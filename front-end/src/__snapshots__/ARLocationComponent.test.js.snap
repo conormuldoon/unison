@@ -1,0 +1,21 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`mathes snapshot 1`] = `
+<div>
+  <div>
+    <div
+      class="pLeft"
+    >
+      <div
+        id="pLeft"
+      >
+        <button
+          data-testid="lf-button"
+        >
+          Add Location
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
+`;

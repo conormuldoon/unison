@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Hibernate configuration for user information table. -->
+<!DOCTYPE hibernate-configuration PUBLIC
+        "-//Hibernate/Hibernate Configuration DTD 3.0//EN"
+        "http://www.hibernate.org/dtd/hibernate-configuration-3.0.dtd">
+<hibernate-configuration>
+	<session-factory>
+
+		<property name="hibernate.show_sql">false</property>
+		<!-- <property name="hbm2ddl.auto">none</property> -->
+		<property name="hibernate.c3p0.min_size">1</property>
+		
+		<property name="hibernate.temp.use_jdbc_metadata_defaults">false</property>
+
+		<mapping
+			class="eu.acclimatize.unison.user.UserInformation" />
+
+	</session-factory>
+</hibernate-configuration>

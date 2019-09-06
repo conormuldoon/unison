@@ -1,0 +1,3314 @@
+<weatherdata xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="http://api.met.no/weatherapi/locationforecast/1.9/schema" created="2019-04-26T17:58:33Z">
+    <meta>
+        <model name="LOCAL" termin="2019-04-26T12:00:00Z" runended="2019-04-26T14:44:34Z" nextrun="2019-04-26T22:00:00Z" from="2019-04-26T18:00:00Z" to="2019-04-29T06:00:00Z" />
+        <model name="EPS" termin="2019-04-26T00:00:00Z" runended="2019-04-26T09:08:02Z" nextrun="2019-04-26T22:00:00Z" from="2019-04-29T12:00:00Z" to="2019-05-05T18:00:00Z" />
+    </meta>
+    <product class="pointData">
+        <time datatype="forecast" from="2019-04-26T18:00:00Z" to="2019-04-26T18:00:00Z">
+            <location altitude="334" latitude="61.6900" longitude="9.4800">
+                <temperature id="TTT" unit="celsius" value="11.2"/>
+                <windDirection id="dd" deg="91.0" name="E"/>
+                <windSpeed id="ff" mps="1.7" beaufort="2" name="Svak vind"/>
+                <windGust id="ff_gust" mps="3.6"/>
+                <areaMaxWindSpeed mps="4.8"/>
+                <humidity value="82.8" unit="percent"/>
+                <pressure id="pr" unit="hPa" value="1014.6"/>
+                <cloudiness id="NN" percent="95.7"/>
+                <fog id="FOG" percent="0.0"/>
+                <lowClouds id="LOW" percent="90.8"/>
+                <mediumClouds id="MEDIUM" percent="0.1"/>
+                <highClouds id="HIGH" percent="53.9"/>
+                <temperatureProbability unit="probabilitycode" value="0"/>
+                <windProbability unit="probabilitycode" value="0"/>
+                <dewpointTemperature id="TD" unit="celsius" value="8.4"/>
+            </location>
+        </time>
+        <time datatype="forecast" from="2019-04-26T17:00:00Z" to="2019-04-26T18:00:00Z">
+            <location altitude="334" latitude="61.6900" longitude="9.4800">
+                <precipitation unit="mm" value="0.0" minvalue="0.0" maxvalue="0.0"/>
+                <symbol id="Cloud" number="4"/>
+            </location>
+        </time>
+        <time datatype="forecast" from="2019-04-26T16:00:00Z" to="2019-04-26T18:00:00Z">
+            <location altitude="334" latitude="61.6900" longitude="9.4800">
+                <precipitation unit="mm" value="0.0" minvalue="0.0" maxvalue="0.0"/>
+                <symbol id="Cloud" number="4"/>
+            </location>
+        </time>
+        <time datatype="forecast" from="2019-04-26T15:00:00Z" to="2019-04-26T18:00:00Z">
+            <location altitude="334" latitude="61.6900" longitude="9.4800">
+                <precipitation unit="mm" value="0.0" minvalue="0.0" maxvalue="0.0"/>
+                <symbol id="Cloud" number="4"/>
+            </location>
+        </time>
+        <time datatype="forecast" from="2019-04-26T12:00:00Z" to="2019-04-26T18:00:00Z">
+            <location altitude="334" latitude="61.6900" longitude="9.4800">
+                <precipitation unit="mm" value="0.0" minvalue="0.0" maxvalue="0.0"/>
+                <minTemperature id="TTT" unit="celsius" value="11.2"/>
+                <maxTemperature id="TTT" unit="celsius" value="13.3"/>
+                <symbol id="Cloud" number="4"/>
+                <symbolProbability unit="probabilitycode" value="0"/>
+            </location>
+        </time>
+        <time datatype="forecast" from="2019-04-26T19:00:00Z" to="2019-04-26T19:00:00Z">
+            <location altitude="334" latitude="61.6900" longitude="9.4800">
+                <temperature id="TTT" unit="celsius" value="9.4"/>
+                <windDirection id="dd" deg="199.2" name="S"/>
+                <windSpeed id="ff" mps="0.9" beaufort="1" name="Flau vind"/>
+                <windGust id="ff_gust" mps="2.6"/>
+                <areaMaxWindSpeed mps="4.8"/>
+                <humidity value="86.4" unit="percent"/>
+                <pressure id="pr" unit="hPa" value="1014.6"/>
+                <cloudiness id="NN" percent="97.6"/>
+                <fog id="FOG" percent="0.0"/>
+                <lowClouds id="LOW" percent="95.7"/>
+                <mediumClouds id="MEDIUM" percent="1.0"/>
+                <highClouds id="HIGH" percent="49.4"/>
+                <dewpointTemperature id="TD" unit="celsius" value="7.3"/>
+            </location>
+        </time>
+        <time datatype="forecast" from="2019-04-26T18:00:00Z" to="2019-04-26T19:00:00Z">
+            <location altitude="334" latitude="61.6900" longitude="9.4800">
+                <precipitation unit="mm" value="0.0" minvalue="0.0" maxvalue="0.0"/>
+                <symbol id="Cloud" number="4"/>
+            </location>
+        </time>
+        <time datatype="forecast" from="2019-04-26T17:00:00Z" to="2019-04-26T19:00:00Z">
+            <location altitude="334" latitude="61.6900" longitude="9.4800">
+                <precipitation unit="mm" value="0.0" minvalue="0.0" maxvalue="0.0"/>
+                <symbol id="Cloud" number="4"/>
+            </location>
+        </time>
+        <time datatype="forecast" from="2019-04-26T16:00:00Z" to="2019-04-26T19:00:00Z">
+            <location altitude="334" latitude="61.6900" longitude="9.4800">
+                <precipitation unit="mm" value="0.0" minvalue="0.0" maxvalue="0.0"/>
+                <symbol id="Cloud" number="4"/>
+            </location>
+        </time>
+        <time datatype="forecast" from="2019-04-26T13:00:00Z" to="2019-04-26T19:00:00Z">
+            <location altitude="334" latitude="61.6900" longitude="9.4800">
+                <precipitation unit="mm" value="0.0" minvalue="0.0" maxvalue="0.0"/>
+                <minTemperature id="TTT" unit="celsius" value="9.4"/>
+                <maxTemperature id="TTT" unit="celsius" value="13.3"/>
+                <symbol id="Cloud" number="4"/>
+            </location>
+        </time>
+        <time datatype="forecast" from="2019-04-26T20:00:00Z" to="2019-04-26T20:00:00Z">
+            <location altitude="334" latitude="61.6900" longitude="9.4800">
+                <temperature id="TTT" unit="celsius" value="8.3"/>
+                <windDirection id="dd" deg="227.9" name="SW"/>
+                <windSpeed id="ff" mps="1.0" beaufort="1" name="Flau vind"/>
+                <windGust id="ff_gust" mps="1.9"/>
+                <areaMaxWindSpeed mps="4.6"/>
+                <humidity value="86.5" unit="percent"/>
+                <pressure id="pr" unit="hPa" value="1014.6"/>
+                <cloudiness id="NN" percent="94.0"/>
+                <fog id="FOG" percent="0.0"/>
+                <lowClouds id="LOW" percent="92.9"/>
+                <mediumClouds id="MEDIUM" percent="14.6"/>
+                <highClouds id="HIGH" percent="12.8"/>
+                <dewpointTemperature id="TD" unit="celsius" value="6.2"/>
+            </location>
+        </time>
+        <time datatype="forecast" from="2019-04-26T19:00:00Z" to="2019-04-26T20:00:00Z">
+            <location altitude="334" latitude="61.6900" longitude="9.4800">
+                <precipitation unit="mm" value="0.0" minvalue="0.0" maxvalue="0.0"/>
+                <symbol id="Cloud" number="4"/>
+            </location>
+        </time>
+        <time datatype="forecast" from="2019-04-26T18:00:00Z" to="2019-04-26T20:00:00Z">
+            <location altitude="334" latitude="61.6900" longitude="9.4800">
+                <precipitation unit="mm" value="0.0" minvalue="0.0" maxvalue="0.0"/>
+                <symbol id="Cloud" number="4"/>
+            </location>
+        </time>
+        <time datatype="forecast" from="2019-04-26T17:00:00Z" to="2019-04-26T20:00:00Z">
+            <location altitude="334" latitude="61.6900" longitude="9.4800">
+                <precipitation unit="mm" value="0.0" minvalue="0.0" maxvalue="0.0"/>
+                <symbol id="Cloud" number="4"/>
+            </location>
+        </time>
+        <time datatype="forecast" from="2019-04-26T14:00:00Z" to="2019-04-26T20:00:00Z">
+            <location altitude="334" latitude="61.6900" longitude="9.4800">
+                <precipitation unit="mm" value="0.0" minvalue="0.0" maxvalue="0.0"/>
+                <minTemperature id="TTT" unit="celsius" value="8.3"/>
+                <maxTemperature id="TTT" unit="celsius" value="12.5"/>
+                <symbol id="Cloud" number="4"/>
+            </location>
+        </time>
+        <time datatype="forecast" from="2019-04-26T21:00:00Z" to="2019-04-26T21:00:00Z">
+            <location altitude="334" latitude="61.6900" longitude="9.4800">
+                <temperature id="TTT" unit="celsius" value="7.6"/>
+                <windDirection id="dd" deg="231.7" name="SW"/>
+                <windSpeed id="ff" mps="0.8" beaufort="1" name="Flau vind"/>
+                <windGust id="ff_gust" mps="1.9"/>
+                <areaMaxWindSpeed mps="4.2"/>
+                <humidity value="90.4" unit="percent"/>
+                <pressure id="pr" unit="hPa" value="1014.7"/>
+                <cloudiness id="NN" percent="99.5"/>
+                <fog id="FOG" percent="0.0"/>
+                <lowClouds id="LOW" percent="99.3"/>
+                <mediumClouds id="MEDIUM" percent="39.4"/>
+                <highClouds id="HIGH" percent="41.3"/>
+                <dewpointTemperature id="TD" unit="celsius" value="6.1"/>
+            </location>
+        </time>
+        <time datatype="forecast" from="2019-04-26T20:00:00Z" to="2019-04-26T21:00:00Z">
+            <location altitude="334" latitude="61.6900" longitude="9.4800">
+                <precipitation unit="mm" value="0.0" minvalue="0.0" maxvalue="0.5"/>
+                <symbol id="Cloud" number="4"/>
+            </location>
+        </time>
+        <time datatype="forecast" from="2019-04-26T19:00:00Z" to="2019-04-26T21:00:00Z">
+            <location altitude="334" latitude="61.6900" longitude="9.4800">
+                <precipitation unit="mm" value="0.0" minvalue="0.0" maxvalue="0.5"/>
+                <symbol id="Cloud" number="4"/>
+            </location>
+        </time>
+        <time datatype="forecast" from="2019-04-26T18:00:00Z" to="2019-04-26T21:00:00Z">
+            <location altitude="334" latitude="61.6900" longitude="9.4800">
+                <precipitation unit="mm" value="0.0" minvalue="0.0" maxvalue="0.5"/>
+                <symbol id="Cloud" number="4"/>
+            </location>
+        </time>
+        <time datatype="forecast" from="2019-04-26T15:00:00Z" to="2019-04-26T21:00:00Z">
+            <location altitude="334" latitude="61.6900" longitude="9.4800">
+                <precipitation unit="mm" value="0.0" minvalue="0.0" maxvalue="0.5"/>
+                <minTemperature id="TTT" unit="celsius" value="7.6"/>
+                <maxTemperature id="TTT" unit="celsius" value="12.2"/>
+                <symbol id="Cloud" number="4"/>
+            </location>
+        </time>
+        <time datatype="forecast" from="2019-04-26T22:00:00Z" to="2019-04-26T22:00:00Z">
+            <location altitude="334" latitude="61.6900" longitude="9.4800">
+                <temperature id="TTT" unit="celsius" value="7.3"/>
+                <windDirection id="dd" deg="273.9" name="W"/>
+                <windSpeed id="ff" mps="0.8" beaufort="1" name="Flau vind"/>
+                <windGust id="ff_gust" mps="1.6"/>
+                <areaMaxWindSpeed mps="4.0"/>
+                <humidity value="92.9" unit="percent"/>
+                <pressure id="pr" unit="hPa" value="1014.3"/>
+                <cloudiness id="NN" percent="99.5"/>
+                <fog id="FOG" percent="0.0"/>
+                <lowClouds id="LOW" percent="93.0"/>
+                <mediumClouds id="MEDIUM" percent="14.3"/>
+                <highClouds id="HIGH" percent="88.5"/>
+                <dewpointTemperature id="TD" unit="celsius" value="6.2"/>
+            </location>
+        </time>
+        <time datatype="forecast" from="2019-04-26T21:00:00Z" to="2019-04-26T22:00:00Z">
+            <location altitude="334" latitude="61.6900" longitude="9.4800">
+                <precipitation unit="mm" value="0.0" minvalue="0.0" maxvalue="0.3"/>
+                <symbol id="Cloud" number="4"/>
+            </location>
+        </time>
+        <time datatype="forecast" from="2019-04-26T20:00:00Z" to="2019-04-26T22:00:00Z">
+            <location altitude="334" latitude="61.6900" longitude="9.4800">
+                <precipitation unit="mm" value="0.0" minvalue="0.0" maxvalue="0.5"/>
+                <symbol id="Cloud" number="4"/>
+            </location>
+        </time>
+        <time datatype="forecast" from="2019-04-26T19:00:00Z" to="2019-04-26T22:00:00Z">
+            <location altitude="334" latitude="61.6900" longitude="9.4800">
+                <precipitation unit="mm" value="0.0" minvalue="0.0" maxvalue="0.5"/>
+                <symbol id="Cloud" number="4"/>
+            </location>
+        </time>
+        <time datatype="forecast" from="2019-04-26T16:00:00Z" to="2019-04-26T22:00:00Z">
+            <location altitude="334" latitude="61.6900" longitude="9.4800">
+                <precipitation unit="mm" value="0.0" minvalue="0.0" maxvalue="0.5"/>
+                <minTemperature id="TTT" unit="celsius" value="7.3"/>
+                <maxTemperature id="TTT" unit="celsius" value="12.2"/>
+                <symbol id="Cloud" number="4"/>
+            </location>
+        </time>
+        <time datatype="forecast" from="2019-04-26T23:00:00Z" to="2019-04-26T23:00:00Z">
+            <location altitude="334" latitude="61.6900" longitude="9.4800">
+                <temperature id="TTT" unit="celsius" value="7.2"/>
+                <windDirection id="dd" deg="257.7" name="W"/>
+                <windSpeed id="ff" mps="0.7" beaufort="1" name="Flau vind"/>
+                <windGust id="ff_gust" mps="1.3"/>
+                <areaMaxWindSpeed mps="4.7"/>
+                <humidity value="92.2" unit="percent"/>
+                <pressure id="pr" unit="hPa" value="1013.9"/>
+                <cloudiness id="NN" percent="99.8"/>
+                <fog id="FOG" percent="0.0"/>
+                <lowClouds id="LOW" percent="98.8"/>
+                <mediumClouds id="MEDIUM" percent="1.6"/>
+                <highClouds id="HIGH" percent="93.9"/>
+                <dewpointTemperature id="TD" unit="celsius" value="6.0"/>
+            </location>
+        </time>
+        <time datatype="forecast" from="2019-04-26T22:00:00Z" to="2019-04-26T23:00:00Z">
+            <location altitude="334" latitude="61.6900" longitude="9.4800">
+                <precipitation unit="mm" value="0.0" minvalue="0.0" maxvalue="0.1"/>
+                <symbol id="Cloud" number="4"/>
+            </location>
+        </time>
+        <time datatype="forecast" from="2019-04-26T21:00:00Z" to="2019-04-26T23:00:00Z">
+            <location altitude="334" latitude="61.6900" longitude="9.4800">
+                <precipitation unit="mm" value="0.0" minvalue="0.0" maxvalue="0.3"/>
+                <symbol id="Cloud" number="4"/>
+            </location>
+        </time>
+        <time datatype="forecast" from="2019-04-26T20:00:00Z" to="2019-04-26T23:00:00Z">
+            <location altitude="334" latitude="61.6900" longitude="9.4800">
+                <precipitation unit="mm" value="0.0" minvalue="0.0" maxvalue="0.5"/>
+                <symbol id="Cloud" number="4"/>
+            </location>
+        </time>
+        <time datatype="forecast" from="2019-04-26T17:00:00Z" to="2019-04-26T23:00:00Z">
+            <location altitude="334" latitude="61.6900" longitude="9.4800">
+                <precipitation unit="mm" value="0.0" minvalue="0.0" maxvalue="0.5"/>
+                <minTemperature id="TTT" unit="celsius" value="7.2"/>
+                <maxTemperature id="TTT" unit="celsius" value="11.9"/>
+                <symbol id="Cloud" number="4"/>
+            </location>
+        </time>
+        <time datatype="forecast" from="2019-04-27T00:00:00Z" to="2019-04-27T00:00:00Z">
+            <location altitude="334" latitude="61.6900" longitude="9.4800">
+                <temperature id="TTT" unit="celsius" value="7.0"/>
+                <windDirection id="dd" deg="258.6" name="W"/>
+                <windSpeed id="ff" mps="0.7" beaufort="1" name="Flau vind"/>
+                <windGust id="ff_gust" mps="1.2"/>
+                <areaMaxWindSpeed mps="5.1"/>
+                <humidity value="92.1" unit="percent"/>
+                <pressure id="pr" unit="hPa" value="1013.4"/>
+                <cloudiness id="NN" percent="99.9"/>
+                <fog id="FOG" percent="0.0"/>
+                <lowClouds id="LOW" percent="98.6"/>
+                <mediumClouds id="MEDIUM" percent="2.2"/>
+                <highClouds id="HIGH" percent="92.9"/>
+                <temperatureProbability unit="probabilitycode" value="1"/>
+                <windProbability unit="probabilitycode" value="0"/>
+                <dewpointTemperature id="TD" unit="celsius" value="5.8"/>
+            </location>
+        </time>
+        <time datatype="forecast" from="2019-04-26T23:00:00Z" to="2019-04-27T00:00:00Z">
+            <location altitude="334" latitude="61.6900" longitude="9.4800">
+                <precipitation unit="mm" value="0.0" minvalue="0.0" maxvalue="0.0"/>
+                <symbol id="Cloud" number="4"/>
+            </location>
+        </time>
+        <time datatype="forecast" from="2019-04-26T22:00:00Z" to="2019-04-27T00:00:00Z">
+            <location altitude="334" latitude="61.6900" longitude="9.4800">
+                <precipitation unit="mm" value="0.0" minvalue="0.0" maxvalue="0.1"/>
+                <symbol id="Cloud" number="4"/>
+            </location>
+        </time>
+        <time datatype="forecast" from="2019-04-26T21:00:00Z" to="2019-04-27T00:00:00Z">
+            <location altitude="334" latitude="61.6900" longitude="9.4800">
+                <precipitation unit="mm" value="0.0" minvalue="0.0" maxvalue="0.3"/>
+                <symbol id="Cloud" number="4"/>
+            </location>
+        </time>
+        <time datatype="forecast" from="2019-04-26T18:00:00Z" to="2019-04-27T00:00:00Z">
+            <location altitude="334" latitude="61.6900" longitude="9.4800">
+                <precipitation unit="mm" value="0.0" minvalue="0.0" maxvalue="0.5"/>
+                <minTemperature id="TTT" unit="celsius" value="7.0"/>
+                <maxTemperature id="TTT" unit="celsius" value="11.2"/>
+                <symbol id="Cloud" number="4"/>
+                <symbolProbability unit="probabilitycode" value="0"/>
+            </location>
+        </time>
+        <time datatype="forecast" from="2019-04-27T01:00:00Z" to="2019-04-27T01:00:00Z">
+            <location altitude="334" latitude="61.6900" longitude="9.4800">
+                <temperature id="TTT" unit="celsius" value="7.0"/>
+                <windDirection id="dd" deg="293.1" name="NW"/>
+                <windSpeed id="ff" mps="0.6" beaufort="1" name="Flau vind"/>
+                <windGust id="ff_gust" mps="1.1"/>
+                <areaMaxWindSpeed mps="5.5"/>
+                <humidity value="94.2" unit="percent"/>
+                <pressure id="pr" unit="hPa" value="1013.1"/>
+                <cloudiness id="NN" percent="99.9"/>
+                <fog id="FOG" percent="0.3"/>
+                <lowClouds id="LOW" percent="99.5"/>
+                <mediumClouds id="MEDIUM" percent="73.1"/>
+                <highClouds id="HIGH" percent="82.8"/>
+                <dewpointTemperature id="TD" unit="celsius" value="6.0"/>
+            </location>
+        </time>
+        <time datatype="forecast" from="2019-04-27T00:00:00Z" to="2019-04-27T01:00:00Z">
+            <location altitude="334" latitude="61.6900" longitude="9.4800">
+                <precipitation unit="mm" value="0.0" minvalue="0.0" maxvalue="0.2"/>
+                <symbol id="Cloud" number="4"/>
+            </location>
+        </time>
+        <time datatype="forecast" from="2019-04-26T23:00:00Z" to="2019-04-27T01:00:00Z">
+            <location altitude="334" latitude="61.6900" longitude="9.4800">
+                <precipitation unit="mm" value="0.0" minvalue="0.0" maxvalue="0.2"/>
+                <symbol id="Cloud" number="4"/>
+            </location>
+        </time>
+        <time datatype="forecast" from="2019-04-26T22:00:00Z" to="2019-04-27T01:00:00Z">
+            <location altitude="334" latitude="61.6900" longitude="9.4800">
+                <precipitation unit="mm" value="0.0" minvalue="0.0" maxvalue="0.2"/>
+                <symbol id="Cloud" number="4"/>
+            </location>
+        </time>
+        <time datatype="forecast" from="2019-04-26T19:00:00Z" to="2019-04-27T01:00:00Z">
+            <location altitude="334" latitude="61.6900" longitude="9.4800">
+                <precipitation unit="mm" value="0.0" minvalue="0.0" maxvalue="0.6"/>
+                <minTemperature id="TTT" unit="celsius" value="7.0"/>
+                <maxTemperature id="TTT" unit="celsius" value="9.4"/>
+                <symbol id="Cloud" number="4"/>
+            </location>
+        </time>
+        <time datatype="forecast" from="2019-04-27T02:00:00Z" to="2019-04-27T02:00:00Z">
+            <location altitude="334" latitude="61.6900" longitude="9.4800">
+                <temperature id="TTT" unit="celsius" value="7.3"/>
+                <windDirection id="dd" deg="224.1" name="SW"/>
+                <windSpeed id="ff" mps="0.6" beaufort="1" name="Flau vind"/>
+                <windGust id="ff_gust" mps="1.0"/>
+                <areaMaxWindSpeed mps="6.6"/>
+                <humidity value="94.7" unit="percent"/>
+                <pressure id="pr" unit="hPa" value="1012.8"/>
+                <cloudiness id="NN" percent="100.0"/>
+                <fog id="FOG" percent="0.4"/>
+                <lowClouds id="LOW" percent="100.0"/>
+                <mediumClouds id="MEDIUM" percent="82.3"/>
+                <highClouds id="HIGH" percent="64.6"/>
+                <dewpointTemperature id="TD" unit="celsius" value="6.5"/>
+            </location>
+        </time>
+        <time datatype="forecast" from="2019-04-27T01:00:00Z" to="2019-04-27T02:00:00Z">
+            <location altitude="334" latitude="61.6900" longitude="9.4800">
+                <precipitation unit="mm" value="0.3" minvalue="0.0" maxvalue="0.9"/>
+                <symbol id="LightRain" number="9"/>
+            </location>
+        </time>
+        <time datatype="forecast" from="2019-04-27T00:00:00Z" to="2019-04-27T02:00:00Z">
+            <location altitude="334" latitude="61.6900" longitude="9.4800">
+                <precipitation unit="mm" value="0.3" minvalue="0.0" maxvalue="0.9"/>
+                <symbol id="Drizzle" number="46"/>
+            </location>
+        </time>
+        <time datatype="forecast" from="2019-04-26T23:00:00Z" to="2019-04-27T02:00:00Z">
+            <location altitude="334" latitude="61.6900" longitude="9.4800">
+                <precipitation unit="mm" value="0.3" minvalue="0.0" maxvalue="0.9"/>
+                <symbol id="Drizzle" number="46"/>
+            </location>
+        </time>
+        <time datatype="forecast" from="2019-04-26T20:00:00Z" to="2019-04-27T02:00:00Z">
+            <location altitude="334" latitude="61.6900" longitude="9.4800">
+                <precipitation unit="mm" value="0.0" minvalue="0.0" maxvalue="1.2"/>
+                <minTemperature id="TTT" unit="celsius" value="7.0"/>
+                <maxTemperature id="TTT" unit="celsius" value="8.3"/>
+                <symbol id="Cloud" number="4"/>
+            </location>
+        </time>
+        <time datatype="forecast" from="2019-04-27T03:00:00Z" to="2019-04-27T03:00:00Z">
+            <location altitude="334" latitude="61.6900" longitude="9.4800">
+                <temperature id="TTT" unit="celsius" value="7.4"/>
+                <windDirection id="dd" deg="152.0" name="SE"/>
+                <windSpeed id="ff" mps="0.6" beaufort="1" name="Flau vind"/>
+                <windGust id="ff_gust" mps="1.3"/>
+                <areaMaxWindSpeed mps="6.5"/>
+                <humidity value="97.4" unit="percent"/>
+                <pressure id="pr" unit="hPa" value="1012.4"/>
+                <cloudiness id="NN" percent="100.0"/>
+                <fog id="FOG" percent="2.5"/>
+                <lowClouds id="LOW" percent="100.0"/>
+                <mediumClouds id="MEDIUM" percent="85.6"/>
+                <highClouds id="HIGH" percent="51.8"/>
+                <dewpointTemperature id="TD" unit="celsius" value="7.0"/>
+            </location>
+        </time>
+        <time datatype="forecast" from="2019-04-27T02:00:00Z" to="2019-04-27T03:00:00Z">
+            <location altitude="334" latitude="61.6900" longitude="9.4800">
+                <precipitation unit="mm" value="0.5" minvalue="0.1" maxvalue="1.1"/>
+                <symbol id="LightRain" number="9"/>
+            </location>
+        </time>
+        <time datatype="forecast" from="2019-04-27T01:00:00Z" to="2019-04-27T03:00:00Z">
+            <location altitude="334" latitude="61.6900" longitude="9.4800">
+                <precipitation unit="mm" value="0.8" minvalue="0.1" maxvalue="1.5"/>
+                <symbol id="LightRain" number="9"/>
+            </location>
+        </time>
+        <time datatype="forecast" from="2019-04-27T00:00:00Z" to="2019-04-27T03:00:00Z">
+            <location altitude="334" latitude="61.6900" longitude="9.4800">
+                <precipitation unit="mm" value="0.8" minvalue="0.1" maxvalue="1.6"/>
+                <symbol id="LightRain" number="9"/>
+            </location>
+        </time>
+        <time datatype="forecast" from="2019-04-26T21:00:00Z" to="2019-04-27T03:00:00Z">
+            <location altitude="334" latitude="61.6900" longitude="9.4800">
+                <precipitation unit="mm" value="0.9" minvalue="0.1" maxvalue="1.8"/>
+                <minTemperature id="TTT" unit="celsius" value="7.0"/>
+                <maxTemperature id="TTT" unit="celsius" value="7.6"/>
+                <symbol id="Drizzle" number="46"/>
+            </location>
+        </time>
+        <time datatype="forecast" from="2019-04-27T04:00:00Z" to="2019-04-27T04:00:00Z">
+            <location altitude="334" latitude="61.6900" longitude="9.4800">
+                <temperature id="TTT" unit="celsius" value="7.7"/>
+                <windDirection id="dd" deg="139.4" name="SE"/>
+                <windSpeed id="ff" mps="0.5" beaufort="1" name="Flau vind"/>
+                <windGust id="ff_gust" mps="1.3"/>
+                <areaMaxWindSpeed mps="5.9"/>
+                <humidity value="98.3" unit="percent"/>
+                <pressure id="pr" unit="hPa" value="1012.2"/>
+                <cloudiness id="NN" percent="100.0"/>
+                <fog id="FOG" percent="5.1"/>
+                <lowClouds id="LOW" percent="100.0"/>
+                <mediumClouds id="MEDIUM" percent="64.8"/>
+                <highClouds id="HIGH" percent="84.9"/>
+                <dewpointTemperature id="TD" unit="celsius" value="7.4"/>
+            </location>
+        </time>
+        <time datatype="forecast" from="2019-04-27T03:00:00Z" to="2019-04-27T04:00:00Z">
+            <location altitude="334" latitude="61.6900" longitude="9.4800">
+                <precipitation unit="mm" value="0.5" minvalue="0.2" maxvalue="1.0"/>
+                <symbol id="LightRain" number="9"/>
+            </location>
+        </time>
+        <time datatype="forecast" from="2019-04-27T02:00:00Z" to="2019-04-27T04:00:00Z">
+            <location altitude="334" latitude="61.6900" longitude="9.4800">
+                <precipitation unit="mm" value="1.0" minvalue="0.3" maxvalue="1.7"/>
+                <symbol id="LightRain" number="9"/>
+            </location>
+        </time>
+        <time datatype="forecast" from="2019-04-27T01:00:00Z" to="2019-04-27T04:00:00Z">
+            <location altitude="334" latitude="61.6900" longitude="9.4800">
+                <precipitation unit="mm" value="1.3" minvalue="0.4" maxvalue="2.3"/>
+                <symbol id="LightRain" number="9"/>
+            </location>
+        </time>
+        <time datatype="forecast" from="2019-04-26T22:00:00Z" to="2019-04-27T04:00:00Z">
+            <location altitude="334" latitude="61.6900" longitude="9.4800">
+                <precipitation unit="mm" value="1.3" minvalue="0.4" maxvalue="2.4"/>
+                <minTemperature id="TTT" unit="celsius" value="7.0"/>
+                <maxTemperature id="TTT" unit="celsius" value="7.7"/>
+                <symbol id="LightRain" number="9"/>
+            </location>
+        </time>
+        <time datatype="forecast" from="2019-04-27T05:00:00Z" to="2019-04-27T05:00:00Z">
+            <location altitude="334" latitude="61.6900" longitude="9.4800">
+                <temperature id="TTT" unit="celsius" value="7.8"/>
+                <windDirection id="dd" deg="106.5" name="E"/>
+                <windSpeed id="ff" mps="0.6" beaufort="1" name="Flau vind"/>
+                <windGust id="ff_gust" mps="1.6"/>
+                <areaMaxWindSpeed mps="6.7"/>
+                <humidity value="98.3" unit="percent"/>
+                <pressure id="pr" unit="hPa" value="1012.0"/>
+                <cloudiness id="NN" percent="100.0"/>
+                <fog id="FOG" percent="5.1"/>
+                <lowClouds id="LOW" percent="100.0"/>
+                <mediumClouds id="MEDIUM" percent="84.7"/>
+                <highClouds id="HIGH" percent="24.3"/>
+                <dewpointTemperature id="TD" unit="celsius" value="7.5"/>
+            </location>
+        </time>
+        <time datatype="forecast" from="2019-04-27T04:00:00Z" to="2019-04-27T05:00:00Z">
+            <location altitude="334" latitude="61.6900" longitude="9.4800">
+                <precipitation unit="mm" value="0.6" minvalue="0.2" maxvalue="1.4"/>
+                <symbol id="LightRain" number="9"/>
+            </location>
+        </time>
+        <time datatype="forecast" from="2019-04-27T03:00:00Z" to="2019-04-27T05:00:00Z">
+            <location altitude="334" latitude="61.6900" longitude="9.4800">
+                <precipitation unit="mm" value="1.1" minvalue="0.5" maxvalue="1.9"/>
+                <symbol id="LightRain" number="9"/>
+            </location>
+        </time>
+        <time datatype="forecast" from="2019-04-27T02:00:00Z" to="2019-04-27T05:00:00Z">
+            <location altitude="334" latitude="61.6900" longitude="9.4800">
+                <precipitation unit="mm" value="1.6" minvalue="0.6" maxvalue="2.7"/>
+                <symbol id="LightRain" number="9"/>
+            </location>
+        </time>
+        <time datatype="forecast" from="2019-04-26T23:00:00Z" to="2019-04-27T05:00:00Z">
+            <location altitude="334" latitude="61.6900" longitude="9.4800">
+                <precipitation unit="mm" value="1.9" minvalue="0.6" maxvalue="3.2"/>
+                <minTemperature id="TTT" unit="celsius" value="7.0"/>
+                <maxTemperature id="TTT" unit="celsius" value="7.8"/>
+                <symbol id="LightRain" number="9"/>
+            </location>
+        </time>
+        <time datatype="forecast" from="2019-04-27T06:00:00Z" to="2019-04-27T06:00:00Z">
+            <location altitude="334" latitude="61.6900" longitude="9.4800">
+                <temperature id="TTT" unit="celsius" value="7.8"/>
+                <windDirection id="dd" deg="104.8" name="E"/>
+                <windSpeed id="ff" mps="0.6" beaufort="1" name="Flau vind"/>
+                <windGust id="ff_gust" mps="1.1"/>
+                <areaMaxWindSpeed mps="6.1"/>
+                <humidity value="99.5" unit="percent"/>
+                <pressure id="pr" unit="hPa" value="1012.2"/>
+                <cloudiness id="NN" percent="99.8"/>
+                <fog id="FOG" percent="19.8"/>
+                <lowClouds id="LOW" percent="99.8"/>
+                <mediumClouds id="MEDIUM" percent="68.0"/>
+                <highClouds id="HIGH" percent="30.9"/>
+                <temperatureProbability unit="probabilitycode" value="0"/>
+                <windProbability unit="probabilitycode" value="0"/>
+                <dewpointTemperature id="TD" unit="celsius" value="7.8"/>
+            </location>
+        </time>
+        <time datatype="forecast" from="2019-04-27T05:00:00Z" to="2019-04-27T06:00:00Z">
+            <location altitude="334" latitude="61.6900" longitude="9.4800">
+                <precipitation unit="mm" value="0.3" minvalue="0.1" maxvalue="0.5"/>
+                <symbol id="LightRain" number="9"/>
+            </location>
+        </time>
+        <time datatype="forecast" from="2019-04-27T04:00:00Z" to="2019-04-27T06:00:00Z">
+            <location altitude="334" latitude="61.6900" longitude="9.4800">
+                <precipitation unit="mm" value="0.9" minvalue="0.3" maxvalue="1.6"/>
+                <symbol id="LightRain" number="9"/>
+            </location>
+        </time>
+        <time datatype="forecast" from="2019-04-27T03:00:00Z" to="2019-04-27T06:00:00Z">
+            <location altitude="334" latitude="61.6900" longitude="9.4800">
+                <precipitation unit="mm" value="1.4" minvalue="0.5" maxvalue="2.4"/>
+                <symbol id="LightRain" number="9"/>
+            </location>
+        </time>
+        <time datatype="forecast" from="2019-04-27T00:00:00Z" to="2019-04-27T06:00:00Z">
+            <location altitude="334" latitude="61.6900" longitude="9.4800">
+                <precipitation unit="mm" value="2.2" minvalue="0.7" maxvalue="3.8"/>
+                <minTemperature id="TTT" unit="celsius" value="7.0"/>
+                <maxTemperature id="TTT" unit="celsius" value="7.8"/>
+                <symbol id="LightRain" number="9"/>
+                <symbolProbability unit="probabilitycode" value="0"/>
+            </location>
+        </time>
+        <time datatype="forecast" from="2019-04-27T07:00:00Z" to="2019-04-27T07:00:00Z">
+            <location altitude="334" latitude="61.6900" longitude="9.4800">
+                <temperature id="TTT" unit="celsius" value="7.9"/>
+                <windDirection id="dd" deg="110.5" name="E"/>
+                <windSpeed id="ff" mps="0.9" beaufort="1" name="Flau vind"/>
+                <windGust id="ff_gust" mps="1.6"/>
+                <areaMaxWindSpeed mps="6.4"/>
+                <humidity value="99.5" unit="percent"/>
+                <pressure id="pr" unit="hPa" value="1012.2"/>
+                <cloudiness id="NN" percent="100.0"/>
+                <fog id="FOG" percent="20.7"/>
+                <lowClouds id="LOW" percent="100.0"/>
+                <mediumClouds id="MEDIUM" percent="61.5"/>
+                <highClouds id="HIGH" percent="82.3"/>
+                <dewpointTemperature id="TD" unit="celsius" value="7.8"/>
+            </location>
+        </time>
+        <time datatype="forecast" from="2019-04-27T06:00:00Z" to="2019-04-27T07:00:00Z">
+            <location altitude="334" latitude="61.6900" longitude="9.4800">
+                <precipitation unit="mm" value="0.2" minvalue="0.1" maxvalue="0.3"/>
+                <symbol id="Drizzle" number="46"/>
+            </location>
+        </time>
+        <time datatype="forecast" from="2019-04-27T05:00:00Z" to="2019-04-27T07:00:00Z">
+            <location altitude="334" latitude="61.6900" longitude="9.4800">
+                <precipitation unit="mm" value="0.5" minvalue="0.2" maxvalue="0.8"/>
+                <symbol id="LightRain" number="9"/>
+            </location>
+        </time>
+        <time datatype="forecast" from="2019-04-27T04:00:00Z" to="2019-04-27T07:00:00Z">
+            <location altitude="334" latitude="61.6900" longitude="9.4800">
+                <precipitation unit="mm" value="1.1" minvalue="0.4" maxvalue="1.9"/>
+                <symbol id="LightRain" number="9"/>
+            </location>
+        </time>
+        <time datatype="forecast" from="2019-04-27T01:00:00Z" to="2019-04-27T07:00:00Z">
+            <location altitude="334" latitude="61.6900" longitude="9.4800">
+                <precipitation unit="mm" value="2.4" minvalue="0.8" maxvalue="4.0"/>
+                <minTemperature id="TTT" unit="celsius" value="7.0"/>
+                <maxTemperature id="TTT" unit="celsius" value="7.9"/>
+                <symbol id="LightRain" number="9"/>
+            </location>
+        </time>
+        <time datatype="forecast" from="2019-04-27T08:00:00Z" to="2019-04-27T08:00:00Z">
+            <location altitude="334" latitude="61.6900" longitude="9.4800">
+                <temperature id="TTT" unit="celsius" value="8.0"/>
+                <windDirection id="dd" deg="124.3" name="SE"/>
+                <windSpeed id="ff" mps="1.4" beaufort="1" name="Flau vind"/>
+                <windGust id="ff_gust" mps="2.4"/>
+                <areaMaxWindSpeed mps="6.7"/>
+                <humidity value="100.0" unit="percent"/>
+                <pressure id="pr" unit="hPa" value="1012.3"/>
+                <cloudiness id="NN" percent="99.9"/>
+                <fog id="FOG" percent="65.6"/>
+                <lowClouds id="LOW" percent="99.7"/>
+                <mediumClouds id="MEDIUM" percent="1.5"/>
+                <highClouds id="HIGH" percent="32.5"/>
+                <dewpointTemperature id="TD" unit="celsius" value="8.0"/>
+            </location>
+        </time>
+        <time datatype="forecast" from="2019-04-27T07:00:00Z" to="2019-04-27T08:00:00Z">
+            <location altitude="334" latitude="61.6900" longitude="9.4800">
+                <precipitation unit="mm" value="0.0" minvalue="0.0" maxvalue="0.1"/>
+                <symbol id="Fog" number="15"/>
+            </location>
+        </time>
+        <time datatype="forecast" from="2019-04-27T06:00:00Z" to="2019-04-27T08:00:00Z">
+            <location altitude="334" latitude="61.6900" longitude="9.4800">
+                <precipitation unit="mm" value="0.2" minvalue="0.1" maxvalue="0.4"/>
+                <symbol id="Drizzle" number="46"/>
+            </location>
+        </time>
+        <time datatype="forecast" from="2019-04-27T05:00:00Z" to="2019-04-27T08:00:00Z">
+            <location altitude="334" latitude="61.6900" longitude="9.4800">
+                <precipitation unit="mm" value="0.5" minvalue="0.2" maxvalue="0.9"/>
+                <symbol id="Drizzle" number="46"/>
+            </location>
+        </time>
+        <time datatype="forecast" from="2019-04-27T02:00:00Z" to="2019-04-27T08:00:00Z">
+            <location altitude="334" latitude="61.6900" longitude="9.4800">
+                <precipitation unit="mm" value="2.1" minvalue="0.8" maxvalue="3.4"/>
+                <minTemperature id="TTT" unit="celsius" value="7.3"/>
+                <maxTemperature id="TTT" unit="celsius" value="8.0"/>
+                <symbol id="LightRain" number="9"/>
+            </location>
+        </time>
+        <time datatype="forecast" from="2019-04-27T09:00:00Z" to="2019-04-27T09:00:00Z">
+            <location altitude="334" latitude="61.6900" longitude="9.4800">
+                <temperature id="TTT" unit="celsius" value="8.4"/>
+                <windDirection id="dd" deg="129.7" name="SE"/>
+                <windSpeed id="ff" mps="1.1" beaufort="1" name="Flau vind"/>
+                <windGust id="ff_gust" mps="2.4"/>
+                <areaMaxWindSpeed mps="7.4"/>
+                <humidity value="98.9" unit="percent"/>
+                <pressure id="pr" unit="hPa" value="1012.5"/>
+                <cloudiness id="NN" percent="99.7"/>
+                <fog id="FOG" percent="9.7"/>
+                <lowClouds id="LOW" percent="99.7"/>
+                <mediumClouds id="MEDIUM" percent="23.2"/>
+                <highClouds id="HIGH" percent="11.2"/>
+                <dewpointTemperature id="TD" unit="celsius" value="8.2"/>
+            </location>
+        </time>
+        <time datatype="forecast" from="2019-04-27T08:00:00Z" to="2019-04-27T09:00:00Z">
+            <location altitude="334" latitude="61.6900" longitude="9.4800">
+                <precipitation unit="mm" value="0.0" minvalue="0.0" maxvalue="0.0"/>
+                <symbol id="Cloud" number="4"/>
+            </location>
+        </time>
+        <time datatype="forecast" from="2019-04-27T07:00:00Z" to="2019-04-27T09:00:00Z">
+            <location altitude="334" latitude="61.6900" longitude="9.4800">
+                <precipitation unit="mm" value="0.0" minvalue="0.0" maxvalue="0.1"/>
+                <symbol id="Fog" number="15"/>
+            </location>
+        </time>
+        <time datatype="forecast" from="2019-04-27T06:00:00Z" to="2019-04-27T09:00:00Z">
+            <location altitude="334" latitude="61.6900" longitude="9.4800">
+                <precipitation unit="mm" value="0.0" minvalue="0.0" maxvalue="0.4"/>
+                <symbol id="Cloud" number="4"/>
+            </location>
+        </time>
+        <time datatype="forecast" from="2019-04-27T03:00:00Z" to="2019-04-27T09:00:00Z">
+            <location altitude="334" latitude="61.6900" longitude="9.4800">
+                <precipitation unit="mm" value="1.6" minvalue="0.6" maxvalue="2.7"/>
+                <minTemperature id="TTT" unit="celsius" value="7.4"/>
+                <maxTemperature id="TTT" unit="celsius" value="8.4"/>
+                <symbol id="LightRain" number="9"/>
+            </location>
+        </time>
+        <time datatype="forecast" from="2019-04-27T10:00:00Z" to="2019-04-27T10:00:00Z">
+            <location altitude="334" latitude="61.6900" longitude="9.4800">
+                <temperature id="TTT" unit="celsius" value="8.6"/>
+                <windDirection id="dd" deg="122.8" name="SE"/>
+                <windSpeed id="ff" mps="1.2" beaufort="1" name="Flau vind"/>
+                <windGust id="ff_gust" mps="2.3"/>
+                <areaMaxWindSpeed mps="6.9"/>
+                <humidity value="98.0" unit="percent"/>
+                <pressure id="pr" unit="hPa" value="1012.7"/>
+                <cloudiness id="NN" percent="100.0"/>
+                <fog id="FOG" percent="3.7"/>
+                <lowClouds id="LOW" percent="100.0"/>
+                <mediumClouds id="MEDIUM" percent="71.9"/>
+                <highClouds id="HIGH" percent="18.5"/>
+                <dewpointTemperature id="TD" unit="celsius" value="8.3"/>
+            </location>
+        </time>
+        <time datatype="forecast" from="2019-04-27T09:00:00Z" to="2019-04-27T10:00:00Z">
+            <location altitude="334" latitude="61.6900" longitude="9.4800">
+                <precipitation unit="mm" value="0.1" minvalue="0.0" maxvalue="0.4"/>
+                <symbol id="Drizzle" number="46"/>
+            </location>
+        </time>
+        <time datatype="forecast" from="2019-04-27T08:00:00Z" to="2019-04-27T10:00:00Z">
+            <location altitude="334" latitude="61.6900" longitude="9.4800">
+                <precipitation unit="mm" value="0.0" minvalue="0.0" maxvalue="0.4"/>
+                <symbol id="Cloud" number="4"/>
+            </location>
+        </time>
+        <time datatype="forecast" from="2019-04-27T07:00:00Z" to="2019-04-27T10:00:00Z">
+            <location altitude="334" latitude="61.6900" longitude="9.4800">
+                <precipitation unit="mm" value="0.0" minvalue="0.0" maxvalue="0.4"/>
+                <symbol id="Cloud" number="4"/>
+            </location>
+        </time>
+        <time datatype="forecast" from="2019-04-27T04:00:00Z" to="2019-04-27T10:00:00Z">
+            <location altitude="334" latitude="61.6900" longitude="9.4800">
+                <precipitation unit="mm" value="1.2" minvalue="0.4" maxvalue="2.1"/>
+                <minTemperature id="TTT" unit="celsius" value="7.7"/>
+                <maxTemperature id="TTT" unit="celsius" value="8.6"/>
+                <symbol id="LightRain" number="9"/>
+            </location>
+        </time>
+        <time datatype="forecast" from="2019-04-27T11:00:00Z" to="2019-04-27T11:00:00Z">
+            <location altitude="334" latitude="61.6900" longitude="9.4800">
+                <temperature id="TTT" unit="celsius" value="8.6"/>
+                <windDirection id="dd" deg="125.3" name="SE"/>
+                <windSpeed id="ff" mps="1.1" beaufort="1" name="Flau vind"/>
+                <windGust id="ff_gust" mps="2.2"/>
+                <areaMaxWindSpeed mps="7.2"/>
+                <humidity value="98.8" unit="percent"/>
+                <pressure id="pr" unit="hPa" value="1012.7"/>
+                <cloudiness id="NN" percent="100.0"/>
+                <fog id="FOG" percent="8.2"/>
+                <lowClouds id="LOW" percent="99.9"/>
+                <mediumClouds id="MEDIUM" percent="21.5"/>
+                <highClouds id="HIGH" percent="71.2"/>
+                <dewpointTemperature id="TD" unit="celsius" value="8.4"/>
+            </location>
+        </time>
+        <time datatype="forecast" from="2019-04-27T10:00:00Z" to="2019-04-27T11:00:00Z">
+            <location altitude="334" latitude="61.6900" longitude="9.4800">
+                <precipitation unit="mm" value="0.1" minvalue="0.0" maxvalue="0.3"/>
+                <symbol id="Drizzle" number="46"/>
+            </location>
+        </time>
+        <time datatype="forecast" from="2019-04-27T09:00:00Z" to="2019-04-27T11:00:00Z">
+            <location altitude="334" latitude="61.6900" longitude="9.4800">
+                <precipitation unit="mm" value="0.2" minvalue="0.0" maxvalue="0.5"/>
+                <symbol id="Drizzle" number="46"/>
+            </location>
+        </time>
+        <time datatype="forecast" from="2019-04-27T08:00:00Z" to="2019-04-27T11:00:00Z">
+            <location altitude="334" latitude="61.6900" longitude="9.4800">
+                <precipitation unit="mm" value="0.0" minvalue="0.0" maxvalue="0.5"/>
+                <symbol id="Cloud" number="4"/>
+            </location>
+        </time>
+        <time datatype="forecast" from="2019-04-27T05:00:00Z" to="2019-04-27T11:00:00Z">
+            <location altitude="334" latitude="61.6900" longitude="9.4800">
+                <precipitation unit="mm" value="0.7" minvalue="0.2" maxvalue="1.2"/>
+                <minTemperature id="TTT" unit="celsius" value="7.8"/>
+                <maxTemperature id="TTT" unit="celsius" value="8.6"/>
+                <symbol id="Drizzle" number="46"/>
+            </location>
+        </time>
+        <time datatype="forecast" from="2019-04-27T12:00:00Z" to="2019-04-27T12:00:00Z">
+            <location altitude="334" latitude="61.6900" longitude="9.4800">
+                <temperature id="TTT" unit="celsius" value="9.2"/>
+                <windDirection id="dd" deg="107.5" name="E"/>
+                <windSpeed id="ff" mps="1.0" beaufort="1" name="Flau vind"/>
+                <windGust id="ff_gust" mps="2.0"/>
+                <areaMaxWindSpeed mps="6.9"/>
+                <humidity value="98.5" unit="percent"/>
+                <pressure id="pr" unit="hPa" value="1012.5"/>
+                <cloudiness id="NN" percent="100.0"/>
+                <fog id="FOG" percent="5.6"/>
+                <lowClouds id="LOW" percent="100.0"/>
+                <mediumClouds id="MEDIUM" percent="31.4"/>
+                <highClouds id="HIGH" percent="99.4"/>
+                <temperatureProbability unit="probabilitycode" value="1"/>
+                <windProbability unit="probabilitycode" value="0"/>
+                <dewpointTemperature id="TD" unit="celsius" value="9.0"/>
+            </location>
+        </time>
+        <time datatype="forecast" from="2019-04-27T11:00:00Z" to="2019-04-27T12:00:00Z">
+            <location altitude="334" latitude="61.6900" longitude="9.4800">
+                <precipitation unit="mm" value="0.0" minvalue="0.0" maxvalue="0.2"/>
+                <symbol id="Cloud" number="4"/>
+            </location>
+        </time>
+        <time datatype="forecast" from="2019-04-27T10:00:00Z" to="2019-04-27T12:00:00Z">
+            <location altitude="334" latitude="61.6900" longitude="9.4800">
+                <precipitation unit="mm" value="0.2" minvalue="0.0" maxvalue="0.4"/>
+                <symbol id="Drizzle" number="46"/>
+            </location>
+        </time>
+        <time datatype="forecast" from="2019-04-27T09:00:00Z" to="2019-04-27T12:00:00Z">
+            <location altitude="334" latitude="61.6900" longitude="9.4800">
+                <precipitation unit="mm" value="0.3" minvalue="0.1" maxvalue="0.6"/>
+                <symbol id="Drizzle" number="46"/>
+            </location>
+        </time>
+        <time datatype="forecast" from="2019-04-27T06:00:00Z" to="2019-04-27T12:00:00Z">
+            <location altitude="334" latitude="61.6900" longitude="9.4800">
+                <precipitation unit="mm" value="0.5" minvalue="0.1" maxvalue="0.9"/>
+                <minTemperature id="TTT" unit="celsius" value="7.8"/>
+                <maxTemperature id="TTT" unit="celsius" value="9.2"/>
+                <symbol id="Drizzle" number="46"/>
+                <symbolProbability unit="probabilitycode" value="1"/>
+            </location>
+        </time>
+        <time datatype="forecast" from="2019-04-27T13:00:00Z" to="2019-04-27T13:00:00Z">
+            <location altitude="334" latitude="61.6900" longitude="9.4800">
+                <temperature id="TTT" unit="celsius" value="9.4"/>
+                <windDirection id="dd" deg="110.0" name="E"/>
+                <windSpeed id="ff" mps="1.0" beaufort="1" name="Flau vind"/>
+                <windGust id="ff_gust" mps="2.0"/>
+                <areaMaxWindSpeed mps="7.0"/>
+                <humidity value="98.4" unit="percent"/>
+                <pressure id="pr" unit="hPa" value="1012.4"/>
+                <cloudiness id="NN" percent="99.8"/>
+                <fog id="FOG" percent="5.2"/>
+                <lowClouds id="LOW" percent="97.9"/>
+                <mediumClouds id="MEDIUM" percent="39.9"/>
+                <highClouds id="HIGH" percent="97.8"/>
+                <dewpointTemperature id="TD" unit="celsius" value="9.2"/>
+            </location>
+        </time>
+        <time datatype="forecast" from="2019-04-27T12:00:00Z" to="2019-04-27T13:00:00Z">
+            <location altitude="334" latitude="61.6900" longitude="9.4800">
+                <precipitation unit="mm" value="0.2" minvalue="0.0" maxvalue="0.4"/>
+                <symbol id="Drizzle" number="46"/>
+            </location>
+        </time>
+        <time datatype="forecast" from="2019-04-27T11:00:00Z" to="2019-04-27T13:00:00Z">
+            <location altitude="334" latitude="61.6900" longitude="9.4800">
+                <precipitation unit="mm" value="0.3" minvalue="0.1" maxvalue="0.5"/>
+                <symbol id="Drizzle" number="46"/>
+            </location>
+        </time>
+        <time datatype="forecast" from="2019-04-27T10:00:00Z" to="2019-04-27T13:00:00Z">
+            <location altitude="334" latitude="61.6900" longitude="9.4800">
+                <precipitation unit="mm" value="0.4" minvalue="0.1" maxvalue="0.7"/>
+                <symbol id="Drizzle" number="46"/>
+            </location>
+        </time>
+        <time datatype="forecast" from="2019-04-27T07:00:00Z" to="2019-04-27T13:00:00Z">
+            <location altitude="334" latitude="61.6900" longitude="9.4800">
+                <precipitation unit="mm" value="0.0" minvalue="0.0" maxvalue="0.9"/>
+                <minTemperature id="TTT" unit="celsius" value="7.9"/>
+                <maxTemperature id="TTT" unit="celsius" value="9.4"/>
+                <symbol id="Cloud" number="4"/>
+            </location>
+        </time>
+        <time datatype="forecast" from="2019-04-27T14:00:00Z" to="2019-04-27T14:00:00Z">
+            <location altitude="334" latitude="61.6900" longitude="9.4800">
+                <temperature id="TTT" unit="celsius" value="10.4"/>
+                <windDirection id="dd" deg="113.5" name="SE"/>
+                <windSpeed id="ff" mps="1.3" beaufort="1" name="Flau vind"/>
+                <windGust id="ff_gust" mps="2.3"/>
+                <areaMaxWindSpeed mps="8.0"/>
+                <humidity value="94.7" unit="percent"/>
+                <pressure id="pr" unit="hPa" value="1011.9"/>
+                <cloudiness id="NN" percent="98.9"/>
+                <fog id="FOG" percent="0.4"/>
+                <lowClouds id="LOW" percent="83.8"/>
+                <mediumClouds id="MEDIUM" percent="0.6"/>
+                <highClouds id="HIGH" percent="92.2"/>
+                <dewpointTemperature id="TD" unit="celsius" value="9.6"/>
+            </location>
+        </time>
+        <time datatype="forecast" from="2019-04-27T13:00:00Z" to="2019-04-27T14:00:00Z">
+            <location altitude="334" latitude="61.6900" longitude="9.4800">
+                <precipitation unit="mm" value="0.0" minvalue="0.0" maxvalue="0.0"/>
+                <symbol id="Cloud" number="4"/>
+            </location>
+        </time>
+        <time datatype="forecast" from="2019-04-27T12:00:00Z" to="2019-04-27T14:00:00Z">
+            <location altitude="334" latitude="61.6900" longitude="9.4800">
+                <precipitation unit="mm" value="0.0" minvalue="0.0" maxvalue="0.4"/>
+                <symbol id="Cloud" number="4"/>
+            </location>
+        </time>
+        <time datatype="forecast" from="2019-04-27T11:00:00Z" to="2019-04-27T14:00:00Z">
+            <location altitude="334" latitude="61.6900" longitude="9.4800">
+                <precipitation unit="mm" value="0.3" minvalue="0.1" maxvalue="0.5"/>
+                <symbol id="Drizzle" number="46"/>
+            </location>
+        </time>
+        <time datatype="forecast" from="2019-04-27T08:00:00Z" to="2019-04-27T14:00:00Z">
+            <location altitude="334" latitude="61.6900" longitude="9.4800">
+                <precipitation unit="mm" value="0.0" minvalue="0.0" maxvalue="0.9"/>
+                <minTemperature id="TTT" unit="celsius" value="8.0"/>
+                <maxTemperature id="TTT" unit="celsius" value="10.4"/>
+                <symbol id="Cloud" number="4"/>
+            </location>
+        </time>
+        <time datatype="forecast" from="2019-04-27T15:00:00Z" to="2019-04-27T15:00:00Z">
+            <location altitude="334" latitude="61.6900" longitude="9.4800">
+                <temperature id="TTT" unit="celsius" value="11.5"/>
+                <windDirection id="dd" deg="107.9" name="E"/>
+                <windSpeed id="ff" mps="1.6" beaufort="2" name="Svak vind"/>
+                <windGust id="ff_gust" mps="2.8"/>
+                <areaMaxWindSpeed mps="7.1"/>
+                <humidity value="91.4" unit="percent"/>
+                <pressure id="pr" unit="hPa" value="1011.4"/>
+                <cloudiness id="NN" percent="100.0"/>
+                <fog id="FOG" percent="0.0"/>
+                <lowClouds id="LOW" percent="88.7"/>
+                <mediumClouds id="MEDIUM" percent="13.4"/>
+                <highClouds id="HIGH" percent="99.7"/>
+                <dewpointTemperature id="TD" unit="celsius" value="10.2"/>
+            </location>
+        </time>
+        <time datatype="forecast" from="2019-04-27T14:00:00Z" to="2019-04-27T15:00:00Z">
+            <location altitude="334" latitude="61.6900" longitude="9.4800">
+                <precipitation unit="mm" value="0.0" minvalue="0.0" maxvalue="0.0"/>
+                <symbol id="Cloud" number="4"/>
+            </location>
+        </time>
+        <time datatype="forecast" from="2019-04-27T13:00:00Z" to="2019-04-27T15:00:00Z">
+            <location altitude="334" latitude="61.6900" longitude="9.4800">
+                <precipitation unit="mm" value="0.0" minvalue="0.0" maxvalue="0.0"/>
+                <symbol id="Cloud" number="4"/>
+            </location>
+        </time>
+        <time datatype="forecast" from="2019-04-27T12:00:00Z" to="2019-04-27T15:00:00Z">
+            <location altitude="334" latitude="61.6900" longitude="9.4800">
+                <precipitation unit="mm" value="0.0" minvalue="0.0" maxvalue="0.4"/>
+                <symbol id="Cloud" number="4"/>
+            </location>
+        </time>
+        <time datatype="forecast" from="2019-04-27T09:00:00Z" to="2019-04-27T15:00:00Z">
+            <location altitude="334" latitude="61.6900" longitude="9.4800">
+                <precipitation unit="mm" value="0.0" minvalue="0.0" maxvalue="0.9"/>
+                <minTemperature id="TTT" unit="celsius" value="8.4"/>
+                <maxTemperature id="TTT" unit="celsius" value="11.5"/>
+                <symbol id="Cloud" number="4"/>
+            </location>
+        </time>
+        <time datatype="forecast" from="2019-04-27T16:00:00Z" to="2019-04-27T16:00:00Z">
+            <location altitude="334" latitude="61.6900" longitude="9.4800">
+                <temperature id="TTT" unit="celsius" value="12.0"/>
+                <windDirection id="dd" deg="121.0" name="SE"/>
+                <windSpeed id="ff" mps="1.4" beaufort="1" name="Flau vind"/>
+                <windGust id="ff_gust" mps="2.8"/>
+                <areaMaxWindSpeed mps="6.1"/>
+                <humidity value="88.0" unit="percent"/>
+                <pressure id="pr" unit="hPa" value="1011.4"/>
+                <cloudiness id="NN" percent="100.0"/>
+                <fog id="FOG" percent="0.0"/>
+                <lowClouds id="LOW" percent="99.2"/>
+                <mediumClouds id="MEDIUM" percent="63.4"/>
+                <highClouds id="HIGH" percent="99.9"/>
+                <dewpointTemperature id="TD" unit="celsius" value="10.1"/>
+            </location>
+        </time>
+        <time datatype="forecast" from="2019-04-27T15:00:00Z" to="2019-04-27T16:00:00Z">
+            <location altitude="334" latitude="61.6900" longitude="9.4800">
+                <precipitation unit="mm" value="0.0" minvalue="0.0" maxvalue="0.0"/>
+                <symbol id="Cloud" number="4"/>
+            </location>
+        </time>
+        <time datatype="forecast" from="2019-04-27T14:00:00Z" to="2019-04-27T16:00:00Z">
+            <location altitude="334" latitude="61.6900" longitude="9.4800">
+                <precipitation unit="mm" value="0.0" minvalue="0.0" maxvalue="0.0"/>
+                <symbol id="Cloud" number="4"/>
+            </location>
+        </time>
+        <time datatype="forecast" from="2019-04-27T13:00:00Z" to="2019-04-27T16:00:00Z">
+            <location altitude="334" latitude="61.6900" longitude="9.4800">
+                <precipitation unit="mm" value="0.0" minvalue="0.0" maxvalue="0.0"/>
+                <symbol id="Cloud" number="4"/>
+            </location>
+        </time>
+        <time datatype="forecast" from="2019-04-27T10:00:00Z" to="2019-04-27T16:00:00Z">
+            <location altitude="334" latitude="61.6900" longitude="9.4800">
+                <precipitation unit="mm" value="0.0" minvalue="0.0" maxvalue="0.7"/>
+                <minTemperature id="TTT" unit="celsius" value="8.6"/>
+                <maxTemperature id="TTT" unit="celsius" value="12.0"/>
+                <symbol id="Cloud" number="4"/>
+            </location>
+        </time>
+        <time datatype="forecast" from="2019-04-27T17:00:00Z" to="2019-04-27T17:00:00Z">
+            <location altitude="334" latitude="61.6900" longitude="9.4800">
+                <temperature id="TTT" unit="celsius" value="10.9"/>
+                <windDirection id="dd" deg="134.6" name="SE"/>
+                <windSpeed id="ff" mps="2.1" beaufort="2" name="Svak vind"/>
+                <windGust id="ff_gust" mps="3.5"/>
+                <areaMaxWindSpeed mps="8.6"/>
+                <humidity value="92.3" unit="percent"/>
+                <pressure id="pr" unit="hPa" value="1011.7"/>
+                <cloudiness id="NN" percent="100.0"/>
+                <fog id="FOG" percent="0.0"/>
+                <lowClouds id="LOW" percent="96.5"/>
+                <mediumClouds id="MEDIUM" percent="89.2"/>
+                <highClouds id="HIGH" percent="100.0"/>
+                <dewpointTemperature id="TD" unit="celsius" value="9.7"/>
+            </location>
+        </time>
+        <time datatype="forecast" from="2019-04-27T16:00:00Z" to="2019-04-27T17:00:00Z">
+            <location altitude="334" latitude="61.6900" longitude="9.4800">
+                <precipitation unit="mm" value="0.0" minvalue="0.0" maxvalue="0.2"/>
+                <symbol id="Cloud" number="4"/>
+            </location>
+        </time>
+        <time datatype="forecast" from="2019-04-27T15:00:00Z" to="2019-04-27T17:00:00Z">
+            <location altitude="334" latitude="61.6900" longitude="9.4800">
+                <precipitation unit="mm" value="0.0" minvalue="0.0" maxvalue="0.2"/>
+                <symbol id="Cloud" number="4"/>
+            </location>
+        </time>
+        <time datatype="forecast" from="2019-04-27T14:00:00Z" to="2019-04-27T17:00:00Z">
+            <location altitude="334" latitude="61.6900" longitude="9.4800">
+                <precipitation unit="mm" value="0.0" minvalue="0.0" maxvalue="0.2"/>
+                <symbol id="Cloud" number="4"/>
+            </location>
+        </time>
+        <time datatype="forecast" from="2019-04-27T11:00:00Z" to="2019-04-27T17:00:00Z">
+            <location altitude="334" latitude="61.6900" longitude="9.4800">
+                <precipitation unit="mm" value="0.0" minvalue="0.0" maxvalue="0.6"/>
+                <minTemperature id="TTT" unit="celsius" value="8.6"/>
+                <maxTemperature id="TTT" unit="celsius" value="12.0"/>
+                <symbol id="Cloud" number="4"/>
+            </location>
+        </time>
+        <time datatype="forecast" from="2019-04-27T18:00:00Z" to="2019-04-27T18:00:00Z">
+            <location altitude="334" latitude="61.6900" longitude="9.4800">
+                <temperature id="TTT" unit="celsius" value="9.8"/>
+                <windDirection id="dd" deg="151.6" name="SE"/>
+                <windSpeed id="ff" mps="2.4" beaufort="2" name="Svak vind"/>
+                <windGust id="ff_gust" mps="4.1"/>
+                <areaMaxWindSpeed mps="9.8"/>
+                <humidity value="94.2" unit="percent"/>
+                <pressure id="pr" unit="hPa" value="1012.1"/>
+                <cloudiness id="NN" percent="100.0"/>
+                <fog id="FOG" percent="0.2"/>
+                <lowClouds id="LOW" percent="97.1"/>
+                <mediumClouds id="MEDIUM" percent="86.4"/>
+                <highClouds id="HIGH" percent="99.5"/>
+                <temperatureProbability unit="probabilitycode" value="1"/>
+                <windProbability unit="probabilitycode" value="0"/>
+                <dewpointTemperature id="TD" unit="celsius" value="8.9"/>
+            </location>
+        </time>
+        <time datatype="forecast" from="2019-04-27T17:00:00Z" to="2019-04-27T18:00:00Z">
+            <location altitude="334" latitude="61.6900" longitude="9.4800">
+                <precipitation unit="mm" value="0.3" minvalue="0.1" maxvalue="0.5"/>
+                <symbol id="LightRain" number="9"/>
+            </location>
+        </time>
+        <time datatype="forecast" from="2019-04-27T16:00:00Z" to="2019-04-27T18:00:00Z">
+            <location altitude="334" latitude="61.6900" longitude="9.4800">
+                <precipitation unit="mm" value="0.4" minvalue="0.1" maxvalue="0.6"/>
+                <symbol id="Drizzle" number="46"/>
+            </location>
+        </time>
+        <time datatype="forecast" from="2019-04-27T15:00:00Z" to="2019-04-27T18:00:00Z">
+            <location altitude="334" latitude="61.6900" longitude="9.4800">
+                <precipitation unit="mm" value="0.4" minvalue="0.1" maxvalue="0.7"/>
+                <symbol id="Drizzle" number="46"/>
+            </location>
+        </time>
+        <time datatype="forecast" from="2019-04-27T12:00:00Z" to="2019-04-27T18:00:00Z">
+            <location altitude="334" latitude="61.6900" longitude="9.4800">
+                <precipitation unit="mm" value="0.5" minvalue="0.2" maxvalue="0.9"/>
+                <minTemperature id="TTT" unit="celsius" value="9.2"/>
+                <maxTemperature id="TTT" unit="celsius" value="12.0"/>
+                <symbol id="Drizzle" number="46"/>
+                <symbolProbability unit="probabilitycode" value="1"/>
+            </location>
+        </time>
+        <time datatype="forecast" from="2019-04-27T19:00:00Z" to="2019-04-27T19:00:00Z">
+            <location altitude="334" latitude="61.6900" longitude="9.4800">
+                <temperature id="TTT" unit="celsius" value="9.3"/>
+                <windDirection id="dd" deg="148.5" name="SE"/>
+                <windSpeed id="ff" mps="1.7" beaufort="2" name="Svak vind"/>
+                <windGust id="ff_gust" mps="3.9"/>
+                <areaMaxWindSpeed mps="9.4"/>
+                <humidity value="95.2" unit="percent"/>
+                <pressure id="pr" unit="hPa" value="1012.5"/>
+                <cloudiness id="NN" percent="99.9"/>
+                <fog id="FOG" percent="0.5"/>
+                <lowClouds id="LOW" percent="94.0"/>
+                <mediumClouds id="MEDIUM" percent="53.3"/>
+                <highClouds id="HIGH" percent="99.1"/>
+                <dewpointTemperature id="TD" unit="celsius" value="8.6"/>
+            </location>
+        </time>
+        <time datatype="forecast" from="2019-04-27T18:00:00Z" to="2019-04-27T19:00:00Z">
+            <location altitude="334" latitude="61.6900" longitude="9.4800">
+                <precipitation unit="mm" value="0.1" minvalue="0.1" maxvalue="0.3"/>
+                <symbol id="Drizzle" number="46"/>
+            </location>
+        </time>
+        <time datatype="forecast" from="2019-04-27T17:00:00Z" to="2019-04-27T19:00:00Z">
+            <location altitude="334" latitude="61.6900" longitude="9.4800">
+                <precipitation unit="mm" value="0.4" minvalue="0.1" maxvalue="0.7"/>
+                <symbol id="LightRain" number="9"/>
+            </location>
+        </time>
+        <time datatype="forecast" from="2019-04-27T16:00:00Z" to="2019-04-27T19:00:00Z">
+            <location altitude="334" latitude="61.6900" longitude="9.4800">
+                <precipitation unit="mm" value="0.5" minvalue="0.1" maxvalue="0.8"/>
+                <symbol id="Drizzle" number="46"/>
+            </location>
+        </time>
+        <time datatype="forecast" from="2019-04-27T13:00:00Z" to="2019-04-27T19:00:00Z">
+            <location altitude="334" latitude="61.6900" longitude="9.4800">
+                <precipitation unit="mm" value="0.0" minvalue="0.0" maxvalue="0.8"/>
+                <minTemperature id="TTT" unit="celsius" value="9.3"/>
+                <maxTemperature id="TTT" unit="celsius" value="12.0"/>
+                <symbol id="Cloud" number="4"/>
+            </location>
+        </time>
+        <time datatype="forecast" from="2019-04-27T20:00:00Z" to="2019-04-27T20:00:00Z">
+            <location altitude="334" latitude="61.6900" longitude="9.4800">
+                <temperature id="TTT" unit="celsius" value="9.2"/>
+                <windDirection id="dd" deg="147.7" name="SE"/>
+                <windSpeed id="ff" mps="1.9" beaufort="2" name="Svak vind"/>
+                <windGust id="ff_gust" mps="3.3"/>
+                <areaMaxWindSpeed mps="10.4"/>
+                <humidity value="94.7" unit="percent"/>
+                <pressure id="pr" unit="hPa" value="1013.1"/>
+                <cloudiness id="NN" percent="99.9"/>
+                <fog id="FOG" percent="0.4"/>
+                <lowClouds id="LOW" percent="75.0"/>
+                <mediumClouds id="MEDIUM" percent="55.7"/>
+                <highClouds id="HIGH" percent="98.4"/>
+                <dewpointTemperature id="TD" unit="celsius" value="8.4"/>
+            </location>
+        </time>
+        <time datatype="forecast" from="2019-04-27T19:00:00Z" to="2019-04-27T20:00:00Z">
+            <location altitude="334" latitude="61.6900" longitude="9.4800">
+                <precipitation unit="mm" value="0.0" minvalue="0.0" maxvalue="0.1"/>
+                <symbol id="Cloud" number="4"/>
+            </location>
+        </time>
+        <time datatype="forecast" from="2019-04-27T18:00:00Z" to="2019-04-27T20:00:00Z">
+            <location altitude="334" latitude="61.6900" longitude="9.4800">
+                <precipitation unit="mm" value="0.0" minvalue="0.0" maxvalue="0.3"/>
+                <symbol id="Cloud" number="4"/>
+            </location>
+        </time>
+        <time datatype="forecast" from="2019-04-27T17:00:00Z" to="2019-04-27T20:00:00Z">
+            <location altitude="334" latitude="61.6900" longitude="9.4800">
+                <precipitation unit="mm" value="0.4" minvalue="0.1" maxvalue="0.7"/>
+                <symbol id="Drizzle" number="46"/>
+            </location>
+        </time>
+        <time datatype="forecast" from="2019-04-27T14:00:00Z" to="2019-04-27T20:00:00Z">
+            <location altitude="334" latitude="61.6900" longitude="9.4800">
+                <precipitation unit="mm" value="0.5" minvalue="0.1" maxvalue="0.9"/>
+                <minTemperature id="TTT" unit="celsius" value="9.2"/>
+                <maxTemperature id="TTT" unit="celsius" value="12.0"/>
+                <symbol id="Drizzle" number="46"/>
+            </location>
+        </time>
+        <time datatype="forecast" from="2019-04-27T21:00:00Z" to="2019-04-27T21:00:00Z">
+            <location altitude="334" latitude="61.6900" longitude="9.4800">
+                <temperature id="TTT" unit="celsius" value="8.6"/>
+                <windDirection id="dd" deg="149.1" name="SE"/>
+                <windSpeed id="ff" mps="1.9" beaufort="2" name="Svak vind"/>
+                <windGust id="ff_gust" mps="3.2"/>
+                <areaMaxWindSpeed mps="9.5"/>
+                <humidity value="94.5" unit="percent"/>
+                <pressure id="pr" unit="hPa" value="1013.7"/>
+                <cloudiness id="NN" percent="93.9"/>
+                <fog id="FOG" percent="0.3"/>
+                <lowClouds id="LOW" percent="17.7"/>
+                <mediumClouds id="MEDIUM" percent="10.2"/>
+                <highClouds id="HIGH" percent="91.7"/>
+                <dewpointTemperature id="TD" unit="celsius" value="7.8"/>
+            </location>
+        </time>
+        <time datatype="forecast" from="2019-04-27T20:00:00Z" to="2019-04-27T21:00:00Z">
+            <location altitude="334" latitude="61.6900" longitude="9.4800">
+                <precipitation unit="mm" value="0.0" minvalue="0.0" maxvalue="0.0"/>
+                <symbol id="Cloud" number="4"/>
+            </location>
+        </time>
+        <time datatype="forecast" from="2019-04-27T19:00:00Z" to="2019-04-27T21:00:00Z">
+            <location altitude="334" latitude="61.6900" longitude="9.4800">
+                <precipitation unit="mm" value="0.0" minvalue="0.0" maxvalue="0.1"/>
+                <symbol id="Cloud" number="4"/>
+            </location>
+        </time>
+        <time datatype="forecast" from="2019-04-27T18:00:00Z" to="2019-04-27T21:00:00Z">
+            <location altitude="334" latitude="61.6900" longitude="9.4800">
+                <precipitation unit="mm" value="0.0" minvalue="0.0" maxvalue="0.3"/>
+                <symbol id="Cloud" number="4"/>
+            </location>
+        </time>
+        <time datatype="forecast" from="2019-04-27T15:00:00Z" to="2019-04-27T21:00:00Z">
+            <location altitude="334" latitude="61.6900" longitude="9.4800">
+                <precipitation unit="mm" value="0.5" minvalue="0.1" maxvalue="0.9"/>
+                <minTemperature id="TTT" unit="celsius" value="8.6"/>
+                <maxTemperature id="TTT" unit="celsius" value="12.0"/>
+                <symbol id="Drizzle" number="46"/>
+            </location>
+        </time>
+        <time datatype="forecast" from="2019-04-27T22:00:00Z" to="2019-04-27T22:00:00Z">
+            <location altitude="334" latitude="61.6900" longitude="9.4800">
+                <temperature id="TTT" unit="celsius" value="7.6"/>
+                <windDirection id="dd" deg="157.8" name="S"/>
+                <windSpeed id="ff" mps="1.9" beaufort="2" name="Svak vind"/>
+                <windGust id="ff_gust" mps="3.4"/>
+                <areaMaxWindSpeed mps="9.4"/>
+                <humidity value="92.0" unit="percent"/>
+                <pressure id="pr" unit="hPa" value="1014.5"/>
+                <cloudiness id="NN" percent="91.0"/>
+                <fog id="FOG" percent="0.0"/>
+                <lowClouds id="LOW" percent="32.6"/>
+                <mediumClouds id="MEDIUM" percent="21.2"/>
+                <highClouds id="HIGH" percent="83.3"/>
+                <dewpointTemperature id="TD" unit="celsius" value="6.3"/>
+            </location>
+        </time>
+        <time datatype="forecast" from="2019-04-27T21:00:00Z" to="2019-04-27T22:00:00Z">
+            <location altitude="334" latitude="61.6900" longitude="9.4800">
+                <precipitation unit="mm" value="0.0" minvalue="0.0" maxvalue="0.0"/>
+                <symbol id="Cloud" number="4"/>
+            </location>
+        </time>
+        <time datatype="forecast" from="2019-04-27T20:00:00Z" to="2019-04-27T22:00:00Z">
+            <location altitude="334" latitude="61.6900" longitude="9.4800">
+                <precipitation unit="mm" value="0.0" minvalue="0.0" maxvalue="0.0"/>
+                <symbol id="Cloud" number="4"/>
+            </location>
+        </time>
+        <time datatype="forecast" from="2019-04-27T19:00:00Z" to="2019-04-27T22:00:00Z">
+            <location altitude="334" latitude="61.6900" longitude="9.4800">
+                <precipitation unit="mm" value="0.0" minvalue="0.0" maxvalue="0.1"/>
+                <symbol id="Cloud" number="4"/>
+            </location>
+        </time>
+        <time datatype="forecast" from="2019-04-27T16:00:00Z" to="2019-04-27T22:00:00Z">
+            <location altitude="334" latitude="61.6900" longitude="9.4800">
+                <precipitation unit="mm" value="0.5" minvalue="0.1" maxvalue="0.9"/>
+                <minTemperature id="TTT" unit="celsius" value="7.6"/>
+                <maxTemperature id="TTT" unit="celsius" value="12.0"/>
+                <symbol id="Drizzle" number="46"/>
+            </location>
+        </time>
+        <time datatype="forecast" from="2019-04-27T23:00:00Z" to="2019-04-27T23:00:00Z">
+            <location altitude="334" latitude="61.6900" longitude="9.4800">
+                <temperature id="TTT" unit="celsius" value="7.2"/>
+                <windDirection id="dd" deg="144.0" name="SE"/>
+                <windSpeed id="ff" mps="1.6" beaufort="2" name="Svak vind"/>
+                <windGust id="ff_gust" mps="3.2"/>
+                <areaMaxWindSpeed mps="9.6"/>
+                <humidity value="92.8" unit="percent"/>
+                <pressure id="pr" unit="hPa" value="1015.4"/>
+                <cloudiness id="NN" percent="89.2"/>
+                <fog id="FOG" percent="0.0"/>
+                <lowClouds id="LOW" percent="62.9"/>
+                <mediumClouds id="MEDIUM" percent="35.7"/>
+                <highClouds id="HIGH" percent="53.7"/>
+                <dewpointTemperature id="TD" unit="celsius" value="6.0"/>
+            </location>
+        </time>
+        <time datatype="forecast" from="2019-04-27T22:00:00Z" to="2019-04-27T23:00:00Z">
+            <location altitude="334" latitude="61.6900" longitude="9.4800">
+                <precipitation unit="mm" value="0.0" minvalue="0.0" maxvalue="0.0"/>
+                <symbol id="Cloud" number="4"/>
+            </location>
+        </time>
+        <time datatype="forecast" from="2019-04-27T21:00:00Z" to="2019-04-27T23:00:00Z">
+            <location altitude="334" latitude="61.6900" longitude="9.4800">
+                <precipitation unit="mm" value="0.0" minvalue="0.0" maxvalue="0.0"/>
+                <symbol id="Cloud" number="4"/>
+            </location>
+        </time>
+        <time datatype="forecast" from="2019-04-27T20:00:00Z" to="2019-04-27T23:00:00Z">
+            <location altitude="334" latitude="61.6900" longitude="9.4800">
+                <precipitation unit="mm" value="0.0" minvalue="0.0" maxvalue="0.0"/>
+                <symbol id="Cloud" number="4"/>
+            </location>
+        </time>
+        <time datatype="forecast" from="2019-04-27T17:00:00Z" to="2019-04-27T23:00:00Z">
+            <location altitude="334" latitude="61.6900" longitude="9.4800">
+                <precipitation unit="mm" value="0.0" minvalue="0.0" maxvalue="0.7"/>
+                <minTemperature id="TTT" unit="celsius" value="7.2"/>
+                <maxTemperature id="TTT" unit="celsius" value="10.9"/>
+                <symbol id="Cloud" number="4"/>
+            </location>
+        </time>
+        <time datatype="forecast" from="2019-04-28T00:00:00Z" to="2019-04-28T00:00:00Z">
+            <location altitude="334" latitude="61.6900" longitude="9.4800">
+                <temperature id="TTT" unit="celsius" value="6.9"/>
+                <windDirection id="dd" deg="130.9" name="SE"/>
+                <windSpeed id="ff" mps="1.5" beaufort="1" name="Flau vind"/>
+                <windGust id="ff_gust" mps="2.9"/>
+                <areaMaxWindSpeed mps="9.0"/>
+                <humidity value="94.1" unit="percent"/>
+                <pressure id="pr" unit="hPa" value="1016.4"/>
+                <cloudiness id="NN" percent="96.6"/>
+                <fog id="FOG" percent="0.3"/>
+                <lowClouds id="LOW" percent="87.0"/>
+                <mediumClouds id="MEDIUM" percent="78.0"/>
+                <highClouds id="HIGH" percent="65.1"/>
+                <temperatureProbability unit="probabilitycode" value="1"/>
+                <windProbability unit="probabilitycode" value="0"/>
+                <dewpointTemperature id="TD" unit="celsius" value="6.0"/>
+            </location>
+        </time>
+        <time datatype="forecast" from="2019-04-27T23:00:00Z" to="2019-04-28T00:00:00Z">
+            <location altitude="334" latitude="61.6900" longitude="9.4800">
+                <precipitation unit="mm" value="0.0" minvalue="0.0" maxvalue="0.0"/>
+                <symbol id="Cloud" number="4"/>
+            </location>
+        </time>
+        <time datatype="forecast" from="2019-04-27T22:00:00Z" to="2019-04-28T00:00:00Z">
+            <location altitude="334" latitude="61.6900" longitude="9.4800">
+                <precipitation unit="mm" value="0.0" minvalue="0.0" maxvalue="0.0"/>
+                <symbol id="Cloud" number="4"/>
+            </location>
+        </time>
+        <time datatype="forecast" from="2019-04-27T21:00:00Z" to="2019-04-28T00:00:00Z">
+            <location altitude="334" latitude="61.6900" longitude="9.4800">
+                <precipitation unit="mm" value="0.0" minvalue="0.0" maxvalue="0.0"/>
+                <symbol id="Cloud" number="4"/>
+            </location>
+        </time>
+        <time datatype="forecast" from="2019-04-27T18:00:00Z" to="2019-04-28T00:00:00Z">
+            <location altitude="334" latitude="61.6900" longitude="9.4800">
+                <precipitation unit="mm" value="0.0" minvalue="0.0" maxvalue="0.3"/>
+                <minTemperature id="TTT" unit="celsius" value="6.9"/>
+                <maxTemperature id="TTT" unit="celsius" value="9.8"/>
+                <symbol id="Cloud" number="4"/>
+                <symbolProbability unit="probabilitycode" value="1"/>
+            </location>
+        </time>
+        <time datatype="forecast" from="2019-04-28T01:00:00Z" to="2019-04-28T01:00:00Z">
+            <location altitude="334" latitude="61.6900" longitude="9.4800">
+                <temperature id="TTT" unit="celsius" value="6.6"/>
+                <windDirection id="dd" deg="142.5" name="SE"/>
+                <windSpeed id="ff" mps="1.4" beaufort="1" name="Flau vind"/>
+                <windGust id="ff_gust" mps="2.5"/>
+                <areaMaxWindSpeed mps="8.4"/>
+                <humidity value="94.8" unit="percent"/>
+                <pressure id="pr" unit="hPa" value="1016.9"/>
+                <cloudiness id="NN" percent="94.8"/>
+                <fog id="FOG" percent="0.4"/>
+                <lowClouds id="LOW" percent="69.2"/>
+                <mediumClouds id="MEDIUM" percent="65.1"/>
+                <highClouds id="HIGH" percent="69.7"/>
+                <dewpointTemperature id="TD" unit="celsius" value="5.8"/>
+            </location>
+        </time>
+        <time datatype="forecast" from="2019-04-28T00:00:00Z" to="2019-04-28T01:00:00Z">
+            <location altitude="334" latitude="61.6900" longitude="9.4800">
+                <precipitation unit="mm" value="0.0" minvalue="0.0" maxvalue="0.1"/>
+                <symbol id="Cloud" number="4"/>
+            </location>
+        </time>
+        <time datatype="forecast" from="2019-04-27T23:00:00Z" to="2019-04-28T01:00:00Z">
+            <location altitude="334" latitude="61.6900" longitude="9.4800">
+                <precipitation unit="mm" value="0.0" minvalue="0.0" maxvalue="0.1"/>
+                <symbol id="Cloud" number="4"/>
+            </location>
+        </time>
+        <time datatype="forecast" from="2019-04-27T22:00:00Z" to="2019-04-28T01:00:00Z">
+            <location altitude="334" latitude="61.6900" longitude="9.4800">
+                <precipitation unit="mm" value="0.0" minvalue="0.0" maxvalue="0.1"/>
+                <symbol id="Cloud" number="4"/>
+            </location>
+        </time>
+        <time datatype="forecast" from="2019-04-27T19:00:00Z" to="2019-04-28T01:00:00Z">
+            <location altitude="334" latitude="61.6900" longitude="9.4800">
+                <precipitation unit="mm" value="0.0" minvalue="0.0" maxvalue="0.1"/>
+                <minTemperature id="TTT" unit="celsius" value="6.6"/>
+                <maxTemperature id="TTT" unit="celsius" value="9.3"/>
+                <symbol id="Cloud" number="4"/>
+            </location>
+        </time>
+        <time datatype="forecast" from="2019-04-28T02:00:00Z" to="2019-04-28T02:00:00Z">
+            <location altitude="334" latitude="61.6900" longitude="9.4800">
+                <temperature id="TTT" unit="celsius" value="5.7"/>
+                <windDirection id="dd" deg="158.4" name="S"/>
+                <windSpeed id="ff" mps="1.5" beaufort="1" name="Flau vind"/>
+                <windGust id="ff_gust" mps="2.6"/>
+                <areaMaxWindSpeed mps="7.9"/>
+                <humidity value="93.2" unit="percent"/>
+                <pressure id="pr" unit="hPa" value="1017.3"/>
+                <cloudiness id="NN" percent="98.4"/>
+                <fog id="FOG" percent="0.2"/>
+                <lowClouds id="LOW" percent="65.9"/>
+                <mediumClouds id="MEDIUM" percent="40.0"/>
+                <highClouds id="HIGH" percent="91.8"/>
+                <dewpointTemperature id="TD" unit="celsius" value="4.6"/>
+            </location>
+        </time>
+        <time datatype="forecast" from="2019-04-28T01:00:00Z" to="2019-04-28T02:00:00Z">
+            <location altitude="334" latitude="61.6900" longitude="9.4800">
+                <precipitation unit="mm" value="0.0" minvalue="0.0" maxvalue="0.0"/>
+                <symbol id="Cloud" number="4"/>
+            </location>
+        </time>
+        <time datatype="forecast" from="2019-04-28T00:00:00Z" to="2019-04-28T02:00:00Z">
+            <location altitude="334" latitude="61.6900" longitude="9.4800">
+                <precipitation unit="mm" value="0.0" minvalue="0.0" maxvalue="0.1"/>
+                <symbol id="Cloud" number="4"/>
+            </location>
+        </time>
+        <time datatype="forecast" from="2019-04-27T23:00:00Z" to="2019-04-28T02:00:00Z">
+            <location altitude="334" latitude="61.6900" longitude="9.4800">
+                <precipitation unit="mm" value="0.0" minvalue="0.0" maxvalue="0.1"/>
+                <symbol id="Cloud" number="4"/>
+            </location>
+        </time>
+        <time datatype="forecast" from="2019-04-27T20:00:00Z" to="2019-04-28T02:00:00Z">
+            <location altitude="334" latitude="61.6900" longitude="9.4800">
+                <precipitation unit="mm" value="0.0" minvalue="0.0" maxvalue="0.1"/>
+                <minTemperature id="TTT" unit="celsius" value="5.7"/>
+                <maxTemperature id="TTT" unit="celsius" value="9.2"/>
+                <symbol id="Cloud" number="4"/>
+            </location>
+        </time>
+        <time datatype="forecast" from="2019-04-28T03:00:00Z" to="2019-04-28T03:00:00Z">
+            <location altitude="334" latitude="61.6900" longitude="9.4800">
+                <temperature id="TTT" unit="celsius" value="5.4"/>
+                <windDirection id="dd" deg="142.6" name="SE"/>
+                <windSpeed id="ff" mps="1.2" beaufort="1" name="Flau vind"/>
+                <windGust id="ff_gust" mps="2.7"/>
+                <areaMaxWindSpeed mps="7.8"/>
+                <humidity value="93.1" unit="percent"/>
+                <pressure id="pr" unit="hPa" value="1017.6"/>
+                <cloudiness id="NN" percent="99.7"/>
+                <fog id="FOG" percent="0.0"/>
+                <lowClouds id="LOW" percent="89.6"/>
+                <mediumClouds id="MEDIUM" percent="68.3"/>
+                <highClouds id="HIGH" percent="95.4"/>
+                <dewpointTemperature id="TD" unit="celsius" value="4.3"/>
+            </location>
+        </time>
+        <time datatype="forecast" from="2019-04-28T02:00:00Z" to="2019-04-28T03:00:00Z">
+            <location altitude="334" latitude="61.6900" longitude="9.4800">
+                <precipitation unit="mm" value="0.0" minvalue="0.0" maxvalue="0.0"/>
+                <symbol id="Cloud" number="4"/>
+            </location>
+        </time>
+        <time datatype="forecast" from="2019-04-28T01:00:00Z" to="2019-04-28T03:00:00Z">
+            <location altitude="334" latitude="61.6900" longitude="9.4800">
+                <precipitation unit="mm" value="0.0" minvalue="0.0" maxvalue="0.0"/>
+                <symbol id="Cloud" number="4"/>
+            </location>
+        </time>
+        <time datatype="forecast" from="2019-04-28T00:00:00Z" to="2019-04-28T03:00:00Z">
+            <location altitude="334" latitude="61.6900" longitude="9.4800">
+                <precipitation unit="mm" value="0.0" minvalue="0.0" maxvalue="0.1"/>
+                <symbol id="Cloud" number="4"/>
+            </location>
+        </time>
+        <time datatype="forecast" from="2019-04-27T21:00:00Z" to="2019-04-28T03:00:00Z">
+            <location altitude="334" latitude="61.6900" longitude="9.4800">
+                <precipitation unit="mm" value="0.0" minvalue="0.0" maxvalue="0.1"/>
+                <minTemperature id="TTT" unit="celsius" value="5.4"/>
+                <maxTemperature id="TTT" unit="celsius" value="8.6"/>
+                <symbol id="Cloud" number="4"/>
+            </location>
+        </time>
+        <time datatype="forecast" from="2019-04-28T04:00:00Z" to="2019-04-28T04:00:00Z">
+            <location altitude="334" latitude="61.6900" longitude="9.4800">
+                <temperature id="TTT" unit="celsius" value="5.5"/>
+                <windDirection id="dd" deg="134.7" name="SE"/>
+                <windSpeed id="ff" mps="0.5" beaufort="1" name="Flau vind"/>
+                <windGust id="ff_gust" mps="1.9"/>
+                <areaMaxWindSpeed mps="7.0"/>
+                <humidity value="95.1" unit="percent"/>
+                <pressure id="pr" unit="hPa" value="1018.0"/>
+                <cloudiness id="NN" percent="95.6"/>
+                <fog id="FOG" percent="0.6"/>
+                <lowClouds id="LOW" percent="81.0"/>
+                <mediumClouds id="MEDIUM" percent="46.3"/>
+                <highClouds id="HIGH" percent="75.3"/>
+                <dewpointTemperature id="TD" unit="celsius" value="4.7"/>
+            </location>
+        </time>
+        <time datatype="forecast" from="2019-04-28T03:00:00Z" to="2019-04-28T04:00:00Z">
+            <location altitude="334" latitude="61.6900" longitude="9.4800">
+                <precipitation unit="mm" value="0.0" minvalue="0.0" maxvalue="0.1"/>
+                <symbol id="Cloud" number="4"/>
+            </location>
+        </time>
+        <time datatype="forecast" from="2019-04-28T02:00:00Z" to="2019-04-28T04:00:00Z">
+            <location altitude="334" latitude="61.6900" longitude="9.4800">
+                <precipitation unit="mm" value="0.0" minvalue="0.0" maxvalue="0.1"/>
+                <symbol id="Cloud" number="4"/>
+            </location>
+        </time>
+        <time datatype="forecast" from="2019-04-28T01:00:00Z" to="2019-04-28T04:00:00Z">
+            <location altitude="334" latitude="61.6900" longitude="9.4800">
+                <precipitation unit="mm" value="0.0" minvalue="0.0" maxvalue="0.1"/>
+                <symbol id="Cloud" number="4"/>
+            </location>
+        </time>
+        <time datatype="forecast" from="2019-04-27T22:00:00Z" to="2019-04-28T04:00:00Z">
+            <location altitude="334" latitude="61.6900" longitude="9.4800">
+                <precipitation unit="mm" value="0.0" minvalue="0.0" maxvalue="0.1"/>
+                <minTemperature id="TTT" unit="celsius" value="5.4"/>
+                <maxTemperature id="TTT" unit="celsius" value="7.6"/>
+                <symbol id="Cloud" number="4"/>
+            </location>
+        </time>
+        <time datatype="forecast" from="2019-04-28T05:00:00Z" to="2019-04-28T05:00:00Z">
+            <location altitude="334" latitude="61.6900" longitude="9.4800">
+                <temperature id="TTT" unit="celsius" value="5.7"/>
+                <windDirection id="dd" deg="135.1" name="SE"/>
+                <windSpeed id="ff" mps="0.9" beaufort="1" name="Flau vind"/>
+                <windGust id="ff_gust" mps="1.5"/>
+                <areaMaxWindSpeed mps="6.5"/>
+                <humidity value="94.6" unit="percent"/>
+                <pressure id="pr" unit="hPa" value="1018.3"/>
+                <cloudiness id="NN" percent="96.9"/>
+                <fog id="FOG" percent="0.4"/>
+                <lowClouds id="LOW" percent="92.6"/>
+                <mediumClouds id="MEDIUM" percent="26.0"/>
+                <highClouds id="HIGH" percent="74.0"/>
+                <dewpointTemperature id="TD" unit="celsius" value="4.9"/>
+            </location>
+        </time>
+        <time datatype="forecast" from="2019-04-28T04:00:00Z" to="2019-04-28T05:00:00Z">
+            <location altitude="334" latitude="61.6900" longitude="9.4800">
+                <precipitation unit="mm" value="0.0" minvalue="0.0" maxvalue="0.0"/>
+                <symbol id="Cloud" number="4"/>
+            </location>
+        </time>
+        <time datatype="forecast" from="2019-04-28T03:00:00Z" to="2019-04-28T05:00:00Z">
+            <location altitude="334" latitude="61.6900" longitude="9.4800">
+                <precipitation unit="mm" value="0.0" minvalue="0.0" maxvalue="0.1"/>
+                <symbol id="Cloud" number="4"/>
+            </location>
+        </time>
+        <time datatype="forecast" from="2019-04-28T02:00:00Z" to="2019-04-28T05:00:00Z">
+            <location altitude="334" latitude="61.6900" longitude="9.4800">
+                <precipitation unit="mm" value="0.0" minvalue="0.0" maxvalue="0.1"/>
+                <symbol id="Cloud" number="4"/>
+            </location>
+        </time>
+        <time datatype="forecast" from="2019-04-27T23:00:00Z" to="2019-04-28T05:00:00Z">
+            <location altitude="334" latitude="61.6900" longitude="9.4800">
+                <precipitation unit="mm" value="0.0" minvalue="0.0" maxvalue="0.1"/>
+                <minTemperature id="TTT" unit="celsius" value="5.4"/>
+                <maxTemperature id="TTT" unit="celsius" value="7.2"/>
+                <symbol id="Cloud" number="4"/>
+            </location>
+        </time>
+        <time datatype="forecast" from="2019-04-28T06:00:00Z" to="2019-04-28T06:00:00Z">
+            <location altitude="334" latitude="61.6900" longitude="9.4800">
+                <temperature id="TTT" unit="celsius" value="6.5"/>
+                <windDirection id="dd" deg="93.6" name="E"/>
+                <windSpeed id="ff" mps="0.6" beaufort="1" name="Flau vind"/>
+                <windGust id="ff_gust" mps="1.5"/>
+                <areaMaxWindSpeed mps="6.3"/>
+                <humidity value="96.6" unit="percent"/>
+                <pressure id="pr" unit="hPa" value="1018.8"/>
+                <cloudiness id="NN" percent="99.7"/>
+                <fog id="FOG" percent="1.5"/>
+                <lowClouds id="LOW" percent="98.8"/>
+                <mediumClouds id="MEDIUM" percent="7.5"/>
+                <highClouds id="HIGH" percent="70.3"/>
+                <temperatureProbability unit="probabilitycode" value="0"/>
+                <windProbability unit="probabilitycode" value="0"/>
+                <dewpointTemperature id="TD" unit="celsius" value="5.9"/>
+            </location>
+        </time>
+        <time datatype="forecast" from="2019-04-28T05:00:00Z" to="2019-04-28T06:00:00Z">
+            <location altitude="334" latitude="61.6900" longitude="9.4800">
+                <precipitation unit="mm" value="0.0" minvalue="0.0" maxvalue="0.0"/>
+                <symbol id="Cloud" number="4"/>
+            </location>
+        </time>
+        <time datatype="forecast" from="2019-04-28T04:00:00Z" to="2019-04-28T06:00:00Z">
+            <location altitude="334" latitude="61.6900" longitude="9.4800">
+                <precipitation unit="mm" value="0.0" minvalue="0.0" maxvalue="0.0"/>
+                <symbol id="Cloud" number="4"/>
+            </location>
+        </time>
+        <time datatype="forecast" from="2019-04-28T03:00:00Z" to="2019-04-28T06:00:00Z">
+            <location altitude="334" latitude="61.6900" longitude="9.4800">
+                <precipitation unit="mm" value="0.0" minvalue="0.0" maxvalue="0.1"/>
+                <symbol id="Cloud" number="4"/>
+            </location>
+        </time>
+        <time datatype="forecast" from="2019-04-28T00:00:00Z" to="2019-04-28T06:00:00Z">
+            <location altitude="334" latitude="61.6900" longitude="9.4800">
+                <precipitation unit="mm" value="0.0" minvalue="0.0" maxvalue="0.1"/>
+                <minTemperature id="TTT" unit="celsius" value="5.4"/>
+                <maxTemperature id="TTT" unit="celsius" value="6.9"/>
+                <symbol id="Cloud" number="4"/>
+                <symbolProbability unit="probabilitycode" value="2"/>
+            </location>
+        </time>
+        <time datatype="forecast" from="2019-04-28T07:00:00Z" to="2019-04-28T07:00:00Z">
+            <location altitude="334" latitude="61.6900" longitude="9.4800">
+                <temperature id="TTT" unit="celsius" value="7.4"/>
+                <windDirection id="dd" deg="67.4" name="NE"/>
+                <windSpeed id="ff" mps="0.7" beaufort="1" name="Flau vind"/>
+                <windGust id="ff_gust" mps="1.3"/>
+                <areaMaxWindSpeed mps="5.9"/>
+                <humidity value="97.5" unit="percent"/>
+                <pressure id="pr" unit="hPa" value="1019.4"/>
+                <cloudiness id="NN" percent="100.0"/>
+                <fog id="FOG" percent="3.3"/>
+                <lowClouds id="LOW" percent="99.9"/>
+                <mediumClouds id="MEDIUM" percent="0.0"/>
+                <highClouds id="HIGH" percent="73.2"/>
+                <dewpointTemperature id="TD" unit="celsius" value="7.0"/>
+            </location>
+        </time>
+        <time datatype="forecast" from="2019-04-28T06:00:00Z" to="2019-04-28T07:00:00Z">
+            <location altitude="334" latitude="61.6900" longitude="9.4800">
+                <precipitation unit="mm" value="0.0" minvalue="0.0" maxvalue="0.0"/>
+                <symbol id="Cloud" number="4"/>
+            </location>
+        </time>
+        <time datatype="forecast" from="2019-04-28T05:00:00Z" to="2019-04-28T07:00:00Z">
+            <location altitude="334" latitude="61.6900" longitude="9.4800">
+                <precipitation unit="mm" value="0.0" minvalue="0.0" maxvalue="0.0"/>
+                <symbol id="Cloud" number="4"/>
+            </location>
+        </time>
+        <time datatype="forecast" from="2019-04-28T04:00:00Z" to="2019-04-28T07:00:00Z">
+            <location altitude="334" latitude="61.6900" longitude="9.4800">
+                <precipitation unit="mm" value="0.0" minvalue="0.0" maxvalue="0.0"/>
+                <symbol id="Cloud" number="4"/>
+            </location>
+        </time>
+        <time datatype="forecast" from="2019-04-28T01:00:00Z" to="2019-04-28T07:00:00Z">
+            <location altitude="334" latitude="61.6900" longitude="9.4800">
+                <precipitation unit="mm" value="0.0" minvalue="0.0" maxvalue="0.1"/>
+                <minTemperature id="TTT" unit="celsius" value="5.4"/>
+                <maxTemperature id="TTT" unit="celsius" value="7.4"/>
+                <symbol id="Cloud" number="4"/>
+            </location>
+        </time>
+        <time datatype="forecast" from="2019-04-28T08:00:00Z" to="2019-04-28T08:00:00Z">
+            <location altitude="334" latitude="61.6900" longitude="9.4800">
+                <temperature id="TTT" unit="celsius" value="7.8"/>
+                <windDirection id="dd" deg="95.8" name="E"/>
+                <windSpeed id="ff" mps="0.8" beaufort="1" name="Flau vind"/>
+                <windGust id="ff_gust" mps="1.5"/>
+                <areaMaxWindSpeed mps="5.9"/>
+                <humidity value="96.1" unit="percent"/>
+                <pressure id="pr" unit="hPa" value="1019.9"/>
+                <cloudiness id="NN" percent="100.0"/>
+                <fog id="FOG" percent="1.4"/>
+                <lowClouds id="LOW" percent="99.9"/>
+                <mediumClouds id="MEDIUM" percent="0.0"/>
+                <highClouds id="HIGH" percent="89.8"/>
+                <dewpointTemperature id="TD" unit="celsius" value="7.2"/>
+            </location>
+        </time>
+        <time datatype="forecast" from="2019-04-28T07:00:00Z" to="2019-04-28T08:00:00Z">
+            <location altitude="334" latitude="61.6900" longitude="9.4800">
+                <precipitation unit="mm" value="0.0" minvalue="0.0" maxvalue="0.0"/>
+                <symbol id="Cloud" number="4"/>
+            </location>
+        </time>
+        <time datatype="forecast" from="2019-04-28T06:00:00Z" to="2019-04-28T08:00:00Z">
+            <location altitude="334" latitude="61.6900" longitude="9.4800">
+                <precipitation unit="mm" value="0.0" minvalue="0.0" maxvalue="0.0"/>
+                <symbol id="Cloud" number="4"/>
+            </location>
+        </time>
+        <time datatype="forecast" from="2019-04-28T05:00:00Z" to="2019-04-28T08:00:00Z">
+            <location altitude="334" latitude="61.6900" longitude="9.4800">
+                <precipitation unit="mm" value="0.0" minvalue="0.0" maxvalue="0.0"/>
+                <symbol id="Cloud" number="4"/>
+            </location>
+        </time>
+        <time datatype="forecast" from="2019-04-28T02:00:00Z" to="2019-04-28T08:00:00Z">
+            <location altitude="334" latitude="61.6900" longitude="9.4800">
+                <precipitation unit="mm" value="0.0" minvalue="0.0" maxvalue="0.1"/>
+                <minTemperature id="TTT" unit="celsius" value="5.4"/>
+                <maxTemperature id="TTT" unit="celsius" value="7.8"/>
+                <symbol id="Cloud" number="4"/>
+            </location>
+        </time>
+        <time datatype="forecast" from="2019-04-28T09:00:00Z" to="2019-04-28T09:00:00Z">
+            <location altitude="334" latitude="61.6900" longitude="9.4800">
+                <temperature id="TTT" unit="celsius" value="8.4"/>
+                <windDirection id="dd" deg="86.5" name="E"/>
+                <windSpeed id="ff" mps="0.6" beaufort="1" name="Flau vind"/>
+                <windGust id="ff_gust" mps="1.4"/>
+                <areaMaxWindSpeed mps="5.9"/>
+                <humidity value="94.7" unit="percent"/>
+                <pressure id="pr" unit="hPa" value="1020.3"/>
+                <cloudiness id="NN" percent="98.9"/>
+                <fog id="FOG" percent="0.6"/>
+                <lowClouds id="LOW" percent="92.9"/>
+                <mediumClouds id="MEDIUM" percent="0.0"/>
+                <highClouds id="HIGH" percent="90.6"/>
+                <dewpointTemperature id="TD" unit="celsius" value="7.5"/>
+            </location>
+        </time>
+        <time datatype="forecast" from="2019-04-28T08:00:00Z" to="2019-04-28T09:00:00Z">
+            <location altitude="334" latitude="61.6900" longitude="9.4800">
+                <precipitation unit="mm" value="0.0" minvalue="0.0" maxvalue="0.0"/>
+                <symbol id="Cloud" number="4"/>
+            </location>
+        </time>
+        <time datatype="forecast" from="2019-04-28T07:00:00Z" to="2019-04-28T09:00:00Z">
+            <location altitude="334" latitude="61.6900" longitude="9.4800">
+                <precipitation unit="mm" value="0.0" minvalue="0.0" maxvalue="0.0"/>
+                <symbol id="Cloud" number="4"/>
+            </location>
+        </time>
+        <time datatype="forecast" from="2019-04-28T06:00:00Z" to="2019-04-28T09:00:00Z">
+            <location altitude="334" latitude="61.6900" longitude="9.4800">
+                <precipitation unit="mm" value="0.0" minvalue="0.0" maxvalue="0.0"/>
+                <symbol id="Cloud" number="4"/>
+            </location>
+        </time>
+        <time datatype="forecast" from="2019-04-28T03:00:00Z" to="2019-04-28T09:00:00Z">
+            <location altitude="334" latitude="61.6900" longitude="9.4800">
+                <precipitation unit="mm" value="0.0" minvalue="0.0" maxvalue="0.1"/>
+                <minTemperature id="TTT" unit="celsius" value="5.4"/>
+                <maxTemperature id="TTT" unit="celsius" value="8.4"/>
+                <symbol id="Cloud" number="4"/>
+            </location>
+        </time>
+        <time datatype="forecast" from="2019-04-28T10:00:00Z" to="2019-04-28T10:00:00Z">
+            <location altitude="334" latitude="61.6900" longitude="9.4800">
+                <temperature id="TTT" unit="celsius" value="10.9"/>
+                <windDirection id="dd" deg="89.4" name="E"/>
+                <windSpeed id="ff" mps="1.1" beaufort="1" name="Flau vind"/>
+                <windGust id="ff_gust" mps="2.8"/>
+                <areaMaxWindSpeed mps="4.1"/>
+                <humidity value="84.3" unit="percent"/>
+                <pressure id="pr" unit="hPa" value="1020.1"/>
+                <cloudiness id="NN" percent="95.6"/>
+                <fog id="FOG" percent="0.0"/>
+                <lowClouds id="LOW" percent="56.9"/>
+                <mediumClouds id="MEDIUM" percent="0.0"/>
+                <highClouds id="HIGH" percent="89.5"/>
+                <dewpointTemperature id="TD" unit="celsius" value="8.4"/>
+            </location>
+        </time>
+        <time datatype="forecast" from="2019-04-28T09:00:00Z" to="2019-04-28T10:00:00Z">
+            <location altitude="334" latitude="61.6900" longitude="9.4800">
+                <precipitation unit="mm" value="0.0" minvalue="0.0" maxvalue="0.0"/>
+                <symbol id="Cloud" number="4"/>
+            </location>
+        </time>
+        <time datatype="forecast" from="2019-04-28T08:00:00Z" to="2019-04-28T10:00:00Z">
+            <location altitude="334" latitude="61.6900" longitude="9.4800">
+                <precipitation unit="mm" value="0.0" minvalue="0.0" maxvalue="0.0"/>
+                <symbol id="Cloud" number="4"/>
+            </location>
+        </time>
+        <time datatype="forecast" from="2019-04-28T07:00:00Z" to="2019-04-28T10:00:00Z">
+            <location altitude="334" latitude="61.6900" longitude="9.4800">
+                <precipitation unit="mm" value="0.0" minvalue="0.0" maxvalue="0.0"/>
+                <symbol id="Cloud" number="4"/>
+            </location>
+        </time>
+        <time datatype="forecast" from="2019-04-28T04:00:00Z" to="2019-04-28T10:00:00Z">
+            <location altitude="334" latitude="61.6900" longitude="9.4800">
+                <precipitation unit="mm" value="0.0" minvalue="0.0" maxvalue="0.0"/>
+                <minTemperature id="TTT" unit="celsius" value="5.5"/>
+                <maxTemperature id="TTT" unit="celsius" value="10.9"/>
+                <symbol id="Cloud" number="4"/>
+            </location>
+        </time>
+        <time datatype="forecast" from="2019-04-28T11:00:00Z" to="2019-04-28T11:00:00Z">
+            <location altitude="334" latitude="61.6900" longitude="9.4800">
+                <temperature id="TTT" unit="celsius" value="13.3"/>
+                <windDirection id="dd" deg="95.1" name="E"/>
+                <windSpeed id="ff" mps="2.1" beaufort="2" name="Svak vind"/>
+                <windGust id="ff_gust" mps="4.7"/>
+                <areaMaxWindSpeed mps="4.0"/>
+                <humidity value="71.0" unit="percent"/>
+                <pressure id="pr" unit="hPa" value="1019.7"/>
+                <cloudiness id="NN" percent="94.2"/>
+                <fog id="FOG" percent="0.0"/>
+                <lowClouds id="LOW" percent="65.8"/>
+                <mediumClouds id="MEDIUM" percent="0.0"/>
+                <highClouds id="HIGH" percent="78.6"/>
+                <dewpointTemperature id="TD" unit="celsius" value="8.1"/>
+            </location>
+        </time>
+        <time datatype="forecast" from="2019-04-28T10:00:00Z" to="2019-04-28T11:00:00Z">
+            <location altitude="334" latitude="61.6900" longitude="9.4800">
+                <precipitation unit="mm" value="0.0" minvalue="0.0" maxvalue="0.0"/>
+                <symbol id="Cloud" number="4"/>
+            </location>
+        </time>
+        <time datatype="forecast" from="2019-04-28T09:00:00Z" to="2019-04-28T11:00:00Z">
+            <location altitude="334" latitude="61.6900" longitude="9.4800">
+                <precipitation unit="mm" value="0.0" minvalue="0.0" maxvalue="0.0"/>
+                <symbol id="Cloud" number="4"/>
+            </location>
+        </time>
+        <time datatype="forecast" from="2019-04-28T08:00:00Z" to="2019-04-28T11:00:00Z">
+            <location altitude="334" latitude="61.6900" longitude="9.4800">
+                <precipitation unit="mm" value="0.0" minvalue="0.0" maxvalue="0.0"/>
+                <symbol id="Cloud" number="4"/>
+            </location>
+        </time>
+        <time datatype="forecast" from="2019-04-28T05:00:00Z" to="2019-04-28T11:00:00Z">
+            <location altitude="334" latitude="61.6900" longitude="9.4800">
+                <precipitation unit="mm" value="0.0" minvalue="0.0" maxvalue="0.0"/>
+                <minTemperature id="TTT" unit="celsius" value="5.7"/>
+                <maxTemperature id="TTT" unit="celsius" value="13.3"/>
+                <symbol id="Cloud" number="4"/>
+            </location>
+        </time>
+        <time datatype="forecast" from="2019-04-28T12:00:00Z" to="2019-04-28T12:00:00Z">
+            <location altitude="334" latitude="61.6900" longitude="9.4800">
+                <temperature id="TTT" unit="celsius" value="14.5"/>
+                <windDirection id="dd" deg="100.4" name="E"/>
+                <windSpeed id="ff" mps="2.7" beaufort="2" name="Svak vind"/>
+                <windGust id="ff_gust" mps="5.6"/>
+                <areaMaxWindSpeed mps="4.4"/>
+                <humidity value="66.5" unit="percent"/>
+                <pressure id="pr" unit="hPa" value="1019.5"/>
+                <cloudiness id="NN" percent="82.6"/>
+                <fog id="FOG" percent="0.0"/>
+                <lowClouds id="LOW" percent="75.6"/>
+                <mediumClouds id="MEDIUM" percent="0.0"/>
+                <highClouds id="HIGH" percent="29.9"/>
+                <temperatureProbability unit="probabilitycode" value="2"/>
+                <windProbability unit="probabilitycode" value="0"/>
+                <dewpointTemperature id="TD" unit="celsius" value="8.3"/>
+            </location>
+        </time>
+        <time datatype="forecast" from="2019-04-28T11:00:00Z" to="2019-04-28T12:00:00Z">
+            <location altitude="334" latitude="61.6900" longitude="9.4800">
+                <precipitation unit="mm" value="0.0" minvalue="0.0" maxvalue="0.0"/>
+                <symbol id="PartlyCloud" number="3"/>
+            </location>
+        </time>
+        <time datatype="forecast" from="2019-04-28T10:00:00Z" to="2019-04-28T12:00:00Z">
+            <location altitude="334" latitude="61.6900" longitude="9.4800">
+                <precipitation unit="mm" value="0.0" minvalue="0.0" maxvalue="0.0"/>
+                <symbol id="Cloud" number="4"/>
+            </location>
+        </time>
+        <time datatype="forecast" from="2019-04-28T09:00:00Z" to="2019-04-28T12:00:00Z">
+            <location altitude="334" latitude="61.6900" longitude="9.4800">
+                <precipitation unit="mm" value="0.0" minvalue="0.0" maxvalue="0.0"/>
+                <symbol id="Cloud" number="4"/>
+            </location>
+        </time>
+        <time datatype="forecast" from="2019-04-28T06:00:00Z" to="2019-04-28T12:00:00Z">
+            <location altitude="334" latitude="61.6900" longitude="9.4800">
+                <precipitation unit="mm" value="0.0" minvalue="0.0" maxvalue="0.0"/>
+                <minTemperature id="TTT" unit="celsius" value="6.5"/>
+                <maxTemperature id="TTT" unit="celsius" value="14.5"/>
+                <symbol id="Cloud" number="4"/>
+                <symbolProbability unit="probabilitycode" value="1"/>
+            </location>
+        </time>
+        <time datatype="forecast" from="2019-04-28T13:00:00Z" to="2019-04-28T13:00:00Z">
+            <location altitude="334" latitude="61.6900" longitude="9.4800">
+                <temperature id="TTT" unit="celsius" value="15.1"/>
+                <windDirection id="dd" deg="100.1" name="E"/>
+                <windSpeed id="ff" mps="3.3" beaufort="2" name="Svak vind"/>
+                <windGust id="ff_gust" mps="6.4"/>
+                <areaMaxWindSpeed mps="4.5"/>
+                <humidity value="65.5" unit="percent"/>
+                <pressure id="pr" unit="hPa" value="1019.4"/>
+                <cloudiness id="NN" percent="83.1"/>
+                <fog id="FOG" percent="0.0"/>
+                <lowClouds id="LOW" percent="74.7"/>
+                <mediumClouds id="MEDIUM" percent="0.0"/>
+                <highClouds id="HIGH" percent="41.7"/>
+                <dewpointTemperature id="TD" unit="celsius" value="8.7"/>
+            </location>
+        </time>
+        <time datatype="forecast" from="2019-04-28T12:00:00Z" to="2019-04-28T13:00:00Z">
+            <location altitude="334" latitude="61.6900" longitude="9.4800">
+                <precipitation unit="mm" value="0.0" minvalue="0.0" maxvalue="0.0"/>
+                <symbol id="PartlyCloud" number="3"/>
+            </location>
+        </time>
+        <time datatype="forecast" from="2019-04-28T11:00:00Z" to="2019-04-28T13:00:00Z">
+            <location altitude="334" latitude="61.6900" longitude="9.4800">
+                <precipitation unit="mm" value="0.0" minvalue="0.0" maxvalue="0.0"/>
+                <symbol id="PartlyCloud" number="3"/>
+            </location>
+        </time>
+        <time datatype="forecast" from="2019-04-28T10:00:00Z" to="2019-04-28T13:00:00Z">
+            <location altitude="334" latitude="61.6900" longitude="9.4800">
+                <precipitation unit="mm" value="0.0" minvalue="0.0" maxvalue="0.0"/>
+                <symbol id="Cloud" number="4"/>
+            </location>
+        </time>
+        <time datatype="forecast" from="2019-04-28T07:00:00Z" to="2019-04-28T13:00:00Z">
+            <location altitude="334" latitude="61.6900" longitude="9.4800">
+                <precipitation unit="mm" value="0.0" minvalue="0.0" maxvalue="0.0"/>
+                <minTemperature id="TTT" unit="celsius" value="7.4"/>
+                <maxTemperature id="TTT" unit="celsius" value="15.1"/>
+                <symbol id="Cloud" number="4"/>
+            </location>
+        </time>
+        <time datatype="forecast" from="2019-04-28T14:00:00Z" to="2019-04-28T14:00:00Z">
+            <location altitude="334" latitude="61.6900" longitude="9.4800">
+                <temperature id="TTT" unit="celsius" value="15.3"/>
+                <windDirection id="dd" deg="98.1" name="E"/>
+                <windSpeed id="ff" mps="3.4" beaufort="3" name="Lett bris"/>
+                <windGust id="ff_gust" mps="6.5"/>
+                <areaMaxWindSpeed mps="4.2"/>
+                <humidity value="64.1" unit="percent"/>
+                <pressure id="pr" unit="hPa" value="1019.4"/>
+                <cloudiness id="NN" percent="82.6"/>
+                <fog id="FOG" percent="0.0"/>
+                <lowClouds id="LOW" percent="72.9"/>
+                <mediumClouds id="MEDIUM" percent="0.0"/>
+                <highClouds id="HIGH" percent="44.8"/>
+                <dewpointTemperature id="TD" unit="celsius" value="8.6"/>
+            </location>
+        </time>
+        <time datatype="forecast" from="2019-04-28T13:00:00Z" to="2019-04-28T14:00:00Z">
+            <location altitude="334" latitude="61.6900" longitude="9.4800">
+                <precipitation unit="mm" value="0.0" minvalue="0.0" maxvalue="0.0"/>
+                <symbol id="PartlyCloud" number="3"/>
+            </location>
+        </time>
+        <time datatype="forecast" from="2019-04-28T12:00:00Z" to="2019-04-28T14:00:00Z">
+            <location altitude="334" latitude="61.6900" longitude="9.4800">
+                <precipitation unit="mm" value="0.0" minvalue="0.0" maxvalue="0.0"/>
+                <symbol id="PartlyCloud" number="3"/>
+            </location>
+        </time>
+        <time datatype="forecast" from="2019-04-28T11:00:00Z" to="2019-04-28T14:00:00Z">
+            <location altitude="334" latitude="61.6900" longitude="9.4800">
+                <precipitation unit="mm" value="0.0" minvalue="0.0" maxvalue="0.0"/>
+                <symbol id="PartlyCloud" number="3"/>
+            </location>
+        </time>
+        <time datatype="forecast" from="2019-04-28T08:00:00Z" to="2019-04-28T14:00:00Z">
+            <location altitude="334" latitude="61.6900" longitude="9.4800">
+                <precipitation unit="mm" value="0.0" minvalue="0.0" maxvalue="0.0"/>
+                <minTemperature id="TTT" unit="celsius" value="7.8"/>
+                <maxTemperature id="TTT" unit="celsius" value="15.3"/>
+                <symbol id="Cloud" number="4"/>
+            </location>
+        </time>
+        <time datatype="forecast" from="2019-04-28T15:00:00Z" to="2019-04-28T15:00:00Z">
+            <location altitude="334" latitude="61.6900" longitude="9.4800">
+                <temperature id="TTT" unit="celsius" value="15.2"/>
+                <windDirection id="dd" deg="98.7" name="E"/>
+                <windSpeed id="ff" mps="3.3" beaufort="2" name="Svak vind"/>
+                <windGust id="ff_gust" mps="6.5"/>
+                <areaMaxWindSpeed mps="4.0"/>
+                <humidity value="63.1" unit="percent"/>
+                <pressure id="pr" unit="hPa" value="1019.5"/>
+                <cloudiness id="NN" percent="75.1"/>
+                <fog id="FOG" percent="0.0"/>
+                <lowClouds id="LOW" percent="63.7"/>
+                <mediumClouds id="MEDIUM" percent="0.0"/>
+                <highClouds id="HIGH" percent="34.1"/>
+                <dewpointTemperature id="TD" unit="celsius" value="8.2"/>
+            </location>
+        </time>
+        <time datatype="forecast" from="2019-04-28T14:00:00Z" to="2019-04-28T15:00:00Z">
+            <location altitude="334" latitude="61.6900" longitude="9.4800">
+                <precipitation unit="mm" value="0.0" minvalue="0.0" maxvalue="0.0"/>
+                <symbol id="PartlyCloud" number="3"/>
+            </location>
+        </time>
+        <time datatype="forecast" from="2019-04-28T13:00:00Z" to="2019-04-28T15:00:00Z">
+            <location altitude="334" latitude="61.6900" longitude="9.4800">
+                <precipitation unit="mm" value="0.0" minvalue="0.0" maxvalue="0.0"/>
+                <symbol id="PartlyCloud" number="3"/>
+            </location>
+        </time>
+        <time datatype="forecast" from="2019-04-28T12:00:00Z" to="2019-04-28T15:00:00Z">
+            <location altitude="334" latitude="61.6900" longitude="9.4800">
+                <precipitation unit="mm" value="0.0" minvalue="0.0" maxvalue="0.0"/>
+                <symbol id="PartlyCloud" number="3"/>
+            </location>
+        </time>
+        <time datatype="forecast" from="2019-04-28T09:00:00Z" to="2019-04-28T15:00:00Z">
+            <location altitude="334" latitude="61.6900" longitude="9.4800">
+                <precipitation unit="mm" value="0.0" minvalue="0.0" maxvalue="0.0"/>
+                <minTemperature id="TTT" unit="celsius" value="8.4"/>
+                <maxTemperature id="TTT" unit="celsius" value="15.3"/>
+                <symbol id="PartlyCloud" number="3"/>
+            </location>
+        </time>
+        <time datatype="forecast" from="2019-04-28T16:00:00Z" to="2019-04-28T16:00:00Z">
+            <location altitude="334" latitude="61.6900" longitude="9.4800">
+                <temperature id="TTT" unit="celsius" value="14.5"/>
+                <windDirection id="dd" deg="97.1" name="E"/>
+                <windSpeed id="ff" mps="2.9" beaufort="2" name="Svak vind"/>
+                <windGust id="ff_gust" mps="6.2"/>
+                <areaMaxWindSpeed mps="3.8"/>
+                <humidity value="64.2" unit="percent"/>
+                <pressure id="pr" unit="hPa" value="1019.7"/>
+                <cloudiness id="NN" percent="81.0"/>
+                <fog id="FOG" percent="0.0"/>
+                <lowClouds id="LOW" percent="55.3"/>
+                <mediumClouds id="MEDIUM" percent="0.0"/>
+                <highClouds id="HIGH" percent="57.7"/>
+                <dewpointTemperature id="TD" unit="celsius" value="7.8"/>
+            </location>
+        </time>
+        <time datatype="forecast" from="2019-04-28T15:00:00Z" to="2019-04-28T16:00:00Z">
+            <location altitude="334" latitude="61.6900" longitude="9.4800">
+                <precipitation unit="mm" value="0.0" minvalue="0.0" maxvalue="0.0"/>
+                <symbol id="PartlyCloud" number="3"/>
+            </location>
+        </time>
+        <time datatype="forecast" from="2019-04-28T14:00:00Z" to="2019-04-28T16:00:00Z">
+            <location altitude="334" latitude="61.6900" longitude="9.4800">
+                <precipitation unit="mm" value="0.0" minvalue="0.0" maxvalue="0.0"/>
+                <symbol id="PartlyCloud" number="3"/>
+            </location>
+        </time>
+        <time datatype="forecast" from="2019-04-28T13:00:00Z" to="2019-04-28T16:00:00Z">
+            <location altitude="334" latitude="61.6900" longitude="9.4800">
+                <precipitation unit="mm" value="0.0" minvalue="0.0" maxvalue="0.0"/>
+                <symbol id="PartlyCloud" number="3"/>
+            </location>
+        </time>
+        <time datatype="forecast" from="2019-04-28T10:00:00Z" to="2019-04-28T16:00:00Z">
+            <location altitude="334" latitude="61.6900" longitude="9.4800">
+                <precipitation unit="mm" value="0.0" minvalue="0.0" maxvalue="0.0"/>
+                <minTemperature id="TTT" unit="celsius" value="10.9"/>
+                <maxTemperature id="TTT" unit="celsius" value="15.3"/>
+                <symbol id="PartlyCloud" number="3"/>
+            </location>
+        </time>
+        <time datatype="forecast" from="2019-04-28T17:00:00Z" to="2019-04-28T17:00:00Z">
+            <location altitude="334" latitude="61.6900" longitude="9.4800">
+                <temperature id="TTT" unit="celsius" value="13.7"/>
+                <windDirection id="dd" deg="94.6" name="E"/>
+                <windSpeed id="ff" mps="2.4" beaufort="2" name="Svak vind"/>
+                <windGust id="ff_gust" mps="5.3"/>
+                <areaMaxWindSpeed mps="3.3"/>
+                <humidity value="66.8" unit="percent"/>
+                <pressure id="pr" unit="hPa" value="1020.1"/>
+                <cloudiness id="NN" percent="98.2"/>
+                <fog id="FOG" percent="0.0"/>
+                <lowClouds id="LOW" percent="52.3"/>
+                <mediumClouds id="MEDIUM" percent="0.0"/>
+                <highClouds id="HIGH" percent="96.5"/>
+                <dewpointTemperature id="TD" unit="celsius" value="7.6"/>
+            </location>
+        </time>
+        <time datatype="forecast" from="2019-04-28T16:00:00Z" to="2019-04-28T17:00:00Z">
+            <location altitude="334" latitude="61.6900" longitude="9.4800">
+                <precipitation unit="mm" value="0.0" minvalue="0.0" maxvalue="0.0"/>
+                <symbol id="Cloud" number="4"/>
+            </location>
+        </time>
+        <time datatype="forecast" from="2019-04-28T15:00:00Z" to="2019-04-28T17:00:00Z">
+            <location altitude="334" latitude="61.6900" longitude="9.4800">
+                <precipitation unit="mm" value="0.0" minvalue="0.0" maxvalue="0.0"/>
+                <symbol id="Cloud" number="4"/>
+            </location>
+        </time>
+        <time datatype="forecast" from="2019-04-28T14:00:00Z" to="2019-04-28T17:00:00Z">
+            <location altitude="334" latitude="61.6900" longitude="9.4800">
+                <precipitation unit="mm" value="0.0" minvalue="0.0" maxvalue="0.0"/>
+                <symbol id="PartlyCloud" number="3"/>
+            </location>
+        </time>
+        <time datatype="forecast" from="2019-04-28T11:00:00Z" to="2019-04-28T17:00:00Z">
+            <location altitude="334" latitude="61.6900" longitude="9.4800">
+                <precipitation unit="mm" value="0.0" minvalue="0.0" maxvalue="0.0"/>
+                <minTemperature id="TTT" unit="celsius" value="13.3"/>
+                <maxTemperature id="TTT" unit="celsius" value="15.3"/>
+                <symbol id="PartlyCloud" number="3"/>
+            </location>
+        </time>
+        <time datatype="forecast" from="2019-04-28T18:00:00Z" to="2019-04-28T18:00:00Z">
+            <location altitude="334" latitude="61.6900" longitude="9.4800">
+                <temperature id="TTT" unit="celsius" value="12.4"/>
+                <windDirection id="dd" deg="99.1" name="E"/>
+                <windSpeed id="ff" mps="1.2" beaufort="1" name="Flau vind"/>
+                <windGust id="ff_gust" mps="3.9"/>
+                <areaMaxWindSpeed mps="2.6"/>
+                <humidity value="75.1" unit="percent"/>
+                <pressure id="pr" unit="hPa" value="1020.6"/>
+                <cloudiness id="NN" percent="98.9"/>
+                <fog id="FOG" percent="0.0"/>
+                <lowClouds id="LOW" percent="35.4"/>
+                <mediumClouds id="MEDIUM" percent="0.0"/>
+                <highClouds id="HIGH" percent="98.3"/>
+                <temperatureProbability unit="probabilitycode" value="1"/>
+                <windProbability unit="probabilitycode" value="0"/>
+                <dewpointTemperature id="TD" unit="celsius" value="8.1"/>
+            </location>
+        </time>
+        <time datatype="forecast" from="2019-04-28T17:00:00Z" to="2019-04-28T18:00:00Z">
+            <location altitude="334" latitude="61.6900" longitude="9.4800">
+                <precipitation unit="mm" value="0.0" minvalue="0.0" maxvalue="0.0"/>
+                <symbol id="Cloud" number="4"/>
+            </location>
+        </time>
+        <time datatype="forecast" from="2019-04-28T16:00:00Z" to="2019-04-28T18:00:00Z">
+            <location altitude="334" latitude="61.6900" longitude="9.4800">
+                <precipitation unit="mm" value="0.0" minvalue="0.0" maxvalue="0.0"/>
+                <symbol id="Cloud" number="4"/>
+            </location>
+        </time>
+        <time datatype="forecast" from="2019-04-28T15:00:00Z" to="2019-04-28T18:00:00Z">
+            <location altitude="334" latitude="61.6900" longitude="9.4800">
+                <precipitation unit="mm" value="0.0" minvalue="0.0" maxvalue="0.0"/>
+                <symbol id="Cloud" number="4"/>
+            </location>
+        </time>
+        <time datatype="forecast" from="2019-04-28T12:00:00Z" to="2019-04-28T18:00:00Z">
+            <location altitude="334" latitude="61.6900" longitude="9.4800">
+                <precipitation unit="mm" value="0.0" minvalue="0.0" maxvalue="0.0"/>
+                <minTemperature id="TTT" unit="celsius" value="12.4"/>
+                <maxTemperature id="TTT" unit="celsius" value="15.3"/>
+                <symbol id="Cloud" number="4"/>
+                <symbolProbability unit="probabilitycode" value="1"/>
+            </location>
+        </time>
+        <time datatype="forecast" from="2019-04-28T19:00:00Z" to="2019-04-28T19:00:00Z">
+            <location altitude="334" latitude="61.6900" longitude="9.4800">
+                <temperature id="TTT" unit="celsius" value="10.2"/>
+                <windDirection id="dd" deg="234.6" name="SW"/>
+                <windSpeed id="ff" mps="0.7" beaufort="1" name="Flau vind"/>
+                <windGust id="ff_gust" mps="1.9"/>
+                <areaMaxWindSpeed mps="3.4"/>
+                <humidity value="82.0" unit="percent"/>
+                <pressure id="pr" unit="hPa" value="1021.2"/>
+                <cloudiness id="NN" percent="99.1"/>
+                <fog id="FOG" percent="0.0"/>
+                <lowClouds id="LOW" percent="38.6"/>
+                <mediumClouds id="MEDIUM" percent="0.0"/>
+                <highClouds id="HIGH" percent="98.6"/>
+                <dewpointTemperature id="TD" unit="celsius" value="7.3"/>
+            </location>
+        </time>
+        <time datatype="forecast" from="2019-04-28T18:00:00Z" to="2019-04-28T19:00:00Z">
+            <location altitude="334" latitude="61.6900" longitude="9.4800">
+                <precipitation unit="mm" value="0.0" minvalue="0.0" maxvalue="0.0"/>
+                <symbol id="Cloud" number="4"/>
+            </location>
+        </time>
+        <time datatype="forecast" from="2019-04-28T17:00:00Z" to="2019-04-28T19:00:00Z">
+            <location altitude="334" latitude="61.6900" longitude="9.4800">
+                <precipitation unit="mm" value="0.0" minvalue="0.0" maxvalue="0.0"/>
+                <symbol id="Cloud" number="4"/>
+            </location>
+        </time>
+        <time datatype="forecast" from="2019-04-28T16:00:00Z" to="2019-04-28T19:00:00Z">
+            <location altitude="334" latitude="61.6900" longitude="9.4800">
+                <precipitation unit="mm" value="0.0" minvalue="0.0" maxvalue="0.0"/>
+                <symbol id="Cloud" number="4"/>
+            </location>
+        </time>
+        <time datatype="forecast" from="2019-04-28T13:00:00Z" to="2019-04-28T19:00:00Z">
+            <location altitude="334" latitude="61.6900" longitude="9.4800">
+                <precipitation unit="mm" value="0.0" minvalue="0.0" maxvalue="0.0"/>
+                <minTemperature id="TTT" unit="celsius" value="10.2"/>
+                <maxTemperature id="TTT" unit="celsius" value="15.3"/>
+                <symbol id="Cloud" number="4"/>
+            </location>
+        </time>
+        <time datatype="forecast" from="2019-04-28T20:00:00Z" to="2019-04-28T20:00:00Z">
+            <location altitude="334" latitude="61.6900" longitude="9.4800">
+                <temperature id="TTT" unit="celsius" value="8.3"/>
+                <windDirection id="dd" deg="237.6" name="SW"/>
+                <windSpeed id="ff" mps="1.2" beaufort="1" name="Flau vind"/>
+                <windGust id="ff_gust" mps="2.0"/>
+                <areaMaxWindSpeed mps="3.5"/>
+                <humidity value="79.9" unit="percent"/>
+                <pressure id="pr" unit="hPa" value="1022.1"/>
+                <cloudiness id="NN" percent="97.8"/>
+                <fog id="FOG" percent="0.0"/>
+                <lowClouds id="LOW" percent="29.2"/>
+                <mediumClouds id="MEDIUM" percent="0.0"/>
+                <highClouds id="HIGH" percent="96.9"/>
+                <dewpointTemperature id="TD" unit="celsius" value="5.0"/>
+            </location>
+        </time>
+        <time datatype="forecast" from="2019-04-28T19:00:00Z" to="2019-04-28T20:00:00Z">
+            <location altitude="334" latitude="61.6900" longitude="9.4800">
+                <precipitation unit="mm" value="0.0" minvalue="0.0" maxvalue="0.0"/>
+                <symbol id="Cloud" number="4"/>
+            </location>
+        </time>
+        <time datatype="forecast" from="2019-04-28T18:00:00Z" to="2019-04-28T20:00:00Z">
+            <location altitude="334" latitude="61.6900" longitude="9.4800">
+                <precipitation unit="mm" value="0.0" minvalue="0.0" maxvalue="0.0"/>
+                <symbol id="Cloud" number="4"/>
+            </location>
+        </time>
+        <time datatype="forecast" from="2019-04-28T17:00:00Z" to="2019-04-28T20:00:00Z">
+            <location altitude="334" latitude="61.6900" longitude="9.4800">
+                <precipitation unit="mm" value="0.0" minvalue="0.0" maxvalue="0.0"/>
+                <symbol id="Cloud" number="4"/>
+            </location>
+        </time>
+        <time datatype="forecast" from="2019-04-28T14:00:00Z" to="2019-04-28T20:00:00Z">
+            <location altitude="334" latitude="61.6900" longitude="9.4800">
+                <precipitation unit="mm" value="0.0" minvalue="0.0" maxvalue="0.0"/>
+                <minTemperature id="TTT" unit="celsius" value="8.3"/>
+                <maxTemperature id="TTT" unit="celsius" value="15.3"/>
+                <symbol id="Cloud" number="4"/>
+            </location>
+        </time>
+        <time datatype="forecast" from="2019-04-28T21:00:00Z" to="2019-04-28T21:00:00Z">
+            <location altitude="334" latitude="61.6900" longitude="9.4800">
+                <temperature id="TTT" unit="celsius" value="7.1"/>
+                <windDirection id="dd" deg="244.3" name="SW"/>
+                <windSpeed id="ff" mps="1.0" beaufort="1" name="Flau vind"/>
+                <windGust id="ff_gust" mps="1.9"/>
+                <areaMaxWindSpeed mps="4.1"/>
+                <humidity value="84.9" unit="percent"/>
+                <pressure id="pr" unit="hPa" value="1023.0"/>
+                <cloudiness id="NN" percent="76.2"/>
+                <fog id="FOG" percent="0.0"/>
+                <lowClouds id="LOW" percent="29.6"/>
+                <mediumClouds id="MEDIUM" percent="0.0"/>
+                <highClouds id="HIGH" percent="66.9"/>
+                <dewpointTemperature id="TD" unit="celsius" value="4.7"/>
+            </location>
+        </time>
+        <time datatype="forecast" from="2019-04-28T20:00:00Z" to="2019-04-28T21:00:00Z">
+            <location altitude="334" latitude="61.6900" longitude="9.4800">
+                <precipitation unit="mm" value="0.0" minvalue="0.0" maxvalue="0.0"/>
+                <symbol id="PartlyCloud" number="3"/>
+            </location>
+        </time>
+        <time datatype="forecast" from="2019-04-28T19:00:00Z" to="2019-04-28T21:00:00Z">
+            <location altitude="334" latitude="61.6900" longitude="9.4800">
+                <precipitation unit="mm" value="0.0" minvalue="0.0" maxvalue="0.0"/>
+                <symbol id="Cloud" number="4"/>
+            </location>
+        </time>
+        <time datatype="forecast" from="2019-04-28T18:00:00Z" to="2019-04-28T21:00:00Z">
+            <location altitude="334" latitude="61.6900" longitude="9.4800">
+                <precipitation unit="mm" value="0.0" minvalue="0.0" maxvalue="0.0"/>
+                <symbol id="Cloud" number="4"/>
+            </location>
+        </time>
+        <time datatype="forecast" from="2019-04-28T15:00:00Z" to="2019-04-28T21:00:00Z">
+            <location altitude="334" latitude="61.6900" longitude="9.4800">
+                <precipitation unit="mm" value="0.0" minvalue="0.0" maxvalue="0.0"/>
+                <minTemperature id="TTT" unit="celsius" value="7.1"/>
+                <maxTemperature id="TTT" unit="celsius" value="15.2"/>
+                <symbol id="Cloud" number="4"/>
+            </location>
+        </time>
+        <time datatype="forecast" from="2019-04-28T22:00:00Z" to="2019-04-28T22:00:00Z">
+            <location altitude="334" latitude="61.6900" longitude="9.4800">
+                <temperature id="TTT" unit="celsius" value="6.1"/>
+                <windDirection id="dd" deg="259.3" name="W"/>
+                <windSpeed id="ff" mps="0.9" beaufort="1" name="Flau vind"/>
+                <windGust id="ff_gust" mps="1.6"/>
+                <areaMaxWindSpeed mps="4.2"/>
+                <humidity value="88.0" unit="percent"/>
+                <pressure id="pr" unit="hPa" value="1023.8"/>
+                <cloudiness id="NN" percent="44.8"/>
+                <fog id="FOG" percent="0.0"/>
+                <lowClouds id="LOW" percent="39.8"/>
+                <mediumClouds id="MEDIUM" percent="0.0"/>
+                <highClouds id="HIGH" percent="8.1"/>
+                <dewpointTemperature id="TD" unit="celsius" value="4.2"/>
+            </location>
+        </time>
+        <time datatype="forecast" from="2019-04-28T21:00:00Z" to="2019-04-28T22:00:00Z">
+            <location altitude="334" latitude="61.6900" longitude="9.4800">
+                <precipitation unit="mm" value="0.0" minvalue="0.0" maxvalue="0.0"/>
+                <symbol id="PartlyCloud" number="3"/>
+            </location>
+        </time>
+        <time datatype="forecast" from="2019-04-28T20:00:00Z" to="2019-04-28T22:00:00Z">
+            <location altitude="334" latitude="61.6900" longitude="9.4800">
+                <precipitation unit="mm" value="0.0" minvalue="0.0" maxvalue="0.0"/>
+                <symbol id="PartlyCloud" number="3"/>
+            </location>
+        </time>
+        <time datatype="forecast" from="2019-04-28T19:00:00Z" to="2019-04-28T22:00:00Z">
+            <location altitude="334" latitude="61.6900" longitude="9.4800">
+                <precipitation unit="mm" value="0.0" minvalue="0.0" maxvalue="0.0"/>
+                <symbol id="PartlyCloud" number="3"/>
+            </location>
+        </time>
+        <time datatype="forecast" from="2019-04-28T16:00:00Z" to="2019-04-28T22:00:00Z">
+            <location altitude="334" latitude="61.6900" longitude="9.4800">
+                <precipitation unit="mm" value="0.0" minvalue="0.0" maxvalue="0.0"/>
+                <minTemperature id="TTT" unit="celsius" value="6.1"/>
+                <maxTemperature id="TTT" unit="celsius" value="14.5"/>
+                <symbol id="PartlyCloud" number="3"/>
+            </location>
+        </time>
+        <time datatype="forecast" from="2019-04-28T23:00:00Z" to="2019-04-28T23:00:00Z">
+            <location altitude="334" latitude="61.6900" longitude="9.4800">
+                <temperature id="TTT" unit="celsius" value="5.2"/>
+                <windDirection id="dd" deg="282.4" name="W"/>
+                <windSpeed id="ff" mps="0.8" beaufort="1" name="Flau vind"/>
+                <windGust id="ff_gust" mps="1.5"/>
+                <areaMaxWindSpeed mps="4.0"/>
+                <humidity value="91.2" unit="percent"/>
+                <pressure id="pr" unit="hPa" value="1024.4"/>
+                <cloudiness id="NN" percent="45.6"/>
+                <fog id="FOG" percent="0.0"/>
+                <lowClouds id="LOW" percent="42.1"/>
+                <mediumClouds id="MEDIUM" percent="0.0"/>
+                <highClouds id="HIGH" percent="4.4"/>
+                <dewpointTemperature id="TD" unit="celsius" value="3.8"/>
+            </location>
+        </time>
+        <time datatype="forecast" from="2019-04-28T22:00:00Z" to="2019-04-28T23:00:00Z">
+            <location altitude="334" latitude="61.6900" longitude="9.4800">
+                <precipitation unit="mm" value="0.0" minvalue="0.0" maxvalue="0.0"/>
+                <symbol id="PartlyCloud" number="3"/>
+            </location>
+        </time>
+        <time datatype="forecast" from="2019-04-28T21:00:00Z" to="2019-04-28T23:00:00Z">
+            <location altitude="334" latitude="61.6900" longitude="9.4800">
+                <precipitation unit="mm" value="0.0" minvalue="0.0" maxvalue="0.0"/>
+                <symbol id="PartlyCloud" number="3"/>
+            </location>
+        </time>
+        <time datatype="forecast" from="2019-04-28T20:00:00Z" to="2019-04-28T23:00:00Z">
+            <location altitude="334" latitude="61.6900" longitude="9.4800">
+                <precipitation unit="mm" value="0.0" minvalue="0.0" maxvalue="0.0"/>
+                <symbol id="PartlyCloud" number="3"/>
+            </location>
+        </time>
+        <time datatype="forecast" from="2019-04-28T17:00:00Z" to="2019-04-28T23:00:00Z">
+            <location altitude="334" latitude="61.6900" longitude="9.4800">
+                <precipitation unit="mm" value="0.0" minvalue="0.0" maxvalue="0.0"/>
+                <minTemperature id="TTT" unit="celsius" value="5.2"/>
+                <maxTemperature id="TTT" unit="celsius" value="13.7"/>
+                <symbol id="PartlyCloud" number="3"/>
+            </location>
+        </time>
+        <time datatype="forecast" from="2019-04-29T00:00:00Z" to="2019-04-29T00:00:00Z">
+            <location altitude="334" latitude="61.6900" longitude="9.4800">
+                <temperature id="TTT" unit="celsius" value="4.6"/>
+                <windDirection id="dd" deg="293.2" name="NW"/>
+                <windSpeed id="ff" mps="0.9" beaufort="1" name="Flau vind"/>
+                <windGust id="ff_gust" mps="1.4"/>
+                <areaMaxWindSpeed mps="3.8"/>
+                <humidity value="92.4" unit="percent"/>
+                <pressure id="pr" unit="hPa" value="1024.8"/>
+                <cloudiness id="NN" percent="67.8"/>
+                <fog id="FOG" percent="0.0"/>
+                <lowClouds id="LOW" percent="56.6"/>
+                <mediumClouds id="MEDIUM" percent="0.0"/>
+                <highClouds id="HIGH" percent="18.7"/>
+                <temperatureProbability unit="probabilitycode" value="2"/>
+                <windProbability unit="probabilitycode" value="0"/>
+                <dewpointTemperature id="TD" unit="celsius" value="3.4"/>
+            </location>
+        </time>
+        <time datatype="forecast" from="2019-04-28T23:00:00Z" to="2019-04-29T00:00:00Z">
+            <location altitude="334" latitude="61.6900" longitude="9.4800">
+                <precipitation unit="mm" value="0.0" minvalue="0.0" maxvalue="0.0"/>
+                <symbol id="PartlyCloud" number="3"/>
+            </location>
+        </time>
+        <time datatype="forecast" from="2019-04-28T22:00:00Z" to="2019-04-29T00:00:00Z">
+            <location altitude="334" latitude="61.6900" longitude="9.4800">
+                <precipitation unit="mm" value="0.0" minvalue="0.0" maxvalue="0.0"/>
+                <symbol id="PartlyCloud" number="3"/>
+            </location>
+        </time>
+        <time datatype="forecast" from="2019-04-28T21:00:00Z" to="2019-04-29T00:00:00Z">
+            <location altitude="334" latitude="61.6900" longitude="9.4800">
+                <precipitation unit="mm" value="0.0" minvalue="0.0" maxvalue="0.0"/>
+                <symbol id="PartlyCloud" number="3"/>
+            </location>
+        </time>
+        <time datatype="forecast" from="2019-04-28T18:00:00Z" to="2019-04-29T00:00:00Z">
+            <location altitude="334" latitude="61.6900" longitude="9.4800">
+                <precipitation unit="mm" value="0.0" minvalue="0.0" maxvalue="0.0"/>
+                <minTemperature id="TTT" unit="celsius" value="4.6"/>
+                <maxTemperature id="TTT" unit="celsius" value="12.4"/>
+                <symbol id="PartlyCloud" number="3"/>
+                <symbolProbability unit="probabilitycode" value="1"/>
+            </location>
+        </time>
+        <time datatype="forecast" from="2019-04-29T01:00:00Z" to="2019-04-29T01:00:00Z">
+            <location altitude="334" latitude="61.6900" longitude="9.4800">
+                <temperature id="TTT" unit="celsius" value="4.2"/>
+                <windDirection id="dd" deg="304.0" name="NW"/>
+                <windSpeed id="ff" mps="1.0" beaufort="1" name="Flau vind"/>
+                <windGust id="ff_gust" mps="1.5"/>
+                <areaMaxWindSpeed mps="3.0"/>
+                <humidity value="93.3" unit="percent"/>
+                <pressure id="pr" unit="hPa" value="1024.9"/>
+                <cloudiness id="NN" percent="63.0"/>
+                <fog id="FOG" percent="0.2"/>
+                <lowClouds id="LOW" percent="57.5"/>
+                <mediumClouds id="MEDIUM" percent="0.0"/>
+                <highClouds id="HIGH" percent="4.5"/>
+                <dewpointTemperature id="TD" unit="celsius" value="3.1"/>
+            </location>
+        </time>
+        <time datatype="forecast" from="2019-04-29T00:00:00Z" to="2019-04-29T01:00:00Z">
+            <location altitude="334" latitude="61.6900" longitude="9.4800">
+                <precipitation unit="mm" value="0.0" minvalue="0.0" maxvalue="0.0"/>
+                <symbol id="PartlyCloud" number="3"/>
+            </location>
+        </time>
+        <time datatype="forecast" from="2019-04-28T23:00:00Z" to="2019-04-29T01:00:00Z">
+            <location altitude="334" latitude="61.6900" longitude="9.4800">
+                <precipitation unit="mm" value="0.0" minvalue="0.0" maxvalue="0.0"/>
+                <symbol id="PartlyCloud" number="3"/>
+            </location>
+        </time>
+        <time datatype="forecast" from="2019-04-28T22:00:00Z" to="2019-04-29T01:00:00Z">
+            <location altitude="334" latitude="61.6900" longitude="9.4800">
+                <precipitation unit="mm" value="0.0" minvalue="0.0" maxvalue="0.0"/>
+                <symbol id="PartlyCloud" number="3"/>
+            </location>
+        </time>
+        <time datatype="forecast" from="2019-04-28T19:00:00Z" to="2019-04-29T01:00:00Z">
+            <location altitude="334" latitude="61.6900" longitude="9.4800">
+                <precipitation unit="mm" value="0.0" minvalue="0.0" maxvalue="0.0"/>
+                <minTemperature id="TTT" unit="celsius" value="4.2"/>
+                <maxTemperature id="TTT" unit="celsius" value="10.2"/>
+                <symbol id="PartlyCloud" number="3"/>
+            </location>
+        </time>
+        <time datatype="forecast" from="2019-04-29T02:00:00Z" to="2019-04-29T02:00:00Z">
+            <location altitude="334" latitude="61.6900" longitude="9.4800">
+                <temperature id="TTT" unit="celsius" value="3.7"/>
+                <windDirection id="dd" deg="306.7" name="NW"/>
+                <windSpeed id="ff" mps="1.1" beaufort="1" name="Flau vind"/>
+                <windGust id="ff_gust" mps="1.7"/>
+                <areaMaxWindSpeed mps="3.0"/>
+                <humidity value="93.4" unit="percent"/>
+                <pressure id="pr" unit="hPa" value="1025.0"/>
+                <cloudiness id="NN" percent="56.2"/>
+                <fog id="FOG" percent="0.2"/>
+                <lowClouds id="LOW" percent="51.8"/>
+                <mediumClouds id="MEDIUM" percent="0.0"/>
+                <highClouds id="HIGH" percent="0.0"/>
+                <dewpointTemperature id="TD" unit="celsius" value="2.7"/>
+            </location>
+        </time>
+        <time datatype="forecast" from="2019-04-29T01:00:00Z" to="2019-04-29T02:00:00Z">
+            <location altitude="334" latitude="61.6900" longitude="9.4800">
+                <precipitation unit="mm" value="0.0" minvalue="0.0" maxvalue="0.0"/>
+                <symbol id="PartlyCloud" number="3"/>
+            </location>
+        </time>
+        <time datatype="forecast" from="2019-04-29T00:00:00Z" to="2019-04-29T02:00:00Z">
+            <location altitude="334" latitude="61.6900" longitude="9.4800">
+                <precipitation unit="mm" value="0.0" minvalue="0.0" maxvalue="0.0"/>
+                <symbol id="PartlyCloud" number="3"/>
+            </location>
+        </time>
+        <time datatype="forecast" from="2019-04-28T23:00:00Z" to="2019-04-29T02:00:00Z">
+            <location altitude="334" latitude="61.6900" longitude="9.4800">
+                <precipitation unit="mm" value="0.0" minvalue="0.0" maxvalue="0.0"/>
+                <symbol id="PartlyCloud" number="3"/>
+            </location>
+        </time>
+        <time datatype="forecast" from="2019-04-28T20:00:00Z" to="2019-04-29T02:00:00Z">
+            <location altitude="334" latitude="61.6900" longitude="9.4800">
+                <precipitation unit="mm" value="0.0" minvalue="0.0" maxvalue="0.0"/>
+                <minTemperature id="TTT" unit="celsius" value="3.7"/>
+                <maxTemperature id="TTT" unit="celsius" value="8.3"/>
+                <symbol id="PartlyCloud" number="3"/>
+            </location>
+        </time>
+        <time datatype="forecast" from="2019-04-29T03:00:00Z" to="2019-04-29T03:00:00Z">
+            <location altitude="334" latitude="61.6900" longitude="9.4800">
+                <temperature id="TTT" unit="celsius" value="3.2"/>
+                <windDirection id="dd" deg="293.4" name="NW"/>
+                <windSpeed id="ff" mps="1.2" beaufort="1" name="Flau vind"/>
+                <windGust id="ff_gust" mps="1.9"/>
+                <areaMaxWindSpeed mps="2.8"/>
+                <humidity value="93.4" unit="percent"/>
+                <pressure id="pr" unit="hPa" value="1025.2"/>
+                <cloudiness id="NN" percent="48.4"/>
+                <fog id="FOG" percent="0.2"/>
+                <lowClouds id="LOW" percent="42.6"/>
+                <mediumClouds id="MEDIUM" percent="0.0"/>
+                <highClouds id="HIGH" percent="0.0"/>
+                <dewpointTemperature id="TD" unit="celsius" value="2.1"/>
+            </location>
+        </time>
+        <time datatype="forecast" from="2019-04-29T02:00:00Z" to="2019-04-29T03:00:00Z">
+            <location altitude="334" latitude="61.6900" longitude="9.4800">
+                <precipitation unit="mm" value="0.0" minvalue="0.0" maxvalue="0.0"/>
+                <symbol id="PartlyCloud" number="3"/>
+            </location>
+        </time>
+        <time datatype="forecast" from="2019-04-29T01:00:00Z" to="2019-04-29T03:00:00Z">
+            <location altitude="334" latitude="61.6900" longitude="9.4800">
+                <precipitation unit="mm" value="0.0" minvalue="0.0" maxvalue="0.0"/>
+                <symbol id="PartlyCloud" number="3"/>
+            </location>
+        </time>
+        <time datatype="forecast" from="2019-04-29T00:00:00Z" to="2019-04-29T03:00:00Z">
+            <location altitude="334" latitude="61.6900" longitude="9.4800">
+                <precipitation unit="mm" value="0.0" minvalue="0.0" maxvalue="0.0"/>
+                <symbol id="PartlyCloud" number="3"/>
+            </location>
+        </time>
+        <time datatype="forecast" from="2019-04-28T21:00:00Z" to="2019-04-29T03:00:00Z">
+            <location altitude="334" latitude="61.6900" longitude="9.4800">
+                <precipitation unit="mm" value="0.0" minvalue="0.0" maxvalue="0.0"/>
+                <minTemperature id="TTT" unit="celsius" value="3.2"/>
+                <maxTemperature id="TTT" unit="celsius" value="7.1"/>
+                <symbol id="PartlyCloud" number="3"/>
+            </location>
+        </time>
+        <time datatype="forecast" from="2019-04-29T04:00:00Z" to="2019-04-29T04:00:00Z">
+            <location altitude="334" latitude="61.6900" longitude="9.4800">
+                <temperature id="TTT" unit="celsius" value="3.3"/>
+                <windDirection id="dd" deg="275.8" name="W"/>
+                <windSpeed id="ff" mps="1.2" beaufort="1" name="Flau vind"/>
+                <windGust id="ff_gust" mps="1.9"/>
+                <areaMaxWindSpeed mps="4.0"/>
+                <humidity value="93.1" unit="percent"/>
+                <pressure id="pr" unit="hPa" value="1025.3"/>
+                <cloudiness id="NN" percent="31.7"/>
+                <fog id="FOG" percent="0.0"/>
+                <lowClouds id="LOW" percent="25.8"/>
+                <mediumClouds id="MEDIUM" percent="0.0"/>
+                <highClouds id="HIGH" percent="0.0"/>
+                <dewpointTemperature id="TD" unit="celsius" value="2.1"/>
+            </location>
+        </time>
+        <time datatype="forecast" from="2019-04-29T03:00:00Z" to="2019-04-29T04:00:00Z">
+            <location altitude="334" latitude="61.6900" longitude="9.4800">
+                <precipitation unit="mm" value="0.0" minvalue="0.0" maxvalue="0.0"/>
+                <symbol id="LightCloud" number="2"/>
+            </location>
+        </time>
+        <time datatype="forecast" from="2019-04-29T02:00:00Z" to="2019-04-29T04:00:00Z">
+            <location altitude="334" latitude="61.6900" longitude="9.4800">
+                <precipitation unit="mm" value="0.0" minvalue="0.0" maxvalue="0.0"/>
+                <symbol id="PartlyCloud" number="3"/>
+            </location>
+        </time>
+        <time datatype="forecast" from="2019-04-29T01:00:00Z" to="2019-04-29T04:00:00Z">
+            <location altitude="334" latitude="61.6900" longitude="9.4800">
+                <precipitation unit="mm" value="0.0" minvalue="0.0" maxvalue="0.0"/>
+                <symbol id="PartlyCloud" number="3"/>
+            </location>
+        </time>
+        <time datatype="forecast" from="2019-04-28T22:00:00Z" to="2019-04-29T04:00:00Z">
+            <location altitude="334" latitude="61.6900" longitude="9.4800">
+                <precipitation unit="mm" value="0.0" minvalue="0.0" maxvalue="0.0"/>
+                <minTemperature id="TTT" unit="celsius" value="3.2"/>
+                <maxTemperature id="TTT" unit="celsius" value="6.1"/>
+                <symbol id="PartlyCloud" number="3"/>
+            </location>
+        </time>
+        <time datatype="forecast" from="2019-04-29T05:00:00Z" to="2019-04-29T05:00:00Z">
+            <location altitude="334" latitude="61.6900" longitude="9.4800">
+                <temperature id="TTT" unit="celsius" value="4.5"/>
+                <windDirection id="dd" deg="288.0" name="W"/>
+                <windSpeed id="ff" mps="1.0" beaufort="1" name="Flau vind"/>
+                <windGust id="ff_gust" mps="1.8"/>
+                <areaMaxWindSpeed mps="4.6"/>
+                <humidity value="92.0" unit="percent"/>
+                <pressure id="pr" unit="hPa" value="1025.1"/>
+                <cloudiness id="NN" percent="19.4"/>
+                <fog id="FOG" percent="0.0"/>
+                <lowClouds id="LOW" percent="12.3"/>
+                <mediumClouds id="MEDIUM" percent="0.0"/>
+                <highClouds id="HIGH" percent="0.0"/>
+                <dewpointTemperature id="TD" unit="celsius" value="3.3"/>
+            </location>
+        </time>
+        <time datatype="forecast" from="2019-04-29T04:00:00Z" to="2019-04-29T05:00:00Z">
+            <location altitude="334" latitude="61.6900" longitude="9.4800">
+                <precipitation unit="mm" value="0.0" minvalue="0.0" maxvalue="0.0"/>
+                <symbol id="LightCloud" number="2"/>
+            </location>
+        </time>
+        <time datatype="forecast" from="2019-04-29T03:00:00Z" to="2019-04-29T05:00:00Z">
+            <location altitude="334" latitude="61.6900" longitude="9.4800">
+                <precipitation unit="mm" value="0.0" minvalue="0.0" maxvalue="0.0"/>
+                <symbol id="LightCloud" number="2"/>
+            </location>
+        </time>
+        <time datatype="forecast" from="2019-04-29T02:00:00Z" to="2019-04-29T05:00:00Z">
+            <location altitude="334" latitude="61.6900" longitude="9.4800">
+                <precipitation unit="mm" value="0.0" minvalue="0.0" maxvalue="0.0"/>
+                <symbol id="LightCloud" number="2"/>
+            </location>
+        </time>
+        <time datatype="forecast" from="2019-04-28T23:00:00Z" to="2019-04-29T05:00:00Z">
+            <location altitude="334" latitude="61.6900" longitude="9.4800">
+                <precipitation unit="mm" value="0.0" minvalue="0.0" maxvalue="0.0"/>
+                <minTemperature id="TTT" unit="celsius" value="3.2"/>
+                <maxTemperature id="TTT" unit="celsius" value="5.2"/>
+                <symbol id="PartlyCloud" number="3"/>
+            </location>
+        </time>
+        <time datatype="forecast" from="2019-04-29T06:00:00Z" to="2019-04-29T06:00:00Z">
+            <location altitude="334" latitude="61.6900" longitude="9.4800">
+                <temperature id="TTT" unit="celsius" value="7.1"/>
+                <windDirection id="dd" deg="352.4" name="N"/>
+                <windSpeed id="ff" mps="0.7" beaufort="1" name="Flau vind"/>
+                <windGust id="ff_gust" mps="1.5"/>
+                <areaMaxWindSpeed mps="4.3"/>
+                <humidity value="89.3" unit="percent"/>
+                <pressure id="pr" unit="hPa" value="1024.7"/>
+                <cloudiness id="NN" percent="8.8"/>
+                <fog id="FOG" percent="0.0"/>
+                <lowClouds id="LOW" percent="4.5"/>
+                <mediumClouds id="MEDIUM" percent="0.0"/>
+                <highClouds id="HIGH" percent="0.0"/>
+                <temperatureProbability unit="probabilitycode" value="1"/>
+                <windProbability unit="probabilitycode" value="0"/>
+                <dewpointTemperature id="TD" unit="celsius" value="5.4"/>
+            </location>
+        </time>
+        <time datatype="forecast" from="2019-04-29T05:00:00Z" to="2019-04-29T06:00:00Z">
+            <location altitude="334" latitude="61.6900" longitude="9.4800">
+                <precipitation unit="mm" value="0.0" minvalue="0.0" maxvalue="0.0"/>
+                <symbol id="Sun" number="1"/>
+            </location>
+        </time>
+        <time datatype="forecast" from="2019-04-29T04:00:00Z" to="2019-04-29T06:00:00Z">
+            <location altitude="334" latitude="61.6900" longitude="9.4800">
+                <precipitation unit="mm" value="0.0" minvalue="0.0" maxvalue="0.0"/>
+                <symbol id="LightCloud" number="2"/>
+            </location>
+        </time>
+        <time datatype="forecast" from="2019-04-29T03:00:00Z" to="2019-04-29T06:00:00Z">
+            <location altitude="334" latitude="61.6900" longitude="9.4800">
+                <precipitation unit="mm" value="0.0" minvalue="0.0" maxvalue="0.0"/>
+                <symbol id="LightCloud" number="2"/>
+            </location>
+        </time>
+        <time datatype="forecast" from="2019-04-29T00:00:00Z" to="2019-04-29T06:00:00Z">
+            <location altitude="334" latitude="61.6900" longitude="9.4800">
+                <precipitation unit="mm" value="0.0" minvalue="0.0" maxvalue="0.0"/>
+                <minTemperature id="TTT" unit="celsius" value="3.2"/>
+                <maxTemperature id="TTT" unit="celsius" value="7.1"/>
+                <symbol id="LightCloud" number="2"/>
+                <symbolProbability unit="probabilitycode" value="1"/>
+            </location>
+        </time>
+        <time datatype="forecast" from="2019-04-29T12:00:00Z" to="2019-04-29T12:00:00Z">
+            <location altitude="334" latitude="61.6900" longitude="9.4800">
+                <temperature id="TTT" unit="celsius" value="19.4"/>
+                <windDirection id="dd" deg="352.4" name="N"/>
+                <windSpeed id="ff" mps="2.1" beaufort="2" name="Svak vind"/>
+                <humidity value="53.4" unit="percent"/>
+                <pressure id="pr" unit="hPa" value="1023.4"/>
+                <cloudiness id="NN" percent="96.9"/>
+                <lowClouds id="LOW" percent="55.5"/>
+                <mediumClouds id="MEDIUM" percent="46.9"/>
+                <highClouds id="HIGH" percent="82.8"/>
+                <temperatureProbability unit="probabilitycode" value="1"/>
+                <windProbability unit="probabilitycode" value="0"/>
+                <dewpointTemperature id="TD" unit="celsius" value="9.7"/>
+            </location>
+        </time>
+        <time datatype="forecast" from="2019-04-29T06:00:00Z" to="2019-04-29T12:00:00Z">
+            <location altitude="334" latitude="61.6900" longitude="9.4800">
+                <precipitation unit="mm" value="0.0"/>
+                <minTemperature id="TTT" unit="celsius" value="9.2"/>
+                <maxTemperature id="TTT" unit="celsius" value="19.4"/>
+                <symbol id="Cloud" number="4"/>
+                <symbolProbability unit="probabilitycode" value="0"/>
+            </location>
+        </time>
+        <time datatype="forecast" from="2019-04-29T18:00:00Z" to="2019-04-29T18:00:00Z">
+            <location altitude="334" latitude="61.6900" longitude="9.4800">
+                <temperature id="TTT" unit="celsius" value="15.2"/>
+                <windDirection id="dd" deg="309.3" name="NW"/>
+                <windSpeed id="ff" mps="1.6" beaufort="2" name="Svak vind"/>
+                <humidity value="75.3" unit="percent"/>
+                <pressure id="pr" unit="hPa" value="1023.6"/>
+                <cloudiness id="NN" percent="95.3"/>
+                <lowClouds id="LOW" percent="23.4"/>
+                <mediumClouds id="MEDIUM" percent="31.6"/>
+                <highClouds id="HIGH" percent="86.3"/>
+                <temperatureProbability unit="probabilitycode" value="1"/>
+                <windProbability unit="probabilitycode" value="0"/>
+                <dewpointTemperature id="TD" unit="celsius" value="10.9"/>
+            </location>
+        </time>
+        <time datatype="forecast" from="2019-04-29T12:00:00Z" to="2019-04-29T18:00:00Z">
+            <location altitude="334" latitude="61.6900" longitude="9.4800">
+                <precipitation unit="mm" value="0.0"/>
+                <minTemperature id="TTT" unit="celsius" value="15.2"/>
+                <maxTemperature id="TTT" unit="celsius" value="19.4"/>
+                <symbol id="Cloud" number="4"/>
+                <symbolProbability unit="probabilitycode" value="0"/>
+            </location>
+        </time>
+        <time datatype="forecast" from="2019-04-30T00:00:00Z" to="2019-04-30T00:00:00Z">
+            <location altitude="334" latitude="61.6900" longitude="9.4800">
+                <temperature id="TTT" unit="celsius" value="8.1"/>
+                <windDirection id="dd" deg="318.8" name="NW"/>
+                <windSpeed id="ff" mps="1.0" beaufort="1" name="Flau vind"/>
+                <humidity value="96.5" unit="percent"/>
+                <pressure id="pr" unit="hPa" value="1024.0"/>
+                <cloudiness id="NN" percent="97.3"/>
+                <lowClouds id="LOW" percent="57.0"/>
+                <mediumClouds id="MEDIUM" percent="34.0"/>
+                <highClouds id="HIGH" percent="80.1"/>
+                <temperatureProbability unit="probabilitycode" value="1"/>
+                <windProbability unit="probabilitycode" value="0"/>
+                <dewpointTemperature id="TD" unit="celsius" value="7.6"/>
+            </location>
+        </time>
+        <time datatype="forecast" from="2019-04-29T18:00:00Z" to="2019-04-30T00:00:00Z">
+            <location altitude="334" latitude="61.6900" longitude="9.4800">
+                <precipitation unit="mm" value="0.0"/>
+                <minTemperature id="TTT" unit="celsius" value="8.1"/>
+                <maxTemperature id="TTT" unit="celsius" value="15.2"/>
+                <symbol id="Cloud" number="4"/>
+                <symbolProbability unit="probabilitycode" value="1"/>
+            </location>
+        </time>
+        <time datatype="forecast" from="2019-04-30T06:00:00Z" to="2019-04-30T06:00:00Z">
+            <location altitude="334" latitude="61.6900" longitude="9.4800">
+                <temperature id="TTT" unit="celsius" value="9.7"/>
+                <windDirection id="dd" deg="306.1" name="NW"/>
+                <windSpeed id="ff" mps="1.4" beaufort="1" name="Flau vind"/>
+                <humidity value="93.1" unit="percent"/>
+                <pressure id="pr" unit="hPa" value="1023.5"/>
+                <cloudiness id="NN" percent="96.9"/>
+                <lowClouds id="LOW" percent="76.6"/>
+                <mediumClouds id="MEDIUM" percent="22.7"/>
+                <highClouds id="HIGH" percent="49.6"/>
+                <temperatureProbability unit="probabilitycode" value="1"/>
+                <windProbability unit="probabilitycode" value="0"/>
+                <dewpointTemperature id="TD" unit="celsius" value="8.6"/>
+            </location>
+        </time>
+        <time datatype="forecast" from="2019-04-30T00:00:00Z" to="2019-04-30T06:00:00Z">
+            <location altitude="334" latitude="61.6900" longitude="9.4800">
+                <precipitation unit="mm" value="0.0"/>
+                <minTemperature id="TTT" unit="celsius" value="6.7"/>
+                <maxTemperature id="TTT" unit="celsius" value="9.7"/>
+                <symbol id="Cloud" number="4"/>
+                <symbolProbability unit="probabilitycode" value="1"/>
+            </location>
+        </time>
+        <time datatype="forecast" from="2019-04-30T12:00:00Z" to="2019-04-30T12:00:00Z">
+            <location altitude="334" latitude="61.6900" longitude="9.4800">
+                <temperature id="TTT" unit="celsius" value="17.2"/>
+                <windDirection id="dd" deg="321.5" name="NW"/>
+                <windSpeed id="ff" mps="1.9" beaufort="2" name="Svak vind"/>
+                <humidity value="53.9" unit="percent"/>
+                <pressure id="pr" unit="hPa" value="1019.9"/>
+                <cloudiness id="NN" percent="87.5"/>
+                <lowClouds id="LOW" percent="62.5"/>
+                <mediumClouds id="MEDIUM" percent="42.2"/>
+                <highClouds id="HIGH" percent="19.5"/>
+                <temperatureProbability unit="probabilitycode" value="2"/>
+                <windProbability unit="probabilitycode" value="0"/>
+                <dewpointTemperature id="TD" unit="celsius" value="7.8"/>
+            </location>
+        </time>
+        <time datatype="forecast" from="2019-04-30T06:00:00Z" to="2019-04-30T12:00:00Z">
+            <location altitude="334" latitude="61.6900" longitude="9.4800">
+                <precipitation unit="mm" value="0.0"/>
+                <minTemperature id="TTT" unit="celsius" value="9.6"/>
+                <maxTemperature id="TTT" unit="celsius" value="17.2"/>
+                <symbol id="Cloud" number="4"/>
+                <symbolProbability unit="probabilitycode" value="1"/>
+            </location>
+        </time>
+        <time datatype="forecast" from="2019-04-30T18:00:00Z" to="2019-04-30T18:00:00Z">
+            <location altitude="334" latitude="61.6900" longitude="9.4800">
+                <temperature id="TTT" unit="celsius" value="13.4"/>
+                <windDirection id="dd" deg="308.6" name="NW"/>
+                <windSpeed id="ff" mps="1.7" beaufort="2" name="Svak vind"/>
+                <humidity value="72.3" unit="percent"/>
+                <pressure id="pr" unit="hPa" value="1017.2"/>
+                <cloudiness id="NN" percent="56.2"/>
+                <lowClouds id="LOW" percent="17.2"/>
+                <mediumClouds id="MEDIUM" percent="5.5"/>
+                <highClouds id="HIGH" percent="0.8"/>
+                <temperatureProbability unit="probabilitycode" value="1"/>
+                <windProbability unit="probabilitycode" value="0"/>
+                <dewpointTemperature id="TD" unit="celsius" value="8.5"/>
+            </location>
+        </time>
+        <time datatype="forecast" from="2019-04-30T12:00:00Z" to="2019-04-30T18:00:00Z">
+            <location altitude="334" latitude="61.6900" longitude="9.4800">
+                <precipitation unit="mm" value="0.0"/>
+                <minTemperature id="TTT" unit="celsius" value="13.4"/>
+                <maxTemperature id="TTT" unit="celsius" value="17.2"/>
+                <symbol id="PartlyCloud" number="3"/>
+                <symbolProbability unit="probabilitycode" value="1"/>
+            </location>
+        </time>
+        <time datatype="forecast" from="2019-05-01T00:00:00Z" to="2019-05-01T00:00:00Z">
+            <location altitude="334" latitude="61.6900" longitude="9.4800">
+                <temperature id="TTT" unit="celsius" value="5.9"/>
+                <windDirection id="dd" deg="310.8" name="NW"/>
+                <windSpeed id="ff" mps="1.1" beaufort="1" name="Flau vind"/>
+                <humidity value="95.6" unit="percent"/>
+                <pressure id="pr" unit="hPa" value="1015.9"/>
+                <cloudiness id="NN" percent="90.6"/>
+                <lowClouds id="LOW" percent="53.9"/>
+                <mediumClouds id="MEDIUM" percent="0.0"/>
+                <highClouds id="HIGH" percent="36.7"/>
+                <temperatureProbability unit="probabilitycode" value="1"/>
+                <windProbability unit="probabilitycode" value="0"/>
+                <dewpointTemperature id="TD" unit="celsius" value="5.2"/>
+            </location>
+        </time>
+        <time datatype="forecast" from="2019-04-30T18:00:00Z" to="2019-05-01T00:00:00Z">
+            <location altitude="334" latitude="61.6900" longitude="9.4800">
+                <precipitation unit="mm" value="0.0"/>
+                <minTemperature id="TTT" unit="celsius" value="5.9"/>
+                <maxTemperature id="TTT" unit="celsius" value="13.4"/>
+                <symbol id="PartlyCloud" number="3"/>
+                <symbolProbability unit="probabilitycode" value="0"/>
+            </location>
+        </time>
+        <time datatype="forecast" from="2019-05-01T06:00:00Z" to="2019-05-01T06:00:00Z">
+            <location altitude="334" latitude="61.6900" longitude="9.4800">
+                <temperature id="TTT" unit="celsius" value="7.6"/>
+                <windDirection id="dd" deg="313.6" name="NW"/>
+                <windSpeed id="ff" mps="1.5" beaufort="1" name="Flau vind"/>
+                <humidity value="88.7" unit="percent"/>
+                <pressure id="pr" unit="hPa" value="1013.4"/>
+                <cloudiness id="NN" percent="97.3"/>
+                <lowClouds id="LOW" percent="78.9"/>
+                <mediumClouds id="MEDIUM" percent="9.0"/>
+                <highClouds id="HIGH" percent="56.2"/>
+                <temperatureProbability unit="probabilitycode" value="1"/>
+                <windProbability unit="probabilitycode" value="0"/>
+                <dewpointTemperature id="TD" unit="celsius" value="5.9"/>
+            </location>
+        </time>
+        <time datatype="forecast" from="2019-05-01T00:00:00Z" to="2019-05-01T06:00:00Z">
+            <location altitude="334" latitude="61.6900" longitude="9.4800">
+                <precipitation unit="mm" value="0.0"/>
+                <minTemperature id="TTT" unit="celsius" value="4.4"/>
+                <maxTemperature id="TTT" unit="celsius" value="7.6"/>
+                <symbol id="Cloud" number="4"/>
+                <symbolProbability unit="probabilitycode" value="0"/>
+            </location>
+        </time>
+        <time datatype="forecast" from="2019-05-01T12:00:00Z" to="2019-05-01T12:00:00Z">
+            <location altitude="334" latitude="61.6900" longitude="9.4800">
+                <temperature id="TTT" unit="celsius" value="14.7"/>
+                <windDirection id="dd" deg="313.2" name="NW"/>
+                <windSpeed id="ff" mps="3.5" beaufort="3" name="Lett bris"/>
+                <humidity value="52.8" unit="percent"/>
+                <pressure id="pr" unit="hPa" value="1008.7"/>
+                <cloudiness id="NN" percent="99.2"/>
+                <lowClouds id="LOW" percent="31.2"/>
+                <mediumClouds id="MEDIUM" percent="68.0"/>
+                <highClouds id="HIGH" percent="90.6"/>
+                <temperatureProbability unit="probabilitycode" value="2"/>
+                <windProbability unit="probabilitycode" value="0"/>
+                <dewpointTemperature id="TD" unit="celsius" value="5.1"/>
+            </location>
+        </time>
+        <time datatype="forecast" from="2019-05-01T06:00:00Z" to="2019-05-01T12:00:00Z">
+            <location altitude="334" latitude="61.6900" longitude="9.4800">
+                <precipitation unit="mm" value="0.0"/>
+                <minTemperature id="TTT" unit="celsius" value="7.6"/>
+                <maxTemperature id="TTT" unit="celsius" value="14.9"/>
+                <symbol id="Cloud" number="4"/>
+                <symbolProbability unit="probabilitycode" value="0"/>
+            </location>
+        </time>
+        <time datatype="forecast" from="2019-05-01T18:00:00Z" to="2019-05-01T18:00:00Z">
+            <location altitude="334" latitude="61.6900" longitude="9.4800">
+                <temperature id="TTT" unit="celsius" value="10.1"/>
+                <windDirection id="dd" deg="313.4" name="NW"/>
+                <windSpeed id="ff" mps="2.7" beaufort="2" name="Svak vind"/>
+                <humidity value="71.4" unit="percent"/>
+                <pressure id="pr" unit="hPa" value="1007.3"/>
+                <cloudiness id="NN" percent="93.8"/>
+                <lowClouds id="LOW" percent="26.6"/>
+                <mediumClouds id="MEDIUM" percent="83.6"/>
+                <highClouds id="HIGH" percent="26.6"/>
+                <temperatureProbability unit="probabilitycode" value="2"/>
+                <windProbability unit="probabilitycode" value="0"/>
+                <dewpointTemperature id="TD" unit="celsius" value="5.1"/>
+            </location>
+        </time>
+        <time datatype="forecast" from="2019-05-01T12:00:00Z" to="2019-05-01T18:00:00Z">
+            <location altitude="334" latitude="61.6900" longitude="9.4800">
+                <precipitation unit="mm" value="0.0"/>
+                <minTemperature id="TTT" unit="celsius" value="10.1"/>
+                <maxTemperature id="TTT" unit="celsius" value="15.3"/>
+                <symbol id="Cloud" number="4"/>
+                <symbolProbability unit="probabilitycode" value="1"/>
+            </location>
+        </time>
+        <time datatype="forecast" from="2019-05-02T00:00:00Z" to="2019-05-02T00:00:00Z">
+            <location altitude="334" latitude="61.6900" longitude="9.4800">
+                <temperature id="TTT" unit="celsius" value="5.1"/>
+                <windDirection id="dd" deg="302.8" name="NW"/>
+                <windSpeed id="ff" mps="1.6" beaufort="2" name="Svak vind"/>
+                <humidity value="85.6" unit="percent"/>
+                <pressure id="pr" unit="hPa" value="1006.6"/>
+                <cloudiness id="NN" percent="87.5"/>
+                <lowClouds id="LOW" percent="64.1"/>
+                <mediumClouds id="MEDIUM" percent="34.4"/>
+                <highClouds id="HIGH" percent="12.5"/>
+                <temperatureProbability unit="probabilitycode" value="1"/>
+                <windProbability unit="probabilitycode" value="0"/>
+                <dewpointTemperature id="TD" unit="celsius" value="2.7"/>
+            </location>
+        </time>
+        <time datatype="forecast" from="2019-05-01T18:00:00Z" to="2019-05-02T00:00:00Z">
+            <location altitude="334" latitude="61.6900" longitude="9.4800">
+                <precipitation unit="mm" value="0.0"/>
+                <minTemperature id="TTT" unit="celsius" value="5.1"/>
+                <maxTemperature id="TTT" unit="celsius" value="10.1"/>
+                <symbol id="Cloud" number="4"/>
+                <symbolProbability unit="probabilitycode" value="1"/>
+            </location>
+        </time>
+        <time datatype="forecast" from="2019-05-02T06:00:00Z" to="2019-05-02T06:00:00Z">
+            <location altitude="334" latitude="61.6900" longitude="9.4800">
+                <temperature id="TTT" unit="celsius" value="5.2"/>
+                <windDirection id="dd" deg="5.6" name="N"/>
+                <windSpeed id="ff" mps="2.8" beaufort="2" name="Svak vind"/>
+                <humidity value="75.7" unit="percent"/>
+                <pressure id="pr" unit="hPa" value="1005.5"/>
+                <cloudiness id="NN" percent="91.4"/>
+                <lowClouds id="LOW" percent="58.6"/>
+                <mediumClouds id="MEDIUM" percent="43.0"/>
+                <highClouds id="HIGH" percent="0.0"/>
+                <temperatureProbability unit="probabilitycode" value="2"/>
+                <windProbability unit="probabilitycode" value="1"/>
+                <dewpointTemperature id="TD" unit="celsius" value="1.1"/>
+            </location>
+        </time>
+        <time datatype="forecast" from="2019-05-02T00:00:00Z" to="2019-05-02T06:00:00Z">
+            <location altitude="334" latitude="61.6900" longitude="9.4800">
+                <precipitation unit="mm" value="0.0"/>
+                <minTemperature id="TTT" unit="celsius" value="3.7"/>
+                <maxTemperature id="TTT" unit="celsius" value="6.1"/>
+                <symbol id="Cloud" number="4"/>
+                <symbolProbability unit="probabilitycode" value="1"/>
+            </location>
+        </time>
+        <time datatype="forecast" from="2019-05-02T12:00:00Z" to="2019-05-02T12:00:00Z">
+            <location altitude="334" latitude="61.6900" longitude="9.4800">
+                <temperature id="TTT" unit="celsius" value="7.3"/>
+                <windDirection id="dd" deg="322.3" name="NW"/>
+                <windSpeed id="ff" mps="4.0" beaufort="3" name="Lett bris"/>
+                <humidity value="53.7" unit="percent"/>
+                <pressure id="pr" unit="hPa" value="1003.0"/>
+                <cloudiness id="NN" percent="81.2"/>
+                <lowClouds id="LOW" percent="42.2"/>
+                <mediumClouds id="MEDIUM" percent="60.2"/>
+                <highClouds id="HIGH" percent="0.0"/>
+                <temperatureProbability unit="probabilitycode" value="2"/>
+                <windProbability unit="probabilitycode" value="1"/>
+                <dewpointTemperature id="TD" unit="celsius" value="-1.7"/>
+            </location>
+        </time>
+        <time datatype="forecast" from="2019-05-02T06:00:00Z" to="2019-05-02T12:00:00Z">
+            <location altitude="334" latitude="61.6900" longitude="9.4800">
+                <precipitation unit="mm" value="0.0"/>
+                <minTemperature id="TTT" unit="celsius" value="5.2"/>
+                <maxTemperature id="TTT" unit="celsius" value="7.4"/>
+                <symbol id="PartlyCloud" number="3"/>
+                <symbolProbability unit="probabilitycode" value="1"/>
+            </location>
+        </time>
+        <time datatype="forecast" from="2019-05-02T18:00:00Z" to="2019-05-02T18:00:00Z">
+            <location altitude="334" latitude="61.6900" longitude="9.4800">
+                <temperature id="TTT" unit="celsius" value="5.4"/>
+                <windDirection id="dd" deg="2.4" name="N"/>
+                <windSpeed id="ff" mps="2.9" beaufort="2" name="Svak vind"/>
+                <humidity value="60.0" unit="percent"/>
+                <pressure id="pr" unit="hPa" value="1003.6"/>
+                <cloudiness id="NN" percent="75.8"/>
+                <lowClouds id="LOW" percent="26.6"/>
+                <mediumClouds id="MEDIUM" percent="48.4"/>
+                <highClouds id="HIGH" percent="2.3"/>
+                <temperatureProbability unit="probabilitycode" value="2"/>
+                <windProbability unit="probabilitycode" value="0"/>
+                <dewpointTemperature id="TD" unit="celsius" value="-1.9"/>
+            </location>
+        </time>
+        <time datatype="forecast" from="2019-05-02T12:00:00Z" to="2019-05-02T18:00:00Z">
+            <location altitude="334" latitude="61.6900" longitude="9.4800">
+                <precipitation unit="mm" value="0.0"/>
+                <minTemperature id="TTT" unit="celsius" value="5.4"/>
+                <maxTemperature id="TTT" unit="celsius" value="7.6"/>
+                <symbol id="PartlyCloud" number="3"/>
+                <symbolProbability unit="probabilitycode" value="1"/>
+            </location>
+        </time>
+        <time datatype="forecast" from="2019-05-03T00:00:00Z" to="2019-05-03T00:00:00Z">
+            <location altitude="334" latitude="61.6900" longitude="9.4800">
+                <temperature id="TTT" unit="celsius" value="1.2"/>
+                <windDirection id="dd" deg="319.1" name="NW"/>
+                <windSpeed id="ff" mps="2.4" beaufort="2" name="Svak vind"/>
+                <humidity value="76.8" unit="percent"/>
+                <pressure id="pr" unit="hPa" value="1005.0"/>
+                <cloudiness id="NN" percent="91.0"/>
+                <lowClouds id="LOW" percent="63.3"/>
+                <mediumClouds id="MEDIUM" percent="32.0"/>
+                <highClouds id="HIGH" percent="16.4"/>
+                <temperatureProbability unit="probabilitycode" value="2"/>
+                <windProbability unit="probabilitycode" value="0"/>
+                <dewpointTemperature id="TD" unit="celsius" value="-2.6"/>
+            </location>
+        </time>
+        <time datatype="forecast" from="2019-05-02T18:00:00Z" to="2019-05-03T00:00:00Z">
+            <location altitude="334" latitude="61.6900" longitude="9.4800">
+                <precipitation unit="mm" value="0.0"/>
+                <minTemperature id="TTT" unit="celsius" value="1.2"/>
+                <maxTemperature id="TTT" unit="celsius" value="5.4"/>
+                <symbol id="PartlyCloud" number="3"/>
+                <symbolProbability unit="probabilitycode" value="1"/>
+            </location>
+        </time>
+        <time datatype="forecast" from="2019-05-03T06:00:00Z" to="2019-05-03T06:00:00Z">
+            <location altitude="334" latitude="61.6900" longitude="9.4800">
+                <temperature id="TTT" unit="celsius" value="2.6"/>
+                <windDirection id="dd" deg="7.8" name="N"/>
+                <windSpeed id="ff" mps="3.2" beaufort="2" name="Svak vind"/>
+                <humidity value="61.7" unit="percent"/>
+                <pressure id="pr" unit="hPa" value="1004.3"/>
+                <cloudiness id="NN" percent="95.3"/>
+                <lowClouds id="LOW" percent="52.7"/>
+                <mediumClouds id="MEDIUM" percent="50.0"/>
+                <highClouds id="HIGH" percent="41.0"/>
+                <temperatureProbability unit="probabilitycode" value="1"/>
+                <windProbability unit="probabilitycode" value="1"/>
+                <dewpointTemperature id="TD" unit="celsius" value="-4.3"/>
+            </location>
+        </time>
+        <time datatype="forecast" from="2019-05-03T00:00:00Z" to="2019-05-03T06:00:00Z">
+            <location altitude="334" latitude="61.6900" longitude="9.4800">
+                <precipitation unit="mm" value="0.0"/>
+                <minTemperature id="TTT" unit="celsius" value="0.5"/>
+                <maxTemperature id="TTT" unit="celsius" value="2.6"/>
+                <symbol id="Cloud" number="4"/>
+                <symbolProbability unit="probabilitycode" value="1"/>
+            </location>
+        </time>
+        <time datatype="forecast" from="2019-05-03T12:00:00Z" to="2019-05-03T12:00:00Z">
+            <location altitude="334" latitude="61.6900" longitude="9.4800">
+                <temperature id="TTT" unit="celsius" value="6.1"/>
+                <windDirection id="dd" deg="302.2" name="NW"/>
+                <windSpeed id="ff" mps="4.2" beaufort="3" name="Lett bris"/>
+                <humidity value="47.6" unit="percent"/>
+                <pressure id="pr" unit="hPa" value="1006.9"/>
+                <cloudiness id="NN" percent="82.4"/>
+                <lowClouds id="LOW" percent="48.0"/>
+                <mediumClouds id="MEDIUM" percent="55.1"/>
+                <highClouds id="HIGH" percent="1.2"/>
+                <temperatureProbability unit="probabilitycode" value="2"/>
+                <windProbability unit="probabilitycode" value="1"/>
+                <dewpointTemperature id="TD" unit="celsius" value="-4.4"/>
+            </location>
+        </time>
+        <time datatype="forecast" from="2019-05-03T06:00:00Z" to="2019-05-03T12:00:00Z">
+            <location altitude="334" latitude="61.6900" longitude="9.4800">
+                <precipitation unit="mm" value="0.0"/>
+                <minTemperature id="TTT" unit="celsius" value="2.6"/>
+                <maxTemperature id="TTT" unit="celsius" value="6.1"/>
+                <symbol id="Cloud" number="4"/>
+                <symbolProbability unit="probabilitycode" value="1"/>
+            </location>
+        </time>
+        <time datatype="forecast" from="2019-05-03T18:00:00Z" to="2019-05-03T18:00:00Z">
+            <location altitude="334" latitude="61.6900" longitude="9.4800">
+                <temperature id="TTT" unit="celsius" value="4.1"/>
+                <windDirection id="dd" deg="318.6" name="NW"/>
+                <windSpeed id="ff" mps="2.9" beaufort="2" name="Svak vind"/>
+                <humidity value="59.2" unit="percent"/>
+                <pressure id="pr" unit="hPa" value="1007.1"/>
+                <cloudiness id="NN" percent="73.4"/>
+                <lowClouds id="LOW" percent="40.2"/>
+                <mediumClouds id="MEDIUM" percent="44.9"/>
+                <highClouds id="HIGH" percent="8.6"/>
+                <temperatureProbability unit="probabilitycode" value="2"/>
+                <windProbability unit="probabilitycode" value="0"/>
+                <dewpointTemperature id="TD" unit="celsius" value="-3.4"/>
+            </location>
+        </time>
+        <time datatype="forecast" from="2019-05-03T12:00:00Z" to="2019-05-03T18:00:00Z">
+            <location altitude="334" latitude="61.6900" longitude="9.4800">
+                <precipitation unit="mm" value="0.0"/>
+                <minTemperature id="TTT" unit="celsius" value="4.1"/>
+                <maxTemperature id="TTT" unit="celsius" value="6.3"/>
+                <symbol id="PartlyCloud" number="3"/>
+                <symbolProbability unit="probabilitycode" value="1"/>
+            </location>
+        </time>
+        <time datatype="forecast" from="2019-05-04T00:00:00Z" to="2019-05-04T00:00:00Z">
+            <location altitude="334" latitude="61.6900" longitude="9.4800">
+                <temperature id="TTT" unit="celsius" value="0.3"/>
+                <windDirection id="dd" deg="204.6" name="SW"/>
+                <windSpeed id="ff" mps="1.8" beaufort="2" name="Svak vind"/>
+                <humidity value="77.1" unit="percent"/>
+                <pressure id="pr" unit="hPa" value="1006.9"/>
+                <cloudiness id="NN" percent="76.6"/>
+                <lowClouds id="LOW" percent="27.0"/>
+                <mediumClouds id="MEDIUM" percent="14.1"/>
+                <highClouds id="HIGH" percent="0.0"/>
+                <temperatureProbability unit="probabilitycode" value="1"/>
+                <windProbability unit="probabilitycode" value="0"/>
+                <dewpointTemperature id="TD" unit="celsius" value="-3.5"/>
+            </location>
+        </time>
+        <time datatype="forecast" from="2019-05-03T18:00:00Z" to="2019-05-04T00:00:00Z">
+            <location altitude="334" latitude="61.6900" longitude="9.4800">
+                <precipitation unit="mm" value="0.0"/>
+                <minTemperature id="TTT" unit="celsius" value="0.1"/>
+                <maxTemperature id="TTT" unit="celsius" value="4.1"/>
+                <symbol id="PartlyCloud" number="3"/>
+                <symbolProbability unit="probabilitycode" value="1"/>
+            </location>
+        </time>
+        <time datatype="forecast" from="2019-05-04T06:00:00Z" to="2019-05-04T06:00:00Z">
+            <location altitude="334" latitude="61.6900" longitude="9.4800">
+                <temperature id="TTT" unit="celsius" value="2.6"/>
+                <windDirection id="dd" deg="305.6" name="NW"/>
+                <windSpeed id="ff" mps="2.7" beaufort="2" name="Svak vind"/>
+                <humidity value="63.3" unit="percent"/>
+                <pressure id="pr" unit="hPa" value="1009.5"/>
+                <cloudiness id="NN" percent="60.2"/>
+                <lowClouds id="LOW" percent="18.8"/>
+                <mediumClouds id="MEDIUM" percent="5.5"/>
+                <highClouds id="HIGH" percent="0.0"/>
+                <temperatureProbability unit="probabilitycode" value="2"/>
+                <windProbability unit="probabilitycode" value="1"/>
+                <dewpointTemperature id="TD" unit="celsius" value="-3.9"/>
+            </location>
+        </time>
+        <time datatype="forecast" from="2019-05-04T00:00:00Z" to="2019-05-04T06:00:00Z">
+            <location altitude="334" latitude="61.6900" longitude="9.4800">
+                <precipitation unit="mm" value="0.0"/>
+                <minTemperature id="TTT" unit="celsius" value="-0.4"/>
+                <maxTemperature id="TTT" unit="celsius" value="2.6"/>
+                <symbol id="PartlyCloud" number="3"/>
+                <symbolProbability unit="probabilitycode" value="1"/>
+            </location>
+        </time>
+        <time datatype="forecast" from="2019-05-04T12:00:00Z" to="2019-05-04T12:00:00Z">
+            <location altitude="334" latitude="61.6900" longitude="9.4800">
+                <temperature id="TTT" unit="celsius" value="6.7"/>
+                <windDirection id="dd" deg="302.9" name="NW"/>
+                <windSpeed id="ff" mps="3.9" beaufort="3" name="Lett bris"/>
+                <humidity value="44.5" unit="percent"/>
+                <pressure id="pr" unit="hPa" value="1009.7"/>
+                <cloudiness id="NN" percent="83.6"/>
+                <lowClouds id="LOW" percent="32.4"/>
+                <mediumClouds id="MEDIUM" percent="55.5"/>
+                <highClouds id="HIGH" percent="0.0"/>
+                <temperatureProbability unit="probabilitycode" value="2"/>
+                <windProbability unit="probabilitycode" value="1"/>
+                <dewpointTemperature id="TD" unit="celsius" value="-4.8"/>
+            </location>
+        </time>
+        <time datatype="forecast" from="2019-05-04T06:00:00Z" to="2019-05-04T12:00:00Z">
+            <location altitude="334" latitude="61.6900" longitude="9.4800">
+                <precipitation unit="mm" value="0.0"/>
+                <minTemperature id="TTT" unit="celsius" value="2.6"/>
+                <maxTemperature id="TTT" unit="celsius" value="6.7"/>
+                <symbol id="PartlyCloud" number="3"/>
+                <symbolProbability unit="probabilitycode" value="1"/>
+            </location>
+        </time>
+        <time datatype="forecast" from="2019-05-04T18:00:00Z" to="2019-05-04T18:00:00Z">
+            <location altitude="334" latitude="61.6900" longitude="9.4800">
+                <temperature id="TTT" unit="celsius" value="4.4"/>
+                <windDirection id="dd" deg="336.4" name="NW"/>
+                <windSpeed id="ff" mps="2.6" beaufort="2" name="Svak vind"/>
+                <humidity value="59.1" unit="percent"/>
+                <pressure id="pr" unit="hPa" value="1011.8"/>
+                <cloudiness id="NN" percent="68.8"/>
+                <lowClouds id="LOW" percent="35.2"/>
+                <mediumClouds id="MEDIUM" percent="29.7"/>
+                <highClouds id="HIGH" percent="0.8"/>
+                <temperatureProbability unit="probabilitycode" value="2"/>
+                <windProbability unit="probabilitycode" value="0"/>
+                <dewpointTemperature id="TD" unit="celsius" value="-3.2"/>
+            </location>
+        </time>
+        <time datatype="forecast" from="2019-05-04T12:00:00Z" to="2019-05-04T18:00:00Z">
+            <location altitude="334" latitude="61.6900" longitude="9.4800">
+                <precipitation unit="mm" value="0.0"/>
+                <minTemperature id="TTT" unit="celsius" value="4.4"/>
+                <maxTemperature id="TTT" unit="celsius" value="7.0"/>
+                <symbol id="PartlyCloud" number="3"/>
+                <symbolProbability unit="probabilitycode" value="1"/>
+            </location>
+        </time>
+        <time datatype="forecast" from="2019-05-05T00:00:00Z" to="2019-05-05T00:00:00Z">
+            <location altitude="334" latitude="61.6900" longitude="9.4800">
+                <temperature id="TTT" unit="celsius" value="1.2"/>
+                <windDirection id="dd" deg="282.9" name="W"/>
+                <windSpeed id="ff" mps="1.7" beaufort="2" name="Svak vind"/>
+                <humidity value="79.6" unit="percent"/>
+                <pressure id="pr" unit="hPa" value="1012.5"/>
+                <cloudiness id="NN" percent="90.6"/>
+                <lowClouds id="LOW" percent="15.6"/>
+                <mediumClouds id="MEDIUM" percent="26.6"/>
+                <highClouds id="HIGH" percent="5.5"/>
+                <temperatureProbability unit="probabilitycode" value="2"/>
+                <windProbability unit="probabilitycode" value="0"/>
+                <dewpointTemperature id="TD" unit="celsius" value="-2.1"/>
+            </location>
+        </time>
+        <time datatype="forecast" from="2019-05-04T18:00:00Z" to="2019-05-05T00:00:00Z">
+            <location altitude="334" latitude="61.6900" longitude="9.4800">
+                <precipitation unit="mm" value="0.0"/>
+                <minTemperature id="TTT" unit="celsius" value="1.0"/>
+                <maxTemperature id="TTT" unit="celsius" value="4.5"/>
+                <symbol id="PartlyCloud" number="3"/>
+                <symbolProbability unit="probabilitycode" value="1"/>
+            </location>
+        </time>
+        <time datatype="forecast" from="2019-05-05T06:00:00Z" to="2019-05-05T06:00:00Z">
+            <location altitude="334" latitude="61.6900" longitude="9.4800">
+                <temperature id="TTT" unit="celsius" value="3.4"/>
+                <windDirection id="dd" deg="153.2" name="SE"/>
+                <windSpeed id="ff" mps="1.6" beaufort="2" name="Svak vind"/>
+                <humidity value="68.3" unit="percent"/>
+                <pressure id="pr" unit="hPa" value="1010.0"/>
+                <cloudiness id="NN" percent="92.6"/>
+                <lowClouds id="LOW" percent="43.8"/>
+                <mediumClouds id="MEDIUM" percent="43.0"/>
+                <highClouds id="HIGH" percent="37.9"/>
+                <temperatureProbability unit="probabilitycode" value="2"/>
+                <windProbability unit="probabilitycode" value="0"/>
+                <dewpointTemperature id="TD" unit="celsius" value="-2.1"/>
+            </location>
+        </time>
+        <time datatype="forecast" from="2019-05-05T00:00:00Z" to="2019-05-05T06:00:00Z">
+            <location altitude="334" latitude="61.6900" longitude="9.4800">
+                <precipitation unit="mm" value="0.0"/>
+                <minTemperature id="TTT" unit="celsius" value="0.7"/>
+                <maxTemperature id="TTT" unit="celsius" value="3.4"/>
+                <symbol id="PartlyCloud" number="3"/>
+                <symbolProbability unit="probabilitycode" value="1"/>
+            </location>
+        </time>
+        <time datatype="forecast" from="2019-05-05T12:00:00Z" to="2019-05-05T12:00:00Z">
+            <location altitude="334" latitude="61.6900" longitude="9.4800">
+                <temperature id="TTT" unit="celsius" value="7.2"/>
+                <windDirection id="dd" deg="317.4" name="NW"/>
+                <windSpeed id="ff" mps="3.6" beaufort="3" name="Lett bris"/>
+                <humidity value="48.5" unit="percent"/>
+                <pressure id="pr" unit="hPa" value="1007.1"/>
+                <cloudiness id="NN" percent="92.2"/>
+                <lowClouds id="LOW" percent="58.6"/>
+                <mediumClouds id="MEDIUM" percent="67.2"/>
+                <highClouds id="HIGH" percent="15.2"/>
+                <temperatureProbability unit="probabilitycode" value="2"/>
+                <windProbability unit="probabilitycode" value="1"/>
+                <dewpointTemperature id="TD" unit="celsius" value="-3.2"/>
+            </location>
+        </time>
+        <time datatype="forecast" from="2019-05-05T06:00:00Z" to="2019-05-05T12:00:00Z">
+            <location altitude="334" latitude="61.6900" longitude="9.4800">
+                <precipitation unit="mm" value="0.0"/>
+                <minTemperature id="TTT" unit="celsius" value="2.9"/>
+                <maxTemperature id="TTT" unit="celsius" value="7.2"/>
+                <symbol id="Cloud" number="4"/>
+                <symbolProbability unit="probabilitycode" value="1"/>
+            </location>
+        </time>
+        <time datatype="forecast" from="2019-05-05T18:00:00Z" to="2019-05-05T18:00:00Z">
+            <location altitude="334" latitude="61.6900" longitude="9.4800">
+                <temperature id="TTT" unit="celsius" value="5.8"/>
+                <windDirection id="dd" deg="211.8" name="SW"/>
+                <windSpeed id="ff" mps="2.2" beaufort="2" name="Svak vind"/>
+                <humidity value="64.2" unit="percent"/>
+                <pressure id="pr" unit="hPa" value="1006.4"/>
+                <cloudiness id="NN" percent="91.8"/>
+                <lowClouds id="LOW" percent="55.5"/>
+                <mediumClouds id="MEDIUM" percent="41.8"/>
+                <highClouds id="HIGH" percent="30.5"/>
+                <temperatureProbability unit="probabilitycode" value="2"/>
+                <windProbability unit="probabilitycode" value="0"/>
+                <dewpointTemperature id="TD" unit="celsius" value="-0.7"/>
+            </location>
+        </time>
+        <time datatype="forecast" from="2019-05-05T12:00:00Z" to="2019-05-05T18:00:00Z">
+            <location altitude="334" latitude="61.6900" longitude="9.4800">
+                <precipitation unit="mm" value="0.0"/>
+                <minTemperature id="TTT" unit="celsius" value="5.8"/>
+                <maxTemperature id="TTT" unit="celsius" value="7.5"/>
+                <symbol id="Cloud" number="4"/>
+                <symbolProbability unit="probabilitycode" value="1"/>
+            </location>
+        </time>
+    </product>
+</weatherdata>

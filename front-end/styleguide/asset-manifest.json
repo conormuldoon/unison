@@ -1,0 +1,16 @@
+{
+  "files": {
+    "main.css": "/unison/static/css/main.eb7dbfdd.chunk.css",
+    "main.js": "/unison/build/main.545eca04.js",
+    "runtime~main.js": "/unison/build/bundle.ff6ec29f.js",
+    "static/css/2.38e738e4.chunk.css": "/unison/static/css/2.38e738e4.chunk.css",
+    "build/2.0f67fd23.js": "/unison/build/2.0f67fd23.js",
+    "index.html": "/unison/index.html",
+    "precache-manifest.85930d55d4333d445ace8f1cd90ee907.js": "/unison/precache-manifest.85930d55d4333d445ace8f1cd90ee907.js",
+    "service-worker.js": "/unison/service-worker.js",
+    "static/css/2.38e738e4.chunk.css.map": "/unison/static/css/2.38e738e4.chunk.css.map",
+    "static/css/main.eb7dbfdd.chunk.css.map": "/unison/static/css/main.eb7dbfdd.chunk.css.map",
+    "static/media/2000px-Map_marker.png": "/unison/static/media/2000px-Map_marker.0fbe958c.png",
+    "static/media/partners-logos.jpg": "/unison/static/media/partners-logos.178d5867.jpg"
+  }
+}

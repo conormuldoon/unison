@@ -1,0 +1,1488 @@
+<weatherdata xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="http://api.met.no/weatherapi/locationforecast/1.9/schema" created="2018-05-03T13:58:47Z">
+   <meta>
+      <model name="harmonie" termin="2018-05-03T06:00:00Z" runended="2018-05-03T09:48:41Z" nextrun="2018-05-03T16:00:00Z" from="2018-05-03T14:00:00Z" to="2018-05-05T12:00:00Z" />
+      <model name="ec_test_l" termin="2018-05-03T00:00:00Z" runended="2018-05-03T09:48:41Z" nextrun="2018-05-03T18:00:00Z" from="2018-05-05T18:00:00Z" to="2018-05-13T00:00:00Z" />
+      </meta>
+   <product class="pointData">
+      <time datatype="forecast" from="2018-05-03T14:00:00Z" to="2018-05-03T14:00:00Z">
+         <location altitude="9" latitude="54.7211" longitude="-8.7237">
+            <temperature id="TTT" unit="celsius" value="10.1"/>
+            <windDirection id="dd" deg="245.3" name="SW"/>
+            <windSpeed id="ff" mps="4.8" beaufort="3" name="Lett bris"/>
+            <humidity value="100.0" unit="percent"/>
+            <pressure id="pr" unit="hPa" value="1011.1"/>
+            <cloudiness id="NN" percent="100.0"/>
+            <lowClouds id="LOW" percent="100.0"/>
+            <mediumClouds id="MEDIUM" percent="0.0"/>
+            <highClouds id="HIGH" percent="93.5"/>
+            <dewpointTemperature id="TD" unit="celsius" value="10.1"/>
+         </location>
+      </time>
+      <time datatype="forecast" from="2018-05-03T13:00:00Z" to="2018-05-03T14:00:00Z">
+         <location altitude="9" latitude="54.7211" longitude="-8.7237">
+            <precipitation unit="mm" value="0.0" minvalue="0.0" maxvalue="0.2"/>
+<symbol id="Cloud" number="4"/>
+         </location>
+      </time>
+      <time datatype="forecast" from="2018-05-03T15:00:00Z" to="2018-05-03T15:00:00Z">
+         <location altitude="9" latitude="54.7211" longitude="-8.7237">
+            <temperature id="TTT" unit="celsius" value="10.4"/>
+            <windDirection id="dd" deg="263.2" name="W"/>
+            <windSpeed id="ff" mps="5.2" beaufort="3" name="Lett bris"/>
+            <humidity value="100.0" unit="percent"/>
+            <pressure id="pr" unit="hPa" value="1011.6"/>
+            <cloudiness id="NN" percent="100.0"/>
+            <lowClouds id="LOW" percent="100.0"/>
+            <mediumClouds id="MEDIUM" percent="0.0"/>
+            <highClouds id="HIGH" percent="81.4"/>
+            <dewpointTemperature id="TD" unit="celsius" value="10.4"/>
+         </location>
+      </time>
+      <time datatype="forecast" from="2018-05-03T14:00:00Z" to="2018-05-03T15:00:00Z">
+         <location altitude="9" latitude="54.7211" longitude="-8.7237">
+            <precipitation unit="mm" value="0.0" minvalue="0.0" maxvalue="0.1"/>
+<symbol id="Cloud" number="4"/>
+         </location>
+      </time>
+      <time datatype="forecast" from="2018-05-03T16:00:00Z" to="2018-05-03T16:00:00Z">
+         <location altitude="9" latitude="54.7211" longitude="-8.7237">
+            <temperature id="TTT" unit="celsius" value="10.4"/>
+            <windDirection id="dd" deg="270.1" name="W"/>
+            <windSpeed id="ff" mps="5.6" beaufort="3" name="Lett bris"/>
+            <humidity value="100.0" unit="percent"/>
+            <pressure id="pr" unit="hPa" value="1012.5"/>
+            <cloudiness id="NN" percent="100.0"/>
+            <lowClouds id="LOW" percent="100.0"/>
+            <mediumClouds id="MEDIUM" percent="0.0"/>
+            <highClouds id="HIGH" percent="22.1"/>
+            <dewpointTemperature id="TD" unit="celsius" value="10.4"/>
+         </location>
+      </time>
+      <time datatype="forecast" from="2018-05-03T15:00:00Z" to="2018-05-03T16:00:00Z">
+         <location altitude="9" latitude="54.7211" longitude="-8.7237">
+            <precipitation unit="mm" value="0.0" minvalue="0.0" maxvalue="0.0"/>
+<symbol id="Cloud" number="4"/>
+         </location>
+      </time>
+      <time datatype="forecast" from="2018-05-03T17:00:00Z" to="2018-05-03T17:00:00Z">
+         <location altitude="9" latitude="54.7211" longitude="-8.7237">
+            <temperature id="TTT" unit="celsius" value="10.5"/>
+            <windDirection id="dd" deg="273.2" name="W"/>
+            <windSpeed id="ff" mps="5.3" beaufort="3" name="Lett bris"/>
+            <humidity value="99.9" unit="percent"/>
+            <pressure id="pr" unit="hPa" value="1013.0"/>
+            <cloudiness id="NN" percent="100.0"/>
+            <lowClouds id="LOW" percent="100.0"/>
+            <mediumClouds id="MEDIUM" percent="0.0"/>
+            <highClouds id="HIGH" percent="63.1"/>
+            <dewpointTemperature id="TD" unit="celsius" value="10.5"/>
+         </location>
+      </time>
+      <time datatype="forecast" from="2018-05-03T16:00:00Z" to="2018-05-03T17:00:00Z">
+         <location altitude="9" latitude="54.7211" longitude="-8.7237">
+            <precipitation unit="mm" value="0.0" minvalue="0.0" maxvalue="0.0"/>
+<symbol id="Cloud" number="4"/>
+         </location>
+      </time>
+      <time datatype="forecast" from="2018-05-03T18:00:00Z" to="2018-05-03T18:00:00Z">
+         <location altitude="9" latitude="54.7211" longitude="-8.7237">
+            <temperature id="TTT" unit="celsius" value="10.2"/>
+            <windDirection id="dd" deg="274.4" name="W"/>
+            <windSpeed id="ff" mps="4.7" beaufort="3" name="Lett bris"/>
+            <humidity value="99.9" unit="percent"/>
+            <pressure id="pr" unit="hPa" value="1013.6"/>
+            <cloudiness id="NN" percent="99.6"/>
+            <lowClouds id="LOW" percent="99.6"/>
+            <mediumClouds id="MEDIUM" percent="0.0"/>
+            <highClouds id="HIGH" percent="0.0"/>
+            <dewpointTemperature id="TD" unit="celsius" value="10.2"/>
+         </location>
+      </time>
+      <time datatype="forecast" from="2018-05-03T17:00:00Z" to="2018-05-03T18:00:00Z">
+         <location altitude="9" latitude="54.7211" longitude="-8.7237">
+            <precipitation unit="mm" value="0.0" minvalue="0.0" maxvalue="0.0"/>
+<symbol id="Cloud" number="4"/>
+         </location>
+      </time>
+      <time datatype="forecast" from="2018-05-03T19:00:00Z" to="2018-05-03T19:00:00Z">
+         <location altitude="9" latitude="54.7211" longitude="-8.7237">
+            <temperature id="TTT" unit="celsius" value="10.0"/>
+            <windDirection id="dd" deg="273.3" name="W"/>
+            <windSpeed id="ff" mps="4.9" beaufort="3" name="Lett bris"/>
+            <humidity value="98.9" unit="percent"/>
+            <pressure id="pr" unit="hPa" value="1014.3"/>
+            <cloudiness id="NN" percent="99.1"/>
+            <lowClouds id="LOW" percent="99.1"/>
+            <mediumClouds id="MEDIUM" percent="0.0"/>
+            <highClouds id="HIGH" percent="0.0"/>
+            <dewpointTemperature id="TD" unit="celsius" value="9.8"/>
+         </location>
+      </time>
+      <time datatype="forecast" from="2018-05-03T18:00:00Z" to="2018-05-03T19:00:00Z">
+         <location altitude="9" latitude="54.7211" longitude="-8.7237">
+            <precipitation unit="mm" value="0.0" minvalue="0.0" maxvalue="0.1"/>
+<symbol id="Cloud" number="4"/>
+         </location>
+      </time>
+      <time datatype="forecast" from="2018-05-03T20:00:00Z" to="2018-05-03T20:00:00Z">
+         <location altitude="9" latitude="54.7211" longitude="-8.7237">
+            <temperature id="TTT" unit="celsius" value="9.8"/>
+            <windDirection id="dd" deg="266.7" name="W"/>
+            <windSpeed id="ff" mps="4.2" beaufort="3" name="Lett bris"/>
+            <humidity value="100.0" unit="percent"/>
+            <pressure id="pr" unit="hPa" value="1015.1"/>
+            <cloudiness id="NN" percent="98.8"/>
+            <lowClouds id="LOW" percent="98.8"/>
+            <mediumClouds id="MEDIUM" percent="0.0"/>
+            <highClouds id="HIGH" percent="0.0"/>
+            <dewpointTemperature id="TD" unit="celsius" value="9.8"/>
+         </location>
+      </time>
+      <time datatype="forecast" from="2018-05-03T19:00:00Z" to="2018-05-03T20:00:00Z">
+         <location altitude="9" latitude="54.7211" longitude="-8.7237">
+            <precipitation unit="mm" value="0.0" minvalue="0.0" maxvalue="0.1"/>
+<symbol id="Cloud" number="4"/>
+         </location>
+      </time>
+      <time datatype="forecast" from="2018-05-03T21:00:00Z" to="2018-05-03T21:00:00Z">
+         <location altitude="9" latitude="54.7211" longitude="-8.7237">
+            <temperature id="TTT" unit="celsius" value="9.6"/>
+            <windDirection id="dd" deg="256.6" name="W"/>
+            <windSpeed id="ff" mps="4.2" beaufort="3" name="Lett bris"/>
+            <humidity value="99.9" unit="percent"/>
+            <pressure id="pr" unit="hPa" value="1015.9"/>
+            <cloudiness id="NN" percent="99.8"/>
+            <lowClouds id="LOW" percent="99.8"/>
+            <mediumClouds id="MEDIUM" percent="0.0"/>
+            <highClouds id="HIGH" percent="0.0"/>
+            <dewpointTemperature id="TD" unit="celsius" value="9.6"/>
+         </location>
+      </time>
+      <time datatype="forecast" from="2018-05-03T20:00:00Z" to="2018-05-03T21:00:00Z">
+         <location altitude="9" latitude="54.7211" longitude="-8.7237">
+            <precipitation unit="mm" value="0.0" minvalue="0.0" maxvalue="0.0"/>
+<symbol id="Cloud" number="4"/>
+         </location>
+      </time>
+      <time datatype="forecast" from="2018-05-03T22:00:00Z" to="2018-05-03T22:00:00Z">
+         <location altitude="9" latitude="54.7211" longitude="-8.7237">
+            <temperature id="TTT" unit="celsius" value="9.4"/>
+            <windDirection id="dd" deg="259.7" name="W"/>
+            <windSpeed id="ff" mps="5.6" beaufort="3" name="Lett bris"/>
+            <humidity value="94.5" unit="percent"/>
+            <pressure id="pr" unit="hPa" value="1016.5"/>
+            <cloudiness id="NN" percent="99.8"/>
+            <lowClouds id="LOW" percent="99.8"/>
+            <mediumClouds id="MEDIUM" percent="0.0"/>
+            <highClouds id="HIGH" percent="0.0"/>
+            <dewpointTemperature id="TD" unit="celsius" value="8.6"/>
+         </location>
+      </time>
+      <time datatype="forecast" from="2018-05-03T21:00:00Z" to="2018-05-03T22:00:00Z">
+         <location altitude="9" latitude="54.7211" longitude="-8.7237">
+            <precipitation unit="mm" value="0.0" minvalue="0.0" maxvalue="0.0"/>
+<symbol id="Cloud" number="4"/>
+         </location>
+      </time>
+      <time datatype="forecast" from="2018-05-03T23:00:00Z" to="2018-05-03T23:00:00Z">
+         <location altitude="9" latitude="54.7211" longitude="-8.7237">
+            <temperature id="TTT" unit="celsius" value="9.2"/>
+            <windDirection id="dd" deg="255.6" name="W"/>
+            <windSpeed id="ff" mps="4.5" beaufort="3" name="Lett bris"/>
+            <humidity value="97.7" unit="percent"/>
+            <pressure id="pr" unit="hPa" value="1016.7"/>
+            <cloudiness id="NN" percent="99.8"/>
+            <lowClouds id="LOW" percent="99.8"/>
+            <mediumClouds id="MEDIUM" percent="0.0"/>
+            <highClouds id="HIGH" percent="0.0"/>
+            <dewpointTemperature id="TD" unit="celsius" value="8.9"/>
+         </location>
+      </time>
+      <time datatype="forecast" from="2018-05-03T22:00:00Z" to="2018-05-03T23:00:00Z">
+         <location altitude="9" latitude="54.7211" longitude="-8.7237">
+            <precipitation unit="mm" value="0.0" minvalue="0.0" maxvalue="0.1"/>
+<symbol id="Cloud" number="4"/>
+         </location>
+      </time>
+      <time datatype="forecast" from="2018-05-04T00:00:00Z" to="2018-05-04T00:00:00Z">
+         <location altitude="9" latitude="54.7211" longitude="-8.7237">
+            <temperature id="TTT" unit="celsius" value="9.3"/>
+            <windDirection id="dd" deg="242.4" name="SW"/>
+            <windSpeed id="ff" mps="4.6" beaufort="3" name="Lett bris"/>
+            <humidity value="98.5" unit="percent"/>
+            <pressure id="pr" unit="hPa" value="1016.8"/>
+            <cloudiness id="NN" percent="100.0"/>
+            <lowClouds id="LOW" percent="100.0"/>
+            <mediumClouds id="MEDIUM" percent="0.0"/>
+            <highClouds id="HIGH" percent="0.0"/>
+            <dewpointTemperature id="TD" unit="celsius" value="9.1"/>
+         </location>
+      </time>
+      <time datatype="forecast" from="2018-05-03T23:00:00Z" to="2018-05-04T00:00:00Z">
+         <location altitude="9" latitude="54.7211" longitude="-8.7237">
+            <precipitation unit="mm" value="0.0" minvalue="0.0" maxvalue="0.0"/>
+<symbol id="Cloud" number="4"/>
+         </location>
+      </time>
+      <time datatype="forecast" from="2018-05-04T01:00:00Z" to="2018-05-04T01:00:00Z">
+         <location altitude="9" latitude="54.7211" longitude="-8.7237">
+            <temperature id="TTT" unit="celsius" value="9.4"/>
+            <windDirection id="dd" deg="228.0" name="SW"/>
+            <windSpeed id="ff" mps="4.9" beaufort="3" name="Lett bris"/>
+            <humidity value="98.4" unit="percent"/>
+            <pressure id="pr" unit="hPa" value="1016.9"/>
+            <cloudiness id="NN" percent="100.0"/>
+            <lowClouds id="LOW" percent="100.0"/>
+            <mediumClouds id="MEDIUM" percent="0.0"/>
+            <highClouds id="HIGH" percent="0.0"/>
+            <dewpointTemperature id="TD" unit="celsius" value="9.2"/>
+         </location>
+      </time>
+      <time datatype="forecast" from="2018-05-04T00:00:00Z" to="2018-05-04T01:00:00Z">
+         <location altitude="9" latitude="54.7211" longitude="-8.7237">
+            <precipitation unit="mm" value="0.0" minvalue="0.0" maxvalue="0.0"/>
+<symbol id="Cloud" number="4"/>
+         </location>
+      </time>
+      <time datatype="forecast" from="2018-05-04T02:00:00Z" to="2018-05-04T02:00:00Z">
+         <location altitude="9" latitude="54.7211" longitude="-8.7237">
+            <temperature id="TTT" unit="celsius" value="9.4"/>
+            <windDirection id="dd" deg="215.3" name="SW"/>
+            <windSpeed id="ff" mps="4.9" beaufort="3" name="Lett bris"/>
+            <humidity value="99.2" unit="percent"/>
+            <pressure id="pr" unit="hPa" value="1016.8"/>
+            <cloudiness id="NN" percent="100.0"/>
+            <lowClouds id="LOW" percent="100.0"/>
+            <mediumClouds id="MEDIUM" percent="0.0"/>
+            <highClouds id="HIGH" percent="0.0"/>
+            <dewpointTemperature id="TD" unit="celsius" value="9.3"/>
+         </location>
+      </time>
+      <time datatype="forecast" from="2018-05-04T01:00:00Z" to="2018-05-04T02:00:00Z">
+         <location altitude="9" latitude="54.7211" longitude="-8.7237">
+            <precipitation unit="mm" value="0.0" minvalue="0.0" maxvalue="0.1"/>
+<symbol id="Cloud" number="4"/>
+         </location>
+      </time>
+      <time datatype="forecast" from="2018-05-04T03:00:00Z" to="2018-05-04T03:00:00Z">
+         <location altitude="9" latitude="54.7211" longitude="-8.7237">
+            <temperature id="TTT" unit="celsius" value="9.4"/>
+            <windDirection id="dd" deg="215.5" name="SW"/>
+            <windSpeed id="ff" mps="5.1" beaufort="3" name="Lett bris"/>
+            <humidity value="99.4" unit="percent"/>
+            <pressure id="pr" unit="hPa" value="1017.0"/>
+            <cloudiness id="NN" percent="100.0"/>
+            <lowClouds id="LOW" percent="100.0"/>
+            <mediumClouds id="MEDIUM" percent="0.0"/>
+            <highClouds id="HIGH" percent="0.0"/>
+            <dewpointTemperature id="TD" unit="celsius" value="9.4"/>
+         </location>
+      </time>
+      <time datatype="forecast" from="2018-05-04T02:00:00Z" to="2018-05-04T03:00:00Z">
+         <location altitude="9" latitude="54.7211" longitude="-8.7237">
+            <precipitation unit="mm" value="0.0" minvalue="0.0" maxvalue="0.1"/>
+<symbol id="Cloud" number="4"/>
+         </location>
+      </time>
+      <time datatype="forecast" from="2018-05-04T04:00:00Z" to="2018-05-04T04:00:00Z">
+         <location altitude="9" latitude="54.7211" longitude="-8.7237">
+            <temperature id="TTT" unit="celsius" value="9.6"/>
+            <windDirection id="dd" deg="214.8" name="SW"/>
+            <windSpeed id="ff" mps="5.1" beaufort="3" name="Lett bris"/>
+            <humidity value="100.0" unit="percent"/>
+            <pressure id="pr" unit="hPa" value="1017.1"/>
+            <cloudiness id="NN" percent="100.0"/>
+            <lowClouds id="LOW" percent="100.0"/>
+            <mediumClouds id="MEDIUM" percent="0.0"/>
+            <highClouds id="HIGH" percent="11.7"/>
+            <dewpointTemperature id="TD" unit="celsius" value="9.6"/>
+         </location>
+      </time>
+      <time datatype="forecast" from="2018-05-04T03:00:00Z" to="2018-05-04T04:00:00Z">
+         <location altitude="9" latitude="54.7211" longitude="-8.7237">
+            <precipitation unit="mm" value="0.0" minvalue="0.0" maxvalue="0.1"/>
+<symbol id="Cloud" number="4"/>
+         </location>
+      </time>
+      <time datatype="forecast" from="2018-05-04T05:00:00Z" to="2018-05-04T05:00:00Z">
+         <location altitude="9" latitude="54.7211" longitude="-8.7237">
+            <temperature id="TTT" unit="celsius" value="9.9"/>
+            <windDirection id="dd" deg="212.2" name="SW"/>
+            <windSpeed id="ff" mps="4.9" beaufort="3" name="Lett bris"/>
+            <humidity value="100.0" unit="percent"/>
+            <pressure id="pr" unit="hPa" value="1017.3"/>
+            <cloudiness id="NN" percent="100.0"/>
+            <lowClouds id="LOW" percent="100.0"/>
+            <mediumClouds id="MEDIUM" percent="0.0"/>
+            <highClouds id="HIGH" percent="97.3"/>
+            <dewpointTemperature id="TD" unit="celsius" value="9.9"/>
+         </location>
+      </time>
+      <time datatype="forecast" from="2018-05-04T04:00:00Z" to="2018-05-04T05:00:00Z">
+         <location altitude="9" latitude="54.7211" longitude="-8.7237">
+            <precipitation unit="mm" value="0.0" minvalue="0.0" maxvalue="0.2"/>
+<symbol id="Cloud" number="4"/>
+         </location>
+      </time>
+      <time datatype="forecast" from="2018-05-04T06:00:00Z" to="2018-05-04T06:00:00Z">
+         <location altitude="9" latitude="54.7211" longitude="-8.7237">
+            <temperature id="TTT" unit="celsius" value="10.4"/>
+            <windDirection id="dd" deg="211.8" name="SW"/>
+            <windSpeed id="ff" mps="4.9" beaufort="3" name="Lett bris"/>
+            <humidity value="100.0" unit="percent"/>
+            <pressure id="pr" unit="hPa" value="1017.3"/>
+            <cloudiness id="NN" percent="100.0"/>
+            <lowClouds id="LOW" percent="100.0"/>
+            <mediumClouds id="MEDIUM" percent="0.0"/>
+            <highClouds id="HIGH" percent="95.1"/>
+            <dewpointTemperature id="TD" unit="celsius" value="10.4"/>
+         </location>
+      </time>
+      <time datatype="forecast" from="2018-05-04T05:00:00Z" to="2018-05-04T06:00:00Z">
+         <location altitude="9" latitude="54.7211" longitude="-8.7237">
+            <precipitation unit="mm" value="0.0" minvalue="0.0" maxvalue="0.1"/>
+<symbol id="Cloud" number="4"/>
+         </location>
+      </time>
+      <time datatype="forecast" from="2018-05-04T07:00:00Z" to="2018-05-04T07:00:00Z">
+         <location altitude="9" latitude="54.7211" longitude="-8.7237">
+            <temperature id="TTT" unit="celsius" value="10.8"/>
+            <windDirection id="dd" deg="223.0" name="SW"/>
+            <windSpeed id="ff" mps="5.2" beaufort="3" name="Lett bris"/>
+            <humidity value="100.0" unit="percent"/>
+            <pressure id="pr" unit="hPa" value="1017.8"/>
+            <cloudiness id="NN" percent="100.0"/>
+            <lowClouds id="LOW" percent="100.0"/>
+            <mediumClouds id="MEDIUM" percent="0.0"/>
+            <highClouds id="HIGH" percent="98.3"/>
+            <dewpointTemperature id="TD" unit="celsius" value="10.8"/>
+         </location>
+      </time>
+      <time datatype="forecast" from="2018-05-04T06:00:00Z" to="2018-05-04T07:00:00Z">
+         <location altitude="9" latitude="54.7211" longitude="-8.7237">
+            <precipitation unit="mm" value="0.0" minvalue="0.0" maxvalue="0.1"/>
+<symbol id="Cloud" number="4"/>
+         </location>
+      </time>
+      <time datatype="forecast" from="2018-05-04T08:00:00Z" to="2018-05-04T08:00:00Z">
+         <location altitude="9" latitude="54.7211" longitude="-8.7237">
+            <temperature id="TTT" unit="celsius" value="10.9"/>
+            <windDirection id="dd" deg="214.2" name="SW"/>
+            <windSpeed id="ff" mps="5.5" beaufort="3" name="Lett bris"/>
+            <humidity value="100.0" unit="percent"/>
+            <pressure id="pr" unit="hPa" value="1018.1"/>
+            <cloudiness id="NN" percent="100.0"/>
+            <lowClouds id="LOW" percent="100.0"/>
+            <mediumClouds id="MEDIUM" percent="0.0"/>
+            <highClouds id="HIGH" percent="63.1"/>
+            <dewpointTemperature id="TD" unit="celsius" value="10.9"/>
+         </location>
+      </time>
+      <time datatype="forecast" from="2018-05-04T07:00:00Z" to="2018-05-04T08:00:00Z">
+         <location altitude="9" latitude="54.7211" longitude="-8.7237">
+            <precipitation unit="mm" value="0.0" minvalue="0.0" maxvalue="0.1"/>
+<symbol id="Cloud" number="4"/>
+         </location>
+      </time>
+      <time datatype="forecast" from="2018-05-04T09:00:00Z" to="2018-05-04T09:00:00Z">
+         <location altitude="9" latitude="54.7211" longitude="-8.7237">
+            <temperature id="TTT" unit="celsius" value="11.1"/>
+            <windDirection id="dd" deg="229.9" name="SW"/>
+            <windSpeed id="ff" mps="5.5" beaufort="3" name="Lett bris"/>
+            <humidity value="99.9" unit="percent"/>
+            <pressure id="pr" unit="hPa" value="1018.5"/>
+            <cloudiness id="NN" percent="100.0"/>
+            <lowClouds id="LOW" percent="100.0"/>
+            <mediumClouds id="MEDIUM" percent="0.5"/>
+            <highClouds id="HIGH" percent="33.6"/>
+            <dewpointTemperature id="TD" unit="celsius" value="11.1"/>
+         </location>
+      </time>
+      <time datatype="forecast" from="2018-05-04T08:00:00Z" to="2018-05-04T09:00:00Z">
+         <location altitude="9" latitude="54.7211" longitude="-8.7237">
+            <precipitation unit="mm" value="0.0" minvalue="0.0" maxvalue="0.1"/>
+<symbol id="Cloud" number="4"/>
+         </location>
+      </time>
+      <time datatype="forecast" from="2018-05-04T10:00:00Z" to="2018-05-04T10:00:00Z">
+         <location altitude="9" latitude="54.7211" longitude="-8.7237">
+            <temperature id="TTT" unit="celsius" value="11.0"/>
+            <windDirection id="dd" deg="235.3" name="SW"/>
+            <windSpeed id="ff" mps="5.6" beaufort="3" name="Lett bris"/>
+            <humidity value="99.3" unit="percent"/>
+            <pressure id="pr" unit="hPa" value="1019.0"/>
+            <cloudiness id="NN" percent="99.9"/>
+            <lowClouds id="LOW" percent="99.8"/>
+            <mediumClouds id="MEDIUM" percent="10.2"/>
+            <highClouds id="HIGH" percent="45.5"/>
+            <dewpointTemperature id="TD" unit="celsius" value="11.0"/>
+         </location>
+      </time>
+      <time datatype="forecast" from="2018-05-04T09:00:00Z" to="2018-05-04T10:00:00Z">
+         <location altitude="9" latitude="54.7211" longitude="-8.7237">
+            <precipitation unit="mm" value="0.0" minvalue="0.0" maxvalue="0.1"/>
+<symbol id="Cloud" number="4"/>
+         </location>
+      </time>
+      <time datatype="forecast" from="2018-05-04T11:00:00Z" to="2018-05-04T11:00:00Z">
+         <location altitude="9" latitude="54.7211" longitude="-8.7237">
+            <temperature id="TTT" unit="celsius" value="11.4"/>
+            <windDirection id="dd" deg="217.3" name="SW"/>
+            <windSpeed id="ff" mps="5.8" beaufort="4" name="Laber bris"/>
+            <humidity value="98.8" unit="percent"/>
+            <pressure id="pr" unit="hPa" value="1019.4"/>
+            <cloudiness id="NN" percent="100.0"/>
+            <lowClouds id="LOW" percent="99.9"/>
+            <mediumClouds id="MEDIUM" percent="29.4"/>
+            <highClouds id="HIGH" percent="79.6"/>
+            <dewpointTemperature id="TD" unit="celsius" value="11.3"/>
+         </location>
+      </time>
+      <time datatype="forecast" from="2018-05-04T10:00:00Z" to="2018-05-04T11:00:00Z">
+         <location altitude="9" latitude="54.7211" longitude="-8.7237">
+            <precipitation unit="mm" value="0.0" minvalue="0.0" maxvalue="0.0"/>
+<symbol id="Cloud" number="4"/>
+         </location>
+      </time>
+      <time datatype="forecast" from="2018-05-04T12:00:00Z" to="2018-05-04T12:00:00Z">
+         <location altitude="9" latitude="54.7211" longitude="-8.7237">
+            <temperature id="TTT" unit="celsius" value="11.6"/>
+            <windDirection id="dd" deg="224.8" name="SW"/>
+            <windSpeed id="ff" mps="5.3" beaufort="3" name="Lett bris"/>
+            <humidity value="97.2" unit="percent"/>
+            <pressure id="pr" unit="hPa" value="1020.0"/>
+            <cloudiness id="NN" percent="99.9"/>
+            <lowClouds id="LOW" percent="98.9"/>
+            <mediumClouds id="MEDIUM" percent="12.0"/>
+            <highClouds id="HIGH" percent="54.3"/>
+            <dewpointTemperature id="TD" unit="celsius" value="11.3"/>
+         </location>
+      </time>
+      <time datatype="forecast" from="2018-05-04T11:00:00Z" to="2018-05-04T12:00:00Z">
+         <location altitude="9" latitude="54.7211" longitude="-8.7237">
+            <precipitation unit="mm" value="0.0" minvalue="0.0" maxvalue="0.0"/>
+<symbol id="Cloud" number="4"/>
+         </location>
+      </time>
+      <time datatype="forecast" from="2018-05-04T13:00:00Z" to="2018-05-04T13:00:00Z">
+         <location altitude="9" latitude="54.7211" longitude="-8.7237">
+            <temperature id="TTT" unit="celsius" value="11.9"/>
+            <windDirection id="dd" deg="217.3" name="SW"/>
+            <windSpeed id="ff" mps="5.0" beaufort="3" name="Lett bris"/>
+            <humidity value="95.1" unit="percent"/>
+            <pressure id="pr" unit="hPa" value="1020.1"/>
+            <cloudiness id="NN" percent="99.7"/>
+            <lowClouds id="LOW" percent="96.7"/>
+            <mediumClouds id="MEDIUM" percent="1.3"/>
+            <highClouds id="HIGH" percent="39.0"/>
+            <dewpointTemperature id="TD" unit="celsius" value="11.2"/>
+         </location>
+      </time>
+      <time datatype="forecast" from="2018-05-04T12:00:00Z" to="2018-05-04T13:00:00Z">
+         <location altitude="9" latitude="54.7211" longitude="-8.7237">
+            <precipitation unit="mm" value="0.0" minvalue="0.0" maxvalue="0.0"/>
+<symbol id="Cloud" number="4"/>
+         </location>
+      </time>
+      <time datatype="forecast" from="2018-05-04T14:00:00Z" to="2018-05-04T14:00:00Z">
+         <location altitude="9" latitude="54.7211" longitude="-8.7237">
+            <temperature id="TTT" unit="celsius" value="12.7"/>
+            <windDirection id="dd" deg="219.7" name="SW"/>
+            <windSpeed id="ff" mps="7.0" beaufort="4" name="Laber bris"/>
+            <humidity value="88.8" unit="percent"/>
+            <pressure id="pr" unit="hPa" value="1020.1"/>
+            <cloudiness id="NN" percent="82.7"/>
+            <lowClouds id="LOW" percent="72.2"/>
+            <mediumClouds id="MEDIUM" percent="0.0"/>
+            <highClouds id="HIGH" percent="17.4"/>
+            <dewpointTemperature id="TD" unit="celsius" value="11.0"/>
+         </location>
+      </time>
+      <time datatype="forecast" from="2018-05-04T13:00:00Z" to="2018-05-04T14:00:00Z">
+         <location altitude="9" latitude="54.7211" longitude="-8.7237">
+            <precipitation unit="mm" value="0.0" minvalue="0.0" maxvalue="0.0"/>
+<symbol id="PartlyCloud" number="3"/>
+         </location>
+      </time>
+      <time datatype="forecast" from="2018-05-04T15:00:00Z" to="2018-05-04T15:00:00Z">
+         <location altitude="9" latitude="54.7211" longitude="-8.7237">
+            <temperature id="TTT" unit="celsius" value="13.0"/>
+            <windDirection id="dd" deg="234.1" name="SW"/>
+            <windSpeed id="ff" mps="7.2" beaufort="4" name="Laber bris"/>
+            <humidity value="86.3" unit="percent"/>
+            <pressure id="pr" unit="hPa" value="1020.2"/>
+            <cloudiness id="NN" percent="72.6"/>
+            <lowClouds id="LOW" percent="72.4"/>
+            <mediumClouds id="MEDIUM" percent="13.1"/>
+            <highClouds id="HIGH" percent="0.0"/>
+            <dewpointTemperature id="TD" unit="celsius" value="10.9"/>
+         </location>
+      </time>
+      <time datatype="forecast" from="2018-05-04T14:00:00Z" to="2018-05-04T15:00:00Z">
+         <location altitude="9" latitude="54.7211" longitude="-8.7237">
+            <precipitation unit="mm" value="0.0" minvalue="0.0" maxvalue="0.0"/>
+<symbol id="PartlyCloud" number="3"/>
+         </location>
+      </time>
+      <time datatype="forecast" from="2018-05-04T16:00:00Z" to="2018-05-04T16:00:00Z">
+         <location altitude="9" latitude="54.7211" longitude="-8.7237">
+            <temperature id="TTT" unit="celsius" value="12.7"/>
+            <windDirection id="dd" deg="229.0" name="SW"/>
+            <windSpeed id="ff" mps="6.7" beaufort="4" name="Laber bris"/>
+            <humidity value="87.6" unit="percent"/>
+            <pressure id="pr" unit="hPa" value="1020.0"/>
+            <cloudiness id="NN" percent="100.0"/>
+            <lowClouds id="LOW" percent="87.3"/>
+            <mediumClouds id="MEDIUM" percent="4.0"/>
+            <highClouds id="HIGH" percent="84.7"/>
+            <dewpointTemperature id="TD" unit="celsius" value="10.8"/>
+         </location>
+      </time>
+      <time datatype="forecast" from="2018-05-04T15:00:00Z" to="2018-05-04T16:00:00Z">
+         <location altitude="9" latitude="54.7211" longitude="-8.7237">
+            <precipitation unit="mm" value="0.0" minvalue="0.0" maxvalue="0.0"/>
+<symbol id="Cloud" number="4"/>
+         </location>
+      </time>
+      <time datatype="forecast" from="2018-05-04T17:00:00Z" to="2018-05-04T17:00:00Z">
+         <location altitude="9" latitude="54.7211" longitude="-8.7237">
+            <temperature id="TTT" unit="celsius" value="12.2"/>
+            <windDirection id="dd" deg="218.9" name="SW"/>
+            <windSpeed id="ff" mps="7.2" beaufort="4" name="Laber bris"/>
+            <humidity value="88.1" unit="percent"/>
+            <pressure id="pr" unit="hPa" value="1019.8"/>
+            <cloudiness id="NN" percent="99.1"/>
+            <lowClouds id="LOW" percent="72.9"/>
+            <mediumClouds id="MEDIUM" percent="0.0"/>
+            <highClouds id="HIGH" percent="68.8"/>
+            <dewpointTemperature id="TD" unit="celsius" value="10.3"/>
+         </location>
+      </time>
+      <time datatype="forecast" from="2018-05-04T16:00:00Z" to="2018-05-04T17:00:00Z">
+         <location altitude="9" latitude="54.7211" longitude="-8.7237">
+            <precipitation unit="mm" value="0.0" minvalue="0.0" maxvalue="0.0"/>
+<symbol id="Cloud" number="4"/>
+         </location>
+      </time>
+      <time datatype="forecast" from="2018-05-04T18:00:00Z" to="2018-05-04T18:00:00Z">
+         <location altitude="9" latitude="54.7211" longitude="-8.7237">
+            <temperature id="TTT" unit="celsius" value="11.8"/>
+            <windDirection id="dd" deg="237.7" name="SW"/>
+            <windSpeed id="ff" mps="6.4" beaufort="4" name="Laber bris"/>
+            <humidity value="89.9" unit="percent"/>
+            <pressure id="pr" unit="hPa" value="1020.5"/>
+            <cloudiness id="NN" percent="99.0"/>
+            <lowClouds id="LOW" percent="99.0"/>
+            <mediumClouds id="MEDIUM" percent="0.0"/>
+            <highClouds id="HIGH" percent="0.0"/>
+            <dewpointTemperature id="TD" unit="celsius" value="10.3"/>
+         </location>
+      </time>
+      <time datatype="forecast" from="2018-05-04T17:00:00Z" to="2018-05-04T18:00:00Z">
+         <location altitude="9" latitude="54.7211" longitude="-8.7237">
+            <precipitation unit="mm" value="0.0" minvalue="0.0" maxvalue="0.0"/>
+<symbol id="Cloud" number="4"/>
+         </location>
+      </time>
+      <time datatype="forecast" from="2018-05-04T19:00:00Z" to="2018-05-04T19:00:00Z">
+         <location altitude="9" latitude="54.7211" longitude="-8.7237">
+            <temperature id="TTT" unit="celsius" value="11.4"/>
+            <windDirection id="dd" deg="219.1" name="SW"/>
+            <windSpeed id="ff" mps="6.7" beaufort="4" name="Laber bris"/>
+            <humidity value="89.8" unit="percent"/>
+            <pressure id="pr" unit="hPa" value="1020.2"/>
+            <cloudiness id="NN" percent="77.9"/>
+            <lowClouds id="LOW" percent="77.9"/>
+            <mediumClouds id="MEDIUM" percent="0.0"/>
+            <highClouds id="HIGH" percent="0.0"/>
+            <dewpointTemperature id="TD" unit="celsius" value="9.8"/>
+         </location>
+      </time>
+      <time datatype="forecast" from="2018-05-04T18:00:00Z" to="2018-05-04T19:00:00Z">
+         <location altitude="9" latitude="54.7211" longitude="-8.7237">
+            <precipitation unit="mm" value="0.0" minvalue="0.0" maxvalue="0.0"/>
+<symbol id="PartlyCloud" number="3"/>
+         </location>
+      </time>
+      <time datatype="forecast" from="2018-05-04T20:00:00Z" to="2018-05-04T20:00:00Z">
+         <location altitude="9" latitude="54.7211" longitude="-8.7237">
+            <temperature id="TTT" unit="celsius" value="11.0"/>
+            <windDirection id="dd" deg="227.5" name="SW"/>
+            <windSpeed id="ff" mps="5.9" beaufort="4" name="Laber bris"/>
+            <humidity value="92.0" unit="percent"/>
+            <pressure id="pr" unit="hPa" value="1020.6"/>
+            <cloudiness id="NN" percent="96.2"/>
+            <lowClouds id="LOW" percent="96.2"/>
+            <mediumClouds id="MEDIUM" percent="2.2"/>
+            <highClouds id="HIGH" percent="0.0"/>
+            <dewpointTemperature id="TD" unit="celsius" value="9.8"/>
+         </location>
+      </time>
+      <time datatype="forecast" from="2018-05-04T19:00:00Z" to="2018-05-04T20:00:00Z">
+         <location altitude="9" latitude="54.7211" longitude="-8.7237">
+            <precipitation unit="mm" value="0.0" minvalue="0.0" maxvalue="0.0"/>
+<symbol id="Cloud" number="4"/>
+         </location>
+      </time>
+      <time datatype="forecast" from="2018-05-04T21:00:00Z" to="2018-05-04T21:00:00Z">
+         <location altitude="9" latitude="54.7211" longitude="-8.7237">
+            <temperature id="TTT" unit="celsius" value="11.1"/>
+            <windDirection id="dd" deg="202.1" name="S"/>
+            <windSpeed id="ff" mps="4.8" beaufort="3" name="Lett bris"/>
+            <humidity value="95.2" unit="percent"/>
+            <pressure id="pr" unit="hPa" value="1021.0"/>
+            <cloudiness id="NN" percent="100.0"/>
+            <lowClouds id="LOW" percent="100.0"/>
+            <mediumClouds id="MEDIUM" percent="6.1"/>
+            <highClouds id="HIGH" percent="0.0"/>
+            <dewpointTemperature id="TD" unit="celsius" value="10.4"/>
+         </location>
+      </time>
+      <time datatype="forecast" from="2018-05-04T20:00:00Z" to="2018-05-04T21:00:00Z">
+         <location altitude="9" latitude="54.7211" longitude="-8.7237">
+            <precipitation unit="mm" value="0.0" minvalue="0.0" maxvalue="0.1"/>
+<symbol id="Cloud" number="4"/>
+         </location>
+      </time>
+      <time datatype="forecast" from="2018-05-04T22:00:00Z" to="2018-05-04T22:00:00Z">
+         <location altitude="9" latitude="54.7211" longitude="-8.7237">
+            <temperature id="TTT" unit="celsius" value="10.6"/>
+            <windDirection id="dd" deg="203.6" name="SW"/>
+            <windSpeed id="ff" mps="5.3" beaufort="3" name="Lett bris"/>
+            <humidity value="95.1" unit="percent"/>
+            <pressure id="pr" unit="hPa" value="1021.3"/>
+            <cloudiness id="NN" percent="99.8"/>
+            <lowClouds id="LOW" percent="99.8"/>
+            <mediumClouds id="MEDIUM" percent="0.0"/>
+            <highClouds id="HIGH" percent="0.0"/>
+            <dewpointTemperature id="TD" unit="celsius" value="9.8"/>
+         </location>
+      </time>
+      <time datatype="forecast" from="2018-05-04T21:00:00Z" to="2018-05-04T22:00:00Z">
+         <location altitude="9" latitude="54.7211" longitude="-8.7237">
+            <precipitation unit="mm" value="0.0" minvalue="0.0" maxvalue="0.1"/>
+<symbol id="Cloud" number="4"/>
+         </location>
+      </time>
+      <time datatype="forecast" from="2018-05-04T23:00:00Z" to="2018-05-04T23:00:00Z">
+         <location altitude="9" latitude="54.7211" longitude="-8.7237">
+            <temperature id="TTT" unit="celsius" value="10.3"/>
+            <windDirection id="dd" deg="215.4" name="SW"/>
+            <windSpeed id="ff" mps="5.5" beaufort="3" name="Lett bris"/>
+            <humidity value="99.2" unit="percent"/>
+            <pressure id="pr" unit="hPa" value="1021.2"/>
+            <cloudiness id="NN" percent="100.0"/>
+            <lowClouds id="LOW" percent="100.0"/>
+            <mediumClouds id="MEDIUM" percent="0.0"/>
+            <highClouds id="HIGH" percent="0.0"/>
+            <dewpointTemperature id="TD" unit="celsius" value="10.2"/>
+         </location>
+      </time>
+      <time datatype="forecast" from="2018-05-04T22:00:00Z" to="2018-05-04T23:00:00Z">
+         <location altitude="9" latitude="54.7211" longitude="-8.7237">
+            <precipitation unit="mm" value="0.0" minvalue="0.0" maxvalue="0.0"/>
+<symbol id="Cloud" number="4"/>
+         </location>
+      </time>
+      <time datatype="forecast" from="2018-05-05T00:00:00Z" to="2018-05-05T00:00:00Z">
+         <location altitude="9" latitude="54.7211" longitude="-8.7237">
+            <temperature id="TTT" unit="celsius" value="10.1"/>
+            <windDirection id="dd" deg="222.5" name="SW"/>
+            <windSpeed id="ff" mps="5.8" beaufort="4" name="Laber bris"/>
+            <humidity value="99.6" unit="percent"/>
+            <pressure id="pr" unit="hPa" value="1021.1"/>
+            <cloudiness id="NN" percent="100.0"/>
+            <lowClouds id="LOW" percent="100.0"/>
+            <mediumClouds id="MEDIUM" percent="0.0"/>
+            <highClouds id="HIGH" percent="0.0"/>
+            <dewpointTemperature id="TD" unit="celsius" value="10.1"/>
+         </location>
+      </time>
+      <time datatype="forecast" from="2018-05-04T23:00:00Z" to="2018-05-05T00:00:00Z">
+         <location altitude="9" latitude="54.7211" longitude="-8.7237">
+            <precipitation unit="mm" value="0.0" minvalue="0.0" maxvalue="0.0"/>
+<symbol id="Cloud" number="4"/>
+         </location>
+      </time>
+      <time datatype="forecast" from="2018-05-05T01:00:00Z" to="2018-05-05T01:00:00Z">
+         <location altitude="9" latitude="54.7211" longitude="-8.7237">
+            <temperature id="TTT" unit="celsius" value="10.2"/>
+            <windDirection id="dd" deg="203.5" name="SW"/>
+            <windSpeed id="ff" mps="5.9" beaufort="4" name="Laber bris"/>
+            <humidity value="98.6" unit="percent"/>
+            <pressure id="pr" unit="hPa" value="1020.5"/>
+            <cloudiness id="NN" percent="100.0"/>
+            <lowClouds id="LOW" percent="100.0"/>
+            <mediumClouds id="MEDIUM" percent="0.0"/>
+            <highClouds id="HIGH" percent="0.0"/>
+            <dewpointTemperature id="TD" unit="celsius" value="10.0"/>
+         </location>
+      </time>
+      <time datatype="forecast" from="2018-05-05T00:00:00Z" to="2018-05-05T01:00:00Z">
+         <location altitude="9" latitude="54.7211" longitude="-8.7237">
+            <precipitation unit="mm" value="0.0" minvalue="0.0" maxvalue="0.0"/>
+<symbol id="Cloud" number="4"/>
+         </location>
+      </time>
+      <time datatype="forecast" from="2018-05-05T02:00:00Z" to="2018-05-05T02:00:00Z">
+         <location altitude="9" latitude="54.7211" longitude="-8.7237">
+            <temperature id="TTT" unit="celsius" value="10.6"/>
+            <windDirection id="dd" deg="200.8" name="S"/>
+            <windSpeed id="ff" mps="7.1" beaufort="4" name="Laber bris"/>
+            <humidity value="97.5" unit="percent"/>
+            <pressure id="pr" unit="hPa" value="1019.8"/>
+            <cloudiness id="NN" percent="100.0"/>
+            <lowClouds id="LOW" percent="100.0"/>
+            <mediumClouds id="MEDIUM" percent="0.0"/>
+            <highClouds id="HIGH" percent="0.0"/>
+            <dewpointTemperature id="TD" unit="celsius" value="10.3"/>
+         </location>
+      </time>
+      <time datatype="forecast" from="2018-05-05T01:00:00Z" to="2018-05-05T02:00:00Z">
+         <location altitude="9" latitude="54.7211" longitude="-8.7237">
+            <precipitation unit="mm" value="0.0" minvalue="0.0" maxvalue="0.1"/>
+<symbol id="Cloud" number="4"/>
+         </location>
+      </time>
+      <time datatype="forecast" from="2018-05-05T03:00:00Z" to="2018-05-05T03:00:00Z">
+         <location altitude="9" latitude="54.7211" longitude="-8.7237">
+            <temperature id="TTT" unit="celsius" value="10.6"/>
+            <windDirection id="dd" deg="201.7" name="S"/>
+            <windSpeed id="ff" mps="6.9" beaufort="4" name="Laber bris"/>
+            <humidity value="99.6" unit="percent"/>
+            <pressure id="pr" unit="hPa" value="1019.6"/>
+            <cloudiness id="NN" percent="100.0"/>
+            <lowClouds id="LOW" percent="100.0"/>
+            <mediumClouds id="MEDIUM" percent="0.0"/>
+            <highClouds id="HIGH" percent="0.0"/>
+            <dewpointTemperature id="TD" unit="celsius" value="10.6"/>
+         </location>
+      </time>
+      <time datatype="forecast" from="2018-05-05T02:00:00Z" to="2018-05-05T03:00:00Z">
+         <location altitude="9" latitude="54.7211" longitude="-8.7237">
+            <precipitation unit="mm" value="0.0" minvalue="0.0" maxvalue="0.2"/>
+<symbol id="Cloud" number="4"/>
+         </location>
+      </time>
+      <time datatype="forecast" from="2018-05-05T04:00:00Z" to="2018-05-05T04:00:00Z">
+         <location altitude="9" latitude="54.7211" longitude="-8.7237">
+            <temperature id="TTT" unit="celsius" value="10.6"/>
+            <windDirection id="dd" deg="206.7" name="SW"/>
+            <windSpeed id="ff" mps="7.0" beaufort="4" name="Laber bris"/>
+            <humidity value="99.0" unit="percent"/>
+            <pressure id="pr" unit="hPa" value="1019.5"/>
+            <cloudiness id="NN" percent="99.9"/>
+            <lowClouds id="LOW" percent="99.9"/>
+            <mediumClouds id="MEDIUM" percent="0.0"/>
+            <highClouds id="HIGH" percent="0.0"/>
+            <dewpointTemperature id="TD" unit="celsius" value="10.5"/>
+         </location>
+      </time>
+      <time datatype="forecast" from="2018-05-05T03:00:00Z" to="2018-05-05T04:00:00Z">
+         <location altitude="9" latitude="54.7211" longitude="-8.7237">
+            <precipitation unit="mm" value="0.0" minvalue="0.0" maxvalue="0.2"/>
+<symbol id="Cloud" number="4"/>
+         </location>
+      </time>
+      <time datatype="forecast" from="2018-05-05T05:00:00Z" to="2018-05-05T05:00:00Z">
+         <location altitude="9" latitude="54.7211" longitude="-8.7237">
+            <temperature id="TTT" unit="celsius" value="10.3"/>
+            <windDirection id="dd" deg="230.3" name="SW"/>
+            <windSpeed id="ff" mps="6.4" beaufort="4" name="Laber bris"/>
+            <humidity value="99.8" unit="percent"/>
+            <pressure id="pr" unit="hPa" value="1019.8"/>
+            <cloudiness id="NN" percent="99.5"/>
+            <lowClouds id="LOW" percent="99.5"/>
+            <mediumClouds id="MEDIUM" percent="0.0"/>
+            <highClouds id="HIGH" percent="0.0"/>
+            <dewpointTemperature id="TD" unit="celsius" value="10.3"/>
+         </location>
+      </time>
+      <time datatype="forecast" from="2018-05-05T04:00:00Z" to="2018-05-05T05:00:00Z">
+         <location altitude="9" latitude="54.7211" longitude="-8.7237">
+            <precipitation unit="mm" value="0.1" minvalue="0.0" maxvalue="0.3"/>
+<symbol id="Drizzle" number="46"/>
+         </location>
+      </time>
+      <time datatype="forecast" from="2018-05-05T06:00:00Z" to="2018-05-05T06:00:00Z">
+         <location altitude="9" latitude="54.7211" longitude="-8.7237">
+            <temperature id="TTT" unit="celsius" value="9.9"/>
+            <windDirection id="dd" deg="232.4" name="SW"/>
+            <windSpeed id="ff" mps="6.0" beaufort="4" name="Laber bris"/>
+            <humidity value="98.5" unit="percent"/>
+            <pressure id="pr" unit="hPa" value="1020.2"/>
+            <cloudiness id="NN" percent="99.2"/>
+            <lowClouds id="LOW" percent="99.2"/>
+            <mediumClouds id="MEDIUM" percent="0.0"/>
+            <highClouds id="HIGH" percent="0.0"/>
+            <dewpointTemperature id="TD" unit="celsius" value="9.7"/>
+         </location>
+      </time>
+      <time datatype="forecast" from="2018-05-05T05:00:00Z" to="2018-05-05T06:00:00Z">
+         <location altitude="9" latitude="54.7211" longitude="-8.7237">
+            <precipitation unit="mm" value="0.1" minvalue="0.0" maxvalue="0.2"/>
+<symbol id="Drizzle" number="46"/>
+         </location>
+      </time>
+      <time datatype="forecast" from="2018-05-05T07:00:00Z" to="2018-05-05T07:00:00Z">
+         <location altitude="9" latitude="54.7211" longitude="-8.7237">
+            <temperature id="TTT" unit="celsius" value="9.7"/>
+            <windDirection id="dd" deg="236.3" name="SW"/>
+            <windSpeed id="ff" mps="7.8" beaufort="4" name="Laber bris"/>
+            <humidity value="90.9" unit="percent"/>
+            <pressure id="pr" unit="hPa" value="1020.6"/>
+            <cloudiness id="NN" percent="97.8"/>
+            <lowClouds id="LOW" percent="97.8"/>
+            <mediumClouds id="MEDIUM" percent="0.0"/>
+            <highClouds id="HIGH" percent="0.0"/>
+            <dewpointTemperature id="TD" unit="celsius" value="8.3"/>
+         </location>
+      </time>
+      <time datatype="forecast" from="2018-05-05T06:00:00Z" to="2018-05-05T07:00:00Z">
+         <location altitude="9" latitude="54.7211" longitude="-8.7237">
+            <precipitation unit="mm" value="0.0" minvalue="0.0" maxvalue="0.1"/>
+<symbol id="Cloud" number="4"/>
+         </location>
+      </time>
+      <time datatype="forecast" from="2018-05-05T08:00:00Z" to="2018-05-05T08:00:00Z">
+         <location altitude="9" latitude="54.7211" longitude="-8.7237">
+            <temperature id="TTT" unit="celsius" value="9.8"/>
+            <windDirection id="dd" deg="211.0" name="SW"/>
+            <windSpeed id="ff" mps="6.2" beaufort="4" name="Laber bris"/>
+            <humidity value="88.8" unit="percent"/>
+            <pressure id="pr" unit="hPa" value="1020.9"/>
+            <cloudiness id="NN" percent="81.1"/>
+            <lowClouds id="LOW" percent="81.1"/>
+            <mediumClouds id="MEDIUM" percent="0.0"/>
+            <highClouds id="HIGH" percent="0.0"/>
+            <dewpointTemperature id="TD" unit="celsius" value="8.1"/>
+         </location>
+      </time>
+      <time datatype="forecast" from="2018-05-05T07:00:00Z" to="2018-05-05T08:00:00Z">
+         <location altitude="9" latitude="54.7211" longitude="-8.7237">
+            <precipitation unit="mm" value="0.0" minvalue="0.0" maxvalue="0.0"/>
+<symbol id="PartlyCloud" number="3"/>
+         </location>
+      </time>
+      <time datatype="forecast" from="2018-05-05T09:00:00Z" to="2018-05-05T09:00:00Z">
+         <location altitude="9" latitude="54.7211" longitude="-8.7237">
+            <temperature id="TTT" unit="celsius" value="10.1"/>
+            <windDirection id="dd" deg="204.5" name="SW"/>
+            <windSpeed id="ff" mps="6.4" beaufort="4" name="Laber bris"/>
+            <humidity value="88.3" unit="percent"/>
+            <pressure id="pr" unit="hPa" value="1021.0"/>
+            <cloudiness id="NN" percent="98.4"/>
+            <lowClouds id="LOW" percent="94.7"/>
+            <mediumClouds id="MEDIUM" percent="0.0"/>
+            <highClouds id="HIGH" percent="23.3"/>
+            <dewpointTemperature id="TD" unit="celsius" value="8.2"/>
+         </location>
+      </time>
+      <time datatype="forecast" from="2018-05-05T08:00:00Z" to="2018-05-05T09:00:00Z">
+         <location altitude="9" latitude="54.7211" longitude="-8.7237">
+            <precipitation unit="mm" value="0.0" minvalue="0.0" maxvalue="0.0"/>
+<symbol id="Cloud" number="4"/>
+         </location>
+      </time>
+      <time datatype="forecast" from="2018-05-05T10:00:00Z" to="2018-05-05T10:00:00Z">
+         <location altitude="9" latitude="54.7211" longitude="-8.7237">
+            <temperature id="TTT" unit="celsius" value="11.2"/>
+            <windDirection id="dd" deg="204.3" name="SW"/>
+            <windSpeed id="ff" mps="6.4" beaufort="4" name="Laber bris"/>
+            <humidity value="85.6" unit="percent"/>
+            <pressure id="pr" unit="hPa" value="1021.2"/>
+            <cloudiness id="NN" percent="99.5"/>
+            <lowClouds id="LOW" percent="97.2"/>
+            <mediumClouds id="MEDIUM" percent="0.0"/>
+            <highClouds id="HIGH" percent="54.1"/>
+            <dewpointTemperature id="TD" unit="celsius" value="8.9"/>
+         </location>
+      </time>
+      <time datatype="forecast" from="2018-05-05T09:00:00Z" to="2018-05-05T10:00:00Z">
+         <location altitude="9" latitude="54.7211" longitude="-8.7237">
+            <precipitation unit="mm" value="0.0" minvalue="0.0" maxvalue="0.0"/>
+<symbol id="Cloud" number="4"/>
+         </location>
+      </time>
+      <time datatype="forecast" from="2018-05-05T11:00:00Z" to="2018-05-05T11:00:00Z">
+         <location altitude="9" latitude="54.7211" longitude="-8.7237">
+            <temperature id="TTT" unit="celsius" value="12.0"/>
+            <windDirection id="dd" deg="213.4" name="SW"/>
+            <windSpeed id="ff" mps="6.7" beaufort="4" name="Laber bris"/>
+            <humidity value="82.0" unit="percent"/>
+            <pressure id="pr" unit="hPa" value="1021.4"/>
+            <cloudiness id="NN" percent="98.2"/>
+            <lowClouds id="LOW" percent="98.2"/>
+            <mediumClouds id="MEDIUM" percent="0.0"/>
+            <highClouds id="HIGH" percent="0.0"/>
+            <dewpointTemperature id="TD" unit="celsius" value="9.1"/>
+         </location>
+      </time>
+      <time datatype="forecast" from="2018-05-05T10:00:00Z" to="2018-05-05T11:00:00Z">
+         <location altitude="9" latitude="54.7211" longitude="-8.7237">
+            <precipitation unit="mm" value="0.0" minvalue="0.0" maxvalue="0.0"/>
+<symbol id="Cloud" number="4"/>
+         </location>
+      </time>
+      <time datatype="forecast" from="2018-05-05T12:00:00Z" to="2018-05-05T12:00:00Z">
+         <location altitude="9" latitude="54.7211" longitude="-8.7237">
+            <temperature id="TTT" unit="celsius" value="12.6"/>
+            <windDirection id="dd" deg="223.8" name="SW"/>
+            <windSpeed id="ff" mps="7.3" beaufort="4" name="Laber bris"/>
+            <humidity value="81.8" unit="percent"/>
+            <pressure id="pr" unit="hPa" value="1021.4"/>
+            <cloudiness id="NN" percent="95.3"/>
+            <lowClouds id="LOW" percent="95.3"/>
+            <mediumClouds id="MEDIUM" percent="0.0"/>
+            <highClouds id="HIGH" percent="0.0"/>
+            <dewpointTemperature id="TD" unit="celsius" value="9.6"/>
+         </location>
+      </time>
+      <time datatype="forecast" from="2018-05-05T11:00:00Z" to="2018-05-05T12:00:00Z">
+         <location altitude="9" latitude="54.7211" longitude="-8.7237">
+            <precipitation unit="mm" value="0.0" minvalue="0.0" maxvalue="0.0"/>
+<symbol id="Cloud" number="4"/>
+         </location>
+      </time>
+      <time datatype="forecast" from="2018-05-05T18:00:00Z" to="2018-05-05T18:00:00Z">
+         <location altitude="9" latitude="54.7211" longitude="-8.7237">
+            <temperature id="TTT" unit="celsius" value="12.1"/>
+            <windDirection id="dd" deg="215.5" name="SW"/>
+            <windSpeed id="ff" mps="6.5" beaufort="4" name="Laber bris"/>
+            <humidity value="85.2" unit="percent"/>
+            <pressure id="pr" unit="hPa" value="1022.2"/>
+            <cloudiness id="NN" percent="45.5"/>
+            <lowClouds id="LOW" percent="44.2"/>
+            <dewpointTemperature id="TD" unit="celsius" value="9.7"/>
+         </location>
+      </time>
+      <time datatype="forecast" from="2018-05-05T12:00:00Z" to="2018-05-05T18:00:00Z">
+         <location altitude="9" latitude="54.7211" longitude="-8.7237">
+            <precipitation unit="mm" value="0.0"/>
+<symbol id="PartlyCloud" number="3"/>
+         </location>
+      </time>
+      <time datatype="forecast" from="2018-05-06T00:00:00Z" to="2018-05-06T00:00:00Z">
+         <location altitude="9" latitude="54.7211" longitude="-8.7237">
+            <temperature id="TTT" unit="celsius" value="10.9"/>
+            <windDirection id="dd" deg="186.0" name="S"/>
+            <windSpeed id="ff" mps="5.1" beaufort="3" name="Lett bris"/>
+            <humidity value="88.9" unit="percent"/>
+            <pressure id="pr" unit="hPa" value="1023.5"/>
+            <cloudiness id="NN" percent="98.8"/>
+            <lowClouds id="LOW" percent="100.0"/>
+            <dewpointTemperature id="TD" unit="celsius" value="9.1"/>
+         </location>
+      </time>
+      <time datatype="forecast" from="2018-05-05T18:00:00Z" to="2018-05-06T00:00:00Z">
+         <location altitude="9" latitude="54.7211" longitude="-8.7237">
+            <precipitation unit="mm" value="0.0"/>
+<symbol id="Cloud" number="4"/>
+         </location>
+      </time>
+      <time datatype="forecast" from="2018-05-06T06:00:00Z" to="2018-05-06T06:00:00Z">
+         <location altitude="9" latitude="54.7211" longitude="-8.7237">
+            <temperature id="TTT" unit="celsius" value="10.1"/>
+            <windDirection id="dd" deg="176.8" name="S"/>
+            <windSpeed id="ff" mps="6.1" beaufort="4" name="Laber bris"/>
+            <humidity value="93.4" unit="percent"/>
+            <pressure id="pr" unit="hPa" value="1021.6"/>
+            <cloudiness id="NN" percent="40.4"/>
+            <lowClouds id="LOW" percent="39.6"/>
+            <dewpointTemperature id="TD" unit="celsius" value="9.1"/>
+         </location>
+      </time>
+      <time datatype="forecast" from="2018-05-06T00:00:00Z" to="2018-05-06T06:00:00Z">
+         <location altitude="9" latitude="54.7211" longitude="-8.7237">
+            <precipitation unit="mm" value="0.0"/>
+<symbol id="PartlyCloud" number="3"/>
+         </location>
+      </time>
+      <time datatype="forecast" from="2018-05-06T12:00:00Z" to="2018-05-06T12:00:00Z">
+         <location altitude="9" latitude="54.7211" longitude="-8.7237">
+            <temperature id="TTT" unit="celsius" value="14.0"/>
+            <windDirection id="dd" deg="199.6" name="S"/>
+            <windSpeed id="ff" mps="8.1" beaufort="4" name="Laber bris"/>
+            <humidity value="67.3" unit="percent"/>
+            <pressure id="pr" unit="hPa" value="1020.3"/>
+            <cloudiness id="NN" percent="86.7"/>
+            <lowClouds id="LOW" percent="45.9"/>
+            <dewpointTemperature id="TD" unit="celsius" value="8.1"/>
+         </location>
+      </time>
+      <time datatype="forecast" from="2018-05-06T06:00:00Z" to="2018-05-06T12:00:00Z">
+         <location altitude="9" latitude="54.7211" longitude="-8.7237">
+            <precipitation unit="mm" value="0.0"/>
+<symbol id="Cloud" number="4"/>
+         </location>
+      </time>
+      <time datatype="forecast" from="2018-05-06T18:00:00Z" to="2018-05-06T18:00:00Z">
+         <location altitude="9" latitude="54.7211" longitude="-8.7237">
+            <temperature id="TTT" unit="celsius" value="9.4"/>
+            <windDirection id="dd" deg="340.2" name="N"/>
+            <windSpeed id="ff" mps="5.8" beaufort="4" name="Laber bris"/>
+            <humidity value="91.1" unit="percent"/>
+            <pressure id="pr" unit="hPa" value="1022.4"/>
+            <cloudiness id="NN" percent="60.7"/>
+            <lowClouds id="LOW" percent="61.4"/>
+            <dewpointTemperature id="TD" unit="celsius" value="8.1"/>
+         </location>
+      </time>
+      <time datatype="forecast" from="2018-05-06T12:00:00Z" to="2018-05-06T18:00:00Z">
+         <location altitude="9" latitude="54.7211" longitude="-8.7237">
+            <precipitation unit="mm" value="0.7"/>
+<symbol id="DrizzleSun" number="40"/>
+         </location>
+      </time>
+      <time datatype="forecast" from="2018-05-07T00:00:00Z" to="2018-05-07T00:00:00Z">
+         <location altitude="9" latitude="54.7211" longitude="-8.7237">
+            <temperature id="TTT" unit="celsius" value="7.4"/>
+            <windDirection id="dd" deg="45.6" name="NE"/>
+            <windSpeed id="ff" mps="4.1" beaufort="3" name="Lett bris"/>
+            <humidity value="83.4" unit="percent"/>
+            <pressure id="pr" unit="hPa" value="1024.6"/>
+            <cloudiness id="NN" percent="96.8"/>
+            <lowClouds id="LOW" percent="86.0"/>
+            <dewpointTemperature id="TD" unit="celsius" value="4.7"/>
+         </location>
+      </time>
+      <time datatype="forecast" from="2018-05-06T18:00:00Z" to="2018-05-07T00:00:00Z">
+         <location altitude="9" latitude="54.7211" longitude="-8.7237">
+            <precipitation unit="mm" value="0.0"/>
+<symbol id="Cloud" number="4"/>
+         </location>
+      </time>
+      <time datatype="forecast" from="2018-05-07T06:00:00Z" to="2018-05-07T06:00:00Z">
+         <location altitude="9" latitude="54.7211" longitude="-8.7237">
+            <temperature id="TTT" unit="celsius" value="7.1"/>
+            <windDirection id="dd" deg="117.5" name="SE"/>
+            <windSpeed id="ff" mps="3.8" beaufort="3" name="Lett bris"/>
+            <humidity value="86.3" unit="percent"/>
+            <pressure id="pr" unit="hPa" value="1022.7"/>
+            <cloudiness id="NN" percent="97.0"/>
+            <lowClouds id="LOW" percent="41.2"/>
+            <dewpointTemperature id="TD" unit="celsius" value="4.9"/>
+         </location>
+      </time>
+      <time datatype="forecast" from="2018-05-07T00:00:00Z" to="2018-05-07T06:00:00Z">
+         <location altitude="9" latitude="54.7211" longitude="-8.7237">
+            <precipitation unit="mm" value="0.0"/>
+<symbol id="Cloud" number="4"/>
+         </location>
+      </time>
+      <time datatype="forecast" from="2018-05-07T12:00:00Z" to="2018-05-07T12:00:00Z">
+         <location altitude="9" latitude="54.7211" longitude="-8.7237">
+            <temperature id="TTT" unit="celsius" value="11.9"/>
+            <windDirection id="dd" deg="202.2" name="S"/>
+            <windSpeed id="ff" mps="4.8" beaufort="3" name="Lett bris"/>
+            <humidity value="81.9" unit="percent"/>
+            <pressure id="pr" unit="hPa" value="1020.7"/>
+            <cloudiness id="NN" percent="92.6"/>
+            <lowClouds id="LOW" percent="90.6"/>
+            <dewpointTemperature id="TD" unit="celsius" value="9.0"/>
+         </location>
+      </time>
+      <time datatype="forecast" from="2018-05-07T06:00:00Z" to="2018-05-07T12:00:00Z">
+         <location altitude="9" latitude="54.7211" longitude="-8.7237">
+            <precipitation unit="mm" value="0.0"/>
+<symbol id="Cloud" number="4"/>
+         </location>
+      </time>
+      <time datatype="forecast" from="2018-05-07T18:00:00Z" to="2018-05-07T18:00:00Z">
+         <location altitude="9" latitude="54.7211" longitude="-8.7237">
+            <temperature id="TTT" unit="celsius" value="12.4"/>
+            <windDirection id="dd" deg="203.6" name="SW"/>
+            <windSpeed id="ff" mps="2.3" beaufort="2" name="Svak vind"/>
+            <humidity value="84.0" unit="percent"/>
+            <pressure id="pr" unit="hPa" value="1017.3"/>
+            <cloudiness id="NN" percent="98.7"/>
+            <lowClouds id="LOW" percent="94.3"/>
+            <dewpointTemperature id="TD" unit="celsius" value="9.8"/>
+         </location>
+      </time>
+      <time datatype="forecast" from="2018-05-07T12:00:00Z" to="2018-05-07T18:00:00Z">
+         <location altitude="9" latitude="54.7211" longitude="-8.7237">
+            <precipitation unit="mm" value="0.0"/>
+<symbol id="Cloud" number="4"/>
+         </location>
+      </time>
+      <time datatype="forecast" from="2018-05-08T00:00:00Z" to="2018-05-08T00:00:00Z">
+         <location altitude="9" latitude="54.7211" longitude="-8.7237">
+            <temperature id="TTT" unit="celsius" value="10.3"/>
+            <windDirection id="dd" deg="190.5" name="S"/>
+            <windSpeed id="ff" mps="6.0" beaufort="4" name="Laber bris"/>
+            <humidity value="89.8" unit="percent"/>
+            <pressure id="pr" unit="hPa" value="1014.5"/>
+            <cloudiness id="NN" percent="98.1"/>
+            <lowClouds id="LOW" percent="0.0"/>
+            <dewpointTemperature id="TD" unit="celsius" value="8.8"/>
+         </location>
+      </time>
+      <time datatype="forecast" from="2018-05-07T18:00:00Z" to="2018-05-08T00:00:00Z">
+         <location altitude="9" latitude="54.7211" longitude="-8.7237">
+            <precipitation unit="mm" value="0.0"/>
+<symbol id="Cloud" number="4"/>
+         </location>
+      </time>
+      <time datatype="forecast" from="2018-05-08T06:00:00Z" to="2018-05-08T06:00:00Z">
+         <location altitude="9" latitude="54.7211" longitude="-8.7237">
+            <temperature id="TTT" unit="celsius" value="10.2"/>
+            <windDirection id="dd" deg="206.1" name="SW"/>
+            <windSpeed id="ff" mps="6.7" beaufort="4" name="Laber bris"/>
+            <humidity value="92.6" unit="percent"/>
+            <pressure id="pr" unit="hPa" value="1011.9"/>
+            <cloudiness id="NN" percent="99.0"/>
+            <lowClouds id="LOW" percent="100.2"/>
+            <dewpointTemperature id="TD" unit="celsius" value="9.0"/>
+         </location>
+      </time>
+      <time datatype="forecast" from="2018-05-08T00:00:00Z" to="2018-05-08T06:00:00Z">
+         <location altitude="9" latitude="54.7211" longitude="-8.7237">
+            <precipitation unit="mm" value="0.0"/>
+<symbol id="Cloud" number="4"/>
+         </location>
+      </time>
+      <time datatype="forecast" from="2018-05-08T12:00:00Z" to="2018-05-08T12:00:00Z">
+         <location altitude="9" latitude="54.7211" longitude="-8.7237">
+            <temperature id="TTT" unit="celsius" value="10.9"/>
+            <windDirection id="dd" deg="228.8" name="SW"/>
+            <windSpeed id="ff" mps="6.5" beaufort="4" name="Laber bris"/>
+            <humidity value="71.3" unit="percent"/>
+            <pressure id="pr" unit="hPa" value="1013.1"/>
+            <cloudiness id="NN" percent="38.7"/>
+            <lowClouds id="LOW" percent="37.7"/>
+            <dewpointTemperature id="TD" unit="celsius" value="5.8"/>
+         </location>
+      </time>
+      <time datatype="forecast" from="2018-05-08T06:00:00Z" to="2018-05-08T12:00:00Z">
+         <location altitude="9" latitude="54.7211" longitude="-8.7237">
+            <precipitation unit="mm" value="0.0"/>
+<symbol id="PartlyCloud" number="3"/>
+         </location>
+      </time>
+      <time datatype="forecast" from="2018-05-08T18:00:00Z" to="2018-05-08T18:00:00Z">
+         <location altitude="9" latitude="54.7211" longitude="-8.7237">
+            <temperature id="TTT" unit="celsius" value="10.5"/>
+            <windDirection id="dd" deg="230.1" name="SW"/>
+            <windSpeed id="ff" mps="5.2" beaufort="3" name="Lett bris"/>
+            <humidity value="74.4" unit="percent"/>
+            <pressure id="pr" unit="hPa" value="1011.7"/>
+            <cloudiness id="NN" percent="89.0"/>
+            <lowClouds id="LOW" percent="65.5"/>
+            <dewpointTemperature id="TD" unit="celsius" value="6.1"/>
+         </location>
+      </time>
+      <time datatype="forecast" from="2018-05-08T12:00:00Z" to="2018-05-08T18:00:00Z">
+         <location altitude="9" latitude="54.7211" longitude="-8.7237">
+            <precipitation unit="mm" value="0.0"/>
+<symbol id="Cloud" number="4"/>
+         </location>
+      </time>
+      <time datatype="forecast" from="2018-05-09T00:00:00Z" to="2018-05-09T00:00:00Z">
+         <location altitude="9" latitude="54.7211" longitude="-8.7237">
+            <temperature id="TTT" unit="celsius" value="9.5"/>
+            <windDirection id="dd" deg="183.5" name="S"/>
+            <windSpeed id="ff" mps="6.0" beaufort="4" name="Laber bris"/>
+            <humidity value="80.2" unit="percent"/>
+            <pressure id="pr" unit="hPa" value="1007.6"/>
+            <cloudiness id="NN" percent="99.0"/>
+            <lowClouds id="LOW" percent="6.5"/>
+            <dewpointTemperature id="TD" unit="celsius" value="6.2"/>
+         </location>
+      </time>
+      <time datatype="forecast" from="2018-05-08T18:00:00Z" to="2018-05-09T00:00:00Z">
+         <location altitude="9" latitude="54.7211" longitude="-8.7237">
+            <precipitation unit="mm" value="0.0"/>
+<symbol id="Cloud" number="4"/>
+         </location>
+      </time>
+      <time datatype="forecast" from="2018-05-09T06:00:00Z" to="2018-05-09T06:00:00Z">
+         <location altitude="9" latitude="54.7211" longitude="-8.7237">
+            <temperature id="TTT" unit="celsius" value="8.9"/>
+            <windDirection id="dd" deg="167.7" name="S"/>
+            <windSpeed id="ff" mps="9.4" beaufort="5" name="Frisk bris"/>
+            <humidity value="82.2" unit="percent"/>
+            <pressure id="pr" unit="hPa" value="1000.0"/>
+            <cloudiness id="NN" percent="97.6"/>
+            <lowClouds id="LOW" percent="21.7"/>
+            <dewpointTemperature id="TD" unit="celsius" value="6.0"/>
+         </location>
+      </time>
+      <time datatype="forecast" from="2018-05-09T00:00:00Z" to="2018-05-09T06:00:00Z">
+         <location altitude="9" latitude="54.7211" longitude="-8.7237">
+            <precipitation unit="mm" value="0.0"/>
+<symbol id="Cloud" number="4"/>
+         </location>
+      </time>
+      <time datatype="forecast" from="2018-05-09T12:00:00Z" to="2018-05-09T12:00:00Z">
+         <location altitude="9" latitude="54.7211" longitude="-8.7237">
+            <temperature id="TTT" unit="celsius" value="10.0"/>
+            <windDirection id="dd" deg="214.2" name="SW"/>
+            <windSpeed id="ff" mps="11.9" beaufort="6" name="Liten kuling"/>
+            <humidity value="68.4" unit="percent"/>
+            <pressure id="pr" unit="hPa" value="998.3"/>
+            <cloudiness id="NN" percent="28.4"/>
+            <lowClouds id="LOW" percent="20.1"/>
+            <dewpointTemperature id="TD" unit="celsius" value="4.4"/>
+         </location>
+      </time>
+      <time datatype="forecast" from="2018-05-09T06:00:00Z" to="2018-05-09T12:00:00Z">
+         <location altitude="9" latitude="54.7211" longitude="-8.7237">
+            <precipitation unit="mm" value="2.0"/>
+<symbol id="LightRainSun" number="5"/>
+         </location>
+      </time>
+      <time datatype="forecast" from="2018-05-09T18:00:00Z" to="2018-05-09T18:00:00Z">
+         <location altitude="9" latitude="54.7211" longitude="-8.7237">
+            <temperature id="TTT" unit="celsius" value="8.7"/>
+            <windDirection id="dd" deg="247.1" name="SW"/>
+            <windSpeed id="ff" mps="12.6" beaufort="6" name="Liten kuling"/>
+            <humidity value="79.1" unit="percent"/>
+            <pressure id="pr" unit="hPa" value="1002.4"/>
+            <cloudiness id="NN" percent="54.9"/>
+            <lowClouds id="LOW" percent="32.0"/>
+            <dewpointTemperature id="TD" unit="celsius" value="5.2"/>
+         </location>
+      </time>
+      <time datatype="forecast" from="2018-05-09T12:00:00Z" to="2018-05-09T18:00:00Z">
+         <location altitude="9" latitude="54.7211" longitude="-8.7237">
+            <precipitation unit="mm" value="0.9"/>
+<symbol id="DrizzleSun" number="40"/>
+         </location>
+      </time>
+      <time datatype="forecast" from="2018-05-10T00:00:00Z" to="2018-05-10T00:00:00Z">
+         <location altitude="9" latitude="54.7211" longitude="-8.7237">
+            <temperature id="TTT" unit="celsius" value="8.6"/>
+            <windDirection id="dd" deg="261.4" name="W"/>
+            <windSpeed id="ff" mps="11.7" beaufort="6" name="Liten kuling"/>
+            <humidity value="67.2" unit="percent"/>
+            <pressure id="pr" unit="hPa" value="1008.8"/>
+            <cloudiness id="NN" percent="59.8"/>
+            <lowClouds id="LOW" percent="47.9"/>
+            <dewpointTemperature id="TD" unit="celsius" value="2.8"/>
+         </location>
+      </time>
+      <time datatype="forecast" from="2018-05-09T18:00:00Z" to="2018-05-10T00:00:00Z">
+         <location altitude="9" latitude="54.7211" longitude="-8.7237">
+            <precipitation unit="mm" value="0.6"/>
+<symbol id="DrizzleSun" number="40"/>
+         </location>
+      </time>
+      <time datatype="forecast" from="2018-05-10T06:00:00Z" to="2018-05-10T06:00:00Z">
+         <location altitude="9" latitude="54.7211" longitude="-8.7237">
+            <temperature id="TTT" unit="celsius" value="8.7"/>
+            <windDirection id="dd" deg="261.8" name="W"/>
+            <windSpeed id="ff" mps="10.5" beaufort="5" name="Frisk bris"/>
+            <humidity value="66.5" unit="percent"/>
+            <pressure id="pr" unit="hPa" value="1014.7"/>
+            <cloudiness id="NN" percent="62.0"/>
+            <lowClouds id="LOW" percent="49.8"/>
+            <dewpointTemperature id="TD" unit="celsius" value="2.7"/>
+         </location>
+      </time>
+      <time datatype="forecast" from="2018-05-10T00:00:00Z" to="2018-05-10T06:00:00Z">
+         <location altitude="9" latitude="54.7211" longitude="-8.7237">
+            <precipitation unit="mm" value="0.8"/>
+<symbol id="DrizzleSun" number="40"/>
+         </location>
+      </time>
+      <time datatype="forecast" from="2018-05-10T12:00:00Z" to="2018-05-10T12:00:00Z">
+         <location altitude="9" latitude="54.7211" longitude="-8.7237">
+            <temperature id="TTT" unit="celsius" value="10.1"/>
+            <windDirection id="dd" deg="234.0" name="SW"/>
+            <windSpeed id="ff" mps="9.7" beaufort="5" name="Frisk bris"/>
+            <humidity value="71.0" unit="percent"/>
+            <pressure id="pr" unit="hPa" value="1019.5"/>
+            <cloudiness id="NN" percent="65.5"/>
+            <lowClouds id="LOW" percent="39.2"/>
+            <dewpointTemperature id="TD" unit="celsius" value="5.1"/>
+         </location>
+      </time>
+      <time datatype="forecast" from="2018-05-10T06:00:00Z" to="2018-05-10T12:00:00Z">
+         <location altitude="9" latitude="54.7211" longitude="-8.7237">
+            <precipitation unit="mm" value="0.6"/>
+<symbol id="DrizzleSun" number="40"/>
+         </location>
+      </time>
+      <time datatype="forecast" from="2018-05-10T18:00:00Z" to="2018-05-10T18:00:00Z">
+         <location altitude="9" latitude="54.7211" longitude="-8.7237">
+            <temperature id="TTT" unit="celsius" value="11.1"/>
+            <windDirection id="dd" deg="216.1" name="SW"/>
+            <windSpeed id="ff" mps="6.1" beaufort="4" name="Laber bris"/>
+            <humidity value="69.3" unit="percent"/>
+            <pressure id="pr" unit="hPa" value="1021.0"/>
+            <cloudiness id="NN" percent="95.8"/>
+            <lowClouds id="LOW" percent="51.2"/>
+            <dewpointTemperature id="TD" unit="celsius" value="5.6"/>
+         </location>
+      </time>
+      <time datatype="forecast" from="2018-05-10T12:00:00Z" to="2018-05-10T18:00:00Z">
+         <location altitude="9" latitude="54.7211" longitude="-8.7237">
+            <precipitation unit="mm" value="0.0"/>
+<symbol id="Cloud" number="4"/>
+         </location>
+      </time>
+      <time datatype="forecast" from="2018-05-11T00:00:00Z" to="2018-05-11T00:00:00Z">
+         <location altitude="9" latitude="54.7211" longitude="-8.7237">
+            <temperature id="TTT" unit="celsius" value="8.7"/>
+            <windDirection id="dd" deg="165.9" name="S"/>
+            <windSpeed id="ff" mps="6.6" beaufort="4" name="Laber bris"/>
+            <humidity value="76.5" unit="percent"/>
+            <pressure id="pr" unit="hPa" value="1020.1"/>
+            <cloudiness id="NN" percent="51.9"/>
+            <lowClouds id="LOW" percent="28.3"/>
+            <dewpointTemperature id="TD" unit="celsius" value="4.7"/>
+         </location>
+      </time>
+      <time datatype="forecast" from="2018-05-10T18:00:00Z" to="2018-05-11T00:00:00Z">
+         <location altitude="9" latitude="54.7211" longitude="-8.7237">
+            <precipitation unit="mm" value="0.0"/>
+<symbol id="PartlyCloud" number="3"/>
+         </location>
+      </time>
+      <time datatype="forecast" from="2018-05-11T06:00:00Z" to="2018-05-11T06:00:00Z">
+         <location altitude="9" latitude="54.7211" longitude="-8.7237">
+            <temperature id="TTT" unit="celsius" value="7.7"/>
+            <windDirection id="dd" deg="163.3" name="S"/>
+            <windSpeed id="ff" mps="9.4" beaufort="5" name="Frisk bris"/>
+            <humidity value="80.4" unit="percent"/>
+            <pressure id="pr" unit="hPa" value="1017.1"/>
+            <cloudiness id="NN" percent="65.4"/>
+            <lowClouds id="LOW" percent="39.2"/>
+            <dewpointTemperature id="TD" unit="celsius" value="4.5"/>
+         </location>
+      </time>
+      <time datatype="forecast" from="2018-05-11T00:00:00Z" to="2018-05-11T06:00:00Z">
+         <location altitude="9" latitude="54.7211" longitude="-8.7237">
+            <precipitation unit="mm" value="0.0"/>
+<symbol id="PartlyCloud" number="3"/>
+         </location>
+      </time>
+      <time datatype="forecast" from="2018-05-11T12:00:00Z" to="2018-05-11T12:00:00Z">
+         <location altitude="9" latitude="54.7211" longitude="-8.7237">
+            <temperature id="TTT" unit="celsius" value="11.6"/>
+            <windDirection id="dd" deg="168.7" name="S"/>
+            <windSpeed id="ff" mps="9.4" beaufort="5" name="Frisk bris"/>
+            <humidity value="63.9" unit="percent"/>
+            <pressure id="pr" unit="hPa" value="1014.4"/>
+            <cloudiness id="NN" percent="98.8"/>
+            <lowClouds id="LOW" percent="97.2"/>
+            <dewpointTemperature id="TD" unit="celsius" value="5.0"/>
+         </location>
+      </time>
+      <time datatype="forecast" from="2018-05-11T06:00:00Z" to="2018-05-11T12:00:00Z">
+         <location altitude="9" latitude="54.7211" longitude="-8.7237">
+            <precipitation unit="mm" value="0.0"/>
+<symbol id="Cloud" number="4"/>
+         </location>
+      </time>
+      <time datatype="forecast" from="2018-05-11T18:00:00Z" to="2018-05-11T18:00:00Z">
+         <location altitude="9" latitude="54.7211" longitude="-8.7237">
+            <temperature id="TTT" unit="celsius" value="12.5"/>
+            <windDirection id="dd" deg="186.1" name="S"/>
+            <windSpeed id="ff" mps="8.2" beaufort="4" name="Laber bris"/>
+            <humidity value="64.3" unit="percent"/>
+            <pressure id="pr" unit="hPa" value="1010.8"/>
+            <cloudiness id="NN" percent="98.8"/>
+            <lowClouds id="LOW" percent="71.8"/>
+            <dewpointTemperature id="TD" unit="celsius" value="5.9"/>
+         </location>
+      </time>
+      <time datatype="forecast" from="2018-05-11T12:00:00Z" to="2018-05-11T18:00:00Z">
+         <location altitude="9" latitude="54.7211" longitude="-8.7237">
+            <precipitation unit="mm" value="0.0"/>
+<symbol id="Cloud" number="4"/>
+         </location>
+      </time>
+      <time datatype="forecast" from="2018-05-12T00:00:00Z" to="2018-05-12T00:00:00Z">
+         <location altitude="9" latitude="54.7211" longitude="-8.7237">
+            <temperature id="TTT" unit="celsius" value="8.5"/>
+            <windDirection id="dd" deg="248.0" name="W"/>
+            <windSpeed id="ff" mps="4.0" beaufort="3" name="Lett bris"/>
+            <humidity value="83.2" unit="percent"/>
+            <pressure id="pr" unit="hPa" value="1013.7"/>
+            <cloudiness id="NN" percent="95.0"/>
+            <lowClouds id="LOW" percent="22.7"/>
+            <dewpointTemperature id="TD" unit="celsius" value="5.7"/>
+         </location>
+      </time>
+      <time datatype="forecast" from="2018-05-11T18:00:00Z" to="2018-05-12T00:00:00Z">
+         <location altitude="9" latitude="54.7211" longitude="-8.7237">
+            <precipitation unit="mm" value="1.1"/>
+<symbol id="LightRain" number="9"/>
+         </location>
+      </time>
+      <time datatype="forecast" from="2018-05-12T06:00:00Z" to="2018-05-12T06:00:00Z">
+         <location altitude="9" latitude="54.7211" longitude="-8.7237">
+            <temperature id="TTT" unit="celsius" value="8.6"/>
+            <windDirection id="dd" deg="252.4" name="W"/>
+            <windSpeed id="ff" mps="3.6" beaufort="3" name="Lett bris"/>
+            <humidity value="79.5" unit="percent"/>
+            <pressure id="pr" unit="hPa" value="1014.2"/>
+            <cloudiness id="NN" percent="28.7"/>
+            <lowClouds id="LOW" percent="24.6"/>
+            <dewpointTemperature id="TD" unit="celsius" value="5.2"/>
+         </location>
+      </time>
+      <time datatype="forecast" from="2018-05-12T00:00:00Z" to="2018-05-12T06:00:00Z">
+         <location altitude="9" latitude="54.7211" longitude="-8.7237">
+            <precipitation unit="mm" value="0.0"/>
+<symbol id="LightCloud" number="2"/>
+         </location>
+      </time>
+      <time datatype="forecast" from="2018-05-12T12:00:00Z" to="2018-05-12T12:00:00Z">
+         <location altitude="9" latitude="54.7211" longitude="-8.7237">
+            <temperature id="TTT" unit="celsius" value="9.9"/>
+            <windDirection id="dd" deg="242.6" name="SW"/>
+            <windSpeed id="ff" mps="5.7" beaufort="4" name="Laber bris"/>
+            <humidity value="65.9" unit="percent"/>
+            <pressure id="pr" unit="hPa" value="1014.8"/>
+            <cloudiness id="NN" percent="39.6"/>
+            <lowClouds id="LOW" percent="27.1"/>
+            <dewpointTemperature id="TD" unit="celsius" value="3.8"/>
+         </location>
+      </time>
+      <time datatype="forecast" from="2018-05-12T06:00:00Z" to="2018-05-12T12:00:00Z">
+         <location altitude="9" latitude="54.7211" longitude="-8.7237">
+            <precipitation unit="mm" value="0.0"/>
+<symbol id="PartlyCloud" number="3"/>
+         </location>
+      </time>
+      <time datatype="forecast" from="2018-05-12T18:00:00Z" to="2018-05-12T18:00:00Z">
+         <location altitude="9" latitude="54.7211" longitude="-8.7237">
+            <temperature id="TTT" unit="celsius" value="10.4"/>
+            <windDirection id="dd" deg="210.6" name="SW"/>
+            <windSpeed id="ff" mps="6.7" beaufort="4" name="Laber bris"/>
+            <humidity value="68.2" unit="percent"/>
+            <pressure id="pr" unit="hPa" value="1011.6"/>
+            <cloudiness id="NN" percent="97.3"/>
+            <lowClouds id="LOW" percent="70.9"/>
+            <dewpointTemperature id="TD" unit="celsius" value="4.7"/>
+         </location>
+      </time>
+      <time datatype="forecast" from="2018-05-12T12:00:00Z" to="2018-05-12T18:00:00Z">
+         <location altitude="9" latitude="54.7211" longitude="-8.7237">
+            <precipitation unit="mm" value="0.0"/>
+<symbol id="Cloud" number="4"/>
+         </location>
+      </time>
+      <time datatype="forecast" from="2018-05-13T00:00:00Z" to="2018-05-13T00:00:00Z">
+         <location altitude="9" latitude="54.7211" longitude="-8.7237">
+            <temperature id="TTT" unit="celsius" value="8.5"/>
+            <windDirection id="dd" deg="280.9" name="W"/>
+            <windSpeed id="ff" mps="3.6" beaufort="2" name="Svak vind"/>
+            <humidity value="88.3" unit="percent"/>
+            <pressure id="pr" unit="hPa" value="1011.4"/>
+            <cloudiness id="NN" percent="66.6"/>
+            <lowClouds id="LOW" percent="34.0"/>
+            <dewpointTemperature id="TD" unit="celsius" value="6.6"/>
+         </location>
+      </time>
+      <time datatype="forecast" from="2018-05-12T18:00:00Z" to="2018-05-13T00:00:00Z">
+         <location altitude="9" latitude="54.7211" longitude="-8.7237">
+            <precipitation unit="mm" value="3.9"/>
+<symbol id="LightRainSun" number="5"/>
+         </location>
+      </time>
+   </product>
+</weatherdata> 

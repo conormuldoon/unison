@@ -1,0 +1,17 @@
+{"properties": [
+  {
+    "name": "exclude.spatial.regex",
+    "type": "java.lang.String",
+    "description": "A regular expression to exclude either PostGIS or GeoDB."
+  },
+  {
+    "name": "api.timezone",
+    "type": "java.lang.String",
+    "description": "The time zone for the Harmonie API being used."
+  },
+  {
+    "name": "api.uri",
+    "type": "java.lang.String",
+    "description": "The URI for the Harmonie API being used."
+  }
+]}

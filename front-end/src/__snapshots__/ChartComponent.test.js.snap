@@ -1,0 +1,301 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`mathes snapshot 1`] = `
+<div>
+  <div
+    class="VictoryContainer"
+    style="height: 100%; width: 100%; user-select: none; pointer-events: none; position: relative;"
+  >
+    <svg
+      aria-labelledby="victory-container-3-title victory-container-3-desc"
+      height="350"
+      role="img"
+      style="pointer-events: all; width: 100%; height: 100%;"
+      viewBox="0 0 350 350"
+      width="350"
+    >
+      <g
+        clip-path="url(#victory-clip-4)"
+        style="border: 1px solid #ccc; width: 100%; height: 100%;"
+      >
+        <defs>
+          <clippath
+            id="victory-clip-4"
+          >
+            <rect
+              height="250"
+              role="presentation"
+              shape-rendering="auto"
+              vector-effect="non-scaling-stroke"
+              width="250"
+              x="50"
+              y="50"
+            />
+          </clippath>
+        </defs>
+        <path
+          d="M50,300L52.35849056603774,300L54.716981132075475,300L57.075471698113205,300L59.43396226415094,300L61.79245283018868,300L64.15094339622641,300L66.50943396226415,300L68.86792452830188,300L71.22641509433961,300L73.58490566037736,300L75.9433962264151,300L78.30188679245283,300L80.66037735849056,300L83.01886792452831,300L85.37735849056604,300L87.73584905660377,300L90.09433962264151,300L92.45283018867924,300L94.81132075471697,300L97.16981132075472,300L99.52830188679246,300L101.88679245283019,300L104.24528301886792,300L106.60377358490567,300L108.9622641509434,300L111.32075471698113,300L113.67924528301887,300L116.0377358490566,300L118.39622641509433,300L120.75471698113208,300L123.11320754716981,300L125.47169811320754,300L127.83018867924528,300L130.18867924528303,300L132.54716981132077,300L134.9056603773585,300L137.2641509433962,300L139.62264150943395,300L141.9811320754717,300L144.33962264150944,300L146.69811320754718,300L149.05660377358492,300L151.41509433962264,300L153.77358490566039,300L156.1320754716981,300L158.49056603773585,300L160.8490566037736,300L163.20754716981133,300L165.56603773584908,300L167.9245283018868,300L170.2830188679245,300L172.64150943396226,300L175,300L177.35849056603774,300L179.71698113207546,300L182.0754716981132,300L184.43396226415095,300L186.79245283018867,300L189.1509433962264,300L191.50943396226415,300L193.86792452830187,300L196.22641509433961,300L198.58490566037736,300L200.94339622641508,300L203.30188679245282,300L205.66037735849056,300L208.0188679245283,300L210.37735849056602,300L212.73584905660377,300L215.0943396226415,300L217.45283018867923,300L219.81132075471697,300L222.16981132075472,300L224.52830188679243,300L226.88679245283018,300L229.24528301886792,300L231.60377358490564,300L233.96226415094338,300L236.32075471698113,300L238.67924528301887,300L241.03773584905662,300L243.39622641509436,300L245.75471698113208,300L248.11320754716982,300L250.47169811320757,300L252.83018867924528,300L255.18867924528303,300L257.54716981132077,300L259.90566037735846,300L262.2641509433962,300L264.62264150943395,300L266.9811320754717,300L269.33962264150944,300L271.6981132075472,300L274.0566037735849,300L276.41509433962267,300L278.7735849056604,300L281.13207547169816,300L283.49056603773585,300L285.8490566037736,300L288.20754716981133,50L290.566037735849,300L292.92452830188677,300L295.2830188679245,300L297.64150943396226,300L300,300"
+          role="presentation"
+          shape-rendering="auto"
+          style="fill: transparent; stroke: #c43a31; opacity: 1; stroke-width: 2;"
+        />
+      </g>
+      <g
+        role="presentation"
+      >
+        <line
+          role="presentation"
+          shape-rendering="auto"
+          style="stroke: #90A4AE; fill: transparent; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round;"
+          vector-effect="non-scaling-stroke"
+          x1="50"
+          x2="300"
+          y1="300"
+          y2="300"
+        />
+        <g
+          role="presentation"
+        >
+          <line
+            role="presentation"
+            shape-rendering="auto"
+            style="stroke: #ECEFF1; fill: none; stroke-dasharray: 10, 5; stroke-linecap: round; stroke-linejoin: round; pointer-events: painted;"
+            vector-effect="non-scaling-stroke"
+            x1="50"
+            x2="50"
+            y1="300"
+            y2="50"
+          />
+          <line
+            role="presentation"
+            shape-rendering="auto"
+            style="stroke: #90A4AE; fill: transparent; size: 5px; stroke-width: 1; stroke-linecap: round; stroke-linejoin: round;"
+            vector-effect="non-scaling-stroke"
+            x1="50"
+            x2="50"
+            y1="300"
+            y2="305"
+          />
+          <text
+            direction="inherit"
+            dx="0"
+            dy="10.26"
+            x="50"
+            y="313"
+          >
+            <tspan
+              dx="0"
+              style="font-family: 'Roboto', 'Helvetica Neue', Helvetica, sans-serif; font-size: 12px; letter-spacing: normal; padding: 8px; fill: #455A64; stroke: transparent; stroke-width: 0;"
+              text-anchor="middle"
+              x="50"
+            >
+              2019-02-23T19:00:00.000+0000
+            </tspan>
+          </text>
+        </g>
+      </g>
+      <g
+        role="presentation"
+      >
+        <line
+          role="presentation"
+          shape-rendering="auto"
+          style="stroke: #90A4AE; fill: transparent; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round;"
+          vector-effect="non-scaling-stroke"
+          x1="50"
+          x2="50"
+          y1="50"
+          y2="300"
+        />
+        <text
+          direction="inherit"
+          dx="0"
+          dy="-1.7400000000000002"
+          transform="rotate(-90,5,175)"
+          x="5"
+          y="175"
+        >
+          <tspan
+            dx="0"
+            style="padding: 45px; text-anchor: middle; font-family: 'Roboto', 'Helvetica Neue', Helvetica, sans-serif; font-size: 12px; letter-spacing: normal; fill: #455A64; stroke: transparent; stroke-width: 0;"
+            text-anchor="middle"
+            x="5"
+          >
+            Millimetres
+          </tspan>
+        </text>
+        <g
+          role="presentation"
+        >
+          <line
+            role="presentation"
+            shape-rendering="auto"
+            style="stroke: #ECEFF1; fill: none; stroke-dasharray: 10, 5; stroke-linecap: round; stroke-linejoin: round; pointer-events: painted;"
+            vector-effect="non-scaling-stroke"
+            x1="50"
+            x2="300"
+            y1="237.5"
+            y2="237.5"
+          />
+          <line
+            role="presentation"
+            shape-rendering="auto"
+            style="stroke: #90A4AE; fill: transparent; size: 5px; stroke-width: 1; stroke-linecap: round; stroke-linejoin: round;"
+            vector-effect="non-scaling-stroke"
+            x1="50"
+            x2="45"
+            y1="237.5"
+            y2="237.5"
+          />
+          <text
+            direction="inherit"
+            dx="0"
+            dy="4.26"
+            x="37"
+            y="237.5"
+          >
+            <tspan
+              dx="0"
+              style="font-family: 'Roboto', 'Helvetica Neue', Helvetica, sans-serif; font-size: 12px; letter-spacing: normal; padding: 8px; fill: #455A64; stroke: transparent; stroke-width: 0;"
+              text-anchor="end"
+              x="37"
+            >
+              0.05
+            </tspan>
+          </text>
+        </g>
+        <g
+          role="presentation"
+        >
+          <line
+            role="presentation"
+            shape-rendering="auto"
+            style="stroke: #ECEFF1; fill: none; stroke-dasharray: 10, 5; stroke-linecap: round; stroke-linejoin: round; pointer-events: painted;"
+            vector-effect="non-scaling-stroke"
+            x1="50"
+            x2="300"
+            y1="175"
+            y2="175"
+          />
+          <line
+            role="presentation"
+            shape-rendering="auto"
+            style="stroke: #90A4AE; fill: transparent; size: 5px; stroke-width: 1; stroke-linecap: round; stroke-linejoin: round;"
+            vector-effect="non-scaling-stroke"
+            x1="50"
+            x2="45"
+            y1="175"
+            y2="175"
+          />
+          <text
+            direction="inherit"
+            dx="0"
+            dy="4.26"
+            x="37"
+            y="175"
+          >
+            <tspan
+              dx="0"
+              style="font-family: 'Roboto', 'Helvetica Neue', Helvetica, sans-serif; font-size: 12px; letter-spacing: normal; padding: 8px; fill: #455A64; stroke: transparent; stroke-width: 0;"
+              text-anchor="end"
+              x="37"
+            >
+              0.1
+            </tspan>
+          </text>
+        </g>
+        <g
+          role="presentation"
+        >
+          <line
+            role="presentation"
+            shape-rendering="auto"
+            style="stroke: #ECEFF1; fill: none; stroke-dasharray: 10, 5; stroke-linecap: round; stroke-linejoin: round; pointer-events: painted;"
+            vector-effect="non-scaling-stroke"
+            x1="50"
+            x2="300"
+            y1="112.50000000000003"
+            y2="112.50000000000003"
+          />
+          <line
+            role="presentation"
+            shape-rendering="auto"
+            style="stroke: #90A4AE; fill: transparent; size: 5px; stroke-width: 1; stroke-linecap: round; stroke-linejoin: round;"
+            vector-effect="non-scaling-stroke"
+            x1="50"
+            x2="45"
+            y1="112.50000000000003"
+            y2="112.50000000000003"
+          />
+          <text
+            direction="inherit"
+            dx="0"
+            dy="4.26"
+            x="37"
+            y="112.50000000000003"
+          >
+            <tspan
+              dx="0"
+              style="font-family: 'Roboto', 'Helvetica Neue', Helvetica, sans-serif; font-size: 12px; letter-spacing: normal; padding: 8px; fill: #455A64; stroke: transparent; stroke-width: 0;"
+              text-anchor="end"
+              x="37"
+            >
+              0.15
+            </tspan>
+          </text>
+        </g>
+        <g
+          role="presentation"
+        >
+          <line
+            role="presentation"
+            shape-rendering="auto"
+            style="stroke: #ECEFF1; fill: none; stroke-dasharray: 10, 5; stroke-linecap: round; stroke-linejoin: round; pointer-events: painted;"
+            vector-effect="non-scaling-stroke"
+            x1="50"
+            x2="300"
+            y1="50"
+            y2="50"
+          />
+          <line
+            role="presentation"
+            shape-rendering="auto"
+            style="stroke: #90A4AE; fill: transparent; size: 5px; stroke-width: 1; stroke-linecap: round; stroke-linejoin: round;"
+            vector-effect="non-scaling-stroke"
+            x1="50"
+            x2="45"
+            y1="50"
+            y2="50"
+          />
+          <text
+            direction="inherit"
+            dx="0"
+            dy="4.26"
+            x="37"
+            y="50"
+          >
+            <tspan
+              dx="0"
+              style="font-family: 'Roboto', 'Helvetica Neue', Helvetica, sans-serif; font-size: 12px; letter-spacing: normal; padding: 8px; fill: #455A64; stroke: transparent; stroke-width: 0;"
+              text-anchor="end"
+              x="37"
+            >
+              0.2
+            </tspan>
+          </text>
+        </g>
+      </g>
+    </svg>
+    <div
+      style="z-index: 99; position: absolute; top: 0px; left: 0px; width: 100%; height: 100%;"
+    >
+      <svg
+        height="350"
+        style="overflow: visible; width: 100%; height: 100%;"
+        viewBox="0 0 350 350"
+        width="350"
+      />
+    </div>
+  </div>
+</div>
+`;

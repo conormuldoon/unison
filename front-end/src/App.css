@@ -1,0 +1,228 @@
+@import "~leaflet/dist/leaflet.css";
+
+.App {
+  text-align: center;
+}
+
+#logos {
+  position: absolute;
+  z-index: 410;
+
+
+  bottom: 0;
+  width: 100%;
+}
+
+
+#logoitem{
+  padding-right: 20px;
+  padding-left: 20px;
+
+}
+
+
+#locForm{
+  position: absolute;
+  margin-left: -135px;
+  margin-top: 10px;
+  background-color: white;
+  width: 326px;
+  padding: 10px;
+  padding-right: 15px;
+  text-align: left;
+
+}
+
+#locForm input{
+  width: 100%;
+
+}
+
+div{
+  display: inline-block;
+}
+
+
+
+.leaflet-popup-content {
+    width: 500px;
+    z-index: 600;
+}
+
+.Dropdown-root {
+  text-align: left;
+}
+
+
+#iicon:hover {
+  cursor: pointer;
+}
+
+
+#selectdiv{
+
+  position: absolute;
+  z-index: 400;
+  margin-left: auto;
+  margin-right: auto;
+  left: 0;
+  right: 0;
+  width: 100%;
+
+
+}
+
+
+#popupdiv{
+
+  position: absolute;
+  z-index: 400;
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: auto;
+  margin-bottom: auto;
+  left: 0;
+  right: 0;
+  top: 0;
+  bottom: 0;
+  width: 60%;
+  height: 75%;
+  background-color: white;
+
+}
+
+#tabdiv{
+
+  position: absolute;
+
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: auto;
+  margin-bottom: auto;
+  left: 0;
+  right: 0;
+  top: 20;
+  bottom: 0;
+  width: 80%;
+  height: 80%;
+
+
+}
+
+
+#singlevar{
+
+  position: absolute;
+
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: auto;
+  margin-bottom: auto;
+  left: 0;
+  right: 0;
+  top: 0;
+  bottom: 0;
+  width: 100%;
+  height: 90%;
+
+
+}
+
+#marginclickdiv {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+
+}
+
+#chartdiv{
+
+  height: 90%;
+  width: 100%;
+
+}
+
+
+#mapdiv:hover > #popupdiv { background-color: yellow; }
+
+.DayPickerInput {
+  pointer-events: auto;
+}
+
+#tabscomponent{
+
+  height: 90%;
+  width: 100%;
+}
+
+#mapdiv{
+  position: relative;
+  z-index: 1;
+  height: 100vh;
+  width: 100vw;
+}
+
+.Dropdown-control {
+
+  margin-bottom: -10px;
+
+}
+
+.dsDiv{
+
+  padding-left: 20px;
+
+
+}
+.pLeft{
+
+  padding-left: 20px;
+
+
+}
+
+.marginItem {
+  border: 0;
+  margin: 0;
+  pointer-events: auto;
+
+}
+
+#variDD{
+  border: 0;
+  margin: 0;
+  padding-right: 20px;
+  pointer-events: auto;
+}
+
+.App-logo {
+  animation: App-logo-spin infinite 20s linear;
+  height: 80px;
+}
+
+.App-header {
+  background-color: #222;
+  height: 150px;
+  padding: 20px;
+  color: white;
+}
+
+.leaflet-container {
+  height: 100%;
+  width: 100%;
+}
+
+.App-title {
+  font-size: 1.5em;
+}
+
+.App-intro {
+  font-size: large;
+}
+
+@keyframes App-logo-spin {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
