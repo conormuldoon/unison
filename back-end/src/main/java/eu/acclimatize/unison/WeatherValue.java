@@ -2,6 +2,12 @@ package eu.acclimatize.unison;
 
 import javax.persistence.Embedded;
 
+/**
+ * A class for storing non-precipitation weather values.
+ * 
+ * @author conormuldoon
+ *
+ */
 @SuppressWarnings("unused")
 public class WeatherValue {
 
@@ -26,6 +32,19 @@ public class WeatherValue {
 
 	private Double fog;
 
+	/**
+	 * Creates an instance of WeatherValue.
+	 * 
+	 * @param t The temperature.
+	 * @param wd The wind direction.
+	 * @param ws The wind speed.
+	 * @param h The humidity.
+	 * @param p The pressure.
+	 * @param c The cloudiness percentage.
+	 * @param cd The low, medium, and high cloud percentages.
+	 * @param dp The dew point level.
+	 * @param fg The level of fog.
+	 */
 	public WeatherValue(Double t, WindDirection wd, WindSpeed ws, Double h, Double p, Double c,Cloud cd, Double dp, Double fg) {
 		temperature = t;
 		windDirection = wd;
@@ -38,6 +57,9 @@ public class WeatherValue {
 		fog = fg;
 	}
 
+	/**
+	 * A zero argument constructor for JPA.
+	 */
 	public WeatherValue() {
 
 	}

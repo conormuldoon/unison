@@ -14,6 +14,11 @@ import eu.acclimatize.unison.result.TemperatureResult;
 import eu.acclimatize.unison.result.WindDirectionResult;
 import eu.acclimatize.unison.result.WindSpeedResult;
 
+/**
+ * 
+ * A configuration class for creating beans for JPA queries.
+ *
+ */
 @Configuration
 public class ResultQueryConfig {
 
@@ -31,51 +36,101 @@ public class ResultQueryConfig {
 		return query;
 	}
 	
+	/**
+	 * Creates a JPA query for precipitation.
+	 * 
+	 * @return A parameterized query string with parameters for the location, from date, and to date.
+	 */
 	@Bean
 	public String precipitationQuery() {
 		return createQuery(PRE_TABLE, PrecipitationResult.class, VALUE);
 	}
 
+	/**
+	 * Creates a JPA query for the cloud level.
+	 * 
+	 * @return A parameterized query string with parameters for the location, from date, and to date.
+	 */
 	@Bean
 	public String cloudLevelQuery() {
 		return createQuery(WEA_TABLE, CloudLevelResult.class, VALUE + ".cloud");
 	}
 
+	/**
+	 * Creates a JPA query for the wind speed.
+	 * 
+	 * @return A parameterized query string with parameters for the location, from date, and to date.
+	 */
 	@Bean
 	public String windSpeedQuery() {
 		return createQuery(WEA_TABLE, WindSpeedResult.class, VALUE + ".windSpeed");
 	}
 
+	/**
+	 * Creates a JPA query for the wind direction.
+	 * 
+	 * @return A parameterized query string with parameters for the location, from date, and to date.
+	 */
 	@Bean
 	public String windDirectionQuery() {
 		return createQuery(WEA_TABLE, WindDirectionResult.class, VALUE + ".windDirection");
 	}
 
+	/**
+	 * Creates a JPA query for humidity.
+	 * 
+	 * @return A parameterized query string with parameters for the location, from date, and to date.
+	 */
 	@Bean
 	public String humidityQuery() {
 		return createQuery(WEA_TABLE, HumidityResult.class, VALUE + ".humidity");
 	}
 
+	/**
+	 * Creates a JPA query for fog.
+	 * 
+	 * @return A parameterized query string with parameters for the location, from date, and to date.
+	 */
 	@Bean
 	public String fogQuery() {
 		return createQuery(WEA_TABLE, FogResult.class, VALUE + ".fog");
 	}
 
+	/**
+	 * Creates a JPA query for cloudiness.
+	 * 
+	 * @return A parameterized query string with parameters for the location, from date, and to date.
+	 */
 	@Bean
 	public String cloudinessQuery() {
 		return createQuery(WEA_TABLE, CloudinessResult.class, VALUE + ".cloudiness");
 	}
 
+	/**
+	 * Creates a JPA query for pressure.
+	 * 
+	 * @return A parameterized query string with parameters for the location, from date, and to date.
+	 */
 	@Bean
 	public String pressureQuery() {
 		return createQuery(WEA_TABLE, PressureResult.class, VALUE + ".pressure");
 	}
 
+	/**
+	 * Creates a JPA query for the dew point.
+	 * 
+	 * @return A parameterized query string with parameters for the location, from date, and to date.
+	 */
 	@Bean
 	public String dewPointQuery() {
 		return createQuery(WEA_TABLE, DewPointResult.class, VALUE + ".dewPoint");
 	}
 
+	/**
+	 * Creates a JPA query for temperature.
+	 * 
+	 * @return A parameterized query string with parameters for the location, from date, and to date.
+	 */
 	@Bean
 	public String temperatureQuery() {
 		return createQuery(WEA_TABLE, TemperatureResult.class, VALUE + ".temperature");

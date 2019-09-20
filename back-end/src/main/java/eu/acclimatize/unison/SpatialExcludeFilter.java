@@ -7,11 +7,20 @@ import org.springframework.core.type.classreading.MetadataReader;
 import org.springframework.core.type.classreading.MetadataReaderFactory;
 import org.springframework.core.type.filter.TypeFilter;
 
+/**
+ * A filter to exclude the injection of classes based on the 'exclude.spatial.regex' regular expression defined within the application properties file.
+ *
+ */
 public class SpatialExcludeFilter implements TypeFilter {
 
 	String exclude;
 	final private static String EX_SPATIAL_REGEX = "exclude.spatial.regex";
 
+	/**
+	 * Creates and instance of SpatialExcludeFilter.
+	 * 
+	 * @throws IOException Will be thrown if there is a problem reading from the properties file.
+	 */
 	public SpatialExcludeFilter() throws IOException {
 
 		// Can't use @Value annotation for exclude as method invoked by component scan

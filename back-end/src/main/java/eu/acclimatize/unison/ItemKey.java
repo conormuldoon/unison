@@ -9,14 +9,17 @@ import javax.persistence.MapsId;
 
 import eu.acclimatize.unison.location.LocationDetails;
 
+/**
+ * 
+ * Represents the primary key for hourly weather and hourly precipitation data.
+ *
+ */
 @Embeddable // Required as is Hibernate Composite-id class
 public class ItemKey implements Serializable {
 
 	final static private String NAME = "name";
 	
-	/**
-	 * 
-	 */
+	
 	private static final long serialVersionUID = -2386171964847399660L;
 
 	private Date fromHour;
@@ -25,11 +28,20 @@ public class ItemKey implements Serializable {
 	@ManyToOne
 	private LocationDetails location;
 
+	/**
+	 * Creates an instance of ItemKey.
+	 * 
+	 * @param fromHour The start time of the hour.
+	 * @param location The location of the hourly weather or hourly precipitation data.
+	 */
 	public ItemKey(Date fromHour, LocationDetails location) {
 		this.fromHour = fromHour;
 		this.location = location;
 	}
 	
+	/**
+	 * A zero argument constructor for JPA.
+	 */
 	public ItemKey() {
 
 	}

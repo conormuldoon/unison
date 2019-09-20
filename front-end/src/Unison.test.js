@@ -1,6 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import App from './App';
+import Unison from './Unison';
 import fetchMock from 'fetch-mock';
 import { render, waitForElement, fireEvent } from "react-testing-library"
 import "@testing-library/jest-dom/extend-expect";
@@ -21,7 +21,7 @@ it('renders without crashing', async () => {
 
   const div = document.createElement('div');
 
-  ReactDOM.render(<App />,div);
+  ReactDOM.render(<Unison />,div);
   ReactDOM.unmountComponentAtNode(div);
 
   fetchMock.restore();
@@ -31,7 +31,7 @@ it('mathes snapshot', () => {
 
   fetchMock.get('end:/location', [{"geom":{"type":"Point","coordinates":[-6.223682,53.308441]},"name":"UCD"}]);
 
-  const {container} = render(<App />);
+  const {container} = render(<Unison />);
 
   expect(container).toMatchSnapshot();
 

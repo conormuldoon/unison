@@ -1,5 +1,5 @@
 App example:
 
 ```js
-<App />
+<Unison />
 ```
