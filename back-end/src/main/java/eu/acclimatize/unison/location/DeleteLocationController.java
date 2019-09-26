@@ -10,6 +10,12 @@ import eu.acclimatize.unison.HourlyWeatherRepository;
 import eu.acclimatize.unison.user.UserService;
 import eu.acclimatize.unison.user.UserTask;
 
+/**
+ * 
+ * A controller to delete a location being tracked. The precipitation and weather data associated with
+ * the location will also be deleted.
+ *
+ */
 @RestController
 public class DeleteLocationController {
 
@@ -21,6 +27,15 @@ public class DeleteLocationController {
 	private CoordinatesStore store;
 	private UserService userService;
 
+	/**
+	 * Creates an instance of DeleteLocationController.
+	 * 
+	 * @param locationRepository The repository where locations are stored.
+	 * @param hpr The repository where precipitation data is stored.
+	 * @param hwr The repository where weather data is stored.
+	 * @param store Uses spatial database functionality in removing coordinates.
+	 * @param userService A service that enables takes to be executed that require user credentials.
+	 */
 	public DeleteLocationController(LocationRepository locationRepository, HourlyPrecipitationRepository hpr,
 			HourlyWeatherRepository hwr, CoordinatesStore store, UserService userService) {
 		this.locationRepository = locationRepository;
@@ -31,6 +46,14 @@ public class DeleteLocationController {
 
 	}
 
+	/** Delete a location from the database.
+	 * 
+	 * @param locationName The name of the location to delete.
+	 * @param userName The user name credential.
+	 * @param password The password credential.
+	 * @return 0 if failed to delete the location, 1 if successfully removed the location, 2 if incorrect credentials used, 
+	 * and 3 if the user used correct credentials, but did not add the location.
+	 */
 	@PostMapping(DELETE_LOCATION)
 	public int deleteLocation(@RequestParam(Constant.LOCATION) String locationName,
 			@RequestParam(Constant.USERNAME) String userName, @RequestParam(Constant.PASSWORD) String password) {

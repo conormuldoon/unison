@@ -1,6 +1,5 @@
 package eu.acclimatize.unison.harvester;
 
-import java.io.IOException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -34,6 +33,9 @@ import eu.acclimatize.unison.WindSpeed;
 import eu.acclimatize.unison.location.LocationDetails;
 import eu.acclimatize.unison.location.LocationRepository;
 
+/**
+ * A service that harvest data from a HARMONIE-AROME API. 
+ */
 @Service
 public class HarvesterService {
 
@@ -54,9 +56,20 @@ public class HarvesterService {
 
 	private SimpleDateFormat dateFormat;
 
+	/**
+	 * Creates an instance of HarvesterService.
+	 * 
+	 * @param locationRepository The repository that stores the locations that data will be harvested for.
+	 * @param precipitationRepository The repository where precipitation data is stored.
+	 * @param weatherRepository The repository where non-precipitation weather data is stored.
+	 * @param drs The service that is used to obtain XML documents from the API.
+	 * @param logger Logs warning messages.
+	 * @param simpleDateFormat Used to parse date data using a given time zone.
+	 */
 	public HarvesterService(LocationRepository locationRepository,
 			HourlyPrecipitationRepository precipitationRepository, HourlyWeatherRepository weatherRepository,
 			DocumentRequestService drs, Logger logger, SimpleDateFormat simpleDateFormat) {
+		
 		this.locationRepository = locationRepository;
 		this.weatherRepository = weatherRepository;
 		this.precipitationRepository = precipitationRepository;
@@ -70,7 +83,14 @@ public class HarvesterService {
 
 	}
 
-	synchronized public void harvestData(Calendar calendar) throws InterruptedException, IOException {
+	/**
+	 * Requests and data stores from a HARMONIE-AROME API for locations in the database. 
+	 * 
+	 * @param calendar Used to determine the time at which to store data.
+	 * @throws InterruptedException The service will sleep for a second if it is having problem obtaining data from the API. 
+	 * The exception will be thrown if the service is interrupted during this time.
+	 */
+	synchronized public void harvestData(Calendar calendar) throws InterruptedException {
 
 		Iterable<Date> modelTime = createModelTime(calendar);
 
@@ -139,6 +159,13 @@ public class HarvesterService {
 
 	}
 
+	/**
+	 * Requests and stores data from a HARMONIE-AROME API for a given location.
+	 * 
+	 * @param location The location to obtain data for.
+	 * @param calendar Used to determine the times to store data for.
+	 * @return True if the data was received and stored, false otherwise.
+	 */
 	synchronized public boolean processLocation(LocationDetails location, Calendar calendar) {
 
 		List<HourlyPrecipitation> hourlyPrecipitation = new ArrayList<>();

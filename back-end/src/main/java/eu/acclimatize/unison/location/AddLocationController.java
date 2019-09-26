@@ -12,6 +12,11 @@ import eu.acclimatize.unison.harvester.HarvesterService;
 import eu.acclimatize.unison.user.UserService;
 import eu.acclimatize.unison.user.UserTask;
 
+/**
+ * 
+ * A controller to add locations to be tracked.
+ *
+ */
 @RestController
 public class AddLocationController {
 
@@ -26,6 +31,15 @@ public class AddLocationController {
 	private HarvesterService harvesterService;
 	private String uri;
 
+	/**
+	 * Creates and instance of AddLocationController.
+	 * 
+	 * @param locationRepository The repository where locations are stored.
+	 * @param store Uses spatial database functionality in storing coordinates.
+	 * @param userService A service that enables takes to be executed that require user credentials.
+	 * @param harvesterService Used to request data for the location once added.
+	 * @param uri The URL template for a HARMONIE-AROME API specified by app.uri in the application properties file.
+	 */
 	public AddLocationController(LocationRepository locationRepository, CoordinatesStore store, UserService userService,
 			HarvesterService harvesterService, @Value("${api.uri}") String uri) {
 		this.locationRepository = locationRepository;
@@ -37,6 +51,17 @@ public class AddLocationController {
 
 	}
 
+	/**
+	 * Adds a location to the database and requests data for the location from a HARMONIE-AROME API.
+	 * 
+	 * @param locationName The name of the location to be added.
+	 * @param userName The user name credential.
+	 * @param password The password d credential.
+	 * @param longitude The longitude of the location.
+	 * @param latitude The latitude of the location.
+	 * @return 0 if failed to add the location, 1 if successfully added the location, 2 if the user provided incorrect credentials, and 3 if the location was added but failed to obtain data from a HARMONIE-AROME API.
+	 * @throws CoordinatesParseException Thrown if there was an error parsing the coordinates for the spatial database.
+	 */
 	@PostMapping(ADD_LOCATION)
 	public int addLocation(@RequestParam(Constant.LOCATION) String locationName,
 			@RequestParam(Constant.USERNAME) String userName, @RequestParam(Constant.PASSWORD) String password,
@@ -50,9 +75,7 @@ public class AddLocationController {
 				String locURI = String.format(uri, latitude, longitude);
 				LocationDetails locationDetails = new LocationDetails(locationName, locURI, user);
 
-				locationRepository.save(locationDetails);
-
-				store.save(locationName, longitude, latitude, locationDetails);
+				store.save(longitude, latitude, locationDetails);
 
 				// Request data
 				if (harvesterService.processLocation(locationDetails, Calendar.getInstance())) {

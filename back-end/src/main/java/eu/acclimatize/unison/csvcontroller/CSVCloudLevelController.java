@@ -12,6 +12,11 @@ import org.springframework.web.bind.annotation.RestController;
 
 import eu.acclimatize.unison.Constant;
 
+/**
+ * 
+ * A controller for accessing low, medium, and high cloud level data in a CSV format.
+ *
+ */
 @RestController
 public class CSVCloudLevelController {
 
@@ -19,10 +24,24 @@ public class CSVCloudLevelController {
 
 	private static final String CSV_CLOUDLEVEL = "/csvCloudLevel";
 
+	/**
+	 * Creates an instance of CSVCloudLevelController.
+	 * 
+	 * @param cloudLevelResponder A responder that prints cloud level data in a CSV format.
+	 */
 	public CSVCloudLevelController(CSVResponder cloudLevelResponder) {
 		this.cloudLevelResponder = cloudLevelResponder;
 	}
 
+	/**
+	 * Prints low, medium, and high cloud level data to the HTTP servlet response object.
+	 * 
+	 * @param location The location of interest.
+	 * @param fromDate The start date for the data (inclusive).
+	 * @param toDate The end date for the data (inclusive).
+	 * @param response Data is written to the writer of the response object.
+	 * @throws IOException Thrown if there is a problem obtaining the writer of the response object.
+	 */
 	// Specify location, from date, and to date
 	@GetMapping(CSV_CLOUDLEVEL)
 	public void cloudLevel(@RequestParam(value = Constant.LOCATION) String location,

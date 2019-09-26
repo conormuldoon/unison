@@ -12,6 +12,11 @@ import org.springframework.web.bind.annotation.RestController;
 
 import eu.acclimatize.unison.Constant;
 
+/**
+ * 
+ * A controller for accessing temperature data in a CSV format.
+ *
+ */
 @RestController
 public class CSVTemperatureController {
 
@@ -19,10 +24,24 @@ public class CSVTemperatureController {
 
 	private static final String CSV_TEMP = "/csvTemperature";
 
+	/**
+	 * Creates an instance of CSVTemperatureController.
+	 * 
+	 * @param temperatureResponder A responder that prints temperature data in a CSV format.
+	 */
 	public CSVTemperatureController(CSVResponder temperatureResponder) {
 		this.temperatureResponder = temperatureResponder;
 	}
 
+	/**
+	 * Prints temperature data to the HTTP servlet response object.
+	 * 
+	 * @param location The location of interest.
+	 * @param fromDate The start date for the data (inclusive).
+	 * @param toDate The end date for the data (inclusive).
+	 * @param response Data is written to the writer of the response object.
+	 * @throws IOException Thrown if there is a problem obtaining the writer of the response object.
+	 */
 	// Specify location, from date, and to date
 	@GetMapping(CSV_TEMP)
 	public void temperature(@RequestParam(value = Constant.LOCATION) String location,

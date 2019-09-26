@@ -16,7 +16,7 @@ import eu.acclimatize.unison.result.WindSpeedResult;
 
 /**
  * 
- * A configuration class for creating beans for JPA queries.
+ * A configuration class for creating beans for JPA queries. The query results are order by time (fromHour column in the database).
  *
  */
 @Configuration

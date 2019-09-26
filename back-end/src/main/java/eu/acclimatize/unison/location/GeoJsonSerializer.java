@@ -3,9 +3,12 @@ package eu.acclimatize.unison.location;
 import java.io.IOException;
 
 import com.fasterxml.jackson.core.JsonGenerator;
-import com.fasterxml.jackson.core.JsonProcessingException;
-import com.fasterxml.jackson.databind.SerializerProvider;
 
+/**
+ * 
+ * Used by spatial database serializers to serialize point data to GeoJSON data.
+ *
+ */
 public class GeoJsonSerializer {
 
 	private static final String TYPE = "type";
@@ -13,8 +16,15 @@ public class GeoJsonSerializer {
 	private static final String COORDINATES = "coordinates";
 
 	
-	public void serialize(double x,double y, JsonGenerator jGen, SerializerProvider provider)
-			throws IOException, JsonProcessingException {
+	/** Writes x and y coordinates to the JSON generator in a GeoJSON format.
+	 * 
+	 * @param x The x coordinate of the point.
+	 * @param y The y coordinate of the point.
+	 * @param jGen The JsonGenerator object written to.
+	 * @throws IOException Thrown if there is a problem writing to the JSON generator.
+	 */
+	public void serialize(double x,double y, JsonGenerator jGen)
+			throws IOException {
 
 		jGen.writeStartObject();
 

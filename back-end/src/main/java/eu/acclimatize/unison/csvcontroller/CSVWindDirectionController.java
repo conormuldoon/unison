@@ -12,16 +12,35 @@ import org.springframework.web.bind.annotation.RestController;
 
 import eu.acclimatize.unison.Constant;
 
+/**
+ * 
+ * A controller for accessing wind direction data in a CSV format.
+ *
+ */
 @RestController
 public class CSVWindDirectionController {
 
 	CSVResponder windDirectionResponder;
 	private static final String WINSPEED = "/csvWindDirection";
 
+	/**
+	 * Creates an instance of CSVWindDirectionController.
+	 * 
+	 * @param windDirectionResponder A responder that prints wind direction data in a CSV format.
+	 */
 	public CSVWindDirectionController(CSVResponder windDirectionResponder) {
 		this.windDirectionResponder = windDirectionResponder;
 	}
 
+	/**
+	 * Prints wind direction data to the HTTP servlet response object.
+	 * 
+	 * @param location The location of interest.
+	 * @param fromDate The start date for the data (inclusive).
+	 * @param toDate The end date for the data (inclusive).
+	 * @param response Data is written to the writer of the response object.
+	 * @throws IOException Thrown if there is a problem obtaining the writer of the response object.
+	 */
 	@GetMapping(WINSPEED)
 	public void windDirection(@RequestParam(Constant.LOCATION) String location,
 			@RequestParam(value = Constant.FROM_DATE) @DateTimeFormat(pattern = Constant.FORMAT) Date fromDate,

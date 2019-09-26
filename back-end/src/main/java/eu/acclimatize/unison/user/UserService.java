@@ -8,7 +8,6 @@ import java.util.logging.Logger;
 
 import javax.annotation.PostConstruct;
 
-import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;

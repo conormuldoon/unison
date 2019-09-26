@@ -31,12 +31,12 @@ public class PostGISStore implements CoordinatesStore {
 
 
 	@Override
-	public void save(String name, double longitude, double latitude, LocationDetails location) {
+	public void save(double longitude, double latitude, LocationDetails location) {
 	
 		Point p;
 		try {
 			p = (Point) wktR.read("POINT (" + longitude + " " + latitude + ")");
-			PostGISCoordinates coord = new PostGISCoordinates(name, p, location);
+			PostGISCoordinates coord = new PostGISCoordinates( p, location);
 			repository.save(coord);
 		} catch (ParseException e) {
 			throw new CoordinatesParseException(e);

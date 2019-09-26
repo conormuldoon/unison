@@ -12,6 +12,11 @@ import org.springframework.web.bind.annotation.RestController;
 
 import eu.acclimatize.unison.Constant;
 
+/**
+ * 
+ * A controller for accessing fog data in a CSV format.
+ *
+ */
 @RestController
 public class CSVFogController {
 
@@ -19,10 +24,24 @@ public class CSVFogController {
 
 	private static final String CSV_Fog = "/csvFog";
 
+	/**
+	 * Creates an instance of CSVFogController.
+	 * 
+	 * @param fogResponder A responder that prints fog data in a CSV format.
+	 */
 	public CSVFogController(CSVResponder fogResponder) {
 		this.fogResponder=fogResponder;
 	}
 
+	/**
+	 * Prints fog data to the HTTP servlet response object.
+	 * 
+	 * @param location The location of interest.
+	 * @param fromDate The start date for the data (inclusive).
+	 * @param toDate The end date for the data (inclusive).
+	 * @param response Data is written to the writer of the response object.
+	 * @throws IOException Thrown if there is a problem obtaining the writer of the response object.
+	 */
 	// Specify location, from date, and to date
 	@GetMapping(CSV_Fog)
 	public void fog(@RequestParam(value = Constant.LOCATION) String location,

@@ -28,7 +28,7 @@ public class PostGISCoordinates {
 
 
 
-	public PostGISCoordinates(String name, Point geom, LocationDetails location) {
+	public PostGISCoordinates( Point geom, LocationDetails location) {
 		this.name = name;
 		this.geom = geom;
 		this.location = location;

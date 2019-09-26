@@ -31,8 +31,8 @@ public class GeoDBCoordinates {
 
 	
 
-	public GeoDBCoordinates(String name, Point geom, LocationDetails location) {
-		this.name = name;
+	public GeoDBCoordinates(Point geom, LocationDetails location) {
+		
 		this.geom = geom;
 		this.location = location;
 		

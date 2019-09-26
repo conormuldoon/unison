@@ -32,12 +32,12 @@ public class GeoDBStore implements CoordinatesStore {
 
 
 	@Override
-	public void save(String name, double longitude, double latitude, LocationDetails location) {
+	public void save(double longitude, double latitude, LocationDetails location) {
 
 		Point p;
 		try {
 			p = (Point) wktR.read("POINT (" + longitude + " " + latitude + ")");
-			GeoDBCoordinates coord = new GeoDBCoordinates(name, p, location);
+			GeoDBCoordinates coord = new GeoDBCoordinates( p, location);
 			repository.save(coord);
 		} catch (ParseException e) {
 			throw new CoordinatesParseException(e);

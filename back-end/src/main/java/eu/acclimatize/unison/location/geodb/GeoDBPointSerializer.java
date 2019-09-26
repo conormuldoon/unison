@@ -23,9 +23,9 @@ public class GeoDBPointSerializer extends JsonSerializer<Point> {
 
 	@Override
 	public void serialize(Point point, JsonGenerator jGen, SerializerProvider provider)
-			throws IOException, JsonProcessingException {
+			throws IOException{
 		
-		geoJsonSerializer.serialize(point.getX(),point.getY(),jGen,provider);
+		geoJsonSerializer.serialize(point.getX(),point.getY(),jGen);
 
 	
 
