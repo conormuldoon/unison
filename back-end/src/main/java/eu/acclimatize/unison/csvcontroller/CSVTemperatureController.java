@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import eu.acclimatize.unison.Constant;
+import eu.acclimatize.unison.result.TemperatureResult;
 
 /**
  * 
@@ -48,6 +49,7 @@ public class CSVTemperatureController {
 			@RequestParam(value = Constant.FROM_DATE) @DateTimeFormat(pattern = Constant.FORMAT) Date fromDate,
 			@RequestParam(value = Constant.TO_DATE) @DateTimeFormat(pattern = Constant.FORMAT) Date toDate,
 			HttpServletResponse response) throws IOException {
+		TemperatureResult.printTitle(response.getWriter());
 		temperatureResponder.handleResponse(response, location, fromDate, toDate);
 
 	}

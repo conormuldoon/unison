@@ -13,6 +13,12 @@ import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 
 import eu.acclimatize.unison.location.LocationDetails;
 
+/**
+ * 
+ * An entity class to store coordinates for GeoDB. Similar to {@link eu.acclimatize.unison.location.postgis.PostGISCoordinates}, 
+ * but has dependencies on the org.locationtech package.
+ *
+ */
 @Entity
 public class GeoDBCoordinates {
 
@@ -31,6 +37,13 @@ public class GeoDBCoordinates {
 
 	
 
+	/**
+	 * Creates an instance of GeoDBCoordinates. The primary key of the entity
+	 * is mapped by the name attribute of {@link eu.acclimatize.unison.location.LocationDetails}.
+	 * 
+	 * @param geom A spatial point geometry used when storing data in GeoDB. 
+	 * @param location Information related to the point.
+	 */
 	public GeoDBCoordinates(Point geom, LocationDetails location) {
 		
 		this.geom = geom;
@@ -38,6 +51,9 @@ public class GeoDBCoordinates {
 		
 	}
 	
+	/**
+	 * A zero argument constructor of JPA.
+	 */
 	public GeoDBCoordinates() {
 		
 	}

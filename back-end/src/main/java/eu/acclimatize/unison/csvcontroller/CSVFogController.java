@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import eu.acclimatize.unison.Constant;
+import eu.acclimatize.unison.result.FogResult;
 
 /**
  * 
@@ -48,6 +49,8 @@ public class CSVFogController {
 			@RequestParam(value = Constant.FROM_DATE) @DateTimeFormat(pattern = Constant.FORMAT) Date fromDate,
 			@RequestParam(value = Constant.TO_DATE) @DateTimeFormat(pattern = Constant.FORMAT) Date toDate,
 			HttpServletResponse response) throws IOException {
+		
+		FogResult.printTitle(response.getWriter());
 		fogResponder.handleResponse(response, location, fromDate, toDate);
 
 	}

@@ -8,14 +8,25 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import eu.acclimatize.unison.HarmonieItem;
 import eu.acclimatize.unison.PrecipitationValue;
 
+/**
+ * A Jackson annotated class that is used to store a result row from a precipitation data query.
+ *
+ */
 public class PrecipitationResult implements HarmonieItem {
 
 	@JsonProperty
-	Date date;
+	private Date date;
 
 	@JsonProperty
-	PrecipitationValue precipitation;
+	private PrecipitationValue precipitation;
 
+	/**
+	 * Creates and instance of PrecipitationResult.
+	 * 
+	 * @param date The hour from which the results relates.
+	 * @param precipitation Stores the value, minimum value, and maximum value for precipitation. The 
+	 * minimum and maximum values may not be presents for some locations or in the Norwegian model.
+	 */
 	public PrecipitationResult(Date date, PrecipitationValue precipitation) {
 		this.date = date;
 
@@ -23,14 +34,13 @@ public class PrecipitationResult implements HarmonieItem {
 
 	}
 
-	public PrecipitationResult() {
-		precipitation = new PrecipitationValue();
-	}
-
-	@Override
-	public void printTitle(PrintWriter pw) {
+	/**
+	 * Prints the title/header in CSV format.
+	 * @param pw The writer the title is printed to.
+	 */
+	public static void printTitle(PrintWriter pw) {
 		pw.print("date,");
-		precipitation.printTitle(pw);
+		PrecipitationValue.printTitle(pw);
 
 	}
 

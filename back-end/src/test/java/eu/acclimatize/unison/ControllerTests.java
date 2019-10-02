@@ -80,7 +80,7 @@ public class ControllerTests {
 	Date fromDate, toDate;
 
 	final private static String LOCATION = "UCD";
-	
+
 	// final private static String P_COORD = "POINT (-6.224133 53.308398)";
 
 	StringWriter sw;
@@ -100,19 +100,19 @@ public class ControllerTests {
 		sw = new StringWriter();
 		PrintWriter pw = new PrintWriter(sw);
 		Mockito.when(response.getWriter()).thenReturn(pw);
-		
+
 	}
 
 	@Before
 	public void addWeatherData() throws ParseException {
 		EntityManager em = testEntityManager.getEntityManager();
 
-		UserInformation ui=new UserInformation("conor","abc");
+		UserInformation ui = new UserInformation("conor", "abc");
 		em.persist(ui);
-		
+
 		location = new LocationDetails(LOCATION, "", ui);
 		ik = new ItemKey(fromDate, location);
-		
+
 		WindDirection wd = new WindDirection(0, "Lett bris");
 		WindSpeed ws = new WindSpeed(0, 0, "W");
 		Cloud cloud = new Cloud(0d, 0d, 0d);
@@ -256,7 +256,9 @@ public class ControllerTests {
 		PrecipitationValue pv = new PrecipitationValue(0d, 0d, 0d);
 		HourlyPrecipitation precip = new HourlyPrecipitation(ik, pv);
 		testEntityManager.getEntityManager().persist(precip);
-		testCSVPreciptiation(4);
+		CSVPrecipitationController csvPrecipitationController = new CSVPrecipitationController(precipitationResponder);
+		csvPrecipitationController.precipitation(LOCATION, fromDate, toDate, response);
+		assertLength(sw, 4);
 
 	}
 
@@ -265,14 +267,17 @@ public class ControllerTests {
 		PrecipitationValue pv = new PrecipitationValue(0d, null, null);
 		HourlyPrecipitation precip = new HourlyPrecipitation(ik, pv);
 		testEntityManager.getEntityManager().persist(precip);
-		testCSVPreciptiation(2);
-	}
-
-	private void testCSVPreciptiation(int num) throws IOException {
-
 		CSVPrecipitationController csvPrecipitationController = new CSVPrecipitationController(precipitationResponder);
 		csvPrecipitationController.precipitation(LOCATION, fromDate, toDate, response);
-		assertLength(sw, num);
+		int len = 4;
+
+		String[] str = sw.toString().split("\n");
+		String[] st0 = str[0].split(",");
+		String[] st1 = str[1].split(",");
+		Assert.assertEquals(len, st1.length);
+		Assert.assertEquals(len, st0.length);
+		Assert.assertEquals("-1.0", st1[2]);
+		Assert.assertEquals("-1.0", st1[3]);
 	}
 
 	@Test

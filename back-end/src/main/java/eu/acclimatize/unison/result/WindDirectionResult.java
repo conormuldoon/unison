@@ -8,27 +8,36 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import eu.acclimatize.unison.HarmonieItem;
 import eu.acclimatize.unison.WindDirection;
 
+/**
+ * A Jackson annotated class that is used to store a result row from a wind direction data query.
+ *
+ */
 public class WindDirectionResult implements HarmonieItem {
 
 	@JsonProperty
-	Date date;
+	private Date date;
 
 	@JsonProperty
-	WindDirection windDirection;
+	private WindDirection windDirection;
 
+	/**
+	 * Creates and instance of WindDirectionResult.
+	 * 
+	 * @param date The hour from which the results relates.
+	 * @param windDirection Contains information related to the angle in degrees and wind name.
+	 */
 	public WindDirectionResult(Date date, WindDirection windDirection) {
 		this.date = date;
 		this.windDirection = windDirection;
 	}
 
-	public WindDirectionResult() {
-		windDirection=new WindDirection();
-	}
-
-	@Override
-	public void printTitle(PrintWriter pw) {
+	/**
+	 * Prints the title/header in CSV format.
+	 * @param pw The writer the title is printed to.
+	 */
+	public static void printTitle(PrintWriter pw) {
 		pw.print("date,");
-		windDirection.printTitle(pw);
+		WindDirection.printTitle(pw);
 
 	}
 

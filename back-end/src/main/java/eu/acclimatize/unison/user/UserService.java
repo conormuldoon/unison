@@ -14,6 +14,11 @@ import org.springframework.transaction.annotation.Transactional;
 
 import eu.acclimatize.unison.location.ResponseConstant;
 
+/**
+ * 
+ * A services that enables tasks to be executed that require user credentials.
+ *
+ */
 @Service
 public class UserService {
 
@@ -23,6 +28,12 @@ public class UserService {
 
 	private BCryptPasswordEncoder passwordEncoder;
 
+	/**
+	 * Creates an instance of UserService.
+	 * 
+	 * @param userRepository The repository user credentials information is stored.
+	 * @param logger Used to log events when the user consoles is not present, such as in testing.
+	 */
 	public UserService(UserRepository userRepository, Logger logger) {
 		this.userRepository = userRepository;
 		passwordEncoder = new BCryptPasswordEncoder();
@@ -30,7 +41,7 @@ public class UserService {
 	}
 
 	@PostConstruct
-	void initialUser() throws IOException {
+	private void initialUser() throws IOException {
 
 		if (userRepository.count() == 0) {
 
@@ -48,6 +59,14 @@ public class UserService {
 
 	}
 
+	/**
+	 * Executes a {@link UserTask} if the user name and password match the credentials in the database.
+	 * 
+	 * @param userName The name of the user.
+	 * @param password The user's password.
+	 * @param task The task to be executed.
+	 * @return The {@link eu.acclimatize.unison.location.ResponseConstant} value for the result of executing the task if the credentials were correct or 2 for incorrect credentials otherwise.
+	 */
 	@Transactional
 	public int executeTask(String userName, String password, UserTask task) {
 		Optional<UserInformation> oUser = userRepository.findById(userName);

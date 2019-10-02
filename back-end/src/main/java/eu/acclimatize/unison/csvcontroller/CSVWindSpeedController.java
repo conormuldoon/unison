@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import eu.acclimatize.unison.Constant;
+import eu.acclimatize.unison.result.WindSpeedResult;
 
 /**
  * 
@@ -46,7 +47,8 @@ public class CSVWindSpeedController {
 			@RequestParam(value = Constant.FROM_DATE) @DateTimeFormat(pattern = Constant.FORMAT) Date fromDate,
 			@RequestParam(value = Constant.TO_DATE) @DateTimeFormat(pattern = Constant.FORMAT) Date toDate,
 			HttpServletResponse response) throws IOException {
-
+		
+		WindSpeedResult.printTitle(response.getWriter());
 		windSpeedResponder.handleResponse(response, location, fromDate, toDate);
 	}
 

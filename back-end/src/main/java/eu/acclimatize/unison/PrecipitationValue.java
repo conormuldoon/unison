@@ -37,13 +37,14 @@ public class PrecipitationValue implements HarmonieItem {
 
 	}
 
-	@Override
-	public void printTitle(PrintWriter pw) {
-		if (minvalue != null) {
-			pw.println("value,minValue,maxValue,");
-		} else {
-			pw.println("value,");
-		}
+	/**
+	 * Prints the title/header in CSV format.
+	 * @param pw The writer the title is printed to.
+	 */
+	public static void printTitle(PrintWriter pw) {
+		
+		pw.println("value,minValue,maxValue,");
+	
 
 	}
 	
@@ -52,7 +53,7 @@ public class PrecipitationValue implements HarmonieItem {
 		if (minvalue != null) {
 			pw.println(value + "," + minvalue + "," + maxvalue + ",");
 		} else {
-			pw.println(value + ",");
+			pw.println(value + ",-1.0,-1.0,");
 		}
 
 	}

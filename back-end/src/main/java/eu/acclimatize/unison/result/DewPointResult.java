@@ -7,25 +7,35 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 
 import eu.acclimatize.unison.HarmonieItem;
 
+/**
+ * A Jackson annotated class that is used to store a result row from a dew point data query.
+ *
+ */
 public class DewPointResult implements HarmonieItem {
 
 	@JsonProperty
-	Date date;
+	private Date date;
 
 	@JsonProperty
-	double dewPoint;
+	private double dewPoint;
 
+	/**
+	 * Creates and instance of DewPointResulte.
+	 * 
+	 * @param date The hour from which the results relates.
+	 * @param dewPoint The dew point value.
+	 */
 	public DewPointResult(Date date, double dewPoint) {
 		this.date = date;
 		this.dewPoint = dewPoint;
 	}
 
-	public DewPointResult() {
 
-	}
-
-	@Override
-	public void printTitle(PrintWriter pw) {
+	/**
+	 * Prints the title/header in CSV format.
+	 * @param pw The writer the title is printed to.
+	 */
+	public static void printTitle(PrintWriter pw) {
 		pw.println("date,dewPoint,");
 
 	}

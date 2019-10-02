@@ -16,6 +16,15 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
 import eu.acclimatize.unison.Constant;
 
+/**
+ * 
+ * A class that uses the console to request user credentials (user name and password) 
+ * information and stores it in the database. Credentials are requested if none are
+ * present when Unison begins operating. Additionally, the class can be invoked from the 
+ * command line to add additional users or update users' passwords. 
+ * 
+ *
+ */
 public class UserConsole {
 
 	public static final String CONFIG = "userinformation.cfg.xml";
@@ -25,6 +34,12 @@ public class UserConsole {
 	Console console;
 	BCryptPasswordEncoder encoder;
 
+	/**
+	 * Creates and instance of UserConsole.
+	 * 
+	 * @param console Used to request and read user data.
+	 * @param encoder Used to encrypt the password.
+	 */
 	public UserConsole(Console console, BCryptPasswordEncoder encoder) {
 
 		this.console = console;
@@ -32,7 +47,7 @@ public class UserConsole {
 
 	}
 
-	void hideInfoLogs() {
+	private void hideInfoLogs() {
 		console.printf("Starting\n");
 
 		System.setProperty("org.jboss.logging.provider", "jdk");
@@ -44,7 +59,7 @@ public class UserConsole {
 		mchangeLogger.setLevel(ch.qos.logback.classic.Level.WARN);
 	}
 
-	void execute() {
+	private void execute() {
 		hideInfoLogs();
 		Configuration cfg = new Configuration();
 
@@ -72,6 +87,12 @@ public class UserConsole {
 
 	}
 
+	/**
+	 * Asks the user to enter a user name whether they would like to generate a password
+	 * or enter one.
+	 * 
+	 * @return Contains the information entered by the user (the password is encoded).
+	 */
 	public UserInformation requestUserInformation() {
 		console.printf("Enter user name: ");
 
@@ -86,11 +107,11 @@ public class UserConsole {
 			String password = randomPassword();
 			console.printf("Generated password: %s\n", password);
 
-			encoded = encodePassword(password);
+			encoded = encoder.encode(password);
 		} else {
 
 			char[] passwd = System.console().readPassword("%s", "Enter password: ");
-			encoded = encodePassword(String.valueOf(passwd));
+			encoded = encoder.encode(String.valueOf(passwd));
 			java.util.Arrays.fill(passwd, ' '); // See Security note for Console class:
 												// https://docs.oracle.com/javase/7/docs/api/java/io/Console.html
 
@@ -101,7 +122,11 @@ public class UserConsole {
 
 	}
 
-	// Generates a random password
+	/** 
+	 * Generates a random password.
+	 * 
+	 * @return The password generated.
+	 */
 	public String randomPassword() {
 		Random r = new Random();
 		StringBuilder pwd = new StringBuilder();
@@ -113,22 +138,22 @@ public class UserConsole {
 
 	}
 
-	// Encodes password
-	public String encodePassword(CharSequence password) {
+	
 
-		String encoded = encoder.encode(password);
-
-		return encoded;
-	}
-
-	public static void main(String[] args) throws IOException {
+	/**
+	 * Creates and executes a UserConsole using the system console and a bcrypt encoder.
+	 * 
+	 * @param args The arguments are not used.
+	 *  
+	 */
+	public static void main(String[] args)  {
 
 		UserConsole uc = new UserConsole(System.console(), new BCryptPasswordEncoder());
 		uc.execute();
 
 	}
 
-	public void storeUser(UserInformation user, Configuration configuration) {
+	private void storeUser(UserInformation user, Configuration configuration) {
 		SessionFactory factory = null;
 		Session session = null;
 		try {

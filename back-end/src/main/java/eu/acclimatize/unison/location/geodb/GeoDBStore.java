@@ -6,13 +6,16 @@ import org.locationtech.jts.io.WKTReader;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Repository;
 
-import eu.acclimatize.unison.HourlyPrecipitationRepository;
-import eu.acclimatize.unison.HourlyWeatherRepository;
+import eu.acclimatize.unison.location.CoordinatesParseException;
 import eu.acclimatize.unison.location.CoordinatesStore;
 import eu.acclimatize.unison.location.LocationDetails;
-import eu.acclimatize.unison.location.LocationRepository;
-import eu.acclimatize.unison.location.CoordinatesParseException;
 
+/**
+ * 
+ * A wrapper repository for the {@link GeoDBCoordinatesRepository} that hides dependencies on the 
+ * org.locationtech package from classes it is injected to.
+ *
+ */
 @Repository
 public class GeoDBStore implements CoordinatesStore {
 
@@ -22,8 +25,13 @@ public class GeoDBStore implements CoordinatesStore {
 
 	private Sort sort;
 
-	public GeoDBStore(GeoDBCoordinatesRepository repository, LocationRepository locationRepository,
-			HourlyPrecipitationRepository hpr, HourlyWeatherRepository hwr, Sort sort) {
+	/**
+	 * Creates an instance of GeoDBStore.
+	 * 
+	 * @param repository A repository that stores coordinates data in GeoDB.
+	 * @param sort Determines the order of results for {@link eu.acclimatize.unison.location.CoordinatesStore#sortedFindAll}.
+	 */
+	public GeoDBStore(GeoDBCoordinatesRepository repository, Sort sort) {
 		this.repository = repository;
 		wktR = new WKTReader();
 
@@ -50,6 +58,7 @@ public class GeoDBStore implements CoordinatesStore {
 		repository.deleteById(locationName);
 	}
 
+	
 	@Override
 	public Iterable<? extends Object> sortedFindAll() {
 

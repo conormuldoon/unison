@@ -8,27 +8,38 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import eu.acclimatize.unison.HarmonieItem;
 import eu.acclimatize.unison.WindSpeed;
 
+/**
+ * A Jackson annotated class that is used to store a result row from a wind speed data query.
+ *
+ */
 public class WindSpeedResult implements HarmonieItem {
 
 	@JsonProperty
-	Date date;
+	private Date date;
 
 	@JsonProperty
-	WindSpeed windSpeed;
+	private WindSpeed windSpeed;
 
+	/**
+	 * Creates and instance of WindSpeedResult.
+	 * 
+	 * @param date The hour from which the results relates.
+	 * @param windSpeed Contains information about the wind speed in
+	 *  metres per second, the wind name, and the Beaufort scale value.
+	 */
 	public WindSpeedResult(Date date, WindSpeed windSpeed) {
 		this.date = date;
 		this.windSpeed = windSpeed;
 	}
 
-	public WindSpeedResult() {
-		windSpeed = new WindSpeed();
-	}
 
-	@Override
-	public void printTitle(PrintWriter pw) {
+	/**
+	 * Prints the title/header in CSV format.
+	 * @param pw The writer the title is printed to.
+	 */
+	public static void printTitle(PrintWriter pw) {
 		pw.print("date,");
-		windSpeed.printTitle(pw);
+		WindSpeed.printTitle(pw);
 
 	}
 

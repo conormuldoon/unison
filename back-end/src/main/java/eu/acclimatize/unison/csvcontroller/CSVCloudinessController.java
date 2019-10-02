@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import eu.acclimatize.unison.Constant;
+import eu.acclimatize.unison.result.CloudinessResult;
 
 /**
  * 
@@ -27,7 +28,8 @@ public class CSVCloudinessController {
 	/**
 	 * Creates an instance of CSVCloudinessController.
 	 * 
-	 * @param cloudinessResponder A responder that prints cloudiness data in a CSV format.
+	 * @param cloudinessResponder A responder that prints cloudiness data in a CSV
+	 *                            format.
 	 */
 	public CSVCloudinessController(CSVResponder cloudinessResponder) {
 		this.cloudinessResponder = cloudinessResponder;
@@ -38,9 +40,10 @@ public class CSVCloudinessController {
 	 * 
 	 * @param location The location of interest.
 	 * @param fromDate The start date for the data (inclusive).
-	 * @param toDate The end date for the data (inclusive).
+	 * @param toDate   The end date for the data (inclusive).
 	 * @param response Data is written to the writer of the response object.
-	 * @throws IOException Thrown if there is a problem obtaining the writer of the response object.
+	 * @throws IOException Thrown if there is a problem obtaining the writer of the
+	 *                     response object.
 	 */
 	// Specify location, from date, and to date
 	@GetMapping(CSV_CLOUDINESS)
@@ -49,6 +52,7 @@ public class CSVCloudinessController {
 			@RequestParam(value = Constant.TO_DATE) @DateTimeFormat(pattern = Constant.FORMAT) Date toDate,
 			HttpServletResponse response) throws IOException {
 
+		CloudinessResult.printTitle(response.getWriter());
 		cloudinessResponder.handleResponse(response, location, fromDate, toDate);
 
 	}

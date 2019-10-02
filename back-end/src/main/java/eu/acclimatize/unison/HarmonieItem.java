@@ -8,11 +8,6 @@ import java.io.PrintWriter;
  */
 public interface HarmonieItem {
 
-	/**
-	 * Prints the title/header in CSV format.
-	 * @param pw The writer the title is printed to.
-	 */
-	public void printTitle(PrintWriter pw);
 	
 	/**
 	 * Prints the body in CSV format.

@@ -7,25 +7,34 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 
 import eu.acclimatize.unison.HarmonieItem;
 
+/**
+ * A Jackson annotated class that is used to store a result row from a humidity data query.
+ *
+ */
 public class HumidityResult implements HarmonieItem {
 
 	@JsonProperty
-	Date date;
+	private Date date;
 
 	@JsonProperty
-	double humidity;
+	private double humidity;
 
+	/**
+	 * Creates and instance of HumidityResult.
+	 * 
+	 * @param date The hour from which the results relates.
+	 * @param humidity The level of humidity.
+	 */
 	public HumidityResult(Date date, double humidity) {
 		this.date = date;
 		this.humidity = humidity;
 	}
 
-	public HumidityResult() {
-
-	}
-
-	@Override
-	public void printTitle(PrintWriter pw) {
+	/**
+	 * Prints the title/header in CSV format.
+	 * @param pw The writer the title is printed to.
+	 */
+	public static void printTitle(PrintWriter pw) {
 		pw.println("date,humidity,");
 
 	}

@@ -7,25 +7,35 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 
 import eu.acclimatize.unison.HarmonieItem;
 
+/**
+ * A Jackson annotated class that is used to store a result row from a cloudiness data query.
+ *
+ */
 public class CloudinessResult implements HarmonieItem {
 
 	@JsonProperty
-	Date date;
+	private Date date;
 
 	@JsonProperty
-	double cloudiness;
+	private double cloudiness;
 
+	/**
+	 * Creates and instance of CloudinessResult.
+	 * 
+	 * @param date The hour from which the results relates.
+	 * @param cloudiness The percentage of cloudiness.
+	 */
 	public CloudinessResult(Date date, double cloudiness) {
 		this.date = date;
 		this.cloudiness = cloudiness;
 	}
 
-	public CloudinessResult() {
 
-	}
-
-	@Override
-	public void printTitle(PrintWriter pw) {
+	/**
+	 * Prints the title/header in CSV format.
+	 * @param pw The writer the title is printed to.
+	 */
+	public static void printTitle(PrintWriter pw) {
 		pw.println("date,cloudiness,");
 
 	}
