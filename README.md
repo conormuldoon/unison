@@ -24,7 +24,7 @@ cd back-end
 ```
 If not previously compiled: `mvn clean compile package`
 ```
-java -cp target/uniAPSHOT.jar -Dloader.main=eu.acclimatize.unison.user.UserConsole org.springframework.boot.loader.PropertiesLauncher
+java -cp target/unison-server-0.0.1-SNAPSHOT.jar -Dloader.main=eu.acclimatize.unison.user.UserConsole org.springframework.boot.loader.PropertiesLauncher
 ```
 
 ## Acknowlegements
