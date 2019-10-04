@@ -26,7 +26,7 @@ const varOpt=['Precipitation','Humidity','Wind Direction','Wind Speed','Cloudine
  * Application component for Unison. Once mounted, it connects to the back-end to receive a list of location being tracked.
  * 
  */
-class App extends Component {
+class Unison extends Component {
 
 
   constructor(props) {
@@ -58,31 +58,33 @@ class App extends Component {
     new Promise(async () =>{
       let response = await fetch(API+'/location');
 
-      let locationArray = await response.json();
+      if(response.ok){
+        let locationArray = await response.json();
 
-      if(active){
-        let n=locationArray.length;
+        if(active){
+          let n=locationArray.length;
 
-        let newOption=[];
-        let newMarker=[];
+          let newOption=[];
+          let newMarker=[];
 
-        maxLen=0;
-        for(let i=0;i<n;i++){
-          maxLen=Math.max(locationArray[i].name.length)
+          maxLen=0;
+          for(let i=0;i<n;i++){
+            maxLen=Math.max(locationArray[i].name.length)
 
-        }
-        for(let i=0;i<n;i++){
-          newOption.push(this.addPadding(locationArray[i].name));
-          let pos=[locationArray[i].geom.coordinates[1],locationArray[i].geom.coordinates[0]];
+          }
+          for(let i=0;i<n;i++){
+            newOption.push(this.addPadding(locationArray[i].name));
+            let pos=[locationArray[i].geom.coordinates[1],locationArray[i].geom.coordinates[0]];
 
-          newMarker.push({name:locationArray[i].name,position:pos});
+            newMarker.push({name:locationArray[i].name,position:pos});
 
 
-        }
-        if(n>0){
-          this.setState({option:newOption,marker:newMarker,curLoc: this.addPadding(locationArray[0].name) });
-        }else{
-          this.setState({curLoc: undefined,option:undefined,marker:undefined});
+          }
+          if(n>0){
+            this.setState({option:newOption,marker:newMarker,curLoc: this.addPadding(locationArray[0].name) });
+          }else{
+            this.setState({curLoc: undefined,option:undefined,marker:undefined});
+          }
         }
       }
     });
@@ -237,4 +239,4 @@ class App extends Component {
   }
 }
 
-export default App;
+export default Unison;

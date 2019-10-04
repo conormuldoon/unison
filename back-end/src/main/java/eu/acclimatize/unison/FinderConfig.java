@@ -6,7 +6,8 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
 /**
- * A configuration class for creating {@link ItemListFinder} beans.
+ * A configuration class for creating {@link ItemListFinder} beans. The {@link ItemListFinder}s are created using
+ * JPQL query string beans configured in {@link ResultQueryConfig}.
  *
  */
 @Configuration

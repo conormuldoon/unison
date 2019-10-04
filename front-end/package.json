@@ -1,5 +1,5 @@
 {
-  "name": "unison-frontend",
+  "name": "unison-front-end",
   "version": "0.1.0",
   "license": "MIT",
   "private": true,
@@ -26,7 +26,9 @@
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test --env=jsdom",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "styleguide": "styleguidist server",
+    "styleguide:build": "styleguidist build"
   },
   "proxy": "http://localhost:8080",
   "homepage": "/unison",

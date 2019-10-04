@@ -12,6 +12,13 @@ const CELSIUS="Celsius";
 
 const PREVAL="precipitation.value";
 
+/**
+ * A component that displays a number of tabs for ChartComponents for the phenomenom being tracked. 
+ * For exmaple, for cloud level, there is a tab for high, medium, and low level clouds. Otherwise,
+ * only a single tab is displayed.
+ * 
+ * @param {*} props 
+ */
 export default function TabsComponent(props){
 
   const [tabs,setTabs]=useState(undefined);

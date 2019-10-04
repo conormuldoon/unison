@@ -8,8 +8,10 @@ import PropTypes from 'prop-types';
 
 
 /**
- * A component that enables locations to be added or removed. The user name and password is posted to the server and the obtain data callback is excuted if successful.
+ * A component that enables locations to be added or removed.
+ * The user name and password is posted to the server and the obtain data callback is excuted if successful. 
  * 
+ * @param {*} props 
  */
 export default function ARLocationComponent(props) {
 

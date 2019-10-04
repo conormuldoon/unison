@@ -5,9 +5,10 @@ import {VictoryChart,VictoryLine,VictoryTheme,VictoryAxis,VictoryZoomContainer} 
 
 import './App.css';
 
-/** 
+/**
  * A component for displaying line graphs.
  * 
+ * @param {*} props 
  */
 export default function ChartComponent(props) {
 

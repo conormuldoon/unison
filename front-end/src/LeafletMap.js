@@ -15,7 +15,9 @@ const image = new Leaflet.Icon({
            })
 
 
-
+/**
+ * A component for displaying a Leaflet map and markers for popups for locations where weather data is being tracked.
+ */
 export default class LeafletMap extends Component {
   constructor() {
     super()

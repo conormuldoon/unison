@@ -1,4 +1,4 @@
-App example:
+Unison example:
 
 ```js
 <Unison />

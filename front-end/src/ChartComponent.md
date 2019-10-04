@@ -7,4 +7,5 @@ const data=[{"date":"2019-02-23T19:00:00.000+0000","precipitation":{"value":0.0,
 
 <ChartComponent data={data} yVal={'precipitation.value'} yLabel={'Millimetres'} />
 
-```
+
+```  

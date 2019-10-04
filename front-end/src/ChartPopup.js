@@ -5,6 +5,11 @@ import {IoMdClose} from "react-icons/io";
 import './App.css';
 import TabsComponent from './TabsComponent';
 
+/**
+ * A popup that displays a TabsComponent.
+ * 
+ * @param {*} props 
+ */
 export default function ChartPopup(props){
 
 

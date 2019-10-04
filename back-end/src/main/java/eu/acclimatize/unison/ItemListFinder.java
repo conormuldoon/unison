@@ -12,7 +12,7 @@ import javax.persistence.TypedQuery;
 
 /**
  * 
- * A class that finds a list of items based on a JPA query.
+ * A class that finds a list of items based on a JPQL query.
  *
  */
 public class ItemListFinder {

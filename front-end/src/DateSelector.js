@@ -10,6 +10,11 @@ import  {
 
 import {FORMAT} from './Constant';
 
+/**
+ * A component for selecting a date.
+ * 
+ * @param {*} props 
+ */
 export default function DateSelector(props){
 
 
