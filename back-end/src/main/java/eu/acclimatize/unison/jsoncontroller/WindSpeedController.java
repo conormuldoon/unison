@@ -19,7 +19,7 @@ import eu.acclimatize.unison.ItemListFinder;
 @RestController
 public class WindSpeedController {
 
-	ItemListFinder windSpeedFinder;
+	private ItemListFinder windSpeedFinder;
 	private static final String MAPPING = "/windSpeed";
 
 	/**

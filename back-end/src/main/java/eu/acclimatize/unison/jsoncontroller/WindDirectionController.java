@@ -19,7 +19,7 @@ import eu.acclimatize.unison.ItemListFinder;
 @RestController
 public class WindDirectionController {
 
-	ItemListFinder windDirectionFinder;
+	private ItemListFinder windDirectionFinder;
 	private static final String MAPPING = "/windDirection";
 
 	/**

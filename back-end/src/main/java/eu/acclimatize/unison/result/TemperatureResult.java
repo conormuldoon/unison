@@ -30,16 +30,6 @@ public class TemperatureResult implements HarmonieItem {
 		this.temperature = temperature;
 	}
 
-
-	/**
-	 * Prints the title/header in CSV format.
-	 * @param pw The writer the title is printed to.
-	 */
-	public static void printTitle(PrintWriter pw) {
-		pw.println("date,temperature,");
-
-	}
-
 	@Override
 	public void printItem(PrintWriter pw) {
 		pw.println(date.toString() + ',' + temperature + ',');

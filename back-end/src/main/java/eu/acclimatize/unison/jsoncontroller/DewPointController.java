@@ -19,7 +19,7 @@ import eu.acclimatize.unison.ItemListFinder;
 @RestController
 public class DewPointController {
 
-	ItemListFinder dewPointFinder;
+	private ItemListFinder dewPointFinder;
 	private static final String MAPPING = "/dewPoint";
 
 	/**

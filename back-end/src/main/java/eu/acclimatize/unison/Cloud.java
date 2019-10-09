@@ -40,15 +40,6 @@ public class Cloud implements HarmonieItem {
 		
 	}
 
-	/**
-	 * Prints the title/header in CSV format.
-	 * @param pw The writer the title is printed to.
-	 */
-	public static void printTitle(PrintWriter pw) {
-		pw.println("low,medium,high,");
-
-	}
-
 	@Override
 	public void printItem(PrintWriter pw) {
 		pw.println(lowClouds + "," + mediumClouds + "," + highClouds + ",");

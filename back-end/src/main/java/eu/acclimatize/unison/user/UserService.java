@@ -65,7 +65,7 @@ public class UserService {
 	 * @param userName The name of the user.
 	 * @param password The user's password.
 	 * @param task The task to be executed.
-	 * @return The {@link eu.acclimatize.unison.location.ResponseConstant} value for the result of executing the task if the credentials were correct or 2 for incorrect credentials otherwise.
+	 * @return The {@link eu.acclimatize.unison.location.ResponseConstant} value for the result of executing the task.
 	 */
 	@Transactional
 	public int executeTask(String userName, String password, UserTask task) {

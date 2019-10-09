@@ -11,7 +11,6 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import eu.acclimatize.unison.Constant;
-import eu.acclimatize.unison.result.PrecipitationResult;
 
 /**
  * 
@@ -50,7 +49,7 @@ public class CSVPrecipitationController {
 			@RequestParam(value = Constant.TO_DATE) @DateTimeFormat(pattern = Constant.FORMAT) Date toDate,
 			HttpServletResponse response) throws IOException {
 		
-		PrecipitationResult.printTitle(response.getWriter());
+		// PrecipitationResult.printTitle(response.getWriter());
 		precipitationResponder.handleResponse(response, location, fromDate, toDate);
 
 	}

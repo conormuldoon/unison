@@ -19,7 +19,7 @@ import eu.acclimatize.unison.ItemListFinder;
 @RestController
 public class PressureController {
 
-	ItemListFinder pressureFinder;
+	private ItemListFinder pressureFinder;
 	private static final String MAPPING = "/pressure";
 
 	/**

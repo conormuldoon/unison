@@ -19,7 +19,7 @@ import eu.acclimatize.unison.ItemListFinder;
 @RestController
 public class PrecipitationController {
 
-	ItemListFinder precipitationFinder;
+	private ItemListFinder precipitationFinder;
 	private static final String PRECIPITATION = "/precipitation";
 
 	/**

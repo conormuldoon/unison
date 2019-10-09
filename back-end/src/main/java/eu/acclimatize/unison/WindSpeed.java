@@ -37,15 +37,6 @@ public class WindSpeed implements HarmonieItem {
 		windSpeed_name = n;
 	}
 
-	/**
-	 * Prints the title/header in CSV format.
-	 * @param pw The writer the title is printed to.
-	 */
-	public static void printTitle(PrintWriter pw) {
-		pw.println("mps,beaufort,name,");
-
-	}
-
 	@Override
 	public void printItem(PrintWriter pw) {
 		pw.println(windSpeed_mps + "," + windSpeed_beaufort + "," + windSpeed_name + ",");

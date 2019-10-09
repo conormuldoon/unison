@@ -19,7 +19,7 @@ import eu.acclimatize.unison.ItemListFinder;
 @RestController
 public class HumidityController {
 
-	ItemListFinder humidityFinder;
+	private ItemListFinder humidityFinder;
 	private static final String HUMIDITY = "/humidity";
 
 	/**

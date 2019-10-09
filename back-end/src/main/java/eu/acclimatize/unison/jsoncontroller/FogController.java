@@ -19,7 +19,7 @@ import eu.acclimatize.unison.ItemListFinder;
 @RestController
 public class FogController {
 
-	ItemListFinder fogFinder;
+	private ItemListFinder fogFinder;
 	private static final String FOG = "/fog";
 
 	/**

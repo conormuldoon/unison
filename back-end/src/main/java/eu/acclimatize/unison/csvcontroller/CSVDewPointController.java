@@ -11,7 +11,6 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import eu.acclimatize.unison.Constant;
-import eu.acclimatize.unison.result.DewPointResult;
 
 /**
  * 
@@ -21,14 +20,15 @@ import eu.acclimatize.unison.result.DewPointResult;
 @RestController
 public class CSVDewPointController {
 
-	CSVResponder dewPointResponder;
+	private CSVResponder dewPointResponder;
 
 	private static final String CSV_DEWPOINT = "/csvDewPoint";
 
 	/**
 	 * Creates an instance of CSVDewPointController.
 	 * 
-	 * @param dewPointResponder A responder that prints dew point data in a CSV format.
+	 * @param dewPointResponder A responder that prints dew point data in a CSV
+	 *                          format.
 	 */
 	public CSVDewPointController(CSVResponder dewPointResponder) {
 		this.dewPointResponder = dewPointResponder;
@@ -39,9 +39,10 @@ public class CSVDewPointController {
 	 * 
 	 * @param location The location of interest.
 	 * @param fromDate The start date for the data (inclusive).
-	 * @param toDate The end date for the data (inclusive).
+	 * @param toDate   The end date for the data (inclusive).
 	 * @param response Data is written to the writer of the response object.
-	 * @throws IOException Thrown if there is a problem obtaining the writer of the response object.
+	 * @throws IOException Thrown if there is a problem obtaining the writer of the
+	 *                     response object.
 	 */
 	// Specify location, from date, and to date
 	@GetMapping(CSV_DEWPOINT)
@@ -49,8 +50,7 @@ public class CSVDewPointController {
 			@RequestParam(value = Constant.FROM_DATE) @DateTimeFormat(pattern = Constant.FORMAT) Date fromDate,
 			@RequestParam(value = Constant.TO_DATE) @DateTimeFormat(pattern = Constant.FORMAT) Date toDate,
 			HttpServletResponse response) throws IOException {
-		
-		DewPointResult.printTitle(response.getWriter());
+
 		dewPointResponder.handleResponse(response, location, fromDate, toDate);
 
 	}

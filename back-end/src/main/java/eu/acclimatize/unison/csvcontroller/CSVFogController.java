@@ -11,7 +11,6 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import eu.acclimatize.unison.Constant;
-import eu.acclimatize.unison.result.FogResult;
 
 /**
  * 
@@ -21,7 +20,8 @@ import eu.acclimatize.unison.result.FogResult;
 @RestController
 public class CSVFogController {
 
-	CSVResponder fogResponder;
+	private CSVResponder fogResponder;
+	
 
 	private static final String CSV_Fog = "/csvFog";
 
@@ -31,7 +31,8 @@ public class CSVFogController {
 	 * @param fogResponder A responder that prints fog data in a CSV format.
 	 */
 	public CSVFogController(CSVResponder fogResponder) {
-		this.fogResponder=fogResponder;
+		this.fogResponder = fogResponder;
+		
 	}
 
 	/**
@@ -39,9 +40,10 @@ public class CSVFogController {
 	 * 
 	 * @param location The location of interest.
 	 * @param fromDate The start date for the data (inclusive).
-	 * @param toDate The end date for the data (inclusive).
+	 * @param toDate   The end date for the data (inclusive).
 	 * @param response Data is written to the writer of the response object.
-	 * @throws IOException Thrown if there is a problem obtaining the writer of the response object.
+	 * @throws IOException Thrown if there is a problem obtaining the writer of the
+	 *                     response object.
 	 */
 	// Specify location, from date, and to date
 	@GetMapping(CSV_Fog)
@@ -49,8 +51,8 @@ public class CSVFogController {
 			@RequestParam(value = Constant.FROM_DATE) @DateTimeFormat(pattern = Constant.FORMAT) Date fromDate,
 			@RequestParam(value = Constant.TO_DATE) @DateTimeFormat(pattern = Constant.FORMAT) Date toDate,
 			HttpServletResponse response) throws IOException {
-		
-		FogResult.printTitle(response.getWriter());
+
+		// FogResult.printTitle(response.getWriter());
 		fogResponder.handleResponse(response, location, fromDate, toDate);
 
 	}

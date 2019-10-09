@@ -11,7 +11,6 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import eu.acclimatize.unison.Constant;
-import eu.acclimatize.unison.result.PressureResult;
 
 /**
  * 
@@ -50,7 +49,7 @@ public class CSVPressureController {
 			@RequestParam(value = Constant.TO_DATE) @DateTimeFormat(pattern = Constant.FORMAT) Date toDate,
 			HttpServletResponse response) throws IOException {
 		
-		PressureResult.printTitle(response.getWriter());
+		// PressureResult.printTitle(response.getWriter());
 		pressureResponder.handleResponse(response, location, fromDate, toDate);
 
 	}

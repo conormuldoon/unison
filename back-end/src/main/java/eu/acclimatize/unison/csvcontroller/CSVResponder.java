@@ -18,15 +18,19 @@ public class CSVResponder {
 
 	private final static String CSV_CONTENT = "text/csv";
 	private ItemListFinder itemListFinder;
+	private String header;
 
 	/**
 	 * Creates an instance of CSVResponder.
 	 * 
 	 * @param itemListFinder Used to obtain a list of data based on query
 	 *                       parameters.
+	 * @param header The CSV header printed by the responder.
 	 */
-	public CSVResponder(ItemListFinder itemListFinder) {
+
+	public CSVResponder(ItemListFinder itemListFinder, String header) {
 		this.itemListFinder = itemListFinder;
+		this.header=header;
 	}
 
 	/**
@@ -37,7 +41,8 @@ public class CSVResponder {
 	 * @param location The location of interest.
 	 * @param fromDate The start date for the data (inclusive).
 	 * @param toDate   The end date for the data (inclusive).
-	 * @param response Data is written to the writer of the response object and the content type is set to text/csv.
+	 * @param response Data is written to the writer of the response object and the
+	 *                 content type is set to text/csv.
 	 * @throws IOException Thrown if there is a problem obtaining the writer of the
 	 *                     response object.
 	 */
@@ -45,6 +50,8 @@ public class CSVResponder {
 			throws IOException {
 		response.setContentType(CSV_CONTENT);
 		PrintWriter pw = response.getWriter();
+
+		pw.println(header);
 
 		List<HarmonieItem> list = itemListFinder.find(location, fromDate, toDate);
 

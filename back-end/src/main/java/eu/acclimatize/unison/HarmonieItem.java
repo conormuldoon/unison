@@ -7,7 +7,6 @@ import java.io.PrintWriter;
  *
  */
 public interface HarmonieItem {
-
 	
 	/**
 	 * Prints the body in CSV format.

@@ -11,7 +11,6 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import eu.acclimatize.unison.Constant;
-import eu.acclimatize.unison.result.CloudinessResult;
 
 /**
  * 
@@ -21,10 +20,10 @@ import eu.acclimatize.unison.result.CloudinessResult;
 @RestController
 public class CSVCloudinessController {
 
-	CSVResponder cloudinessResponder;
+	private CSVResponder cloudinessResponder;
 
 	private static final String CSV_CLOUDINESS = "/csvCloudiness";
-
+	
 	/**
 	 * Creates an instance of CSVCloudinessController.
 	 * 
@@ -52,7 +51,7 @@ public class CSVCloudinessController {
 			@RequestParam(value = Constant.TO_DATE) @DateTimeFormat(pattern = Constant.FORMAT) Date toDate,
 			HttpServletResponse response) throws IOException {
 
-		CloudinessResult.printTitle(response.getWriter());
+		
 		cloudinessResponder.handleResponse(response, location, fromDate, toDate);
 
 	}

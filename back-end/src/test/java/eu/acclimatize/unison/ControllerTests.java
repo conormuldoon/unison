@@ -77,15 +77,15 @@ public class ControllerTests {
 	CSVResponder cloudinessResponder, cloudLevelResponder, dewPointResponder, fogResponder, humidityResponder,
 			precipitationResponder, pressureResponder, temperatureResponder, windDirectionResponder, windSpeedResponder;
 
-	Date fromDate, toDate;
+	private Date fromDate, toDate;
 
-	final private static String LOCATION = "UCD";
+	private final static String LOCATION = "UCD";
 
 	// final private static String P_COORD = "POINT (-6.224133 53.308398)";
 
-	StringWriter sw;
-	LocationDetails location;
-	ItemKey ik;
+	private StringWriter sw;
+	private LocationDetails location;
+	private ItemKey ik;
 
 	public ControllerTests() throws IOException {
 		Calendar cal = Calendar.getInstance();

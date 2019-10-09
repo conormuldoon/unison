@@ -11,7 +11,6 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import eu.acclimatize.unison.Constant;
-import eu.acclimatize.unison.result.WindDirectionResult;
 
 /**
  * 
@@ -48,7 +47,7 @@ public class CSVWindDirectionController {
 			@RequestParam(value = Constant.TO_DATE) @DateTimeFormat(pattern = Constant.FORMAT) Date toDate,
 			HttpServletResponse response) throws IOException {
 
-		WindDirectionResult.printTitle(response.getWriter());
+		// WindDirectionResult.printTitle(response.getWriter());
 		windDirectionResponder.handleResponse(response, location, fromDate, toDate);
 	}
 

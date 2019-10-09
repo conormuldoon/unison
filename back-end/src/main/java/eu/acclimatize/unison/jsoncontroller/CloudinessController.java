@@ -18,7 +18,7 @@ import eu.acclimatize.unison.ItemListFinder;
 @RestController
 public class CloudinessController {
 
-	ItemListFinder cloudinessFinder;
+	private ItemListFinder cloudinessFinder;
 	private static final String MAPPING = "/cloudiness";
 	
 

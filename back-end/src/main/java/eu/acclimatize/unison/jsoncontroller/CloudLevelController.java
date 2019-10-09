@@ -18,7 +18,7 @@ import eu.acclimatize.unison.ItemListFinder;
 @RestController
 public class CloudLevelController {
 
-	ItemListFinder cloudLevelFinder;
+	private ItemListFinder cloudLevelFinder;
 	private static final String MAPPING = "/cloudLevel";
 
 	/**

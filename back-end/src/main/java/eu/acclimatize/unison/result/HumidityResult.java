@@ -30,15 +30,6 @@ public class HumidityResult implements HarmonieItem {
 		this.humidity = humidity;
 	}
 
-	/**
-	 * Prints the title/header in CSV format.
-	 * @param pw The writer the title is printed to.
-	 */
-	public static void printTitle(PrintWriter pw) {
-		pw.println("date,humidity,");
-
-	}
-
 	@Override
 	public void printItem(PrintWriter pw) {
 		pw.println(date.toString() + ',' + humidity + ',');

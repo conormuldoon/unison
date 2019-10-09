@@ -19,7 +19,7 @@ import eu.acclimatize.unison.ItemListFinder;
 @RestController
 public class TemperatureController {
 
-	ItemListFinder temperatureFinder;
+	private ItemListFinder temperatureFinder;
 	private static final String TEMP = "/temperature";
 
 	/**
