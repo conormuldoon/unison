@@ -14,7 +14,7 @@ if(display){
 
 <div style={{"width":"80vw"}}>
     
-    {!display&&<button onClick={toggleDisplay}>Display popup</button>}
+    <button onClick={toggleDisplay}>{(display)?"Hide":"Display"}</button>
     {display&&<ChartPopup closePopup={toggleDisplay} varCur="Precipitation" location="UCD" fromDate="4/10/2019" toDate="5/10/2019" />}
 </div>
 ```

@@ -6,7 +6,6 @@ import {removePostObject} from './Util';
 /**
  * A component to display a form to enable the user to enter their credentials to remove a location from being tracked.
  * 
- * @param {*} props 
  */
 export default function RemoveForm(props) {
 

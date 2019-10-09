@@ -41,7 +41,7 @@ it('mathes snapshot', () => {
 
 it('displays popup when marker clicked', async () =>{
   fetchMock.get('end:/location', [{"geom":{"type":"Point","coordinates":[-6.223682,53.308441]},"name":"UCD"}]);
-  const location='UCD';
+  
 
   fetchMock.get('end:/precipitation?location=UCD&fromDate='+FROM_DATE+'&toDate='+TODAY, [{
         "date": "2019-04-01T23:00:00.000+0000",
@@ -140,12 +140,15 @@ it('displays popup when marker clicked', async () =>{
         }
     }]);
 
-  const {getAllByAltText,getByText,getByTestId,debug} = render(<App />);
+  const {getAllByAltText,getByText,debug} = render(<Unison />);
 
-  const marker = await waitForElement(()=>getAllByAltText('')[1]);
+  const marker= await waitForElement(()=>getAllByAltText('')[1]);
+  
   fireEvent.click(marker);
-  await waitForElement(()=>getByText('Median'));
-
-  expect(getByTestId('chart')).toHaveTextContent('Millimetres')
+  const text=await waitForElement(()=>getByText('UCD'));
+  
+  expect(text).toBeDefined();
+  //debug();
   fetchMock.restore();
 });
+

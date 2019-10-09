@@ -16,8 +16,7 @@ const PREVAL="precipitation.value";
  * A component that displays a number of tabs for ChartComponents for the phenomenom being tracked. 
  * For exmaple, for cloud level, there is a tab for high, medium, and low level clouds. Otherwise,
  * only a single tab is displayed.
- * 
- * @param {*} props 
+ *  
  */
 export default function TabsComponent(props){
 
@@ -34,7 +33,7 @@ export default function TabsComponent(props){
     function updateTabs(minMax){
 
 
-      if(minMax&&props.varCur===PRECIP){
+      if(minMax){
   
         setTabs([LPER,MEDIAN,HPER]);
   
@@ -48,53 +47,26 @@ export default function TabsComponent(props){
   
     }
     
-    async function obtainData(){
-      const variRequest=varMapping(props.varCur);
+ 
+      if(props.data&&props.data.length>0){
 
-      const loc=props.location.trim();
-      const request=API+'/'+variRequest+'?location='+loc+"&fromDate="+props.fromDate+"&toDate="+props.toDate;
-
-      let response = await fetch(request);
-      let dataArray = await response.json();
-
-    
-      const n=dataArray.length;
-
-      for(let i=0;i<n;i++){
-        const dateS=dataArray[i].date;
-        dataArray[i].date=new Date(dateS.substring(0,DLEN));
-
-      }
-
-      if(n>0){
-
-        const fd=dataArray[0].date;
-        const td=dataArray[dataArray.length-1].date;
-
-        let minMax=false;
-        if(props.varCur === PRECIP&&n>0&&dataArray[0].precipitation.minvalue!==undefined){
-
-          minMax=true;
-        }
-        determineLabel(minMax,variRequest);
+        const variRequest=varMapping(props.varCur);
+        determineLabel(props.minMax,variRequest);
         updateTabs(minMax);
 
-        setData(dataArray);
-        setZoomDomain({ x: [fd, td] });
       }else{
 
         setTabs(undefined);
         setYVal(undefined);
         setYLabel(undefined);
-        setData(undefined);
-        setZoomDomain(undefined);
+        
       }
       
-    }
-    obtainData();
+    
+    
     
 
-  },[props.varCur,props.location,props.fromDate,props.toDate,tabs]);
+  },[props.data,props.minMax,tabs]);
 
 
 
@@ -146,20 +118,17 @@ export default function TabsComponent(props){
 
   function tabsPanel(index){
     return (<TabPanel >
-      <div id="tabdiv">
+      <div id="tabdiv" data-testid='chart' >
         <ChartComponent data={data} zoomDomain={zoomDomain} yVal={yVal[index]}
           handleZoom={setZoomDomain}
          yLabel={yLabel} />
       </div>
-    </TabPanel>);
+    </TabPanel>
+    );
   }
 
-
-
-
-
-      return (<div data-testid='chart' id="chartdiv">
-          {tabs&&yVal&&<Tabs id="tabscomponent" defaultIndex={1}>
+      return (<div  id="chartdiv">
+          {data&&tabs&&yVal&&<Tabs id="tabscomponent" defaultIndex={1}>
           <TabList >
             <Tab>{tabs[0]}</Tab>
             <Tab>{tabs[1]}</Tab>
@@ -172,11 +141,12 @@ export default function TabsComponent(props){
 
         </Tabs>}
 
-        {!tabs&&<div data-testid='chart' id="singlevar">
+        {data&&!tabs&&<div data-testid='chart' id="singlevar">
           <ChartComponent data={data} zoomDomain={zoomDomain} handleZoom={setZoomDomain}
             yVal={yVal} yLabel={yLabel} />
           </div>
         }
+        {!data&&<div/>}
       </div>
     );
 

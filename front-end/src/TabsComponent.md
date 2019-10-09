@@ -18,6 +18,7 @@ if(display){
     <button onClick={toggleDisplay}>{(display)?"Hide":"Display"}</button>
     
     {display&&<div id="popupdiv" >
+        <button onClick={toggleDisplay}>Hide</button>
         <TabsComponent varCur="Precipitation" location="Oslo" fromDate={TODAY} toDate={TODAY}/>
         
     </div>}
