@@ -12,12 +12,13 @@ import  {
 
 import { render, waitForElement, wait} from "react-testing-library"
 import expectExport from 'expect';
+const DLEN=16;
 
 
 
 
 const apiRequest='end:/precipitation?location=UCD&fromDate=20/12/2018&toDate=4/4/2019';
-it('renders without crashing', async () => {
+/*it('renders without crashing', async () => {
 
 
   fetchMock.get(apiRequest, []);
@@ -40,7 +41,7 @@ it('mathes snapshot', () => {
 
   fetchMock.restore();
 
-});
+});*/
 /*
 it("doesn't crash when no data obtained from server", async ()=>{
   const date='2/4/2019';
@@ -54,18 +55,22 @@ it("doesn't crash when no data obtained from server", async ()=>{
 });
 */
 
-const addChart = async (weatherVariable,data) =>{
-  const date='8/10/2019';
-  const location='UCD';
+const addChart = async (weatherVariable,dataArray,zoomDomain) =>{
+  
+    const n=dataArray.length;
 
-  fetchMock.get('end:/'+varMapping(weatherVariable)+'?location='+location+'&fromDate='+date+'&toDate='+date,
-      data);
+    for(let i=0;i<n;i++){
+      const dateS=dataArray[i].date;
+      dataArray[i].date=new Date(dateS.substring(0,DLEN));
 
-  const {getByTestId,debug} = render(<TabsComponent varCur={weatherVariable} location={location} fromDate={date} toDate={date}  />);
+    }
+ 
+  
+  const {findByTestId,debug} = render(<TabsComponent varCur={weatherVariable} data={dataArray} zoomDomain={zoomDomain} minMax={false} />);
  
   //console.log(weatherVariable);
   
-  const chartDiv=getByTestId('chart');
+  const chartDiv=findByTestId('chart');
  
   //expect(chartDiv).toBeDefined();
   
@@ -75,8 +80,8 @@ const addChart = async (weatherVariable,data) =>{
 
 
 
-/*
 
+/* 
 it('adds a chart for humidity', async () =>{
     await addChart('Humidity',[
         {
@@ -91,10 +96,12 @@ it('adds a chart for humidity', async () =>{
             "date": "2019-10-08T01:00:00.000+0000",
             "humidity": 75.3
         }
-    ]
+    ],{ x: ['2019-10-07T23:00:00.000+0000', '2019-10-08T01:00:00.000+0000'] }
 
     );
 });
+
+
 
 
 it('adds tabs for the low, medium, and high cloud level values', async () =>{
@@ -193,6 +200,8 @@ it('adds tabs for the low, medium, and high cloud level values', async () =>{
 
 );
 
+
+
 it('adds a chart for temperature', async () =>{
   await addChart('Temperature',[
         {
@@ -253,7 +262,7 @@ it('adds a chart for temperature', async () =>{
        }
   ]);
 });
-
+*/
 
 it('adds tabs for precipitation', async () =>{
 
@@ -352,9 +361,8 @@ it('adds tabs for precipitation', async () =>{
             "minvalue": 0,
             "maxvalue": 0
         }
-    }]);
+    }],{ x: [new Date('2019-04-01T23:00:00.000+0000'.substring(0,DLEN)), new Date('2019-04-02T10:00:00.000+0000'.substring(0,DLEN))] });
 
 
 
 });
-*/

@@ -5,7 +5,7 @@ import ChartComponent from './ChartComponent';
 
 import {API,LPER,MEDIAN,HPER,LOW,MEDIUM,HIGH,CL,PRECIP} from './Constant';
 import {varMapping} from './Util';
-const DLEN=16;
+
 
 const PERCENT="Percentage";
 const CELSIUS="Celsius";
@@ -22,60 +22,47 @@ export default function TabsComponent(props){
 
   const [tabs,setTabs]=useState(undefined);
 
-  const [data,setData]=useState(undefined);
-  const [zoomDomain,setZoomDomain]=useState(undefined);
   const [yVal,setYVal]=useState(undefined);
   const [yLabel,setYLabel]=useState(undefined);
 
-  
+
   useEffect(()=>{
-
-    function updateTabs(minMax){
-
-
-      if(minMax){
-  
-        setTabs([LPER,MEDIAN,HPER]);
-  
-      }else if(props.varCur===CL){
-  
-        setTabs([LOW,MEDIUM,HIGH]);
-  
-      }else if(tabs){
-        setTabs(undefined);
-      }
-  
-    }
-    
- 
-      if(props.data&&props.data.length>0){
+    if(props.data&&props.data.length>0){
 
         const variRequest=varMapping(props.varCur);
-        determineLabel(props.minMax,variRequest);
-        updateTabs(minMax);
+        determineLabel(variRequest);
+        if(props.minMax){
+  
+          setTabs([LPER,MEDIAN,HPER]);
+      
+        }else if(props.varCur===CL){
+      
+          setTabs([LOW,MEDIUM,HIGH]);
+      
+        }else if(tabs){
+          setTabs(undefined);
+        }
+        
 
       }else{
-
+        
         setTabs(undefined);
         setYVal(undefined);
         setYLabel(undefined);
         
+        
       }
-      
+    },[props.data,props.varCur,props.minMax]
+  );
+  
     
-    
-    
 
-  },[props.data,props.minMax,tabs]);
-
-
-
-  function determineLabel(minMax,variRequest){
+  function determineLabel(variRequest){
 
     // 'Precipitation','Humidity','Wind Direction','Wind Speed','Cloudiness','Cloud Level','Dew Point','Pressure','Temperature'
 
     if(variRequest === "precipitation"){
-      if(minMax){
+      if(props.minMax){
         setYVal(["precipitation.minvalue",PREVAL,"precipitation.maxvalue"]);
 
       }else{
@@ -110,25 +97,22 @@ export default function TabsComponent(props){
       setYVal(variRequest);
       setYLabel(CELSIUS);
     }
+    
   }
 
-
-
- 
-
-  function tabsPanel(index){
-    return (<TabPanel >
-      <div id="tabdiv" data-testid='chart' >
-        <ChartComponent data={data} zoomDomain={zoomDomain} yVal={yVal[index]}
-          handleZoom={setZoomDomain}
-         yLabel={yLabel} />
-      </div>
-    </TabPanel>
-    );
-  }
+      function tabsPanel(index){
+        return (<TabPanel >
+          <div id="tabdiv" data-testid='chart' >
+            <ChartComponent data={props.data} zoomDomain={props.zoomDomain} yVal={yVal[index]}
+              handleZoom={props.setZoomDomain}
+            yLabel={yLabel} />
+          </div>
+        </TabPanel>
+        );
+      }
 
       return (<div  id="chartdiv">
-          {data&&tabs&&yVal&&<Tabs id="tabscomponent" defaultIndex={1}>
+          {tabs&&yVal&&<Tabs id="tabscomponent" defaultIndex={1}>
           <TabList >
             <Tab>{tabs[0]}</Tab>
             <Tab>{tabs[1]}</Tab>
@@ -141,12 +125,12 @@ export default function TabsComponent(props){
 
         </Tabs>}
 
-        {data&&!tabs&&<div data-testid='chart' id="singlevar">
-          <ChartComponent data={data} zoomDomain={zoomDomain} handleZoom={setZoomDomain}
+        {yVal&&!tabs&&<div data-testid='chart' id="singlevar">
+          <ChartComponent data={props.data} zoomDomain={props.zoomDomain} handleZoom={props.setZoomDomain}
             yVal={yVal} yLabel={yLabel} />
           </div>
         }
-        {!data&&<div/>}
+        {!yVal&&<div/>}
       </div>
     );
 

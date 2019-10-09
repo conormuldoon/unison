@@ -1,10 +1,14 @@
-import React, { useState, useEffect  } from 'react';
+import React, { useState, useEffect } from 'react';
 
 import {IoMdClose} from "react-icons/io";
 
 import './App.css';
 import TabsComponent from './TabsComponent';
 import {varMapping} from './Util';
+
+import {PRECIP} from './Constant';
+
+const DLEN=16;
 
 /**
  * A popup that displays a TabsComponent.
@@ -84,7 +88,8 @@ export default function ChartPopup(props){
         <center>
           {vc} data from {props.location.trim()}
 
-          <TabsComponent varCur={props.varCur} data={data} zoomDomain={zoomDomain} minMax={minMax}/>
+          <TabsComponent varCur={props.varCur} data={data} zoomDomain={zoomDomain} minMax={minMax} 
+            setZoomDomain={setZoomDomain}/>
 
         </center>
       </div>
