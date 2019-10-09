@@ -26,6 +26,8 @@ If not previously compiled: `mvn clean compile package`
 ```
 java -cp target/unison-server-0.0.1-SNAPSHOT.jar -Dloader.main=eu.acclimatize.unison.user.UserConsole org.springframework.boot.loader.PropertiesLauncher
 ```
+
+Enter the user credentials (if the user already exists, the password will be upated).
 ## Testing
 
 ### Back-end
