@@ -18,6 +18,9 @@ Wait until the application has started and then enter an initial user name and p
 
 ```
 cd front-end
+```
+If not previously run: `yarn install`
+```
 yarn start
 ```
 ## Adding additional users
