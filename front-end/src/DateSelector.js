@@ -10,6 +10,8 @@ import  {
 
 import {FORMAT} from './Constant';
 
+import PropTypes from 'prop-types';
+
 /**
  * A component for selecting a date.
  * 
@@ -32,5 +34,18 @@ export default function DateSelector(props){
         />
       </div>
     );
+
+}
+
+DateSelector.propTypes ={
+  
+  /** The label to display over the selector. */
+  label: PropTypes.string,
+
+  /** The initial date value to display. */
+  dateValue: PropTypes.string,
+
+  /** A callback function called when the date is changed. */
+  handleDayChange: PropTypes.func,
 
 }

@@ -23,7 +23,7 @@ const WSPACE='\u00a0';
 const varOpt=['Precipitation','Humidity','Wind Direction','Wind Speed','Cloudiness','Cloud Level','Dew Point','Pressure','Temperature'];
     
 /**
- * Application component for Unison. Once mounted, it connects to the back-end to receive a list of location being tracked.
+ * Application component for Unison. Once mounted, it connects to the back-end to receive a list of the locations being tracked.
  * 
  */
 class Unison extends Component {

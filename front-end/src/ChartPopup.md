@@ -12,7 +12,7 @@ if(display){
     window.scrollTo(0,0);
 }
 
-<div style={{"width":"80vw"}}>
+<div>
     
     <button onClick={toggleDisplay}>{(display)?"Hide":"Display"}</button>
     {display&&<ChartPopup closePopup={toggleDisplay} varCur="Precipitation" location="UCD" fromDate="4/10/2019" toDate="5/10/2019" />}

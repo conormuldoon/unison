@@ -1,7 +1,7 @@
 import React from 'react';
 import {VictoryChart,VictoryLine,VictoryTheme,VictoryAxis,VictoryZoomContainer} from 'victory';
 
-//import PropTypes from 'prop-types';
+import PropTypes from 'prop-types';
 
 import './App.css';
 
@@ -46,21 +46,21 @@ export default function ChartComponent(props) {
 }
 
 
-// ChartComponent.propTypes ={
-//   /** Specifies the beginning and end times of the time domain of the x-axis. */
-//   zoomDomain: PropTypes.object,
+ChartComponent.propTypes ={
+  /** Specifies the beginning and end times of the time domain of the x-axis. */
+  zoomDomain: PropTypes.object,
 
-//   /** Called when there is a zoom domain change. */
-//   handleZoom: PropTypes.func,
+  /** Called when there is a zoom domain change. */
+  handleZoom: PropTypes.func,
 
-//   /** Data to be displayed on the graph. */
-//   data: PropTypes.array,
+  /** Data to be displayed on the graph. */
+  data: PropTypes.array,
 
-//   /** The label for the y-axis. The x-axis is always time.  */
-//   yLabel: PropTypes.string,
+  /** The label for the y-axis. The x-axis is always time.  */
+  yLabel: PropTypes.string,
 
-//   /** The name of the attribute in all objects of the data array to be plotted.*/
-//   yVal: PropTypes.string,
-// }
+  /** The name of the attribute in all objects of the data array to be plotted.*/
+  yVal: PropTypes.string,
+}
 
 

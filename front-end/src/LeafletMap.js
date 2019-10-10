@@ -7,7 +7,7 @@ import ChartPopup from './ChartPopup';
 
 import {CENTRE_LAT,CENTRE_LON} from './Constant';
 
-
+import PropTypes from 'prop-types';
 
 const image = new Leaflet.Icon({
                iconUrl: require('./2000px-Map_marker.png'),
@@ -89,4 +89,26 @@ export default class LeafletMap extends Component {
       </Map>
     );
   }
+}
+
+LeafletMap.propTypes ={
+  /** Specifies the weather variable currently selected. */
+  curVar: PropTypes.string,
+
+  /** Sepecifies the location selected. */
+  curLoc: PropTypes.string,
+
+  /** Specifies the start date for the data that is to be displayed. */
+  fromDate: PropTypes.string,
+
+  /** Specifies the end date for the data that is to be displayed. */
+  toDate: PropTypes.string,
+
+  /** An array of markers to be displayed on the map. Each element of the array specifies the coordinates and location 
+   * name associated with a marker.*/
+  marker: PropTypes.array,
+
+  /** A function called when a marker is clicked. */
+  markerCallback: PropTypes.func,
+
 }

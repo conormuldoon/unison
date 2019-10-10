@@ -3,6 +3,8 @@ import React, { useState } from 'react';
 import {API} from './Constant';
 import {removePostObject} from './Util';
 
+import PropTypes from 'prop-types';
+
 /**
  * A component to display a form to enable the user to enter their credentials to remove a location from being tracked.
  * 
@@ -97,4 +99,23 @@ export default function RemoveForm(props) {
 
     );
 
+}
+
+
+RemoveForm.propTypes ={
+ 
+  /** The name of the location to be removed. */
+  location: PropTypes.string,
+
+  /** Determines whether the form is displayed. */
+  display: PropTypes.bool,
+
+  /** Toggles whether the form is displayed. If the location form is displayed, it will be hidden. */
+  toggleDisplay: PropTypes.func,
+
+  /** Called when a location has been successfully removed to hide the form. */
+  hideDisplay: PropTypes.func,
+
+  /** Called when a location has been successfully removed to obtain the updated location list from the server. */
+  obtainData: PropTypes.func,
 }

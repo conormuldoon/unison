@@ -6,12 +6,15 @@ import './App.css';
 import TabsComponent from './TabsComponent';
 import {varMapping} from './Util';
 
-import {PRECIP} from './Constant';
+import {PRECIP,API} from './Constant';
+
+import PropTypes from 'prop-types';
 
 const DLEN=16;
 
 /**
- * A popup that displays a TabsComponent.
+ * A popup that displays a TabsComponent. Once mounted, it connects to the back-end to obtain data
+ * for the from date, to date, location, and weather variable selected.
  * 
  */
 export default function ChartPopup(props){
@@ -96,3 +99,19 @@ export default function ChartPopup(props){
     );
 
 }
+
+ChartPopup.propTypes ={
+  /** Specifies the weather variable currently selected. */
+  varCur: PropTypes.string,
+
+  /** Sepecifies the location selected. */
+  location: PropTypes.string,
+
+  /** Specifies the start date for the data that is to be displayed. */
+  fromDate: PropTypes.string,
+
+  /** Specifies the end date for the data that is to be displayed. */
+  toDate: PropTypes.string,
+
+}
+

@@ -14,7 +14,7 @@ if(display){
     window.scrollTo(0,0);
 }
 
-<div style={{"width":"80vw"}}>
+<div>
     <button onClick={toggleDisplay}>{(display)?"Hide":"Display"}</button>
     
     {display&&<div id="popupdiv" >

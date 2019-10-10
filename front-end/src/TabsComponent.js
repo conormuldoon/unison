@@ -3,19 +3,21 @@ import React, { useState,useEffect  } from 'react';
 import "react-tabs/style/react-tabs.css";
 import ChartComponent from './ChartComponent';
 
-import {API,LPER,MEDIAN,HPER,LOW,MEDIUM,HIGH,CL,PRECIP} from './Constant';
+import {LPER,MEDIAN,HPER,LOW,MEDIUM,HIGH,CL} from './Constant';
 import {varMapping} from './Util';
-
+import PropTypes from 'prop-types';
 
 const PERCENT="Percentage";
 const CELSIUS="Celsius";
 
 const PREVAL="precipitation.value";
 
+
+
 /**
  * A component that displays a number of tabs for ChartComponents for the phenomenom being tracked. 
  * For exmaple, for cloud level, there is a tab for high, medium, and low level clouds. Otherwise,
- * only a single tab is displayed.
+ * only a single ChartComponent is displayed.
  *  
  */
 export default function TabsComponent(props){
@@ -27,6 +29,50 @@ export default function TabsComponent(props){
 
 
   useEffect(()=>{
+
+    function determineLabel(variRequest){
+
+      // 'Precipitation','Humidity','Wind Direction','Wind Speed','Cloudiness','Cloud Level','Dew Point','Pressure','Temperature'
+  
+      if(variRequest === "precipitation"){
+        if(props.minMax){
+          setYVal(["precipitation.minvalue",PREVAL,"precipitation.maxvalue"]);
+  
+        }else{
+          setYVal(PREVAL);
+        }
+        setYLabel("Millimetres");
+  
+      }else if(variRequest === "humidity"){
+        setYVal(variRequest);
+        setYLabel(PERCENT);
+      }else if(variRequest === "windDirection"){
+  
+        // Displaying sin of the angle on the graph, rather than the angle/
+        setYVal("windDirection.sinDeg");
+        setYLabel("sin of angle");
+      }else if(variRequest === "windSpeed"){
+        setYVal("windSpeed.mps");
+        setYLabel("Metres per second");
+      }else if(variRequest === "cloudiness"){
+        setYVal(variRequest);
+        setYLabel(PERCENT);
+      }else if(variRequest === "cloudLevel"){
+        setYVal(["cloud.low","cloud.medium","cloud.high"])
+        setYLabel(PERCENT);
+      }else if(variRequest === "dewPoint"){
+        setYVal(variRequest);
+        setYLabel(CELSIUS);
+      }else if(variRequest === "pressure"){
+        setYVal(variRequest);
+        setYLabel("Hectopascals");
+      }else if(variRequest === "temperature"){
+        setYVal(variRequest);
+        setYLabel(CELSIUS);
+      }
+      
+    }
+
     if(props.data&&props.data.length>0){
 
         const variRequest=varMapping(props.varCur);
@@ -52,53 +98,12 @@ export default function TabsComponent(props){
         
         
       }
-    },[props.data,props.varCur,props.minMax]
+    },[props.data,props.varCur,props.minMax,tabs]
   );
   
     
 
-  function determineLabel(variRequest){
-
-    // 'Precipitation','Humidity','Wind Direction','Wind Speed','Cloudiness','Cloud Level','Dew Point','Pressure','Temperature'
-
-    if(variRequest === "precipitation"){
-      if(props.minMax){
-        setYVal(["precipitation.minvalue",PREVAL,"precipitation.maxvalue"]);
-
-      }else{
-        setYVal(PREVAL);
-      }
-      setYLabel("Millimetres");
-
-    }else if(variRequest === "humidity"){
-      setYVal(variRequest);
-      setYLabel(PERCENT);
-    }else if(variRequest === "windDirection"){
-
-      // Displaying sin of the angle on the graph, rather than the angle/
-      setYVal("windDirection.sinDeg");
-      setYLabel("sin of angle");
-    }else if(variRequest === "windSpeed"){
-      setYVal("windSpeed.mps");
-      setYLabel("Metres per second");
-    }else if(variRequest === "cloudiness"){
-      setYVal(variRequest);
-      setYLabel(PERCENT);
-    }else if(variRequest === "cloudLevel"){
-      setYVal(["cloud.low","cloud.medium","cloud.high"])
-      setYLabel(PERCENT);
-    }else if(variRequest === "dewPoint"){
-      setYVal(variRequest);
-      setYLabel(CELSIUS);
-    }else if(variRequest === "pressure"){
-      setYVal(variRequest);
-      setYLabel("Hectopascals");
-    }else if(variRequest === "temperature"){
-      setYVal(variRequest);
-      setYLabel(CELSIUS);
-    }
-    
-  }
+  
 
       function tabsPanel(index){
         return (<TabPanel >
@@ -135,3 +140,30 @@ export default function TabsComponent(props){
     );
 
 }
+
+
+TabsComponent.propTypes ={
+ 
+  /** An array of data to be displayed on one or more charts. */
+  data: PropTypes.array,
+
+  /** The current weather variable selected. */
+  varCur: PropTypes.string,
+
+  /** Determines wheather to display tabs for the precipitation weather variable. This is needed in that with
+   * some locations and models only provide a single preciption value (no minimum or maximum).
+   */
+  minMax: PropTypes.bool,
+
+  /** Determines the range of data to be displayed. */
+  zoomDomain: PropTypes.object,
+
+  /** A function used to change the zoom domain. */
+  setZoomDomain: PropTypes.func,
+
+  /** A function called when the zoom level for charts is changed. */
+  handleZoom: PropTypes.func,
+
+  
+}
+
