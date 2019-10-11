@@ -50,6 +50,9 @@ The coverage report will be located in the target/site/jacoco directory.
 ### Front-end
 ```
 cd front-end
+```
+If not previously run: `yarn install`
+```
 yarn test
 ```
 For coverage, watch needs to be disabled (see https://github.com/facebook/create-react-app/issues/6888).
