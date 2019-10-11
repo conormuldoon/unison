@@ -46,7 +46,7 @@ To generate a coverage report:
 ```
 mvn verify
 ```
-The coverage report will be located in the `target/site/jacoco` directory.
+The coverage report will be located in the `back-end/target/site/jacoco` directory.
 
 ### Front-end
 ```
@@ -60,7 +60,7 @@ For coverage, watch needs to be disabled (see https://github.com/facebook/create
 ```
 yarn test --coverage --watchAll=false
 ```
-The coverage report will be located in the `coverage/locv-report` directory.
+The coverage report will be located in the `front-end/coverage/locv-report` directory.
 
 ## Switching between GeoDB and Postgres/PostGIS
 
