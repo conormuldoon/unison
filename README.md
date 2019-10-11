@@ -46,7 +46,7 @@ To generate a coverage report:
 ```
 mvn verify
 ```
-The coverage report will be located in the 'target/site/jacoco' directory.
+The coverage report will be located in the `target/site/jacoco` directory.
 
 ### Front-end
 ```
@@ -60,11 +60,11 @@ For coverage, watch needs to be disabled (see https://github.com/facebook/create
 ```
 yarn test --coverage --watchAll=false
 ```
-The coverage report will be located in the 'coverage/locv-report' directory.
+The coverage report will be located in the `coverage/locv-report` directory.
 
 ## Switching between GeoDB and Postgres/PostGIS
 '
-The geospatial database configuration is specified in the 'back-end/src/main/resources/application.properties file. Comment out the lines related GeoDB and uncomment the lines related to Postgres/PostGIS or vice versa. With the Postgres/PostGIS configuration, the schema is not created automatically and it should be created using psql and the 'back-end/src/main/resources/pg_pgis_schema.sql' schema file.
+The geospatial database configuration is specified in the `back-end/src/main/resources/application.properties` file. Comment out the lines related GeoDB and uncomment the lines related to Postgres/PostGIS or vice versa. With the Postgres/PostGIS configuration, the schema is not created automatically and it should be created using psql and the `back-end/src/main/resources/pg_pgis_schema.sql` schema file.
 
 ## Acknowlegements
 Unison has been developed as part of the Acclimatize Project (https://www.acclimatize.eu/), which is partly funded under the EU Ireland Wales European Territorial Co-operation (ETC) programme.
