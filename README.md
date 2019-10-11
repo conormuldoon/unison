@@ -12,7 +12,7 @@ See the [Javadoc](https://conormuldoon.github.io/unison/docs/back-end/) for a de
 cd back-end
 mvn clean compile spring-boot:run
 ```
-Wait until the application has started and then enter an initial user name and password, which will be required for adding/removing the locations at which data will be recorded.
+Wait until the application has started and then enter an initial user name and password, which will be required for adding/removing the locations to track data for.
 
 ### Start the front-end
 
