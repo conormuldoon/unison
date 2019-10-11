@@ -63,7 +63,7 @@ yarn test --coverage --watchAll=false
 The coverage report will be located in the `coverage/locv-report` directory.
 
 ## Switching between GeoDB and Postgres/PostGIS
-'
+
 The geospatial database configuration is specified in the `back-end/src/main/resources/application.properties` file. Comment out the lines related GeoDB and uncomment the lines related to Postgres/PostGIS or vice versa. With the Postgres/PostGIS configuration, the schema is not created automatically and it should be created using psql and the `back-end/src/main/resources/pg_pgis_schema.sql` schema file.
 
 ## Acknowlegements
