@@ -33,7 +33,10 @@ exports[`mathes snapshot 1`] = `
       <div
         id="chartdiv"
       >
-        <div />
+        <div
+          data-testid="chart"
+          id="singlevar"
+        />
       </div>
     </center>
   </div>
