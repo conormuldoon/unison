@@ -25,6 +25,7 @@ yarn start
 ```
 ## Adding additional users
 
+If using GeoDB (Unison is configured for GeoDB in this repository), stop the server if it is in use.
 ```
 cd back-end
 ```
