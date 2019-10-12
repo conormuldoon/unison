@@ -12,7 +12,7 @@ See the [Javadoc](https://conormuldoon.github.io/unison/docs/back-end/) for a de
 cd back-end
 mvn clean compile spring-boot:run
 ```
-Wait until the application has started and then enter an initial user name and password, which will be required for adding/removing the locations to track data for.
+Wait until the application has started and then enter an initial user name and password, which will be required for adding/removing the locations to track.
 
 ### Start the front-end
 
@@ -65,6 +65,10 @@ The coverage report will be located in the `front-end/coverage/locv-report` dire
 ## Switching between GeoDB and Postgres/PostGIS
 
 The geospatial database configuration is specified in the `back-end/src/main/resources/application.properties` file. Comment out the lines related GeoDB and uncomment the lines related to Postgres/PostGIS or vice versa. With the Postgres/PostGIS configuration, the schema is not created automatically and it should be created using psql and the `back-end/src/main/resources/pg_pgis_schema.sql` schema file.
+
+## Changing the model
+
+To change the model, edit the (HARMONIE-AROME) API URI `api.uri` and the associated time zone `api.timezone` settings in the `back-end/src/main/resources/application.properties` file.
 
 ## Acknowlegements
 Unison has been developed as part of the Acclimatize Project (https://www.acclimatize.eu/), which is partly funded under the EU Ireland Wales European Territorial Co-operation (ETC) programme.
