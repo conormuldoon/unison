@@ -11,7 +11,7 @@ import DateSelector from './DateSelector';
 import ARLocationComponent from './ARLocationComponent';
 
 import LeafletMap from './LeafletMap';
-import {FORMAT,API,CSV_DOMAIN} from './Constant';
+import {FORMAT,API} from './Constant';
 import {TODAY,FROM_DATE} from './Util';
 
 import  {
@@ -217,7 +217,7 @@ class Unison extends Component {
 
 
 
-            <a className='pLeft'  href={CSV_DOMAIN+'/'+API+'/csv'+this.state.curVar.replace(/ /g,'')+'?location='+this.removePadding(this.state.curLoc)+'&fromDate='+this.state.fromDate+'&toDate='+this.state.toDate}>
+            <a className='pLeft'  href={API+'/csv'+this.state.curVar.replace(/ /g,'')+'?location='+this.removePadding(this.state.curLoc)+'&fromDate='+this.state.fromDate+'&toDate='+this.state.toDate}>
 
               <button disabled={!this.state.curLoc} >
                 CSV

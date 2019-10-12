@@ -1,9 +1,7 @@
 
 export const FORMAT = "D/M/YYYY";
 
-export const API = "";
-//export const API = "/apiacc";
-export const CSV_DOMAIN = "http://localhost:8080";
+export const API = "/apiacc";
 
 export const LPER = "20\u1d57\u02b0 percentile";
 export const HPER = "80\u1d57\u02b0 percentile";
