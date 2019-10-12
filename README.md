@@ -2,7 +2,7 @@
 Unsion is a service that enables (HARMONIE-AROME) numerical forecast data from meteorological services to be tracked and visualised through a web interface and historical data to be accessed via a RESTful API. The initial deployment of the service (see https://aqua.ucd.ie/unison/) was designed for use with Met Éireann's model (coverage of Ireland and the UK), but the version of the code here has been configured for use with the Norwegian Meteorological Institute's model, as it is openly accessible (does not require IP address whitelisting). Unison has been developed using Spring Boot, JPA, and React and can be configured for use with either an embedded GeoDB geospatial database or Postgres/PostGIS for a production environment.
 
 ## Documentation
-See the [Javadoc](https://conormuldoon.github.io/unison/docs/back-end/) for a description of the Java classes for the back-end. The documentation for the API is available [here](https://documenter.getpostman.com/view/3155829/SVtWvmRS?version=latest#2243189b-3b11-49c2-a283-338a924d2e49) with examples for the https://aqua.ucd.ie/unison/apiacc endpoint.
+See the [Javadoc](https://conormuldoon.github.io/unison/docs/back-end/) for a description of the Java classes for the back-end. The documentation for the API is available [here](https://documenter.getpostman.com/view/3155829/SVtWvmRS?version=latest#2243189b-3b11-49c2-a283-338a924d2e49) with examples for the endpoint used by https://aqua.ucd.ie/unison.
 
 ## Running
 
