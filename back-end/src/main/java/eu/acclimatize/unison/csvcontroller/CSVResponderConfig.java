@@ -51,30 +51,6 @@ public class CSVResponderConfig {
 		return sb.toString();
 	}
 
-	static private void print(Class<?> cls, int count) {
-
-		if (count == 1)
-			return;
-		Field[] fieldArr = cls.getDeclaredFields();
-		for (Field f : fieldArr) {
-			Class<?> ft = f.getType();
-
-			if (ft.equals(Date.class) || ft.equals(Double.TYPE) || ft.equals(Integer.TYPE) || ft.equals(Double.class)
-					|| ft.equals(String.class)) {
-
-				System.out.println(f.getName());
-			} else {
-				print(ft, count++);
-
-			}
-		}
-	}
-
-	public static void main(String[] args) {
-		print(PrecipitationResult.class, 0);
-
-	}
-
 	/**
 	 * Creates a {@link CVSResponder} bean for precipitation data.
 	 * 

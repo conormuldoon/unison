@@ -15,6 +15,7 @@ export const CL = "Cloud Level";
 //export const API = "";
 
 // Map coordinates
+// Dublin
 //export const CENTRE_LAT = 53.35014;
 //export const CENTRE_LON = -6.266155;
 
