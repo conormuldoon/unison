@@ -19,8 +19,8 @@ import org.xml.sax.SAXException;
 @Service
 public class DocumentRequestService {
 
-	Logger logger;
-	DocumentBuilder documentBuilder;
+	private Logger logger;
+	private DocumentBuilder documentBuilder;
 
 	/**
 	 * Creates an instance of DocumentRequestService.

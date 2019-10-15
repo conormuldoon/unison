@@ -10,10 +10,12 @@ import org.mockito.Mockito;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringRunner;
 
 import eu.acclimatize.unison.harvester.HarvesterService;
 import eu.acclimatize.unison.location.AddLocationController;
+import eu.acclimatize.unison.location.CoordinatesConfig;
 import eu.acclimatize.unison.location.CoordinatesParseException;
 import eu.acclimatize.unison.location.CoordinatesStore;
 import eu.acclimatize.unison.location.DeleteLocationController;
@@ -26,6 +28,8 @@ import eu.acclimatize.unison.user.UserService;
 
 @RunWith(SpringRunner.class)
 @DataJpaTest
+@ContextConfiguration(classes = { UnisonServerApplication.class, CoordinatesConfig.class})
+
 public class LocationTests {
 
 	final static private String LOCATION = "UCD";

@@ -20,7 +20,7 @@ import eu.acclimatize.unison.Constant;
 @RestController
 public class CSVPressureController {
 
-	CSVResponder pressureResponder;
+	private CSVResponder pressureResponder;
 
 	private static final String CSV_PRESSURE = "/csvPressure";
 

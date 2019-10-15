@@ -32,7 +32,7 @@ public class HourlyWeather {
 	}
 
 	/**
-	 * A zero argumenet constructor for JPA.
+	 * A zero argument constructor for JPA.
 	 */
 	public HourlyWeather() {
 

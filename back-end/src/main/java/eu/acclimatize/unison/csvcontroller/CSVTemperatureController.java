@@ -20,7 +20,7 @@ import eu.acclimatize.unison.Constant;
 @RestController
 public class CSVTemperatureController {
 
-	CSVResponder temperatureResponder;
+	private CSVResponder temperatureResponder;
 
 	private static final String CSV_TEMP = "/csvTemperature";
 

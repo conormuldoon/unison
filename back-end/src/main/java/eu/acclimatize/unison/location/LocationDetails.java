@@ -20,12 +20,12 @@ import eu.acclimatize.unison.user.UserInformation;
 public class LocationDetails {
 
 	@Id
-	String name;
+	private String name;
 
 	private String uri;
 
 	@ManyToOne
-	UserInformation user;
+	private UserInformation user;
 
 	/**
 	 * Creates an instance of LocationDetails.

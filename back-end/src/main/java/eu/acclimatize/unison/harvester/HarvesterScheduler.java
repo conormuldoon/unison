@@ -19,7 +19,7 @@ public class HarvesterScheduler {
 	final static private int ULM = 40;
 	final static private int LLM = 10;
 
-	HarvesterService harvesterService;
+	private HarvesterService harvesterService;
 
 	/**
 	 * Creates and instance of HarvesterScheduler.

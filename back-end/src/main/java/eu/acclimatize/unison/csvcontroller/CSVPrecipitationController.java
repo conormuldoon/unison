@@ -20,7 +20,7 @@ import eu.acclimatize.unison.Constant;
 @RestController
 public class CSVPrecipitationController {
 
-	CSVResponder precipitationResponder;
+	private CSVResponder precipitationResponder;
 
 	private static final String CSV_PRECIPITATION = "/csvPrecipitation";
 

@@ -17,7 +17,7 @@ import eu.acclimatize.unison.location.GeoJsonSerializer;
  */
 public class PostGISPointSerializer extends JsonSerializer<Point> {
 	
-	GeoJsonSerializer geoJsonSerializer;
+	private GeoJsonSerializer geoJsonSerializer;
 	
 	
 	/**

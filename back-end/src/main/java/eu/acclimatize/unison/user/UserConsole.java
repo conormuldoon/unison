@@ -31,8 +31,8 @@ public class UserConsole {
 
 	private static final int PLEN = 10;
 
-	Console console;
-	BCryptPasswordEncoder encoder;
+	private Console console;
+	private BCryptPasswordEncoder encoder;
 
 	/**
 	 * Creates and instance of UserConsole.

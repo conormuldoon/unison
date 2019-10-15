@@ -18,7 +18,6 @@ import org.mockito.Mockito;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 import org.springframework.boot.test.autoconfigure.orm.jpa.TestEntityManager;
-import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringRunner;
 
 import com.vividsolutions.jts.io.ParseException;
@@ -31,7 +30,6 @@ import eu.acclimatize.unison.csvcontroller.CSVHumidityController;
 import eu.acclimatize.unison.csvcontroller.CSVPrecipitationController;
 import eu.acclimatize.unison.csvcontroller.CSVPressureController;
 import eu.acclimatize.unison.csvcontroller.CSVResponder;
-import eu.acclimatize.unison.csvcontroller.CSVResponderConfig;
 import eu.acclimatize.unison.csvcontroller.CSVTemperatureController;
 import eu.acclimatize.unison.csvcontroller.CSVWindDirectionController;
 import eu.acclimatize.unison.csvcontroller.CSVWindSpeedController;
@@ -60,8 +58,7 @@ import eu.acclimatize.unison.user.UserInformation;
 
 @RunWith(SpringRunner.class)
 @DataJpaTest
-@ContextConfiguration(classes = { UnisonServerApplication.class, ResultQueryConfig.class, FinderConfig.class,
-		CSVResponderConfig.class })
+
 public class ControllerTests {
 
 	HttpServletResponse response;

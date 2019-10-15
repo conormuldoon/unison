@@ -34,9 +34,9 @@ public class UserService {
 	 * @param userRepository The repository user credentials information is stored.
 	 * @param logger Used to log events when the user consoles is not present, such as in testing.
 	 */
-	public UserService(UserRepository userRepository, Logger logger) {
+	public UserService(UserRepository userRepository, Logger logger, BCryptPasswordEncoder passwordEncoder) {
 		this.userRepository = userRepository;
-		passwordEncoder = new BCryptPasswordEncoder();
+		this.passwordEncoder = new BCryptPasswordEncoder();
 		this.logger = logger;
 	}
 

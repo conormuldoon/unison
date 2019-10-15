@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 public class LocationController {
 
-	CoordinatesStore store;
+	private CoordinatesStore store;
 	private static final String LOCATION = "/location";
 
 	/** Creates and instance of LocationController.

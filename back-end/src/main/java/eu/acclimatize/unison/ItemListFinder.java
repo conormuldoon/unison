@@ -18,7 +18,7 @@ import javax.persistence.TypedQuery;
 public class ItemListFinder {
 
 	private String query;
-	EntityManager entityManager;
+	private EntityManager entityManager;
 
 	/**
 	 * Creates an instance of ItemListFinder.

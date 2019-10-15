@@ -20,7 +20,7 @@ import eu.acclimatize.unison.Constant;
 @RestController
 public class CSVHumidityController {
 
-	CSVResponder humidityResponder;
+	private CSVResponder humidityResponder;
 
 	private static final String CSV_HUMIDITY = "/csvHumidity";
 

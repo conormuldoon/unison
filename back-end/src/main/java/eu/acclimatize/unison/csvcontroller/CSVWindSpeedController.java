@@ -20,7 +20,7 @@ import eu.acclimatize.unison.Constant;
 @RestController
 public class CSVWindSpeedController {
 
-	CSVResponder windSpeedResponder;
+	private CSVResponder windSpeedResponder;
 	private static final String WINSPEED = "/csvWindSpeed";
 
 	/**

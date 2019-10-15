@@ -13,7 +13,7 @@ import org.springframework.core.type.filter.TypeFilter;
  */
 public class SpatialExcludeFilter implements TypeFilter {
 
-	String exclude;
+	private String exclude;
 	final private static String EX_SPATIAL_REGEX = "exclude.spatial.regex";
 
 	/**

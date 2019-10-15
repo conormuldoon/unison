@@ -31,9 +31,9 @@ public class GeoDBStore implements CoordinatesStore {
 	 * @param repository A repository that stores coordinates data in GeoDB.
 	 * @param sort Determines the order of results for {@link eu.acclimatize.unison.location.CoordinatesStore#sortedFindAll}.
 	 */
-	public GeoDBStore(GeoDBCoordinatesRepository repository, Sort sort) {
+	public GeoDBStore(GeoDBCoordinatesRepository repository, Sort sort, WKTReader wktReader) {
 		this.repository = repository;
-		wktR = new WKTReader();
+		wktR = wktReader;
 
 		this.sort = sort;
 	}

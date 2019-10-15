@@ -18,7 +18,7 @@ import eu.acclimatize.unison.location.GeoJsonSerializer;
  */
 public class GeoDBPointSerializer extends JsonSerializer<Point> {
 	
-	GeoJsonSerializer geoJsonSerializer;
+	private GeoJsonSerializer geoJsonSerializer;
 	
 	/**
 	 * Creates an instance of GeoDBPointSerializer.
