@@ -31,7 +31,7 @@ cd back-end
 ```
 If not previously compiled: `mvn clean compile package`
 ```
-java -cp target/unison-server-0.0.1-SNAPSHOT.jar -Dloader.main=eu.acclimatize.unison.user.UserConsole org.springframework.boot.loader.PropertiesLauncher
+java -cp target/unison-server-0.1.0-SNAPSHOT.jar -Dloader.main=eu.acclimatize.unison.user.UserConsole org.springframework.boot.loader.PropertiesLauncher
 ```
 
 Enter the user credentials (if the user name already exists, the password will be updated).
@@ -64,11 +64,11 @@ The coverage report will be located in the `front-end/coverage/locv-report` dire
 
 ## Switching between GeoDB and Postgres/PostGIS
 
-The geospatial database configuration is specified in the `back-end/src/main/resources/application.properties` file. Comment out the lines related GeoDB and uncomment the lines related to Postgres/PostGIS or vice versa. With the Postgres/PostGIS configuration, the schema is not created automatically and it should be created using psql and the `back-end/src/main/resources/pg_pgis_schema.sql` schema file.
+With the Postgres/PostGIS configuration, the schema is not created automatically and it should be created using psql and the `back-end/src/main/resources/pg_pgis_schema.sql` schema file. The database configuration is specified in the `back-end/src/main/resources/application.properties` file. Comment out the lines related GeoDB and uncomment the lines related to Postgres/PostGIS or vice versa and restart the server.
 
 ## Changing the model
 
-To change the model, edit the (HARMONIE-AROME) API URI `api.uri` and the associated time zone `api.timezone` settings in the `back-end/src/main/resources/application.properties` file.
+To change the model, edit the (HARMONIE-AROME) API URI `api.uri` and the associated time zone `api.timezone` settings in the `back-end/src/main/resources/application.properties` file and restart the server.
 
 ## Acknowlegements
 Unison has been developed as part of the Acclimatize Project (https://www.acclimatize.eu/), which is partly funded under the EU Ireland Wales European Territorial Co-operation (ETC) programme.
