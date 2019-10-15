@@ -5,8 +5,6 @@ import { Map, Marker, TileLayer} from 'react-leaflet';
 import Leaflet from 'leaflet';
 import ChartPopup from './ChartPopup';
 
-import {CENTRE_LAT,CENTRE_LON} from './Constant';
-
 import PropTypes from 'prop-types';
 
 const image = new Leaflet.Icon({
@@ -19,12 +17,10 @@ const image = new Leaflet.Icon({
  * A component for displaying a Leaflet map and markers for popups for locations where weather data is being tracked.
  */
 export default class LeafletMap extends Component {
-  constructor() {
-    super()
+  constructor(props) {
+    super(props)
     this.state = {
 
-      lat: CENTRE_LAT,
-      lng: CENTRE_LON,
       zoom: 12,
       popupComponent: undefined,
       dragging: true,
@@ -70,10 +66,10 @@ export default class LeafletMap extends Component {
 
 
   render() {
-    const position = [this.state.lat, this.state.lng];
+    
 
     return (
-      <Map center={position} zoom={this.state.zoom} dragging={this.state.dragging} >
+      <Map center={this.props.mapCentre} zoom={this.state.zoom} dragging={this.state.dragging} >
         <TileLayer
           attribution='&copy; <a href="https://osm.org/copyright">OpenStreetMap</a> contributors'
           url='https://{s}.tile.osm.org/{z}/{x}/{y}.png'

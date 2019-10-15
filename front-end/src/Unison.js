@@ -170,7 +170,11 @@ class Unison extends Component {
 
       </div>
 
-      <LeafletMap marker={this.state.marker} curVar={this.state.curVar} curLoc={this.state.curLoc} markerCallback={this.markerClicked} fromDate={this.state.fromDate} toDate={this.state.toDate}/>
+      <LeafletMap marker={this.state.marker} curVar={this.state.curVar} curLoc={this.state.curLoc} 
+          markerCallback={this.markerClicked} fromDate={this.state.fromDate} toDate={this.state.toDate} 
+          mapCentre={this.props.mapCentre}
+          
+          />
       <div id="selectdiv" >
 
         <center>

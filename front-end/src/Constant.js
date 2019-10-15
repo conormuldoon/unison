@@ -12,7 +12,6 @@ export const MEDIUM = "Medium";
 export const HIGH = "High";
 export const PRECIP = "Precipitation";
 export const CL = "Cloud Level";
-//export const API = "";
 
 // Map coordinates
 // Dublin
