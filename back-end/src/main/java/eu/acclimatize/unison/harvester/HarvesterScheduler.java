@@ -35,7 +35,8 @@ public class HarvesterScheduler {
 	/**
 	 * Invokes the {@link HarvesterService#harvestData} method using a Calendar object for the current date and time.
 	 * The method is invoked every 6 hours and initially when the application begins. The minutes and seconds
-	 * are randomised to load balance connections to the Harmonie API (see https://api.met.no/conditions_service.html). 
+	 * are randomised to load balance connections to the Harmonie API 
+	 * (see <a href="https://api.met.no/conditions_service.html">https://api.met.no/conditions_service.html</a>). 
 	 * 
 	 * @throws InterruptedException The harvester service will sleep for a second if it is having problem obtaining data from the API. 
 	 * The exception will be thrown if the service is interrupted during this time.
