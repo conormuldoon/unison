@@ -28,7 +28,7 @@ public class CSVResponderConfig {
 
 	private static final char DELIMITER = ',';
 
-	// Recursively appends the double, int, Date, and String field names of the
+	// Recursively appends the double, int, Date, and String attribute names of the
 	// result classes to create a CSV header string.
 	private void appendFieldNames(Class<?> c, StringBuilder sb) {
 		Field[] fieldArr = c.getDeclaredFields();
@@ -37,13 +37,14 @@ public class CSVResponderConfig {
 			Class<?> ft = f.getType();
 			if (ft.equals(Date.class) || ft.equals(Double.TYPE) || ft.equals(Integer.TYPE) || ft.equals(Double.class)
 					|| ft.equals(String.class)) {
-				sb.append(ft.getName());
+				sb.append(f.getName());
 				sb.append(DELIMITER);
 			} else {
 				appendFieldNames(ft, sb);
 			}
 		}
 	}
+	
 
 	private String createHeader(Class<?> c) {
 		StringBuilder sb = new StringBuilder();
