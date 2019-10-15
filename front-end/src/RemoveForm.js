@@ -8,6 +8,7 @@ import PropTypes from 'prop-types';
 /**
  * A component to display a form to enable the user to enter their credentials to remove a location from being tracked.
  * 
+ * @component
  */
 export default function RemoveForm(props) {
 

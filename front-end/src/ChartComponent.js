@@ -15,6 +15,8 @@ const PREVAL="precipitation.value";
 /**
  * A component for displaying line graphs.
  * 
+ * @component
+ * 
  */
 export default function ChartComponent(props) {
 

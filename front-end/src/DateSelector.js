@@ -15,6 +15,7 @@ import PropTypes from 'prop-types';
 /**
  * A component for selecting a date.
  * 
+ * @component
  */
 export default function DateSelector(props){
 

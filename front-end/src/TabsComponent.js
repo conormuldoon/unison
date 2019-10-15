@@ -16,6 +16,7 @@ import PropTypes from 'prop-types';
  * For exmaple, for cloud level, there is a tab for high, medium, and low level clouds. Otherwise,
  * only a single ChartComponent is displayed.
  *  
+ * @component
  */
 
 export default function TabsComponent(props){

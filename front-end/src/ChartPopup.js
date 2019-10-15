@@ -16,6 +16,8 @@ const DLEN=16;
  * A popup that displays a TabsComponent. Once mounted, it connects to the back-end to obtain data
  * for the from date, to date, location, and weather variable selected.
  * 
+ * @component
+ * 
  */
 export default function ChartPopup(props){
 

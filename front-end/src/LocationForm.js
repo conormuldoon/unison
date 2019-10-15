@@ -9,6 +9,8 @@ import PropTypes from 'prop-types';
 
 /**
  * A component for displaying a form to add new locations to be tracked.
+ * 
+ * @component
  *  
  */
 export default function LocationForm(props) {

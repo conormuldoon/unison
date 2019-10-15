@@ -25,6 +25,7 @@ const varOpt=['Precipitation','Humidity','Wind Direction','Wind Speed','Cloudine
 /**
  * Application component for Unison. Once mounted, it connects to the back-end to receive a list of the locations being tracked.
  * 
+ * @component
  */
 class Unison extends Component {
 
