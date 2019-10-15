@@ -162,10 +162,10 @@ class Unison extends Component {
       <div id="logos">
 
           <center>
-            <img id="logoitem" alt="Acclimatize Logo" src={require('./Acclimatize-Logo.png')} />
+            <img id="logoitem" alt="" src={this.props.logoLeft} />
 
 
-            <img id="logoitem" alt="Partners logos" src={require('./partners-logos.jpg')} />
+            <img id="logoitem" alt="" src={this.props.logoRight} />
           </center>
 
       </div>

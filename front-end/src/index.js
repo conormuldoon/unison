@@ -12,5 +12,5 @@ import registerServiceWorker from './registerServiceWorker';
 // Oslo
 const mapCentre=[59.922326, 10.751560];
 
-ReactDOM.render(<Unison mapCentre={mapCentre} />, document.getElementById('root'));
+ReactDOM.render(<Unison mapCentre={mapCentre} logoLeft={require('./Acclimatize-Logo.png')} logoRight={require('./partners-logos.jpg')} />, document.getElementById('root'));
 registerServiceWorker();
