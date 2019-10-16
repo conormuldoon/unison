@@ -94,7 +94,7 @@ TabsComponent.propTypes ={
   data: PropTypes.array,
 
   /** The current weather variable selected. */
-  varCur: PropTypes.string,
+  varCur: PropTypes.string.isRequired,
 
   /** Determines wheather to display tabs for the precipitation weather variable. This is needed in that with
    * some locations and models only provide a single preciption value (no minimum or maximum).
@@ -105,7 +105,7 @@ TabsComponent.propTypes ={
   zoomDomain: PropTypes.object,
 
   /** A function used to change the zoom domain. */
-  setZoomDomain: PropTypes.func,
+  setZoomDomain: PropTypes.func.isRequired,
 
   
 }

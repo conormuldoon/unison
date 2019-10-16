@@ -106,19 +106,19 @@ function RemoveForm(props) {
 RemoveForm.propTypes ={
  
   /** The name of the location to be removed. */
-  location: PropTypes.string,
+  location: PropTypes.string.isRequired,
 
   /** Determines whether the form is displayed. */
-  display: PropTypes.bool,
+  display: PropTypes.bool.isRequired,
 
   /** Toggles whether the form is displayed. If the location form is displayed, it will be hidden. */
-  toggleDisplay: PropTypes.func,
+  toggleDisplay: PropTypes.func.isRequired,
 
   /** Called when a location has been successfully removed to hide the form. */
-  hideDisplay: PropTypes.func,
+  hideDisplay: PropTypes.func.isRequired,
 
   /** Called when a location has been successfully removed to obtain the updated location list from the server. */
-  obtainData: PropTypes.func,
+  obtainData: PropTypes.func.isRequired,
 }
 
 export default RemoveForm;

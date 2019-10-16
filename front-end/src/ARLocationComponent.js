@@ -64,7 +64,7 @@ ARLocationComponent.propTypes ={
   location: PropTypes.string,
 
   /** Called when a location has been successfully added/removed to obtain the updated location list from the server and update the locations displayed on the map. */
-  obtainData: PropTypes.func,
+  obtainData: PropTypes.func.isRequired,
 }
 
 export default ARLocationComponent;

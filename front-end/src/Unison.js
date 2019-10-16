@@ -13,6 +13,7 @@ import ARLocationComponent from './ARLocationComponent';
 import LeafletMap from './LeafletMap';
 import {FORMAT,API} from './Constant';
 import {TODAY,FROM_DATE} from './Util';
+import PropTypes from 'prop-types';
 
 import  {
   formatDate
@@ -248,8 +249,8 @@ class Unison extends Component {
 Unison.propTypes ={
 
    /** The latitude/longitude coordinates for the centre of the map. */
-   mapCentre: PropTypes.array,
-   
+   mapCentre: PropTypes.array.isRequired,
+
   /** A logo displayed at the bottom of the screen. It will be displayed to the left
    * if the logoRight prop is defined.
    */

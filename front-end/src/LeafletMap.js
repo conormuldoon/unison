@@ -112,7 +112,7 @@ LeafletMap.propTypes ={
   markerCallback: PropTypes.func,
 
   /** The latitude/longitude coordinates for the centre of the map. */
-  mapCentre: PropTypes.array,
+  mapCentre: PropTypes.array.isRequired,
 
 }
 

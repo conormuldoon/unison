@@ -144,16 +144,16 @@ function LocationForm(props) {
 
 LocationForm.propTypes ={
   /** Determines whether the form for entering location name, longitude, and latitude values is displayed. */
-  display: PropTypes.bool,
+  display: PropTypes.bool.isRequired,
 
   /** Toggles whether the form is displayed. If the remove form is displayed, it will be hidden. */
-  toggleDisplay: PropTypes.func,
+  toggleDisplay: PropTypes.func.isRequired,
 
   /** Called when a location has been successfully added to hide the form. */
-  hideDisplay: PropTypes.func,
+  hideDisplay: PropTypes.func.isRequired,
 
   /** Called when a location has been successfully added to obtain the updated location list from the server and add the location to the map. */
-  obtainData: PropTypes.func,
+  obtainData: PropTypes.func.isRequired,
 }
 
 export default LocationForm;

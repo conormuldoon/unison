@@ -42,13 +42,13 @@ function DateSelector(props){
 DateSelector.propTypes ={
   
   /** The label to display over the selector. */
-  label: PropTypes.string,
+  label: PropTypes.string.isRequired,
 
   /** The initial date value to display. */
-  dateValue: PropTypes.string,
+  dateValue: PropTypes.string.isRequired,
 
   /** A callback function called when the date is changed. */
-  handleDayChange: PropTypes.func,
+  handleDayChange: PropTypes.func.isRequired,
 
 }
 

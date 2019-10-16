@@ -131,14 +131,14 @@ ChartComponent.propTypes ={
   zoomDomain: PropTypes.object,
 
   /** Called when there is a zoom domain change. */
-  handleZoom: PropTypes.func,
+  handleZoom: PropTypes.func.isRequired,
 
   /** Data to be displayed on the graph. */
   data: PropTypes.array,
 
 
   /** The weather variable currently selected. */
-  varCur: PropTypes.string,
+  varCur: PropTypes.string.isRequired,
 
   /** True if the if displaying tabs for the precipitation variable.  */
   minMax: PropTypes.bool,

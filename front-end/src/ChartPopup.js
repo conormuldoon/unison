@@ -103,19 +103,19 @@ function ChartPopup(props){
 
 ChartPopup.propTypes ={
   /** Specifies the weather variable currently selected. */
-  varCur: PropTypes.string,
+  varCur: PropTypes.string.isRequired,
 
   /** Sepecifies the location selected. */
-  location: PropTypes.string,
+  location: PropTypes.string.isRequired,
 
   /** Specifies the start date for the data that is to be displayed. */
-  fromDate: PropTypes.string,
+  fromDate: PropTypes.string.isRequired,
 
   /** Specifies the end date for the data that is to be displayed. */
-  toDate: PropTypes.string,
+  toDate: PropTypes.string.isRequired,
 
   /** Called when the close icon is clicked. */
-  closePopup: PropTypes.func,
+  closePopup: PropTypes.func.isRequired,
 
 }
 
