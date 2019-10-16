@@ -31,6 +31,7 @@ public class PostGISStore implements CoordinatesStore {
 	 * 
 	 * @param repository A repository that stores coordinates data in PostGIS.
 	 * @param sort Determines the order of results for {@link eu.acclimatize.unison.location.CoordinatesStore#sortedFindAll}.
+	 * @param wktReader Used to create a point geometry from a Well-Known Text (WKT) description.
 	 */
 	public PostGISStore(PostGISCoordinatesRepository repository, Sort sort, WKTReader wktReader) {
 		this.repository = repository;
