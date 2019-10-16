@@ -66,7 +66,7 @@ const addChart = async (weatherVariable,dataArray,zoomDomain) =>{
     }
  
   
-  const {findByTestId,debug} = render(<TabsComponent varCur={weatherVariable} data={dataArray} zoomDomain={zoomDomain} minMax={false} />);
+  const {findByTestId,debug} = render(<TabsComponent varCur={weatherVariable} data={dataArray} zoomDomain={zoomDomain} minMax={false} setZoomDomain={()=>{}} />);
  
   //console.log(weatherVariable);
   

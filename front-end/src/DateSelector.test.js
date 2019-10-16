@@ -11,7 +11,7 @@ import  {
 
 const date=formatDate(new Date(), FORMAT);
 
-const dateSelector=<DateSelector label={'Test Label'} dateValue={date} />;
+const dateSelector=<DateSelector label={'Test Label'} dateValue={date} handleDayChange={()=>{}}/>;
 
 it('renders without crashing', () => {
   const div = document.createElement('div');

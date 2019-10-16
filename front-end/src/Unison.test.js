@@ -21,7 +21,7 @@ it('renders without crashing', async () => {
 
   const div = document.createElement('div');
 
-  ReactDOM.render(<Unison />,div);
+  ReactDOM.render(<Unison mapCentre={[59.922326, 10.751560]} />,div);
   ReactDOM.unmountComponentAtNode(div);
 
   fetchMock.restore();
@@ -31,7 +31,7 @@ it('mathes snapshot', () => {
 
   fetchMock.get('end:/location', [{"geom":{"type":"Point","coordinates":[-6.223682,53.308441]},"name":"UCD"}]);
 
-  const {container} = render(<Unison />);
+  const {container} = render(<Unison mapCentre={[59.922326, 10.751560]}/>);
 
   expect(container).toMatchSnapshot();
 
@@ -140,7 +140,7 @@ it('displays popup when marker clicked', async () =>{
         }
     }]);
 
-  const {getAllByAltText,getByText,debug} = render(<Unison />);
+  const {getAllByAltText,getByText,debug} = render(<Unison mapCentre={[59.922326, 10.751560]} />);
 
   const marker= await waitForElement(()=>getAllByAltText('')[1]);
   

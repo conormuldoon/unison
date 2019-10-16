@@ -36,7 +36,7 @@ exports[`mathes snapshot 1`] = `
       <div>
         <input
           type="submit"
-          value="Remove undefined"
+          value="Remove UCD"
         />
       </div>
     </form>

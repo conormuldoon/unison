@@ -11,14 +11,15 @@ it('renders without crashing', async () => {
 
   const div = document.createElement('div');
 
-  ReactDOM.render(<RemoveForm/>,div);
+  ReactDOM.render(<RemoveForm location='UCD'
+    obtainData={()=>{}} hideDisplay={()=>{}} toggleDisplay={()=>{}} display={true}/>, div);
   ReactDOM.unmountComponentAtNode(div);
 });
 
 it('mathes snapshot', () => {
 
 
-  const {container} = render(<RemoveForm display={true} />);
+  const {container} = render(<RemoveForm display={true} location='UCD' obtainData={()=>{}} hideDisplay={()=>{}} toggleDisplay={()=>{}} display={true}/>);
 
   expect(container).toMatchSnapshot();
 
@@ -38,7 +39,7 @@ it('handles remove location', async (done) =>{
     done();
   };
 
-  const component=<RemoveForm location={location} display={true} obtainData={obtainData} hideDisplay={hideDisplay}/>;
+  const component=<RemoveForm location={location} display={true} obtainData={obtainData} hideDisplay={hideDisplay} toggleDisplay={()=>{}} />;
   const {getByText} = render(component);
 
   fireEvent.click(getByText('Remove ' + location));
@@ -59,7 +60,7 @@ const testRemove = async(done,retVal,message) =>{
   });
 
 
-  const component=<RemoveForm location={location} display={true}  />;
+  const component=<RemoveForm location={location} display={true} obtainData={()=>{}} toggleDisplay={()=>{}} hideDisplay={()=>{}} />;
   const {getByText} = render(component);
 
   fireEvent.click(getByText('Remove ' + location));

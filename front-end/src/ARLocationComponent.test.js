@@ -10,7 +10,7 @@ it('renders without crashing', async () => {
 
   const div = document.createElement('div');
 
-  ReactDOM.render(<ARLocationComponent />,div);
+  ReactDOM.render(<ARLocationComponent obtainData={()=>{}} />,div);
   ReactDOM.unmountComponentAtNode(div);
 });
 
@@ -20,7 +20,7 @@ it('renders without crashing', async () => {
 it('mathes snapshot', () => {
 
 
-  const {container} = render(<ARLocationComponent />);
+  const {container} = render(<ARLocationComponent obtainData={()=>{}} />);
 
   expect(container).toMatchSnapshot();
 
@@ -30,7 +30,7 @@ it('mathes snapshot', () => {
 
 it('toggles add location correctly', () => {
 
-  const {getByTestId,getByText} = render(<ARLocationComponent location={'UCD'} />);
+  const {getByTestId,getByText} = render(<ARLocationComponent location={'UCD'} obtainData={()=>{}}  />);
   expect(getByTestId('lf-button')).toHaveTextContent('Add Location');
   expect(getByTestId('rf-button')).toHaveTextContent('Remove Location');
   fireEvent.click(getByText('Add Location'));
@@ -51,7 +51,7 @@ it('toggles add location correctly', () => {
 
 it('toggles remove location correctly', () => {
 
-  const {getByTestId,getByText} = render(<ARLocationComponent location='UCD'/>);
+  const {getByTestId,getByText} = render(<ARLocationComponent location='UCD' obtainData={()=>{}} />);
   expect(getByTestId('lf-button')).toHaveTextContent('Add Location');
   expect(getByTestId('rf-button')).toHaveTextContent('Remove Location');
   fireEvent.click(getByText('Remove Location'));

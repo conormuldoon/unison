@@ -10,14 +10,14 @@ it('renders without crashing', async () => {
 
   const div = document.createElement('div');
 
-  ReactDOM.render(<LeafletMap/>,div);
+  ReactDOM.render(<LeafletMap mapCentre={[59.922326, 10.751560]} />,div);
   ReactDOM.unmountComponentAtNode(div);
 });
 
 it('mathes snapshot', () => {
 
 
-  const {container} = render(<LeafletMap />);
+  const {container} = render(<LeafletMap mapCentre={[59.922326, 10.751560]} />);
 
   expect(container).toMatchSnapshot();
 

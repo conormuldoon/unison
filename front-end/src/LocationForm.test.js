@@ -13,7 +13,7 @@ it('renders without crashing', async () => {
 
   const div = document.createElement('div');
 
-  ReactDOM.render(<LocationForm/>,div);
+  ReactDOM.render(<LocationForm obtainData={()=>{}} hideDisplay={()=>{}} toggleDisplay={()=>{}} display={true} />,div);
   ReactDOM.unmountComponentAtNode(div);
 });
 
@@ -21,7 +21,7 @@ it('renders without crashing', async () => {
 it('mathes snapshot', () => {
 
 
-  const {container} = render(<LocationForm />);
+  const {container} = render(<LocationForm obtainData={()=>{}} hideDisplay={()=>{}} toggleDisplay={()=>{}} display={true} />);
 
   expect(container).toMatchSnapshot();
 
@@ -50,7 +50,7 @@ it('posts data in form when submit is clicked', async(done) =>{
     done();
   };
 
-  const component=<LocationForm display={true} obtainData={obtainData} hideDisplay={hideDisplay}/>;
+  const component=<LocationForm display={true} obtainData={obtainData} hideDisplay={hideDisplay} toggleDisplay={()=>{}} />;
   const {getByText,getByLabelText} = render(component);
 
   function changeValue(labelText,value){
@@ -83,7 +83,7 @@ it('handles add location', async (done) =>{
     done();
   };
 
-  const component=<LocationForm display={true} obtainData={obtainData} hideDisplay={hideDisplay}/>;
+  const component=<LocationForm display={true} obtainData={obtainData} hideDisplay={hideDisplay} toggleDisplay={()=>{}} />;
   const {getByText} = render(component);
 
   fireEvent.click(getByText('Submit'));
@@ -103,7 +103,7 @@ const testAdd = async(done,retVal,message) =>{
   });
 
 
-  const component=<LocationForm display={true}  />;
+  const component=<LocationForm display={true} obtainData={()=>{}} toggleDisplay={()=>{}} hideDisplay={()=>{}} />;
   const {getByText} = render(component);
 
   fireEvent.click(getByText('Submit'));
