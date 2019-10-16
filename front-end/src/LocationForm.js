@@ -10,10 +10,9 @@ import PropTypes from 'prop-types';
 /**
  * A component for displaying a form to add new locations to be tracked.
  * 
- * @component
- *  
+ * @component 
  */
-export default function LocationForm(props) {
+function LocationForm(props) {
 
   
 
@@ -156,3 +155,5 @@ LocationForm.propTypes ={
   /** Called when a location has been successfully added to obtain the updated location list from the server and add the location to the map. */
   obtainData: PropTypes.func,
 }
+
+export default LocationForm;

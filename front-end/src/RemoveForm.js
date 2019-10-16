@@ -10,7 +10,7 @@ import PropTypes from 'prop-types';
  * 
  * @component
  */
-export default function RemoveForm(props) {
+function RemoveForm(props) {
 
 
   const [uname,setUName]=useState('');
@@ -120,3 +120,5 @@ RemoveForm.propTypes ={
   /** Called when a location has been successfully removed to obtain the updated location list from the server. */
   obtainData: PropTypes.func,
 }
+
+export default RemoveForm;

@@ -17,8 +17,10 @@ const image = new Leaflet.Icon({
  * A component for displaying a Leaflet map and markers for popups for locations where weather data is being tracked.
  * 
  * @component
+ * 
  */
-export default class LeafletMap extends Component {
+
+ class LeafletMap extends Component {
   constructor(props) {
     super(props)
     this.state = {
@@ -110,3 +112,5 @@ LeafletMap.propTypes ={
   markerCallback: PropTypes.func,
 
 }
+
+export default LeafletMap;

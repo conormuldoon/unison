@@ -18,7 +18,7 @@ const PREVAL="precipitation.value";
  * @component
  * 
  */
-export default function ChartComponent(props) {
+function ChartComponent(props) {
 
   const [yVal,setYVal]=useState(undefined);
   const [yLabel,setYLabel]=useState(undefined);
@@ -142,5 +142,7 @@ ChartComponent.propTypes ={
   /** The name of the attribute in all objects of the data array to be plotted.*/
   yVal: PropTypes.string,
 }
+
+export default ChartComponent;
 
 

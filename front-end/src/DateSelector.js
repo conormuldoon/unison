@@ -16,8 +16,9 @@ import PropTypes from 'prop-types';
  * A component for selecting a date.
  * 
  * @component
+ * 
  */
-export default function DateSelector(props){
+function DateSelector(props){
 
 
     return (
@@ -50,3 +51,5 @@ DateSelector.propTypes ={
   handleDayChange: PropTypes.func,
 
 }
+
+export default DateSelector;

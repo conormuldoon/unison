@@ -18,8 +18,7 @@ import PropTypes from 'prop-types';
  *  
  * @component
  */
-
-export default function TabsComponent(props){
+function TabsComponent(props){
 
   const [tabs,setTabs]=useState(undefined);
 
@@ -114,3 +113,4 @@ TabsComponent.propTypes ={
   
 }
 
+export default TabsComponent;

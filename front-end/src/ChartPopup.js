@@ -17,9 +17,8 @@ const DLEN=16;
  * for the from date, to date, location, and weather variable selected.
  * 
  * @component
- * 
  */
-export default function ChartPopup(props){
+function ChartPopup(props){
 
   const [data,setData]=useState(undefined);
   const [zoomDomain,setZoomDomain]=useState(undefined);
@@ -116,4 +115,6 @@ ChartPopup.propTypes ={
   toDate: PropTypes.string,
 
 }
+
+export default ChartPopup;
 

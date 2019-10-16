@@ -32,11 +32,12 @@ it('displays popup', () => {
   const curVar='Temperature';
   const fromDate='1/2/2018';
   const toDate='7/10/2019';
+  const mapCentre=[53.35014, -6.266155];
 
   fetchMock.get('end:/temperature?location=UCD&fromDate='+fromDate+'&toDate='+toDate, []);
 
   const markerCallback=jest.fn();
-  const {getAllByAltText} = render(<LeafletMap curVar={curVar} markerCallback={markerCallback} marker={marker} fromDate={fromDate} toDate={toDate}/>);
+  const {getAllByAltText} = render(<LeafletMap curVar={curVar} mapCentre={mapCentre} markerCallback={markerCallback} marker={marker} fromDate={fromDate} toDate={toDate}/>);
 
   // Firing click event for marker icon image
   fireEvent.click(getAllByAltText('')[1]);
