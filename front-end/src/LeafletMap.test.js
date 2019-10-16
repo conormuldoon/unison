@@ -2,7 +2,7 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import LeafletMap from './LeafletMap';
 
-import { render,getByTestId,fireEvent,waitForElement} from "react-testing-library";
+import {render,fireEvent} from "react-testing-library";
 import fetchMock from 'fetch-mock';
 
 

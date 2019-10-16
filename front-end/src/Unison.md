@@ -1,5 +1,0 @@
-Unison example:
-
-```js
-<Unison />
-```

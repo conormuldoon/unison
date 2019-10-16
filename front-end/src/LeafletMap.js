@@ -111,6 +111,9 @@ LeafletMap.propTypes ={
   /** A function called when a marker is clicked. */
   markerCallback: PropTypes.func,
 
+  /** The latitude/longitude coordinates for the centre of the map. */
+  mapCentre: PropTypes.array,
+
 }
 
 export default LeafletMap;

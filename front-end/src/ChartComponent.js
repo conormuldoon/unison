@@ -136,11 +136,16 @@ ChartComponent.propTypes ={
   /** Data to be displayed on the graph. */
   data: PropTypes.array,
 
-  /** The label for the y-axis. The x-axis is always time.  */
-  yLabel: PropTypes.string,
 
-  /** The name of the attribute in all objects of the data array to be plotted.*/
-  yVal: PropTypes.string,
+  /** The weather variable currently selected. */
+  varCur: PropTypes.string,
+
+  /** True if the if displaying tabs for the precipitation variable.  */
+  minMax: PropTypes.bool,
+
+  /** The tab index - 0 for the left tab, 1 for the middle tab, and 2 for the right tab. */
+  index: PropTypes.number,
+
 }
 
 export default ChartComponent;

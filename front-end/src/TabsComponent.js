@@ -107,9 +107,6 @@ TabsComponent.propTypes ={
   /** A function used to change the zoom domain. */
   setZoomDomain: PropTypes.func,
 
-  /** A function called when the zoom level for charts is changed. */
-  handleZoom: PropTypes.func,
-
   
 }
 

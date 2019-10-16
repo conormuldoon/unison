@@ -245,4 +245,21 @@ class Unison extends Component {
   }
 }
 
+Unison.propTypes ={
+
+   /** The latitude/longitude coordinates for the centre of the map. */
+   mapCentre: PropTypes.array,
+   
+  /** A logo displayed at the bottom of the screen. It will be displayed to the left
+   * if the logoRight prop is defined.
+   */
+  logoLeft: PropTypes.any,
+
+  /** A logo displayed at the bottom of the screen. It will be displayed to the right
+   * if the logoLeft prop is defined.
+   */
+  logoRight: PropTypes.any,
+
+}
+
 export default Unison;

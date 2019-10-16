@@ -114,6 +114,9 @@ ChartPopup.propTypes ={
   /** Specifies the end date for the data that is to be displayed. */
   toDate: PropTypes.string,
 
+  /** Called when the close icon is clicked. */
+  closePopup: PropTypes.func,
+
 }
 
 export default ChartPopup;
