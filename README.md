@@ -6,7 +6,12 @@ See the [Javadoc](https://conormuldoon.github.io/unison/docs/back-end/) for a de
 
 ## Running
 
-### Start the back-end
+### Binary
+Unison requires Java 11 to operate. Download and run [https://github.com/conormuldoon/unison/releases/download/v0.1.0/unison-server-0.1.0-SNAPSHOT.jar] and open [http://localhost:8080/unison/index.html] in the browser. To change the port, use the `--server.port`argument for main.
+
+### From source
+
+#### Start the back-end
 
 ```
 cd back-end
@@ -14,7 +19,7 @@ mvn clean compile spring-boot:run
 ```
 Wait until the application has started and then enter an initial user name and password, which will be required for adding/removing the locations to track.
 
-### Start the front-end
+#### Start the front-end
 
 ```
 cd front-end
