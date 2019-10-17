@@ -13,11 +13,3 @@ export const HIGH = "High";
 export const PRECIP = "Precipitation";
 export const CL = "Cloud Level";
 
-// Map coordinates
-// Dublin
-//export const CENTRE_LAT = 53.35014;
-//export const CENTRE_LON = -6.266155;
-
-// Oslo
-export const CENTRE_LAT = 59.922326;
-export const CENTRE_LON = 10.751560;
