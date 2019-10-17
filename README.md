@@ -7,7 +7,7 @@ See the [Javadoc](https://conormuldoon.github.io/unison/docs/back-end/) for a de
 ## Running
 
 ### Binary
-Unison requires Java 11 to operate. Download and run the [latest release](https://github.com/conormuldoon/unison/releases/latest/download/unison.jar). Once the application has started, enter an initial user name and password in the terminal, which will be required adding/removing the locations to track, and and then open `http://localhost:8080/unison/index.html` in the browser. To change the port, use the `--server.port`argument for main.
+Unison requires Java 11 to operate. Download and run the [latest release](https://github.com/conormuldoon/unison/releases/latest/download/unison.jar). Once the application has started, enter an initial user name and password in the terminal, which will be required adding/removing the locations to track, and and then open `http://localhost:8080/unison/index.html` in the browser. To change the port, use the `--server.port` argument for main.
 
 ### From source
 
