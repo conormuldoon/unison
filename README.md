@@ -7,7 +7,7 @@ See the [Javadoc](https://conormuldoon.github.io/unison/docs/back-end/) for a de
 ## Running
 
 ### Binary
-Unison requires Java 11 to operate. Download and run the [latest release](https://github.com/conormuldoon/unison/releases/latest/). Once the application has started, enter an initial user name and password in the terminal, which will be required adding/removing the locations to track, and and then open `http://localhost:8080/unison/index.html` in the browser. To change the port, use the `--server.port` argument for main.
+Unison requires Java 11 to operate. Download and run the [latest release](https://github.com/conormuldoon/unison/releases/latest/) using the `-jar` option. Once the application has started, enter an initial user name and password in the terminal, which will be required adding/removing the locations to track, and and then open `http://localhost:8080/unison/index.html` in the browser. To change the port, use the `--server.port` argument for main.
 
 ### From source
 
@@ -36,7 +36,7 @@ cd back-end
 ```
 If not previously compiled: `mvn clean compile package`
 ```
-java -cp target/unison-server-0.1.0-SNAPSHOT.jar -Dloader.main=eu.acclimatize.unison.user.UserConsole org.springframework.boot.loader.PropertiesLauncher
+java -cp target/unison-server-0.1.1-SNAPSHOT.jar -Dloader.main=eu.acclimatize.unison.user.UserConsole org.springframework.boot.loader.PropertiesLauncher
 ```
 
 Enter the user credentials (if the user name already exists, the password will be updated).

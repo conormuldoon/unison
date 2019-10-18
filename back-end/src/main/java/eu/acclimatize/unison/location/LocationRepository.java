@@ -22,7 +22,7 @@ public interface LocationRepository extends CrudRepository<LocationDetails, Stri
 	/**
 	 * Determines locations that have not received or stored data from the API.
 	 * 
-	 * @return Locations that have not data.
+	 * @return Locations that have no data.
 	 */
 	@Query("from LocationDetails l where (select count(*) from HourlyPrecipitation p where l.name=p.key.location.name) = 0 or (select count(*) from HourlyWeather w where l.name=w.key.location.name) = 0")
 	public Iterable<LocationDetails> empty();
