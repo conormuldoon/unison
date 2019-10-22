@@ -26,7 +26,7 @@ public class DocumentRequestService {
 	 * Creates an instance of DocumentRequestService.
 	 * 
 	 * @param documentBuilder A builder used to parse the XML document.
-	 * @param logger Used to log URIs for requested documents.
+	 * @param logger Used to log URIs for requested documents and exceptions.
 	 */
 	public DocumentRequestService(DocumentBuilder documentBuilder, Logger logger) {
 
@@ -50,10 +50,9 @@ public class DocumentRequestService {
 			return Optional.of(doc);
 
 		} catch (SAXException e) {
-
-			e.printStackTrace();
+			logger.log(Level.WARNING,e.getMessage());
 		} catch (IOException e) {
-			e.printStackTrace();
+			logger.log(Level.WARNING,e.getMessage());
 		}
 		return Optional.empty();
 	}

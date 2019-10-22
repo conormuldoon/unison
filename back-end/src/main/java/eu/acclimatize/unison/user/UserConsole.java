@@ -62,7 +62,7 @@ public class UserConsole {
 		mchangeLogger.setLevel(ch.qos.logback.classic.Level.WARN);
 	}
 
-	private void execute() {
+	private void execute(Logger logger) {
 		hideInfoLogs();
 		Configuration cfg = new Configuration();
 
@@ -85,7 +85,8 @@ public class UserConsole {
 
 		} catch (IOException e) {
 
-			e.printStackTrace();
+			logger.log(Level.WARNING,e.getMessage());
+			
 		}
 
 	}
@@ -152,7 +153,7 @@ public class UserConsole {
 	public static void main(String[] args) {
 
 		UserConsole uc = new UserConsole(System.console(), new BCryptPasswordEncoder(), new SecureRandom());
-		uc.execute();
+		uc.execute(Logger.getLogger(UserConsole.class.getName()));
 
 	}
 

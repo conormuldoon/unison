@@ -34,7 +34,7 @@ import eu.acclimatize.unison.location.LocationDetails;
 import eu.acclimatize.unison.location.LocationRepository;
 
 /**
- * A service that harvest data from a HARMONIE-AROME API. 
+ * A service that harvest data from a HARMONIE-AROME API.
  */
 @Service
 public class HarvesterService {
@@ -59,17 +59,22 @@ public class HarvesterService {
 	/**
 	 * Creates an instance of HarvesterService.
 	 * 
-	 * @param locationRepository The repository that stores the locations that data will be harvested for.
-	 * @param precipitationRepository The repository where precipitation data is stored.
-	 * @param weatherRepository The repository where non-precipitation weather data is stored.
-	 * @param drs The service that is used to obtain XML documents from the API.
-	 * @param logger Logs warning messages.
-	 * @param simpleDateFormat Used to parse date data using a given time zone.
+	 * @param locationRepository      The repository that stores the locations that
+	 *                                data will be harvested for.
+	 * @param precipitationRepository The repository where precipitation data is
+	 *                                stored.
+	 * @param weatherRepository       The repository where non-precipitation weather
+	 *                                data is stored.
+	 * @param drs                     The service that is used to obtain XML
+	 *                                documents from the API.
+	 * @param logger                  Logs warning messages and exceptions.
+	 * @param simpleDateFormat        Used to parse date data using a given time
+	 *                                zone.
 	 */
 	public HarvesterService(LocationRepository locationRepository,
 			HourlyPrecipitationRepository precipitationRepository, HourlyWeatherRepository weatherRepository,
 			DocumentRequestService drs, Logger logger, SimpleDateFormat simpleDateFormat) {
-		
+
 		this.locationRepository = locationRepository;
 		this.weatherRepository = weatherRepository;
 		this.precipitationRepository = precipitationRepository;
@@ -84,11 +89,14 @@ public class HarvesterService {
 	}
 
 	/**
-	 * Requests and data stores from a HARMONIE-AROME API for locations in the database. 
+	 * Requests and data stores from a HARMONIE-AROME API for locations in the
+	 * database.
 	 * 
 	 * @param calendar Used to determine the time at which to store data.
-	 * @throws InterruptedException The service will sleep for a second if it is having problem obtaining data from the API. 
-	 * The exception will be thrown if the service is interrupted during this time.
+	 * @throws InterruptedException The service will sleep for a second if it is
+	 *                              having problem obtaining data from the API. The
+	 *                              exception will be thrown if the service is
+	 *                              interrupted during this time.
 	 */
 	@Transactional
 	synchronized public void harvestData(Calendar calendar) throws InterruptedException {
@@ -229,8 +237,8 @@ public class HarvesterService {
 
 				}
 			} catch (ParseException e) {
+				logger.log(Level.WARNING, e.getMessage());
 
-				e.printStackTrace();
 			}
 
 		}
