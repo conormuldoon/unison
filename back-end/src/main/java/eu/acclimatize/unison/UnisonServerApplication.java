@@ -5,6 +5,7 @@ import java.text.SimpleDateFormat;
 import java.util.TimeZone;
 import java.util.logging.Logger;
 
+import javax.xml.XMLConstants;
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.ParserConfigurationException;
@@ -32,7 +33,7 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 public class UnisonServerApplication {
 
 	/**
-	 * Starts spring.
+	 * Starts spring application.
 	 * 
 	 * @param args Arguments passed to the application runner.
 	 */
@@ -49,6 +50,7 @@ public class UnisonServerApplication {
 	@Bean
 	public DocumentBuilder documentBuilder() throws ParserConfigurationException {
 		DocumentBuilderFactory dbFactory = DocumentBuilderFactory.newInstance();
+		dbFactory.setFeature(XMLConstants.FEATURE_SECURE_PROCESSING, true);
 		return dbFactory.newDocumentBuilder();
 
 	}
