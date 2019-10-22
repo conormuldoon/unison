@@ -2,7 +2,7 @@ package eu.acclimatize.unison;
 
 import static org.junit.Assert.assertNotSame;
 
-import java.util.Random;
+import java.security.SecureRandom;
 
 import org.junit.Test;
 
@@ -20,7 +20,7 @@ public class UserConsoleTests {
 	 */
 	@Test
 	public void testRandDiff() {
-		UserConsole passwordBCrypt = new UserConsole(null, null, new Random());
+		UserConsole passwordBCrypt = new UserConsole(null, null, new SecureRandom());
 
 		String r0 = passwordBCrypt.randomPassword();
 		String r1 = passwordBCrypt.randomPassword();

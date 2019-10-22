@@ -2,8 +2,8 @@ package eu.acclimatize.unison.user;
 
 import java.io.Console;
 import java.io.IOException;
+import java.security.SecureRandom;
 import java.util.Optional;
-import java.util.Random;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -29,7 +29,7 @@ public class UserService {
 
 	private BCryptPasswordEncoder passwordEncoder;
 
-	private Random random;
+	private SecureRandom random;
 
 	/**
 	 * Creates an instance of UserService.
@@ -40,7 +40,7 @@ public class UserService {
 	 * @param passwordEncoder Used to encrypt and match user passwords.
 	 */
 	public UserService(UserRepository userRepository, Logger logger, BCryptPasswordEncoder passwordEncoder,
-			Random random) {
+			SecureRandom random) {
 		this.userRepository = userRepository;
 		this.passwordEncoder = passwordEncoder;
 		this.logger = logger;

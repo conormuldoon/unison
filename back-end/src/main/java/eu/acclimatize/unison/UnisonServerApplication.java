@@ -1,7 +1,7 @@
 package eu.acclimatize.unison;
 
+import java.security.SecureRandom;
 import java.text.SimpleDateFormat;
-import java.util.Random;
 import java.util.TimeZone;
 import java.util.logging.Logger;
 
@@ -89,13 +89,13 @@ public class UnisonServerApplication {
 	}
 	
 	/**
-	 * Creates a singleton scope Random object.
+	 * Creates a singleton scope SecureRandom object used for generating random passwords.
 	 * 
-	 * @return The Random object created.
+	 * @return The SecureRandom object created.
 	 */
 	@Bean
-	public Random random() {
-		return new Random();
+	public SecureRandom random() {
+		return new SecureRandom();
 	}
 	
 	

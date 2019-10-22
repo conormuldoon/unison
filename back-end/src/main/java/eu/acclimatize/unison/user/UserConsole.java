@@ -2,8 +2,8 @@ package eu.acclimatize.unison.user;
 
 import java.io.Console;
 import java.io.IOException;
+import java.security.SecureRandom;
 import java.util.Properties;
-import java.util.Random;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -34,7 +34,7 @@ public class UserConsole {
 
 	private Console console;
 	private BCryptPasswordEncoder encoder;
-	private Random random;
+	private SecureRandom random;
 
 	/**
 	 * Creates and instance of UserConsole.
@@ -42,7 +42,7 @@ public class UserConsole {
 	 * @param console Used to request and read user data.
 	 * @param encoder Used to encrypt the password.
 	 */
-	public UserConsole(Console console, BCryptPasswordEncoder encoder, Random random) {
+	public UserConsole(Console console, BCryptPasswordEncoder encoder, SecureRandom random) {
 
 		this.console = console;
 		this.encoder = encoder;
@@ -151,7 +151,7 @@ public class UserConsole {
 	 */
 	public static void main(String[] args) {
 
-		UserConsole uc = new UserConsole(System.console(), new BCryptPasswordEncoder(), new Random());
+		UserConsole uc = new UserConsole(System.console(), new BCryptPasswordEncoder(), new SecureRandom());
 		uc.execute();
 
 	}
