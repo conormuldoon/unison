@@ -58,7 +58,7 @@ public class DeleteLocationController {
 	public int deleteLocation(@RequestParam(Constant.LOCATION) String locationName,
 			@RequestParam(Constant.USERNAME) String userName, @RequestParam(Constant.PASSWORD) String password) {
 
-		UserTask task = (user) -> {
+		UserTask task = user -> {
 
 			if(locationRepository.existsById(locationName)) {
 				String owner=locationRepository.findOwner(locationName);

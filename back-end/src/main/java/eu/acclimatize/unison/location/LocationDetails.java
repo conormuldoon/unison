@@ -1,5 +1,6 @@
 package eu.acclimatize.unison.location;
 
+import java.io.Serializable;
 import java.util.Optional;
 
 import javax.persistence.Entity;
@@ -17,7 +18,10 @@ import eu.acclimatize.unison.user.UserInformation;
  *
  */
 @Entity
-public class LocationDetails {
+public class LocationDetails implements Serializable{
+
+	
+	private static final long serialVersionUID = 1771422791257298902L;
 
 	@Id
 	private String name;

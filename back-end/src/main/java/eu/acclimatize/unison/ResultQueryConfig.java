@@ -16,12 +16,12 @@ import eu.acclimatize.unison.result.WindSpeedResult;
 
 /**
  * 
- * A configuration class for creating beans for JPQL queries. The query results are order by time (fromHour column in the database).
+ * A configuration class for creating beans for JPQL queries. The query results
+ * are order by time (fromHour column in the database).
  *
  */
 @Configuration
 public class ResultQueryConfig {
-
 
 	private final static String VALUE = "value";
 
@@ -30,16 +30,18 @@ public class ResultQueryConfig {
 	private final static String PRE_TABLE = HourlyPrecipitation.class.getSimpleName();
 
 	private String createQuery(String entityName, Class<? extends HarmonieItem> resultClass, String item) {
-		String query = "select new " + resultClass.getName() + "(a.key.fromHour,a." + item + ") from " + entityName
-				+ " a where a.key.location.name= :" + Constant.LOCATION + " and a.key.fromHour >= :" + Constant.FROM_DATE
-				+ " and cast(a.key.fromHour as date) <= :" + Constant.TO_DATE + " order by a.key.fromHour";
-		return query;
+		return "select new " + resultClass.getName() + "(a.key.fromHour,a." + item + ") from " + entityName
+				+ " a where a.key.location.name= :" + Constant.LOCATION + " and a.key.fromHour >= :"
+				+ Constant.FROM_DATE + " and cast(a.key.fromHour as date) <= :" + Constant.TO_DATE
+				+ " order by a.key.fromHour";
+
 	}
-	
+
 	/**
 	 * Creates a JPA query for precipitation.
 	 * 
-	 * @return A parameterized query string with parameters for the location, from date, and to date.
+	 * @return A parameterized query string with parameters for the location, from
+	 *         date, and to date.
 	 */
 	@Bean
 	public String precipitationQuery() {
@@ -49,7 +51,8 @@ public class ResultQueryConfig {
 	/**
 	 * Creates a JPA query for the cloud level.
 	 * 
-	 * @return A parameterized query string with parameters for the location, from date, and to date.
+	 * @return A parameterized query string with parameters for the location, from
+	 *         date, and to date.
 	 */
 	@Bean
 	public String cloudLevelQuery() {
@@ -59,7 +62,8 @@ public class ResultQueryConfig {
 	/**
 	 * Creates a JPA query for the wind speed.
 	 * 
-	 * @return A parameterized query string with parameters for the location, from date, and to date.
+	 * @return A parameterized query string with parameters for the location, from
+	 *         date, and to date.
 	 */
 	@Bean
 	public String windSpeedQuery() {
@@ -69,7 +73,8 @@ public class ResultQueryConfig {
 	/**
 	 * Creates a JPA query for the wind direction.
 	 * 
-	 * @return A parameterized query string with parameters for the location, from date, and to date.
+	 * @return A parameterized query string with parameters for the location, from
+	 *         date, and to date.
 	 */
 	@Bean
 	public String windDirectionQuery() {
@@ -79,7 +84,8 @@ public class ResultQueryConfig {
 	/**
 	 * Creates a JPA query for humidity.
 	 * 
-	 * @return A parameterized query string with parameters for the location, from date, and to date.
+	 * @return A parameterized query string with parameters for the location, from
+	 *         date, and to date.
 	 */
 	@Bean
 	public String humidityQuery() {
@@ -89,7 +95,8 @@ public class ResultQueryConfig {
 	/**
 	 * Creates a JPA query for fog.
 	 * 
-	 * @return A parameterized query string with parameters for the location, from date, and to date.
+	 * @return A parameterized query string with parameters for the location, from
+	 *         date, and to date.
 	 */
 	@Bean
 	public String fogQuery() {
@@ -99,7 +106,8 @@ public class ResultQueryConfig {
 	/**
 	 * Creates a JPA query for cloudiness.
 	 * 
-	 * @return A parameterized query string with parameters for the location, from date, and to date.
+	 * @return A parameterized query string with parameters for the location, from
+	 *         date, and to date.
 	 */
 	@Bean
 	public String cloudinessQuery() {
@@ -109,7 +117,8 @@ public class ResultQueryConfig {
 	/**
 	 * Creates a JPA query for pressure.
 	 * 
-	 * @return A parameterized query string with parameters for the location, from date, and to date.
+	 * @return A parameterized query string with parameters for the location, from
+	 *         date, and to date.
 	 */
 	@Bean
 	public String pressureQuery() {
@@ -119,7 +128,8 @@ public class ResultQueryConfig {
 	/**
 	 * Creates a JPA query for the dew point.
 	 * 
-	 * @return A parameterized query string with parameters for the location, from date, and to date.
+	 * @return A parameterized query string with parameters for the location, from
+	 *         date, and to date.
 	 */
 	@Bean
 	public String dewPointQuery() {
@@ -129,7 +139,8 @@ public class ResultQueryConfig {
 	/**
 	 * Creates a JPA query for temperature.
 	 * 
-	 * @return A parameterized query string with parameters for the location, from date, and to date.
+	 * @return A parameterized query string with parameters for the location, from
+	 *         date, and to date.
 	 */
 	@Bean
 	public String temperatureQuery() {
