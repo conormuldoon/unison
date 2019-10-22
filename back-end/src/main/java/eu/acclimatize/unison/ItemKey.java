@@ -18,8 +18,7 @@ import eu.acclimatize.unison.location.LocationDetails;
 public class ItemKey implements Serializable {
 
 	final static private String NAME = "name";
-	
-	
+
 	private static final long serialVersionUID = -2386171964847399660L;
 
 	private Date fromHour;
@@ -32,13 +31,14 @@ public class ItemKey implements Serializable {
 	 * Creates an instance of ItemKey.
 	 * 
 	 * @param fromHour The start time of the hour.
-	 * @param location The location of the hourly weather or hourly precipitation data.
+	 * @param location The location of the hourly weather or hourly precipitation
+	 *                 data.
 	 */
 	public ItemKey(Date fromHour, LocationDetails location) {
 		this.fromHour = fromHour;
 		this.location = location;
 	}
-	
+
 	/**
 	 * A zero argument constructor for JPA.
 	 */
@@ -59,11 +59,15 @@ public class ItemKey implements Serializable {
 	@Override
 	public boolean equals(Object obj) {
 
-		ItemKey other = (ItemKey) obj;
-		return fromHour.equals(other.fromHour) && location.equals(other.location);
+		if (obj == null)
+			return false;
+		else if (!(obj instanceof ItemKey))
+			return false;
+		else {
+			ItemKey other = (ItemKey) obj;
+			return fromHour.equals(other.fromHour) && location.equals(other.location);
+		}
 
 	}
-
-
 
 }

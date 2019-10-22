@@ -90,6 +90,7 @@ public class HarvesterService {
 	 * @throws InterruptedException The service will sleep for a second if it is having problem obtaining data from the API. 
 	 * The exception will be thrown if the service is interrupted during this time.
 	 */
+	@Transactional
 	synchronized public void harvestData(Calendar calendar) throws InterruptedException {
 
 		Iterable<Date> modelTime = createModelTime(calendar);
@@ -332,7 +333,6 @@ public class HarvesterService {
 		return nnm.getNamedItem(attName).getTextContent();
 	}
 
-	@Transactional
 	private void store(List<HourlyPrecipitation> hPrecipitation, List<HourlyWeather> hWeather) {
 
 		precipitationRepository.saveAll(hPrecipitation);
