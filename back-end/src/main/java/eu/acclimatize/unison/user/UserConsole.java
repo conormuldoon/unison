@@ -81,12 +81,12 @@ public class UserConsole {
 
 			UserInformation userInformation = requestUserInformation();
 
-			storeUser(userInformation, cfg);
+			storeUser(userInformation, cfg, logger);
 
 		} catch (IOException e) {
 
-			logger.log(Level.WARNING,e.getMessage());
-			
+			logger.log(Level.WARNING, e.getMessage());
+
 		}
 
 	}
@@ -157,7 +157,7 @@ public class UserConsole {
 
 	}
 
-	private void storeUser(UserInformation user, Configuration configuration) {
+	private void storeUser(UserInformation user, Configuration configuration, Logger logger) {
 		SessionFactory factory = null;
 		Session session = null;
 		try {
@@ -170,7 +170,7 @@ public class UserConsole {
 
 				t.commit();
 			} catch (javax.persistence.PersistenceException pe) {
-				pe.printStackTrace();
+				logger.log(Level.WARNING, pe.getMessage());
 			}
 
 		} finally {

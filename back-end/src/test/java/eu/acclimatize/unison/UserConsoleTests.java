@@ -13,8 +13,6 @@ import eu.acclimatize.unison.user.UserConsole;
  */
 public class UserConsoleTests {
 
-	
-
 	/**
 	 * Check that randomly generated passwords are different
 	 */
@@ -27,7 +25,5 @@ public class UserConsoleTests {
 
 		assertNotSame(r0, r1);
 	}
-
-	
 
 }
