@@ -7,6 +7,11 @@ package eu.acclimatize.unison;
  */
 public class Constant {
 	
+	// A private constructor to prevent constant from being instantiated by other classes.
+	private Constant() {
+		
+	}
+	
 	/**
 	 * The field name for the location query string parameter.
 	 */
