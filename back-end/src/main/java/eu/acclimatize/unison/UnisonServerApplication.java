@@ -1,6 +1,7 @@
 package eu.acclimatize.unison;
 
 import java.text.SimpleDateFormat;
+import java.util.Random;
 import java.util.TimeZone;
 import java.util.logging.Logger;
 
@@ -85,6 +86,16 @@ public class UnisonServerApplication {
 	@Bean
 	public BCryptPasswordEncoder passwordEncoder() {
 		return new BCryptPasswordEncoder();
+	}
+	
+	/**
+	 * Creates a singleton scope Random object.
+	 * 
+	 * @return The Random object created.
+	 */
+	@Bean
+	public Random random() {
+		return new Random();
 	}
 	
 	

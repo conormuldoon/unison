@@ -2,6 +2,8 @@ package eu.acclimatize.unison;
 
 import static org.junit.Assert.assertNotSame;
 
+import java.util.Random;
+
 import org.junit.Test;
 
 import eu.acclimatize.unison.user.UserConsole;
@@ -18,7 +20,7 @@ public class UserConsoleTests {
 	 */
 	@Test
 	public void testRandDiff() {
-		UserConsole passwordBCrypt = new UserConsole(null, null);
+		UserConsole passwordBCrypt = new UserConsole(null, null, new Random());
 
 		String r0 = passwordBCrypt.randomPassword();
 		String r1 = passwordBCrypt.randomPassword();

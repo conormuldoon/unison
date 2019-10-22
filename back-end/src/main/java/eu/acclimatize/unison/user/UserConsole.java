@@ -18,10 +18,11 @@ import eu.acclimatize.unison.Constant;
 
 /**
  * 
- * A class that uses the console to request user credentials (user name and password) 
- * information and stores it in the database. Credentials are requested if none are
- * present when Unison begins operating. Additionally, the class can be invoked from the 
- * command line to add additional users or update users' passwords. 
+ * A class that uses the console to request user credentials (user name and
+ * password) information and stores it in the database. Credentials are
+ * requested if none are present when Unison begins operating. Additionally, the
+ * class can be invoked from the command line to add additional users or update
+ * users' passwords.
  * 
  *
  */
@@ -33,6 +34,7 @@ public class UserConsole {
 
 	private Console console;
 	private BCryptPasswordEncoder encoder;
+	private Random random;
 
 	/**
 	 * Creates and instance of UserConsole.
@@ -40,10 +42,11 @@ public class UserConsole {
 	 * @param console Used to request and read user data.
 	 * @param encoder Used to encrypt the password.
 	 */
-	public UserConsole(Console console, BCryptPasswordEncoder encoder) {
+	public UserConsole(Console console, BCryptPasswordEncoder encoder, Random random) {
 
 		this.console = console;
 		this.encoder = encoder;
+		this.random = random;
 
 	}
 
@@ -88,10 +91,11 @@ public class UserConsole {
 	}
 
 	/**
-	 * Asks the user to enter a user name whether they would like to generate a password
-	 * or enter one.
+	 * Asks the user to enter a user name whether they would like to generate a
+	 * password or enter one.
 	 * 
-	 * @return Contains the information entered by the user (the password is encoded).
+	 * @return Contains the information entered by the user (the password is
+	 *         encoded).
 	 */
 	public UserInformation requestUserInformation() {
 		console.printf("Enter user name: ");
@@ -122,33 +126,32 @@ public class UserConsole {
 
 	}
 
-	/** 
+	/**
 	 * Generates a random password.
 	 * 
 	 * @return The password generated.
 	 */
 	public String randomPassword() {
-		Random r = new Random();
+
 		StringBuilder pwd = new StringBuilder();
 		for (int i = 0; i < PLEN; i++) {
-			char c = (char) (r.nextInt(75) + 48);
+			char c = (char) (random.nextInt(75) + 48);
 			pwd.append(c);
 		}
 		return pwd.toString();
 
 	}
 
-	
-
 	/**
-	 * Creates and executes a UserConsole using the system console and a bcrypt encoder.
+	 * Creates and executes a UserConsole using the system console and a bcrypt
+	 * encoder.
 	 * 
 	 * @param args The arguments are not used.
-	 *  
+	 * 
 	 */
-	public static void main(String[] args)  {
+	public static void main(String[] args) {
 
-		UserConsole uc = new UserConsole(System.console(), new BCryptPasswordEncoder());
+		UserConsole uc = new UserConsole(System.console(), new BCryptPasswordEncoder(), new Random());
 		uc.execute();
 
 	}

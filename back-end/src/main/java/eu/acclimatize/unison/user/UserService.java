@@ -3,6 +3,7 @@ package eu.acclimatize.unison.user;
 import java.io.Console;
 import java.io.IOException;
 import java.util.Optional;
+import java.util.Random;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -28,17 +29,22 @@ public class UserService {
 
 	private BCryptPasswordEncoder passwordEncoder;
 
+	private Random random;
+
 	/**
 	 * Creates an instance of UserService.
 	 * 
-	 * @param userRepository The repository user credentials information is stored.
-	 * @param logger Used to log events when the user consoles is not present, such as in testing.
+	 * @param userRepository  The repository user credentials information is stored.
+	 * @param logger          Used to log events when the user consoles is not
+	 *                        present, such as in testing.
 	 * @param passwordEncoder Used to encrypt and match user passwords.
 	 */
-	public UserService(UserRepository userRepository, Logger logger, BCryptPasswordEncoder passwordEncoder) {
+	public UserService(UserRepository userRepository, Logger logger, BCryptPasswordEncoder passwordEncoder,
+			Random random) {
 		this.userRepository = userRepository;
-		this.passwordEncoder = new BCryptPasswordEncoder();
+		this.passwordEncoder = passwordEncoder;
 		this.logger = logger;
+		this.random = random;
 	}
 
 	@PostConstruct
@@ -48,7 +54,7 @@ public class UserService {
 
 			Console console = System.console();
 			if (console != null) {
-				UserConsole userConsole = new UserConsole(System.console(), passwordEncoder);
+				UserConsole userConsole = new UserConsole(System.console(), passwordEncoder, random);
 				UserInformation userInformation = userConsole.requestUserInformation();
 
 				userRepository.save(userInformation);
@@ -61,12 +67,14 @@ public class UserService {
 	}
 
 	/**
-	 * Executes a {@link UserTask} if the user name and password match the credentials in the database.
+	 * Executes a {@link UserTask} if the user name and password match the
+	 * credentials in the database.
 	 * 
 	 * @param userName The name of the user.
 	 * @param password The user's password.
-	 * @param task The task to be executed.
-	 * @return The {@link eu.acclimatize.unison.location.ResponseConstant} value for the result of executing the task.
+	 * @param task     The task to be executed.
+	 * @return The {@link eu.acclimatize.unison.location.ResponseConstant} value for
+	 *         the result of executing the task.
 	 */
 	@Transactional
 	public int executeTask(String userName, String password, UserTask task) {
@@ -74,13 +82,11 @@ public class UserService {
 		if (oUser.isPresent()) {
 			UserInformation user = oUser.get();
 			if (user.passwordMatches(password, passwordEncoder))
-				 return task.execute(user);
+				return task.execute(user);
 
 		}
 		return ResponseConstant.INCORRECT_CREDENTIALS;
 
 	}
-
-
 
 }
