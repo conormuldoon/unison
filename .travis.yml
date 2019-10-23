@@ -14,4 +14,4 @@ matrix:
       jdk: openjdk11
       before_script: cd back-end
       script:
-        - ./mvn clean compile package
+        - ./mvnw clean compile package
