@@ -30,11 +30,7 @@ public class UserConsole {
 
 	public static final String CONFIG = "userinformation.cfg.xml";
 
-	private static final int PLEN = 10;
-
-	private Console console;
-	private BCryptPasswordEncoder encoder;
-	private SecureRandom random;
+	CredentialsRequester credentialsRequester;
 
 	/**
 	 * Creates and instance of UserConsole.
@@ -42,16 +38,13 @@ public class UserConsole {
 	 * @param console Used to request and read user data.
 	 * @param encoder Used to encrypt the password.
 	 */
-	public UserConsole(Console console, BCryptPasswordEncoder encoder, SecureRandom random) {
+	public UserConsole(CredentialsRequester credentialsRequester) {
 
-		this.console = console;
-		this.encoder = encoder;
-		this.random = random;
+		this.credentialsRequester = credentialsRequester;
 
 	}
 
 	private void hideInfoLogs() {
-		console.printf("Starting\n");
 
 		System.setProperty("org.jboss.logging.provider", "jdk");
 		Logger loggerHibernate = Logger.getLogger("org.hibernate");
@@ -79,7 +72,7 @@ public class UserConsole {
 			cfg.setProperty("hibernate.connection.password", properties.getProperty("spring.datasource.password"));
 			cfg.setProperty("hibernate.hbm2ddl.auto", properties.getProperty("spring.jpa.hibernate.ddl-auto"));
 
-			UserInformation userInformation = requestUserInformation();
+			UserInformation userInformation = credentialsRequester.requestUserInformation();
 
 			storeUser(userInformation, cfg, logger);
 
@@ -92,58 +85,6 @@ public class UserConsole {
 	}
 
 	/**
-	 * Asks the user to enter a user name whether they would like to generate a
-	 * password or enter one.
-	 * 
-	 * @return Contains the information entered by the user (the password is
-	 *         encoded).
-	 */
-	public UserInformation requestUserInformation() {
-		console.printf("Enter user name: ");
-
-		String userName = console.readLine();
-		console.printf("Generate password (y/N)? ");
-
-		String gp = console.readLine().toLowerCase();
-		String encoded = null;
-
-		if (gp.startsWith("y")) {
-
-			String password = randomPassword();
-			console.printf("Generated password: %s\n", password);
-
-			encoded = encoder.encode(password);
-		} else {
-
-			char[] passwd = System.console().readPassword("%s", "Enter password: ");
-			encoded = encoder.encode(String.valueOf(passwd));
-			java.util.Arrays.fill(passwd, ' '); // See Security note for Console class:
-												// https://docs.oracle.com/javase/7/docs/api/java/io/Console.html
-
-		}
-
-		UserInformation userInformation = new UserInformation(userName, encoded);
-		return userInformation;
-
-	}
-
-	/**
-	 * Generates a random password.
-	 * 
-	 * @return The password generated.
-	 */
-	public String randomPassword() {
-
-		StringBuilder pwd = new StringBuilder();
-		for (int i = 0; i < PLEN; i++) {
-			char c = (char) (random.nextInt(75) + 48);
-			pwd.append(c);
-		}
-		return pwd.toString();
-
-	}
-
-	/**
 	 * Creates and executes a UserConsole using the system console and a bcrypt
 	 * encoder.
 	 * 
@@ -152,7 +93,9 @@ public class UserConsole {
 	 */
 	public static void main(String[] args) {
 
-		UserConsole uc = new UserConsole(System.console(), new BCryptPasswordEncoder(), new SecureRandom());
+		Console console=System.console();
+		UserConsole uc = new UserConsole(new CredentialsRequester(console, new BCryptPasswordEncoder(), new SecureRandom()));
+		console.printf("Starting\n");
 		uc.execute(Logger.getLogger(UserConsole.class.getName()));
 
 	}

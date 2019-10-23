@@ -29,8 +29,6 @@ public class UserService {
 
 	private BCryptPasswordEncoder passwordEncoder;
 
-	private SecureRandom random;
-
 	/**
 	 * Creates an instance of UserService.
 	 * 
@@ -39,12 +37,10 @@ public class UserService {
 	 *                        present, such as in testing.
 	 * @param passwordEncoder Used to encrypt and match user passwords.
 	 */
-	public UserService(UserRepository userRepository, Logger logger, BCryptPasswordEncoder passwordEncoder,
-			SecureRandom random) {
+	public UserService(UserRepository userRepository, Logger logger, BCryptPasswordEncoder passwordEncoder) {
 		this.userRepository = userRepository;
 		this.passwordEncoder = passwordEncoder;
 		this.logger = logger;
-		this.random = random;
 	}
 
 	@PostConstruct
@@ -54,8 +50,9 @@ public class UserService {
 
 			Console console = System.console();
 			if (console != null) {
-				UserConsole userConsole = new UserConsole(System.console(), passwordEncoder, random);
-				UserInformation userInformation = userConsole.requestUserInformation();
+				CredentialsRequester requester = new CredentialsRequester(System.console(), passwordEncoder,
+						new SecureRandom());
+				UserInformation userInformation = requester.requestUserInformation();
 
 				userRepository.save(userInformation);
 			} else {

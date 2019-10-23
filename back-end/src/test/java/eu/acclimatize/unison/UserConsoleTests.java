@@ -6,7 +6,7 @@ import java.security.SecureRandom;
 
 import org.junit.Test;
 
-import eu.acclimatize.unison.user.UserConsole;
+import eu.acclimatize.unison.user.CredentialsRequester;
 
 /**
  * Unit tests for password generator.
@@ -18,10 +18,10 @@ public class UserConsoleTests {
 	 */
 	@Test
 	public void testRandDiff() {
-		UserConsole passwordBCrypt = new UserConsole(null, null, new SecureRandom());
+		CredentialsRequester requester = new CredentialsRequester(null, null, new SecureRandom());
 
-		String r0 = passwordBCrypt.randomPassword();
-		String r1 = passwordBCrypt.randomPassword();
+		String r0 = requester.randomPassword();
+		String r1 = requester.randomPassword();
 
 		assertNotSame(r0, r1);
 	}
