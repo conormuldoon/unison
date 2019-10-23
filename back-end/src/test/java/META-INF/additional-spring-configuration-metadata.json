@@ -13,5 +13,10 @@
     "name": "api.uri",
     "type": "java.lang.String",
     "description": "The URI for the Harmonie API being used."
+  },
+  {
+    "name": "exclude.spatial.regex",
+    "type": "java.lang.String",
+    "description": "A description for 'exclude.spatial.regex'"
   }
 ]}
