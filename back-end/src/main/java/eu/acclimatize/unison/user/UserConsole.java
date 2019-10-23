@@ -18,11 +18,9 @@ import eu.acclimatize.unison.Constant;
 
 /**
  * 
- * A class that uses the console to request user credentials (user name and
- * password) information and stores it in the database. Credentials are
- * requested if none are present when Unison begins operating. Additionally, the
- * class can be invoked from the command line to add additional users or update
- * users' passwords.
+ * A class that enables user credentials (user name and password) to be stored
+ * in the database using the terminal and without launching the Spring
+ * application.
  * 
  *
  */
@@ -93,8 +91,9 @@ public class UserConsole {
 	 */
 	public static void main(String[] args) {
 
-		Console console=System.console();
-		UserConsole uc = new UserConsole(new CredentialsRequester(console, new BCryptPasswordEncoder(), new SecureRandom()));
+		Console console = System.console();
+		UserConsole uc = new UserConsole(
+				new CredentialsRequester(console, new BCryptPasswordEncoder(), new SecureRandom()));
 		console.printf("Starting\n");
 		uc.execute(Logger.getLogger(UserConsole.class.getName()));
 
