@@ -237,7 +237,7 @@ public class HarvesterService {
 
 				}
 			} catch (ParseException e) {
-				logger.log(Level.WARNING, e.getMessage());
+				logger.log(Level.SEVERE, e.getMessage());
 
 			}
 

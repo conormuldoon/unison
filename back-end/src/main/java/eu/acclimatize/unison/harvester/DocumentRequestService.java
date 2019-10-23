@@ -50,9 +50,9 @@ public class DocumentRequestService {
 			return Optional.of(doc);
 
 		} catch (SAXException e) {
-			logger.log(Level.WARNING,e.getMessage());
+			logger.log(Level.SEVERE,e.getMessage());
 		} catch (IOException e) {
-			logger.log(Level.WARNING,e.getMessage());
+			logger.log(Level.SEVERE,e.getMessage());
 		}
 		return Optional.empty();
 	}

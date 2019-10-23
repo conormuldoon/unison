@@ -85,7 +85,7 @@ public class UserConsole {
 
 		} catch (IOException e) {
 
-			logger.log(Level.WARNING, e.getMessage());
+			logger.log(Level.SEVERE, e.getMessage());
 
 		}
 
@@ -170,7 +170,7 @@ public class UserConsole {
 
 				t.commit();
 			} catch (javax.persistence.PersistenceException pe) {
-				logger.log(Level.WARNING, pe.getMessage());
+				logger.log(Level.SEVERE, pe.getMessage());
 			}
 
 		} finally {
