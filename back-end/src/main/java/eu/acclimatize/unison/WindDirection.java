@@ -2,6 +2,8 @@ package eu.acclimatize.unison;
 
 import java.io.PrintWriter;
 
+import javax.persistence.Column;
+
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 /**
@@ -10,10 +12,13 @@ import com.fasterxml.jackson.annotation.JsonProperty;
  */
 public class WindDirection implements HarmonieItem {
 
-	@JsonProperty("degress")
-	private double windDirection_deg;
-	@JsonProperty("name")
-	private String windDirection_name;
+	@JsonProperty
+	@Column(name="windDirection_deg")
+	private double degrees;
+	
+	@JsonProperty
+	@Column(name="windDirection_name")
+	private String name;
 
 	/**
 	 * A zero argument constructor for JPA.
@@ -25,12 +30,12 @@ public class WindDirection implements HarmonieItem {
 	/**
 	 * Creates an instance of WindDirection.
 	 * 
-	 * @param d The wind direction in degrees.
-	 * @param n The wind direction name.
+	 * @param degrees The wind direction in degrees.
+	 * @param name The wind direction name.
 	 */
-	public WindDirection(double d, String n) {
-		windDirection_deg = d;
-		windDirection_name = n;
+	public WindDirection(double degrees, String name) {
+		this.degrees = degrees;
+		this.name = name;
 	}
 
 	/**
@@ -40,14 +45,14 @@ public class WindDirection implements HarmonieItem {
 	 */
 	@JsonProperty
 	public double sinDeg() {
-		return Math.sin(Math.toRadians(windDirection_deg));
+		return Math.sin(Math.toRadians(degrees));
 	}
 
 
 
 	@Override
 	public void printItem(PrintWriter pw) {
-		pw.println(windDirection_deg + "," + windDirection_name + ',');
+		pw.println(degrees + "," + name + ',');
 
 	}
 

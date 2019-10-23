@@ -1,5 +1,7 @@
 package eu.acclimatize.unison.user;
 
+import java.io.Serializable;
+
 import javax.persistence.Entity;
 import javax.persistence.Id;
 
@@ -11,7 +13,9 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
  *
  */
 @Entity
-public class UserInformation {
+public class UserInformation implements Serializable{
+
+	private static final long serialVersionUID = -6566767228133005900L;
 
 	@Id
 	private String userName;

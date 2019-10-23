@@ -49,7 +49,6 @@ public class CSVPrecipitationController {
 			@RequestParam(value = Constant.TO_DATE) @DateTimeFormat(pattern = Constant.FORMAT) Date toDate,
 			HttpServletResponse response) throws IOException {
 		
-		// PrecipitationResult.printTitle(response.getWriter());
 		precipitationResponder.handleResponse(response, location, fromDate, toDate);
 
 	}

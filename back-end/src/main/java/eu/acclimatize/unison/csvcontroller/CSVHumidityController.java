@@ -49,7 +49,6 @@ public class CSVHumidityController {
 			@RequestParam(value = Constant.TO_DATE) @DateTimeFormat(pattern = Constant.FORMAT) Date toDate,
 			HttpServletResponse response) throws IOException {
 		
-		// HumidityResult.printTitle(response.getWriter());
 		humidityResponder.handleResponse(response, location, fromDate, toDate);
 
 	}

@@ -41,7 +41,7 @@ public class DocumentRequestService {
 	 * @return The Optional will contain the document if obtained and parsed correctly or empty otherwise.
 	 */
 	public Optional<Document> documentForURI(String locURI) {
-		logger.log(Level.INFO, "Requesting data for " + locURI + '.');
+		logger.log(Level.INFO, () -> "Requesting data for " + locURI + '.');
 
 		try {
 
@@ -49,11 +49,10 @@ public class DocumentRequestService {
 
 			return Optional.of(doc);
 
-		} catch (SAXException e) {
+		} catch (SAXException|IOException e) {
 			logger.log(Level.SEVERE,e.getMessage());
-		} catch (IOException e) {
-			logger.log(Level.SEVERE,e.getMessage());
-		}
+		} 
+		
 		return Optional.empty();
 	}
 }

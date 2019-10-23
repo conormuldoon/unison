@@ -43,6 +43,9 @@ public class HarvesterService {
 
 	private static final int NUM_HOUR = 6; // The Met Eireann model updates every 6 hours.
 
+	private static final String VALUE = "value";
+	private static final String PERCENT = "percent";
+
 	private LocationRepository locationRepository;
 
 	private HourlyPrecipitationRepository precipitationRepository;
@@ -127,12 +130,6 @@ public class HarvesterService {
 
 	}
 
-	private Date createDate(String s) throws ParseException {
-
-		Date date = dateFormat.parse(s);
-		return date;
-	}
-
 	private Iterable<Date> createModelTime(Calendar calendar) {
 
 		// Required in case the harvest was either invoked at start time, rather than
@@ -215,7 +212,7 @@ public class HarvesterService {
 
 			Date ft;
 			try {
-				ft = createDate(from);
+				ft = dateFormat.parse(from);
 
 				if (keyMap.containsKey(ft)) {
 
@@ -247,7 +244,7 @@ public class HarvesterService {
 
 	private void addPrecipitation(NodeList cn, ItemKey ik, List<HourlyPrecipitation> hPrecipitation) {
 		Element precip = (Element) cn.item(0);
-		String value = precip.getAttribute("value");
+		String value = precip.getAttribute(VALUE);
 		String mnval = precip.getAttribute("minvalue");
 		Double mnV = null;
 		if (!mnval.equals(""))
@@ -282,7 +279,7 @@ public class HarvesterService {
 			NamedNodeMap nnm = chNode.getAttributes();
 			if (nn.equals("temperature")) {
 
-				String value = textContent(nnm, "value");
+				String value = textContent(nnm, VALUE);
 				t = Double.parseDouble(value);
 
 			} else if (nn.equals("windDirection")) {
@@ -296,36 +293,35 @@ public class HarvesterService {
 				ws = new WindSpeed(Double.parseDouble(mps), Integer.parseInt(beaufort), name);
 
 			} else if (nn.equals("humidity")) {
-				String value = textContent(nnm, "value");
+				String value = textContent(nnm, VALUE);
 				h = Double.parseDouble(value);
 
 			} else if (nn.equals("pressure")) {
-				String value = textContent(nnm, "value");
+				String value = textContent(nnm, VALUE);
 				p = Double.parseDouble(value);
 			} else if (nn.equals("cloudiness")) {
-				String percent = textContent(nnm, "percent");
+				String percent = textContent(nnm, PERCENT);
 				c = Double.parseDouble(percent);
 			} else if (nn.equals("lowClouds")) {
-				String percent = textContent(nnm, "percent");
+				String percent = textContent(nnm, PERCENT);
 				lc = Double.parseDouble(percent);
 			} else if (nn.equals("mediumClouds")) {
-				String percent = textContent(nnm, "percent");
+				String percent = textContent(nnm, PERCENT);
 				mc = Double.parseDouble(percent);
 			} else if (nn.equals("highClouds")) {
-				String percent = textContent(nnm, "percent");
+				String percent = textContent(nnm, PERCENT);
 				hc = Double.parseDouble(percent);
 			} else if (nn.equals("dewpointTemperature")) {
-				String value = textContent(nnm, "value");
+				String value = textContent(nnm, VALUE);
 				dp = Double.parseDouble(value);
 
-			} else if (nn.equals("#text")) {
-				// System.out.println(chNode.getTextContent());
 			} else if (nn.equals("fog")) {
-				String percent = textContent(nnm, "percent");
+				String percent = textContent(nnm, PERCENT);
 				f = Double.parseDouble(percent);
-			} else {
-				// throw new UnknownTagException(nn);
-				logger.log(Level.WARNING, "Unknown tag in data converter. Tag name: " + nn);
+				
+			} else if (!nn.equals("#text")) {
+
+				logger.log(Level.WARNING, () -> "Unknown tag in data converter. Tag name: " + nn);
 			}
 
 		}
@@ -336,6 +332,7 @@ public class HarvesterService {
 		hWeather.add(new HourlyWeather(ik, weatherValue));
 
 	}
+
 
 	private String textContent(NamedNodeMap nnm, String attName) {
 		return nnm.getNamedItem(attName).getTextContent();

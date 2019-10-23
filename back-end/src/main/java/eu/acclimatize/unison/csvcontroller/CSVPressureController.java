@@ -49,7 +49,6 @@ public class CSVPressureController {
 			@RequestParam(value = Constant.TO_DATE) @DateTimeFormat(pattern = Constant.FORMAT) Date toDate,
 			HttpServletResponse response) throws IOException {
 		
-		// PressureResult.printTitle(response.getWriter());
 		pressureResponder.handleResponse(response, location, fromDate, toDate);
 
 	}

@@ -2,20 +2,28 @@ package eu.acclimatize.unison;
 
 import java.io.PrintWriter;
 
+import javax.persistence.Column;
+
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 /**
- * A class for the wind speed in metres per second, Beaufort value, and wind name.
+ * A class for the wind speed in metres per second, Beaufort value, and wind
+ * name.
  *
  */
 public class WindSpeed implements HarmonieItem {
 
-	@JsonProperty("mps")
-	private double windSpeed_mps;
-	@JsonProperty("beaufort")
-	private int windSpeed_beaufort;
-	@JsonProperty("name")
-	private String windSpeed_name;
+	@JsonProperty
+	@Column(name = "windSpeed_mps")
+	private double mps;
+
+	@JsonProperty
+	@Column(name = "windSpeed_beaufort")
+	private int beaufort;
+
+	@JsonProperty
+	@Column(name = "windSpeed_name")
+	private String name;
 
 	/**
 	 * A zero argument constructor for JPA.
@@ -28,18 +36,18 @@ public class WindSpeed implements HarmonieItem {
 	 * Creates an instance of WindSpeed
 	 * 
 	 * @param mps The wind speed in metres per second.
-	 * @param b The Beaufort scale value.
-	 * @param n The wind speed name.
+	 * @param beaufort The Beaufort scale value.
+	 * @param name The wind speed name.
 	 */
-	public WindSpeed(double mps, int b, String n) {
-		windSpeed_mps = mps;
-		windSpeed_beaufort = b;
-		windSpeed_name = n;
+	public WindSpeed(double mps, int beaufort, String name) {
+		this.mps = mps;
+		this.beaufort = beaufort;
+		this.name = name;
 	}
 
 	@Override
 	public void printItem(PrintWriter pw) {
-		pw.println(windSpeed_mps + "," + windSpeed_beaufort + "," + windSpeed_name + ",");
+		pw.println(mps + "," + beaufort + "," + name + ",");
 
 	}
 

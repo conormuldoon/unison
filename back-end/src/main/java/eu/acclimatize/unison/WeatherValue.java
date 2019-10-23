@@ -5,11 +5,12 @@ import javax.persistence.Embedded;
 /**
  * A class for storing non-precipitation weather values.
  * 
- * @author conormuldoon
  *
  */
 @SuppressWarnings("unused")
 public class WeatherValue {
+	
+	// The private attributes are used by JPA when storing the data.
 
 	private Double temperature;
 

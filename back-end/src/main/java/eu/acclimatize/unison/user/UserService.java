@@ -1,7 +1,6 @@
 package eu.acclimatize.unison.user;
 
 import java.io.Console;
-import java.io.IOException;
 import java.security.SecureRandom;
 import java.util.Optional;
 import java.util.logging.Level;
@@ -44,7 +43,7 @@ public class UserService {
 	}
 
 	@PostConstruct
-	private void initialUser() throws IOException {
+	private void initialUser() {
 
 		if (userRepository.count() == 0) {
 

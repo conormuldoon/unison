@@ -8,6 +8,11 @@ package eu.acclimatize.unison.location;
  */
 public class ResponseConstant {
 	
+	// A private constructor to prevent instantiation.
+	private ResponseConstant() {
+		
+	}
+	
 	/**
 	 * Returned when failed to add or remove a location.
 	 */

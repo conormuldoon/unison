@@ -15,19 +15,25 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 public class PrecipitationValue implements HarmonieItem {
 
 	@JsonProperty
-	private Double value, minvalue, maxvalue;
+	private Double value;
+	
+	@JsonProperty
+	private Double minvalue;
+	
+	@JsonProperty
+	private Double maxvalue;
 
 	/**
 	 * Creates an instance of PrecipitationValue.
 	 * 
-	 * @param v The median value.
-	 * @param mnv The 20<sup>th</sup> percentile value.
-	 * @param mxv The 80<sup>th</sup> percentile value.
+	 * @param value The median value.
+	 * @param minvalue The 20<sup>th</sup> percentile value.
+	 * @param maxvalue The 80<sup>th</sup> percentile value.
 	 */
-	public PrecipitationValue(Double v, Double mnv, Double mxv) {
-		value = v;
-		minvalue = mnv;
-		maxvalue = mxv;
+	public PrecipitationValue(Double value, Double minvalue, Double maxvalue) {
+		this.value = value;
+		this.minvalue = minvalue;
+		this.maxvalue = maxvalue;
 	}
 
 	/**

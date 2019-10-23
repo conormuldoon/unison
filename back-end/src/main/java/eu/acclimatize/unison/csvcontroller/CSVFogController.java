@@ -23,7 +23,7 @@ public class CSVFogController {
 	private CSVResponder fogResponder;
 	
 
-	private static final String CSV_Fog = "/csvFog";
+	private static final String CSV_FOG = "/csvFog";
 
 	/**
 	 * Creates an instance of CSVFogController.
@@ -46,7 +46,7 @@ public class CSVFogController {
 	 *                     response object.
 	 */
 	// Specify location, from date, and to date
-	@GetMapping(CSV_Fog)
+	@GetMapping(CSV_FOG)
 	public void fog(@RequestParam(value = Constant.LOCATION) String location,
 			@RequestParam(value = Constant.FROM_DATE) @DateTimeFormat(pattern = Constant.FORMAT) Date fromDate,
 			@RequestParam(value = Constant.TO_DATE) @DateTimeFormat(pattern = Constant.FORMAT) Date toDate,

@@ -33,8 +33,8 @@ public class UserConsole {
 	/**
 	 * Creates and instance of UserConsole.
 	 * 
-	 * @param console Used to request and read user data.
-	 * @param encoder Used to encrypt the password.
+	 * @param credentialsRequester Used to request and read user names and passwords.
+	 * 
 	 */
 	public UserConsole(CredentialsRequester credentialsRequester) {
 
