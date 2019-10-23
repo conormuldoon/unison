@@ -1,1 +1,17 @@
-language: java
+
+dist: bionic
+
+matrix:
+  include:
+    - language: node_js
+      node_js:
+        - "6.1.0"
+      before_script: cd front-end
+      script:
+        - npm install
+        - npm run build
+    - language: java
+      jdk: openjdk11
+      before_script: cd back-end
+      script:
+        - ./mvn clean compile package
