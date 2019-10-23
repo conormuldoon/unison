@@ -17,7 +17,7 @@ import eu.acclimatize.unison.location.LocationDetails;
 @Embeddable // Required as is Hibernate Composite-id class
 public class ItemKey implements Serializable {
 
-	final static private String NAME = "name";
+	private static final String NAME = "name";
 
 	private static final long serialVersionUID = -2386171964847399660L;
 

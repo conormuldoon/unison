@@ -16,7 +16,7 @@ import eu.acclimatize.unison.ItemListFinder;
  */
 public class CSVResponder {
 
-	private final static String CSV_CONTENT = "text/csv";
+	private static final String CSV_CONTENT = "text/csv";
 	private ItemListFinder itemListFinder;
 	private String header;
 

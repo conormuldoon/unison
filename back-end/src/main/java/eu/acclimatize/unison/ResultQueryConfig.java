@@ -23,11 +23,11 @@ import eu.acclimatize.unison.result.WindSpeedResult;
 @Configuration
 public class ResultQueryConfig {
 
-	private final static String VALUE = "value";
+	private static final String VALUE = "value";
 
-	private final static String WEA_TABLE = HourlyWeather.class.getSimpleName();
+	private static final String WEA_TABLE = HourlyWeather.class.getSimpleName();
 
-	private final static String PRE_TABLE = HourlyPrecipitation.class.getSimpleName();
+	private static final String PRE_TABLE = HourlyPrecipitation.class.getSimpleName();
 
 	private String createQuery(String entityName, Class<? extends HarmonieItem> resultClass, String item) {
 		return "select new " + resultClass.getName() + "(a.key.fromHour,a." + item + ") from " + entityName

@@ -14,7 +14,7 @@ import org.springframework.core.type.filter.TypeFilter;
 public class SpatialExcludeFilter implements TypeFilter {
 
 	private String exclude;
-	final private static String EX_SPATIAL_REGEX = "exclude.spatial.regex";
+	private static final String EX_SPATIAL_REGEX = "exclude.spatial.regex";
 
 	/**
 	 * Creates and instance of SpatialExcludeFilter.

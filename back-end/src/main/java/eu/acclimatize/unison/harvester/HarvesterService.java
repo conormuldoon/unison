@@ -39,7 +39,7 @@ import eu.acclimatize.unison.location.LocationRepository;
 @Service
 public class HarvesterService {
 
-	final static private int SLEEP_TIME = 60000;
+	private static final int SLEEP_TIME = 60000;
 
 	private static final int NUM_HOUR = 6; // The Met Eireann model updates every 6 hours.
 
@@ -99,7 +99,7 @@ public class HarvesterService {
 	 *                              interrupted during this time.
 	 */
 	@Transactional
-	synchronized public void harvestData(Calendar calendar) throws InterruptedException {
+	public synchronized void harvestData(Calendar calendar) throws InterruptedException {
 
 		Iterable<Date> modelTime = createModelTime(calendar);
 
@@ -175,7 +175,7 @@ public class HarvesterService {
 	 * @param calendar Used to determine the times to store data for.
 	 * @return True if the data was received and stored, false otherwise.
 	 */
-	synchronized public boolean processLocation(LocationDetails location, Calendar calendar) {
+	public synchronized boolean processLocation(LocationDetails location, Calendar calendar) {
 
 		List<HourlyPrecipitation> hourlyPrecipitation = new ArrayList<>();
 		List<HourlyWeather> hourlyWeather = new ArrayList<>();

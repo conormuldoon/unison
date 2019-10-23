@@ -17,8 +17,8 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 public class RedirectToIndexController {
 
-	final private static String UNISON = "/unison";
-	final private static String INDEX_PATH_NAME = UNISON + "/index.html";
+	private static final String UNISON = "/unison";
+	private static final String INDEX_PATH_NAME = UNISON + "/index.html";
 
 	/**
 	 * Redirects the /unison request to the index.html file for the single-page application.

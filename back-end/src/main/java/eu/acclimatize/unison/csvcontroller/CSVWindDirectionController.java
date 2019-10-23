@@ -47,7 +47,6 @@ public class CSVWindDirectionController {
 			@RequestParam(value = Constant.TO_DATE) @DateTimeFormat(pattern = Constant.FORMAT) Date toDate,
 			HttpServletResponse response) throws IOException {
 
-		// WindDirectionResult.printTitle(response.getWriter());
 		windDirectionResponder.handleResponse(response, location, fromDate, toDate);
 	}
 

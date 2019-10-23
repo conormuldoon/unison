@@ -52,7 +52,6 @@ public class CSVFogController {
 			@RequestParam(value = Constant.TO_DATE) @DateTimeFormat(pattern = Constant.FORMAT) Date toDate,
 			HttpServletResponse response) throws IOException {
 
-		// FogResult.printTitle(response.getWriter());
 		fogResponder.handleResponse(response, location, fromDate, toDate);
 
 	}

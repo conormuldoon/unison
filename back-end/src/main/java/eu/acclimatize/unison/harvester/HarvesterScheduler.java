@@ -7,17 +7,18 @@ import javax.annotation.PostConstruct;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
 
-/** 
+/**
  * 
- * A component that schedules data to be harvested at start up and subsequently 4 times a day.
+ * A component that schedules data to be harvested at start up and subsequently
+ * 4 times a day.
  *
  */
 @Component
 public class HarvesterScheduler {
 
-	final static private int ULS = 60;
-	final static private int ULM = 40;
-	final static private int LLM = 10;
+	private static final int ULS = 60;
+	private static final int ULM = 40;
+	private static final int LLM = 10;
 
 	private HarvesterService harvesterService;
 
@@ -31,15 +32,17 @@ public class HarvesterScheduler {
 
 	}
 
-	
 	/**
-	 * Invokes the {@link HarvesterService#harvestData} method using a Calendar object for the current date and time.
-	 * The method is invoked every 6 hours and initially when the application begins. The minutes and seconds
-	 * are randomised to load balance connections to the Harmonie API 
-	 * (see <a href="https://api.met.no/conditions_service.html">https://api.met.no/conditions_service.html</a>). 
+	 * Invokes the {@link HarvesterService#harvestData} method using a Calendar
+	 * object for the current date and time. The method is invoked every 6 hours and
+	 * initially when the application begins. The minutes and seconds are randomised
+	 * to load balance connections to the Harmonie API (see <a href=
+	 * "https://api.met.no/conditions_service.html">https://api.met.no/conditions_service.html</a>).
 	 * 
-	 * @throws InterruptedException The harvester service will sleep for a second if it is having problem obtaining data from the API. 
-	 * The exception will be thrown if the service is interrupted during this time.
+	 * @throws InterruptedException The harvester service will sleep for a second if
+	 *                              it is having problem obtaining data from the
+	 *                              API. The exception will be thrown if the service
+	 *                              is interrupted during this time.
 	 */
 	@Scheduled(cron = " ${random.int(" + ULS + ")} ${random.int[" + LLM + "," + ULM + "]} 0 * * ?")
 	@Scheduled(cron = " ${random.int(" + ULS + ")} ${random.int[" + LLM + "," + ULM + "]} 6 * * ?")
