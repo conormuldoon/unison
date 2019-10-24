@@ -9,9 +9,9 @@ import  {
   formatDate
 } from 'react-day-picker/moment';
 
-const date=formatDate(new Date(), FORMAT);
 
-const dateSelector=<DateSelector label={'Test Label'} dateValue={date} handleDayChange={()=>{}}/>;
+
+const dateSelector=<DateSelector label={'Test Label'} dateValue={'23/10/2019'} handleDayChange={()=>{}}/>;
 
 it('renders without crashing', () => {
   const div = document.createElement('div');

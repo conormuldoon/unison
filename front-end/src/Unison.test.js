@@ -4,14 +4,6 @@ import Unison from './Unison';
 import fetchMock from 'fetch-mock';
 import { render, waitForElement, fireEvent } from "react-testing-library"
 import "@testing-library/jest-dom/extend-expect";
-import {TODAY,FROM_DATE} from './Util';
-
-import {FORMAT} from './Constant';
-
-import  {
-  formatDate
-} from 'react-day-picker/moment';
-
 
 
 it('renders without crashing', async () => {
@@ -43,7 +35,7 @@ it('displays popup when marker clicked', async () =>{
   fetchMock.get('end:/location', [{"geom":{"type":"Point","coordinates":[-6.223682,53.308441]},"name":"UCD"}]);
   
 
-  fetchMock.get('end:/precipitation?location=UCD&fromDate='+FROM_DATE+'&toDate='+TODAY, [{
+  fetchMock.get('end:/precipitation?location=UCD&fromDate=1/9/2019&toDate=23/10/2019', [{
         "date": "2019-04-01T23:00:00.000+0000",
         "precipitation": {
             "value": 0,
