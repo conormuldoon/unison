@@ -6,11 +6,10 @@ matrix:
     - language: node_js
       node_js:
         - "stable"
-      before_install: 
+      before_script: 
         - cd front-end
-      install:
-        - yarn install
       script:
+        - yarn install
         - yarn test
         - yarn build
     - language: java
