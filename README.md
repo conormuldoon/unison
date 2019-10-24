@@ -73,7 +73,7 @@ With the Postgres/PostGIS configuration, the schema is not created automatically
 
 ## Changing the model
 
-To change the model, edit the (HARMONIE-AROME) API URI `api.uri` and the associated time zone `api.timezone` settings in the `back-end/src/main/resources/application.properties` file and restart the server. Alternatively, use the `--api.uri` and `--api.timezone` arguments for main if running a packaged version of the application.
+To change the model, edit the (HARMONIE-AROME) API URI `api.uri` and the associated time zone `api.timezone` settings in the `back-end/src/main/resources/application.properties` file and restart the server. Alternatively, if running a packaged version of the application, override the `api.uri` and `api.timezone` properties using Java system properties or the `--api.uri` and `--api.timezone` arguments for main.
 
 ## Acknowlegements
 Unison has been developed as part of the Acclimatize Project (https://www.acclimatize.eu/), which is partly funded under the EU Ireland Wales European Territorial Co-operation (ETC) programme.
