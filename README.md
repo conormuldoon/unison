@@ -15,7 +15,7 @@ Unison requires Java 11 to operate. Download and run the [latest release](https:
 
 ```
 cd back-end
-mvn clean compile spring-boot:run
+./mvnw clean compile spring-boot:run
 ```
 Wait until the application has started and then enter an initial user name and password, which will be required for adding/removing the locations to track.
 
@@ -34,7 +34,7 @@ If using GeoDB (Unison is configured for GeoDB in this repository), stop the ser
 ```
 cd back-end
 ```
-If not previously compiled: `mvn clean compile package`
+If not previously compiled: `./mvnw clean compile package`
 ```
 java -cp target/unison-server-0.1.1-SNAPSHOT.jar -Dloader.main=eu.acclimatize.unison.user.UserConsole org.springframework.boot.loader.PropertiesLauncher
 ```
@@ -73,7 +73,7 @@ With the Postgres/PostGIS configuration, the schema is not created automatically
 
 ## Changing the model
 
-To change the model, edit the (HARMONIE-AROME) API URI `api.uri` and the associated time zone `api.timezone` settings in the `back-end/src/main/resources/application.properties` file and restart the server.
+To change the model, edit the (HARMONIE-AROME) API URI `api.uri` and the associated time zone `api.timezone` settings in the `back-end/src/main/resources/application.properties` file and restart the server. Alternatively, if running a packaged version of the application, override the `api.uri` and `api.timezone` properties using Java system properties or the `--api.uri` and `--api.timezone` arguments for main.
 
 ## Acknowlegements
 Unison has been developed as part of the Acclimatize Project (https://www.acclimatize.eu/), which is partly funded under the EU Ireland Wales European Territorial Co-operation (ETC) programme.
