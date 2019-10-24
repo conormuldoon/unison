@@ -11,7 +11,7 @@ exports[`mathes snapshot 1`] = `
     >
       <input
         placeholder="YYYY-M-D"
-        value="16/10/2019"
+        value="24/10/2019"
       />
     </div>
   </div>
