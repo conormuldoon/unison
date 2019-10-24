@@ -6,7 +6,9 @@ matrix:
     - language: node_js
       node_js:
         - "stable"
-      before_install: cd front-end
+      before_install: 
+	- cd front-end
+      install:
 	- yarn install
       script:
         - yarn test
