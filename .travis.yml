@@ -8,7 +8,7 @@ matrix:
         - "stable"
       before_script: cd front-end
       script:
-        - yarn install
+        - yarn test
         - yarn build
     - language: java
       jdk: openjdk11
