@@ -5,9 +5,9 @@ import  {
   formatDate
 } from 'react-day-picker/moment';
 
-const fromDate = () =>{
+export const fromDate = () =>{
 
-  const today=new Date();
+  const today=new Date(Date.now());
   let lMonth=today.getMonth()-1;
   const year=today.getFullYear();
   const fDate=new Date();
@@ -22,8 +22,9 @@ const fromDate = () =>{
   return formatDate(fDate,FORMAT);
 }
 
-export const TODAY = formatDate(new Date(), FORMAT);
-export const FROM_DATE = fromDate();
+export const today = () => {
+  return formatDate(new Date(Date.now()), FORMAT);
+};
 
 const postObject = (body) =>{
   return {

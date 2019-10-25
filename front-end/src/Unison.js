@@ -12,7 +12,7 @@ import ARLocationComponent from './ARLocationComponent';
 
 import LeafletMap from './LeafletMap';
 import {FORMAT,API} from './Constant';
-import {TODAY,FROM_DATE} from './Util';
+import {today,fromDate} from './Util';
 import PropTypes from 'prop-types';
 
 import  {
@@ -36,14 +36,16 @@ class Unison extends Component {
     super(props);
 
     this.state = {
-      fromDate: FROM_DATE,
-      toDate: TODAY,
+      fromDate: fromDate(),
+      toDate: today(),
       option: undefined,
       marker: undefined,
       clickedLocation: undefined,
       curVar: 'Precipitation',
       curLoc: undefined,
     };
+
+    
   }
 
   componentDidMount = () => {

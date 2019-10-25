@@ -6,6 +6,7 @@ import { render, waitForElement, fireEvent } from "react-testing-library"
 import "@testing-library/jest-dom/extend-expect";
 
 
+
 it('renders without crashing', async () => {
 
 
@@ -19,14 +20,18 @@ it('renders without crashing', async () => {
   fetchMock.restore();
 });
 
-it('mathes snapshot', () => {
+it('mathes Unison snapshot', () => {
+
 
   fetchMock.get('end:/location', [{"geom":{"type":"Point","coordinates":[-6.223682,53.308441]},"name":"UCD"}]);
-
+  const mockDateNow = jest.fn(() => 1571875200000);
+  const dn=global.Date.now;
+  global.Date.now = mockDateNow;
+  
   const {container} = render(<Unison mapCentre={[59.922326, 10.751560]}/>);
 
   expect(container).toMatchSnapshot();
-
+  global.Date.now=dn;
   fetchMock.restore();
 
 });
