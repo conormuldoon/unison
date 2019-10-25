@@ -7,7 +7,7 @@ See the [Javadoc](https://conormuldoon.github.io/unison/docs/back-end/) for a de
 ## Running
 
 ### Binary
-Unison requires Java 11 to operate. Download and run the [latest release](https://github.com/conormuldoon/unison/releases/latest/) using the `-jar` option. Once the application has started, enter an initial user name and password in the terminal, which will be required adding/removing the locations to track, and and then open `http://localhost:8080/unison/index.html` in the browser. To change the port, override the `server.port` property using a Java system property or the `--server.port` argument for main.
+Unison requires Java 11 to operate. Download and run the [latest release](https://github.com/conormuldoon/unison/releases/latest/) using the `-jar` option. Once the application has started, enter an initial user name and password in the terminal, which will be required for adding/removing the locations to track, and then open `http://localhost:8080/unison/index.html` in the browser. To change the port, override the `server.port` property using a Java system property or the `--server.port` argument for main.
 
 ### From source
 
@@ -69,11 +69,13 @@ The coverage report will be located in the `front-end/coverage/locv-report` dire
 
 ## Switching between GeoDB and Postgres/PostGIS
 
-With the Postgres/PostGIS configuration, the schema is not created automatically and it should be created using psql and the `back-end/src/main/resources/pg_pgis_schema.sql` schema file. The database configuration is specified in the `back-end/src/main/resources/application.properties` file. Comment out the lines related GeoDB and uncomment the lines related to Postgres/PostGIS or vice versa and restart the server.
+With the Postgres/PostGIS configuration, the schema is not created automatically and it should be created using psql and the `back-end/src/main/resources/pg_pgis_schema.sql` schema file.
+
+The database configuration is specified in the `back-end/src/main/resources/application.properties` file. Comment out the lines related GeoDB and uncomment the lines related to Postgres/PostGIS or vice versa and restart the server.
 
 ## Changing the model
 
-To change the model, edit the (HARMONIE-AROME) API URI `api.uri` and the associated time zone `api.timezone` settings in the `back-end/src/main/resources/application.properties` file and restart the server. Alternatively, if running a packaged version of the application, override the `api.uri` and `api.timezone` properties using Java system properties or the `--api.uri` and `--api.timezone` arguments for main.
+To change the model, edit the (HARMONIE-AROME) API URI `api.uri` and the associated time zone `api.timezone` properties in the `back-end/src/main/resources/application.properties` file and restart the server. Alternatively, if running a packaged version of the application, override the `api.uri` and `api.timezone` properties using Java system properties or the `--api.uri` and `--api.timezone` arguments for main.
 
 ## Acknowlegements
 Unison has been developed as part of the Acclimatize Project (https://www.acclimatize.eu/), which is partly funded under the EU Ireland Wales European Territorial Co-operation (ETC) programme.
