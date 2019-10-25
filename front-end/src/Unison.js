@@ -41,7 +41,7 @@ class Unison extends Component {
       option: undefined,
       marker: undefined,
       clickedLocation: undefined,
-      curVar: 'Precipitation',
+      curVar: varOpt[0],
       curLoc: undefined,
     };
 
