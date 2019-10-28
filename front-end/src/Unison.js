@@ -60,7 +60,7 @@ class Unison extends Component {
 
     let active=true;
 
-    new Promise(async () =>{
+    async function requestLocation(comp){
       let response = await fetch(API+'/location');
 
       if(response.ok){
@@ -78,7 +78,7 @@ class Unison extends Component {
 
           }
           for(let i=0;i<n;i++){
-            newOption.push(this.addPadding(locationArray[i].name));
+            newOption.push(comp.addPadding(locationArray[i].name));
             let pos=[locationArray[i].geom.coordinates[1],locationArray[i].geom.coordinates[0]];
 
             newMarker.push({name:locationArray[i].name,position:pos});
@@ -86,13 +86,15 @@ class Unison extends Component {
 
           }
           if(n>0){
-            this.setState({option:newOption,marker:newMarker,curLoc: this.addPadding(locationArray[0].name) });
+            comp.setState({option:newOption,marker:newMarker,curLoc: comp.addPadding(locationArray[0].name) });
           }else{
-            this.setState({curLoc: undefined,option:undefined,marker:undefined});
+            comp.setState({curLoc: undefined,option:undefined,marker:undefined});
           }
         }
       }
-    });
+    };
+
+    requestLocation(this);
 
     const cancel = () => active = false;
     return cancel;
