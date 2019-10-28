@@ -8,17 +8,9 @@ import  {
 export const fromDate = () =>{
 
   const today=new Date(Date.now());
-  let lMonth=today.getMonth()-1;
-  const year=today.getFullYear();
-  const fDate=new Date();
+  const fDate=new Date(Date.now());
+  fDate.setMonth(today.getMonth()-1);
 
-  if(lMonth<0){
-    lMonth=11;
-    fDate.setYear(year-1);
-  }
-
-  fDate.setDate(1);
-  fDate.setMonth(lMonth);
   return formatDate(fDate,FORMAT);
 }
 
