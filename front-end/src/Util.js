@@ -7,8 +7,9 @@ import  {
 
 export const fromDate = () =>{
 
-  const today=new Date(Date.now());
-  const fDate=new Date(Date.now());
+  const now=Date.now();
+  const today=new Date(now);
+  const fDate=new Date(now);
   fDate.setMonth(today.getMonth()-1);
 
   return formatDate(fDate,FORMAT);
