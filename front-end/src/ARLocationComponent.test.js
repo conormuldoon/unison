@@ -1,16 +1,14 @@
+import "@testing-library/jest-dom/extend-expect";
 import React from 'react';
 import ReactDOM from 'react-dom';
+import { fireEvent, render } from "react-testing-library";
 import ARLocationComponent from './ARLocationComponent';
-import { act } from 'react-dom/test-utils';
-import {fireEvent,render,waitForElement} from "react-testing-library";
-import "@testing-library/jest-dom/extend-expect";
-import fetchMock from 'fetch-mock';
 
 it('renders without crashing', async () => {
 
   const div = document.createElement('div');
 
-  ReactDOM.render(<ARLocationComponent obtainData={()=>{}} />,div);
+  ReactDOM.render(<ARLocationComponent obtainData={() => { }} />, div);
   ReactDOM.unmountComponentAtNode(div);
 });
 
@@ -20,7 +18,7 @@ it('renders without crashing', async () => {
 it('mathes snapshot', () => {
 
 
-  const {container} = render(<ARLocationComponent obtainData={()=>{}} />);
+  const { container } = render(<ARLocationComponent obtainData={() => { }} />);
 
   expect(container).toMatchSnapshot();
 
@@ -30,7 +28,7 @@ it('mathes snapshot', () => {
 
 it('toggles add location correctly', () => {
 
-  const {getByTestId,getByText} = render(<ARLocationComponent location={'UCD'} obtainData={()=>{}}  />);
+  const { getByTestId, getByText } = render(<ARLocationComponent location={'UCD'} obtainData={() => { }} />);
   expect(getByTestId('lf-button')).toHaveTextContent('Add Location');
   expect(getByTestId('rf-button')).toHaveTextContent('Remove Location');
   fireEvent.click(getByText('Add Location'));
@@ -51,7 +49,7 @@ it('toggles add location correctly', () => {
 
 it('toggles remove location correctly', () => {
 
-  const {getByTestId,getByText} = render(<ARLocationComponent location='UCD' obtainData={()=>{}} />);
+  const { getByTestId, getByText } = render(<ARLocationComponent location='UCD' obtainData={() => { }} />);
   expect(getByTestId('lf-button')).toHaveTextContent('Add Location');
   expect(getByTestId('rf-button')).toHaveTextContent('Remove Location');
   fireEvent.click(getByText('Remove Location'));

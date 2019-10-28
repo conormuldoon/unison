@@ -1,46 +1,46 @@
+import "@testing-library/jest-dom/extend-expect";
+import fetchMock from 'fetch-mock';
 import React from 'react';
 import ReactDOM from 'react-dom';
+import { fireEvent, render, waitForElement } from "react-testing-library";
 import Unison from './Unison';
-import fetchMock from 'fetch-mock';
-import { render, waitForElement, fireEvent } from "react-testing-library"
-import "@testing-library/jest-dom/extend-expect";
 
 
 
 it('renders without crashing', async () => {
 
 
-  fetchMock.get('end:/location', [{"geom":{"type":"Point","coordinates":[-6.223682,53.308441]},"name":"UCD"}]);
+    fetchMock.get('end:/location', [{ "geom": { "type": "Point", "coordinates": [-6.223682, 53.308441] }, "name": "UCD" }]);
 
-  const div = document.createElement('div');
+    const div = document.createElement('div');
 
-  ReactDOM.render(<Unison mapCentre={[59.922326, 10.751560]} />,div);
-  ReactDOM.unmountComponentAtNode(div);
+    ReactDOM.render(<Unison mapCentre={[59.922326, 10.751560]} />, div);
+    ReactDOM.unmountComponentAtNode(div);
 
-  fetchMock.restore();
+    fetchMock.restore();
 });
 
 it('mathes Unison snapshot', () => {
 
 
-  fetchMock.get('end:/location', [{"geom":{"type":"Point","coordinates":[-6.223682,53.308441]},"name":"UCD"}]);
-  const mockDateNow = jest.fn(() => 1571875200000);
-  const dn=global.Date.now;
-  global.Date.now = mockDateNow;
-  
-  const {container} = render(<Unison mapCentre={[59.922326, 10.751560]}/>);
+    fetchMock.get('end:/location', [{ "geom": { "type": "Point", "coordinates": [-6.223682, 53.308441] }, "name": "UCD" }]);
+    const mockDateNow = jest.fn(() => 1571875200000);
+    const dn = global.Date.now;
+    global.Date.now = mockDateNow;
 
-  expect(container).toMatchSnapshot();
-  global.Date.now=dn;
-  fetchMock.restore();
+    const { container } = render(<Unison mapCentre={[59.922326, 10.751560]} />);
+
+    expect(container).toMatchSnapshot();
+    global.Date.now = dn;
+    fetchMock.restore();
 
 });
 
-it('displays popup when marker clicked', async () =>{
-  fetchMock.get('end:/location', [{"geom":{"type":"Point","coordinates":[-6.223682,53.308441]},"name":"UCD"}]);
-  
+it('displays popup when marker clicked', async () => {
+    fetchMock.get('end:/location', [{ "geom": { "type": "Point", "coordinates": [-6.223682, 53.308441] }, "name": "UCD" }]);
 
-  fetchMock.get('end:/precipitation?location=UCD&fromDate=1/9/2019&toDate=23/10/2019', [{
+
+    fetchMock.get('end:/precipitation?location=UCD&fromDate=1/9/2019&toDate=23/10/2019', [{
         "date": "2019-04-01T23:00:00.000+0000",
         "precipitation": {
             "value": 0,
@@ -137,15 +137,15 @@ it('displays popup when marker clicked', async () =>{
         }
     }]);
 
-  const {getAllByAltText,getByText,debug} = render(<Unison mapCentre={[59.922326, 10.751560]} />);
+    const { getAllByAltText, getByText /*, debug*/ } = render(<Unison mapCentre={[59.922326, 10.751560]} />);
 
-  const marker= await waitForElement(()=>getAllByAltText('')[1]);
-  
-  fireEvent.click(marker);
-  const text=await waitForElement(()=>getByText('UCD'));
-  
-  expect(text).toBeDefined();
-  //debug();
-  fetchMock.restore();
+    const marker = await waitForElement(() => getAllByAltText('')[1]);
+
+    fireEvent.click(marker);
+    const text = await waitForElement(() => getByText('UCD'));
+
+    expect(text).toBeDefined();
+    //debug();
+    fetchMock.restore();
 });
 

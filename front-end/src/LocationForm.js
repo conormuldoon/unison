@@ -1,10 +1,10 @@
 
-import React, { useState } from 'react';
-import {API} from './Constant';
-import './App.css';
-import {locationPostObject} from './Util';
-
 import PropTypes from 'prop-types';
+import React, { useState } from 'react';
+import './App.css';
+import { API } from './Constant';
+import { locationPostObject } from './Util';
+
 
 
 /**
@@ -14,68 +14,68 @@ import PropTypes from 'prop-types';
  */
 function LocationForm(props) {
 
-  
-
-  const [location,setLocation]=useState('');
-  const [lon,setLon]=useState('');
-  const [lat,setLat]=useState('');
-  const [uname,setUName]=useState('');
-  const [pword,setPWord]=useState('');
 
 
-  function handleLoc(event){
+  const [location, setLocation] = useState('');
+  const [lon, setLon] = useState('');
+  const [lat, setLat] = useState('');
+  const [uname, setUName] = useState('');
+  const [pword, setPWord] = useState('');
+
+
+  function handleLoc(event) {
     setLocation(event.target.value);
 
   }
 
-  function handleLon(event){
+  function handleLon(event) {
     setLon(event.target.value);
   }
 
-  function handleLat(event){
+  function handleLat(event) {
     setLat(event.target.value);
 
   }
 
-  function handleUN(event){
+  function handleUN(event) {
     setUName(event.target.value);
   }
 
-  function handlePassw(event){
+  function handlePassw(event) {
     setPWord(event.target.value);
   }
 
-  function handleSubmit(event){
+  function handleSubmit(event) {
 
     postData();
 
     event.preventDefault();
 
-   }
+  }
 
-   async function postData(){
+  async function postData() {
 
-    const response=await fetch(API+'/addLocation',
-      locationPostObject(location,uname,pword,lon,lat));
+    const response = await fetch(API + '/addLocation',
+      locationPostObject(location, uname, pword, lon, lat));
 
 
 
-    if(response.ok){
-      const resVal=await response.json();
+    if (response.ok) {
+      const resVal = await response.json();
 
-      if(resVal===0){
+      if (resVal === 0) {
         alert('Location already exists');
-      }else if(resVal===1){
-        alert(location+' added');
+      } else if (resVal === 1) {
+        alert(location + ' added');
         updateDisplay();
 
-      }else if(resVal===2){
+      } else if (resVal === 2) {
         alert('Incorrect user name or password');
-      }else{
+      } else {
         alert(location + ' added, but did not obtain weather data.')
         updateDisplay();
       }
-    }else{
+    } else {
       alert('Problem connecting');
     }
 
@@ -83,7 +83,7 @@ function LocationForm(props) {
 
 
 
-  function updateDisplay(){
+  function updateDisplay() {
     setLocation('');
     setLon('');
     setLat('');
@@ -94,55 +94,55 @@ function LocationForm(props) {
   }
 
 
-    let text='Add Location';
-    if(props.display){
-      text='Hide';
-    }
+  let text = 'Add Location';
+  if (props.display) {
+    text = 'Hide';
+  }
 
 
 
-    return ( <div id='pLeft'>
+  return (<div id='pLeft'>
 
-          <button data-testid="lf-button" onClick={props.toggleDisplay}>{text}</button>
+    <button data-testid="lf-button" onClick={props.toggleDisplay}>{text}</button>
 
-          {props.display&&<form  id='locForm' onSubmit={handleSubmit}>
-              <label>
-                Location name: <input type="text" name="name" value={location} onChange={handleLoc} required  />
-              </label>
-              <br/>
-              <br/>
-              <label>
-                Longitude: <input type="number" step="any" name="lon" value={lon} onChange={handleLon} required  />
-              </label>
-              <br/>
-              <br/>
-              <label>
-                Latitude: <input type="number" step="any" name="lat"  value={lat} onChange={handleLat} required  />
-              </label>
-              <br/>
-              <br/>
-              <label>
-                Username: <input type="text" name="un" onChange={handleUN}  value={uname}  required />
-              </label>
-              <br/>
-              <br/>
-              <label>
-                Password: <input type="password" name="passwd" onChange={handlePassw}  value={pword} required />
-              </label>
-              <br/>
-              <br/>
-              <div>
-                  <input type="submit" value="Submit" />
-              </div>
-            </form>}
-        </div>
+    {props.display && <form id='locForm' onSubmit={handleSubmit}>
+      <label>
+        Location name: <input type="text" name="name" value={location} onChange={handleLoc} required />
+      </label>
+      <br />
+      <br />
+      <label>
+        Longitude: <input type="number" step="any" name="lon" value={lon} onChange={handleLon} required />
+      </label>
+      <br />
+      <br />
+      <label>
+        Latitude: <input type="number" step="any" name="lat" value={lat} onChange={handleLat} required />
+      </label>
+      <br />
+      <br />
+      <label>
+        Username: <input type="text" name="un" onChange={handleUN} value={uname} required />
+      </label>
+      <br />
+      <br />
+      <label>
+        Password: <input type="password" name="passwd" onChange={handlePassw} value={pword} required />
+      </label>
+      <br />
+      <br />
+      <div>
+        <input type="submit" value="Submit" />
+      </div>
+    </form>}
+  </div>
 
 
-    );
+  );
 
 }
 
-LocationForm.propTypes ={
+LocationForm.propTypes = {
   /** Determines whether the form for entering location name, longitude, and latitude values is displayed. */
   display: PropTypes.bool.isRequired,
 

@@ -1,9 +1,9 @@
 
-import React, { useState } from 'react';
-import {API} from './Constant';
-import {removePostObject} from './Util';
-
 import PropTypes from 'prop-types';
+import React, { useState } from 'react';
+import { API } from './Constant';
+import { removePostObject } from './Util';
+
 
 /**
  * A component to display a form to enable the user to enter their credentials to remove a location from being tracked.
@@ -13,55 +13,55 @@ import PropTypes from 'prop-types';
 function RemoveForm(props) {
 
 
-  const [uname,setUName]=useState('');
-  const [pword,setPWord]=useState('');
+  const [uname, setUName] = useState('');
+  const [pword, setPWord] = useState('');
 
 
-  function handleUN(event){
+  function handleUN(event) {
     setUName(event.target.value);
   }
 
-  function handlePassw(event){
+  function handlePassw(event) {
     setPWord(event.target.value);
   }
 
-  function handleSubmit(event){
+  function handleSubmit(event) {
 
     removeRequest();
 
     event.preventDefault();
 
-   }
+  }
 
-   async function removeRequest(){
+  async function removeRequest() {
 
-    const response=await fetch(API+'/deleteLocation',
-      removePostObject(props.location,uname,pword));
+    const response = await fetch(API + '/deleteLocation',
+      removePostObject(props.location, uname, pword));
 
-    if(response.ok){
-      const resVal=await response.json();
+    if (response.ok) {
+      const resVal = await response.json();
 
-      if(resVal===0){
+      if (resVal === 0) {
         alert('Location does not exist');
 
-      }else if(resVal===1){
+      } else if (resVal === 1) {
 
-        alert(props.location+' removed');
+        alert(props.location + ' removed');
         clear();
         props.obtainData();
 
-      }else if (resVal===3){
+      } else if (resVal === 3) {
         alert('You do not have permission to delete this location');
-      }else{
+      } else {
         alert('Incorrect user name or password');
       }
-    }else{
+    } else {
       alert('Problem connecting');
     }
 
   }
 
-  function clear(){
+  function clear() {
     setUName('');
     setPWord('');
     props.hideDisplay();
@@ -69,42 +69,42 @@ function RemoveForm(props) {
 
 
 
-    let text='Remove Location';
-    if(props.display){
-      text='Hide';
-    }
+  let text = 'Remove Location';
+  if (props.display) {
+    text = 'Hide';
+  }
 
-    return (
+  return (
 
-      <div>
+    <div>
 
-          <button data-testid='rf-button' onClick={props.toggleDisplay}>{text}</button>
+      <button data-testid='rf-button' onClick={props.toggleDisplay}>{text}</button>
 
-          {props.display&&<form  id='locForm' onSubmit={handleSubmit}>
-              <label>
-                Username: <input type="text" name="un" onChange={handleUN}  value={uname}  required />
-              </label>
-              <br/>
-              <br/>
-              <label>
-                Password: <input type="password" name="passwd" onChange={handlePassw}  value={pword} required />
-              </label>
-              <br/>
-              <br/>
-              <div>
-                  <input  type="submit" value={"Remove "+props.location} />
-              </div>
-            </form>}
+      {props.display && <form id='locForm' onSubmit={handleSubmit}>
+        <label>
+          Username: <input type="text" name="un" onChange={handleUN} value={uname} required />
+        </label>
+        <br />
+        <br />
+        <label>
+          Password: <input type="password" name="passwd" onChange={handlePassw} value={pword} required />
+        </label>
+        <br />
+        <br />
+        <div>
+          <input type="submit" value={"Remove " + props.location} />
         </div>
+      </form>}
+    </div>
 
 
-    );
+  );
 
 }
 
 
-RemoveForm.propTypes ={
- 
+RemoveForm.propTypes = {
+
   /** The name of the location to be removed. */
   location: PropTypes.string.isRequired,
 

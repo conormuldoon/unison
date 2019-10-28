@@ -1,10 +1,10 @@
-import React, { useState,} from 'react';
+import PropTypes from 'prop-types';
+import React, { useState } from 'react';
+import './App.css';
 import LocationForm from './LocationForm';
 import RemoveForm from './RemoveForm';
-import './App.css';
 
 
-import PropTypes from 'prop-types';
 
 
 /**
@@ -16,50 +16,50 @@ import PropTypes from 'prop-types';
  */
 function ARLocationComponent(props) {
 
-    const [displayAdd,setDisplayAdd]=useState(false);
-    const [displayRemove,setDisplayRemove]=useState(false);
+  const [displayAdd, setDisplayAdd] = useState(false);
+  const [displayRemove, setDisplayRemove] = useState(false);
 
-    function toggleDisplayAdd(){
-      if(displayRemove&&!displayAdd){
-        setDisplayAdd(true);
-        setDisplayRemove(false);
-      }else{
-        setDisplayAdd(!displayAdd);
-      }
-    }
-
-    function toggleDisplayRemove(){
-      if(displayAdd&&!displayRemove){
-        setDisplayAdd(false);
-        setDisplayRemove(true);
-      }else{
-        setDisplayRemove(!displayRemove);
-      }
-    }
-
-    function hideAdd(){
-      setDisplayAdd(false);
-    }
-
-    function hideRemove(){
+  function toggleDisplayAdd() {
+    if (displayRemove && !displayAdd) {
+      setDisplayAdd(true);
       setDisplayRemove(false);
+    } else {
+      setDisplayAdd(!displayAdd);
     }
+  }
 
-    return (
-      <div>
-        <div className='pLeft'>
-          <LocationForm obtainData={props.obtainData} toggleDisplay={toggleDisplayAdd} display={displayAdd} hideDisplay={hideAdd} />
+  function toggleDisplayRemove() {
+    if (displayAdd && !displayRemove) {
+      setDisplayAdd(false);
+      setDisplayRemove(true);
+    } else {
+      setDisplayRemove(!displayRemove);
+    }
+  }
 
-        </div>
-        {props.location&&<div className='pLeft'>
-          <RemoveForm obtainData={props.obtainData} toggleDisplay={toggleDisplayRemove} display={displayRemove} hideDisplay={hideRemove} location={props.location} />
-        </div>}
+  function hideAdd() {
+    setDisplayAdd(false);
+  }
+
+  function hideRemove() {
+    setDisplayRemove(false);
+  }
+
+  return (
+    <div>
+      <div className='pLeft'>
+        <LocationForm obtainData={props.obtainData} toggleDisplay={toggleDisplayAdd} display={displayAdd} hideDisplay={hideAdd} />
+
       </div>
-    );
+      {props.location && <div className='pLeft'>
+        <RemoveForm obtainData={props.obtainData} toggleDisplay={toggleDisplayRemove} display={displayRemove} hideDisplay={hideRemove} location={props.location} />
+      </div>}
+    </div>
+  );
 }
 
 
-ARLocationComponent.propTypes ={
+ARLocationComponent.propTypes = {
   /** The currently selected location. */
   location: PropTypes.string,
 

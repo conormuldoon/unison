@@ -1,16 +1,13 @@
+import PropTypes from 'prop-types';
 import React from 'react';
-
 import DayPickerInput from 'react-day-picker/DayPickerInput';
 import 'react-day-picker/lib/style.css';
+import { formatDate, parseDate } from 'react-day-picker/moment';
+import { FORMAT } from './Constant';
 
-import  {
-  formatDate,
-  parseDate,
-} from 'react-day-picker/moment';
 
-import {FORMAT} from './Constant';
 
-import PropTypes from 'prop-types';
+
 
 /**
  * A component for selecting a date.
@@ -18,29 +15,29 @@ import PropTypes from 'prop-types';
  * @component
  * 
  */
-function DateSelector(props){
+function DateSelector(props) {
 
 
-    return (
-      <div>
-        <p>{props.label}</p>
-        <DayPickerInput
+  return (
+    <div>
+      <p>{props.label}</p>
+      <DayPickerInput
 
-          format={FORMAT}
-          formatDate={formatDate}
-          parseDate={parseDate}
-          value={props.dateValue}
-          onDayChange={props.handleDayChange}
+        format={FORMAT}
+        formatDate={formatDate}
+        parseDate={parseDate}
+        value={props.dateValue}
+        onDayChange={props.handleDayChange}
 
 
-        />
-      </div>
-    );
+      />
+    </div>
+  );
 
 }
 
-DateSelector.propTypes ={
-  
+DateSelector.propTypes = {
+
   /** The label to display over the selector. */
   label: PropTypes.string.isRequired,
 

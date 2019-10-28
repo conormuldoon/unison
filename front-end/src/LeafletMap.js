@@ -1,11 +1,11 @@
 
-import React, { Component  } from 'react';
-
-import { Map, Marker, TileLayer} from 'react-leaflet';
 import Leaflet from 'leaflet';
+import PropTypes from 'prop-types';
+import React, { Component } from 'react';
+import { Map, Marker, TileLayer } from 'react-leaflet';
 import ChartPopup from './ChartPopup';
 
-import PropTypes from 'prop-types';
+
 
 const image = new Leaflet.Icon({
                iconUrl: require('./2000px-Map_marker.png'),

@@ -1,11 +1,11 @@
-import { Tab, Tabs, TabList, TabPanel } from 'react-tabs';
-import React, { useState,useEffect  } from 'react';
+import PropTypes from 'prop-types';
+import React, { useEffect, useState } from 'react';
+import { Tab, TabList, TabPanel, Tabs } from 'react-tabs';
 import "react-tabs/style/react-tabs.css";
 import ChartComponent from './ChartComponent';
+import { CL, HIGH, HPER, LOW, LPER, MEDIAN, MEDIUM } from './Constant';
 
-import {LPER,MEDIAN,HPER,LOW,MEDIUM,HIGH,CL} from './Constant';
 
-import PropTypes from 'prop-types';
 
 
 
@@ -18,78 +18,78 @@ import PropTypes from 'prop-types';
  *  
  * @component
  */
-function TabsComponent(props){
+function TabsComponent(props) {
 
-  const [tabs,setTabs]=useState(undefined);
+  const [tabs, setTabs] = useState(undefined);
 
 
-  useEffect(()=>{
+  useEffect(() => {
 
-    function updateTabs(){
-      if(props.minMax){
-  
-        setTabs([LPER,MEDIAN,HPER]);
-    
-      }else if(props.varCur===CL){
-    
-        setTabs([LOW,MEDIUM,HIGH]);
-    
-      }else{
+    function updateTabs() {
+      if (props.minMax) {
+
+        setTabs([LPER, MEDIAN, HPER]);
+
+      } else if (props.varCur === CL) {
+
+        setTabs([LOW, MEDIUM, HIGH]);
+
+      } else {
         setTabs(undefined);
       }
     }
 
-    if(props.data&&props.data.length>0){
+    if (props.data && props.data.length > 0) {
 
-        updateTabs(props.minMax,props.varCur===CL);     
+      updateTabs(props.minMax, props.varCur === CL);
 
-      }else{
-        
-        setTabs(undefined);  
-        
-      }
-    },[props.data,props.varCur,props.minMax]
+    } else {
+
+      setTabs(undefined);
+
+    }
+  }, [props.data, props.varCur, props.minMax]
   );
-  
 
-      function tabsPanel(index){
-        return (<TabPanel >
-          <div id="tabdiv" data-testid='chart' >
-            <ChartComponent data={props.data} zoomDomain={props.zoomDomain} index={index}
-              handleZoom={props.setZoomDomain}
-              varCur={props.varCur} minMax={props.minMax}  />
-          </div>
-        </TabPanel>
-        );
-      }
 
-      return (<div  id="chartdiv">
-          {tabs&&<Tabs id="tabscomponent" defaultIndex={1}>
-          <TabList >
-            <Tab>{tabs[0]}</Tab>
-            <Tab>{tabs[1]}</Tab>
-            <Tab>{tabs[2]}</Tab>
-          </TabList>
-
-          {tabsPanel(0)}
-          {tabsPanel(1)}
-          {tabsPanel(2)}
-
-        </Tabs>}
-
-        {!tabs&&<div data-testid='chart' id="singlevar">
-          <ChartComponent data={props.data} zoomDomain={props.zoomDomain} handleZoom={props.setZoomDomain}
-            varCur={props.varCur} minMax={props.minMax} />
-          </div>
-        }
+  function tabsPanel(index) {
+    return (<TabPanel >
+      <div id="tabdiv" data-testid='chart' >
+        <ChartComponent data={props.data} zoomDomain={props.zoomDomain} index={index}
+          handleZoom={props.setZoomDomain}
+          varCur={props.varCur} minMax={props.minMax} />
       </div>
+    </TabPanel>
     );
+  }
+
+  return (<div id="chartdiv">
+    {tabs && <Tabs id="tabscomponent" defaultIndex={1}>
+      <TabList >
+        <Tab>{tabs[0]}</Tab>
+        <Tab>{tabs[1]}</Tab>
+        <Tab>{tabs[2]}</Tab>
+      </TabList>
+
+      {tabsPanel(0)}
+      {tabsPanel(1)}
+      {tabsPanel(2)}
+
+    </Tabs>}
+
+    {!tabs && <div data-testid='chart' id="singlevar">
+      <ChartComponent data={props.data} zoomDomain={props.zoomDomain} handleZoom={props.setZoomDomain}
+        varCur={props.varCur} minMax={props.minMax} />
+    </div>
+    }
+  </div>
+  );
 
 }
 
 
-TabsComponent.propTypes ={
- 
+TabsComponent.propTypes = {
+
   /** An array of data to be displayed on one or more charts. */
   data: PropTypes.array,
 
@@ -107,7 +107,7 @@ TabsComponent.propTypes ={
   /** A function used to change the zoom domain. */
   setZoomDomain: PropTypes.func.isRequired,
 
-  
+
 }
 
 export default TabsComponent;
