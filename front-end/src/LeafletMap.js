@@ -32,7 +32,7 @@ const image = new Leaflet.Icon({
     }
   }
 
-  componentDidUpdate = (prevProps, prevState) =>{
+  componentDidUpdate = (prevProps) =>{
 
     if(prevProps.curVar!==this.props.curVar||prevProps.curLoc!==this.props.curLoc||prevProps.fromDate!==this.props.fromDate||prevProps.toDate!==this.props.toDate){
       if(this.state.popupComponent!==undefined){
@@ -61,7 +61,7 @@ const image = new Leaflet.Icon({
 
   }
 
-  closePopup = (e) =>{
+  closePopup = () =>{
 
     this.setState({popupComponent:undefined,dragging:true});
 

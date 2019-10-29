@@ -86,7 +86,7 @@ class Unison extends Component {
           }
         }
       }
-    };
+    }
 
     requestLocation(this);
 
