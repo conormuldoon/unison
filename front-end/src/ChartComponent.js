@@ -90,7 +90,8 @@ function ChartComponent(props) {
 
     return (
 
-      <VictoryChart
+      <VictoryChart style={{ parent: { maxWidth: "55%", maxHeight: "55%" } }} responsive={true} padding={{ left: 70, bottom: 50, top: 10 }}
+        domainPadding={{ x: [0, 0], y: 0 }}
         theme={VictoryTheme.material}
         scale={{ x: "time" }}
         containerComponent={
@@ -101,7 +102,7 @@ function ChartComponent(props) {
           />
         }
       >
-        {props.data && <VictoryLine
+        <VictoryLine
           style={{
             data: { stroke: "#c43a31" },
             parent: { border: "1px solid #ccc" }
@@ -109,11 +110,11 @@ function ChartComponent(props) {
           data={props.data}
           x="date"
           y={yVal}
-        />}
+        />
 
-        {props.data && <VictoryAxis fixLabelOverlap={true} />}
-        {props.data && <VictoryAxis dependentAxis label={yLabel} style={{ axisLabel: { padding: 45 } }} tickFormat={
-          (x) => { if (x < .001) { return x.toFixed(3); } if (x > 999) { return Math.round(x); } return x; }} />}
+        <VictoryAxis fixLabelOverlap={true} />
+        <VictoryAxis dependentAxis label={yLabel} style={{ axisLabel: { padding: 45 } }} tickFormat={
+          (x) => { if (x < .001) { return x.toFixed(3); } if (x > 999) { return Math.round(x); } return x; }} />
 
       </VictoryChart>
 
