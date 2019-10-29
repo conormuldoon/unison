@@ -44,7 +44,7 @@
             <div class="column is-3" id="sidebarNav">
                 <div class="sidebar">
                     <nav>
-                        <h2><a href="index.html">Home</a></h2><div class="category"><h3>Components</h3><ul><li><a href="module.exports.html">exports</a></li><li><a href="Unison.html">Unison</a></li></ul></div>
+                        <h2><a href="index.html">Home</a></h2><div class="category"><h3>Classes</h3><ul><li><a href="module.exports.html">exports</a></li><li><a href="Unison.html">Unison</a></li></ul></div>
                     </nav>
                 </div>
             </div>
@@ -56,6 +56,425 @@
                     </header>
                     
                     
+
+
+
+
+<section>
+
+<header>
+    
+        <h2>
+            &ltexports <i>label</i> <i>dateValue</i> <i>handleDayChange</i> /&gt
+        </h2>
+        
+    
+</header>
+
+<article>
+    <div class="container-overview">
+    
+        
+            <div class='vertical-section'>
+                <h3 class="title"><span>Constructor</span></h3>
+                <div class="members">
+                    <div class="member">
+
+
+    
+    <h4 class="name" id="exports">
+        
+        <span class="code-name">
+            
+                &ltexports <i>label</i> <i>dateValue</i> <i>handleDayChange</i> /&gt
+            
+        </span>
+    </h4>
+    
+
+    
+    
+    <div class="description">
+        <p>A component for selecting a date.</p>
+    </div>
+    
+
+
+
+
+
+
+
+    
+        <h5>PropTypes:</h5>
+        
+
+<table class="params">
+  <thead>
+  <tr>
+      <th>Name</th>
+      <th>Type</th>
+      <th>Required</th>
+      <th>Description</th>
+      <th class="last">Default</th>
+  </tr>
+  </thead>
+
+  <tbody>
+  
+        <tr class="deep-level-0">
+          <td class="name"><code>label</code></td>
+          <td>
+            string
+          </td>
+          <td>No</td>
+          <td>The label to display over the selector.</td>
+          <td></td>
+        </tr>
+        
+  
+        <tr class="deep-level-0">
+          <td class="name"><code>dateValue</code></td>
+          <td>
+            string
+          </td>
+          <td>No</td>
+          <td>The initial date value to display.</td>
+          <td></td>
+        </tr>
+        
+  
+        <tr class="deep-level-0">
+          <td class="name"><code>handleDayChange</code></td>
+          <td>
+            func
+          </td>
+          <td>No</td>
+          <td>A callback function called when the date is changed.</td>
+          <td></td>
+        </tr>
+        
+  
+  </tbody>
+</table>
+    
+
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    
+
+    
+
+    
+
+    
+        <p class="tag-source">
+            <a href="DateSelector.js.html" class="button">View Source</a>
+            <span>
+                <a href="DateSelector.js.html">DateSelector.js</a>, <a href="DateSelector.js.html#line20">line 20</a>
+            </span>
+        </p>
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</div>
+                </div>
+            </div>
+        
+    
+    </div>
+    
+        
+    
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+</article>
+
+</section>
+
+
+
+
+
+
+
+<section>
+
+<header>
+    
+        <h2>
+            &ltexports <i>display</i> <i>toggleDisplay</i> <i>hideDisplay</i> <i>obtainData</i> /&gt
+        </h2>
+        
+    
+</header>
+
+<article>
+    <div class="container-overview">
+    
+        
+            <div class='vertical-section'>
+                <h3 class="title"><span>Constructor</span></h3>
+                <div class="members">
+                    <div class="member">
+
+
+    
+    <h4 class="name" id="exports">
+        
+        <span class="code-name">
+            
+                &ltexports <i>display</i> <i>toggleDisplay</i> <i>hideDisplay</i> <i>obtainData</i> /&gt
+            
+        </span>
+    </h4>
+    
+
+    
+    
+    <div class="description">
+        <p>A component for displaying a form to add new locations to be tracked.</p>
+    </div>
+    
+
+
+
+
+
+
+
+    
+        <h5>PropTypes:</h5>
+        
+
+<table class="params">
+  <thead>
+  <tr>
+      <th>Name</th>
+      <th>Type</th>
+      <th>Required</th>
+      <th>Description</th>
+      <th class="last">Default</th>
+  </tr>
+  </thead>
+
+  <tbody>
+  
+        <tr class="deep-level-0">
+          <td class="name"><code>display</code></td>
+          <td>
+            bool
+          </td>
+          <td>No</td>
+          <td>Determines whether the form for entering location name, longitude, and latitude values is displayed.</td>
+          <td></td>
+        </tr>
+        
+  
+        <tr class="deep-level-0">
+          <td class="name"><code>toggleDisplay</code></td>
+          <td>
+            func
+          </td>
+          <td>No</td>
+          <td>Toggles whether the form is displayed. If the remove form is displayed, it will be hidden.</td>
+          <td></td>
+        </tr>
+        
+  
+        <tr class="deep-level-0">
+          <td class="name"><code>hideDisplay</code></td>
+          <td>
+            func
+          </td>
+          <td>No</td>
+          <td>Called when a location has been successfully added to hide the form.</td>
+          <td></td>
+        </tr>
+        
+  
+        <tr class="deep-level-0">
+          <td class="name"><code>obtainData</code></td>
+          <td>
+            func
+          </td>
+          <td>No</td>
+          <td>Called when a location has been successfully added to obtain the updated location list from the server and add the location to the map.</td>
+          <td></td>
+        </tr>
+        
+  
+  </tbody>
+</table>
+    
+
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    
+
+    
+
+    
+
+    
+        <p class="tag-source">
+            <a href="LocationForm.js.html" class="button">View Source</a>
+            <span>
+                <a href="LocationForm.js.html">LocationForm.js</a>, <a href="LocationForm.js.html#line16">line 16</a>
+            </span>
+        </p>
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</div>
+                </div>
+            </div>
+        
+    
+    </div>
+    
+        
+    
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+</article>
+
+</section>
+
+
+
 
 
 
@@ -190,249 +609,7 @@ The user name and password is posted to the server and the obtain data callback 
         <p class="tag-source">
             <a href="ARLocationComponent.js.html" class="button">View Source</a>
             <span>
-                <a href="ARLocationComponent.js.html">ARLocationComponent.js</a>, <a href="ARLocationComponent.js.html#line25">line 25</a>
-            </span>
-        </p>
-    
-</dl>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-    <h5>Example</h5>
-    
-    
-        
-
-<div id='1o0ufwh2l0xk1tadid7'></div>
-
-<script>
-  ReactDOM.render(ReactWrapper({
-    example: "return (\n  <div style={{paddingLeft:200}}>\n     <ARLocationComponent location=\"UCD\" />\n  <div>\n)",
-    uniqId: "1o0ufwh2l0xk1tadid7",
-  }), document.getElementById('1o0ufwh2l0xk1tadid7'));
-</script>
-    
-
-
-</div>
-                </div>
-            </div>
-        
-    
-    </div>
-    
-        
-    
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-</article>
-
-</section>
-
-
-
-
-
-
-
-<section>
-
-<header>
-    
-        <h2>
-            &ltexports <i>zoomDomain</i> <i>handleZoom</i> <i>data</i> <i>yLabel</i> <i>yVal</i> /&gt
-        </h2>
-        
-    
-</header>
-
-<article>
-    <div class="container-overview">
-    
-        
-            <div class='vertical-section'>
-                <h3 class="title"><span>Constructor</span></h3>
-                <div class="members">
-                    <div class="member">
-
-
-    
-    <h4 class="name" id="exports">
-        
-        <span class="code-name">
-            
-                &ltexports <i>zoomDomain</i> <i>handleZoom</i> <i>data</i> <i>yLabel</i> <i>yVal</i> /&gt
-            
-        </span>
-    </h4>
-    
-
-    
-    
-    <div class="description">
-        <p>A component for displaying line graphs.</p>
-    </div>
-    
-
-
-
-
-
-
-
-    
-        <h5>PropTypes:</h5>
-        
-
-<table class="params">
-  <thead>
-  <tr>
-      <th>Name</th>
-      <th>Type</th>
-      <th>Required</th>
-      <th>Description</th>
-      <th class="last">Default</th>
-  </tr>
-  </thead>
-
-  <tbody>
-  
-        <tr class="deep-level-0">
-          <td class="name"><code>zoomDomain</code></td>
-          <td>
-            object
-          </td>
-          <td>No</td>
-          <td>Specifies the beginning and end times of the time domain of the x-axis.</td>
-          <td></td>
-        </tr>
-        
-  
-        <tr class="deep-level-0">
-          <td class="name"><code>handleZoom</code></td>
-          <td>
-            func
-          </td>
-          <td>No</td>
-          <td>Called when there is a zoom domain change.</td>
-          <td></td>
-        </tr>
-        
-  
-        <tr class="deep-level-0">
-          <td class="name"><code>data</code></td>
-          <td>
-            array
-          </td>
-          <td>No</td>
-          <td>Data to be displayed on the graph.</td>
-          <td></td>
-        </tr>
-        
-  
-        <tr class="deep-level-0">
-          <td class="name"><code>yLabel</code></td>
-          <td>
-            string
-          </td>
-          <td>No</td>
-          <td>The label for the y-axis. The x-axis is always time.</td>
-          <td></td>
-        </tr>
-        
-  
-        <tr class="deep-level-0">
-          <td class="name"><code>yVal</code></td>
-          <td>
-            string
-          </td>
-          <td>No</td>
-          <td>The name of the attribute in all objects of the data array to be plotted.</td>
-          <td></td>
-        </tr>
-        
-  
-  </tbody>
-</table>
-    
-
-
-
-
-
-
-
-<dl class="details">
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-    
-
-    
-
-    
-
-    
-        <p class="tag-source">
-            <a href="ChartComponent.js.html" class="button">View Source</a>
-            <span>
-                <a href="ChartComponent.js.html">ChartComponent.js</a>, <a href="ChartComponent.js.html#line21">line 21</a>
+                <a href="ARLocationComponent.js.html">ARLocationComponent.js</a>, <a href="ARLocationComponent.js.html#line17">line 17</a>
             </span>
         </p>
     
@@ -717,7 +894,7 @@ for the from date, to date, location, and weather variable selected.</p>
 <header>
     
         <h2>
-            &ltexports <i>label</i> <i>dateValue</i> <i>handleDayChange</i> /&gt
+            &ltexports <i>zoomDomain</i> <i>handleZoom</i> <i>data</i> <i>yLabel</i> <i>yVal</i> /&gt
         </h2>
         
     
@@ -738,7 +915,7 @@ for the from date, to date, location, and weather variable selected.</p>
         
         <span class="code-name">
             
-                &ltexports <i>label</i> <i>dateValue</i> <i>handleDayChange</i> /&gt
+                &ltexports <i>zoomDomain</i> <i>handleZoom</i> <i>data</i> <i>yLabel</i> <i>yVal</i> /&gt
             
         </span>
     </h4>
@@ -747,7 +924,7 @@ for the from date, to date, location, and weather variable selected.</p>
     
     
     <div class="description">
-        <p>A component for selecting a date.</p>
+        <p>A component for displaying line graphs.</p>
     </div>
     
 
@@ -775,270 +952,56 @@ for the from date, to date, location, and weather variable selected.</p>
   <tbody>
   
         <tr class="deep-level-0">
-          <td class="name"><code>label</code></td>
+          <td class="name"><code>zoomDomain</code></td>
           <td>
-            string
+            object
           </td>
           <td>No</td>
-          <td>The label to display over the selector.</td>
+          <td>Specifies the beginning and end times of the time domain of the x-axis.</td>
           <td></td>
         </tr>
         
   
         <tr class="deep-level-0">
-          <td class="name"><code>dateValue</code></td>
-          <td>
-            string
-          </td>
-          <td>No</td>
-          <td>The initial date value to display.</td>
-          <td></td>
-        </tr>
-        
-  
-        <tr class="deep-level-0">
-          <td class="name"><code>handleDayChange</code></td>
+          <td class="name"><code>handleZoom</code></td>
           <td>
             func
           </td>
           <td>No</td>
-          <td>A callback function called when the date is changed.</td>
-          <td></td>
-        </tr>
-        
-  
-  </tbody>
-</table>
-    
-
-
-
-
-
-
-
-<dl class="details">
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-    
-
-    
-
-    
-
-    
-        <p class="tag-source">
-            <a href="DateSelector.js.html" class="button">View Source</a>
-            <span>
-                <a href="DateSelector.js.html">DateSelector.js</a>, <a href="DateSelector.js.html#line20">line 20</a>
-            </span>
-        </p>
-    
-</dl>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-</div>
-                </div>
-            </div>
-        
-    
-    </div>
-    
-        
-    
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-</article>
-
-</section>
-
-
-
-
-
-
-
-<section>
-
-<header>
-    
-        <h2>
-            &ltexports <i>curVar</i> <i>curLoc</i> <i>fromDate</i> <i>toDate</i> <i>marker</i> <i>markerCallback</i> /&gt
-        </h2>
-        
-            <div class="class-description"><p>A component for displaying a Leaflet map and markers for popups for locations where weather data is being tracked.</p></div>
-        
-    
-</header>
-
-<article>
-    <div class="container-overview">
-    
-        
-            <div class='vertical-section'>
-                <h3 class="title"><span>Constructor</span></h3>
-                <div class="members">
-                    <div class="member">
-
-
-    
-    <h4 class="name" id="exports">
-        
-        <span class="code-name">
-            
-                &ltexports <i>curVar</i> <i>curLoc</i> <i>fromDate</i> <i>toDate</i> <i>marker</i> <i>markerCallback</i> /&gt
-            
-        </span>
-    </h4>
-    
-
-    
-    
-
-
-
-
-
-
-
-    
-        <h5>PropTypes:</h5>
-        
-
-<table class="params">
-  <thead>
-  <tr>
-      <th>Name</th>
-      <th>Type</th>
-      <th>Required</th>
-      <th>Description</th>
-      <th class="last">Default</th>
-  </tr>
-  </thead>
-
-  <tbody>
-  
-        <tr class="deep-level-0">
-          <td class="name"><code>curVar</code></td>
-          <td>
-            string
-          </td>
-          <td>No</td>
-          <td>Specifies the weather variable currently selected.</td>
+          <td>Called when there is a zoom domain change.</td>
           <td></td>
         </tr>
         
   
         <tr class="deep-level-0">
-          <td class="name"><code>curLoc</code></td>
-          <td>
-            string
-          </td>
-          <td>No</td>
-          <td>Sepecifies the location selected.</td>
-          <td></td>
-        </tr>
-        
-  
-        <tr class="deep-level-0">
-          <td class="name"><code>fromDate</code></td>
-          <td>
-            string
-          </td>
-          <td>No</td>
-          <td>Specifies the start date for the data that is to be displayed.</td>
-          <td></td>
-        </tr>
-        
-  
-        <tr class="deep-level-0">
-          <td class="name"><code>toDate</code></td>
-          <td>
-            string
-          </td>
-          <td>No</td>
-          <td>Specifies the end date for the data that is to be displayed.</td>
-          <td></td>
-        </tr>
-        
-  
-        <tr class="deep-level-0">
-          <td class="name"><code>marker</code></td>
+          <td class="name"><code>data</code></td>
           <td>
             array
           </td>
           <td>No</td>
-          <td>An array of markers to be displayed on the map. Each element of the array specifies the coordinates and location 
-name associated with a marker.</td>
+          <td>Data to be displayed on the graph.</td>
           <td></td>
         </tr>
         
   
         <tr class="deep-level-0">
-          <td class="name"><code>markerCallback</code></td>
+          <td class="name"><code>yLabel</code></td>
           <td>
-            func
+            string
           </td>
           <td>No</td>
-          <td>A function called when a marker is clicked.</td>
+          <td>The label for the y-axis. The x-axis is always time.</td>
+          <td></td>
+        </tr>
+        
+  
+        <tr class="deep-level-0">
+          <td class="name"><code>yVal</code></td>
+          <td>
+            string
+          </td>
+          <td>No</td>
+          <td>The name of the attribute in all objects of the data array to be plotted.</td>
           <td></td>
         </tr>
         
@@ -1086,224 +1049,9 @@ name associated with a marker.</td>
 
     
         <p class="tag-source">
-            <a href="LeafletMap.js.html" class="button">View Source</a>
+            <a href="ChartComponent.js.html" class="button">View Source</a>
             <span>
-                <a href="LeafletMap.js.html">LeafletMap.js</a>, <a href="LeafletMap.js.html#line22">line 22</a>
-            </span>
-        </p>
-    
-</dl>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-</div>
-                </div>
-            </div>
-        
-    
-    </div>
-    
-        
-    
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-</article>
-
-</section>
-
-
-
-
-
-
-
-<section>
-
-<header>
-    
-        <h2>
-            &ltexports <i>display</i> <i>toggleDisplay</i> <i>hideDisplay</i> <i>obtainData</i> /&gt
-        </h2>
-        
-    
-</header>
-
-<article>
-    <div class="container-overview">
-    
-        
-            <div class='vertical-section'>
-                <h3 class="title"><span>Constructor</span></h3>
-                <div class="members">
-                    <div class="member">
-
-
-    
-    <h4 class="name" id="exports">
-        
-        <span class="code-name">
-            
-                &ltexports <i>display</i> <i>toggleDisplay</i> <i>hideDisplay</i> <i>obtainData</i> /&gt
-            
-        </span>
-    </h4>
-    
-
-    
-    
-    <div class="description">
-        <p>A component for displaying a form to add new locations to be tracked.</p>
-    </div>
-    
-
-
-
-
-
-
-
-    
-        <h5>PropTypes:</h5>
-        
-
-<table class="params">
-  <thead>
-  <tr>
-      <th>Name</th>
-      <th>Type</th>
-      <th>Required</th>
-      <th>Description</th>
-      <th class="last">Default</th>
-  </tr>
-  </thead>
-
-  <tbody>
-  
-        <tr class="deep-level-0">
-          <td class="name"><code>display</code></td>
-          <td>
-            bool
-          </td>
-          <td>No</td>
-          <td>Determines whether the form for entering location name, longitude, and latitude values is displayed.</td>
-          <td></td>
-        </tr>
-        
-  
-        <tr class="deep-level-0">
-          <td class="name"><code>toggleDisplay</code></td>
-          <td>
-            func
-          </td>
-          <td>No</td>
-          <td>Toggles whether the form is displayed. If the remove form is displayed, it will be hidden.</td>
-          <td></td>
-        </tr>
-        
-  
-        <tr class="deep-level-0">
-          <td class="name"><code>hideDisplay</code></td>
-          <td>
-            func
-          </td>
-          <td>No</td>
-          <td>Called when a location has been successfully added to hide the form.</td>
-          <td></td>
-        </tr>
-        
-  
-        <tr class="deep-level-0">
-          <td class="name"><code>obtainData</code></td>
-          <td>
-            func
-          </td>
-          <td>No</td>
-          <td>Called when a location has been successfully added to obtain the updated location list from the server and add the location to the map.</td>
-          <td></td>
-        </tr>
-        
-  
-  </tbody>
-</table>
-    
-
-
-
-
-
-
-
-<dl class="details">
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-    
-
-    
-
-    
-
-    
-        <p class="tag-source">
-            <a href="LocationForm.js.html" class="button">View Source</a>
-            <span>
-                <a href="LocationForm.js.html">LocationForm.js</a>, <a href="LocationForm.js.html#line16">line 16</a>
+                <a href="ChartComponent.js.html">ChartComponent.js</a>, <a href="ChartComponent.js.html#line21">line 21</a>
             </span>
         </p>
     
@@ -1837,7 +1585,7 @@ some locations and models only provide a single preciption value (no minimum or 
 
 <footer class="footer">
     <div class="content has-text-centered">
-        <p>Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.6.3</a> on Wed Oct 16 2019 14:03:29 GMT+0100 (Irish Standard Time)</p>
+        <p>Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.6.3</a> on Tue Oct 15 2019 19:54:14 GMT+0100 (Irish Standard Time)</p>
         <p class="sidebar-created-by">
             <a href="https://github.com/SoftwareBrothers/better-docs" target="_blank">BetterDocs theme</a> provided with <i class="fas fa-heart"></i> by 
             <a href="http://softwarebrothers.co" target="_blank">SoftwareBrothers - JavaScript Development Agency</a>

@@ -65,12 +65,12 @@
     <section>
         <article>
             <pre class="prettyprint source linenums"><code>
-import React, { useState } from 'react';
-import {API} from './Constant';
-import './App.css';
-import {locationPostObject} from './Util';
-
 import PropTypes from 'prop-types';
+import React, { useState } from 'react';
+import './App.css';
+import { API } from './Constant';
+import { locationPostObject } from './Util';
+
 
 
 /**
@@ -80,68 +80,68 @@ import PropTypes from 'prop-types';
  */
 function LocationForm(props) {
 
-  
-
-  const [location,setLocation]=useState('');
-  const [lon,setLon]=useState('');
-  const [lat,setLat]=useState('');
-  const [uname,setUName]=useState('');
-  const [pword,setPWord]=useState('');
 
 
-  function handleLoc(event){
+  const [location, setLocation] = useState('');
+  const [lon, setLon] = useState('');
+  const [lat, setLat] = useState('');
+  const [uname, setUName] = useState('');
+  const [pword, setPWord] = useState('');
+
+
+  function handleLoc(event) {
     setLocation(event.target.value);
 
   }
 
-  function handleLon(event){
+  function handleLon(event) {
     setLon(event.target.value);
   }
 
-  function handleLat(event){
+  function handleLat(event) {
     setLat(event.target.value);
 
   }
 
-  function handleUN(event){
+  function handleUN(event) {
     setUName(event.target.value);
   }
 
-  function handlePassw(event){
+  function handlePassw(event) {
     setPWord(event.target.value);
   }
 
-  function handleSubmit(event){
+  function handleSubmit(event) {
 
     postData();
 
     event.preventDefault();
 
-   }
+  }
 
-   async function postData(){
+  async function postData() {
 
-    const response=await fetch(API+'/addLocation',
-      locationPostObject(location,uname,pword,lon,lat));
+    const response = await fetch(API + '/addLocation',
+      locationPostObject(location, uname, pword, lon, lat));
 
 
 
-    if(response.ok){
-      const resVal=await response.json();
+    if (response.ok) {
+      const resVal = await response.json();
 
-      if(resVal===0){
+      if (resVal === 0) {
         alert('Location already exists');
-      }else if(resVal===1){
-        alert(location+' added');
+      } else if (resVal === 1) {
+        alert(location + ' added');
         updateDisplay();
 
-      }else if(resVal===2){
+      } else if (resVal === 2) {
         alert('Incorrect user name or password');
-      }else{
+      } else {
         alert(location + ' added, but did not obtain weather data.')
         updateDisplay();
       }
-    }else{
+    } else {
       alert('Problem connecting');
     }
 
@@ -149,7 +149,7 @@ function LocationForm(props) {
 
 
 
-  function updateDisplay(){
+  function updateDisplay() {
     setLocation('');
     setLon('');
     setLat('');
@@ -160,55 +160,55 @@ function LocationForm(props) {
   }
 
 
-    let text='Add Location';
-    if(props.display){
-      text='Hide';
-    }
+  let text = 'Add Location';
+  if (props.display) {
+    text = 'Hide';
+  }
 
 
 
-    return ( &lt;div id='pLeft'>
+  return (&lt;div id='pLeft'>
 
-          &lt;button data-testid="lf-button" onClick={props.toggleDisplay}>{text}&lt;/button>
+    &lt;button data-testid="lf-button" onClick={props.toggleDisplay}>{text}&lt;/button>
 
-          {props.display&amp;&amp;&lt;form  id='locForm' onSubmit={handleSubmit}>
-              &lt;label>
-                Location name: &lt;input type="text" name="name" value={location} onChange={handleLoc} required  />
-              &lt;/label>
-              &lt;br/>
-              &lt;br/>
-              &lt;label>
-                Longitude: &lt;input type="number" step="any" name="lon" value={lon} onChange={handleLon} required  />
-              &lt;/label>
-              &lt;br/>
-              &lt;br/>
-              &lt;label>
-                Latitude: &lt;input type="number" step="any" name="lat"  value={lat} onChange={handleLat} required  />
-              &lt;/label>
-              &lt;br/>
-              &lt;br/>
-              &lt;label>
-                Username: &lt;input type="text" name="un" onChange={handleUN}  value={uname}  required />
-              &lt;/label>
-              &lt;br/>
-              &lt;br/>
-              &lt;label>
-                Password: &lt;input type="password" name="passwd" onChange={handlePassw}  value={pword} required />
-              &lt;/label>
-              &lt;br/>
-              &lt;br/>
-              &lt;div>
-                  &lt;input type="submit" value="Submit" />
-              &lt;/div>
-            &lt;/form>}
-        &lt;/div>
+    {props.display &amp;&amp; &lt;form id='locForm' onSubmit={handleSubmit}>
+      &lt;label>
+        Location name: &lt;input type="text" name="name" value={location} onChange={handleLoc} required />
+      &lt;/label>
+      &lt;br />
+      &lt;br />
+      &lt;label>
+        Longitude: &lt;input type="number" step="any" name="lon" value={lon} onChange={handleLon} required />
+      &lt;/label>
+      &lt;br />
+      &lt;br />
+      &lt;label>
+        Latitude: &lt;input type="number" step="any" name="lat" value={lat} onChange={handleLat} required />
+      &lt;/label>
+      &lt;br />
+      &lt;br />
+      &lt;label>
+        Username: &lt;input type="text" name="un" onChange={handleUN} value={uname} required />
+      &lt;/label>
+      &lt;br />
+      &lt;br />
+      &lt;label>
+        Password: &lt;input type="password" name="passwd" onChange={handlePassw} value={pword} required />
+      &lt;/label>
+      &lt;br />
+      &lt;br />
+      &lt;div>
+        &lt;input type="submit" value="Submit" />
+      &lt;/div>
+    &lt;/form>}
+  &lt;/div>
 
 
-    );
+  );
 
 }
 
-LocationForm.propTypes ={
+LocationForm.propTypes = {
   /** Determines whether the form for entering location name, longitude, and latitude values is displayed. */
   display: PropTypes.bool.isRequired,
 
@@ -237,7 +237,7 @@ export default LocationForm;
 
 <footer class="footer">
     <div class="content has-text-centered">
-        <p>Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.6.3</a> on Wed Oct 16 2019 15:40:45 GMT+0100 (Irish Standard Time)</p>
+        <p>Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.6.3</a> on Tue Oct 29 2019 12:30:12 GMT+0000 (Greenwich Mean Time)</p>
         <p class="sidebar-created-by">
             <a href="https://github.com/SoftwareBrothers/better-docs" target="_blank">BetterDocs theme</a> provided with <i class="fas fa-heart"></i> by 
             <a href="http://softwarebrothers.co" target="_blank">SoftwareBrothers - JavaScript Development Agency</a>

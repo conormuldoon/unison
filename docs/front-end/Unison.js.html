@@ -66,29 +66,23 @@
         <article>
             <pre class="prettyprint source linenums"><code>
 
-import React, { Component } from 'react';
-
-import './App.css';
-
-import 'react-day-picker/lib/style.css';
-
-import DateSelector from './DateSelector';
-
-import ARLocationComponent from './ARLocationComponent';
-
-import LeafletMap from './LeafletMap';
-import {FORMAT,API} from './Constant';
-import {TODAY,FROM_DATE} from './Util';
 import PropTypes from 'prop-types';
+import React, { Component } from 'react';
+import 'react-day-picker/lib/style.css';
+import { formatDate } from 'react-day-picker/moment';
+import './App.css';
+import ARLocationComponent from './ARLocationComponent';
+import { API, FORMAT } from './Constant';
+import DateSelector from './DateSelector';
+import LeafletMap from './LeafletMap';
+import { fromDate, today } from './Util';
 
-import  {
-  formatDate
-} from 'react-day-picker/moment';
+
 
 let maxLen;
-const WSPACE='\u00a0';
-const varOpt=['Precipitation','Humidity','Wind Direction','Wind Speed','Cloudiness','Cloud Level','Dew Point','Pressure','Temperature'];
-    
+const WSPACE = '\u00a0';
+const varOpt = ['Precipitation', 'Humidity', 'Wind Direction', 'Wind Speed', 'Cloudiness', 'Cloud Level', 'Dew Point', 'Pressure', 'Temperature'];
+
 /**
  * Application component for Unison. Once mounted, it connects to the back-end to receive a list of the locations being tracked.
  * 
@@ -102,18 +96,20 @@ class Unison extends Component {
     super(props);
 
     this.state = {
-      fromDate: FROM_DATE,
-      toDate: TODAY,
+      fromDate: fromDate(),
+      toDate: today(),
       option: undefined,
       marker: undefined,
       clickedLocation: undefined,
-      curVar: 'Precipitation',
+      curVar: varOpt[0],
       curLoc: undefined,
     };
+
+
   }
 
   componentDidMount = () => {
-    this.cancelObtainData=this.obtainData();
+    this.cancelObtainData = this.obtainData();
   }
 
   componentWillUnmount = () => {
@@ -122,41 +118,43 @@ class Unison extends Component {
 
   obtainData = () => {
 
-    let active=true;
+    let active = true;
 
-    new Promise(async () =>{
-      let response = await fetch(API+'/location');
+    async function requestLocation(comp) {
+      let response = await fetch(API + '/location');
 
-      if(response.ok){
+      if (response.ok) {
         let locationArray = await response.json();
 
-        if(active){
-          let n=locationArray.length;
+        if (active) {
+          let n = locationArray.length;
 
-          let newOption=[];
-          let newMarker=[];
+          let newOption = [];
+          let newMarker = [];
 
-          maxLen=0;
-          for(let i=0;i&lt;n;i++){
-            maxLen=Math.max(locationArray[i].name.length)
-
-          }
-          for(let i=0;i&lt;n;i++){
-            newOption.push(this.addPadding(locationArray[i].name));
-            let pos=[locationArray[i].geom.coordinates[1],locationArray[i].geom.coordinates[0]];
-
-            newMarker.push({name:locationArray[i].name,position:pos});
-
+          maxLen = 0;
+          for (let i = 0; i &lt; n; i++) {
+            maxLen = Math.max(locationArray[i].name.length)
 
           }
-          if(n>0){
-            this.setState({option:newOption,marker:newMarker,curLoc: this.addPadding(locationArray[0].name) });
-          }else{
-            this.setState({curLoc: undefined,option:undefined,marker:undefined});
+          for (let i = 0; i &lt; n; i++) {
+            newOption.push(comp.addPadding(locationArray[i].name));
+            let pos = [locationArray[i].geom.coordinates[1], locationArray[i].geom.coordinates[0]];
+
+            newMarker.push({ name: locationArray[i].name, position: pos });
+
+
+          }
+          if (n > 0) {
+            comp.setState({ option: newOption, marker: newMarker, curLoc: comp.addPadding(locationArray[0].name) });
+          } else {
+            comp.setState({ curLoc: undefined, option: undefined, marker: undefined });
           }
         }
       }
-    });
+    }
+
+    requestLocation(this);
 
     const cancel = () => active = false;
     return cancel;
@@ -165,59 +163,59 @@ class Unison extends Component {
 
   markerClicked = (location) => {
 
-    let newLoc=this.addPadding(location,maxLen);
-    this.setState({clickedLocation:newLoc,curLoc:newLoc});
+    let newLoc = this.addPadding(location, maxLen);
+    this.setState({ clickedLocation: newLoc, curLoc: newLoc });
   }
 
-  _onLocationSelect = (event) =>{
+  _onLocationSelect = (event) => {
 
-    this.setState({curLoc: event.target.value});
+    this.setState({ curLoc: event.target.value });
   }
 
-  _onVarSelect = (event) =>{
-    this.setState({curVar: event.target.value});
+  _onVarSelect = (event) => {
+    this.setState({ curVar: event.target.value });
   }
 
-  removePadding = (location) =>{
+  removePadding = (location) => {
 
-    if(location!==undefined){
+    if (location !== undefined) {
 
-      const n=location.length;
-      for(let i=0;i&lt;n;i++){
-        if(location.charAt(i)===WSPACE){
-          if(i===n-1||location.charAt(i+1)===WSPACE){
-              return location.substring(0,i);
+      const n = location.length;
+      for (let i = 0; i &lt; n; i++) {
+        if (location.charAt(i) === WSPACE) {
+          if (i === n - 1 || location.charAt(i + 1) === WSPACE) {
+            return location.substring(0, i);
           }
         }
 
       }
-      
+
     }
     return location;
   }
 
-  addPadding = (location) =>{
-    let num=maxLen-location.length;
-    let newLoc=location;
+  addPadding = (location) => {
+    let num = maxLen - location.length;
+    let newLoc = location;
 
-    for(let i=0;i&lt;num;i++){
-      newLoc=newLoc.concat(WSPACE);
+    for (let i = 0; i &lt; num; i++) {
+      newLoc = newLoc.concat(WSPACE);
     }
 
     return newLoc;
   }
 
   handleStartChange = (selectedDate) => {
-    this.setState({ fromDate: formatDate(selectedDate,FORMAT) });
+    this.setState({ fromDate: formatDate(selectedDate, FORMAT) });
   }
 
   handleEndChange = (selectedDate) => {
-    this.setState({ toDate: formatDate(selectedDate,FORMAT) });
+    this.setState({ toDate: formatDate(selectedDate, FORMAT) });
   }
 
 
-  test = (event) =>{
-    alert('hello '+event.target.value);
+  test = (event) => {
+    alert('hello ' + event.target.value);
   }
 
   render() {
@@ -228,7 +226,7 @@ class Unison extends Component {
 
       &lt;div id="mapdiv">
 
-      &lt;div id="logos">
+        &lt;div id="logos">
 
           &lt;center>
             &lt;img id="logoitem" alt="" src={this.props.logoLeft} />
@@ -237,73 +235,73 @@ class Unison extends Component {
             &lt;img id="logoitem" alt="" src={this.props.logoRight} />
           &lt;/center>
 
-      &lt;/div>
+        &lt;/div>
 
-      &lt;LeafletMap marker={this.state.marker} curVar={this.state.curVar} curLoc={this.state.curLoc} 
-          markerCallback={this.markerClicked} fromDate={this.state.fromDate} toDate={this.state.toDate} 
+        &lt;LeafletMap marker={this.state.marker} curVar={this.state.curVar} curLoc={this.state.curLoc}
+          markerCallback={this.markerClicked} fromDate={this.state.fromDate} toDate={this.state.toDate}
           mapCentre={this.props.mapCentre}
-          
-          />
-      &lt;div id="selectdiv" >
 
-        &lt;center>
+        />
+        &lt;div id="selectdiv" >
 
-          &lt;div>
-            &lt;div id='variDD' >
+          &lt;center>
+
+            &lt;div>
+              &lt;div id='variDD' >
 
                 &lt;select disabled={!this.state.curLoc} onChange={this._onVarSelect}>
 
-                    {varOpt.map((opt) => &lt;option key={opt} value={opt}>{opt}&lt;/option>)}
+                  {varOpt.map((opt) => &lt;option key={opt} value={opt}>{opt}&lt;/option>)}
 
                 &lt;/select>
 
-            &lt;/div>
+              &lt;/div>
 
-            &lt;div className='marginItem' >
+              &lt;div className='marginItem' >
 
                 &lt;select disabled={!this.state.curLoc} onChange={this._onLocationSelect} defaultValue="Location" value={this.state.curLoc}>
-                    {!this.state.option&amp;&amp;&lt;option key="Location" value="Location" >Location&lt;/option>}
-                    {this.state.option&amp;&amp;this.state.option.map((opt) => &lt;option key={opt} value={opt}>{opt}&lt;/option>)}
+                  {!this.state.option &amp;&amp; &lt;option key="Location" value="Location" >Location&lt;/option>}
+                  {this.state.option &amp;&amp; this.state.option.map((opt) => &lt;option key={opt} value={opt}>{opt}&lt;/option>)}
 
                 &lt;/select>
 
-              
-            &lt;/div>
+
+              &lt;/div>
 
 
-            &lt;div className='pLeft' >
-              &lt;DateSelector 
-                label="From date" dateValue={this.state.fromDate}
-                handleDayChange={this.handleStartChange}
-              />
-            &lt;/div>
+              &lt;div className='pLeft' >
+                &lt;DateSelector
+                  label="From date" dateValue={this.state.fromDate}
+                  handleDayChange={this.handleStartChange}
+                />
+              &lt;/div>
 
-            &lt;div className='pLeft' >
-              &lt;DateSelector
-                label="To date" dateValue={this.state.toDate}
-                handleDayChange={this.handleEndChange}
-              />
+              &lt;div className='pLeft' >
+                &lt;DateSelector
+                  label="To date" dateValue={this.state.toDate}
+                  handleDayChange={this.handleEndChange}
+                />
 
-            &lt;/div>
-
-          
+              &lt;/div>
 
 
 
-            &lt;a className='pLeft'  href={API+'/csv'+this.state.curVar.replace(/ /g,'')+'?location='+this.removePadding(this.state.curLoc)+'&amp;fromDate='+this.state.fromDate+'&amp;toDate='+this.state.toDate}>
 
-              &lt;button disabled={!this.state.curLoc} >
-                CSV
+
+              &lt;a className='pLeft' href={API + '/csv' + this.state.curVar.replace(/ /g, '') + '?location=' + this.removePadding(this.state.curLoc) + '&amp;fromDate=' + this.state.fromDate + '&amp;toDate=' + this.state.toDate}>
+
+                &lt;button disabled={!this.state.curLoc} >
+                  CSV
               &lt;/button>
 
-            &lt;/a>
-          &lt;/div>
+              &lt;/a>
+            &lt;/div>
 
-          &lt;ARLocationComponent obtainData={this.obtainData} location={this.removePadding(this.state.curLoc)}/>
+            &lt;ARLocationComponent obtainData={this.obtainData} location={this.removePadding(this.state.curLoc)} />
 
-        &lt;/center>
+          &lt;/center>
 
-      &lt;/div>
+        &lt;/div>
 
 
 
@@ -312,10 +310,10 @@ class Unison extends Component {
   }
 }
 
-Unison.propTypes ={
+Unison.propTypes = {
 
-   /** The latitude/longitude coordinates for the centre of the map. */
-   mapCentre: PropTypes.array.isRequired,
+  /** The latitude/longitude coordinates for the centre of the map. */
+  mapCentre: PropTypes.array.isRequired,
 
   /** A logo displayed at the bottom of the screen. It will be displayed to the left
    * if the logoRight prop is defined.
@@ -344,7 +342,7 @@ export default Unison;
 
 <footer class="footer">
     <div class="content has-text-centered">
-        <p>Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.6.3</a> on Wed Oct 16 2019 15:40:45 GMT+0100 (Irish Standard Time)</p>
+        <p>Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.6.3</a> on Tue Oct 29 2019 12:30:12 GMT+0000 (Greenwich Mean Time)</p>
         <p class="sidebar-created-by">
             <a href="https://github.com/SoftwareBrothers/better-docs" target="_blank">BetterDocs theme</a> provided with <i class="fas fa-heart"></i> by 
             <a href="http://softwarebrothers.co" target="_blank">SoftwareBrothers - JavaScript Development Agency</a>
