@@ -5,6 +5,7 @@ module.exports = {
     'jest': true,
     'node': true,
   },
+  //'parser': 'babel-eslint',
   'extends': [
     'eslint:recommended',
     'plugin:react/recommended',
@@ -12,7 +13,7 @@ module.exports = {
   'globals': {
     'Atomics': 'readonly',
     'SharedArrayBuffer': 'readonly',
-    
+
   },
   'parserOptions': {
     'ecmaFeatures': {
@@ -24,6 +25,12 @@ module.exports = {
   'plugins': [
     'react',
   ],
+  'settings': {
+    'react': {
+
+      'version': 'detect',
+    }
+  },
   'rules': {
   },
 };

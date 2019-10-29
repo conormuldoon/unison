@@ -30,8 +30,7 @@
     "build": "react-scripts build",
     "test": "react-scripts test --env=jsdom",
     "eject": "react-scripts eject",
-    "docs": "jsdoc -c ./jsdoc.json",
-    "lint": "eslint src/**/*.js"
+    "docs": "jsdoc -c ./jsdoc.json"
   },
   "homepage": "/unison",
   "devDependencies": {
