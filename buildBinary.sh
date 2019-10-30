@@ -2,7 +2,7 @@
 cd front-end
 yarn install
 yarn build
-rm -r ../back-end/src/main/resources/public/unison/*
+rm -r ../back-end/src/main/resources/public/*
 cp -r build/* ../back-end/src/main/resources/public
 cd ../back-end
 ./mvnw clean compile package
