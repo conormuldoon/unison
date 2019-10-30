@@ -9,9 +9,6 @@ import static org.mockito.Mockito.when;
 
 import java.io.IOException;
 import java.text.SimpleDateFormat;
-import java.time.Instant;
-import java.util.Calendar;
-import java.util.Date;
 import java.util.Optional;
 import java.util.TimeZone;
 import java.util.logging.Logger;
@@ -30,15 +27,8 @@ import eu.acclimatize.unison.location.LocationDetails;
 
 public class HarvesterTests {
 
-	private Calendar testFileTime(String s) {
-		Instant instant = Instant.parse(s);
-		Date date = Date.from(instant);
-		Calendar cal = Calendar.getInstance();
-		cal.setTime(date);
-		return cal;
-	}
 
-	private void testParse(String fileName, Calendar cal, String timeZone)
+	private void testParse(String fileName, String timeZone)
 			throws ParserConfigurationException, SAXException, IOException {
 
 		HourlyPrecipitationRepository pr = mock(HourlyPrecipitationRepository.class);
@@ -61,7 +51,7 @@ public class HarvesterTests {
 
 		when(location.requestData(any())).thenReturn(oDoc);
 
-		Assert.assertTrue(hs.processLocation(location, cal));
+		Assert.assertTrue(hs.processLocation(location));
 		verify(pr, times(1)).saveAll(anyCollection());
 		verify(wr, times(1)).saveAll(anyCollection());
 
@@ -70,18 +60,18 @@ public class HarvesterTests {
 	// XML data obtained using the Met Eireann API
 	@Test
 	public void testConvertorIrl() throws ParserConfigurationException, SAXException, IOException {
-		testParse("/TestIreland.xml", testFileTime("2018-05-03T14:00:00Z"), "Europe/Dublin");
+		testParse("/TestIreland.xml",  "Europe/Dublin");
 	}
 
 	// XML data obtained using the Met Eireann API
 	@Test
 	public void testConvertorUK() throws ParserConfigurationException, SAXException, IOException {
-		testParse("/TestUK.xml", testFileTime("2019-02-28T18:00:00Z"), "Europe/Dublin");
+		testParse("/TestUK.xml",  "Europe/Dublin");
 	}
 
 	// XML data obtained using the Norwegian Meteorological Institute API
 	@Test
 	public void testConvertorNor() throws ParserConfigurationException, SAXException, IOException {
-		testParse("/TestNorway.xml", testFileTime("2019-04-26T18:00:00Z"), "Europe/Oslo");
+		testParse("/TestNorway.xml", "Europe/Oslo");
 	}
 }

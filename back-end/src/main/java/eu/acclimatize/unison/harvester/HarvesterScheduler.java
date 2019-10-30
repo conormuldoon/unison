@@ -1,7 +1,5 @@
 package eu.acclimatize.unison.harvester;
 
-import java.util.Calendar;
-
 import javax.annotation.PostConstruct;
 
 import org.springframework.scheduling.annotation.Scheduled;
@@ -52,7 +50,7 @@ public class HarvesterScheduler {
 	@PostConstruct
 	public void harvest() throws InterruptedException {
 
-		harvesterService.harvestData(Calendar.getInstance());
+		harvesterService.harvestData();
 
 	}
 

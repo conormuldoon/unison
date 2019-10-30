@@ -1,7 +1,5 @@
 package eu.acclimatize.unison.location;
 
-import java.util.Calendar;
-
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -84,7 +82,7 @@ public class AddLocationController {
 				store.save(longitude, latitude, locationDetails);
 
 				// Request data
-				if (harvesterService.processLocation(locationDetails, Calendar.getInstance())) {
+				if (harvesterService.processLocation(locationDetails)) {
 					return ResponseConstant.SUCCESS;
 				} else {
 					return ResponseConstant.DATA_NOT_RECIEVED;

@@ -1,7 +1,5 @@
 package eu.acclimatize.unison;
 
-import java.util.Calendar;
-
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
@@ -84,7 +82,7 @@ public class LocationTests {
 
 		CoordinatesStore store = Mockito.mock(CoordinatesStore.class);
 
-		Mockito.when(hs.processLocation(Mockito.any(LocationDetails.class), Mockito.any(Calendar.class)))
+		Mockito.when(hs.processLocation(Mockito.any(LocationDetails.class)))
 				.thenReturn(true);
 
 		AddLocationController controller = new AddLocationController(locationRepository, store, userService, hs, URI);

@@ -3,11 +3,8 @@ package eu.acclimatize.unison.harvester;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Calendar;
 import java.util.Date;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 import java.util.Optional;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -40,8 +37,6 @@ import eu.acclimatize.unison.location.LocationRepository;
 public class HarvesterService {
 
 	private static final int SLEEP_TIME = 60000;
-
-	private static final int NUM_HOUR = 6; // The Met Eireann model updates every 6 hours.
 
 	private static final String VALUE = "value";
 	private static final String PERCENT = "percent";
@@ -95,20 +90,15 @@ public class HarvesterService {
 	 * Requests and data stores from a HARMONIE-AROME API for locations in the
 	 * database.
 	 * 
-	 * @param calendar Used to determine the time at which to store data.
 	 * @throws InterruptedException The service will sleep for a second if it is
 	 *                              having problem obtaining data from the API. The
 	 *                              exception will be thrown if the service is
 	 *                              interrupted during this time.
 	 */
 	@Transactional
-	public synchronized void harvestData(Calendar calendar) throws InterruptedException {
+	public synchronized void harvestData() throws InterruptedException {
 
-		Iterable<Date> modelTime = createModelTime(calendar);
-
-		harvestData(locationRepository.dataRequestRequired(), modelTime);
-
-		harvestData(locationRepository.empty(), modelTime);
+		harvestData(locationRepository.findAll());
 
 		store(precipitation, weather);
 		precipitation.clear();
@@ -116,13 +106,12 @@ public class HarvesterService {
 
 	}
 
-	private void harvestData(Iterable<? extends LocationDetails> iterable, Iterable<Date> modelTime)
-			throws InterruptedException {
+	private void harvestData(Iterable<? extends LocationDetails> iterable) throws InterruptedException {
 		for (LocationDetails loc : iterable) {
 
 			// If data is not received from the API, sleeps and then attempts to connect
 			// again.
-			while (!processLocation(loc, precipitation, weather, modelTime)) {
+			while (!processLocation(loc, precipitation, weather)) {
 				Thread.sleep(SLEEP_TIME);
 			}
 
@@ -130,53 +119,17 @@ public class HarvesterService {
 
 	}
 
-	private Iterable<Date> createModelTime(Calendar calendar) {
-
-		// Required in case the harvest was either invoked at start time, rather than
-		// scheduled, or triggered by a location being added.
-		int hr = calendar.get(Calendar.HOUR_OF_DAY);
-		int md = hr % NUM_HOUR;
-		calendar.add(Calendar.HOUR_OF_DAY, -md);
-
-		// On the hour
-		calendar.set(Calendar.MINUTE, 0);
-		calendar.set(Calendar.SECOND, 0);
-		calendar.set(Calendar.MILLISECOND, 0);
-
-		List<Date> list = new ArrayList<>();
-		list.add(calendar.getTime());
-
-		for (int i = 1; i < NUM_HOUR; i++) {
-			calendar.add(Calendar.HOUR_OF_DAY, 1);
-			list.add(calendar.getTime());
-		}
-		return list;
-	}
-
-	private Map<Date, ItemKey> createKeyMap(Iterable<Date> modelTime, LocationDetails location) {
-		Map<Date, ItemKey> map = new HashMap<>();
-
-		for (Date d : modelTime) {
-
-			ItemKey ik = new ItemKey(d, location);
-			map.put(d, ik);
-		}
-		return map;
-
-	}
-
 	/**
 	 * Requests and stores data from a HARMONIE-AROME API for a given location.
 	 * 
 	 * @param location The location to obtain data for.
-	 * @param calendar Used to determine the times to store data for.
 	 * @return True if the data was received and stored, false otherwise.
 	 */
-	public synchronized boolean processLocation(LocationDetails location, Calendar calendar) {
+	public synchronized boolean processLocation(LocationDetails location) {
 
 		List<HourlyPrecipitation> hourlyPrecipitation = new ArrayList<>();
 		List<HourlyWeather> hourlyWeather = new ArrayList<>();
-		if (processLocation(location, hourlyPrecipitation, hourlyWeather, createModelTime(calendar))) {
+		if (processLocation(location, hourlyPrecipitation, hourlyWeather)) {
 			store(hourlyPrecipitation, hourlyWeather);
 			return true;
 		} else {
@@ -185,20 +138,20 @@ public class HarvesterService {
 	}
 
 	private boolean processLocation(LocationDetails location, List<HourlyPrecipitation> hPrecipitation,
-			List<HourlyWeather> hWeather, Iterable<Date> dateIterable) {
+			List<HourlyWeather> hWeather) {
 		Optional<Document> oDoc = location.requestData(drs);
 
 		if (oDoc.isPresent()) {
-			Map<Date, ItemKey> keyMap = createKeyMap(dateIterable, location);
-			processDocument(oDoc.get(), keyMap, hPrecipitation, hWeather);
+
+			processDocument(oDoc.get(), hPrecipitation, hWeather, location);
 			return true;
 		} else {
 			return false;
 		}
 	}
 
-	private void processDocument(Document doc, Map<Date, ItemKey> keyMap, List<HourlyPrecipitation> hPrecipitation,
-			List<HourlyWeather> hWeather) {
+	private void processDocument(Document doc, List<HourlyPrecipitation> hPrecipitation, List<HourlyWeather> hWeather,
+			LocationDetails location) {
 
 		doc.getDocumentElement().normalize();
 
@@ -214,25 +167,23 @@ public class HarvesterService {
 			try {
 				ft = dateFormat.parse(from);
 
-				if (keyMap.containsKey(ft)) {
+				ItemKey ik = new ItemKey(ft, location);
 
-					ItemKey ik = keyMap.get(ft);
-					Element loc = (Element) element.getElementsByTagName("location").item(0);
-					NodeList cn = loc.getElementsByTagName("precipitation");
+				Element loc = (Element) element.getElementsByTagName("location").item(0);
+				NodeList cn = loc.getElementsByTagName("precipitation");
 
-					int m = cn.getLength();
+				int m = cn.getLength();
 
-					if (m == 1) {
+				if (m == 1) {
 
-						addPrecipitation(cn, ik, hPrecipitation);
+					addPrecipitation(cn, ik, hPrecipitation);
 
-					} else {
+				} else {
 
-						addWeather(loc.getChildNodes(), ik, hWeather);
-
-					}
+					addWeather(loc.getChildNodes(), ik, hWeather);
 
 				}
+
 			} catch (ParseException e) {
 				logger.log(Level.SEVERE, e.getMessage());
 
@@ -318,7 +269,7 @@ public class HarvesterService {
 			} else if (nn.equals("fog")) {
 				String percent = textContent(nnm, PERCENT);
 				f = Double.parseDouble(percent);
-				
+
 			} else if (!nn.equals("#text")) {
 
 				logger.log(Level.WARNING, () -> "Unknown tag in data converter. Tag name: " + nn);
@@ -332,7 +283,6 @@ public class HarvesterService {
 		hWeather.add(new HourlyWeather(ik, weatherValue));
 
 	}
-
 
 	private String textContent(NamedNodeMap nnm, String attName) {
 		return nnm.getNamedItem(attName).getTextContent();
