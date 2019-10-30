@@ -33,7 +33,7 @@
     "docs": "jsdoc -c ./jsdoc.json",
     "lint": "eslint src/**/*.js"
   },
-  "homepage": "/unison",
+  "homepage": ".",
   "devDependencies": {
     "@babel/core": "^7.0.0-0",
     "@babel/plugin-proposal-class-properties": "^7.5.5",
