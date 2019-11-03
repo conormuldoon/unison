@@ -92,9 +92,8 @@ public class UserConsole {
 	 * 
 	 * @param args The arguments are not used.
 	 * 
-	 * @throws IOException Thrown if there is a problem closing a reader for System.in.
 	 */
-	public static void main(String[] args) throws IOException {
+	public static void main(String[] args) {
 
 		Console console = System.console();
 		PrintWriter pw = new PrintWriter(System.out, true);
@@ -105,7 +104,11 @@ public class UserConsole {
 		uc.execute(Logger.getLogger(UserConsole.class.getName()));
 		pw.close();
 
-		br.close();
+		try {
+			br.close();
+		} catch (IOException e) {
+			System.out.println(e.getMessage());
+		}
 
 	}
 

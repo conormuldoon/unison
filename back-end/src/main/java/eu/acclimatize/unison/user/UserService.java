@@ -1,7 +1,6 @@
 package eu.acclimatize.unison.user;
 
 import java.io.BufferedReader;
-import java.io.Console;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.PrintWriter;
@@ -32,6 +31,8 @@ public class UserService {
 
 	private BCryptPasswordEncoder passwordEncoder;
 
+	private Boolean consolePresent;
+
 	/**
 	 * Creates an instance of UserService.
 	 * 
@@ -39,21 +40,24 @@ public class UserService {
 	 * @param logger          Used to log events when the user consoles is not
 	 *                        present, such as in testing.
 	 * @param passwordEncoder Used to encrypt and match user passwords.
+	 * @param consolePresent  Used to determine whether to request initial user data
+	 *                        from a {@link CredentialsRequester}.
 	 */
-	public UserService(UserRepository userRepository, Logger logger, BCryptPasswordEncoder passwordEncoder) {
+	public UserService(UserRepository userRepository, Logger logger, BCryptPasswordEncoder passwordEncoder,
+			Boolean consolePresent) {
 		this.userRepository = userRepository;
 		this.passwordEncoder = passwordEncoder;
 		this.logger = logger;
+		this.consolePresent = consolePresent;
 	}
 
 	@PostConstruct
-	private void initialUser() {
+	public void initialUser() {
 
 		if (userRepository.count() == 0) {
 
-			Console console = System.console();
-			if (console != null) {
-				
+			if (consolePresent) {
+
 				PrintWriter pw = new PrintWriter(System.out, true);
 				BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
 
@@ -73,7 +77,7 @@ public class UserService {
 				logger.log(Level.INFO, "No active console available.");
 			}
 
-		} 
+		}
 
 	}
 

@@ -14,6 +14,9 @@ import org.mockito.Mockito;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
 import eu.acclimatize.unison.user.CredentialsRequester;
+import eu.acclimatize.unison.user.UserInformation;
+import eu.acclimatize.unison.user.UserRepository;
+import eu.acclimatize.unison.user.UserService;
 
 /**
  * Unit tests for the user package.
@@ -23,14 +26,15 @@ public class UserTests {
 	/**
 	 * Tests that the password encoder is invoked by the credentials requester.
 	 * 
-	 * @throws IOException Thrown if there is a problem closing a buffered reader or requesting user information.
+	 * @throws IOException Thrown if there is a problem closing a buffered reader or
+	 *                     requesting user information.
 	 */
 	@Test
-	public void testRequestData() throws IOException{
+	public void testRequestData() throws IOException {
 
 		BCryptPasswordEncoder mockEncoder = Mockito.mock(BCryptPasswordEncoder.class);
 
-		ByteArrayInputStream bais = new ByteArrayInputStream("conor\ny\n".getBytes());
+		ByteArrayInputStream bais = mockInputStream();
 		BufferedReader br = new BufferedReader(new InputStreamReader(bais));
 		PrintWriter mockWriter = Mockito.mock(PrintWriter.class);
 		CredentialsRequester requester = new CredentialsRequester(mockWriter, br, mockEncoder, new SecureRandom());
@@ -39,6 +43,25 @@ public class UserTests {
 		br.close();
 
 		Mockito.verify(mockEncoder, Mockito.times(1)).encode(Mockito.anyString());
+
+	}
+
+	private ByteArrayInputStream mockInputStream() {
+		return new ByteArrayInputStream("conor\ny\n".getBytes());
+
+	}
+
+	/**
+	 * Tests that initial user information is saved.
+	 */
+	@Test
+	public void testInitialUser() {
+		UserRepository userRepository = Mockito.mock(UserRepository.class);
+		BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
+		UserService userService = new UserService(userRepository, null, passwordEncoder, true);
+		System.setIn(mockInputStream());
+		userService.initialUser();
+		Mockito.verify(userRepository, Mockito.times(1)).save(Mockito.any(UserInformation.class));
 
 	}
 

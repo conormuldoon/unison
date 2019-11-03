@@ -19,7 +19,6 @@ import org.springframework.context.annotation.ComponentScan.Filter;
 import org.springframework.context.annotation.FilterType;
 import org.springframework.context.annotation.Scope;
 import org.springframework.scheduling.annotation.EnableScheduling;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
 /**
  * 
@@ -78,15 +77,6 @@ public class UnisonServerApplication {
 		SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd'T'KK:mm:ss'Z'");
 		dateFormat.setTimeZone(TimeZone.getTimeZone(timeZone));
 		return dateFormat;
-	}
-	/**
-	 * Creates an encoder for encrypting and matching user passwords.
-	 * 
-	 * @return The password encoder created.
-	 */
-	@Bean
-	public BCryptPasswordEncoder passwordEncoder() {
-		return new BCryptPasswordEncoder();
 	}
 	
 	
