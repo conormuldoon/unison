@@ -51,6 +51,11 @@ public class UserService {
 		this.consolePresent = consolePresent;
 	}
 
+	/**
+	 * Requests user information if there are no users stored in the data base, the server
+	 * is running in interactive mode, and the system console is available. 
+	 * 
+	 */
 	@PostConstruct
 	public void initialUser() {
 

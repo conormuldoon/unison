@@ -31,52 +31,55 @@ public class UserConsole {
 
 	public static final String CONFIG = "userinformation.cfg.xml";
 
-	CredentialsRequester credentialsRequester;
+	private CredentialsRequester credentialsRequester;
+
+	private Logger logger;
+
+	private Configuration configuration;
 
 	/**
 	 * Creates and instance of UserConsole.
 	 * 
 	 * @param credentialsRequester Used to request and read user names and
 	 *                             passwords.
+	 * @param configuration        Hibernate configuration used for building a
+	 *                             session factory.
+	 * @param logger               Used for logging errors.
 	 * 
 	 */
-	public UserConsole(CredentialsRequester credentialsRequester) {
+	public UserConsole(CredentialsRequester credentialsRequester, Configuration configuration, Logger logger) {
 
 		this.credentialsRequester = credentialsRequester;
+		this.logger = logger;
+		this.configuration = configuration;
 
 	}
-
-	private void hideInfoLogs() {
-
-		System.setProperty("org.jboss.logging.provider", "jdk");
-		Logger loggerHibernate = Logger.getLogger("org.hibernate");
-		loggerHibernate.setLevel(Level.WARNING);
-
-		ch.qos.logback.classic.Logger mchangeLogger = (ch.qos.logback.classic.Logger) LoggerFactory
-				.getLogger("com.mchange.v2");
-		mchangeLogger.setLevel(ch.qos.logback.classic.Level.WARN);
-	}
-
-	private void execute(Logger logger) {
-		hideInfoLogs();
-		Configuration cfg = new Configuration();
+	
+	/**
+	 * Loads the configuration properties and requests information from the user.
+	 */
+	public void execute() {
 
 		Properties properties = new Properties();
 		try {
 			properties.load(UserConsole.class.getResourceAsStream(Constant.PROPERTIES_FILE));
-			cfg.configure(CONFIG);
+			configuration.configure(CONFIG);
 
 			String driverClass = properties.getProperty("spring.datasource.driverClassName");
-			cfg.setProperty("hibernate.connection.driver_class", driverClass);
-			cfg.setProperty("hibernate.dialect", properties.getProperty("spring.jpa.properties.hibernate.dialect"));
-			cfg.setProperty("hibernate.connection.url", properties.getProperty("spring.datasource.url"));
-			cfg.setProperty("hibernate.connection.username", properties.getProperty("spring.datasource.username"));
-			cfg.setProperty("hibernate.connection.password", properties.getProperty("spring.datasource.password"));
-			cfg.setProperty("hibernate.hbm2ddl.auto", properties.getProperty("spring.jpa.hibernate.ddl-auto"));
+			configuration.setProperty("hibernate.connection.driver_class", driverClass);
+			configuration.setProperty("hibernate.dialect",
+					properties.getProperty("spring.jpa.properties.hibernate.dialect"));
+			configuration.setProperty("hibernate.connection.url", properties.getProperty("spring.datasource.url"));
+			configuration.setProperty("hibernate.connection.username",
+					properties.getProperty("spring.datasource.username"));
+			configuration.setProperty("hibernate.connection.password",
+					properties.getProperty("spring.datasource.password"));
+			configuration.setProperty("hibernate.hbm2ddl.auto",
+					properties.getProperty("spring.jpa.hibernate.ddl-auto"));
 
 			UserInformation userInformation = credentialsRequester.requestUserInformation();
 
-			storeUser(userInformation, cfg, logger);
+			storeUser(userInformation, logger);
 
 		} catch (IOException e) {
 
@@ -98,10 +101,23 @@ public class UserConsole {
 		Console console = System.console();
 		PrintWriter pw = new PrintWriter(System.out, true);
 		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
-		UserConsole uc = new UserConsole(
-				new CredentialsRequester(pw, br, new BCryptPasswordEncoder(), new SecureRandom()));
+		Logger logger = Logger.getLogger(UserConsole.class.getName());
+		CredentialsRequester credentialsRequester = new CredentialsRequester(pw, br, new BCryptPasswordEncoder(),
+				new SecureRandom());
+
+		// Hiding info logs
+		System.setProperty("org.jboss.logging.provider", "jdk");
+		Logger loggerHibernate = Logger.getLogger("org.hibernate");
+		loggerHibernate.setLevel(Level.WARNING);
+
+		ch.qos.logback.classic.Logger mchangeLogger = (ch.qos.logback.classic.Logger) LoggerFactory
+				.getLogger("com.mchange.v2");
+		mchangeLogger.setLevel(ch.qos.logback.classic.Level.WARN);
+
+		UserConsole uc = new UserConsole(credentialsRequester, new Configuration(), logger);
 		console.printf("Starting\n");
-		uc.execute(Logger.getLogger(UserConsole.class.getName()));
+		
+		uc.execute();
 		pw.close();
 
 		try {
@@ -112,7 +128,7 @@ public class UserConsole {
 
 	}
 
-	private void storeUser(UserInformation user, Configuration configuration, Logger logger) {
+	private void storeUser(UserInformation user, Logger logger) {
 		SessionFactory factory = null;
 		Session session = null;
 		try {

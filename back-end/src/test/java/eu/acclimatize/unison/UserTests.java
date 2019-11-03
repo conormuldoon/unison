@@ -9,11 +9,16 @@ import java.io.InputStreamReader;
 import java.io.PrintWriter;
 import java.security.SecureRandom;
 
+import org.hibernate.Session;
+import org.hibernate.SessionFactory;
+import org.hibernate.Transaction;
+import org.hibernate.cfg.Configuration;
 import org.junit.Test;
 import org.mockito.Mockito;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
 import eu.acclimatize.unison.user.CredentialsRequester;
+import eu.acclimatize.unison.user.UserConsole;
 import eu.acclimatize.unison.user.UserInformation;
 import eu.acclimatize.unison.user.UserRepository;
 import eu.acclimatize.unison.user.UserService;
@@ -38,7 +43,6 @@ public class UserTests {
 		BufferedReader br = new BufferedReader(new InputStreamReader(bais));
 		PrintWriter mockWriter = Mockito.mock(PrintWriter.class);
 		CredentialsRequester requester = new CredentialsRequester(mockWriter, br, mockEncoder, new SecureRandom());
-
 		requester.requestUserInformation();
 		br.close();
 
@@ -76,6 +80,34 @@ public class UserTests {
 		String r1 = requester.randomPassword();
 
 		assertNotSame(r0, r1);
+	}
+
+	/**
+	 * Tests that user data is committed using a transaction.
+	 * 
+	 * @throws IOException Thrown if there is a problem closing a buffered reader or
+	 *                     requesting user information.
+	 */
+	@Test
+	public void testUserConsole() throws IOException {
+		Configuration configuration = Mockito.mock(Configuration.class);
+		SessionFactory factory = Mockito.mock(SessionFactory.class);
+		Mockito.when(configuration.buildSessionFactory()).thenReturn(factory);
+		Session session = Mockito.mock(Session.class);
+		Mockito.when(factory.openSession()).thenReturn(session);
+		Transaction transaction = Mockito.mock(Transaction.class);
+		Mockito.when(session.getTransaction()).thenReturn(transaction);
+
+		BCryptPasswordEncoder mockEncoder = Mockito.mock(BCryptPasswordEncoder.class);
+		ByteArrayInputStream bais = mockInputStream();
+		BufferedReader br = new BufferedReader(new InputStreamReader(bais));
+		PrintWriter mockWriter = Mockito.mock(PrintWriter.class);
+		CredentialsRequester requester = new CredentialsRequester(mockWriter, br, mockEncoder, new SecureRandom());
+		UserConsole userConsole = new UserConsole(requester, configuration, null);
+		userConsole.execute();
+		br.close();
+
+		Mockito.verify(transaction, Mockito.times(1)).commit();
 	}
 
 }
