@@ -101,15 +101,14 @@ public class UserConsole {
 	}
 
 	/**
-	 * Creates and executes a UserConsole using the system console and a bcrypt
-	 * encoder.
+	 * Creates a {@link CredentialsRequester} to request credentials from a user
+	 * and stores received data using Hibernate.
 	 * 
 	 * @param args The arguments are not used.
 	 * 
 	 */
 	public static void main(String[] args) {
 
-		Console console = System.console();
 		PrintWriter pw = new PrintWriter(System.out, true);
 		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
 		Logger logger = Logger.getLogger(UserConsole.class.getName());
@@ -117,7 +116,7 @@ public class UserConsole {
 				new SecureRandom());
 
 		UserConsole uc = new UserConsole(credentialsRequester, logger);
-		console.printf("Starting\n");
+		System.out.println("Starting");
 
 		uc.hideInfoLogs();
 		uc.execute(new Configuration());
