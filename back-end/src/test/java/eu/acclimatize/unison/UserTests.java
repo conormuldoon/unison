@@ -103,8 +103,9 @@ public class UserTests {
 		BufferedReader br = new BufferedReader(new InputStreamReader(bais));
 		PrintWriter mockWriter = Mockito.mock(PrintWriter.class);
 		CredentialsRequester requester = new CredentialsRequester(mockWriter, br, mockEncoder, new SecureRandom());
-		UserConsole userConsole = new UserConsole(requester, configuration, null);
-		userConsole.execute();
+		UserConsole userConsole = new UserConsole(requester, null);
+		userConsole.hideInfoLogs();
+		userConsole.execute(configuration);
 		br.close();
 
 		Mockito.verify(transaction, Mockito.times(1)).commit();

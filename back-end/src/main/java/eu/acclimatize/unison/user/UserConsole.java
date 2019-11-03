@@ -35,30 +35,41 @@ public class UserConsole {
 
 	private Logger logger;
 
-	private Configuration configuration;
-
 	/**
 	 * Creates and instance of UserConsole.
 	 * 
 	 * @param credentialsRequester Used to request and read user names and
 	 *                             passwords.
-	 * @param configuration        Hibernate configuration used for building a
-	 *                             session factory.
 	 * @param logger               Used for logging errors.
 	 * 
 	 */
-	public UserConsole(CredentialsRequester credentialsRequester, Configuration configuration, Logger logger) {
+	public UserConsole(CredentialsRequester credentialsRequester, Logger logger) {
 
 		this.credentialsRequester = credentialsRequester;
 		this.logger = logger;
-		this.configuration = configuration;
 
 	}
-	
+
+	/**
+	 * Hides information logs.
+	 */
+	public void hideInfoLogs() {
+		System.setProperty("org.jboss.logging.provider", "jdk");
+		Logger loggerHibernate = Logger.getLogger("org.hibernate");
+		loggerHibernate.setLevel(Level.WARNING);
+
+		ch.qos.logback.classic.Logger mchangeLogger = (ch.qos.logback.classic.Logger) LoggerFactory
+				.getLogger("com.mchange.v2");
+		mchangeLogger.setLevel(ch.qos.logback.classic.Level.WARN);
+	}
+
 	/**
 	 * Loads the configuration properties and requests information from the user.
+	 * 
+	 * @param configuration Hibernate configuration used for building a session
+	 *                      factory.
 	 */
-	public void execute() {
+	public void execute(Configuration configuration) {
 
 		Properties properties = new Properties();
 		try {
@@ -79,7 +90,7 @@ public class UserConsole {
 
 			UserInformation userInformation = credentialsRequester.requestUserInformation();
 
-			storeUser(userInformation, logger);
+			storeUser(userInformation, configuration, logger);
 
 		} catch (IOException e) {
 
@@ -105,19 +116,11 @@ public class UserConsole {
 		CredentialsRequester credentialsRequester = new CredentialsRequester(pw, br, new BCryptPasswordEncoder(),
 				new SecureRandom());
 
-		// Hiding info logs
-		System.setProperty("org.jboss.logging.provider", "jdk");
-		Logger loggerHibernate = Logger.getLogger("org.hibernate");
-		loggerHibernate.setLevel(Level.WARNING);
-
-		ch.qos.logback.classic.Logger mchangeLogger = (ch.qos.logback.classic.Logger) LoggerFactory
-				.getLogger("com.mchange.v2");
-		mchangeLogger.setLevel(ch.qos.logback.classic.Level.WARN);
-
-		UserConsole uc = new UserConsole(credentialsRequester, new Configuration(), logger);
+		UserConsole uc = new UserConsole(credentialsRequester, logger);
 		console.printf("Starting\n");
-		
-		uc.execute();
+
+		uc.hideInfoLogs();
+		uc.execute(new Configuration());
 		pw.close();
 
 		try {
@@ -128,7 +131,7 @@ public class UserConsole {
 
 	}
 
-	private void storeUser(UserInformation user, Logger logger) {
+	private void storeUser(UserInformation user, Configuration configuration, Logger logger) {
 		SessionFactory factory = null;
 		Session session = null;
 		try {
