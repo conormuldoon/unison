@@ -1,6 +1,8 @@
 package eu.acclimatize.unison.user;
 
-import java.io.Console;
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.PrintWriter;
 import java.security.SecureRandom;
 
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
@@ -9,28 +11,31 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
  * 
  * A class that uses the console to request user credentials (user name and
  * password) information. Credentials are requested if none are present when
- * Unison begins operating or when {@link UserConsole} is run from the
- * terminal.
+ * Unison begins operating or when {@link UserConsole} is run from the terminal.
  * 
  */
 public class CredentialsRequester {
 
 	private static final int PLEN = 10;
 
-	private Console console;
+	private PrintWriter writer;
+	private BufferedReader reader;
 	private BCryptPasswordEncoder encoder;
 	private SecureRandom random;
 
 	/**
-	 * Creates and instance of UserConsole.
+	 * Creates and instance of CredentialsRequester.
 	 * 
-	 * @param console Used to request and read user data.
+	 * @param writer  Used to display information to the user.
+	 * @param reader  Used to request data from the user.
 	 * @param encoder Used to encrypt the password.
 	 * @param random  Used in generating random passwords.
 	 */
-	public CredentialsRequester(Console console, BCryptPasswordEncoder encoder, SecureRandom random) {
+	public CredentialsRequester(PrintWriter writer, BufferedReader reader, BCryptPasswordEncoder encoder,
+			SecureRandom random) {
 
-		this.console = console;
+		this.writer = writer;
+		this.reader = reader;
 		this.encoder = encoder;
 		this.random = random;
 
@@ -42,20 +47,22 @@ public class CredentialsRequester {
 	 * 
 	 * @return Contains the information entered by the user (the password is
 	 *         encoded).
+	 * @throws IOException Thrown if there is an I/O problem reading or writing
+	 *                     data.
 	 */
-	public UserInformation requestUserInformation() {
-		console.printf("Enter user name: ");
+	public UserInformation requestUserInformation() throws IOException {
+		writer.printf("Enter user name: ");
 
-		String userName = console.readLine();
-		console.printf("Generate password (y/N)? ");
+		String userName = reader.readLine();
+		writer.printf("Generate password (y/N)? ");
 
-		String gp = console.readLine().toLowerCase();
+		String gp = reader.readLine().toLowerCase();
 		String encoded = null;
 
 		if (gp.startsWith("y")) {
 
 			String password = randomPassword();
-			console.printf("Generated password: %s\n", password);
+			writer.printf("Generated password: %s\n", password);
 
 			encoded = encoder.encode(password);
 		} else {
@@ -68,7 +75,6 @@ public class CredentialsRequester {
 		}
 
 		return new UserInformation(userName, encoded);
-		
 
 	}
 

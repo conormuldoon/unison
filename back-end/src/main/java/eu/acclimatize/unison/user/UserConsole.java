@@ -1,7 +1,10 @@
 package eu.acclimatize.unison.user;
 
+import java.io.BufferedReader;
 import java.io.Console;
 import java.io.IOException;
+import java.io.InputStreamReader;
+import java.io.PrintWriter;
 import java.security.SecureRandom;
 import java.util.Properties;
 import java.util.logging.Level;
@@ -33,7 +36,8 @@ public class UserConsole {
 	/**
 	 * Creates and instance of UserConsole.
 	 * 
-	 * @param credentialsRequester Used to request and read user names and passwords.
+	 * @param credentialsRequester Used to request and read user names and
+	 *                             passwords.
 	 * 
 	 */
 	public UserConsole(CredentialsRequester credentialsRequester) {
@@ -88,14 +92,20 @@ public class UserConsole {
 	 * 
 	 * @param args The arguments are not used.
 	 * 
+	 * @throws IOException Thrown if there is a problem closing a reader for System.in.
 	 */
-	public static void main(String[] args) {
+	public static void main(String[] args) throws IOException {
 
 		Console console = System.console();
+		PrintWriter pw = new PrintWriter(System.out, true);
+		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
 		UserConsole uc = new UserConsole(
-				new CredentialsRequester(console, new BCryptPasswordEncoder(), new SecureRandom()));
+				new CredentialsRequester(pw, br, new BCryptPasswordEncoder(), new SecureRandom()));
 		console.printf("Starting\n");
 		uc.execute(Logger.getLogger(UserConsole.class.getName()));
+		pw.close();
+
+		br.close();
 
 	}
 

@@ -1,6 +1,10 @@
 package eu.acclimatize.unison.user;
 
+import java.io.BufferedReader;
 import java.io.Console;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.io.PrintWriter;
 import java.security.SecureRandom;
 import java.util.Optional;
 import java.util.logging.Level;
@@ -49,16 +53,27 @@ public class UserService {
 
 			Console console = System.console();
 			if (console != null) {
-				CredentialsRequester requester = new CredentialsRequester(System.console(), passwordEncoder,
-						new SecureRandom());
-				UserInformation userInformation = requester.requestUserInformation();
+				
+				PrintWriter pw = new PrintWriter(System.out, true);
+				BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
 
-				userRepository.save(userInformation);
+				CredentialsRequester requester = new CredentialsRequester(pw, br, passwordEncoder, new SecureRandom());
+
+				try {
+					UserInformation userInformation = requester.requestUserInformation();
+					userRepository.save(userInformation);
+
+					pw.close();
+					br.close();
+				} catch (IOException e) {
+					logger.log(Level.SEVERE, e.getMessage());
+				}
+
 			} else {
 				logger.log(Level.INFO, "No active console available.");
 			}
 
-		}
+		} 
 
 	}
 
