@@ -18,7 +18,7 @@ import org.mockito.Mockito;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
 import eu.acclimatize.unison.user.CredentialsRequester;
-import eu.acclimatize.unison.user.UserConsole;
+import eu.acclimatize.unison.user.UserHibernateStore;
 import eu.acclimatize.unison.user.UserInformation;
 import eu.acclimatize.unison.user.UserRepository;
 import eu.acclimatize.unison.user.UserService;
@@ -103,9 +103,9 @@ public class UserTests {
 		BufferedReader br = new BufferedReader(new InputStreamReader(bais));
 		PrintWriter mockWriter = Mockito.mock(PrintWriter.class);
 		CredentialsRequester requester = new CredentialsRequester(mockWriter, br, mockEncoder, new SecureRandom());
-		UserConsole userConsole = new UserConsole(requester, null);
-		userConsole.hideInfoLogs();
-		userConsole.execute(configuration);
+		UserHibernateStore uhs = new UserHibernateStore(requester, null);
+		uhs.hideInfoLogs();
+		uhs.execute(configuration);
 		br.close();
 
 		Mockito.verify(transaction, Mockito.times(1)).commit();

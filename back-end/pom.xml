@@ -179,8 +179,14 @@
 							<goal>report</goal>
 						</goals>
 					</execution>
-
 				</executions>
+				<configuration>
+					<!-- The UserConsole contains a main method that invokes static methods 
+						and makes new instantiations. -->
+					<excludes>
+						<exclude>**/UserConsole.class</exclude>
+					</excludes>
+				</configuration>
 			</plugin>
 		</plugins>
 	</build>
