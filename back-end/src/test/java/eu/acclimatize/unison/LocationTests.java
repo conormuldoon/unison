@@ -20,15 +20,13 @@ import eu.acclimatize.unison.location.DeleteLocationController;
 import eu.acclimatize.unison.location.LocationDetails;
 import eu.acclimatize.unison.location.LocationRepository;
 import eu.acclimatize.unison.location.ResponseConstant;
-import eu.acclimatize.unison.location.geodb.GeoDBConfig;
-import eu.acclimatize.unison.location.geodb.GeoDBStore;
 import eu.acclimatize.unison.user.UserInformation;
 import eu.acclimatize.unison.user.UserRepository;
 import eu.acclimatize.unison.user.UserService;
 
 @RunWith(SpringRunner.class)
 @DataJpaTest
-@ContextConfiguration(classes = { UnisonServerApplication.class, CoordinatesConfig.class, GeoDBConfig.class })
+@ContextConfiguration(classes = { UnisonServerApplication.class, CoordinatesConfig.class})
 
 public class LocationTests {
 
@@ -46,8 +44,6 @@ public class LocationTests {
 	@Autowired
 	UserRepository userRepository;
 
-	@Autowired
-	GeoDBStore geoDBStore;
 
 	@Before
 	public void addData() {
