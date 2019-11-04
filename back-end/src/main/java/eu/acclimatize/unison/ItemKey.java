@@ -50,24 +50,31 @@ public class ItemKey implements Serializable {
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
-		result = prime * result + fromHour.hashCode();
-		result = prime * result + location.hashCode();
+		result = prime * result + ((fromHour == null) ? 0 : fromHour.hashCode());
+		result = prime * result + ((location == null) ? 0 : location.hashCode());
 		return result;
 	}
 
-	// Required as is Hibernate Composite-id class
 	@Override
 	public boolean equals(Object obj) {
-
+		if (this == obj)
+			return true;
 		if (obj == null)
 			return false;
-		else if (!(obj instanceof ItemKey))
+		if (getClass() != obj.getClass())
 			return false;
-		else {
-			ItemKey other = (ItemKey) obj;
-			return fromHour.equals(other.fromHour) && location.equals(other.location);
-		}
-
+		ItemKey other = (ItemKey) obj;
+		if (fromHour == null) {
+			if (other.fromHour != null)
+				return false;
+		} else if (!fromHour.equals(other.fromHour))
+			return false;
+		if (location == null) {
+			if (other.location != null)
+				return false;
+		} else if (!location.equals(other.location))
+			return false;
+		return true;
 	}
 
 }

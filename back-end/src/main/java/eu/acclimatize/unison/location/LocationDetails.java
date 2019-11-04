@@ -14,13 +14,13 @@ import eu.acclimatize.unison.user.UserInformation;
 
 /**
  * 
- * An entity class for storing generic (non-spatial) information related to coordinates.
+ * An entity class for storing generic (non-spatial) information related to
+ * coordinates.
  *
  */
 @Entity
-public class LocationDetails implements Serializable{
+public class LocationDetails implements Serializable {
 
-	
 	private static final long serialVersionUID = 1771422791257298902L;
 
 	@Id
@@ -35,7 +35,7 @@ public class LocationDetails implements Serializable{
 	 * Creates an instance of LocationDetails.
 	 * 
 	 * @param name The name of the location.
-	 * @param uri The URI where data related to the location will be obtained from.
+	 * @param uri  The URI where data related to the location will be obtained from.
 	 * @param user Information related to the user that added the location.
 	 */
 	public LocationDetails(String name, String uri, UserInformation user) {
@@ -53,16 +53,55 @@ public class LocationDetails implements Serializable{
 
 	}
 
-	/** Requests XML data from the {@link eu.acclimatize.unison.harvester.DocumentRequestService}
+	/**
+	 * Requests XML data from the
+	 * {@link eu.acclimatize.unison.harvester.DocumentRequestService}
 	 * 
 	 * @param drs The service that requests data from a HARMONIE-AROME API.
-	 * @return An Optional contain an XML document if the request was successful and an empty Optional otherwise.
+	 * @return An Optional contain an XML document if the request was successful and
+	 *         an empty Optional otherwise.
 	 */
 	public Optional<Document> requestData(DocumentRequestService drs) {
 
 		return drs.documentForURI(uri);
 
 	}
-	
+
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + ((name == null) ? 0 : name.hashCode());
+		result = prime * result + ((uri == null) ? 0 : uri.hashCode());
+		result = prime * result + ((user == null) ? 0 : user.hashCode());
+		return result;
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		LocationDetails other = (LocationDetails) obj;
+		if (name == null) {
+			if (other.name != null)
+				return false;
+		} else if (!name.equals(other.name))
+			return false;
+		if (uri == null) {
+			if (other.uri != null)
+				return false;
+		} else if (!uri.equals(other.uri))
+			return false;
+		if (user == null) {
+			if (other.user != null)
+				return false;
+		} else if (!user.equals(other.user))
+			return false;
+		return true;
+	}
 
 }
