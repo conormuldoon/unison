@@ -1,5 +1,7 @@
 package eu.acclimatize.unison.location;
 
+import java.util.List;
+
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -27,7 +29,7 @@ public class LocationController {
 	 * @return A list of Jackson annotated coordinates.
 	 */
 	@GetMapping(LOCATION)
-	public Iterable<? extends Object> location() {
+	public List<? extends Object> location() {
 		return store.sortedFindAll();
 
 	}

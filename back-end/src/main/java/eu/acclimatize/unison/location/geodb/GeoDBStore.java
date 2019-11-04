@@ -1,5 +1,7 @@
 package eu.acclimatize.unison.location.geodb;
 
+import java.util.List;
+
 import org.locationtech.jts.geom.Point;
 import org.locationtech.jts.io.ParseException;
 import org.locationtech.jts.io.WKTReader;
@@ -61,7 +63,7 @@ public class GeoDBStore implements CoordinatesStore {
 
 	
 	@Override
-	public Iterable<? extends Object> sortedFindAll() {
+	public List<? extends Object> sortedFindAll() {
 
 		return repository.findAll(sort);
 	}

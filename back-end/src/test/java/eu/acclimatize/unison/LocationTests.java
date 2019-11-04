@@ -20,13 +20,15 @@ import eu.acclimatize.unison.location.DeleteLocationController;
 import eu.acclimatize.unison.location.LocationDetails;
 import eu.acclimatize.unison.location.LocationRepository;
 import eu.acclimatize.unison.location.ResponseConstant;
+import eu.acclimatize.unison.location.geodb.GeoDBConfig;
+import eu.acclimatize.unison.location.geodb.GeoDBStore;
 import eu.acclimatize.unison.user.UserInformation;
 import eu.acclimatize.unison.user.UserRepository;
 import eu.acclimatize.unison.user.UserService;
 
 @RunWith(SpringRunner.class)
 @DataJpaTest
-@ContextConfiguration(classes = { UnisonServerApplication.class, CoordinatesConfig.class})
+@ContextConfiguration(classes = { UnisonServerApplication.class, CoordinatesConfig.class, GeoDBConfig.class })
 
 public class LocationTests {
 
@@ -44,6 +46,9 @@ public class LocationTests {
 	@Autowired
 	UserRepository userRepository;
 
+	@Autowired
+	GeoDBStore geoDBStore;
+
 	@Before
 	public void addData() {
 		UserInformation userInfo = addUser(USER, PWD);
@@ -53,7 +58,7 @@ public class LocationTests {
 
 	private UserInformation addUser(String userName, String password) {
 		BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
-		UserInformation userInfo = new UserInformation(USER, passwordEncoder.encode(PWD));
+		UserInformation userInfo = new UserInformation(userName, passwordEncoder.encode(password));
 		userRepository.save(userInfo);
 		return userInfo;
 	}
@@ -61,8 +66,7 @@ public class LocationTests {
 	@Test
 	public void locationAlreadyExists() throws CoordinatesParseException {
 
-		AddLocationController controller = new AddLocationController(locationRepository,null,
-				userService, null, URI);
+		AddLocationController controller = new AddLocationController(locationRepository, null, userService, null, URI);
 		Assert.assertEquals(ResponseConstant.FAIL, controller.addLocation(LOCATION, USER, PWD, 0, 0));
 
 	}
@@ -75,6 +79,7 @@ public class LocationTests {
 				controller.addLocation(LOCATION, USER, "abc", 0, 0));
 	}
 
+
 	@Test
 	public void validUser() throws CoordinatesParseException {
 
@@ -82,8 +87,7 @@ public class LocationTests {
 
 		CoordinatesStore store = Mockito.mock(CoordinatesStore.class);
 
-		Mockito.when(hs.processLocation(Mockito.any(LocationDetails.class)))
-				.thenReturn(true);
+		Mockito.when(hs.processLocation(Mockito.any(LocationDetails.class))).thenReturn(true);
 
 		AddLocationController controller = new AddLocationController(locationRepository, store, userService, hs, URI);
 		Assert.assertEquals(ResponseConstant.SUCCESS, controller.addLocation("newLocation", USER, PWD, 0, 0));
@@ -118,7 +122,7 @@ public class LocationTests {
 
 		DeleteLocationController controller = new DeleteLocationController(locationRepository, null, null, null,
 				userService);
-		Assert.assertEquals(ResponseConstant.INCORRECT_CREDENTIALS, controller.deleteLocation(LOCATION, ou, op));
+		Assert.assertEquals(ResponseConstant.NOT_OWNER, controller.deleteLocation(LOCATION, ou, op));
 
 	}
 

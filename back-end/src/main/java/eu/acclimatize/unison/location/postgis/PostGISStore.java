@@ -1,5 +1,7 @@
 package eu.acclimatize.unison.location.postgis;
 
+import java.util.List;
+
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Repository;
 
@@ -60,7 +62,7 @@ public class PostGISStore implements CoordinatesStore {
 	}
 
 	@Override
-	public Iterable<? extends Object> sortedFindAll() {
+	public List<? extends Object> sortedFindAll() {
 		return repository.findAll(sort);
 	}
 

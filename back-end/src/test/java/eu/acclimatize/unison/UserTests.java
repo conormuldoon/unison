@@ -89,7 +89,7 @@ public class UserTests {
 	 *                     requesting user information.
 	 */
 	@Test
-	public void testUserConsole() throws IOException {
+	public void testUserHibernateStore() throws IOException {
 		Configuration configuration = Mockito.mock(Configuration.class);
 		SessionFactory factory = Mockito.mock(SessionFactory.class);
 		Mockito.when(configuration.buildSessionFactory()).thenReturn(factory);

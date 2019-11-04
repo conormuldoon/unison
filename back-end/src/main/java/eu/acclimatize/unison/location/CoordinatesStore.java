@@ -1,5 +1,7 @@
 package eu.acclimatize.unison.location;
 
+import java.util.List;
+
 /**
  * 
  * An interface that defines the contract between generic location classes and spatial database specific classes.
@@ -20,7 +22,7 @@ public interface CoordinatesStore {
 	 * 
 	 * @return An ordered list of coordinates. 
 	 */
-	public Iterable<? extends Object> sortedFindAll();
+	public List<? extends Object> sortedFindAll();
 	
 	/**
 	 * Removes coordinates from the spatial database.
