@@ -17,10 +17,7 @@ import eu.acclimatize.unison.location.postgis.PostGISCoordinatesRepository;
 import eu.acclimatize.unison.location.postgis.PostGISStore;
 
 /**
- * Tests for PostGIS. Not using the Spring test framework, just mocking, so as
- * that the tests will still run when Spring is configured to use GeoDB rather
- * than Postgres/PostGIS. In that case, classes, such as PostGISConfig, will be
- * unavailable due to the {@link eu.acclimatize.unison.SpatialExcludeFilter}.
+ * Tests for PostGIS.
  **/
 public class PostGISTests {
 

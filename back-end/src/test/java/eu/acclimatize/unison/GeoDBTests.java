@@ -16,11 +16,7 @@ import eu.acclimatize.unison.location.geodb.GeoDBCoordinatesRepository;
 import eu.acclimatize.unison.location.geodb.GeoDBStore;
 
 /**
- * Tests for GeoDB. Not using the Spring test framework, just mocking, so as
- * that the tests will still run when Spring is configured to use
- * Postgres/PostGIS rather than GeoDB. In that case, classes, such as
- * GeoDBConfig, will be unavailable due to the
- * {@link eu.acclimatize.unison.SpatialExcludeFilter}.
+ * Tests for GeoDB.
  **/
 public class GeoDBTests {
 

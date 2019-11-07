@@ -8,6 +8,7 @@ import java.util.Date;
 import java.util.Iterator;
 
 import javax.persistence.EntityManager;
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import org.junit.Assert;
@@ -19,6 +20,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 import org.springframework.boot.test.autoconfigure.orm.jpa.TestEntityManager;
 import org.springframework.test.context.junit4.SpringRunner;
+import org.springframework.web.servlet.HandlerMapping;
 
 import com.vividsolutions.jts.io.ParseException;
 
@@ -73,6 +75,9 @@ public class ControllerTests {
 	@Autowired
 	CSVResponder cloudinessResponder, cloudLevelResponder, dewPointResponder, fogResponder, humidityResponder,
 			precipitationResponder, pressureResponder, temperatureResponder, windDirectionResponder, windSpeedResponder;
+
+	@Autowired
+	MappingForwardController forwardController;
 
 	private Date fromDate, toDate;
 
@@ -198,6 +203,15 @@ public class ControllerTests {
 
 		WindSpeedController windSpeedController = new WindSpeedController(windSpeedFinder);
 		assertType(windSpeedController.windSpeed(LOCATION, fromDate, toDate), WindSpeedResult.class);
+	}
+
+	@Test
+	public void testMappingForward() {
+
+		HttpServletRequest request = Mockito.mock(HttpServletRequest.class);
+		Mockito.when(request.getAttribute(HandlerMapping.PATH_WITHIN_HANDLER_MAPPING_ATTRIBUTE))
+				.thenReturn("/apiacc/location");
+		Assert.assertEquals("forward:/location", forwardController.forward(request));
 	}
 
 	void assertLength(StringWriter sw, int len) {

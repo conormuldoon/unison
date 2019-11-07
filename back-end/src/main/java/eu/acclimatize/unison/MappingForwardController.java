@@ -28,7 +28,7 @@ public class MappingForwardController {
 	 * @return The mapping to forward to.
 	 */
 	@RequestMapping(APIACC)
-	public String print(HttpServletRequest request) {
+	public String forward(HttpServletRequest request) {
 		String path = (String) request.getAttribute(HandlerMapping.PATH_WITHIN_HANDLER_MAPPING_ATTRIBUTE);
 		return FORWARD + path.substring(START_INDEX, path.length());
 	}
