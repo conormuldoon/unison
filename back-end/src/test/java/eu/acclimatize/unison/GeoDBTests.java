@@ -1,19 +1,30 @@
 package eu.acclimatize.unison;
 
+import java.io.IOException;
+import java.io.StringWriter;
+import java.io.Writer;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.junit.Assert;
 import org.junit.Test;
+import org.locationtech.jts.geom.Point;
+import org.locationtech.jts.io.ParseException;
 import org.locationtech.jts.io.WKTReader;
 import org.mockito.Mockito;
 import org.springframework.data.domain.Sort;
+
+import com.fasterxml.jackson.core.JsonFactory;
+import com.fasterxml.jackson.core.JsonGenerator;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.SerializerProvider;
 
 import eu.acclimatize.unison.location.LocationController;
 import eu.acclimatize.unison.location.LocationDetails;
 import eu.acclimatize.unison.location.geodb.GeoDBCoordinates;
 import eu.acclimatize.unison.location.geodb.GeoDBCoordinatesRepository;
+import eu.acclimatize.unison.location.geodb.GeoDBPointSerializer;
 import eu.acclimatize.unison.location.geodb.GeoDBStore;
+import org.junit.Assert;
 
 /**
  * Tests for GeoDB.
@@ -48,6 +59,21 @@ public class GeoDBTests {
 		geoDBStore.save(-6.224176, 53.308366, new LocationDetails());
 
 		Mockito.verify(repository, Mockito.times(1)).save(Mockito.any(GeoDBCoordinates.class));
+	}
+
+	/** Tests the coordinates are serialized in a GeoJSON format correctly. **/
+	@Test
+	public void testSerialization() throws IOException, ParseException {
+		Writer jsonWriter = new StringWriter();
+		JsonGenerator jsonGenerator = new JsonFactory().createGenerator(jsonWriter);
+		SerializerProvider serializerProvider = new ObjectMapper().getSerializerProvider();
+		WKTReader wktReader = new WKTReader();
+		Point p = (Point) wktReader.read("Point(-6.224176 53.308366)");
+		new GeoDBPointSerializer().serialize(p, jsonGenerator, serializerProvider);
+		jsonGenerator.flush();
+
+		Assert.assertEquals("{\"type\":\"Point\",\"coordinates\":[-6.224176,53.308366]}", jsonWriter.toString());
+
 	}
 
 }

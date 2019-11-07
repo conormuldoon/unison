@@ -1,5 +1,8 @@
 package eu.acclimatize.unison;
 
+import java.io.IOException;
+import java.io.StringWriter;
+import java.io.Writer;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -8,11 +11,20 @@ import org.junit.Test;
 import org.mockito.Mockito;
 import org.springframework.data.domain.Sort;
 
+import com.fasterxml.jackson.core.JsonFactory;
+import com.fasterxml.jackson.core.JsonGenerator;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.SerializerProvider;
+import com.vividsolutions.jts.geom.Point;
+import com.vividsolutions.jts.io.ParseException;
+import com.vividsolutions.jts.io.WKTReader;
+
 import eu.acclimatize.unison.location.LocationController;
 import eu.acclimatize.unison.location.LocationDetails;
 import eu.acclimatize.unison.location.postgis.PostGISConfig;
 import eu.acclimatize.unison.location.postgis.PostGISCoordinates;
 import eu.acclimatize.unison.location.postgis.PostGISCoordinatesRepository;
+import eu.acclimatize.unison.location.postgis.PostGISPointSerializer;
 import eu.acclimatize.unison.location.postgis.PostGISStore;
 
 /**
@@ -51,4 +63,18 @@ public class PostGISTests {
 		Mockito.verify(repository, Mockito.times(1)).save(Mockito.any(PostGISCoordinates.class));
 	}
 
+	/** Tests the coordinates are serialized in a GeoJSON format correctly. **/
+	@Test
+	public void testSerialization() throws IOException, ParseException {
+		Writer jsonWriter = new StringWriter();
+		JsonGenerator jsonGenerator = new JsonFactory().createGenerator(jsonWriter);
+		SerializerProvider serializerProvider = new ObjectMapper().getSerializerProvider();
+		WKTReader wktReader = new WKTReader();
+		Point p = (Point) wktReader.read("Point(-6.224176 53.308366)");
+		new PostGISPointSerializer().serialize(p, jsonGenerator, serializerProvider);
+		jsonGenerator.flush();
+
+		Assert.assertEquals("{\"type\":\"Point\",\"coordinates\":[-6.224176,53.308366]}", jsonWriter.toString());
+
+	}
 }
