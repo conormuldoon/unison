@@ -7,8 +7,6 @@ import javax.persistence.Id;
 
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
-import eu.acclimatize.unison.location.LocationDetails;
-
 /**
  * 
  * An entity class user to store user crediatial information in the data base.

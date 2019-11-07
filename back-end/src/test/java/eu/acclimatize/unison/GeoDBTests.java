@@ -30,7 +30,7 @@ public class GeoDBTests {
 		Sort sort = new Sort(Sort.Direction.ASC, "name");
 		Mockito.when(repository.findAll(sort)).thenReturn(list);
 
-		GeoDBStore geoDBStore = new GeoDBStore(repository, sort, null);
+		GeoDBStore geoDBStore = new GeoDBStore(repository, sort, null, null);
 
 		LocationController locationController = new LocationController(geoDBStore);
 		List<? extends Object> locList = locationController.location();
@@ -44,7 +44,7 @@ public class GeoDBTests {
 	public void savePoint() {
 		GeoDBCoordinatesRepository repository = Mockito.mock(GeoDBCoordinatesRepository.class);
 		Sort sort = new Sort(Sort.Direction.ASC, "name");
-		GeoDBStore geoDBStore = new GeoDBStore(repository, sort, new WKTReader());
+		GeoDBStore geoDBStore = new GeoDBStore(repository, sort, new WKTReader(), null);
 		geoDBStore.save(-6.224176, 53.308366, new LocationDetails());
 
 		Mockito.verify(repository, Mockito.times(1)).save(Mockito.any(GeoDBCoordinates.class));

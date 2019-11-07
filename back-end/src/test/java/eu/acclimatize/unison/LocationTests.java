@@ -14,7 +14,6 @@ import org.springframework.test.context.junit4.SpringRunner;
 import eu.acclimatize.unison.harvester.HarvesterService;
 import eu.acclimatize.unison.location.AddLocationController;
 import eu.acclimatize.unison.location.CoordinatesConfig;
-import eu.acclimatize.unison.location.CoordinatesParseException;
 import eu.acclimatize.unison.location.CoordinatesStore;
 import eu.acclimatize.unison.location.DeleteLocationController;
 import eu.acclimatize.unison.location.LocationDetails;
@@ -26,7 +25,7 @@ import eu.acclimatize.unison.user.UserService;
 
 @RunWith(SpringRunner.class)
 @DataJpaTest
-@ContextConfiguration(classes = { UnisonServerApplication.class, CoordinatesConfig.class})
+@ContextConfiguration(classes = { UnisonServerApplication.class, CoordinatesConfig.class })
 
 public class LocationTests {
 
@@ -44,7 +43,6 @@ public class LocationTests {
 	@Autowired
 	UserRepository userRepository;
 
-
 	@Before
 	public void addData() {
 		UserInformation userInfo = addUser(USER, PWD);
@@ -60,7 +58,7 @@ public class LocationTests {
 	}
 
 	@Test
-	public void locationAlreadyExists() throws CoordinatesParseException {
+	public void locationAlreadyExists() {
 
 		AddLocationController controller = new AddLocationController(locationRepository, null, userService, null, URI);
 		Assert.assertEquals(ResponseConstant.FAIL, controller.addLocation(LOCATION, USER, PWD, 0, 0));
@@ -68,16 +66,15 @@ public class LocationTests {
 	}
 
 	@Test
-	public void invalidUser() throws CoordinatesParseException {
+	public void invalidUser() {
 
 		AddLocationController controller = new AddLocationController(locationRepository, null, userService, null, null);
 		Assert.assertEquals(ResponseConstant.INCORRECT_CREDENTIALS,
 				controller.addLocation(LOCATION, USER, "abc", 0, 0));
 	}
 
-
 	@Test
-	public void validUser() throws CoordinatesParseException {
+	public void validUser() {
 
 		HarvesterService hs = Mockito.mock(HarvesterService.class);
 
