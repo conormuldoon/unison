@@ -11,6 +11,7 @@ import java.util.logging.Logger;
 
 import javax.annotation.PostConstruct;
 
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -33,6 +34,10 @@ public class UserService {
 
 	private Boolean consolePresent;
 
+	private String defaultUserName;
+
+	private String defaultEncoded;
+
 	/**
 	 * Creates an instance of UserService.
 	 * 
@@ -42,18 +47,31 @@ public class UserService {
 	 * @param passwordEncoder Used to encrypt and match user passwords.
 	 * @param consolePresent  Used to determine whether to request initial user data
 	 *                        from a {@link CredentialsRequester}.
+	 * @param defaultUserName Assigned using the default.username property. If not
+	 *                        null and no users stored, used in adding an initial
+	 *                        user to the database.
+	 * @param defaultEncoded  A bcrypt encoded password assigned using the
+	 *                        default.encoded property. Used in adding an initial
+	 *                        user to the database if not null and no users stored.
 	 */
 	public UserService(UserRepository userRepository, Logger logger, BCryptPasswordEncoder passwordEncoder,
-			Boolean consolePresent) {
+			Boolean consolePresent, @Value("${default.username:#{null}}") String defaultUserName,
+			@Value("${default.encoded:#{null}}") String defaultEncoded) {
 		this.userRepository = userRepository;
 		this.passwordEncoder = passwordEncoder;
 		this.logger = logger;
 		this.consolePresent = consolePresent;
+		this.defaultUserName = defaultUserName;
+		this.defaultEncoded = defaultEncoded;
 	}
 
 	/**
-	 * Requests user information if there are no users stored in the data base, the server
-	 * is running in interactive mode, and the system console is available. 
+	 * 
+	 * If there are no users stored in the database and the default.username and
+	 * default.password properties are set, they are used to add an initial user to
+	 * the database. Alternatively, if the properties are not set, the console will
+	 * be used to request user information if it is available and the server is
+	 * running in interactive mode.
 	 * 
 	 */
 	@PostConstruct
@@ -61,7 +79,12 @@ public class UserService {
 
 		if (userRepository.count() == 0) {
 
-			if (consolePresent) {
+			if (defaultUserName != null && defaultEncoded != null) {
+
+				UserInformation userInformation = new UserInformation(defaultUserName, defaultEncoded);
+				userRepository.save(userInformation);
+
+			} else if (consolePresent) {
 
 				PrintWriter pw = new PrintWriter(System.out, true);
 				BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
