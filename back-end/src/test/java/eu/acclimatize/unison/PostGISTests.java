@@ -21,6 +21,7 @@ import com.vividsolutions.jts.io.WKTReader;
 
 import eu.acclimatize.unison.location.LocationController;
 import eu.acclimatize.unison.location.LocationDetails;
+import eu.acclimatize.unison.location.PointParseException;
 import eu.acclimatize.unison.location.postgis.PostGISConfig;
 import eu.acclimatize.unison.location.postgis.PostGISCoordinates;
 import eu.acclimatize.unison.location.postgis.PostGISCoordinatesRepository;
@@ -42,7 +43,7 @@ public class PostGISTests {
 		Sort sort = new Sort(Sort.Direction.ASC, "name");
 		Mockito.when(repository.findAll(sort)).thenReturn(list);
 
-		PostGISStore geoDBStore = new PostGISStore(repository, sort, null, null);
+		PostGISStore geoDBStore = new PostGISStore(repository, sort, null);
 
 		LocationController locationController = new LocationController(geoDBStore);
 		List<? extends Object> locList = locationController.location();
@@ -57,7 +58,7 @@ public class PostGISTests {
 		PostGISCoordinatesRepository repository = Mockito.mock(PostGISCoordinatesRepository.class);
 		PostGISConfig config = new PostGISConfig();
 		Sort sort = new Sort(Sort.Direction.ASC, "name");
-		PostGISStore postGISStore = new PostGISStore(repository, sort, config.wktReader(), null);
+		PostGISStore postGISStore = new PostGISStore(repository, sort, config.wktReader());
 		postGISStore.save(-6.224176, 53.308366, new LocationDetails());
 		
 		Mockito.verify(repository, Mockito.times(1)).save(Mockito.any(PostGISCoordinates.class));
@@ -76,5 +77,20 @@ public class PostGISTests {
 
 		Assert.assertEquals("{\"type\":\"Point\",\"coordinates\":[-6.224176,53.308366]}", jsonWriter.toString());
 
+	}
+	
+	/**
+	 * Tests that save catch throws PointParseException when there is a parsing
+	 * problem.
+	 * 
+	 * @throws ParseException The exception is caught within the save method and a
+	 *                        PointParseException is thrown.
+	 */
+	@Test(expected = PointParseException.class)
+	public void throwsPointParseException() throws ParseException {
+		WKTReader reader = Mockito.mock(WKTReader.class);
+		Mockito.when(reader.read(Mockito.anyString())).thenThrow(new ParseException(""));
+		PostGISStore postGISStore = new PostGISStore(null, null, reader);
+		postGISStore.save(-6.224176, 53.308366, new LocationDetails());
 	}
 }

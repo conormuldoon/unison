@@ -1,8 +1,6 @@
 package eu.acclimatize.unison.location.postgis;
 
 import java.util.List;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Repository;
@@ -13,6 +11,7 @@ import com.vividsolutions.jts.io.WKTReader;
 
 import eu.acclimatize.unison.location.CoordinatesStore;
 import eu.acclimatize.unison.location.LocationDetails;
+import eu.acclimatize.unison.location.PointParseException;
 
 /**
  * 
@@ -30,8 +29,6 @@ public class PostGISStore implements CoordinatesStore {
 
 	private Sort sort;
 
-	private Logger logger;
-
 	/**
 	 * Creates an instance of PostGISStore.
 	 * 
@@ -40,27 +37,26 @@ public class PostGISStore implements CoordinatesStore {
 	 *                   {@link eu.acclimatize.unison.location.CoordinatesStore#sortedFindAll}.
 	 * @param wktReader  Used to create a point geometry from a Well-Known Text
 	 *                   (WKT) description.
-	 * @param logger     Invoked when there is a parse exception for WKT. This
-	 *                   should not occur.
+	 * 
 	 */
-	public PostGISStore(PostGISCoordinatesRepository repository, Sort sort, WKTReader wktReader, Logger logger) {
+	public PostGISStore(PostGISCoordinatesRepository repository, Sort sort, WKTReader wktReader) {
 		this.repository = repository;
 
 		wktR = wktReader;
 		this.sort = sort;
-		this.logger = logger;
+
 	}
 
 	@Override
 	public void save(double longitude, double latitude, LocationDetails location) {
 
-		Point p;
+		String pointWKT = "POINT (" + longitude + " " + latitude + ")";
 		try {
-			p = (Point) wktR.read("POINT (" + longitude + " " + latitude + ")");
+			Point p = (Point) wktR.read(pointWKT);
 			PostGISCoordinates coord = new PostGISCoordinates(p, location);
 			repository.save(coord);
 		} catch (ParseException e) {
-			logger.log(Level.SEVERE,e.getMessage());		
+			throw new PointParseException(pointWKT, e);
 		}
 
 	}
