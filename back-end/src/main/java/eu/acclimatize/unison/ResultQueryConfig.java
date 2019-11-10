@@ -38,7 +38,7 @@ public class ResultQueryConfig {
 	}
 
 	/**
-	 * Creates a JPA query for precipitation.
+	 * Creates a JPQL query for precipitation.
 	 * 
 	 * @return A parameterized query string with parameters for the location, from
 	 *         date, and to date.
@@ -49,7 +49,7 @@ public class ResultQueryConfig {
 	}
 
 	/**
-	 * Creates a JPA query for the cloud level.
+	 * Creates a JPQL query for the cloud level.
 	 * 
 	 * @return A parameterized query string with parameters for the location, from
 	 *         date, and to date.
@@ -60,7 +60,7 @@ public class ResultQueryConfig {
 	}
 
 	/**
-	 * Creates a JPA query for the wind speed.
+	 * Creates a JPQL query for the wind speed.
 	 * 
 	 * @return A parameterized query string with parameters for the location, from
 	 *         date, and to date.
@@ -71,7 +71,7 @@ public class ResultQueryConfig {
 	}
 
 	/**
-	 * Creates a JPA query for the wind direction.
+	 * Creates a JPQL query for the wind direction.
 	 * 
 	 * @return A parameterized query string with parameters for the location, from
 	 *         date, and to date.
@@ -82,7 +82,7 @@ public class ResultQueryConfig {
 	}
 
 	/**
-	 * Creates a JPA query for humidity.
+	 * Creates a JPQL query for humidity.
 	 * 
 	 * @return A parameterized query string with parameters for the location, from
 	 *         date, and to date.
@@ -93,7 +93,7 @@ public class ResultQueryConfig {
 	}
 
 	/**
-	 * Creates a JPA query for fog.
+	 * Creates a JPQL query for fog.
 	 * 
 	 * @return A parameterized query string with parameters for the location, from
 	 *         date, and to date.
@@ -104,7 +104,7 @@ public class ResultQueryConfig {
 	}
 
 	/**
-	 * Creates a JPA query for cloudiness.
+	 * Creates a JPQL query for cloudiness.
 	 * 
 	 * @return A parameterized query string with parameters for the location, from
 	 *         date, and to date.
@@ -115,7 +115,7 @@ public class ResultQueryConfig {
 	}
 
 	/**
-	 * Creates a JPA query for pressure.
+	 * Creates a JPQL query for pressure.
 	 * 
 	 * @return A parameterized query string with parameters for the location, from
 	 *         date, and to date.
@@ -126,7 +126,7 @@ public class ResultQueryConfig {
 	}
 
 	/**
-	 * Creates a JPA query for the dew point.
+	 * Creates a JPQL query for the dew point.
 	 * 
 	 * @return A parameterized query string with parameters for the location, from
 	 *         date, and to date.
@@ -137,7 +137,7 @@ public class ResultQueryConfig {
 	}
 
 	/**
-	 * Creates a JPA query for temperature.
+	 * Creates a JPQL query for temperature.
 	 * 
 	 * @return A parameterized query string with parameters for the location, from
 	 *         date, and to date.
