@@ -84,7 +84,7 @@ public class UserService {
 				UserInformation userInformation = new UserInformation(defaultUserName, defaultEncoded);
 				userRepository.save(userInformation);
 
-			} else if (consolePresent) {
+			} else if (Boolean.TRUE.equals(consolePresent)) {
 
 				PrintWriter pw = new PrintWriter(System.out, true);
 				BufferedReader br = new BufferedReader(new InputStreamReader(System.in));

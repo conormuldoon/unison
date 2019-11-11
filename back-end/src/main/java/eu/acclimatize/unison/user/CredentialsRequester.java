@@ -62,7 +62,7 @@ public class CredentialsRequester {
 		if (gp.startsWith("y")) {
 
 			String password = randomPassword();
-			writer.printf("Generated password: %s\n", password);
+			writer.printf("Generated password: %s%n", password);
 
 			encoded = encoder.encode(password);
 		} else {

@@ -28,10 +28,9 @@ public class ItemKeyTest {
 
 		ItemKey itemKey0 = new ItemKey(fh0, new LocationDetails(LOCATION, URI, new UserInformation(USER, encoded)));
 		ItemKey itemKey1 = new ItemKey(fh1, new LocationDetails(LOCATION, URI, new UserInformation(USER, encoded)));
-		
-		Assert.isTrue(itemKey0.equals(itemKey1));;
+
+		Assert.equals(itemKey0, itemKey1);
 		Assert.equals(itemKey0.hashCode(), itemKey1.hashCode());
-		
 
 	}
 
