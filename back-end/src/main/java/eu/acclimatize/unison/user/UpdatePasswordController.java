@@ -18,11 +18,11 @@ public class UpdatePasswordController {
 
 	private static final String UPDATE_PASSWORD = "/updatePassword";
 
-	UserRepository userRepository;
+	private UserRepository userRepository;
 
-	UserService userService;
+	private UserService userService;
 
-	BCryptPasswordEncoder passwordEncoder;
+	private BCryptPasswordEncoder passwordEncoder;
 
 	/**
 	 * Creates and instance of UpdatePasswordController.

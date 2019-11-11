@@ -55,7 +55,7 @@ public class AddUserController {
 			@RequestParam(Constant.PASSWORD) String password, @RequestParam(Constant.NEW_USERNAME) String newUserName,
 			@RequestParam(Constant.NEW_PASSWORD) String newPassword) {
 
-		if (userRepository.existsById(userName)) {
+		if (userRepository.existsById(newUserName)) {
 			return ResponseConstant.FAIL;
 		}
 

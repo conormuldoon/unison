@@ -58,6 +58,11 @@ import eu.acclimatize.unison.result.WindDirectionResult;
 import eu.acclimatize.unison.result.WindSpeedResult;
 import eu.acclimatize.unison.user.UserInformation;
 
+/**
+ * 
+ * Tests the controllers (CSV and JSON) for querying Unison data.
+ *
+ */
 @RunWith(SpringRunner.class)
 @DataJpaTest
 
