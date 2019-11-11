@@ -18,7 +18,6 @@ import eu.acclimatize.unison.location.CoordinatesStore;
 import eu.acclimatize.unison.location.DeleteLocationController;
 import eu.acclimatize.unison.location.LocationDetails;
 import eu.acclimatize.unison.location.LocationRepository;
-import eu.acclimatize.unison.location.ResponseConstant;
 import eu.acclimatize.unison.user.UserInformation;
 import eu.acclimatize.unison.user.UserRepository;
 import eu.acclimatize.unison.user.UserService;

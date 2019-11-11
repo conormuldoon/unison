@@ -16,7 +16,7 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import eu.acclimatize.unison.location.ResponseConstant;
+import eu.acclimatize.unison.ResponseConstant;
 
 /**
  * 
@@ -116,7 +116,7 @@ public class UserService {
 	 * @param userName The name of the user.
 	 * @param password The user's password.
 	 * @param task     The task to be executed.
-	 * @return The {@link eu.acclimatize.unison.location.ResponseConstant} value for
+	 * @return The {@link eu.acclimatize.unison.ResponseConstant} value for
 	 *         the result of executing the task.
 	 */
 	@Transactional

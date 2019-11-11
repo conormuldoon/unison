@@ -7,6 +7,7 @@ import org.springframework.web.bind.annotation.RestController;
 import eu.acclimatize.unison.Constant;
 import eu.acclimatize.unison.HourlyPrecipitationRepository;
 import eu.acclimatize.unison.HourlyWeatherRepository;
+import eu.acclimatize.unison.ResponseConstant;
 import eu.acclimatize.unison.user.UserService;
 import eu.acclimatize.unison.user.UserTask;
 

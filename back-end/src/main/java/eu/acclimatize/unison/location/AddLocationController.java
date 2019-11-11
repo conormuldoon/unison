@@ -6,6 +6,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import eu.acclimatize.unison.Constant;
+import eu.acclimatize.unison.ResponseConstant;
 import eu.acclimatize.unison.harvester.HarvesterService;
 import eu.acclimatize.unison.user.UserService;
 import eu.acclimatize.unison.user.UserTask;
@@ -30,7 +31,7 @@ public class AddLocationController {
 	private String uri;
 
 	/**
-	 * Creates and instance of AddLocationController.
+	 * Creates an instance of AddLocationController.
 	 * 
 	 * @param locationRepository The repository where locations are stored.
 	 * @param store              Uses spatial database functionality in storing
