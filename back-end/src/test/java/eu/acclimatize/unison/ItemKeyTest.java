@@ -4,8 +4,8 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.GregorianCalendar;
 
+import org.junit.Assert;
 import org.junit.Test;
-import org.locationtech.jts.util.Assert;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
 import eu.acclimatize.unison.location.LocationDetails;
@@ -29,8 +29,8 @@ public class ItemKeyTest {
 		ItemKey itemKey0 = new ItemKey(fh0, new LocationDetails(LOCATION, URI, new UserInformation(USER, encoded)));
 		ItemKey itemKey1 = new ItemKey(fh1, new LocationDetails(LOCATION, URI, new UserInformation(USER, encoded)));
 
-		Assert.equals(itemKey0, itemKey1);
-		Assert.equals(itemKey0.hashCode(), itemKey1.hashCode());
+		Assert.assertEquals(itemKey0, itemKey1);
+		Assert.assertEquals(itemKey0.hashCode(), itemKey1.hashCode());
 
 	}
 
