@@ -40,6 +40,9 @@ java -cp target/unison-server-0.2.1-SNAPSHOT.jar -Dloader.main=eu.acclimatize.un
 ```
 
 Enter the user credentials (if the user name already exists, the password will be updated).
+
+Alternatively, the API can be used to add users or update passwords.
+
 ## Testing
 
 ### Back-end
