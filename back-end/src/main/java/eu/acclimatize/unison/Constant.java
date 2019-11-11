@@ -51,11 +51,11 @@ public class Constant {
 	/**
 	 * The field name for the new user name query string parameter.
 	 */
-	public static final String NEW_USERNAME = "newusername";
+	public static final String NEW_USERNAME = "newUsername";
 
 	/**
 	 * The field name for the new password query string parameter.
 	 */
-	public static final String NEW_PASSWORD = "newpassword";
+	public static final String NEW_PASSWORD = "newPassword";
 
 }
