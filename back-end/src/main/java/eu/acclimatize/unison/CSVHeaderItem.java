@@ -22,6 +22,5 @@ public @interface CSVHeaderItem {
 	 * 
 	 * @return The text to for an attribute to in a CSV header.
 	 */
-
 	public String value() default "";
 }

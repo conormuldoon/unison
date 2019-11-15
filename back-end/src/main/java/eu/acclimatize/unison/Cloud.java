@@ -11,11 +11,11 @@ import com.fasterxml.jackson.annotation.JsonProperty;
  */
 public class Cloud implements HarmonieItem {
 
-	@CSVHeaderItem("Low "+Constant.PERCENTAGE_SYMBOL)
+	@CSVHeaderItem("Low " + Constant.PERCENTAGE_SYMBOL)
 	@JsonProperty("low")
 	private Double lowClouds;
 
-	@CSVHeaderItem("Medium "+Constant.PERCENTAGE_SYMBOL)
+	@CSVHeaderItem("Medium " + Constant.PERCENTAGE_SYMBOL)
 	@JsonProperty("medium")
 	private Double mediumClouds;
 
@@ -26,21 +26,21 @@ public class Cloud implements HarmonieItem {
 	/**
 	 * Creates an instance of Cloud.
 	 * 
-	 * @param lowClouds The low clouds percentage.
+	 * @param lowClouds    The low clouds percentage.
 	 * @param mediumClouds The medium clouds percentage.
-	 * @param highClouds The high clouds percentage.
+	 * @param highClouds   The high clouds percentage.
 	 */
 	public Cloud(Double lowClouds, Double mediumClouds, Double highClouds) {
 		this.lowClouds = lowClouds;
 		this.mediumClouds = mediumClouds;
 		this.highClouds = highClouds;
 	}
-	
+
 	/**
 	 * A zero argument constructor for JPA.
 	 */
 	public Cloud() {
-		
+
 	}
 
 	@Override
