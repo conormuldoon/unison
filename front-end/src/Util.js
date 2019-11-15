@@ -5,14 +5,14 @@ import {
   formatDate
 } from 'react-day-picker/moment';
 
-export const fromDate = () => {
+export const tomorrow = () => {
 
   const now = Date.now();
   const today = new Date(now);
-  const fDate = new Date(now);
-  fDate.setMonth(today.getMonth() - 1);
+  const tomorrow = new Date(now);
+  tomorrow.setDate(today.getDate() + 1)
 
-  return formatDate(fDate, FORMAT);
+  return formatDate(tomorrow, FORMAT);
 }
 
 export const today = () => {

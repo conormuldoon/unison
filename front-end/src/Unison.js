@@ -9,7 +9,7 @@ import ARLocationComponent from './ARLocationComponent';
 import { API, FORMAT } from './Constant';
 import DateSelector from './DateSelector';
 import LeafletMap from './LeafletMap';
-import { fromDate, today } from './Util';
+import { today, tomorrow } from './Util';
 
 
 
@@ -30,8 +30,8 @@ class Unison extends Component {
     super(props);
 
     this.state = {
-      fromDate: fromDate(),
-      toDate: today(),
+      fromDate: today(),
+      toDate: tomorrow(),
       option: undefined,
       marker: undefined,
       clickedLocation: undefined,
