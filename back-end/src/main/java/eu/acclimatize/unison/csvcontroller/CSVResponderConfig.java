@@ -6,6 +6,7 @@ import java.util.Date;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
+import eu.acclimatize.unison.CSVHeaderItem;
 import eu.acclimatize.unison.ItemListFinder;
 import eu.acclimatize.unison.result.CloudLevelResult;
 import eu.acclimatize.unison.result.CloudinessResult;
@@ -28,23 +29,31 @@ public class CSVResponderConfig {
 
 	private static final char DELIMITER = ',';
 
-	// Recursively appends the double, int, Date, and String attribute names of the
-	// result classes to create a CSV header string.
+	// Recursively appends the double, Double, int, Date, and String CSVHeaderItem
+	// values of the attributes of the result classes to create a CSV header string.
 	private void appendFieldNames(Class<?> c, StringBuilder sb) {
 		Field[] fieldArr = c.getDeclaredFields();
 
 		for (Field f : fieldArr) {
-			Class<?> ft = f.getType();
-			if (ft.equals(Date.class) || ft.equals(Double.TYPE) || ft.equals(Integer.TYPE) || ft.equals(Double.class)
-					|| ft.equals(String.class)) {
-				sb.append(f.getName());
-				sb.append(DELIMITER);
-			} else {
-				appendFieldNames(ft, sb);
+			CSVHeaderItem csvProperty = f.getAnnotation(CSVHeaderItem.class);
+			if (csvProperty != null) {
+				Class<?> ft = f.getType();
+				if (ft.equals(Date.class) || ft.equals(Double.TYPE) || ft.equals(Integer.TYPE)
+						|| ft.equals(Double.class) || ft.equals(String.class)) {
+					String value = csvProperty.value();
+
+					if (value.equals(""))
+						sb.append(f.getName());
+					else
+						sb.append(value);
+
+					sb.append(DELIMITER);
+				} else {
+					appendFieldNames(ft, sb);
+				}
 			}
 		}
 	}
-	
 
 	private String createHeader(Class<?> c) {
 		StringBuilder sb = new StringBuilder();

@@ -58,4 +58,24 @@ public class Constant {
 	 */
 	public static final String NEW_PASSWORD = "newPassword";
 
+	/**
+	 * The date/time CSV header text.
+	 */
+	public static final String FROM_HOUR = "From hour";
+
+	/**
+	 * The percentage symbol used in CSV headers.
+	 */
+	public static final String PERCENTAGE_SYMBOL = "(%)";
+
+	/**
+	 * The millimetres symbol used in CSV headers.
+	 */
+	public static final String MILLIMETRES_SYMBOL = "(mm)";
+
+	/**
+	 * The Celsius symbol used in CSV headers.
+	 */
+	public static final String CELSIUS_SYMBOL = "(°C)";
+
 }

@@ -13,14 +13,17 @@ import com.fasterxml.jackson.annotation.JsonProperty;
  */
 public class WindSpeed implements HarmonieItem {
 
+	@CSVHeaderItem("Speed (mps)")
 	@JsonProperty
 	@Column(name = "windSpeed_mps")
 	private double mps;
 
+	@CSVHeaderItem("Beaufort")
 	@JsonProperty
 	@Column(name = "windSpeed_beaufort")
 	private int beaufort;
 
+	@CSVHeaderItem("Name")
 	@JsonProperty
 	@Column(name = "windSpeed_name")
 	private String name;

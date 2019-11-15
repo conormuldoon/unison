@@ -5,18 +5,22 @@ import java.util.Date;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 
+import eu.acclimatize.unison.CSVHeaderItem;
 import eu.acclimatize.unison.Cloud;
+import eu.acclimatize.unison.Constant;
 import eu.acclimatize.unison.HarmonieItem;
 
 /**
- * A Jackson annotated class that is used to store a result row from a low, medium, and high cloud level data query.
+ * A Jackson and CSV annotated class that is used to store a result row from a low, medium, and high cloud level data query.
  *
  */
 public class CloudLevelResult implements HarmonieItem {
 
+	@CSVHeaderItem(Constant.FROM_HOUR)
 	@JsonProperty
 	private Date date;
 
+	@CSVHeaderItem
 	@JsonProperty
 	private Cloud cloud;
 	/**

@@ -12,10 +12,12 @@ import com.fasterxml.jackson.annotation.JsonProperty;
  */
 public class WindDirection implements HarmonieItem {
 
+	@CSVHeaderItem("Degrees")
 	@JsonProperty
 	@Column(name="windDirection_deg")
 	private double degrees;
 	
+	@CSVHeaderItem("Name")
 	@JsonProperty
 	@Column(name="windDirection_name")
 	private String name;

@@ -5,24 +5,29 @@ import java.util.Date;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 
+import eu.acclimatize.unison.CSVHeaderItem;
+import eu.acclimatize.unison.Constant;
 import eu.acclimatize.unison.HarmonieItem;
 
 /**
- * A Jackson annotated class that is used to store a result row from a humidity data query.
+ * A Jackson and CSV annotated class that is used to store a result row from a
+ * humidity data query.
  *
  */
 public class HumidityResult implements HarmonieItem {
 
+	@CSVHeaderItem(Constant.FROM_HOUR)
 	@JsonProperty
 	private Date date;
 
+	@CSVHeaderItem("Humidity " + Constant.PERCENTAGE_SYMBOL)
 	@JsonProperty
 	private double humidity;
 
 	/**
 	 * Creates and instance of HumidityResult.
 	 * 
-	 * @param date The hour from which the results relates.
+	 * @param date     The hour from which the results relates.
 	 * @param humidity The level of humidity.
 	 */
 	public HumidityResult(Date date, double humidity) {

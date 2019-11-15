@@ -8,25 +8,29 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 
 /**
  * 
- * Stores the median, 20<sup>th</sup> percentile, and 80<sup>th</sup> percentile precipitation values.
+ * Stores the median, 20<sup>th</sup> percentile, and 80<sup>th</sup> percentile
+ * precipitation values.
  *
  */
 @JsonInclude(Include.NON_NULL)
 public class PrecipitationValue implements HarmonieItem {
 
+	@CSVHeaderItem("Median " + Constant.MILLIMETRES_SYMBOL)
 	@JsonProperty
 	private Double value;
-	
+
+	@CSVHeaderItem("20th percentile " + Constant.MILLIMETRES_SYMBOL)
 	@JsonProperty
 	private Double minvalue;
-	
+
+	@CSVHeaderItem("80th percentile " + Constant.MILLIMETRES_SYMBOL)
 	@JsonProperty
 	private Double maxvalue;
 
 	/**
 	 * Creates an instance of PrecipitationValue.
 	 * 
-	 * @param value The median value.
+	 * @param value    The median value.
 	 * @param minvalue The 20<sup>th</sup> percentile value.
 	 * @param maxvalue The 80<sup>th</sup> percentile value.
 	 */
@@ -42,7 +46,7 @@ public class PrecipitationValue implements HarmonieItem {
 	public PrecipitationValue() {
 
 	}
-	
+
 	@Override
 	public void printItem(PrintWriter pw) {
 		if (minvalue != null) {

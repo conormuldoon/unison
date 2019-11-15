@@ -5,17 +5,21 @@ import java.util.Date;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 
+import eu.acclimatize.unison.CSVHeaderItem;
+import eu.acclimatize.unison.Constant;
 import eu.acclimatize.unison.HarmonieItem;
 
 /**
- * A Jackson annotated class that is used to store a result row from a pressure data query.
+ * A Jackson and CSV annotated class that is used to store a result row from a pressure data query.
  *
  */
 public class PressureResult implements HarmonieItem {
 
+	@CSVHeaderItem(Constant.FROM_HOUR)
 	@JsonProperty
 	private Date date;
 
+	@CSVHeaderItem("Pressure (hPa)")
 	@JsonProperty
 	private double pressure;
 

@@ -5,17 +5,22 @@ import java.util.Date;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 
+import eu.acclimatize.unison.CSVHeaderItem;
+import eu.acclimatize.unison.Constant;
 import eu.acclimatize.unison.HarmonieItem;
 
 /**
- * A Jackson annotated class that is used to store a result row from a fog data query.
+ * A Jackson and CSV annotated class that is used to store a result row from a
+ * fog data query.
  *
  */
 public class FogResult implements HarmonieItem {
 
+	@CSVHeaderItem(Constant.FROM_HOUR)
 	@JsonProperty
 	private Date date;
 
+	@CSVHeaderItem("Fog " + Constant.PERCENTAGE_SYMBOL)
 	@JsonProperty
 	private double fog;
 
@@ -23,7 +28,7 @@ public class FogResult implements HarmonieItem {
 	 * Creates and instance of FogResult.
 	 * 
 	 * @param date The hour from which the results relates.
-	 * @param fog The amount of fog.
+	 * @param fog  The amount of fog.
 	 */
 	public FogResult(Date date, double fog) {
 		this.date = date;

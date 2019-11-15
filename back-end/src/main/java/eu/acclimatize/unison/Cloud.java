@@ -11,12 +11,15 @@ import com.fasterxml.jackson.annotation.JsonProperty;
  */
 public class Cloud implements HarmonieItem {
 
+	@CSVHeaderItem("Low "+Constant.PERCENTAGE_SYMBOL)
 	@JsonProperty("low")
 	private Double lowClouds;
 
+	@CSVHeaderItem("Medium "+Constant.PERCENTAGE_SYMBOL)
 	@JsonProperty("medium")
 	private Double mediumClouds;
 
+	@CSVHeaderItem("High " + Constant.PERCENTAGE_SYMBOL)
 	@JsonProperty("high")
 	private Double highClouds;
 
