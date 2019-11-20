@@ -1,5 +1,8 @@
 # See https://help.github.com/ignore-files/ for more about ignoring files.
 
+# Temporary Stryker files
+/.stryker-temp
+
 # documentation
 /docs
 /.cache
@@ -9,6 +12,7 @@
 
 # testing
 /coverage
+/reports
 
 # production
 /build

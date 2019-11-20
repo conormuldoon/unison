@@ -147,11 +147,6 @@ class Unison extends Component {
     this.setState({ toDate: formatDate(selectedDate, FORMAT) });
   }
 
-
-  test = (event) => {
-    alert('hello ' + event.target.value);
-  }
-
   render() {
 
 
