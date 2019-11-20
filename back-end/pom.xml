@@ -199,13 +199,33 @@
 				<reportSets>
 					<reportSet>
 						<reports>
-							<!-- select non-aggregate reports -->
+							<!-- Select non-aggregate reports. -->
 							<report>report</report>
 						</reports>
 					</reportSet>
 				</reportSets>
 			</plugin>
+
+			<plugin>
+				<groupId>org.pitest</groupId>
+				<artifactId>pitest-maven</artifactId>
+				<version>1.4.10</version>
+				<configuration>
+					<targetClasses>
+						<param>eu.acclimatize.unison*</param>
+					</targetClasses>
+					<targetTests>
+						<param>eu.acclimatize.unison*Test*</param>
+					</targetTests>
+
+					<!-- See JaCoCo plug-in excludes comment. -->
+					<excludedTestClasses>
+						<param>*UserConsole</param>
+					</excludedTestClasses>
+				</configuration>
+			</plugin>
 		</plugins>
+
 	</reporting>
 
 
