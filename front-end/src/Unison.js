@@ -217,7 +217,7 @@ class Unison extends Component {
 
 
 
-              <a className='pLeft' href={API + '/csv' + this.state.curVar.replace(/ /g, '') + '?location=' + this.removePadding(this.state.curLoc) + '&fromDate=' + this.state.fromDate + '&toDate=' + this.state.toDate}>
+              <a className='pLeft' href={API + '/csv' + this.state.curVar.replace(/ /g, '') + '_' + Date.now() + '.csv?location=' + this.removePadding(this.state.curLoc) + '&fromDate=' + this.state.fromDate + '&toDate=' + this.state.toDate}>
 
                 <button disabled={!this.state.curLoc} >
                   CSV

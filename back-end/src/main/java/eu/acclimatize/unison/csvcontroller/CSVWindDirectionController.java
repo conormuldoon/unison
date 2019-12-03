@@ -21,7 +21,7 @@ import eu.acclimatize.unison.Constant;
 public class CSVWindDirectionController {
 
 	private CSVResponder windDirectionResponder;
-	private static final String WINSPEED = "/csvWindDirection";
+	private static final String WINSPEED = "/csvWindDirection*";
 
 	/**
 	 * Creates an instance of CSVWindDirectionController.

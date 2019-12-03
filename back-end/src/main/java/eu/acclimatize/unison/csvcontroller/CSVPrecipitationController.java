@@ -22,7 +22,7 @@ public class CSVPrecipitationController {
 
 	private CSVResponder precipitationResponder;
 
-	private static final String CSV_PRECIPITATION = "/csvPrecipitation";
+	private static final String CSV_PRECIPITATION = "/csvPrecipitation*";
 
 	/**
 	 * Creates an instance of CSVPrecipitationController.

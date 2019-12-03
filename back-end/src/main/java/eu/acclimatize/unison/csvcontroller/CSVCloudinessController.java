@@ -22,7 +22,7 @@ public class CSVCloudinessController {
 
 	private CSVResponder cloudinessResponder;
 
-	private static final String CSV_CLOUDINESS = "/csvCloudiness";
+	private static final String CSV_CLOUDINESS = "/csvCloudiness*";
 	
 	/**
 	 * Creates an instance of CSVCloudinessController.

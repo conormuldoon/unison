@@ -22,7 +22,7 @@ public class CSVTemperatureController {
 
 	private CSVResponder temperatureResponder;
 
-	private static final String CSV_TEMP = "/csvTemperature";
+	private static final String CSV_TEMP = "/csvTemperature*";
 
 	/**
 	 * Creates an instance of CSVTemperatureController.

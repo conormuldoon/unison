@@ -22,7 +22,7 @@ public class CSVDewPointController {
 
 	private CSVResponder dewPointResponder;
 
-	private static final String CSV_DEWPOINT = "/csvDewPoint";
+	private static final String CSV_DEWPOINT = "/csvDewPoint*";
 
 	/**
 	 * Creates an instance of CSVDewPointController.

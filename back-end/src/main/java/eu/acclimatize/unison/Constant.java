@@ -77,5 +77,6 @@ public class Constant {
 	 * The Celsius symbol used in CSV headers.
 	 */
 	public static final String CELSIUS_SYMBOL = "(°C)";
+	
 
 }
