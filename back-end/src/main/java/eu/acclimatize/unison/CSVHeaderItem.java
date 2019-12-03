@@ -7,7 +7,7 @@ import java.lang.annotation.Target;
 
 /**
  * 
- * An annotation used in specifying CSV header text;
+ * An annotation used in specifying CSV header text.
  *
  */
 @Target(ElementType.FIELD)
