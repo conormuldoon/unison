@@ -1,6 +1,7 @@
 /bin
 /target/
 !.mvn/wrapper/maven-wrapper.jar
+__pycache__/
 
 ### STS ###
 .apt_generated
