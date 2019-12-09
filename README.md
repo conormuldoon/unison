@@ -74,7 +74,7 @@ The coverage report will be located in the `front-end/coverage/locv-report` dire
 
 With the Postgres/PostGIS configuration, the schema is not created automatically and it should be created using psql and the `back-end/src/main/resources/pg_pgis_schema.sql` schema file.
 
-The database configuration is specified in the `back-end/src/main/resources/application.properties` file. Comment out the lines related GeoDB and uncomment the lines related to Postgres/PostGIS or vice versa and restart the server. Alternatively, use the Python script:
+The database configuration is specified in the `back-end/src/main/resources/application.properties` file. Comment out the properties related GeoDB and uncomment the properties related to Postgres/PostGIS or vice versa and restart the server. Alternatively, use the Python script to comment out and uncomment the relevant properties:
 ```
 cd back-end
 python switch_db_config.py
