@@ -12,9 +12,6 @@ import LeafletMap from './LeafletMap';
 import { today, tomorrow } from './Util';
 
 
-
-let maxLen;
-const WSPACE = '\u00a0';
 const varOpt = ['Precipitation', 'Humidity', 'Wind Direction', 'Wind Speed', 'Cloudiness', 'Cloud Level', 'Dew Point', 'Pressure', 'Temperature'];
 
 /**
@@ -34,7 +31,6 @@ class Unison extends Component {
       toDate: tomorrow(),
       option: undefined,
       marker: undefined,
-      clickedLocation: undefined,
       curVar: varOpt[0],
       curLoc: undefined,
     };
@@ -66,13 +62,8 @@ class Unison extends Component {
           let newOption = [];
           let newMarker = [];
 
-          maxLen = 0;
           for (let i = 0; i < n; i++) {
-            maxLen = Math.max(locationArray[i].name.length)
-
-          }
-          for (let i = 0; i < n; i++) {
-            newOption.push(comp.addPadding(locationArray[i].name));
+            newOption.push(locationArray[i].name);
             let pos = [locationArray[i].geom.coordinates[1], locationArray[i].geom.coordinates[0]];
 
             newMarker.push({ name: locationArray[i].name, position: pos });
@@ -80,7 +71,7 @@ class Unison extends Component {
 
           }
           if (n > 0) {
-            comp.setState({ option: newOption, marker: newMarker, curLoc: comp.addPadding(locationArray[0].name) });
+            comp.setState({ option: newOption, marker: newMarker, curLoc: locationArray[0].name });
           } else {
             comp.setState({ curLoc: undefined, option: undefined, marker: undefined });
           }
@@ -97,8 +88,7 @@ class Unison extends Component {
 
   markerClicked = (location) => {
 
-    let newLoc = this.addPadding(location, maxLen);
-    this.setState({ clickedLocation: newLoc, curLoc: newLoc });
+    this.setState({ curLoc: location });
   }
 
   _onLocationSelect = (event) => {
@@ -110,34 +100,7 @@ class Unison extends Component {
     this.setState({ curVar: event.target.value });
   }
 
-  removePadding = (location) => {
 
-    if (location !== undefined) {
-
-      const n = location.length;
-      for (let i = 0; i < n; i++) {
-        if (location.charAt(i) === WSPACE) {
-          if (i === n - 1 || location.charAt(i + 1) === WSPACE) {
-            return location.substring(0, i);
-          }
-        }
-
-      }
-
-    }
-    return location;
-  }
-
-  addPadding = (location) => {
-    let num = maxLen - location.length;
-    let newLoc = location;
-
-    for (let i = 0; i < num; i++) {
-      newLoc = newLoc.concat(WSPACE);
-    }
-
-    return newLoc;
-  }
 
   handleStartChange = (selectedDate) => {
     this.setState({ fromDate: formatDate(selectedDate, FORMAT) });
@@ -217,7 +180,7 @@ class Unison extends Component {
 
 
 
-              <a className='pLeft' href={API + '/csv' + this.state.curVar.replace(/ /g, '') + '_' + Date.now() + '.csv?location=' + this.removePadding(this.state.curLoc) + '&fromDate=' + this.state.fromDate + '&toDate=' + this.state.toDate}>
+              <a className='pLeft' href={API + '/csv' + this.state.curVar.replace(/ /g, '') + '_' + Date.now() + '.csv?location=' + this.state.curLoc + '&fromDate=' + this.state.fromDate + '&toDate=' + this.state.toDate}>
 
                 <button disabled={!this.state.curLoc} >
                   CSV
@@ -226,7 +189,7 @@ class Unison extends Component {
               </a>
             </div>
 
-            <ARLocationComponent obtainData={this.obtainData} location={this.removePadding(this.state.curLoc)} />
+            <ARLocationComponent obtainData={this.obtainData} location={this.state.curLoc} />
 
           </center>
 
