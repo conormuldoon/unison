@@ -7,7 +7,7 @@ See the [Javadoc](https://conormuldoon.github.io/unison/docs/back-end/) for a de
 ## Running
 
 ### Binary
-Unison requires Java 11 to operate. Download and run the [latest release](https://github.com/conormuldoon/unison/releases/latest/) using the `-jar` option. Once the application has started, enter an initial user name and password in the terminal, which will be required for adding/removing the locations to track, and then open `http://localhost:8080` in the browser.To change the port, override the `server.port` property using a Java system property or the `--server.port` argument for main. The initial user credentials can also be specified using (`default.username` and `default.encoded`) properties as an alternative to using the console where the password is encoded using a bcrypt encoder.
+Unison requires Java 11 to operate. Download and run the [latest release](https://github.com/conormuldoon/unison/releases/latest/) using the `-jar` option. Once the application has started, enter an initial user name and password in the terminal, which will be required for adding/removing the locations to track, and then open `http://localhost:8080` in the browser. To change the port, override the `server.port` property using a Java system property or the `--server.port` argument for main. The initial user credentials can also be specified using (`default.username` and `default.encoded`) properties as an alternative to using the console where the password is encoded using a bcrypt encoder.
 
 ### From source
 
@@ -74,7 +74,7 @@ The coverage report will be located in the `front-end/coverage/locv-report` dire
 
 With the Postgres/PostGIS configuration, the schema is not created automatically and it should be created using psql and the `back-end/src/main/resources/pg_pgis_schema.sql` schema file.
 
-The database configuration is specified in the `back-end/src/main/resources/application.properties` file. Comment out the properties related GeoDB and uncomment the properties related to Postgres/PostGIS or vice versa and restart the server. Alternatively, to automate the process (for instance, for continuous integration purposes), use the Python script to comment out and uncomment the relevant properties:
+The database configuration is specified in the `back-end/src/main/resources/application.properties` file. Comment out the lines related GeoDB and uncomment the lines related to Postgres/PostGIS or vice versa and restart the server. Alternatively, to automate the process (for instance, for continuous integration purposes), use the Python script to comment out and uncomment the relevant lines:
 ```
 cd back-end
 python switch_db_config.py
