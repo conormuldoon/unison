@@ -1,7 +1,7 @@
 import shutil
 
-CURRENT = "src/main/resources/application.properties"
-SWITCHED = "src/main/resources/application.tmppy"
+CURRENT = "../resources/application.properties"
+SWITCHED = "../resources/application.tmppy"
 
 
 def switchitems(matchlist):

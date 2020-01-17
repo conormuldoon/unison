@@ -76,11 +76,11 @@ With the Postgres/PostGIS configuration, the schema is not created automatically
 
 The database configuration is specified in the `back-end/src/main/resources/application.properties` file. Comment out the lines related GeoDB and uncomment the lines related to Postgres/PostGIS or vice versa and restart the server. Alternatively, to automate the process (for instance, for continuous deployment purposes), use the Python script to comment out and uncomment the relevant lines:
 ```
-cd back-end
+cd back-end/src/main/python
 python switch_db_config.py
 ```
 
-It is recommended that the `spring.datasource.password` property be changed to a new password (a system property or the `change_db_password.py` Python script can be used for automation purposes). 
+It is recommended that the `spring.datasource.password` property be changed to a new password (a system property or the `back-end/src/main/python/change_db_password.py` Python script can be used for automation purposes). 
 
 ## Changing the model
 

@@ -1,8 +1,8 @@
 import shutil
 import sys
 
-CURRENT = "src/main/resources/application.properties"
-SWITCHED = "src/main/resources/application.tmppy"
+CURRENT = "../resources/application.properties"
+SWITCHED = "../resources/application.tmppy"
 DS_PASSWORD = "spring.datasource.password"
 
 
