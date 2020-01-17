@@ -74,11 +74,13 @@ The coverage report will be located in the `front-end/coverage/locv-report` dire
 
 With the Postgres/PostGIS configuration, the schema is not created automatically and it should be created using psql and the `back-end/src/main/resources/pg_pgis_schema.sql` schema file.
 
-The database configuration is specified in the `back-end/src/main/resources/application.properties` file. Comment out the lines related GeoDB and uncomment the lines related to Postgres/PostGIS or vice versa and restart the server. Alternatively, to automate the process (for instance, for continuous integration purposes), use the Python script to comment out and uncomment the relevant lines:
+The database configuration is specified in the `back-end/src/main/resources/application.properties` file. Comment out the lines related GeoDB and uncomment the lines related to Postgres/PostGIS or vice versa and restart the server. Alternatively, to automate the process (for instance, for continuous deployment purposes), use the Python script to comment out and uncomment the relevant lines:
 ```
 cd back-end
 python switch_db_config.py
 ```
+
+It is recommended that the `spring.datasource.password` property be changed to a new password (the `change_db_password.py` Python script can be used for automation purposes). 
 
 ## Changing the model
 
