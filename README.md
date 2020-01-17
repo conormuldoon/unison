@@ -80,7 +80,7 @@ cd back-end
 python switch_db_config.py
 ```
 
-It is recommended that the `spring.datasource.password` property be changed to a new password (the `change_db_password.py` Python script can be used for automation purposes). 
+It is recommended that the `spring.datasource.password` property be changed to a new password (a system property or the `change_db_password.py` Python script can be used for automation purposes). 
 
 ## Changing the model
 
