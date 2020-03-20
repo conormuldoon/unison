@@ -1,6 +1,6 @@
 package eu.acclimatize.unison.location;
 
-import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -55,7 +55,7 @@ public class DeleteLocationController {
 	 * @return 0 if failed to delete the location, 1 if successfully removed the location, 2 if incorrect credentials used, 
 	 * and 3 if the user used correct credentials, but did not add the location.
 	 */
-	@PostMapping(DELETE_LOCATION)
+	@DeleteMapping(DELETE_LOCATION)
 	public int deleteLocation(@RequestParam(Constant.LOCATION) String locationName,
 			@RequestParam(Constant.USERNAME) String userName, @RequestParam(Constant.PASSWORD) String password) {
 

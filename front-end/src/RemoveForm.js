@@ -2,7 +2,7 @@
 import PropTypes from 'prop-types';
 import React, { useState } from 'react';
 import { API } from './Constant';
-import { removePostObject } from './Util';
+import { locCred } from './Util';
 
 
 /**
@@ -35,8 +35,10 @@ function RemoveForm(props) {
 
   async function removeRequest() {
 
-    const response = await fetch(API + '/deleteLocation',
-      removePostObject(props.location, uname, pword));
+    const response = await fetch(API + '/deleteLocation?' + locCred(props.location, uname, pword),
+      {
+        method: 'DELETE'
+      });
 
     if (response.ok) {
       const resVal = await response.json();

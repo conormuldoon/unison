@@ -27,8 +27,9 @@ it('mathes snapshot', () => {
 
 
 it('handles remove location', async (done) => {
-  fetchMock.post('end:/deleteLocation', '1');
   const location = 'UCD';
+  fetchMock.delete('end:/deleteLocation?location=' + location + '&username=&password=', '1');
+
 
   jest.spyOn(window, 'alert').mockImplementation(() => { });
   const hideDisplay = jest.fn();
@@ -51,8 +52,10 @@ it('handles remove location', async (done) => {
 
 
 const testRemove = async (done, retVal, message) => {
-  fetchMock.post('end:/deleteLocation', retVal);
+  
   const location = 'UCD';
+  fetchMock.delete('end:/deleteLocation?location=' + location + '&username=&password=', retVal);
+
 
   jest.spyOn(window, 'alert').mockImplementation((messStr) => {
     expect(messStr).toEqual(message);

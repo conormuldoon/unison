@@ -29,7 +29,7 @@ const postObject = (body) => {
   }
 }
 
-const locCred = (location, uname, pword) => {
+export const locCred = (location, uname, pword) => {
   return 'location=' + location + '&username=' + uname + '&password=' + pword;
 }
 
