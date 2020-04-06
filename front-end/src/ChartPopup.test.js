@@ -71,3 +71,12 @@ it('displays a lower case letter for second word', () => {
   fetchMock.restore();
 });
 
+it('adds a chart', () => {
+
+  fetchMock.get(apiRequest, data);
+
+  const { getByTestId } = render(chartPopup);
+  getByTestId('chart');
+  fetchMock.restore();
+});
+

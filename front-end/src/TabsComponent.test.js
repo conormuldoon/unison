@@ -18,10 +18,10 @@ const addChart = async (weatherVariable, dataArray, zoomDomain) => {
     }
 
 
-    const { findByTestId /*, debug */} = render(<TabsComponent curVar={weatherVariable} data={dataArray} zoomDomain={zoomDomain} minMax={false} setZoomDomain={() => { }} />);
+    const { getByTestId /*, debug */} = render(<TabsComponent curVar={weatherVariable} data={dataArray} zoomDomain={zoomDomain} minMax={false} setZoomDomain={() => { }} />);
 
 
-    findByTestId('chart');
+    getByTestId('chart');
 
 
     fetchMock.restore();
