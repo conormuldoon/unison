@@ -7,9 +7,6 @@ import TabsComponent from './TabsComponent';
 const DLEN = 16;
 
 
-
-
-
 const addChart = async (weatherVariable, dataArray, zoomDomain) => {
 
     const n = dataArray.length;
@@ -21,7 +18,7 @@ const addChart = async (weatherVariable, dataArray, zoomDomain) => {
     }
 
 
-    const { findByTestId /*, debug */} = render(<TabsComponent varCur={weatherVariable} data={dataArray} zoomDomain={zoomDomain} minMax={false} setZoomDomain={() => { }} />);
+    const { findByTestId /*, debug */} = render(<TabsComponent curVar={weatherVariable} data={dataArray} zoomDomain={zoomDomain} minMax={false} setZoomDomain={() => { }} />);
 
 
     findByTestId('chart');
@@ -30,9 +27,6 @@ const addChart = async (weatherVariable, dataArray, zoomDomain) => {
     fetchMock.restore();
 
 }
-
-
-
 
 
 

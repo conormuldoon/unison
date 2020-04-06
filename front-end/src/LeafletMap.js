@@ -45,7 +45,7 @@ const image = new Leaflet.Icon({
   addPopup = (name) =>{
     this.props.markerCallback(name);
 
-    const popupComponent=<ChartPopup varCur={this.props.curVar} location={name} fromDate={this.props.fromDate} toDate={this.props.toDate} closePopup={this.closePopup}/>;
+    const popupComponent=<ChartPopup curVar={this.props.curVar} location={name} fromDate={this.props.fromDate} toDate={this.props.toDate} closePopup={this.closePopup}/>;
     this.setState({popupComponent:popupComponent,dragging:false});
 
 

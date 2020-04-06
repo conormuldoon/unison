@@ -1,18 +1,15 @@
 
 
 import PropTypes from 'prop-types';
-import React, { Component } from 'react';
+import React, { useState, useEffect } from 'react';
 import 'react-day-picker/lib/style.css';
 import { formatDate } from 'react-day-picker/moment';
 import './App.css';
 import ARLocationComponent from './ARLocationComponent';
-import { API, FORMAT } from './Constant';
+import { API, FORMAT, VAR_OPT } from './Constant';
 import DateSelector from './DateSelector';
 import LeafletMap from './LeafletMap';
 import { today, tomorrow } from './Util';
-
-
-const varOpt = ['Precipitation', 'Humidity', 'Wind Direction', 'Wind Speed', 'Cloudiness', 'Cloud Level', 'Dew Point', 'Pressure', 'Temperature'];
 
 /**
  * Application component for Unison. Once mounted, it connects to the back-end to receive a list of the locations being tracked.
@@ -20,37 +17,20 @@ const varOpt = ['Precipitation', 'Humidity', 'Wind Direction', 'Wind Speed', 'Cl
  * @component
  * 
  */
-class Unison extends Component {
+function Unison(props) {
 
 
-  constructor(props) {
-    super(props);
+  const [fromDate, setFromDate] = useState(today());
+  const [toDate, setToDate] = useState(tomorrow());
+  const [option, setOption] = useState(undefined);
+  const [marker, setMarker] = useState(undefined);
+  const [curLoc, setCurLoc] = useState(undefined);
+  const [curVar, setCurVar] = useState(VAR_OPT[0]);
 
-    this.state = {
-      fromDate: today(),
-      toDate: tomorrow(),
-      option: undefined,
-      marker: undefined,
-      curVar: varOpt[0],
-      curLoc: undefined,
-    };
-
-
-  }
-
-  componentDidMount = () => {
-    this.cancelObtainData = this.obtainData();
-  }
-
-  componentWillUnmount = () => {
-    this.cancelObtainData();
-  }
-
-  obtainData = () => {
-
+  const obtainData = () => {
     let active = true;
 
-    async function requestLocation(comp) {
+    async function requestLocation() {
       let response = await fetch(API + '/location');
 
       if (response.ok) {
@@ -71,135 +51,140 @@ class Unison extends Component {
 
           }
           if (n > 0) {
-            comp.setState({ option: newOption, marker: newMarker, curLoc: locationArray[0].name });
+            setOption(newOption);
+            setMarker(newMarker);
+            setCurLoc(locationArray[0].name);
+           
           } else {
-            comp.setState({ curLoc: undefined, option: undefined, marker: undefined });
+            setOption(undefined);
+            setMarker(undefined);
+            setCurLoc(undefined);
           }
         }
       }
     }
 
-    requestLocation(this);
+    requestLocation();
 
     const cancel = () => active = false;
     return cancel;
+  };
+
+  useEffect(() => {
+
+    return obtainData();
+  }, []);
+
+
+  const markerClicked = (location) => {
+    setCurLoc(location);
+  }
+
+  const _onLocationSelect = (event) => {
+
+    setCurLoc(event.target.value);
 
   }
 
-  markerClicked = (location) => {
+  const _onVarSelect = (event) => {
+    setCurVar(event.target.value);
 
-    this.setState({ curLoc: location });
   }
 
-  _onLocationSelect = (event) => {
+  const handleStartChange = (selectedDate) => {
+    setFromDate(formatDate(selectedDate, FORMAT));
 
-    this.setState({ curLoc: event.target.value });
   }
 
-  _onVarSelect = (event) => {
-    this.setState({ curVar: event.target.value });
+  const handleEndChange = (selectedDate) => {
+
+    setToDate(formatDate(selectedDate, FORMAT));
+
   }
 
 
+  return (
 
-  handleStartChange = (selectedDate) => {
-    this.setState({ fromDate: formatDate(selectedDate, FORMAT) });
-  }
+    <div id="mapdiv">
 
-  handleEndChange = (selectedDate) => {
-    this.setState({ toDate: formatDate(selectedDate, FORMAT) });
-  }
+      <div id="logos">
 
-  render() {
+        <center>
+          <img id="logoitem" alt="" src={props.logoLeft} />
 
 
-    return (
-
-
-      <div id="mapdiv">
-
-        <div id="logos">
-
-          <center>
-            <img id="logoitem" alt="" src={this.props.logoLeft} />
-
-
-            <img id="logoitem" alt="" src={this.props.logoRight} />
-          </center>
-
-        </div>
-
-        <LeafletMap marker={this.state.marker} curVar={this.state.curVar} curLoc={this.state.curLoc}
-          markerCallback={this.markerClicked} fromDate={this.state.fromDate} toDate={this.state.toDate}
-          mapCentre={this.props.mapCentre}
-
-        />
-        <div id="selectdiv" >
-
-          <center>
-
-            <div>
-              <div id='variDD' >
-
-                <select disabled={!this.state.curLoc} onChange={this._onVarSelect}>
-
-                  {varOpt.map((opt) => <option key={opt} value={opt}>{opt}</option>)}
-
-                </select>
-
-              </div>
-
-              <div className='marginItem' >
-
-                <select disabled={!this.state.curLoc} onChange={this._onLocationSelect} defaultValue="Location" value={this.state.curLoc}>
-                  {!this.state.option && <option key="Location" value="Location" >Location</option>}
-                  {this.state.option && this.state.option.map((opt) => <option key={opt} value={opt}>{opt}</option>)}
-
-                </select>
-
-
-              </div>
-
-
-              <div className='pLeft' >
-                <DateSelector
-                  label="From date" dateValue={this.state.fromDate}
-                  handleDayChange={this.handleStartChange}
-                />
-              </div>
-
-              <div className='pLeft' >
-                <DateSelector
-                  label="To date" dateValue={this.state.toDate}
-                  handleDayChange={this.handleEndChange}
-                />
-
-              </div>
-
-
-
-
-
-              <a className='pLeft' href={API + '/csv' + this.state.curVar.replace(/ /g, '') + '_' + Date.now() + '.csv?location=' + this.state.curLoc + '&fromDate=' + this.state.fromDate + '&toDate=' + this.state.toDate}>
-
-                <button disabled={!this.state.curLoc} >
-                  CSV
-              </button>
-
-              </a>
-            </div>
-
-            <ARLocationComponent obtainData={this.obtainData} location={this.state.curLoc} />
-
-          </center>
-
-        </div>
-
-
+          <img id="logoitem" alt="" src={props.logoRight} />
+        </center>
 
       </div>
-    );
-  }
+
+      <LeafletMap marker={marker} curVar={curVar} curLoc={curLoc}
+        markerCallback={markerClicked} fromDate={fromDate} toDate={toDate}
+        mapCentre={props.mapCentre}
+
+      />
+      <div id="selectdiv" >
+
+        <center>
+
+          <div>
+            <div id='variDD' >
+
+              <select disabled={!curLoc} onChange={_onVarSelect}>
+
+                {VAR_OPT.map((opt) => <option key={opt} value={opt}>{opt}</option>)}
+
+              </select>
+
+            </div>
+
+            <div className='marginItem' >
+
+              <select disabled={!curLoc} onChange={_onLocationSelect} defaultValue="Location" value={curLoc}>
+                {!option && <option key="Location" value="Location" >Location</option>}
+                {option && option.map((opt) => <option key={opt} value={opt}>{opt}</option>)}
+
+              </select>
+
+
+            </div>
+
+
+            <div className='pLeft' >
+              <DateSelector
+                label="From date" dateValue={fromDate}
+                handleDayChange={handleStartChange}
+              />
+            </div>
+
+            <div className='pLeft' >
+              <DateSelector
+                label="To date" dateValue={toDate}
+                handleDayChange={handleEndChange}
+              />
+
+            </div>
+
+            <a className='pLeft' href={API + '/csv' + curVar.replace(/ /g, '') + '_' + Date.now() + '.csv?location=' + curLoc + '&fromDate=' + fromDate + '&toDate=' + toDate}>
+
+              <button disabled={!curLoc} >
+                CSV
+              </button>
+
+            </a>
+          </div>
+
+          <ARLocationComponent obtainData={obtainData} location={curLoc} />
+
+        </center>
+
+      </div>
+
+
+
+    </div>
+  );
+
 }
 
 Unison.propTypes = {

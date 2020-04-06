@@ -7,9 +7,6 @@ import TabsComponent from './TabsComponent';
 import { varMapping } from './Util';
 
 
-
-
-
 const DLEN = 16;
 
 /**
@@ -26,8 +23,12 @@ function ChartPopup(props) {
 
   useEffect(() => {
 
+    let active = true;
+
     async function obtainData() {
-      const variRequest = varMapping(props.varCur);
+
+
+      const variRequest = varMapping(props.curVar);
 
 
       const loc = props.location.trim();
@@ -36,47 +37,51 @@ function ChartPopup(props) {
       let response = await fetch(request);
       let dataArray = await response.json();
 
-      const n = dataArray.length;
+      if (active) {
+        const n = dataArray.length;
 
-      for (let i = 0; i < n; i++) {
-        const dateS = dataArray[i].date;
-        dataArray[i].date = new Date(dateS.substring(0, DLEN));
+        for (let i = 0; i < n; i++) {
+          const dateS = dataArray[i].date;
+          dataArray[i].date = new Date(dateS.substring(0, DLEN));
 
-      }
-
-      if (n > 0) {
-
-        const fd = dataArray[0].date;
-        const td = dataArray[dataArray.length - 1].date;
-
-        if (props.varCur === PRECIP && dataArray[0].precipitation.minvalue !== undefined) {
-
-          setMinMax(true);
-        } else {
-          setMinMax(false);
         }
 
-        setData(dataArray);
-        setZoomDomain({ x: [fd, td] });
-      } else {
+        if (n > 0) {
 
-        setData(undefined);
-        setZoomDomain(undefined);
-        setMinMax(false);
+          const fd = dataArray[0].date;
+          const td = dataArray[dataArray.length - 1].date;
+
+          if (props.curVar === PRECIP && dataArray[0].precipitation.minvalue !== undefined) {
+
+            setMinMax(true);
+          } else {
+            setMinMax(false);
+          }
+
+          setData(dataArray);
+          setZoomDomain({ x: [fd, td] });
+        } else {
+
+          setData(undefined);
+          setZoomDomain(undefined);
+          setMinMax(false);
+        }
       }
 
     }
+
     obtainData();
+    const cancel = () => active = false;
+    return cancel;
 
-
-  }, [props.varCur, props.location, props.fromDate, props.toDate]);
+  }, [props.curVar, props.location, props.fromDate, props.toDate]);
 
   function handleClick(e) {
     e.stopPropagation();
   }
 
   // Changing second word in current variable to lower case if present
-  let vca = props.varCur.split(' ');
+  let vca = props.curVar.split(' ');
   let vc = vca[0];
   if (vca.length > 1) {
     vca[1] = vca[1].toLowerCase();
@@ -92,7 +97,7 @@ function ChartPopup(props) {
       <center>
         {vc} data from {props.location.trim()}
 
-        <TabsComponent varCur={props.varCur} data={data} zoomDomain={zoomDomain} minMax={minMax}
+        <TabsComponent curVar={props.curVar} data={data} zoomDomain={zoomDomain} minMax={minMax}
           setZoomDomain={setZoomDomain} />
 
       </center>
@@ -103,7 +108,7 @@ function ChartPopup(props) {
 
 ChartPopup.propTypes = {
   /** Specifies the weather variable currently selected. */
-  varCur: PropTypes.string.isRequired,
+  curVar: PropTypes.string.isRequired,
 
   /** Sepecifies the location selected. */
   location: PropTypes.string.isRequired,

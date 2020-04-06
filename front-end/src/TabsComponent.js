@@ -1,15 +1,9 @@
 import PropTypes from 'prop-types';
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 import { Tab, TabList, TabPanel, Tabs } from 'react-tabs';
 import "react-tabs/style/react-tabs.css";
 import ChartComponent from './ChartComponent';
 import { CL, HIGH, HPER, LOW, LPER, MEDIAN, MEDIUM } from './Constant';
-
-
-
-
-
-
 
 /**
  * A component that displays a number of tabs for ChartComponents for the phenomenom being tracked. 
@@ -20,44 +14,24 @@ import { CL, HIGH, HPER, LOW, LPER, MEDIAN, MEDIUM } from './Constant';
  */
 function TabsComponent(props) {
 
-  const [tabs, setTabs] = useState(undefined);
+  let tabs;
 
+  if (props.minMax) {
 
-  useEffect(() => {
+    tabs = [LPER, MEDIAN, HPER];
 
-    function updateTabs() {
-      if (props.minMax) {
+  } else if (props.curVar === CL) {
 
-        setTabs([LPER, MEDIAN, HPER]);
+    tabs = [LOW, MEDIUM, HIGH];
 
-      } else if (props.varCur === CL) {
-
-        setTabs([LOW, MEDIUM, HIGH]);
-
-      } else {
-        setTabs(undefined);
-      }
-    }
-
-    if (props.data && props.data.length > 0) {
-
-      updateTabs(props.minMax, props.varCur === CL);
-
-    } else {
-
-      setTabs(undefined);
-
-    }
-  }, [props.data, props.varCur, props.minMax]
-  );
-
+  }
 
   function tabsPanel(index) {
     return (<TabPanel >
       <div id="tabdiv" data-testid='chart' >
         <ChartComponent data={props.data} zoomDomain={props.zoomDomain} index={index}
           handleZoom={props.setZoomDomain}
-          varCur={props.varCur} minMax={props.minMax} />
+          curVar={props.curVar} minMax={props.minMax} />
       </div>
     </TabPanel>
     );
@@ -79,7 +53,7 @@ function TabsComponent(props) {
 
     {!tabs && <div data-testid='chart' id="singlevar">
       <ChartComponent data={props.data} zoomDomain={props.zoomDomain} handleZoom={props.setZoomDomain}
-        varCur={props.varCur} minMax={props.minMax} />
+        curVar={props.curVar} minMax={props.minMax} />
     </div>
     }
   </div>
@@ -94,7 +68,7 @@ TabsComponent.propTypes = {
   data: PropTypes.array,
 
   /** The current weather variable selected. */
-  varCur: PropTypes.string.isRequired,
+  curVar: PropTypes.string.isRequired,
 
   /** Determines wheather to display tabs for the precipitation weather variable. This is needed in that with
    * some locations and models only provide a single preciption value (no minimum or maximum).
