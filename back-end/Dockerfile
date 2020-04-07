@@ -23,4 +23,4 @@ COPY --from=build ${DEPENDENCY}/BOOT-INF/classes /app
 
 EXPOSE 8080
 
-ENTRYPOINT ["java","-cp","app:app/lib/*","eu.acclimatize.unison.UnisonServerApplication"]
+ENTRYPOINT ["java","-cp","app:app/lib/*","eu.acclimatize.unison.UnisonServerApplication -Ddefault.username=unisonuser -Ddefault.password=unisonpassword"]
