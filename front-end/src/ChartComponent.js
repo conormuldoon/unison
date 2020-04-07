@@ -77,7 +77,7 @@ function ChartComponent(props) {
   }
 
 
-  if (props.data && has(props.data[0], yVal)) {
+  if (has(props.data[0], yVal)) {
 
     return (
 
@@ -126,7 +126,7 @@ ChartComponent.propTypes = {
   handleZoom: PropTypes.func.isRequired,
 
   /** Data to be displayed on the graph. */
-  data: PropTypes.array,
+  data: PropTypes.array.isRequired,
 
 
   /** The weather variable currently selected. */

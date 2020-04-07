@@ -97,8 +97,8 @@ function ChartPopup(props) {
       <center>
         {vc} data from {props.location.trim()}
 
-        <TabsComponent curVar={props.curVar} data={data} zoomDomain={zoomDomain} minMax={minMax}
-          setZoomDomain={setZoomDomain} />
+        {data && <TabsComponent curVar={props.curVar} data={data} zoomDomain={zoomDomain} minMax={minMax}
+          setZoomDomain={setZoomDomain} />}
 
       </center>
     </div>
