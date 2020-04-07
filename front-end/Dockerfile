@@ -1,13 +1,13 @@
 FROM node:12.4.0-alpine as build
 WORKDIR /app
-COPY package.json yarn.lock ./
-RUN yarn install
+COPY package.json ./
+
 COPY . ./
 
 ARG REACT_APP_API_BASE_URL
 ENV REACT_APP_API_BASE_URL=${REACT_APP_API_BASE_URL}
 
-RUN yarn build
+RUN npm run build
 
 
 FROM nginx:1.17.0-alpine

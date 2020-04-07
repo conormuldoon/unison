@@ -1,0 +1,34 @@
+# Docker Compose file Reference (https://docs.docker.com/compose/compose-file/)
+
+version: '3.7'
+
+services:
+  server:
+    build:
+      context: back-end 
+      dockerfile: Dockerfile
+    ports:
+      - "8080:8080"
+    restart: always
+    networks:
+      - back-end
+      - front-end
+
+  react-app:
+    build:
+      context: front-end
+      dockerfile: Dockerfile
+      args:
+        REACT_APP_API_BASE_URL: http://127.0.0.1:8080
+    ports:
+      - "4545:80"
+    restart: always
+    depends_on:
+      - server
+    networks:
+      - front-end  
+
+networks:
+  back-end:
+  front-end:    
+
