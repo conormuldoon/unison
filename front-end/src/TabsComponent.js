@@ -65,7 +65,7 @@ function TabsComponent(props) {
 TabsComponent.propTypes = {
 
   /** An array of data to be displayed on one or more charts. */
-  data: PropTypes.array,
+  data: PropTypes.array.isRequired,
 
   /** The current weather variable selected. */
   curVar: PropTypes.string.isRequired,

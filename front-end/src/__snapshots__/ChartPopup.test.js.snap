@@ -30,14 +30,6 @@ exports[`mathes snapshot 1`] = `
       Precipitation
        data from 
       UCD
-      <div
-        id="chartdiv"
-      >
-        <div
-          data-testid="chart"
-          id="singlevar"
-        />
-      </div>
     </center>
   </div>
 </div>
