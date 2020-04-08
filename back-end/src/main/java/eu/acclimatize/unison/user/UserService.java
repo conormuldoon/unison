@@ -79,7 +79,6 @@ public class UserService {
 
 		if (userRepository.count() == 0) {
 
-			System.out.println("!!!!!!!!!! " + defaultUserName + " " + defaultEncoded);
 			if (defaultUserName != null && defaultEncoded != null) {
 
 				UserInformation userInformation = new UserInformation(defaultUserName, defaultEncoded);

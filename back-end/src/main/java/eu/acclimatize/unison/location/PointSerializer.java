@@ -8,7 +8,7 @@ import eu.acclimatize.unison.Constant;
 
 /**
  * 
- * Used by spatial database serializers to serialize point data to GeoJSON data.
+ * Used by {@link FeatureCollection} to serialize point data to GeoJSON data.
  *
  */
 public class PointSerializer {
@@ -20,14 +20,15 @@ public class PointSerializer {
 	private static final String GEOMETRY = "geometry";
 	private static final String FEATURE = "Feature";
 
+	
 	/**
-	 * Writes x and y coordinates to the JSON generator in a GeoJSON format.
-	 * 
-	 * @param x   The x coordinate of the point.
-	 * @param y   The y coordinate of the point.
-	 * @param gen The JsonGenerator object written to.
-	 * @throws IOException Thrown if there is a problem writing to the JSON
-	 *                     generator.
+	 *  Writes x and y coordinates and location to the JSON generator in a GeoJSON format.
+	 *  
+	 * @param x    The x coordinate of the point.
+	 * @param y    The y coordinate of the point.
+	 * @param name The name of the location.
+	 * @param gen  The generator object written to.
+	 * @throws IOException Thrown if there is an I/O error while serializing.
 	 */
 	public void serialize(double x, double y, String name, JsonGenerator gen) throws IOException {
 		gen.writeStartObject();

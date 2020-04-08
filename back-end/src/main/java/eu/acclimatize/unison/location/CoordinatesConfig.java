@@ -23,6 +23,11 @@ public class CoordinatesConfig {
 		return new Sort(Sort.Direction.ASC, "name");
 	}
 	
+	/**
+	 * A bean used in serializing location data in a GeoJSON format.
+	 * 
+	 * @return The point serializer created.
+	 */
 	@Bean
 	public PointSerializer pointSerializer() {
 		return new PointSerializer();
