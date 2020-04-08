@@ -12,8 +12,10 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 public class LocationController {
 
-	private CoordinatesStore store;
 	private static final String LOCATION = "/location";
+	private static final String MEDIA_TYPE = "application/geo+json";
+
+	private CoordinatesStore store;
 	private PointSerializer pointSerializer;
 
 	/**
@@ -28,14 +30,14 @@ public class LocationController {
 	}
 
 	/**
-	 * Obtains a sorted list of all coordinates in the spatial database.
+	 * Obtains a feature collection where the features represent a sorted list of all coordinates in the spatial database.
 	 * 
 	 * @return A list of Jackson annotated coordinates.
 	 */
-	@GetMapping(LOCATION)
+	@GetMapping(value = LOCATION, produces = MEDIA_TYPE)
 	public FeatureCollection location() {
 
-		return new FeatureCollection(store.sortedFindAll(),pointSerializer);
+		return new FeatureCollection(store.sortedFindAll(), pointSerializer);
 
 	}
 }
