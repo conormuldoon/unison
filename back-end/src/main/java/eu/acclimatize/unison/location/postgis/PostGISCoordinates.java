@@ -1,15 +1,18 @@
 package eu.acclimatize.unison.location.postgis;
 
+import java.io.IOException;
+
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.MapsId;
 import javax.persistence.OneToOne;
 
-import com.fasterxml.jackson.annotation.JsonProperty;
-import com.fasterxml.jackson.databind.annotation.JsonSerialize;
+import com.fasterxml.jackson.core.JsonGenerator;
 import com.vividsolutions.jts.geom.Point;
 
+import eu.acclimatize.unison.location.CoordinatesSerializer;
 import eu.acclimatize.unison.location.LocationDetails;
+import eu.acclimatize.unison.location.PointSerializer;
 
 /**
  * 
@@ -18,14 +21,11 @@ import eu.acclimatize.unison.location.LocationDetails;
  *
  */
 @Entity
-public class PostGISCoordinates {
+public class PostGISCoordinates implements CoordinatesSerializer{
 
 	@Id
-	@JsonProperty
 	private String name;
 
-	@JsonProperty
-	@JsonSerialize(using = PostGISPointSerializer.class)
 	private Point geom;
 
 	@OneToOne
@@ -50,6 +50,12 @@ public class PostGISCoordinates {
 	 * A zero argument constructor of JPA.
 	 */
 	public PostGISCoordinates() {
+		
+	}
+
+	@Override
+	public void serialize(JsonGenerator gen, PointSerializer pointSerializer) throws IOException {
+		pointSerializer.serialize(geom.getX(), geom.getY(), name, gen);
 		
 	}
 

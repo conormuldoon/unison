@@ -1,31 +1,26 @@
 package eu.acclimatize.unison;
 
 import java.io.IOException;
-import java.io.StringWriter;
-import java.io.Writer;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.junit.Assert;
 import org.junit.Test;
 import org.mockito.Mockito;
 import org.springframework.data.domain.Sort;
 
-import com.fasterxml.jackson.core.JsonFactory;
 import com.fasterxml.jackson.core.JsonGenerator;
-import com.fasterxml.jackson.databind.ObjectMapper;
-import com.fasterxml.jackson.databind.SerializerProvider;
 import com.vividsolutions.jts.geom.Point;
 import com.vividsolutions.jts.io.ParseException;
 import com.vividsolutions.jts.io.WKTReader;
 
+import eu.acclimatize.unison.location.FeatureCollection;
 import eu.acclimatize.unison.location.LocationController;
 import eu.acclimatize.unison.location.LocationDetails;
 import eu.acclimatize.unison.location.PointParseException;
+import eu.acclimatize.unison.location.PointSerializer;
 import eu.acclimatize.unison.location.postgis.PostGISConfig;
 import eu.acclimatize.unison.location.postgis.PostGISCoordinates;
 import eu.acclimatize.unison.location.postgis.PostGISCoordinatesRepository;
-import eu.acclimatize.unison.location.postgis.PostGISPointSerializer;
 import eu.acclimatize.unison.location.postgis.PostGISStore;
 
 /**
@@ -33,22 +28,27 @@ import eu.acclimatize.unison.location.postgis.PostGISStore;
  **/
 public class PostGISTests {
 
-	/** Tests that the length of the list returned by the location controller. **/
+	/** Tests that the length of the list returned by the location controller. 
+	 * @throws IOException 
+	 * @throws ParseException **/
 	@Test
-	public void testLocationList() {
+	public void testLocationList() throws IOException, ParseException {
 
 		PostGISCoordinatesRepository repository = Mockito.mock(PostGISCoordinatesRepository.class);
 		List<PostGISCoordinates> list = new ArrayList<>();
-		list.add(new PostGISCoordinates());
+		WKTReader wktReader=new WKTReader();
+		list.add(new PostGISCoordinates((Point) wktReader.read("Point(-6.224176 53.308366)"),null));
 		Sort sort = new Sort(Sort.Direction.ASC, "name");
 		Mockito.when(repository.findAll(sort)).thenReturn(list);
 
-		PostGISStore geoDBStore = new PostGISStore(repository, sort, null);
+		PostGISStore postGISStore = new PostGISStore(repository, sort, null);
 
-		LocationController locationController = new LocationController(geoDBStore);
-		List<? extends Object> locList = locationController.location();
+		LocationController locationController = new LocationController(postGISStore,new PointSerializer());
+		FeatureCollection fc = locationController.location();
 
-		Assert.assertEquals(1, locList.size());
+		JsonGenerator jg=Mockito.mock(JsonGenerator.class);
+		fc.geoJsonSerialize(jg);
+		Mockito.verify(jg,Mockito.times(1)).writeStringField("type", "Feature");
 
 	}
 
@@ -64,20 +64,7 @@ public class PostGISTests {
 		Mockito.verify(repository, Mockito.times(1)).save(Mockito.any(PostGISCoordinates.class));
 	}
 
-	/** Tests the coordinates are serialized in a GeoJSON format correctly. **/
-	@Test
-	public void testSerialization() throws IOException, ParseException {
-		Writer jsonWriter = new StringWriter();
-		JsonGenerator jsonGenerator = new JsonFactory().createGenerator(jsonWriter);
-		SerializerProvider serializerProvider = new ObjectMapper().getSerializerProvider();
-		WKTReader wktReader = new WKTReader();
-		Point p = (Point) wktReader.read("Point(-6.224176 53.308366)");
-		new PostGISPointSerializer().serialize(p, jsonGenerator, serializerProvider);
-		jsonGenerator.flush();
 
-		Assert.assertEquals("{\"type\":\"Point\",\"coordinates\":[-6.224176,53.308366]}", jsonWriter.toString());
-
-	}
 	
 	/**
 	 * Tests that save catch throws PointParseException when there is a parsing

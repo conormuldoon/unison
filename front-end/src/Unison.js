@@ -34,7 +34,9 @@ function Unison(props) {
       let response = await fetch(API + '/location');
 
       if (response.ok) {
-        let locationArray = await response.json();
+        const featureCollection = await response.json();
+
+        const locationArray=featureCollection.features;
 
         if (active) {
           let n = locationArray.length;
@@ -43,17 +45,17 @@ function Unison(props) {
           let newMarker = [];
 
           for (let i = 0; i < n; i++) {
-            newOption.push(locationArray[i].name);
-            let pos = [locationArray[i].geom.coordinates[1], locationArray[i].geom.coordinates[0]];
+            newOption.push(locationArray[i].properties.name);
+            let pos = [locationArray[i].geometry.coordinates[1], locationArray[i].geometry.coordinates[0]];
 
-            newMarker.push({ name: locationArray[i].name, position: pos });
+            newMarker.push({ name: locationArray[i].properties.name, position: pos });
 
 
           }
           if (n > 0) {
             setOption(newOption);
             setMarker(newMarker);
-            setCurLoc(locationArray[0].name);
+            setCurLoc(locationArray[0].properties.name);
            
           } else {
             setOption(undefined);

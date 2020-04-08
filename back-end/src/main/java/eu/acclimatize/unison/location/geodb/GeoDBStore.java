@@ -8,6 +8,7 @@ import org.locationtech.jts.io.WKTReader;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Repository;
 
+import eu.acclimatize.unison.location.CoordinatesSerializer;
 import eu.acclimatize.unison.location.CoordinatesStore;
 import eu.acclimatize.unison.location.LocationDetails;
 import eu.acclimatize.unison.location.PointParseException;
@@ -66,7 +67,7 @@ public class GeoDBStore implements CoordinatesStore {
 	}
 
 	@Override
-	public List<? extends Object> sortedFindAll() {
+	public List<? extends CoordinatesSerializer> sortedFindAll() {
 
 		return repository.findAll(sort);
 	}

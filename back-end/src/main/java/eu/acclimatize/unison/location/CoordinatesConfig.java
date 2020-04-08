@@ -22,4 +22,9 @@ public class CoordinatesConfig {
 	public Sort sort() {
 		return new Sort(Sort.Direction.ASC, "name");
 	}
+	
+	@Bean
+	public PointSerializer pointSerializer() {
+		return new PointSerializer();
+	}
 }

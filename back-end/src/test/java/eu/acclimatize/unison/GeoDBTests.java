@@ -16,15 +16,14 @@ import org.springframework.data.domain.Sort;
 
 import com.fasterxml.jackson.core.JsonFactory;
 import com.fasterxml.jackson.core.JsonGenerator;
-import com.fasterxml.jackson.databind.ObjectMapper;
-import com.fasterxml.jackson.databind.SerializerProvider;
 
+import eu.acclimatize.unison.location.FeatureCollection;
 import eu.acclimatize.unison.location.LocationController;
 import eu.acclimatize.unison.location.LocationDetails;
 import eu.acclimatize.unison.location.PointParseException;
+import eu.acclimatize.unison.location.PointSerializer;
 import eu.acclimatize.unison.location.geodb.GeoDBCoordinates;
 import eu.acclimatize.unison.location.geodb.GeoDBCoordinatesRepository;
-import eu.acclimatize.unison.location.geodb.GeoDBPointSerializer;
 import eu.acclimatize.unison.location.geodb.GeoDBStore;
 
 /**
@@ -32,22 +31,30 @@ import eu.acclimatize.unison.location.geodb.GeoDBStore;
  **/
 public class GeoDBTests {
 
-	/** Tests that the length of the list returned by the location controller. **/
+	/**
+	 * Tests that the length of the list returned by the location controller.
+	 * 
+	 * @throws IOException
+	 * @throws ParseException 
+	 **/
 	@Test
-	public void testLocationList() {
+	public void testLocationList() throws IOException, ParseException {
 
 		GeoDBCoordinatesRepository repository = Mockito.mock(GeoDBCoordinatesRepository.class);
 		List<GeoDBCoordinates> list = new ArrayList<>();
-		list.add(new GeoDBCoordinates());
+		WKTReader wktReader=new WKTReader();
+		list.add(new GeoDBCoordinates((Point) wktReader.read("Point(-6.224176 53.308366)"),null));
 		Sort sort = new Sort(Sort.Direction.ASC, "name");
 		Mockito.when(repository.findAll(sort)).thenReturn(list);
 
 		GeoDBStore geoDBStore = new GeoDBStore(repository, sort, null);
 
-		LocationController locationController = new LocationController(geoDBStore);
-		List<? extends Object> locList = locationController.location();
+		LocationController locationController = new LocationController(geoDBStore, new PointSerializer());
+		FeatureCollection fc = locationController.location();
 
-		Assert.assertEquals(1, locList.size());
+		JsonGenerator jg = Mockito.mock(JsonGenerator.class);
+		fc.geoJsonSerialize(jg);
+		Mockito.verify(jg, Mockito.times(1)).writeStringField("type", "Feature");
 
 	}
 
@@ -63,17 +70,38 @@ public class GeoDBTests {
 	}
 
 	/** Tests the coordinates are serialized in a GeoJSON format correctly. **/
+//	@Test
+//	public void testSerialization() throws IOException, ParseException {
+//		Writer jsonWriter = new StringWriter();
+//		JsonGenerator jsonGenerator = new JsonFactory().createGenerator(jsonWriter);
+//		SerializerProvider serializerProvider = new ObjectMapper().getSerializerProvider();
+//		WKTReader wktReader = new WKTReader();
+//		Point p = (Point) wktReader.read("Point(-6.224176 53.308366)");
+//		new GeoDBPointSerializer().serialize(p, jsonGenerator, serializerProvider);
+//		jsonGenerator.flush();
+//
+//		Assert.assertEquals("{\"type\":\"Point\",\"coordinates\":[-6.224176,53.308366]}", jsonWriter.toString());
+//
+//	}
+
+	/** Tests the coordinates are serialized in a GeoJSON format correctly. **/
 	@Test
 	public void testSerialization() throws IOException, ParseException {
 		Writer jsonWriter = new StringWriter();
 		JsonGenerator jsonGenerator = new JsonFactory().createGenerator(jsonWriter);
-		SerializerProvider serializerProvider = new ObjectMapper().getSerializerProvider();
+
 		WKTReader wktReader = new WKTReader();
-		Point p = (Point) wktReader.read("Point(-6.224176 53.308366)");
-		new GeoDBPointSerializer().serialize(p, jsonGenerator, serializerProvider);
+		double lon = -6.224176;
+		double lat = 53.308366;
+		String loc = "UCD";
+		Point p = (Point) wktReader.read("Point(" + lon + " " + lat + ")");
+		PointSerializer ps = new PointSerializer();
+		ps.serialize(p.getX(), p.getY(), loc, jsonGenerator);
+
 		jsonGenerator.flush();
 
-		Assert.assertEquals("{\"type\":\"Point\",\"coordinates\":[-6.224176,53.308366]}", jsonWriter.toString());
+		Assert.assertEquals("{\"geometry\":{\"type\":\"Point\",\"coordinates\":[" + lon + "," + lat
+				+ "]},\"properties\":{\"name\":\"" + loc + "\"},\"type\":\"Feature\"}", jsonWriter.toString());
 
 	}
 

@@ -79,6 +79,7 @@ public class UserService {
 
 		if (userRepository.count() == 0) {
 
+			System.out.println("!!!!!!!!!! " + defaultUserName + " " + defaultEncoded);
 			if (defaultUserName != null && defaultEncoded != null) {
 
 				UserInformation userInformation = new UserInformation(defaultUserName, defaultEncoded);
@@ -116,8 +117,8 @@ public class UserService {
 	 * @param userName The name of the user.
 	 * @param password The user's password.
 	 * @param task     The task to be executed.
-	 * @return The {@link eu.acclimatize.unison.ResponseConstant} value for
-	 *         the result of executing the task.
+	 * @return The {@link eu.acclimatize.unison.ResponseConstant} value for the
+	 *         result of executing the task.
 	 */
 	@Transactional
 	public int executeTask(String userName, String password, UserTask task) {
