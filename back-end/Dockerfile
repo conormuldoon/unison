@@ -23,5 +23,5 @@ COPY --from=build ${DEPENDENCY}/BOOT-INF/classes /app
 
 EXPOSE 8080
 ENV default.username=unisonuser
-ENV defalut.password=unisonpassword
+ENV default.encoded=$2a$10$BTjMBPjDaK0vmisQkxOA..udgDrTR2SGlLR8Lo9ODSrU/qPCg5GbK
 ENTRYPOINT ["java","-cp","app:app/lib/*","eu.acclimatize.unison.UnisonServerApplication"]
