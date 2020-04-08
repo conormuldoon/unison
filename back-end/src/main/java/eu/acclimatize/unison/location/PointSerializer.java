@@ -4,6 +4,8 @@ import java.io.IOException;
 
 import com.fasterxml.jackson.core.JsonGenerator;
 
+import eu.acclimatize.unison.Constant;
+
 /**
  * 
  * Used by spatial database serializers to serialize point data to GeoJSON data.
@@ -11,7 +13,6 @@ import com.fasterxml.jackson.core.JsonGenerator;
  */
 public class PointSerializer {
 
-	private static final String TYPE = "type";
 	private static final String POINT = "Point";
 	private static final String COORDINATES = "coordinates";
 	private static final String PROPERTIES = "properties";
@@ -33,7 +34,7 @@ public class PointSerializer {
 
 		gen.writeFieldName(GEOMETRY);
 		gen.writeStartObject();
-		gen.writeStringField(TYPE, POINT);
+		gen.writeStringField(Constant.TYPE, POINT);
 		gen.writeArrayFieldStart(COORDINATES);
 		gen.writeNumber(x);
 		gen.writeNumber(y);
@@ -45,7 +46,7 @@ public class PointSerializer {
 		gen.writeStringField(NAME, name);
 		gen.writeEndObject();
 
-		gen.writeStringField(TYPE, FEATURE);
+		gen.writeStringField(Constant.TYPE, FEATURE);
 
 		gen.writeEndObject();
 

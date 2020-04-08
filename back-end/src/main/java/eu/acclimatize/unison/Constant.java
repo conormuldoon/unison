@@ -78,5 +78,11 @@ public class Constant {
 	 */
 	public static final String CELSIUS_SYMBOL = "(°C)";
 	
+	
+	/**
+	 * The GeoJSON type field name.
+	 */
+	public static final String TYPE = "type";
+	
 
 }
