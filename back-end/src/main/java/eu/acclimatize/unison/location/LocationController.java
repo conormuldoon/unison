@@ -40,7 +40,6 @@ public class LocationController {
 	@GetMapping(value = LOCATION, produces = MEDIA_TYPE)
 	public FeatureCollection location() {
 
-		System.out.println("Called");
 		return new FeatureCollection(store.sortedFindAll(), pointSerializer);
 
 	}

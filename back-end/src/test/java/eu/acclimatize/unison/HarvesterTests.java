@@ -1,6 +1,7 @@
 package eu.acclimatize.unison;
 
 import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.ArgumentMatchers.anyCollection;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
@@ -10,7 +11,6 @@ import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.Optional;
 import java.util.TimeZone;
-import java.util.concurrent.Executor;
 import java.util.logging.Logger;
 
 import javax.xml.parsers.DocumentBuilder;
@@ -23,6 +23,7 @@ import org.w3c.dom.Document;
 import org.xml.sax.SAXException;
 
 import eu.acclimatize.unison.harvester.DocumentRequestException;
+import eu.acclimatize.unison.harvester.HarvesterConfig;
 import eu.acclimatize.unison.harvester.HarvesterService;
 import eu.acclimatize.unison.location.LocationDetails;
 
@@ -31,15 +32,16 @@ public class HarvesterTests {
 	private void testParse(String fileName, String timeZone)
 			throws ParserConfigurationException, SAXException, IOException, DocumentRequestException {
 
-		Executor executor=mock(Executor.class);
+		HourlyPrecipitationRepository pr = mock(HourlyPrecipitationRepository.class);
+		HourlyWeatherRepository wr = mock(HourlyWeatherRepository.class);
 
 		Logger logger = mock(Logger.class);
 
 		SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd'T'KK:mm:ss'Z'");
 		dateFormat.setTimeZone(TimeZone.getTimeZone(timeZone));
 
-		HarvesterService hs = new HarvesterService(null, null, null, null, logger, dateFormat,
-				executor);
+		HarvesterService hs = new HarvesterService(null, pr, wr, null, logger, dateFormat,
+				new HarvesterConfig().executor());
 		DocumentBuilderFactory dbFactory = DocumentBuilderFactory.newInstance();
 		DocumentBuilder dBuilder = dbFactory.newDocumentBuilder();
 
@@ -52,7 +54,8 @@ public class HarvesterTests {
 		when(location.requestData(any())).thenReturn(oDoc);
 
 		Assert.assertTrue(hs.processLocation(location));
-		verify(executor, times(1)).execute(any());
+		verify(pr, times(1)).saveAll(anyCollection());
+		verify(wr, times(1)).saveAll(anyCollection());
 
 	}
 

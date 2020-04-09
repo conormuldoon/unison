@@ -16,12 +16,13 @@ import eu.acclimatize.unison.Constant;
  *
  */
 @JsonSerialize(using = FeatureCollectionSerializer.class)
-public class FeatureCollection extends JsonSerializer<FeatureCollection>{
+public class FeatureCollection{
 
-	private List<? extends CoordinatesSerializer> locationList;
-	private PointSerializer pointSerializer;
 	private static final String FEATURE_COLLECTION="FeatureCollection";
 	private static final String FEATURES ="features";
+	
+	private List<? extends CoordinatesSerializer> locationList;
+	private PointSerializer pointSerializer;
 
 	/**
 	 * Creates an instance of FeatureCollection.
@@ -46,19 +47,11 @@ public class FeatureCollection extends JsonSerializer<FeatureCollection>{
 		gen.writeStringField(Constant.TYPE, FEATURE_COLLECTION);
 		gen.writeArrayFieldStart(FEATURES);
 		for (CoordinatesSerializer l : locationList) {
-
 			l.serialize(gen, pointSerializer);
 		}
 		gen.writeEndArray();
 		gen.writeEndObject();
 
-	}
-
-	@Override
-	public void serialize(FeatureCollection value, JsonGenerator gen, SerializerProvider serializers)
-			throws IOException {
-		geoJsonSerialize(gen);
-		
 	}
 
 }

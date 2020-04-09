@@ -70,7 +70,7 @@ public class HarvesterService {
 	 * @param logger                  Logs warning messages and exceptions.
 	 * @param simpleDateFormat        Used to parse date data using a given time
 	 *                                zone.
-	 * @param excecutor               Used to execute the data harvesting process on
+	 * @param executor               Used to execute the data harvesting process on
 	 *                                a thread.
 	 */
 	public HarvesterService(LocationRepository locationRepository,
@@ -141,12 +141,12 @@ public class HarvesterService {
 
 		Optional<Document> oDoc = location.requestData(drs);
 		if (oDoc.isPresent()) {
-			executor.execute(() -> {
-				List<HourlyPrecipitation> hourlyPrecipitation = new ArrayList<>();
-				List<HourlyWeather> hourlyWeather = new ArrayList<>();
-				processDocument(oDoc.get(), hourlyPrecipitation, hourlyWeather, location);
-				store(hourlyPrecipitation, hourlyWeather);
-			});
+
+			List<HourlyPrecipitation> hourlyPrecipitation = new ArrayList<>();
+			List<HourlyWeather> hourlyWeather = new ArrayList<>();
+			processDocument(oDoc.get(), hourlyPrecipitation, hourlyWeather, location);
+			store(hourlyPrecipitation, hourlyWeather);
+
 			return true;
 		} else {
 			return false;

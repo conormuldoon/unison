@@ -47,7 +47,7 @@ public class AddLocationController {
 	 * @param harvesterService   Used to request data for the location once added.
 	 * @param uri                The URL template for a HARMONIE-AROME API specified
 	 *                           by app.uri in the application properties file.
-	 * @param Logs               an error message if the generated XML on the
+	 * @param logger             Logs an error message if the generated XML on the
 	 *                           HARMONIE-AROME API server for the location was not
 	 *                           found.
 	 */
@@ -100,7 +100,7 @@ public class AddLocationController {
 						return ResponseConstant.DATA_NOT_RECIEVED;
 					}
 				} catch (DocumentRequestException e) {
-					
+
 					logger.log(Level.SEVERE, e.getMessage());
 					return ResponseConstant.DATA_NOT_RECIEVED;
 				}
