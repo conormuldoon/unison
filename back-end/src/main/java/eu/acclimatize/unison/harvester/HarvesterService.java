@@ -70,7 +70,7 @@ public class HarvesterService {
 	 * @param logger                  Logs warning messages and exceptions.
 	 * @param simpleDateFormat        Used to parse date data using a given time
 	 *                                zone.
-	 * @param excecutor             Used to execute the data harvesting process on
+	 * @param excecutor               Used to execute the data harvesting process on
 	 *                                a thread.
 	 */
 	public HarvesterService(LocationRepository locationRepository,
@@ -96,18 +96,20 @@ public class HarvesterService {
 	 * database.
 	 * 
 	 */
-	public synchronized void harvestData(){
+	public void harvestData() {
 		executor.execute(() -> {
-			harvestData(locationRepository.findAll());
+			synchronized (this) {
+				harvestData(locationRepository.findAll());
 
-			store(precipitation, weather);
-			precipitation.clear();
-			weather.clear();
+				store(precipitation, weather);
+				precipitation.clear();
+				weather.clear();
+			}
 		});
 
 	}
 
-	private void harvestData(Iterable<? extends LocationDetails> iterable){
+	private void harvestData(Iterable<? extends LocationDetails> iterable) {
 
 		for (LocationDetails loc : iterable) {
 
