@@ -5,12 +5,12 @@ import ReactDOM from 'react-dom';
 import { fireEvent, render, waitForElement } from "react-testing-library";
 import Unison from './Unison';
 
-
+const features = { "features": [{ "geometry": { "type": "Point", "coordinates": [-6.223682, 53.308441] }, "properties": { "name": "UCD" } }] };
 
 it('renders without crashing', async () => {
 
 
-    fetchMock.get('end:/location', [{ "geom": { "type": "Point", "coordinates": [-6.223682, 53.308441] }, "name": "UCD" }]);
+    fetchMock.get('end:/location', features);
 
     const div = document.createElement('div');
 
@@ -23,7 +23,7 @@ it('renders without crashing', async () => {
 it('mathes Unison snapshot', () => {
 
 
-    fetchMock.get('end:/location', [{ "geom": { "type": "Point", "coordinates": [-6.223682, 53.308441] }, "name": "UCD" }]);
+    fetchMock.get('end:/location', features);
     const mockDateNow = jest.fn(() => 1571875200000);
     const dn = global.Date.now;
     global.Date.now = mockDateNow;
@@ -37,7 +37,7 @@ it('mathes Unison snapshot', () => {
 });
 
 it('displays popup when marker clicked', async () => {
-    fetchMock.get('end:/location', [{ "geom": { "type": "Point", "coordinates": [-6.223682, 53.308441] }, "name": "UCD" }]);
+    fetchMock.get('end:/location', features);
 
 
     fetchMock.get('end:/precipitation?location=UCD&fromDate=1/9/2019&toDate=23/10/2019', [{
