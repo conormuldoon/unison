@@ -11,7 +11,6 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 import org.w3c.dom.NamedNodeMap;
@@ -71,7 +70,7 @@ public class HarvesterService {
 	 * @param logger                  Logs warning messages and exceptions.
 	 * @param simpleDateFormat        Used to parse date data using a given time
 	 *                                zone.
-	 * @param stExcecutor             Used to execute the data harvesting process on
+	 * @param excecutor             Used to execute the data harvesting process on
 	 *                                a thread.
 	 */
 	public HarvesterService(LocationRepository locationRepository,
@@ -96,41 +95,36 @@ public class HarvesterService {
 	 * Requests and data stores from a HARMONIE-AROME API for locations in the
 	 * database.
 	 * 
-	 * @throws InterruptedException The service will sleep for a second if it is
-	 *                              having problem obtaining data from the API. The
-	 *                              exception will be thrown if the service is
-	 *                              interrupted during this time.
 	 */
-	@Transactional
-	public synchronized void harvestData() throws InterruptedException {
+	public synchronized void harvestData(){
+		executor.execute(() -> {
+			harvestData(locationRepository.findAll());
 
-		harvestData(locationRepository.findAll());
-
-		store(precipitation, weather);
-		precipitation.clear();
-		weather.clear();
+			store(precipitation, weather);
+			precipitation.clear();
+			weather.clear();
+		});
 
 	}
 
-	private void harvestData(Iterable<? extends LocationDetails> iterable) throws InterruptedException {
-		executor.execute(() -> {
-			for (LocationDetails loc : iterable) {
+	private void harvestData(Iterable<? extends LocationDetails> iterable){
 
-				try {
+		for (LocationDetails loc : iterable) {
 
-					// If data is not received from the API due to a connection error, sleeps and
-					// then attempts to connect
-					// again.
-					while (!processLocation(loc, precipitation, weather)) {
-						Thread.sleep(SLEEP_TIME);
-					}
-				} catch (DocumentRequestException | InterruptedException e) {
+			try {
 
-					logger.log(Level.SEVERE, e.getMessage());
+				// If data is not received from the API due to a connection error, sleeps and
+				// then attempts to connect
+				// again.
+				while (!processLocation(loc, precipitation, weather)) {
+					Thread.sleep(SLEEP_TIME);
 				}
+			} catch (DocumentRequestException | InterruptedException e) {
 
+				logger.log(Level.SEVERE, e.getMessage());
 			}
-		});
+
+		}
 
 	}
 
