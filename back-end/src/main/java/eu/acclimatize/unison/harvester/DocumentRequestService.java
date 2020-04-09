@@ -1,5 +1,6 @@
 package eu.acclimatize.unison.harvester;
 
+import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.Optional;
 import java.util.logging.Level;
@@ -26,7 +27,8 @@ public class DocumentRequestService {
 	 * Creates an instance of DocumentRequestService.
 	 * 
 	 * @param documentBuilder A builder used to parse the XML document.
-	 * @param logger Used to log URIs for requested documents and exceptions.
+	 * @param logger          Used to log URIs for requested documents and
+	 *                        exceptions.
 	 */
 	public DocumentRequestService(DocumentBuilder documentBuilder, Logger logger) {
 
@@ -37,11 +39,14 @@ public class DocumentRequestService {
 	/**
 	 * Obtains an XML document from an API.
 	 * 
+	 * @param locName The name of the location.
 	 * @param locURI The URI to obtain the document from.
-	 * @return The Optional will contain the document if obtained and parsed correctly or empty otherwise.
+	 * @return The Optional will contain the document if obtained and parsed
+	 *         correctly or empty otherwise.
+	 * @throws DocumentRequestException Thrown when the generated XML for the location was not found.
 	 */
-	public Optional<Document> documentForURI(String locURI) {
-		logger.log(Level.INFO, () -> "Requesting data for " + locURI + '.');
+	public Optional<Document> documentForURI(String locName, String locURI) throws DocumentRequestException {
+		logger.log(Level.INFO, () -> "Requesting data for " + locName + " from " + locURI + '.');
 
 		try {
 
@@ -49,10 +54,14 @@ public class DocumentRequestService {
 
 			return Optional.of(doc);
 
-		} catch (SAXException|IOException e) {
-			logger.log(Level.SEVERE,e.getMessage());
-		} 
-		
+		}catch(FileNotFoundException e){
+			throw new DocumentRequestException("Problem obtaining document for "+ locName+". The gnerated XML was not found.");
+		}
+		catch (SAXException | IOException e) {
+			logger.log(Level.SEVERE, e.getMessage());
+			
+		}
+
 		return Optional.empty();
 	}
 }

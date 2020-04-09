@@ -9,6 +9,7 @@ import javax.persistence.ManyToOne;
 
 import org.w3c.dom.Document;
 
+import eu.acclimatize.unison.harvester.DocumentRequestException;
 import eu.acclimatize.unison.harvester.DocumentRequestService;
 import eu.acclimatize.unison.user.UserInformation;
 
@@ -60,10 +61,11 @@ public class LocationDetails implements Serializable {
 	 * @param drs The service that requests data from a HARMONIE-AROME API.
 	 * @return An Optional contain an XML document if the request was successful and
 	 *         an empty Optional otherwise.
+	 * @throws DocumentRequestException Thrown when the generated XML for the location was not found.
 	 */
-	public Optional<Document> requestData(DocumentRequestService drs) {
+	public Optional<Document> requestData(DocumentRequestService drs) throws DocumentRequestException {
 
-		return drs.documentForURI(uri);
+		return drs.documentForURI(name, uri);
 
 	}
 

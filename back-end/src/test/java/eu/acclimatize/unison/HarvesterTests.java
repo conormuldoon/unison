@@ -22,24 +22,26 @@ import org.junit.Test;
 import org.w3c.dom.Document;
 import org.xml.sax.SAXException;
 
+import eu.acclimatize.unison.harvester.DocumentRequestException;
+import eu.acclimatize.unison.harvester.HarvesterConfig;
 import eu.acclimatize.unison.harvester.HarvesterService;
 import eu.acclimatize.unison.location.LocationDetails;
 
 public class HarvesterTests {
 
-
 	private void testParse(String fileName, String timeZone)
-			throws ParserConfigurationException, SAXException, IOException {
+			throws ParserConfigurationException, SAXException, IOException, DocumentRequestException {
 
 		HourlyPrecipitationRepository pr = mock(HourlyPrecipitationRepository.class);
 		HourlyWeatherRepository wr = mock(HourlyWeatherRepository.class);
 
 		Logger logger = mock(Logger.class);
-		
+
 		SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd'T'KK:mm:ss'Z'");
 		dateFormat.setTimeZone(TimeZone.getTimeZone(timeZone));
-		
-		HarvesterService hs = new HarvesterService(null, pr, wr, null, logger, dateFormat);
+
+		HarvesterService hs = new HarvesterService(null, pr, wr, null, logger, dateFormat,
+				new HarvesterConfig().executor());
 		DocumentBuilderFactory dbFactory = DocumentBuilderFactory.newInstance();
 		DocumentBuilder dBuilder = dbFactory.newDocumentBuilder();
 
@@ -59,19 +61,22 @@ public class HarvesterTests {
 
 	// XML data obtained using the Met Eireann API
 	@Test
-	public void testConvertorIrl() throws ParserConfigurationException, SAXException, IOException {
-		testParse("/TestIreland.xml",  "Europe/Dublin");
+	public void testConvertorIrl()
+			throws ParserConfigurationException, SAXException, IOException, DocumentRequestException {
+		testParse("/TestIreland.xml", "Europe/Dublin");
 	}
 
 	// XML data obtained using the Met Eireann API
 	@Test
-	public void testConvertorUK() throws ParserConfigurationException, SAXException, IOException {
-		testParse("/TestUK.xml",  "Europe/Dublin");
+	public void testConvertorUK()
+			throws ParserConfigurationException, SAXException, IOException, DocumentRequestException {
+		testParse("/TestUK.xml", "Europe/Dublin");
 	}
 
 	// XML data obtained using the Norwegian Meteorological Institute API
 	@Test
-	public void testConvertorNor() throws ParserConfigurationException, SAXException, IOException {
+	public void testConvertorNor()
+			throws ParserConfigurationException, SAXException, IOException, DocumentRequestException {
 		testParse("/TestNorway.xml", "Europe/Oslo");
 	}
 }

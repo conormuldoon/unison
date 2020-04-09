@@ -1,5 +1,8 @@
 package eu.acclimatize.unison.location;
 
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -7,6 +10,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import eu.acclimatize.unison.Constant;
 import eu.acclimatize.unison.ResponseConstant;
+import eu.acclimatize.unison.harvester.DocumentRequestException;
 import eu.acclimatize.unison.harvester.HarvesterService;
 import eu.acclimatize.unison.user.UserService;
 import eu.acclimatize.unison.user.UserTask;
@@ -30,6 +34,8 @@ public class AddLocationController {
 	private HarvesterService harvesterService;
 	private String uri;
 
+	private Logger logger;
+
 	/**
 	 * Creates an instance of AddLocationController.
 	 * 
@@ -41,15 +47,19 @@ public class AddLocationController {
 	 * @param harvesterService   Used to request data for the location once added.
 	 * @param uri                The URL template for a HARMONIE-AROME API specified
 	 *                           by app.uri in the application properties file.
+	 * @param Logs               an error message if the generated XML on the
+	 *                           HARMONIE-AROME API server for the location was not
+	 *                           found.
 	 */
 	public AddLocationController(LocationRepository locationRepository, CoordinatesStore store, UserService userService,
-			HarvesterService harvesterService, @Value("${api.uri}") String uri) {
+			HarvesterService harvesterService, @Value("${api.uri}") String uri, Logger logger) {
 		this.locationRepository = locationRepository;
 
 		this.store = store;
 		this.userService = userService;
 		this.harvesterService = harvesterService;
 		this.uri = uri;
+		this.logger = logger;
 
 	}
 
@@ -83,9 +93,15 @@ public class AddLocationController {
 				store.save(longitude, latitude, locationDetails);
 
 				// Request data
-				if (harvesterService.processLocation(locationDetails)) {
-					return ResponseConstant.SUCCESS;
-				} else {
+				try {
+					if (harvesterService.processLocation(locationDetails)) {
+						return ResponseConstant.SUCCESS;
+					} else {
+						return ResponseConstant.DATA_NOT_RECIEVED;
+					}
+				} catch (DocumentRequestException e) {
+					
+					logger.log(Level.SEVERE, e.getMessage());
 					return ResponseConstant.DATA_NOT_RECIEVED;
 				}
 			}

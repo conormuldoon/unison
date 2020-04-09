@@ -12,13 +12,14 @@ import org.mockito.Mockito;
 import org.w3c.dom.Document;
 import org.xml.sax.SAXException;
 
+import eu.acclimatize.unison.harvester.DocumentRequestException;
 import eu.acclimatize.unison.harvester.DocumentRequestService;
 
 // Tests whether the document is present in the returned optional from the DocumentRequestService.
 public class DocumentRequestTest {
 
 	@Test
-	public void testHaveDocument() throws SAXException, IOException {
+	public void testHaveDocument() throws SAXException, IOException, DocumentRequestException {
 		DocumentBuilder documentBuilder = Mockito.mock(DocumentBuilder.class);
 		Logger logger = Mockito.mock(Logger.class);
 
@@ -26,19 +27,19 @@ public class DocumentRequestTest {
 		Mockito.when(documentBuilder.parse(Mockito.anyString())).thenReturn(d);
 		DocumentRequestService drc = new DocumentRequestService(documentBuilder, logger);
 
-		Optional<Document> optD = drc.documentForURI("");
+		Optional<Document> optD = drc.documentForURI("","");
 		Assert.assertFalse(optD.isEmpty());
 	}
 
 	@Test
-	public void testOptionalEmpty() throws SAXException, IOException {
+	public void testOptionalEmpty() throws SAXException, IOException, DocumentRequestException {
 		DocumentBuilder documentBuilder = Mockito.mock(DocumentBuilder.class);
 		Logger logger = Mockito.mock(Logger.class);
 		Mockito.when(documentBuilder.parse(Mockito.anyString())).thenThrow(SAXException.class);
 
 		DocumentRequestService drc = new DocumentRequestService(documentBuilder, logger);
 
-		Optional<Document> optD = drc.documentForURI("");
+		Optional<Document> optD = drc.documentForURI("","");
 		Assert.assertTrue(optD.isEmpty());
 	}
 }

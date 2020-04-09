@@ -11,6 +11,7 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringRunner;
 
+import eu.acclimatize.unison.harvester.DocumentRequestException;
 import eu.acclimatize.unison.harvester.HarvesterService;
 import eu.acclimatize.unison.location.AddLocationController;
 import eu.acclimatize.unison.location.CoordinatesConfig;
@@ -59,7 +60,8 @@ public class LocationTests {
 	@Test
 	public void locationAlreadyExists() {
 
-		AddLocationController controller = new AddLocationController(locationRepository, null, userService, null, URI);
+		AddLocationController controller = new AddLocationController(locationRepository, null, userService, null, URI,
+				null);
 		Assert.assertEquals(ResponseConstant.FAIL, controller.addLocation(LOCATION, USER, PWD, 0, 0));
 
 	}
@@ -67,13 +69,14 @@ public class LocationTests {
 	@Test
 	public void invalidUser() {
 
-		AddLocationController controller = new AddLocationController(locationRepository, null, userService, null, null);
+		AddLocationController controller = new AddLocationController(locationRepository, null, userService, null, null,
+				null);
 		Assert.assertEquals(ResponseConstant.INCORRECT_CREDENTIALS,
 				controller.addLocation(LOCATION, USER, "abc", 0, 0));
 	}
 
 	@Test
-	public void validUser() {
+	public void validUser() throws DocumentRequestException {
 
 		HarvesterService hs = Mockito.mock(HarvesterService.class);
 
@@ -81,7 +84,8 @@ public class LocationTests {
 
 		Mockito.when(hs.processLocation(Mockito.any(LocationDetails.class))).thenReturn(true);
 
-		AddLocationController controller = new AddLocationController(locationRepository, store, userService, hs, URI);
+		AddLocationController controller = new AddLocationController(locationRepository, store, userService, hs, URI,
+				null);
 		Assert.assertEquals(ResponseConstant.SUCCESS, controller.addLocation("newLocation", USER, PWD, 0, 0));
 
 	}

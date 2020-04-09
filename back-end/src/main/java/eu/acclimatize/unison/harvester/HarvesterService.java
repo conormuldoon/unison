@@ -6,6 +6,7 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.Optional;
+import java.util.concurrent.Executor;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -54,6 +55,8 @@ public class HarvesterService {
 
 	private SimpleDateFormat dateFormat;
 
+	private Executor executor;
+
 	/**
 	 * Creates an instance of HarvesterService.
 	 * 
@@ -68,10 +71,12 @@ public class HarvesterService {
 	 * @param logger                  Logs warning messages and exceptions.
 	 * @param simpleDateFormat        Used to parse date data using a given time
 	 *                                zone.
+	 * @param stExcecutor             Used to execute the data harvesting process on
+	 *                                a thread.
 	 */
 	public HarvesterService(LocationRepository locationRepository,
 			HourlyPrecipitationRepository precipitationRepository, HourlyWeatherRepository weatherRepository,
-			DocumentRequestService drs, Logger logger, SimpleDateFormat simpleDateFormat) {
+			DocumentRequestService drs, Logger logger, SimpleDateFormat simpleDateFormat, Executor executor) {
 
 		this.locationRepository = locationRepository;
 		this.weatherRepository = weatherRepository;
@@ -83,6 +88,7 @@ public class HarvesterService {
 		this.logger = logger;
 
 		this.dateFormat = simpleDateFormat;
+		this.executor = executor;
 
 	}
 
@@ -107,15 +113,24 @@ public class HarvesterService {
 	}
 
 	private void harvestData(Iterable<? extends LocationDetails> iterable) throws InterruptedException {
-		for (LocationDetails loc : iterable) {
+		executor.execute(() -> {
+			for (LocationDetails loc : iterable) {
 
-			// If data is not received from the API, sleeps and then attempts to connect
-			// again.
-			while (!processLocation(loc, precipitation, weather)) {
-				Thread.sleep(SLEEP_TIME);
+				try {
+
+					// If data is not received from the API due to a connection error, sleeps and
+					// then attempts to connect
+					// again.
+					while (!processLocation(loc, precipitation, weather)) {
+						Thread.sleep(SLEEP_TIME);
+					}
+				} catch (DocumentRequestException | InterruptedException e) {
+
+					logger.log(Level.SEVERE, e.getMessage());
+				}
+
 			}
-
-		}
+		});
 
 	}
 
@@ -124,8 +139,10 @@ public class HarvesterService {
 	 * 
 	 * @param location The location to obtain data for.
 	 * @return True if the data was received and stored, false otherwise.
+	 * @throws DocumentRequestException Thrown when the generated XML for the
+	 *                                  location was not found.
 	 */
-	public synchronized boolean processLocation(LocationDetails location) {
+	public synchronized boolean processLocation(LocationDetails location) throws DocumentRequestException {
 
 		List<HourlyPrecipitation> hourlyPrecipitation = new ArrayList<>();
 		List<HourlyWeather> hourlyWeather = new ArrayList<>();
@@ -138,8 +155,10 @@ public class HarvesterService {
 	}
 
 	private boolean processLocation(LocationDetails location, List<HourlyPrecipitation> hPrecipitation,
-			List<HourlyWeather> hWeather) {
-		Optional<Document> oDoc = location.requestData(drs);
+			List<HourlyWeather> hWeather) throws DocumentRequestException {
+		Optional<Document> oDoc;
+
+		oDoc = location.requestData(drs);
 
 		if (oDoc.isPresent()) {
 
