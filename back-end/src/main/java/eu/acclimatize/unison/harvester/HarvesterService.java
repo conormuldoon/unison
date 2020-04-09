@@ -98,13 +98,12 @@ public class HarvesterService {
 	 */
 	public void harvestData() {
 		executor.execute(() -> {
-			synchronized (this) {
-				harvestData(locationRepository.findAll());
 
-				store(precipitation, weather);
-				precipitation.clear();
-				weather.clear();
-			}
+			harvestData(locationRepository.findAll());
+			store(precipitation, weather);
+			precipitation.clear();
+			weather.clear();
+
 		});
 
 	}
@@ -138,23 +137,26 @@ public class HarvesterService {
 	 * @throws DocumentRequestException Thrown when the generated XML for the
 	 *                                  location was not found.
 	 */
-	public synchronized boolean processLocation(LocationDetails location) throws DocumentRequestException {
+	public boolean processLocation(LocationDetails location) throws DocumentRequestException {
 
-		List<HourlyPrecipitation> hourlyPrecipitation = new ArrayList<>();
-		List<HourlyWeather> hourlyWeather = new ArrayList<>();
-		if (processLocation(location, hourlyPrecipitation, hourlyWeather)) {
-			store(hourlyPrecipitation, hourlyWeather);
+		Optional<Document> oDoc = location.requestData(drs);
+		if (oDoc.isPresent()) {
+			executor.execute(() -> {
+				List<HourlyPrecipitation> hourlyPrecipitation = new ArrayList<>();
+				List<HourlyWeather> hourlyWeather = new ArrayList<>();
+				processDocument(oDoc.get(), hourlyPrecipitation, hourlyWeather, location);
+				store(hourlyPrecipitation, hourlyWeather);
+			});
 			return true;
 		} else {
 			return false;
 		}
+
 	}
 
 	private boolean processLocation(LocationDetails location, List<HourlyPrecipitation> hPrecipitation,
 			List<HourlyWeather> hWeather) throws DocumentRequestException {
-		Optional<Document> oDoc;
-
-		oDoc = location.requestData(drs);
+		Optional<Document> oDoc = location.requestData(drs);
 
 		if (oDoc.isPresent()) {
 
