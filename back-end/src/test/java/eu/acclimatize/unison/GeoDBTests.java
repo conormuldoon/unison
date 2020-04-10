@@ -33,6 +33,12 @@ import eu.acclimatize.unison.location.geodb.GeoDBStore;
  **/
 public class GeoDBTests {
 
+	private WKTReader wktReader;
+
+	public GeoDBTests() {
+		wktReader = new WKTReader();
+	}
+
 	/**
 	 * Tests that the length of the list returned by the location controller.
 	 * 
@@ -44,8 +50,8 @@ public class GeoDBTests {
 
 		GeoDBCoordinatesRepository repository = Mockito.mock(GeoDBCoordinatesRepository.class);
 		List<GeoDBCoordinates> list = new ArrayList<>();
-		WKTReader wktReader = new WKTReader();
-		list.add(new GeoDBCoordinates((Point) wktReader.read("Point(-6.224176 53.308366)"), null));
+
+		list.add(new GeoDBCoordinates((Point) wktReader.read("Point(-6.224176 53.308366)"), new LocationDetails()));
 		Sort sort = new Sort(Sort.Direction.ASC, "name");
 		Mockito.when(repository.findAll(sort)).thenReturn(list);
 
@@ -65,7 +71,7 @@ public class GeoDBTests {
 	public void savePoint() {
 		GeoDBCoordinatesRepository repository = Mockito.mock(GeoDBCoordinatesRepository.class);
 		Sort sort = new Sort(Sort.Direction.ASC, "name");
-		GeoDBStore geoDBStore = new GeoDBStore(repository, sort, new WKTReader());
+		GeoDBStore geoDBStore = new GeoDBStore(repository, sort, wktReader);
 		geoDBStore.save(-6.224176, 53.308366, new LocationDetails());
 
 		Mockito.verify(repository, Mockito.times(1)).save(Mockito.any(GeoDBCoordinates.class));
@@ -77,13 +83,12 @@ public class GeoDBTests {
 		Writer jsonWriter = new StringWriter();
 		JsonGenerator jsonGenerator = new JsonFactory().createGenerator(jsonWriter);
 
-		WKTReader wktReader = new WKTReader();
 		double lon = -6.224176;
 		double lat = 53.308366;
 		String loc = "UCD";
 		Point p = (Point) wktReader.read("Point(" + lon + " " + lat + ")");
 		PointSerializer ps = new PointSerializer();
-		ps.serialize(p.getX(), p.getY(), loc, jsonGenerator);
+		ps.serialize(p.getX(), p.getY(), new LocationDetails(loc, null, null), jsonGenerator);
 
 		jsonGenerator.flush();
 
@@ -93,7 +98,7 @@ public class GeoDBTests {
 	}
 
 	/**
-	 * Tests that feature collections are serialized in a GeoJSON format correctly.
+	 * Tests that a feature collection is serialized in a GeoJSON format correctly.
 	 **/
 	@Test
 	public void testFCSerialization() throws IOException, ParseException {
@@ -108,6 +113,46 @@ public class GeoDBTests {
 		jsonGenerator.flush();
 
 		Assert.assertEquals("{\"type\":\"FeatureCollection\",\"features\":[]}", jsonWriter.toString());
+
+	}
+
+	private GeoDBCoordinates createCoordinates(String name, double lon, double lat) throws ParseException {
+
+		Point p = (Point) wktReader.read("Point(" + lon + " " + lat + ")");
+		GeoDBCoordinates coord = new GeoDBCoordinates(p, new LocationDetails(name, null, null));
+		return coord;
+
+	}
+
+	/**
+	 * Tests that a list of features is serialized in a GeoJSON format correctly.
+	 **/
+	@Test
+	public void testFCArraySerialization() throws IOException, ParseException {
+
+		List<CoordinatesSerializer> list = new ArrayList<>();
+
+		String[] locArr = { "UCD", "San Francisco" };
+		double[][] coordArr = { { -6.224176, 53.308366 }, { -122.447366, 37.762681 } };
+		for (int i = 0; i < locArr.length; i++) {
+			list.add(createCoordinates(locArr[i], coordArr[i][0], coordArr[i][1]));
+		}
+
+		FeatureCollection featureCollection = new FeatureCollection(list, new PointSerializer());
+		FeatureCollectionSerializer fcs = new FeatureCollectionSerializer();
+		Writer jsonWriter = new StringWriter();
+		JsonGenerator jsonGenerator = new JsonFactory().createGenerator(jsonWriter);
+
+		fcs.serialize(featureCollection, jsonGenerator, null);
+
+		jsonGenerator.flush();
+
+		String geoStr = "{\"type\":\"FeatureCollection\",\"features\":[{\"geometry\":{\"type\":\"Point\",\"coordinates\":["
+				+ coordArr[0][0] + "," + coordArr[0][1] + "]},\"properties\":{\"name\":\"" + locArr[0]
+				+ "\"},\"type\":\"Feature\"},{\"geometry\":{\"type\":\"Point\",\"coordinates\":[" + coordArr[1][0] + ","
+				+ coordArr[1][1] + "]},\"properties\":{\"name\":\"" + locArr[1] + "\"},\"type\":\"Feature\"}]}";
+		
+		Assert.assertEquals(geoStr, jsonWriter.toString());
 
 	}
 

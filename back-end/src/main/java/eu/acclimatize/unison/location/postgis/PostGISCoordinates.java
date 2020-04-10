@@ -55,7 +55,7 @@ public class PostGISCoordinates implements CoordinatesSerializer{
 
 	@Override
 	public void serialize(JsonGenerator gen, PointSerializer pointSerializer) throws IOException {
-		pointSerializer.serialize(geom.getX(), geom.getY(), name, gen);
+		pointSerializer.serialize(geom.getX(), geom.getY(), location, gen);
 		
 	}
 

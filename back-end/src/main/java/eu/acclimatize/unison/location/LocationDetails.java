@@ -1,5 +1,6 @@
 package eu.acclimatize.unison.location;
 
+import java.io.IOException;
 import java.io.Serializable;
 import java.util.Optional;
 
@@ -8,6 +9,8 @@ import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 
 import org.w3c.dom.Document;
+
+import com.fasterxml.jackson.core.JsonGenerator;
 
 import eu.acclimatize.unison.harvester.DocumentRequestException;
 import eu.acclimatize.unison.harvester.DocumentRequestService;
@@ -21,6 +24,8 @@ import eu.acclimatize.unison.user.UserInformation;
  */
 @Entity
 public class LocationDetails implements Serializable {
+	
+	private static final String NAME = "name";
 
 	private static final long serialVersionUID = 1771422791257298902L;
 
@@ -67,6 +72,19 @@ public class LocationDetails implements Serializable {
 
 		return drs.documentForURI(name, uri);
 
+	}
+	
+	/**
+	 * Serializes as a GeoJSON feature properties object.
+	 * 
+	 * @param gen the JSON generator written to.
+	 * @throws IOException Thrown if there is an I/O error while serializing.
+	 */
+	public void writeProperties(JsonGenerator gen) throws IOException {
+		
+		gen.writeStartObject();
+		gen.writeStringField(NAME, name);
+		gen.writeEndObject();
 	}
 
 	@Override

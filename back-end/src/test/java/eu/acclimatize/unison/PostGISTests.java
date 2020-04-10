@@ -37,7 +37,7 @@ public class PostGISTests {
 		PostGISCoordinatesRepository repository = Mockito.mock(PostGISCoordinatesRepository.class);
 		List<PostGISCoordinates> list = new ArrayList<>();
 		WKTReader wktReader=new WKTReader();
-		list.add(new PostGISCoordinates((Point) wktReader.read("Point(-6.224176 53.308366)"),null));
+		list.add(new PostGISCoordinates((Point) wktReader.read("Point(-6.224176 53.308366)"),new LocationDetails()));
 		Sort sort = new Sort(Sort.Direction.ASC, "name");
 		Mockito.when(repository.findAll(sort)).thenReturn(list);
 
