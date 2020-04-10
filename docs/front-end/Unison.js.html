@@ -1,0 +1,303 @@
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    
+    <meta charset="utf-8">
+    <title>JSDoc: Unison.js</title>
+
+    <script src="https://cdn.jsdelivr.net/gh/google/code-prettify@master/loader/run_prettify.js"></script>
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+    <script src="./build/entry.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <!--[if lt IE 9]>
+      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <link href="https://fonts.googleapis.com/css?family=Muli:100,400,700|Oswald:300|Inconsolata,700" rel="stylesheet">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.3/css/all.css" integrity="sha384-UHRtZLI+pbxtHCWp1t77Bi1L4ZtiqrqD80Kn4Z8NTSRyMA2Fd33n5dQ8lWUE00s/" crossorigin="anonymous">
+    <link type="text/css" rel="stylesheet" href="https://jmblog.github.io/color-themes-for-google-code-prettify/themes/tomorrow-night.min.css">
+    <link type="text/css" rel="stylesheet" href="styles/app.min.css">
+    <link type="text/css" rel="stylesheet" href="styles/iframe.css">
+</head>
+
+<body>
+    <div id="stickyNavbarOverlay"></div>
+    <div class="top-navbar">
+        <div class="container">
+            <nav class="navbar" role="navigation" aria-label="main navigation">
+                <div class="navbar-brand">
+                    
+                     
+                        <h1 class="navbar-item">Unison React components</h1>
+                    
+                    <a id="hamburger" role="button" class="navbar-burger" aria-label="menu" aria-expanded="false">
+                        <span aria-hidden="true"></span>
+                        <span aria-hidden="true"></span>
+                        <span aria-hidden="true"></span>
+                    </a>
+                </div>
+                
+            </nav>
+        </div>
+    </div>
+    <div class="container">
+        <div class="columns">
+            <div class="column is-3" id="sidebarNav">
+                <div class="sidebar">
+                    <nav>
+                        <h2><a href="index.html">Home</a></h2><div class="category"><h3>Components</h3><ul><li><a href="ARLocationComponent.html">ARLocationComponent</a></li><li><a href="ChartComponent.html">ChartComponent</a></li><li><a href="ChartPopup.html">ChartPopup</a></li><li><a href="DateSelector.html">DateSelector</a></li><li><a href="LeafletMap.html">LeafletMap</a></li><li><a href="LocationForm.html">LocationForm</a></li><li><a href="RemoveForm.html">RemoveForm</a></li><li><a href="TabsComponent.html">TabsComponent</a></li><li><a href="Unison.html">Unison</a></li></ul></div>
+                    </nav>
+                </div>
+            </div>
+            <div class="column is-9-desktop">
+                <div class="content" id="main-content-wrapper">
+                    <header class="page-title">
+                        <p>Source</p>
+                        <h1>Unison.js</h1>
+                    </header>
+                    
+                    
+
+
+
+    
+    <section>
+        <article>
+            <pre class="prettyprint source linenums"><code>
+
+import PropTypes from 'prop-types';
+import React, { useState, useEffect } from 'react';
+import 'react-day-picker/lib/style.css';
+import { formatDate } from 'react-day-picker/moment';
+import './App.css';
+import ARLocationComponent from './ARLocationComponent';
+import { API, FORMAT, VAR_OPT } from './Constant';
+import DateSelector from './DateSelector';
+import LeafletMap from './LeafletMap';
+import { today, tomorrow } from './Util';
+
+/**
+ * Application component for Unison. Once mounted, it connects to the back-end to receive a list of the locations being tracked.
+ * 
+ * @component
+ * 
+ */
+function Unison(props) {
+
+
+  const [fromDate, setFromDate] = useState(today());
+  const [toDate, setToDate] = useState(tomorrow());
+  const [option, setOption] = useState(undefined);
+  const [marker, setMarker] = useState(undefined);
+  const [curLoc, setCurLoc] = useState(undefined);
+  const [curVar, setCurVar] = useState(VAR_OPT[0]);
+
+  const obtainData = () => {
+    let active = true;
+
+    async function requestLocation() {
+      let response = await fetch(API + '/location');
+
+      if (response.ok) {
+        const featureCollection = await response.json();
+
+        const locationArray=featureCollection.features;
+
+        if (active) {
+          let n = locationArray.length;
+
+          let newOption = [];
+          let newMarker = [];
+
+          for (let i = 0; i &lt; n; i++) {
+            newOption.push(locationArray[i].properties.name);
+            let pos = [locationArray[i].geometry.coordinates[1], locationArray[i].geometry.coordinates[0]];
+
+            newMarker.push({ name: locationArray[i].properties.name, position: pos });
+
+
+          }
+          if (n > 0) {
+            setOption(newOption);
+            setMarker(newMarker);
+            setCurLoc(locationArray[0].properties.name);
+           
+          } else {
+            setOption(undefined);
+            setMarker(undefined);
+            setCurLoc(undefined);
+          }
+        }
+      }
+    }
+
+    requestLocation();
+
+    const cancel = () => active = false;
+    return cancel;
+  };
+
+  useEffect(() => {
+
+    return obtainData();
+  }, []);
+
+
+  const markerClicked = (location) => {
+    setCurLoc(location);
+  }
+
+  const _onLocationSelect = (event) => {
+
+    setCurLoc(event.target.value);
+
+  }
+
+  const _onVarSelect = (event) => {
+    setCurVar(event.target.value);
+
+  }
+
+  const handleStartChange = (selectedDate) => {
+    setFromDate(formatDate(selectedDate, FORMAT));
+
+  }
+
+  const handleEndChange = (selectedDate) => {
+
+    setToDate(formatDate(selectedDate, FORMAT));
+
+  }
+
+
+  return (
+
+    &lt;div id="mapdiv">
+
+      &lt;div id="logos">
+
+        &lt;center>
+          &lt;img id="logoitem" alt="" src={props.logoLeft} />
+
+
+          &lt;img id="logoitem" alt="" src={props.logoRight} />
+        &lt;/center>
+
+      &lt;/div>
+
+      &lt;LeafletMap marker={marker} curVar={curVar} curLoc={curLoc}
+        markerCallback={markerClicked} fromDate={fromDate} toDate={toDate}
+        mapCentre={props.mapCentre}
+
+      />
+      &lt;div id="selectdiv" >
+
+        &lt;center>
+
+          &lt;div>
+            &lt;div id='variDD' >
+
+              &lt;select disabled={!curLoc} onChange={_onVarSelect}>
+
+                {VAR_OPT.map((opt) => &lt;option key={opt} value={opt}>{opt}&lt;/option>)}
+
+              &lt;/select>
+
+            &lt;/div>
+
+            &lt;div className='marginItem' >
+
+              &lt;select disabled={!curLoc} onChange={_onLocationSelect} defaultValue="Location" value={curLoc}>
+                {!option &amp;&amp; &lt;option key="Location" value="Location" >Location&lt;/option>}
+                {option &amp;&amp; option.map((opt) => &lt;option key={opt} value={opt}>{opt}&lt;/option>)}
+
+              &lt;/select>
+
+
+            &lt;/div>
+
+
+            &lt;div className='pLeft' >
+              &lt;DateSelector
+                label="From date" dateValue={fromDate}
+                handleDayChange={handleStartChange}
+              />
+            &lt;/div>
+
+            &lt;div className='pLeft' >
+              &lt;DateSelector
+                label="To date" dateValue={toDate}
+                handleDayChange={handleEndChange}
+              />
+
+            &lt;/div>
+
+            &lt;a className='pLeft' href={API + '/csv' + curVar.replace(/ /g, '') + '_' + Date.now() + '.csv?location=' + curLoc + '&amp;fromDate=' + fromDate + '&amp;toDate=' + toDate}>
+
+              &lt;button disabled={!curLoc} >
+                CSV
+              &lt;/button>
+
+            &lt;/a>
+          &lt;/div>
+
+          &lt;ARLocationComponent obtainData={obtainData} location={curLoc} />
+
+        &lt;/center>
+
+      &lt;/div>
+
+
+
+    &lt;/div>
+  );
+
+}
+
+Unison.propTypes = {
+
+  /** The latitude/longitude coordinates for the centre of the map. */
+  mapCentre: PropTypes.array.isRequired,
+
+  /** A logo displayed at the bottom of the screen. It will be displayed to the left
+   * if the logoRight prop is defined.
+   */
+  logoLeft: PropTypes.any,
+
+  /** A logo displayed at the bottom of the screen. It will be displayed to the right
+   * if the logoLeft prop is defined.
+   */
+  logoRight: PropTypes.any,
+
+}
+
+export default Unison;
+</code></pre>
+        </article>
+    </section>
+
+
+
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+<footer class="footer">
+    <div class="content has-text-centered">
+        <p>Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.6.3</a> on Fri Apr 10 2020 16:07:34 GMT+0100 (Irish Standard Time)</p>
+        <p class="sidebar-created-by">
+            <a href="https://github.com/SoftwareBrothers/better-docs" target="_blank">BetterDocs theme</a> provided with <i class="fas fa-heart"></i> by 
+            <a href="http://softwarebrothers.co" target="_blank">SoftwareBrothers - JavaScript Development Agency</a>
+        </p>
+    </div>
+</footer>
+
+
+<script src="scripts/app.min.js"></script>
+<script src="scripts/linenumber.js"> </script>
+</body>
+</html>
