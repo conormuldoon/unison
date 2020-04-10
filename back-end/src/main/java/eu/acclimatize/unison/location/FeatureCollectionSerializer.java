@@ -19,5 +19,4 @@ public class FeatureCollectionSerializer extends JsonSerializer<FeatureCollectio
 			throws IOException {
 		value.geoJsonSerialize(gen);	
 	}
-
 }
