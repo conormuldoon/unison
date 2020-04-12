@@ -70,7 +70,7 @@ public class HarvesterService {
 	 * @param logger                  Logs warning messages and exceptions.
 	 * @param simpleDateFormat        Used to parse date data using a given time
 	 *                                zone.
-	 * @param executor               Used to execute the data harvesting process on
+	 * @param executor                Used to execute the data harvesting process on
 	 *                                a thread.
 	 */
 	public HarvesterService(LocationRepository locationRepository,
@@ -99,7 +99,15 @@ public class HarvesterService {
 	public void harvestData() {
 		executor.execute(() -> {
 
-			harvestData(locationRepository.findAll());
+			try {
+				harvestData(locationRepository.findAll());
+			} catch (InterruptedException e) {
+				logger.log(Level.SEVERE, "Interrupted!", e);
+				
+				// Restoring interrupted state.
+				Thread.currentThread().interrupt();
+			}
+
 			store(precipitation, weather);
 			precipitation.clear();
 			weather.clear();
@@ -108,7 +116,7 @@ public class HarvesterService {
 
 	}
 
-	private void harvestData(Iterable<? extends LocationDetails> iterable) {
+	private void harvestData(Iterable<? extends LocationDetails> iterable) throws InterruptedException {
 
 		for (LocationDetails loc : iterable) {
 
@@ -120,7 +128,7 @@ public class HarvesterService {
 				while (!processLocation(loc, precipitation, weather)) {
 					Thread.sleep(SLEEP_TIME);
 				}
-			} catch (DocumentRequestException | InterruptedException e) {
+			} catch (DocumentRequestException e) {
 
 				logger.log(Level.SEVERE, e.getMessage());
 			}
