@@ -10,9 +10,14 @@ services:
     ports:
       - "8080:8080"
     restart: always
+    depends_on: 
+      - db
+    environment:
+      SPRING_DATASOURCE_URL: jdbc:postgresql://db:5432/harmonie
     networks:
       - back-end
       - front-end
+    
 
   react-app:
     build:
@@ -27,8 +32,25 @@ services:
       - server
     networks:
       - front-end  
+  
+  db:
+    image: postgis/postgis
+    ports:
+      - "8001:5432"
+    environment:
+      POSTGRES_USER: harmonie
+      POSTGRES_PASSWORD: harpasswd
+      POSTGRES_DB: harmonie
+    volumes:
+      - db-data:/var/lib/postgresql/data
+      - ./back-end/src/main/resources/pg_pgis_schema.sql:/docker-entrypoint-initdb.d/init.sql
+    networks:
+      - back-end
 
+volumes:
+  db-data:
 networks:
   back-end:
-  front-end:    
+  front-end:
+ 
 
