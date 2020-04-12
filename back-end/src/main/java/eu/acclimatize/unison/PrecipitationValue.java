@@ -4,6 +4,9 @@ import java.io.PrintWriter;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonInclude.Include;
+
+import eu.acclimatize.unison.csvcontroller.CSVHeaderItem;
+
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 /**

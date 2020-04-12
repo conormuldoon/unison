@@ -6,7 +6,6 @@ import java.util.Date;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
-import eu.acclimatize.unison.CSVHeaderItem;
 import eu.acclimatize.unison.ItemListFinder;
 import eu.acclimatize.unison.result.CloudLevelResult;
 import eu.acclimatize.unison.result.CloudinessResult;

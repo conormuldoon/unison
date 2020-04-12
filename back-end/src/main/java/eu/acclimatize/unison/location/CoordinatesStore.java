@@ -22,7 +22,7 @@ public interface CoordinatesStore {
 	 * 
 	 * @return An ordered list of coordinates. 
 	 */
-	public List<? extends CoordinatesSerializer> sortedFindAll();
+	public List<? extends PointFeature> sortedFindAll();
 	
 	/**
 	 * Removes coordinates from the spatial database.

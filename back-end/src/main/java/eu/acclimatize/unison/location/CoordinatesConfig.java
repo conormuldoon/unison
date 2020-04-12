@@ -12,7 +12,6 @@ import org.springframework.data.domain.Sort;
 @Configuration
 public class CoordinatesConfig {
 
-	
 	/**
 	 * A bean used to determine how coordinates queries are sorted.
 	 * 
@@ -20,16 +19,18 @@ public class CoordinatesConfig {
 	 */
 	@Bean
 	public Sort sort() {
-		return new Sort(Sort.Direction.ASC, "name");
+		
+		return Sort.by(Sort.Direction.ASC, "name");
+		
 	}
-	
+
 	/**
 	 * A bean used in serializing location data in a GeoJSON format.
 	 * 
 	 * @return The point serializer created.
 	 */
 	@Bean
-	public PointSerializer pointSerializer() {
-		return new PointSerializer();
+	public PointFeatureSerializer pointSerializer() {
+		return new PointFeatureSerializer();
 	}
 }

@@ -17,7 +17,7 @@ import eu.acclimatize.unison.location.FeatureCollection;
 import eu.acclimatize.unison.location.LocationController;
 import eu.acclimatize.unison.location.LocationDetails;
 import eu.acclimatize.unison.location.PointParseException;
-import eu.acclimatize.unison.location.PointSerializer;
+import eu.acclimatize.unison.location.PointFeatureSerializer;
 import eu.acclimatize.unison.location.postgis.PostGISConfig;
 import eu.acclimatize.unison.location.postgis.PostGISCoordinates;
 import eu.acclimatize.unison.location.postgis.PostGISCoordinatesRepository;
@@ -38,12 +38,12 @@ public class PostGISTests {
 		List<PostGISCoordinates> list = new ArrayList<>();
 		WKTReader wktReader=new WKTReader();
 		list.add(new PostGISCoordinates((Point) wktReader.read("Point(-6.224176 53.308366)"),new LocationDetails()));
-		Sort sort = new Sort(Sort.Direction.ASC, "name");
+		Sort sort = Sort.by(Sort.Direction.ASC, "name");
 		Mockito.when(repository.findAll(sort)).thenReturn(list);
 
 		PostGISStore postGISStore = new PostGISStore(repository, sort, null);
 
-		LocationController locationController = new LocationController(postGISStore,new PointSerializer());
+		LocationController locationController = new LocationController(postGISStore,new PointFeatureSerializer());
 		FeatureCollection fc = locationController.location();
 
 		JsonGenerator jg=Mockito.mock(JsonGenerator.class);
@@ -57,7 +57,7 @@ public class PostGISTests {
 	public void savePoint() {
 		PostGISCoordinatesRepository repository = Mockito.mock(PostGISCoordinatesRepository.class);
 		PostGISConfig config = new PostGISConfig();
-		Sort sort = new Sort(Sort.Direction.ASC, "name");
+		Sort sort = Sort.by(Sort.Direction.ASC, "name");
 		PostGISStore postGISStore = new PostGISStore(repository, sort, config.wktReader());
 		postGISStore.save(-6.224176, 53.308366, new LocationDetails());
 		

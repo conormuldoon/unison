@@ -17,13 +17,13 @@ import org.springframework.data.domain.Sort;
 import com.fasterxml.jackson.core.JsonFactory;
 import com.fasterxml.jackson.core.JsonGenerator;
 
-import eu.acclimatize.unison.location.CoordinatesSerializer;
+import eu.acclimatize.unison.location.PointFeature;
 import eu.acclimatize.unison.location.FeatureCollection;
 import eu.acclimatize.unison.location.FeatureCollectionSerializer;
 import eu.acclimatize.unison.location.LocationController;
 import eu.acclimatize.unison.location.LocationDetails;
 import eu.acclimatize.unison.location.PointParseException;
-import eu.acclimatize.unison.location.PointSerializer;
+import eu.acclimatize.unison.location.PointFeatureSerializer;
 import eu.acclimatize.unison.location.geodb.GeoDBCoordinates;
 import eu.acclimatize.unison.location.geodb.GeoDBCoordinatesRepository;
 import eu.acclimatize.unison.location.geodb.GeoDBStore;
@@ -52,12 +52,12 @@ public class GeoDBTests {
 		List<GeoDBCoordinates> list = new ArrayList<>();
 
 		list.add(new GeoDBCoordinates((Point) wktReader.read("Point(-6.224176 53.308366)"), new LocationDetails()));
-		Sort sort = new Sort(Sort.Direction.ASC, "name");
+		Sort sort = Sort.by(Sort.Direction.ASC, "name");
 		Mockito.when(repository.findAll(sort)).thenReturn(list);
 
 		GeoDBStore geoDBStore = new GeoDBStore(repository, sort, null);
 
-		LocationController locationController = new LocationController(geoDBStore, new PointSerializer());
+		LocationController locationController = new LocationController(geoDBStore, new PointFeatureSerializer());
 		FeatureCollection fc = locationController.location();
 
 		JsonGenerator jg = Mockito.mock(JsonGenerator.class);
@@ -70,7 +70,7 @@ public class GeoDBTests {
 	@Test
 	public void savePoint() {
 		GeoDBCoordinatesRepository repository = Mockito.mock(GeoDBCoordinatesRepository.class);
-		Sort sort = new Sort(Sort.Direction.ASC, "name");
+		Sort sort = Sort.by(Sort.Direction.ASC, "name");
 		GeoDBStore geoDBStore = new GeoDBStore(repository, sort, wktReader);
 		geoDBStore.save(-6.224176, 53.308366, new LocationDetails());
 
@@ -87,7 +87,7 @@ public class GeoDBTests {
 		double lat = 53.308366;
 		String loc = "UCD";
 		Point p = (Point) wktReader.read("Point(" + lon + " " + lat + ")");
-		PointSerializer ps = new PointSerializer();
+		PointFeatureSerializer ps = new PointFeatureSerializer();
 		ps.serialize(p.getX(), p.getY(), new LocationDetails(loc, null, null), jsonGenerator);
 
 		jsonGenerator.flush();
@@ -103,7 +103,7 @@ public class GeoDBTests {
 	@Test
 	public void testFCSerialization() throws IOException, ParseException {
 
-		FeatureCollection featureCollection = new FeatureCollection(new ArrayList<CoordinatesSerializer>(), null);
+		FeatureCollection featureCollection = new FeatureCollection(new ArrayList<PointFeature>(), null);
 		FeatureCollectionSerializer fcs = new FeatureCollectionSerializer();
 		Writer jsonWriter = new StringWriter();
 		JsonGenerator jsonGenerator = new JsonFactory().createGenerator(jsonWriter);
@@ -130,7 +130,7 @@ public class GeoDBTests {
 	@Test
 	public void testFCArraySerialization() throws IOException, ParseException {
 
-		List<CoordinatesSerializer> list = new ArrayList<>();
+		List<PointFeature> list = new ArrayList<>();
 
 		String[] locArr = { "UCD", "San Francisco" };
 		double[][] coordArr = { { -6.224176, 53.308366 }, { -122.447366, 37.762681 } };
@@ -138,7 +138,7 @@ public class GeoDBTests {
 			list.add(createCoordinates(locArr[i], coordArr[i][0], coordArr[i][1]));
 		}
 
-		FeatureCollection featureCollection = new FeatureCollection(list, new PointSerializer());
+		FeatureCollection featureCollection = new FeatureCollection(list, new PointFeatureSerializer());
 		FeatureCollectionSerializer fcs = new FeatureCollectionSerializer();
 		Writer jsonWriter = new StringWriter();
 		JsonGenerator jsonGenerator = new JsonFactory().createGenerator(jsonWriter);

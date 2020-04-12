@@ -9,7 +9,7 @@ import com.vividsolutions.jts.geom.Point;
 import com.vividsolutions.jts.io.ParseException;
 import com.vividsolutions.jts.io.WKTReader;
 
-import eu.acclimatize.unison.location.CoordinatesSerializer;
+import eu.acclimatize.unison.location.PointFeature;
 import eu.acclimatize.unison.location.CoordinatesStore;
 import eu.acclimatize.unison.location.LocationDetails;
 import eu.acclimatize.unison.location.PointParseException;
@@ -68,7 +68,7 @@ public class PostGISStore implements CoordinatesStore {
 	}
 
 	@Override
-	public List<? extends CoordinatesSerializer> sortedFindAll() {
+	public List<? extends PointFeature> sortedFindAll() {
 		return repository.findAll(sort);
 	}
 

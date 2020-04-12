@@ -4,6 +4,8 @@ import java.io.PrintWriter;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 
+import eu.acclimatize.unison.csvcontroller.CSVHeaderItem;
+
 /**
  * 
  * A class for low, medium, and high cloud levels.

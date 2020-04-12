@@ -16,7 +16,7 @@ public class LocationController {
 	private static final String MEDIA_TYPE = "application/geo+json";
 
 	private CoordinatesStore store;
-	private PointSerializer pointSerializer;
+	private PointFeatureSerializer pointSerializer;
 
 	/**
 	 * Creates and instance of LocationController.
@@ -26,7 +26,7 @@ public class LocationController {
 	 * 
 	 * @param pointSerializer Used in serializing points.
 	 */
-	public LocationController(CoordinatesStore store, PointSerializer pointSerializer) {
+	public LocationController(CoordinatesStore store, PointFeatureSerializer pointSerializer) {
 		this.store = store;
 		this.pointSerializer = pointSerializer;
 	}

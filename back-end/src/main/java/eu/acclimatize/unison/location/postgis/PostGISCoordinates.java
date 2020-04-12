@@ -10,9 +10,9 @@ import javax.persistence.OneToOne;
 import com.fasterxml.jackson.core.JsonGenerator;
 import com.vividsolutions.jts.geom.Point;
 
-import eu.acclimatize.unison.location.CoordinatesSerializer;
+import eu.acclimatize.unison.location.PointFeature;
 import eu.acclimatize.unison.location.LocationDetails;
-import eu.acclimatize.unison.location.PointSerializer;
+import eu.acclimatize.unison.location.PointFeatureSerializer;
 
 /**
  * 
@@ -21,7 +21,7 @@ import eu.acclimatize.unison.location.PointSerializer;
  *
  */
 @Entity
-public class PostGISCoordinates implements CoordinatesSerializer{
+public class PostGISCoordinates implements PointFeature{
 
 	@Id
 	private String name;
@@ -54,7 +54,7 @@ public class PostGISCoordinates implements CoordinatesSerializer{
 	}
 
 	@Override
-	public void serialize(JsonGenerator gen, PointSerializer pointSerializer) throws IOException {
+	public void serialize(JsonGenerator gen, PointFeatureSerializer pointSerializer) throws IOException {
 		pointSerializer.serialize(geom.getX(), geom.getY(), location, gen);
 		
 	}

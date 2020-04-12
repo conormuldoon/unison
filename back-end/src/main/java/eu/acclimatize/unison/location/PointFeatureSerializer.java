@@ -11,7 +11,7 @@ import eu.acclimatize.unison.Constant;
  * Used by {@link FeatureCollection} to serialize point data to GeoJSON data.
  *
  */
-public class PointSerializer {
+public class PointFeatureSerializer {
 
 	private static final String POINT = "Point";
 	private static final String COORDINATES = "coordinates";
@@ -49,6 +49,5 @@ public class PointSerializer {
 		gen.writeEndObject();
 
 	}
-
 
 }

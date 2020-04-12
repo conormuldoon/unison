@@ -5,10 +5,10 @@ import java.util.Date;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 
-import eu.acclimatize.unison.CSVHeaderItem;
 import eu.acclimatize.unison.Constant;
 import eu.acclimatize.unison.HarmonieItem;
 import eu.acclimatize.unison.WindDirection;
+import eu.acclimatize.unison.csvcontroller.CSVHeaderItem;
 
 /**
  * A Jackson and CSV annotated class that is used to store a result row from a wind direction data query.

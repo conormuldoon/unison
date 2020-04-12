@@ -6,6 +6,8 @@ import javax.persistence.Column;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 
+import eu.acclimatize.unison.csvcontroller.CSVHeaderItem;
+
 /**
  * A class for the wind speed in metres per second, Beaufort value, and wind
  * name.

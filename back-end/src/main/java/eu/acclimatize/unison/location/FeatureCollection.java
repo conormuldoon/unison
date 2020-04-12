@@ -19,8 +19,8 @@ public class FeatureCollection{
 	private static final String FEATURE_COLLECTION="FeatureCollection";
 	private static final String FEATURES ="features";
 	
-	private List<? extends CoordinatesSerializer> locationList;
-	private PointSerializer pointSerializer;
+	private List<? extends PointFeature> locationList;
+	private PointFeatureSerializer pointSerializer;
 
 	/**
 	 * Creates an instance of FeatureCollection.
@@ -28,7 +28,7 @@ public class FeatureCollection{
 	 * @param locationList A list of features.
 	 * @param pointSerializer Used to serialize the list if points..
 	 */
-	public FeatureCollection(List<? extends CoordinatesSerializer> locationList, PointSerializer pointSerializer) {
+	public FeatureCollection(List<? extends PointFeature> locationList, PointFeatureSerializer pointSerializer) {
 		this.locationList = locationList;
 		this.pointSerializer = pointSerializer;
 	}
@@ -44,7 +44,7 @@ public class FeatureCollection{
 
 		gen.writeStringField(Constant.TYPE, FEATURE_COLLECTION);
 		gen.writeArrayFieldStart(FEATURES);
-		for (CoordinatesSerializer l : locationList) {
+		for (PointFeature l : locationList) {
 			l.serialize(gen, pointSerializer);
 		}
 		gen.writeEndArray();

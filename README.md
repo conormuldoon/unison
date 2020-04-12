@@ -2,7 +2,7 @@
 Unison enables (HARMONIE-AROME) numerical weather forecast data from meteorological services to be tracked and visualised through a web interface and historical data to be accessed via a RESTful API. The version of the code in this repository (deployed at https://aqua.ucd.ie/unison/) has been configured for use with Met Éireann's model (coverage of Ireland and the UK), but Unison can also be used with the Norwegian Meteorological Institute's API or other APIs that conform to the same schema. The service has been developed using Spring Boot, JPA, and React and can be configured for use with either an embedded GeoDB geospatial database or Postgres/PostGIS for a production environment.
 
 ## Documentation
-See the [Javadoc](https://conormuldoon.github.io/unison/docs/back-end/) for a description of the Java classes for the back-end or the [JSDoc](https://conormuldoon.github.io/unison/docs/front-end/) for an overview of the React components. The documentation for the API is available [here](https://documenter.getpostman.com/view/3155829/SVtWvmRS) with examples for the endpoints used by https://aqua.ucd.ie/unison.
+See the [Javadoc](https://conormuldoon.github.io/unison/docs/back-end/) for a description of the Java classes for the back-end or the [JSDoc](https://conormuldoon.github.io/unison/docs/front-end/) for an overview of the React components. The documentation for the RESTful API is available [here](https://documenter.getpostman.com/view/3155829/SVtWvmRS) with examples for the endpoints used by https://aqua.ucd.ie/unison.
 
 ## Running
 
@@ -36,16 +36,24 @@ cd back-end
 ```
 If not previously compiled: `./mvnw clean compile package`
 ```
-java -cp target/unison-server-0.4.1-SNAPSHOT.jar -Dloader.main=eu.acclimatize.unison.user.UserConsole org.springframework.boot.loader.PropertiesLauncher
+java -cp target/unison-server-0.5.0-SNAPSHOT.jar -Dloader.main=eu.acclimatize.unison.user.UserConsole org.springframework.boot.loader.PropertiesLauncher
 ```
 
 Enter the user credentials (if the user name already exists, the password will be updated).
 
 Alternatively, the API can be used to add users or update passwords.
 
+### Docker
+
+Production ready containers for the system that use Postgres/PostGIS and Nginx can be created using Docker Compose.
+```
+docker-compose up
+```
+Once running, open `http://localhost:4545` to access the front-end. The default user user name and password in the Docker configuration are `unisonuser` and `unisonpassword`.
+
 ## Testing
 
-### Back-end
+### Back-end 
 ```
 cd back-end
 ./mvnw clean compile test
