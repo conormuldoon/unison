@@ -25,7 +25,8 @@ import eu.acclimatize.unison.user.UserInformation;
 @Entity
 public class LocationDetails implements Serializable {
 	
-	private static final String NAME = "name";
+	// The JSON field name for the location name.
+	private static final String FN_NAME = "name";
 
 	private static final long serialVersionUID = 1771422791257298902L;
 
@@ -83,7 +84,7 @@ public class LocationDetails implements Serializable {
 	public void writeProperties(JsonGenerator gen) throws IOException {
 		
 		gen.writeStartObject();
-		gen.writeStringField(NAME, name);
+		gen.writeStringField(FN_NAME, name);
 		gen.writeEndObject();
 	}
 

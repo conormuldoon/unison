@@ -102,8 +102,8 @@ public class HarvesterService {
 			try {
 				harvestData(locationRepository.findAll());
 			} catch (InterruptedException e) {
-				logger.log(Level.SEVERE, "Interrupted!", e);
-				
+				logger.log(Level.WARNING, "Interruped when invoking harvestData.", e.getMessage());
+
 				// Restoring interrupted state.
 				Thread.currentThread().interrupt();
 			}

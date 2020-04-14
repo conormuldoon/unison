@@ -45,7 +45,7 @@ Alternatively, the API can be used to add users or update passwords.
 
 ### Docker
 
-Production ready containers for the system that use Postgres/PostGIS and Nginx can be created using Docker Compose.
+Containers for the system that use Postgres/PostGIS and Nginx can be created using Docker Compose.
 ```
 docker-compose up
 ```
