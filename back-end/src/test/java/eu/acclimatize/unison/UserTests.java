@@ -8,6 +8,7 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.PrintWriter;
 import java.security.SecureRandom;
+import java.util.concurrent.Executor;
 
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
@@ -19,7 +20,6 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
 import eu.acclimatize.unison.user.CredentialsRequester;
 import eu.acclimatize.unison.user.UserHibernateStore;
-import eu.acclimatize.unison.user.UserInformation;
 import eu.acclimatize.unison.user.UserRepository;
 import eu.acclimatize.unison.user.UserService;
 
@@ -56,16 +56,18 @@ public class UserTests {
 	}
 
 	/**
-	 * Tests that initial user information is saved.
+	 * Tests that runnable task executed for initial user information.
 	 */
 	@Test
 	public void testInitialUser() {
 		UserRepository userRepository = Mockito.mock(UserRepository.class);
 		BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
-		UserService userService = new UserService(userRepository, null, passwordEncoder, true, null, null);
+		Executor executor=Mockito.mock(Executor.class);
+		UserService userService = new UserService(userRepository, null, passwordEncoder, true, null, null,
+				executor);
 		System.setIn(mockInputStream());
 		userService.initialUser();
-		Mockito.verify(userRepository, Mockito.times(1)).save(Mockito.any(UserInformation.class));
+		Mockito.verify(executor, Mockito.times(1)).execute(Mockito.any());
 
 	}
 

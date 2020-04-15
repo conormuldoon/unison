@@ -2,6 +2,8 @@ package eu.acclimatize.unison;
 
 import java.text.SimpleDateFormat;
 import java.util.TimeZone;
+import java.util.concurrent.Executor;
+import java.util.concurrent.Executors;
 import java.util.logging.Logger;
 
 import javax.xml.XMLConstants;
@@ -77,6 +79,16 @@ public class UnisonServerApplication {
 		SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd'T'KK:mm:ss'Z'");
 		dateFormat.setTimeZone(TimeZone.getTimeZone(timeZone));
 		return dateFormat;
+	}
+	
+	
+	/**
+	 * 
+	 * @return A single thread executor for executing runnable tasks.
+	 */
+	@Bean
+	public Executor executor() {
+		return  Executors.newSingleThreadExecutor();
 	}
 	
 	

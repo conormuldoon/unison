@@ -23,7 +23,7 @@ import org.w3c.dom.Document;
 import org.xml.sax.SAXException;
 
 import eu.acclimatize.unison.harvester.DocumentRequestException;
-import eu.acclimatize.unison.harvester.HarvesterConfig;
+
 import eu.acclimatize.unison.harvester.HarvesterService;
 import eu.acclimatize.unison.location.LocationDetails;
 
@@ -41,7 +41,7 @@ public class HarvesterTests {
 		dateFormat.setTimeZone(TimeZone.getTimeZone(timeZone));
 
 		HarvesterService hs = new HarvesterService(null, pr, wr, null, logger, dateFormat,
-				new HarvesterConfig().executor());
+				new UnisonServerApplication().executor());
 		DocumentBuilderFactory dbFactory = DocumentBuilderFactory.newInstance();
 		DocumentBuilder dBuilder = dbFactory.newDocumentBuilder();
 

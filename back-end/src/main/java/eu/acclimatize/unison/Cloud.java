@@ -36,6 +36,7 @@ public class Cloud implements HarmonieItem {
 		this.lowClouds = lowClouds;
 		this.mediumClouds = mediumClouds;
 		this.highClouds = highClouds;
+
 	}
 
 	/**

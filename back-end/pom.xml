@@ -5,11 +5,11 @@
 
 	<groupId>eu.acclimatize</groupId>
 	<artifactId>unison-server</artifactId>
-	<version>0.5.0-SNAPSHOT</version>
+	<version>0.5.0</version>
 	<packaging>jar</packaging>
 
 	<name>unison-server</name>
-	<description>Backend server and data harvester for Unison.</description>
+	<description>Back-end server and data harvester for Unison.</description>
 
 	<parent>
 		<groupId>org.springframework.boot</groupId>
@@ -211,5 +211,12 @@
 
 	</reporting>
 
+	<distributionManagement>
+		<repository>
+			<id>github</id>
+			<name>GitHub conormuldoon Apache Maven Packages</name>
+			<url>https://maven.pkg.github.com/conormuldoon/unison</url>
+		</repository>
+	</distributionManagement>
 
 </project>

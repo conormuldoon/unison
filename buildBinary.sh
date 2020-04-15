@@ -10,11 +10,13 @@ cd front-end
 sed -i "s/version\": \"[0-9]*\.[0-9]*\.[0-9]*.*\"/version\": \"$1\"/" package.json
 yarn install
 yarn build
-rm -r ../back-end/src/main/resources/public/*
+rm -rf ../back-end/src/main/resources/public/*
 cp -r build/* ../back-end/src/main/resources/public
 cd ../back-end
 sed -i "s/[0-9]*\.[0-9]*\.[0-9]*-SNAPSHOT/$1/" pom.xml
 ./mvnw clean compile package
+rm -r src/main/resources/public/*
 cp target/unison-server-$1.jar target/unison-$1.jar
 cd ..
 ./generateDocs.sh
+:

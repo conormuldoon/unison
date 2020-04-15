@@ -15,11 +15,23 @@ RUN mkdir -p target/dependency && (cd target/dependency; jar -xf ../*.jar)
 
 FROM openjdk:11-jdk-slim
 
+ARG DEPENDENCY=/app/target/dependency
 
-ARG DEPENDENCIES=/app/target/dependency
+COPY --from=build ${DEPENDENCY}/BOOT-INF/lib /app/lib	
+COPY --from=build ${DEPENDENCY}/META-INF /app/META-INF	
+COPY --from=build ${DEPENDENCY}/BOOT-INF/classes /app
 
-COPY --from=build ${DEPENDENCIES}/BOOT-INF/lib /app/lib
-COPY --from=build ${DEPENDENCIES}/META-INF /app/META-INF
-COPY --from=build ${DEPENDENCIES}/BOOT-INF/classes /app
+EXPOSE 8080
 
-ENTRYPOINT ["java","-cp","app:app/lib/*","-Ddefault.username=unisonuser", "-Ddefault.encoded=$2a$10$A2tDbzPnFa0ti2z5Da/HNeSlxVL2MC8fLK1AWXbphOI1Vo6S8swGC","-D" "eu.acclimatize.unison.UnisonServerApplication"]
+RUN apt-get update
+RUN apt-get install -y gnupg wget
+RUN wget --quiet -O - https://www.postgresql.org/media/keys/ACCC4CF8.asc | apt-key add -
+RUN apt-get update
+RUN apt-get install -y postgresql-client
+COPY entrypoint.sh .
+RUN chmod + entrypoint.sh
+
+ENV POSTGRES_USER harmonie
+ENV POSTGRES_PASSWORD harpasswd
+
+ENTRYPOINT ["./entrypoint.sh","db"]

@@ -6,12 +6,15 @@ import java.io.InputStreamReader;
 import java.io.PrintWriter;
 import java.security.SecureRandom;
 import java.util.Optional;
+import java.util.concurrent.Executor;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
 import javax.annotation.PostConstruct;
 
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.boot.context.event.ApplicationReadyEvent;
+import org.springframework.context.event.EventListener;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -38,6 +41,8 @@ public class UserService {
 
 	private String defaultEncoded;
 
+	private Executor executor;
+
 	/**
 	 * Creates an instance of UserService.
 	 * 
@@ -53,16 +58,18 @@ public class UserService {
 	 * @param defaultEncoded  A bcrypt encoded password assigned using the
 	 *                        default.encoded property. Used in adding an initial
 	 *                        user to the database if not null and no users stored.
+	 * @param executor        Used to request user credentials on a separate thread.
 	 */
 	public UserService(UserRepository userRepository, Logger logger, BCryptPasswordEncoder passwordEncoder,
 			Boolean consolePresent, @Value("${default.username:#{null}}") String defaultUserName,
-			@Value("${default.encoded:#{null}}") String defaultEncoded) {
+			@Value("${default.encoded:#{null}}") String defaultEncoded, Executor executor) {
 		this.userRepository = userRepository;
 		this.passwordEncoder = passwordEncoder;
 		this.logger = logger;
 		this.consolePresent = consolePresent;
 		this.defaultUserName = defaultUserName;
 		this.defaultEncoded = defaultEncoded;
+		this.executor = executor;
 	}
 
 	/**
@@ -74,7 +81,7 @@ public class UserService {
 	 * running in interactive mode.
 	 * 
 	 */
-	@PostConstruct
+	@EventListener(ApplicationReadyEvent.class)
 	public void initialUser() {
 
 		if (userRepository.count() == 0) {
@@ -86,20 +93,23 @@ public class UserService {
 
 			} else if (Boolean.TRUE.equals(consolePresent)) {
 
-				PrintWriter pw = new PrintWriter(System.out, true);
-				BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+				executor.execute(() -> {
+					PrintWriter pw = new PrintWriter(System.out, true);
+					BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
 
-				CredentialsRequester requester = new CredentialsRequester(pw, br, passwordEncoder, new SecureRandom());
+					CredentialsRequester requester = new CredentialsRequester(pw, br, passwordEncoder,
+							new SecureRandom());
 
-				try {
-					UserInformation userInformation = requester.requestUserInformation();
-					userRepository.save(userInformation);
+					try {
+						UserInformation userInformation = requester.requestUserInformation();
+						userRepository.save(userInformation);
 
-					pw.close();
-					br.close();
-				} catch (IOException e) {
-					logger.log(Level.SEVERE, e.getMessage());
-				}
+						pw.close();
+						br.close();
+					} catch (IOException e) {
+						logger.log(Level.SEVERE, e.getMessage());
+					}
+				});
 
 			} else {
 				logger.log(Level.INFO, "No active console available.");
@@ -108,6 +118,7 @@ public class UserService {
 		}
 
 	}
+	
 
 	/**
 	 * Executes a {@link UserTask} if the user name and password match the

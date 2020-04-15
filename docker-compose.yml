@@ -40,13 +40,13 @@ services:
       POSTGRES_PASSWORD: harpasswd
       POSTGRES_DB: harmonie
     volumes:
-      - unison-db-data:/var/lib/postgresql/unison-data
+      - db-data:/var/lib/postgresql/unison-data
       - ./back-end/src/main/resources/pg_pgis_schema.sql:/docker-entrypoint-initdb.d/init.sql
     networks:
       - back-end
 
 volumes:
-  unison-db-data:
+  db-data:
 networks:
   back-end:
   front-end:
