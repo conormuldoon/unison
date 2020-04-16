@@ -32,4 +32,4 @@ ENV POSTGRES_USER harmonie
 ENV POSTGRES_PASSWORD harpasswd
 ENV DB_HOST db
 
-ENTRYPOINT ["./entrypoint.sh", "$DB_HOST"]
+ENTRYPOINT ["./entrypoint.sh"]
