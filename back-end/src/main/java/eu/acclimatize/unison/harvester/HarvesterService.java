@@ -102,7 +102,7 @@ public class HarvesterService {
 			try {
 				harvestData(locationRepository.findAll());
 			} catch (InterruptedException e) {
-				logger.log(Level.WARNING, "Interruped when invoking harvestData.", e.getMessage());
+				logger.log(Level.WARNING, "Interruped when invoking harvestData.%n{0}", e.getMessage());
 
 				// Restoring interrupted state.
 				Thread.currentThread().interrupt();
@@ -125,7 +125,7 @@ public class HarvesterService {
 				// If data is not received from the API due to a connection error, sleeps and
 				// then attempts to connect
 				// again.
-				while (!processLocation(loc, precipitation, weather)) {
+				while (!processItem(loc)) {
 					Thread.sleep(SLEEP_TIME);
 				}
 			} catch (DocumentRequestException e) {
@@ -162,13 +162,12 @@ public class HarvesterService {
 
 	}
 
-	private boolean processLocation(LocationDetails location, List<HourlyPrecipitation> hPrecipitation,
-			List<HourlyWeather> hWeather) throws DocumentRequestException {
+	private boolean processItem(LocationDetails location) throws DocumentRequestException {
 		Optional<Document> oDoc = location.requestData(drs);
 
 		if (oDoc.isPresent()) {
 
-			processDocument(oDoc.get(), hPrecipitation, hWeather, location);
+			processDocument(oDoc.get(), precipitation, weather, location);
 			return true;
 		} else {
 			return false;

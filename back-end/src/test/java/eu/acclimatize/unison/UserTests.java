@@ -20,6 +20,7 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
 import eu.acclimatize.unison.user.CredentialsRequester;
 import eu.acclimatize.unison.user.UserHibernateStore;
+import eu.acclimatize.unison.user.UserInformation;
 import eu.acclimatize.unison.user.UserRepository;
 import eu.acclimatize.unison.user.UserService;
 
@@ -56,19 +57,41 @@ public class UserTests {
 	}
 
 	/**
-	 * Tests that runnable task executed for initial user information.
+	 * Tests that a runnable task is passed to the executor.
 	 */
 	@Test
-	public void testInitialUser() {
+	public void testTaskSubmitted() {
+		UserRepository userRepository = Mockito.mock(UserRepository.class);
+		
+		Executor executor = Mockito.mock(Executor.class);
+		UserService userService = new UserService(userRepository, null, null, true, null, null, executor);
+		
+		userService.initialUser();
+		Mockito.verify(executor, Mockito.times(1)).execute(Mockito.any(Runnable.class));
+
+	}
+
+	/**
+	 * Test that the initial user credentials are save in the user repository.
+	 */
+	@Test
+	public void testInitiaUser() {
+
+		Executor executor = new Executor() { // Runs a runnable task on the current thread.
+
+			@Override
+			public void execute(Runnable r) {
+				r.run();
+
+			}
+		};
+		
 		UserRepository userRepository = Mockito.mock(UserRepository.class);
 		BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
-		Executor executor=Mockito.mock(Executor.class);
-		UserService userService = new UserService(userRepository, null, passwordEncoder, true, null, null,
-				executor);
+		UserService userService = new UserService(userRepository, null, passwordEncoder, true, null, null, executor);
 		System.setIn(mockInputStream());
 		userService.initialUser();
-		Mockito.verify(executor, Mockito.times(1)).execute(Mockito.any());
-
+		Mockito.verify(userRepository,Mockito.times(1)).save(Mockito.any(UserInformation.class));
 	}
 
 	/**

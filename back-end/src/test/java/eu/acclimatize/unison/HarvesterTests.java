@@ -23,12 +23,14 @@ import org.w3c.dom.Document;
 import org.xml.sax.SAXException;
 
 import eu.acclimatize.unison.harvester.DocumentRequestException;
-
 import eu.acclimatize.unison.harvester.HarvesterService;
 import eu.acclimatize.unison.location.LocationDetails;
 
 public class HarvesterTests {
 
+	/**
+	 * Tests that parsed documents are saved.
+	 */
 	private void testParse(String fileName, String timeZone)
 			throws ParserConfigurationException, SAXException, IOException, DocumentRequestException {
 
@@ -58,6 +60,7 @@ public class HarvesterTests {
 		verify(wr, times(1)).saveAll(anyCollection());
 
 	}
+
 
 	// XML data obtained using the Met Eireann API
 	@Test
