@@ -2,15 +2,12 @@ FROM openkbs/jdk11-mvn-py3 as build
 
 WORKDIR /app
 
-COPY mvnw .
-COPY .mvn .mvn
 COPY pom.xml .
 COPY src src
 
 RUN (cd src/main/python; python switch_db_config.py)
 
-RUN ./mvnw dependency:go-offline -B
-RUN ./mvnw package -DskipTests
+RUN mvn package -DskipTests
 RUN mkdir -p target/dependency && (cd target/dependency; jar -xf ../*.jar)
 
 FROM openjdk:11-jdk-slim
@@ -33,5 +30,6 @@ RUN chmod + entrypoint.sh
 
 ENV POSTGRES_USER harmonie
 ENV POSTGRES_PASSWORD harpasswd
+ENV DB_HOST db
 
-ENTRYPOINT ["./entrypoint.sh","db"]
+ENTRYPOINT ["./entrypoint.sh", "$DB_HOST"]
