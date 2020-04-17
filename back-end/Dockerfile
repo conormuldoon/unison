@@ -8,6 +8,7 @@ COPY src src
 RUN (cd src/main/python; python switch_db_config.py)
 
 RUN mvn package -DskipTests
+
 RUN mkdir -p target/dependency && (cd target/dependency; jar -xf ../*.jar)
 
 FROM openjdk:11-jdk-slim
@@ -30,6 +31,9 @@ RUN chmod + entrypoint.sh
 
 ENV POSTGRES_USER harmonie
 ENV POSTGRES_PASSWORD harpasswd
-ENV DB_HOST db
+ENV UNISON_DB_HOST db
+ENV UNISON_USER unisonuser
+#Dollar characters in a bcryt encoded password must be escaped for the UNISON_ENCDODE variable.
+ENV UNISON_ENCODED \$2a\$10\$Id/K06.QPQACEzr8udi/m.DKlhChKCS7XFqfhjiWVH.TOvPrFBOom
 
 ENTRYPOINT ["./entrypoint.sh"]
