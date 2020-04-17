@@ -1,6 +1,6 @@
 {
   "name": "@conormuldoon/unison",
-  "version": "0.5.1-alpha",
+  "version": "0.5.1",
   "license": "MIT",
   "dependencies": {
     "browserify-css": "^0.14.0",

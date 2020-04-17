@@ -36,7 +36,7 @@ cd back-end
 ```
 If not previously compiled: `./mvnw clean compile package`
 ```
-java -cp target/unison-server-0.5.1-SNAPSHOT.jar -Dloader.main=eu.acclimatize.unison.user.UserConsole org.springframework.boot.loader.PropertiesLauncher
+java -cp target/unison-server-0.5.1.jar -Dloader.main=eu.acclimatize.unison.user.UserConsole org.springframework.boot.loader.PropertiesLauncher
 ```
 
 Enter the user credentials (if the user name already exists, the password will be updated).
