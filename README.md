@@ -28,6 +28,15 @@ If not previously run: `yarn install`
 ```
 yarn start
 ```
+
+### Docker
+
+Containers for the system that use Postgres/PostGIS and Nginx can be created using Docker Compose.
+```
+docker-compose up
+```
+Once running, open `http://localhost:4545` to access the front-end. The default user name and password in the Docker configuration are `unisonuser` and `unisonpassword`.
+
 ## Adding additional users
 
 If using GeoDB (Unison is configured for GeoDB in this repository), stop the server if it is in use.
@@ -42,14 +51,6 @@ java -cp target/unison-server-0.5.1.jar -Dloader.main=eu.acclimatize.unison.user
 Enter the user credentials (if the user name already exists, the password will be updated).
 
 Alternatively, the API can be used to add users or update passwords.
-
-### Docker
-
-Containers for the system that use Postgres/PostGIS and Nginx can be created using Docker Compose.
-```
-docker-compose up
-```
-Once running, open `http://localhost:4545` to access the front-end. The default user name and password in the Docker configuration are `unisonuser` and `unisonpassword`.
 
 ## Testing
 
