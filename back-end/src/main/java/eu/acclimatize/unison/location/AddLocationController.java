@@ -3,14 +3,14 @@ package eu.acclimatize.unison.location;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-import org.springframework.beans.factory.annotation.Value;
+import org.locationtech.jts.geom.Coordinate;
+import org.locationtech.jts.geom.GeometryFactory;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import eu.acclimatize.unison.Constant;
 import eu.acclimatize.unison.ResponseConstant;
-import eu.acclimatize.unison.harvester.DocumentRequestException;
 import eu.acclimatize.unison.harvester.HarvesterService;
 import eu.acclimatize.unison.user.UserService;
 import eu.acclimatize.unison.user.UserTask;
@@ -29,37 +29,34 @@ public class AddLocationController {
 
 	private LocationRepository locationRepository;
 
-	private CoordinatesStore store;
 	private UserService userService;
 	private HarvesterService harvesterService;
-	private String uri;
 
 	private Logger logger;
+
+	private GeometryFactory geometryFactory;
 
 	/**
 	 * Creates an instance of AddLocationController.
 	 * 
 	 * @param locationRepository The repository where locations are stored.
-	 * @param store              Uses spatial database functionality in storing
-	 *                           coordinates.
 	 * @param userService        A service that enables takes to be executed that
 	 *                           require user credentials.
 	 * @param harvesterService   Used to request data for the location once added.
-	 * @param uri                The URL template for a HARMONIE-AROME API specified
-	 *                           by app.uri in the application properties file.
 	 * @param logger             Logs an error message if the generated XML on the
 	 *                           HARMONIE-AROME API server for the location was not
 	 *                           found.
+	 * @param geometryFactory    A factory used to create points.
 	 */
-	public AddLocationController(LocationRepository locationRepository, CoordinatesStore store, UserService userService,
-			HarvesterService harvesterService, @Value("${api.uri}") String uri, Logger logger) {
+	public AddLocationController(LocationRepository locationRepository, UserService userService,
+			HarvesterService harvesterService, Logger logger,
+			GeometryFactory geometryFactory) {
 		this.locationRepository = locationRepository;
 
-		this.store = store;
 		this.userService = userService;
 		this.harvesterService = harvesterService;
-		this.uri = uri;
 		this.logger = logger;
+		this.geometryFactory = geometryFactory;
 
 	}
 
@@ -87,19 +84,20 @@ public class AddLocationController {
 			if (locationRepository.existsById(locationName)) {
 				return ResponseConstant.FAIL;
 			} else {
-				String locURI = String.format(uri, latitude, longitude);
-				LocationDetails locationDetails = new LocationDetails(locationName, locURI, user);
+				
+				Location location = new Location(locationName,  user,
+						geometryFactory.createPoint(new Coordinate(longitude, latitude)));
 
-				store.save(longitude, latitude, locationDetails);
+				locationRepository.save(location);
 
 				// Request data
 				try {
-					if (harvesterService.processLocation(locationDetails)) {
+					if (harvesterService.fetchAndStore(location)) {
 						return ResponseConstant.SUCCESS;
 					} else {
 						return ResponseConstant.DATA_NOT_RECIEVED;
 					}
-				} catch (DocumentRequestException e) {
+				} catch (LocationRequestException e) {
 
 					logger.log(Level.SEVERE, e.getMessage());
 					return ResponseConstant.DATA_NOT_RECIEVED;

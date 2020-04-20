@@ -1,8 +1,3 @@
-    create table if not exists GeoDBCoordinates (
-       geom blob,
-        location_name varchar(255) not null,
-        primary key (location_name)
-    );
     
     create table if not exists HourlyPrecipitation (
        fromHour timestamp not null,
@@ -12,6 +7,7 @@
         location_name varchar(255) not null,
         primary key (fromHour, location_name)
     );
+ 
     
     create table if not exists HourlyWeather (
        fromHour timestamp not null,
@@ -24,47 +20,44 @@
         humidity double,
         pressure double,
         temperature double,
-        windDirection_deg double not null,
+        windDirection_deg double,
         windDirection_name varchar(255),
-        windSpeed_beaufort integer not null,
-        windSpeed_mps double not null,
+        windSpeed_beaufort integer,
+        windSpeed_mps double,
         windSpeed_name varchar(255),
         location_name varchar(255) not null,
         primary key (fromHour, location_name)
     );
+
     
-    create table if not exists LocationDetails (
+    create table if not exists Location (
        name varchar(255) not null,
-        uri varchar(255),
+        geom GEOMETRY,
         user_userName varchar(255),
         primary key (name)
     );
-    
+
     
     create table if not exists UserInformation (
        userName varchar(255) not null,
         passwordBCrypt varchar(255),
         primary key (userName)
     );
+
     
-    alter table GeoDBCoordinates 
-       add constraint if not exists FK7qgeafw7kwbg3h76srydwu1wi 
-       foreign key (location_name) 
-       references LocationDetails;
-       
     alter table HourlyPrecipitation 
-       add constraint if not exists FKknxifbv2wongq21fly9yjkeot 
+       add constraint if not exists FKrh67reb9xhoo0775ervi0n7tm 
        foreign key (location_name) 
-       references LocationDetails;
+       references Location;
+
     
     alter table HourlyWeather 
-       add constraint if not exists FK9suxsvjuyvt2x3vi8tgwe7g5a 
+       add constraint if not exists FKlwnjo05pnxo5k6f8s53y0tmtg 
        foreign key (location_name) 
-       references LocationDetails;
+       references Location;
+
     
-    alter table LocationDetails 
-       add constraint if not exists FK955mkrhajp4s27eyw7px4nktj 
+    alter table Location 
+       add constraint if not exists FK20kfrl1yb9dujp553x6uiutdh 
        foreign key (user_userName) 
        references UserInformation;
-       
-    

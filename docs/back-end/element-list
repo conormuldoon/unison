@@ -3,7 +3,5 @@ eu.acclimatize.unison.csvcontroller
 eu.acclimatize.unison.harvester
 eu.acclimatize.unison.jsoncontroller
 eu.acclimatize.unison.location
-eu.acclimatize.unison.location.geodb
-eu.acclimatize.unison.location.postgis
 eu.acclimatize.unison.result
 eu.acclimatize.unison.user

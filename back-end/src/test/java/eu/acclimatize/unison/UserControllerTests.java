@@ -1,11 +1,12 @@
 package eu.acclimatize.unison;
 
+import org.junit.After;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
+import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.test.context.junit4.SpringRunner;
 
@@ -20,7 +21,7 @@ import eu.acclimatize.unison.user.UserRepository;
  *
  */
 @RunWith(SpringRunner.class)
-@DataJpaTest
+@SpringBootTest
 public class UserControllerTests {
 
 	private static final String USERNAME = "conor";
@@ -45,6 +46,14 @@ public class UserControllerTests {
 		String encodedPassword = passwordEncoder.encode(PASSWORD);
 		userRepository.save(new UserInformation(USERNAME, encodedPassword));
 
+	}
+
+	/**
+	 * Removes user data from the database.
+	 */
+	@After
+	public void clearData() {
+		userRepository.deleteAll();
 	}
 
 	/**

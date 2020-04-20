@@ -27,7 +27,9 @@ import eu.acclimatize.unison.PrecipitationValue;
 import eu.acclimatize.unison.WeatherValue;
 import eu.acclimatize.unison.WindDirection;
 import eu.acclimatize.unison.WindSpeed;
-import eu.acclimatize.unison.location.LocationDetails;
+import eu.acclimatize.unison.location.LocationRequestException;
+import eu.acclimatize.unison.location.LocationRequestService;
+import eu.acclimatize.unison.location.Location;
 import eu.acclimatize.unison.location.LocationRepository;
 
 /**
@@ -45,7 +47,7 @@ public class HarvesterService {
 
 	private HourlyPrecipitationRepository precipitationRepository;
 	private HourlyWeatherRepository weatherRepository;
-	private DocumentRequestService drs;
+	private LocationRequestService lrs;
 
 	private List<HourlyPrecipitation> precipitation;
 	private List<HourlyWeather> weather;
@@ -65,8 +67,8 @@ public class HarvesterService {
 	 *                                stored.
 	 * @param weatherRepository       The repository where non-precipitation weather
 	 *                                data is stored.
-	 * @param drs                     The service that is used to obtain XML
-	 *                                documents from the API.
+	 * @param lrs                     The service that is used to obtain XML weather
+	 *                                data documents for locations.
 	 * @param logger                  Logs warning messages and exceptions.
 	 * @param simpleDateFormat        Used to parse date data using a given time
 	 *                                zone.
@@ -75,12 +77,12 @@ public class HarvesterService {
 	 */
 	public HarvesterService(LocationRepository locationRepository,
 			HourlyPrecipitationRepository precipitationRepository, HourlyWeatherRepository weatherRepository,
-			DocumentRequestService drs, Logger logger, SimpleDateFormat simpleDateFormat, Executor executor) {
+			LocationRequestService lrs, Logger logger, SimpleDateFormat simpleDateFormat, Executor executor) {
 
 		this.locationRepository = locationRepository;
 		this.weatherRepository = weatherRepository;
 		this.precipitationRepository = precipitationRepository;
-		this.drs = drs;
+		this.lrs = lrs;
 
 		precipitation = new ArrayList<>();
 		weather = new ArrayList<>();
@@ -116,19 +118,19 @@ public class HarvesterService {
 
 	}
 
-	private void harvestData(Iterable<? extends LocationDetails> iterable) throws InterruptedException {
+	private void harvestData(Iterable<? extends Location> iterable) throws InterruptedException {
 
-		for (LocationDetails loc : iterable) {
+		for (Location location : iterable) {
 
 			try {
 
 				// If data is not received from the API due to a connection error, sleeps and
 				// then attempts to connect
 				// again.
-				while (!processItem(loc)) {
+				while (!fetchWeatherData(location)) {
 					Thread.sleep(SLEEP_TIME);
 				}
-			} catch (DocumentRequestException e) {
+			} catch (LocationRequestException e) {
 
 				logger.log(Level.SEVERE, e.getMessage());
 			}
@@ -138,16 +140,17 @@ public class HarvesterService {
 	}
 
 	/**
-	 * Requests and stores data from a HARMONIE-AROME API for a given location.
+	 * Requests and stores weather data from a HARMONIE-AROME API for a given
+	 * location.
 	 * 
 	 * @param location The location to obtain data for.
 	 * @return True if the data was received and stored, false otherwise.
-	 * @throws DocumentRequestException Thrown when the generated XML for the
+	 * @throws LocationRequestException Thrown when the generated XML for the
 	 *                                  location was not found.
 	 */
-	public boolean processLocation(LocationDetails location) throws DocumentRequestException {
+	public boolean fetchAndStore(Location location) throws LocationRequestException {
 
-		Optional<Document> oDoc = location.requestData(drs);
+		Optional<Document> oDoc = lrs.documentForLocation(location);
 		if (oDoc.isPresent()) {
 
 			List<HourlyPrecipitation> hourlyPrecipitation = new ArrayList<>();
@@ -162,8 +165,8 @@ public class HarvesterService {
 
 	}
 
-	private boolean processItem(LocationDetails location) throws DocumentRequestException {
-		Optional<Document> oDoc = location.requestData(drs);
+	private boolean fetchWeatherData(Location location) throws LocationRequestException {
+		Optional<Document> oDoc = lrs.documentForLocation(location);
 
 		if (oDoc.isPresent()) {
 
@@ -175,7 +178,7 @@ public class HarvesterService {
 	}
 
 	private void processDocument(Document doc, List<HourlyPrecipitation> hPrecipitation, List<HourlyWeather> hWeather,
-			LocationDetails location) {
+			Location location) {
 
 		doc.getDocumentElement().normalize();
 

@@ -1,17 +1,29 @@
 package eu.acclimatize.unison.location;
 
+import org.locationtech.jts.geom.GeometryFactory;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.data.domain.Sort;
 
 /**
  * 
- * A configuration class for {@link CoordinatesStore}s.
+ * A configuration class for the location package.
  *
  */
 @Configuration
-public class CoordinatesConfig {
+public class LocationConfig {
 
+	/**
+	 * A bean for a factory that is used to create points.
+	 * 
+	 * @return The geometry factory created.
+	 */
+	@Bean
+	public GeometryFactory geometryFactory(){
+		return new GeometryFactory();
+	}
+	
+	
 	/**
 	 * A bean used to determine how coordinates queries are sorted.
 	 * 
@@ -22,15 +34,5 @@ public class CoordinatesConfig {
 		
 		return Sort.by(Sort.Direction.ASC, "name");
 		
-	}
-
-	/**
-	 * A bean used in serializing location data in a GeoJSON format.
-	 * 
-	 * @return The point serializer created.
-	 */
-	@Bean
-	public PointFeatureSerializer pointSerializer() {
-		return new PointFeatureSerializer();
 	}
 }

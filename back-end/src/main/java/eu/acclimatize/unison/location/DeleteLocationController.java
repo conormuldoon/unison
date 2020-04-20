@@ -25,7 +25,6 @@ public class DeleteLocationController {
 	private LocationRepository locationRepository;
 	private HourlyPrecipitationRepository hpr;
 	private HourlyWeatherRepository hwr;
-	private CoordinatesStore store;
 	private UserService userService;
 
 	/**
@@ -34,15 +33,13 @@ public class DeleteLocationController {
 	 * @param locationRepository The repository where locations are stored.
 	 * @param hpr The repository where precipitation data is stored.
 	 * @param hwr The repository where weather data is stored.
-	 * @param store Uses spatial database functionality in removing coordinates.
 	 * @param userService A service that enables takes to be executed that require user credentials.
 	 */
 	public DeleteLocationController(LocationRepository locationRepository, HourlyPrecipitationRepository hpr,
-			HourlyWeatherRepository hwr, CoordinatesStore store, UserService userService) {
+			HourlyWeatherRepository hwr,  UserService userService) {
 		this.locationRepository = locationRepository;
 		this.hpr = hpr;
 		this.hwr = hwr;
-		this.store = store;
 		this.userService = userService;
 
 	}
@@ -66,7 +63,6 @@ public class DeleteLocationController {
 				if(owner.equals(userName)) {
 					hpr.deleteForLocation(locationName);
 					hwr.deleteForLocation(locationName);
-					store.delete(locationName);
 					locationRepository.deleteById(locationName);
 					return ResponseConstant.SUCCESS;
 

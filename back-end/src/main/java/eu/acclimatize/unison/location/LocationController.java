@@ -1,5 +1,6 @@
 package eu.acclimatize.unison.location;
 
+import org.springframework.data.domain.Sort;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -15,20 +16,18 @@ public class LocationController {
 	private static final String LOCATION = "/location";
 	private static final String MEDIA_TYPE = "application/geo+json";
 
-	private CoordinatesStore store;
-	private PointFeatureSerializer pointSerializer;
+	private LocationRepository locationRepository;
+	private Sort sort;
 
 	/**
 	 * Creates and instance of LocationController.
 	 * 
-	 * @param store           Uses spatial database functionality to obtain a list
-	 *                        of coordinates along with location names.
-	 * 
-	 * @param pointSerializer Used in serializing points.
+	 * @param locationRepository The repository where the location data is stored.
+	 * @param sort Determines that order of the features in the feature collection.
 	 */
-	public LocationController(CoordinatesStore store, PointFeatureSerializer pointSerializer) {
-		this.store = store;
-		this.pointSerializer = pointSerializer;
+	public LocationController(LocationRepository locationRepository, Sort sort) {
+		this.locationRepository=locationRepository;
+		this.sort=sort;
 	}
 
 	/**
@@ -40,7 +39,7 @@ public class LocationController {
 	@GetMapping(value = LOCATION, produces = MEDIA_TYPE)
 	public FeatureCollection location() {
 
-		return new FeatureCollection(store.sortedFindAll(), pointSerializer);
+		return new FeatureCollection(locationRepository.findAll(sort));
 
 	}
 }

@@ -7,7 +7,6 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.Iterator;
 
-import javax.persistence.EntityManager;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
@@ -17,12 +16,9 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mockito;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
-import org.springframework.boot.test.autoconfigure.orm.jpa.TestEntityManager;
+import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.web.servlet.HandlerMapping;
-
-import com.vividsolutions.jts.io.ParseException;
 
 import eu.acclimatize.unison.csvcontroller.CSVCloudLevelController;
 import eu.acclimatize.unison.csvcontroller.CSVCloudinessController;
@@ -32,6 +28,7 @@ import eu.acclimatize.unison.csvcontroller.CSVHumidityController;
 import eu.acclimatize.unison.csvcontroller.CSVPrecipitationController;
 import eu.acclimatize.unison.csvcontroller.CSVPressureController;
 import eu.acclimatize.unison.csvcontroller.CSVResponder;
+import eu.acclimatize.unison.csvcontroller.CSVResponderConfig;
 import eu.acclimatize.unison.csvcontroller.CSVTemperatureController;
 import eu.acclimatize.unison.csvcontroller.CSVWindDirectionController;
 import eu.acclimatize.unison.csvcontroller.CSVWindSpeedController;
@@ -45,7 +42,8 @@ import eu.acclimatize.unison.jsoncontroller.PressureController;
 import eu.acclimatize.unison.jsoncontroller.TemperatureController;
 import eu.acclimatize.unison.jsoncontroller.WindDirectionController;
 import eu.acclimatize.unison.jsoncontroller.WindSpeedController;
-import eu.acclimatize.unison.location.LocationDetails;
+import eu.acclimatize.unison.location.Location;
+import eu.acclimatize.unison.location.LocationRepository;
 import eu.acclimatize.unison.result.CloudLevelResult;
 import eu.acclimatize.unison.result.CloudinessResult;
 import eu.acclimatize.unison.result.DewPointResult;
@@ -56,7 +54,6 @@ import eu.acclimatize.unison.result.PressureResult;
 import eu.acclimatize.unison.result.TemperatureResult;
 import eu.acclimatize.unison.result.WindDirectionResult;
 import eu.acclimatize.unison.result.WindSpeedResult;
-import eu.acclimatize.unison.user.UserInformation;
 
 /**
  * 
@@ -64,34 +61,38 @@ import eu.acclimatize.unison.user.UserInformation;
  *
  */
 @RunWith(SpringRunner.class)
-@DataJpaTest
+@SpringBootTest(classes = { UnisonServerApplication.class, FinderConfig.class, CSVResponderConfig.class })
 
 public class ControllerTests {
 
-	HttpServletResponse response;
+	private HttpServletResponse response;
 
 	@Autowired
-	TestEntityManager testEntityManager;
+	private HourlyWeatherRepository hwr;
 
 	@Autowired
-	ItemListFinder cloudinessFinder, cloudLevelFinder, dewPointFinder, fogFinder, humidityFinder, precipitationFinder,
-			pressureFinder, temperatureFinder, windDirectionFinder, windSpeedFinder;
+	private HourlyPrecipitationRepository hpr;
 
 	@Autowired
-	CSVResponder cloudinessResponder, cloudLevelResponder, dewPointResponder, fogResponder, humidityResponder,
+	private LocationRepository locationRepository;
+
+	@Autowired
+	private ItemListFinder cloudinessFinder, cloudLevelFinder, dewPointFinder, fogFinder, humidityFinder,
+			precipitationFinder, pressureFinder, temperatureFinder, windDirectionFinder, windSpeedFinder;
+
+	@Autowired
+	private CSVResponder cloudinessResponder, cloudLevelResponder, dewPointResponder, fogResponder, humidityResponder,
 			precipitationResponder, pressureResponder, temperatureResponder, windDirectionResponder, windSpeedResponder;
 
 	@Autowired
-	MappingForwardController forwardController;
+	private MappingForwardController forwardController;
 
 	private Date fromDate, toDate;
 
 	private final static String LOCATION = "UCD";
 
-	// final private static String P_COORD = "POINT (-6.224133 53.308398)";
-
 	private StringWriter sw;
-	private LocationDetails location;
+	private Location location;
 	private ItemKey ik;
 
 	public ControllerTests() throws IOException {
@@ -110,26 +111,31 @@ public class ControllerTests {
 
 	}
 
+	/**
+	 * Add initial data to the database.
+	 */
 	@Before
-	public void addWeatherData() throws ParseException {
-		EntityManager em = testEntityManager.getEntityManager();
+	public void addWeatherData() {
 
-		UserInformation ui = new UserInformation("conor", "abc");
-		em.persist(ui);
-
-		location = new LocationDetails(LOCATION, "", ui);
+		
+		location = new Location(LOCATION, null, null);
+		locationRepository.save(location);
 		ik = new ItemKey(fromDate, location);
 
 		WindDirection wd = new WindDirection(0, "Lett bris");
 		WindSpeed ws = new WindSpeed(0, 0, "W");
 		Cloud cloud = new Cloud(0d, 0d, 0d);
 		WeatherValue weatherValue = new WeatherValue(0d, wd, ws, 0d, 0d, 0d, cloud, 0d, 0d);
-		em.persist(location);
+
 		HourlyWeather weatherData = new HourlyWeather(ik, weatherValue);
-		em.persist(weatherData);
+
+		hwr.save(weatherData);
 
 	}
 
+	/**
+	 * Test that the results returned are of type CloudinessResult.
+	 */
 	@Test
 	public void testCloudiness() {
 
@@ -139,6 +145,9 @@ public class ControllerTests {
 
 	}
 
+	/**
+	 * Test that the results returned are of type CloudLevelResult.
+	 */
 	@Test
 	public void testCloudLevel() {
 		CloudLevelController cloudLevelController = new CloudLevelController(cloudLevelFinder);
@@ -146,6 +155,9 @@ public class ControllerTests {
 
 	}
 
+	/**
+	 * Test that the results returned are of type DewPointResult.
+	 */
 	@Test
 	public void testDewPoint() {
 		DewPointController dewPointController = new DewPointController(dewPointFinder);
@@ -153,6 +165,9 @@ public class ControllerTests {
 
 	}
 
+	/**
+	 * Test that the results returned are of type FogResult.
+	 */
 	@Test
 	public void testFog() {
 
@@ -161,6 +176,9 @@ public class ControllerTests {
 
 	}
 
+	/**
+	 * Test that the results returned are of type HumidityResult.
+	 */
 	@Test
 	public void testHumidity() {
 		HumidityController humidityController = new HumidityController(humidityFinder);
@@ -168,17 +186,23 @@ public class ControllerTests {
 
 	}
 
+	/**
+	 * Test that the results returned are of type PrecipitationResult.
+	 */
 	@Test
-	public void testPreciptiation() throws ParseException {
+	public void testPreciptiation() {
 		PrecipitationValue pv = new PrecipitationValue(0d, 0d, 0d);
 		HourlyPrecipitation precip = new HourlyPrecipitation(ik, pv);
-		testEntityManager.getEntityManager().persist(precip);
+		hpr.save(precip);
 
 		PrecipitationController precipitationController = new PrecipitationController(precipitationFinder);
 		assertType(precipitationController.precipitation(LOCATION, fromDate, toDate), PrecipitationResult.class);
 
 	}
 
+	/**
+	 * Test that the results returned are of type PressureResult.
+	 */
 	@Test
 	public void testPressure() {
 
@@ -187,6 +211,9 @@ public class ControllerTests {
 
 	}
 
+	/**
+	 * Test that the results returned are of type TemperatureResult.
+	 */
 	@Test
 	public void testTemperature() {
 
@@ -195,6 +222,9 @@ public class ControllerTests {
 
 	}
 
+	/**
+	 * Test that the results returned are of type WindDirectionResult.
+	 */
 	@Test
 	public void testWindDirection() {
 
@@ -203,6 +233,9 @@ public class ControllerTests {
 
 	}
 
+	/**
+	 * Test that the results returned are of type WindSpeedResult.
+	 */
 	@Test
 	public void testWindSpeed() {
 
@@ -210,6 +243,9 @@ public class ControllerTests {
 		assertType(windSpeedController.windSpeed(LOCATION, fromDate, toDate), WindSpeedResult.class);
 	}
 
+	/**
+	 * Tests that requests to /apiacc/ are prepended with forward.
+	 */
 	@Test
 	public void testMappingForward() {
 
@@ -219,7 +255,7 @@ public class ControllerTests {
 		Assert.assertEquals("forward:/location", forwardController.forward(request));
 	}
 
-	void assertLength(StringWriter sw, int len) {
+	private void assertLength(StringWriter sw, int len) {
 		String[] str = sw.toString().split("\n");
 		String[] st0 = str[0].split(",");
 		String[] st1 = str[1].split(",");
@@ -227,6 +263,9 @@ public class ControllerTests {
 		Assert.assertEquals(len, st0.length);
 	}
 
+	/**
+	 * Tests the number of CSV columns for cloudiness data.
+	 */
 	@Test
 	public void testCSVCloudiness() throws IOException {
 
@@ -235,6 +274,9 @@ public class ControllerTests {
 		assertLength(sw, 2);
 	}
 
+	/**
+	 * Tests the number of CSV columns for cloud level data.
+	 */
 	@Test
 	public void testCSVCloudLevel() throws IOException {
 
@@ -243,6 +285,9 @@ public class ControllerTests {
 		assertLength(sw, 4);
 	}
 
+	/**
+	 * Tests the number of CSV columns for dew point data.
+	 */
 	@Test
 	public void testCSVDewPoint() throws IOException {
 
@@ -251,6 +296,9 @@ public class ControllerTests {
 		assertLength(sw, 2);
 	}
 
+	/**
+	 * Tests the number of CSV columns for fog data.
+	 */
 	@Test
 	public void testCSVFog() throws IOException {
 
@@ -259,6 +307,9 @@ public class ControllerTests {
 		assertLength(sw, 2);
 	}
 
+	/**
+	 * Tests the number of CSV columns for humidity data.
+	 */
 	@Test
 	public void testCSVHumidity() throws IOException {
 
@@ -267,22 +318,30 @@ public class ControllerTests {
 		assertLength(sw, 2);
 	}
 
+	/**
+	 * Tests the number of CSV columns for precipitation data when min and max
+	 * values are not null.
+	 */
 	@Test
-	public void testCSVPrecipMultiple() throws IOException, ParseException {
+	public void testCSVPrecipMultiple() throws IOException {
 		PrecipitationValue pv = new PrecipitationValue(0d, 0d, 0d);
 		HourlyPrecipitation precip = new HourlyPrecipitation(ik, pv);
-		testEntityManager.getEntityManager().persist(precip);
+		hpr.save(precip);
 		CSVPrecipitationController csvPrecipitationController = new CSVPrecipitationController(precipitationResponder);
 		csvPrecipitationController.precipitation(LOCATION, fromDate, toDate, response);
 		assertLength(sw, 4);
 
 	}
 
+	/**
+	 * Tests the values of -1.0 are provided for min and max values for
+	 * precipitation data when the min and max values are null.
+	 */
 	@Test
-	public void testCSVPrecipSingle() throws IOException, ParseException {
+	public void testCSVPrecipSingle() throws IOException {
 		PrecipitationValue pv = new PrecipitationValue(0d, null, null);
 		HourlyPrecipitation precip = new HourlyPrecipitation(ik, pv);
-		testEntityManager.getEntityManager().persist(precip);
+		hpr.save(precip);
 		CSVPrecipitationController csvPrecipitationController = new CSVPrecipitationController(precipitationResponder);
 		csvPrecipitationController.precipitation(LOCATION, fromDate, toDate, response);
 		int len = 4;
@@ -296,6 +355,9 @@ public class ControllerTests {
 		Assert.assertEquals("-1.0", st1[3]);
 	}
 
+	/**
+	 * Tests the number of CSV columns for pressure data.
+	 */
 	@Test
 	public void testCSVPressure() throws IOException {
 
@@ -304,6 +366,9 @@ public class ControllerTests {
 		assertLength(sw, 2);
 	}
 
+	/**
+	 * Tests the number of CSV columns for temperature data.
+	 */
 	@Test
 	public void testCSVTemperature() throws IOException {
 
@@ -312,6 +377,9 @@ public class ControllerTests {
 		assertLength(sw, 2);
 	}
 
+	/**
+	 * Tests the number of CSV columns for wind direction data.
+	 */
 	@Test
 	public void testCSVWindDirection() throws IOException {
 
@@ -320,6 +388,9 @@ public class ControllerTests {
 		assertLength(sw, 3);
 	}
 
+	/**
+	 * Tests the number of CSV columns for wind speed data.
+	 */
 	@Test
 	public void testCSVWindSpeed() throws IOException {
 
@@ -329,7 +400,7 @@ public class ControllerTests {
 
 	}
 
-	void assertType(Iterable<HarmonieItem> list, Class<? extends HarmonieItem> cls) {
+	private void assertType(Iterable<HarmonieItem> list, Class<? extends HarmonieItem> cls) {
 
 		Iterator<HarmonieItem> itr = list.iterator();
 		HarmonieItem item = itr.next();

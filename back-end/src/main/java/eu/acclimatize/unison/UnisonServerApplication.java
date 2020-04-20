@@ -16,9 +16,6 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
-import org.springframework.context.annotation.ComponentScan;
-import org.springframework.context.annotation.ComponentScan.Filter;
-import org.springframework.context.annotation.FilterType;
 import org.springframework.context.annotation.Scope;
 import org.springframework.scheduling.annotation.EnableScheduling;
 
@@ -28,7 +25,6 @@ import org.springframework.scheduling.annotation.EnableScheduling;
  *
  */
 @SpringBootApplication
-@ComponentScan(excludeFilters = @Filter(type = FilterType.CUSTOM, classes = { SpatialExcludeFilter.class }))
 @EnableScheduling
 public class UnisonServerApplication {
 
@@ -83,8 +79,9 @@ public class UnisonServerApplication {
 	
 	
 	/**
+	 * Creates a single threaded executor for executing runnable tasks.s.
 	 * 
-	 * @return A single thread executor for executing runnable tasks.
+	 * @return The executor created.
 	 */
 	@Bean
 	public Executor executor() {

@@ -7,7 +7,7 @@ import javax.persistence.Embeddable;
 import javax.persistence.ManyToOne;
 import javax.persistence.MapsId;
 
-import eu.acclimatize.unison.location.LocationDetails;
+import eu.acclimatize.unison.location.Location;
 
 /**
  * 
@@ -25,7 +25,7 @@ public class ItemKey implements Serializable {
 
 	@MapsId(NAME)
 	@ManyToOne
-	private LocationDetails location;
+	private Location location;
 
 	/**
 	 * Creates an instance of ItemKey.
@@ -34,7 +34,7 @@ public class ItemKey implements Serializable {
 	 * @param location The location of the hourly weather or hourly precipitation
 	 *                 data.
 	 */
-	public ItemKey(Date fromHour, LocationDetails location) {
+	public ItemKey(Date fromHour, Location location) {
 		this.fromHour = fromHour;
 		this.location = location;
 	}
