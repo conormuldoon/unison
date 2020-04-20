@@ -35,7 +35,7 @@ Containers for the system that use Postgres/PostGIS and Nginx can be created usi
 ```
 docker-compose up
 ```
-Once running, open `http://localhost:4545` to access the front-end. The default user name and password in the Docker configuration are `unisonuser` and `unisonpassword`.
+Once running, open `http://localhost:4545` to access the front-end. In the Docker configuration, the default user name is `unisonuser` and the default password is `unisonpassword`.
 
 ## Adding additional users
 
