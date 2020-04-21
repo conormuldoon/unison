@@ -11,9 +11,7 @@ import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import org.locationtech.jts.geom.Coordinate;
 import org.locationtech.jts.geom.GeometryFactory;
-import org.locationtech.jts.geom.Point;
 import org.locationtech.jts.io.ParseException;
 import org.mockito.Mockito;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -58,11 +56,8 @@ public class LocationTests {
 	 */
 	@Before
 	public void addData() {
-		UserInformation userInfo = addUser(TestConstant.USERNAME, TestConstant.PASSWORD);
 
-		Point p = new GeometryFactory().createPoint(new Coordinate(TestConstant.LONGITUDE, TestConstant.LATITUDE));
-
-		locationRepository.save(new Location(TestConstant.LOCATION, userInfo, p));
+		TestUtility.saveLocationData(userRepository, locationRepository);
 
 	}
 
@@ -71,8 +66,7 @@ public class LocationTests {
 	 */
 	@After
 	public void clearData() {
-		locationRepository.deleteAll();
-		userRepository.deleteAll();
+		TestUtility.deleteLocationData(locationRepository, userRepository);
 	}
 
 	private UserInformation addUser(String userName, String password) {
@@ -186,8 +180,8 @@ public class LocationTests {
 		Writer jsonWriter = new StringWriter();
 		JsonGenerator jsonGenerator = new JsonFactory().createGenerator(jsonWriter);
 
-		Point p = new GeometryFactory().createPoint(new Coordinate(TestConstant.LONGITUDE, TestConstant.LATITUDE));
-		Location location = new Location(TestConstant.LOCATION, null, p);
+		Location location = TestUtility.createLocation(TestConstant.LOCATION, null, TestConstant.LONGITUDE,
+				TestConstant.LATITUDE);
 		location.serialize(jsonGenerator);
 
 		jsonGenerator.flush();
@@ -217,14 +211,6 @@ public class LocationTests {
 
 	}
 
-	private Location createLocation(String name, double lon, double lat) {
-
-		Point p = new GeometryFactory().createPoint(new Coordinate(lon, lat));
-
-		return new Location(name, null, p);
-
-	}
-
 	/**
 	 * Tests that a list of features is serialized in a GeoJSON format correctly.
 	 **/
@@ -237,7 +223,8 @@ public class LocationTests {
 
 		double[][] coordArr = { { -6.258070, 53.349248 }, { -122.447366, 37.762681 } };
 		for (int i = 0; i < locArr.length; i++) {
-			list.add(createLocation(locArr[i], coordArr[i][0], coordArr[i][1]));
+			Location location = TestUtility.createLocation(locArr[i], null, coordArr[i][0], coordArr[i][1]);
+			list.add(location);
 		}
 
 		FeatureCollection featureCollection = new FeatureCollection(list);

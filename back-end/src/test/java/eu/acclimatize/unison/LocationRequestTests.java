@@ -8,18 +8,17 @@ import javax.xml.parsers.DocumentBuilder;
 
 import org.junit.Assert;
 import org.junit.Test;
-import org.locationtech.jts.geom.Coordinate;
-import org.locationtech.jts.geom.GeometryFactory;
-import org.locationtech.jts.geom.Point;
 import org.mockito.Mockito;
 import org.w3c.dom.Document;
 import org.xml.sax.SAXException;
 
-import eu.acclimatize.unison.location.Location;
 import eu.acclimatize.unison.location.LocationRequestException;
 import eu.acclimatize.unison.location.LocationRequestService;
 
-// Tests whether the document is present in the returned optional from the DocumentRequestService.
+/**
+ *  Tests whether the document is present in the returned optional from the DocumentRequestService.
+ *
+ */
 public class LocationRequestTests {
 
 	/**
@@ -34,7 +33,8 @@ public class LocationRequestTests {
 		Mockito.when(documentBuilder.parse(Mockito.anyString())).thenReturn(d);
 		LocationRequestService drc = new LocationRequestService(documentBuilder, logger, "");
 
-		Optional<Document> optD = drc.documentForLocation(createLocation());
+		Optional<Document> optD = drc.documentForLocation(
+				TestUtility.createLocation(TestConstant.LOCATION, null, TestConstant.LONGITUDE, TestConstant.LATITUDE));
 		Assert.assertFalse(optD.isEmpty());
 	}
 
@@ -50,13 +50,9 @@ public class LocationRequestTests {
 
 		LocationRequestService drc = new LocationRequestService(documentBuilder, logger, "");
 
-		Optional<Document> optD = drc.documentForLocation(createLocation());
+		Optional<Document> optD = drc.documentForLocation(
+				TestUtility.createLocation(TestConstant.LOCATION, null, TestConstant.LONGITUDE, TestConstant.LATITUDE));
 		Assert.assertTrue(optD.isEmpty());
 	}
 
-	private Location createLocation() {
-		Point p = new GeometryFactory().createPoint(new Coordinate(TestConstant.LONGITUDE, TestConstant.LATITUDE));
-
-		return new Location(TestConstant.LOCATION, null, p);
-	}
 }

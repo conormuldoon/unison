@@ -6,10 +6,8 @@ import java.util.GregorianCalendar;
 
 import org.junit.Assert;
 import org.junit.Test;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
 import eu.acclimatize.unison.location.Location;
-import eu.acclimatize.unison.user.UserInformation;
 
 /**
  * 
@@ -27,13 +25,11 @@ public class ItemKeyTest {
 
 		Date fh0 = fromHour();
 		Date fh1 = fromHour();
-		BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
-		String encoded = passwordEncoder.encode(TestConstant.PASSWORD);
-
+		
 		ItemKey itemKey0 = new ItemKey(fh0,
-				new Location(TestConstant.LOCATION, new UserInformation(TestConstant.USERNAME, encoded), null));
+				new Location(TestConstant.LOCATION, null, null));
 		ItemKey itemKey1 = new ItemKey(fh1,
-				new Location(TestConstant.LOCATION, new UserInformation(TestConstant.USERNAME, encoded), null));
+				new Location(TestConstant.LOCATION, null, null));
 
 		Assert.assertEquals(itemKey0, itemKey1);
 		Assert.assertEquals(itemKey0.hashCode(), itemKey1.hashCode());

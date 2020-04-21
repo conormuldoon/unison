@@ -115,6 +115,7 @@ public class UserTests {
 	 */
 	@Test
 	public void testUserHibernateStore() throws IOException {
+
 		Configuration configuration = Mockito.mock(Configuration.class);
 		SessionFactory factory = Mockito.mock(SessionFactory.class);
 		Mockito.when(configuration.buildSessionFactory()).thenReturn(factory);
