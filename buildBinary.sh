@@ -18,5 +18,3 @@ sed -i "s/[0-9]*\.[0-9]*\.[0-9]*-SNAPSHOT/$1/" pom.xml
 rm -r src/main/resources/public/*
 cp target/unison-server-$1.jar target/unison-$1.jar
 cd ..
-./generateDocs.sh
-:
