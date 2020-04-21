@@ -62,10 +62,10 @@ public class UserTests {
 	@Test
 	public void testTaskSubmitted() {
 		UserRepository userRepository = Mockito.mock(UserRepository.class);
-		
+
 		Executor executor = Mockito.mock(Executor.class);
 		UserService userService = new UserService(userRepository, null, null, true, null, null, executor);
-		
+
 		userService.initialUser();
 		Mockito.verify(executor, Mockito.times(1)).execute(Mockito.any(Runnable.class));
 
@@ -85,13 +85,13 @@ public class UserTests {
 
 			}
 		};
-		
+
 		UserRepository userRepository = Mockito.mock(UserRepository.class);
 		BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
 		UserService userService = new UserService(userRepository, null, passwordEncoder, true, null, null, executor);
 		System.setIn(mockInputStream());
 		userService.initialUser();
-		Mockito.verify(userRepository,Mockito.times(1)).save(Mockito.any(UserInformation.class));
+		Mockito.verify(userRepository, Mockito.times(1)).save(Mockito.any(UserInformation.class));
 	}
 
 	/**

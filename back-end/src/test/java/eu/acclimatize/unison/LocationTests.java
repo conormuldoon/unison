@@ -44,12 +44,6 @@ import eu.acclimatize.unison.user.UserService;
 
 public class LocationTests {
 
-	final static private String LOCATION = "UCD";
-	final static private double LONGITUDE = -6.224176;
-	final static private double LATITUDE = 53.308366;
-	final static private String USER = "conor";
-	final static private String PWD = "pwd";
-
 	@Autowired
 	private UserService userService;
 
@@ -64,11 +58,11 @@ public class LocationTests {
 	 */
 	@Before
 	public void addData() {
-		UserInformation userInfo = addUser(USER, PWD);
+		UserInformation userInfo = addUser(TestConstant.USERNAME, TestConstant.PASSWORD);
 
-		Point p = new GeometryFactory().createPoint(new Coordinate(LONGITUDE, LATITUDE));
+		Point p = new GeometryFactory().createPoint(new Coordinate(TestConstant.LONGITUDE, TestConstant.LATITUDE));
 
-		locationRepository.save(new Location(LOCATION, userInfo, p));
+		locationRepository.save(new Location(TestConstant.LOCATION, userInfo, p));
 
 	}
 
@@ -96,7 +90,8 @@ public class LocationTests {
 	public void locationAlreadyExists() {
 
 		AddLocationController controller = new AddLocationController(locationRepository, userService, null, null, null);
-		Assert.assertEquals(ResponseConstant.FAIL, controller.addLocation(LOCATION, USER, PWD, 0, 0));
+		Assert.assertEquals(ResponseConstant.FAIL,
+				controller.addLocation(TestConstant.LOCATION, TestConstant.USERNAME, TestConstant.PASSWORD, 0, 0));
 
 	}
 
@@ -109,7 +104,7 @@ public class LocationTests {
 
 		AddLocationController controller = new AddLocationController(locationRepository, userService, null, null, null);
 		Assert.assertEquals(ResponseConstant.INCORRECT_CREDENTIALS,
-				controller.addLocation(LOCATION, USER, "abc", 0, 0));
+				controller.addLocation(TestConstant.LOCATION, TestConstant.USERNAME, "abc", 0, 0));
 	}
 
 	/**
@@ -125,7 +120,8 @@ public class LocationTests {
 
 		AddLocationController controller = new AddLocationController(locationRepository, userService, hs, null,
 				new GeometryFactory());
-		Assert.assertEquals(ResponseConstant.SUCCESS, controller.addLocation("newLocation", USER, PWD, 0, 0));
+		Assert.assertEquals(ResponseConstant.SUCCESS,
+				controller.addLocation("newLocation", TestConstant.USERNAME, TestConstant.PASSWORD, 0, 0));
 
 	}
 
@@ -137,7 +133,8 @@ public class LocationTests {
 	public void locationNotPresentValidUser() {
 
 		DeleteLocationController controller = new DeleteLocationController(locationRepository, null, null, userService);
-		Assert.assertEquals(ResponseConstant.FAIL, controller.deleteLocation("otherLocation", USER, PWD));
+		Assert.assertEquals(ResponseConstant.FAIL,
+				controller.deleteLocation("otherLocation", TestConstant.USERNAME, TestConstant.PASSWORD));
 	}
 
 	// Test when user does not exist
@@ -146,7 +143,7 @@ public class LocationTests {
 
 		DeleteLocationController controller = new DeleteLocationController(locationRepository, null, null, userService);
 		Assert.assertEquals(ResponseConstant.INCORRECT_CREDENTIALS,
-				controller.deleteLocation(LOCATION, "otherUser", null));
+				controller.deleteLocation(TestConstant.LOCATION, "otherUser", null));
 	}
 
 	// Testing delete when user exists, but other user added location
@@ -158,7 +155,7 @@ public class LocationTests {
 		addUser(ou, op);
 
 		DeleteLocationController controller = new DeleteLocationController(locationRepository, null, null, userService);
-		Assert.assertEquals(ResponseConstant.NOT_OWNER, controller.deleteLocation(LOCATION, ou, op));
+		Assert.assertEquals(ResponseConstant.NOT_OWNER, controller.deleteLocation(TestConstant.LOCATION, ou, op));
 
 	}
 
@@ -189,14 +186,15 @@ public class LocationTests {
 		Writer jsonWriter = new StringWriter();
 		JsonGenerator jsonGenerator = new JsonFactory().createGenerator(jsonWriter);
 
-		Point p = new GeometryFactory().createPoint(new Coordinate(LONGITUDE, LATITUDE));
-		Location location = new Location(LOCATION, null, p);
+		Point p = new GeometryFactory().createPoint(new Coordinate(TestConstant.LONGITUDE, TestConstant.LATITUDE));
+		Location location = new Location(TestConstant.LOCATION, null, p);
 		location.serialize(jsonGenerator);
 
 		jsonGenerator.flush();
 
-		Assert.assertEquals("{\"type\":\"Feature\",\"geometry\":{\"type\":\"Point\",\"coordinates\":[" + LONGITUDE + ","
-				+ LATITUDE + "]},\"properties\":{\"name\":\"" + LOCATION + "\"}}", jsonWriter.toString());
+		Assert.assertEquals("{\"type\":\"Feature\",\"geometry\":{\"type\":\"Point\",\"coordinates\":["
+				+ TestConstant.LONGITUDE + "," + TestConstant.LATITUDE + "]},\"properties\":{\"name\":\""
+				+ TestConstant.LOCATION + "\"}}", jsonWriter.toString());
 
 	}
 

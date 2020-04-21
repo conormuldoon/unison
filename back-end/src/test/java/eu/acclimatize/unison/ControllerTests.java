@@ -10,10 +10,13 @@ import java.util.Iterator;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.junit.After;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.locationtech.jts.geom.Coordinate;
+import org.locationtech.jts.geom.GeometryFactory;
 import org.mockito.Mockito;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -54,6 +57,8 @@ import eu.acclimatize.unison.result.PressureResult;
 import eu.acclimatize.unison.result.TemperatureResult;
 import eu.acclimatize.unison.result.WindDirectionResult;
 import eu.acclimatize.unison.result.WindSpeedResult;
+import eu.acclimatize.unison.user.UserInformation;
+import eu.acclimatize.unison.user.UserRepository;
 
 /**
  * 
@@ -87,9 +92,10 @@ public class ControllerTests {
 	@Autowired
 	private MappingForwardController forwardController;
 
-	private Date fromDate, toDate;
+	@Autowired
+	private UserRepository userRepository;
 
-	private final static String LOCATION = "UCD";
+	private Date fromDate, toDate;
 
 	private StringWriter sw;
 	private Location location;
@@ -117,8 +123,10 @@ public class ControllerTests {
 	@Before
 	public void addWeatherData() {
 
-		
-		location = new Location(LOCATION, null, null);
+		UserInformation userInformation = new UserInformation(TestConstant.USERNAME, TestConstant.PASSWORD);
+		userRepository.save(userInformation);
+		location = new Location(TestConstant.LOCATION, userInformation,
+				new GeometryFactory().createPoint(new Coordinate(TestConstant.LONGITUDE, TestConstant.LATITUDE)));
 		locationRepository.save(location);
 		ik = new ItemKey(fromDate, location);
 
@@ -134,6 +142,18 @@ public class ControllerTests {
 	}
 
 	/**
+	 * Clears saved data from the database.
+	 */
+	@After
+	public void deleteData() {
+
+		hwr.deleteAll();
+		hpr.deleteAll();
+		locationRepository.deleteAll();
+		userRepository.deleteAll();
+	}
+
+	/**
 	 * Test that the results returned are of type CloudinessResult.
 	 */
 	@Test
@@ -141,7 +161,7 @@ public class ControllerTests {
 
 		CloudinessController cloudinessController = new CloudinessController(cloudinessFinder);
 
-		assertType(cloudinessController.cloudiness(LOCATION, fromDate, toDate), CloudinessResult.class);
+		assertType(cloudinessController.cloudiness(TestConstant.LOCATION, fromDate, toDate), CloudinessResult.class);
 
 	}
 
@@ -151,7 +171,7 @@ public class ControllerTests {
 	@Test
 	public void testCloudLevel() {
 		CloudLevelController cloudLevelController = new CloudLevelController(cloudLevelFinder);
-		assertType(cloudLevelController.cloudLevel(LOCATION, fromDate, toDate), CloudLevelResult.class);
+		assertType(cloudLevelController.cloudLevel(TestConstant.LOCATION, fromDate, toDate), CloudLevelResult.class);
 
 	}
 
@@ -161,7 +181,7 @@ public class ControllerTests {
 	@Test
 	public void testDewPoint() {
 		DewPointController dewPointController = new DewPointController(dewPointFinder);
-		assertType(dewPointController.dewPoint(LOCATION, fromDate, toDate), DewPointResult.class);
+		assertType(dewPointController.dewPoint(TestConstant.LOCATION, fromDate, toDate), DewPointResult.class);
 
 	}
 
@@ -172,7 +192,7 @@ public class ControllerTests {
 	public void testFog() {
 
 		FogController fogController = new FogController(fogFinder);
-		assertType(fogController.fog(LOCATION, fromDate, toDate), FogResult.class);
+		assertType(fogController.fog(TestConstant.LOCATION, fromDate, toDate), FogResult.class);
 
 	}
 
@@ -182,7 +202,7 @@ public class ControllerTests {
 	@Test
 	public void testHumidity() {
 		HumidityController humidityController = new HumidityController(humidityFinder);
-		assertType(humidityController.humidity(LOCATION, fromDate, toDate), HumidityResult.class);
+		assertType(humidityController.humidity(TestConstant.LOCATION, fromDate, toDate), HumidityResult.class);
 
 	}
 
@@ -196,7 +216,8 @@ public class ControllerTests {
 		hpr.save(precip);
 
 		PrecipitationController precipitationController = new PrecipitationController(precipitationFinder);
-		assertType(precipitationController.precipitation(LOCATION, fromDate, toDate), PrecipitationResult.class);
+		assertType(precipitationController.precipitation(TestConstant.LOCATION, fromDate, toDate),
+				PrecipitationResult.class);
 
 	}
 
@@ -207,7 +228,7 @@ public class ControllerTests {
 	public void testPressure() {
 
 		PressureController pressureController = new PressureController(pressureFinder);
-		assertType(pressureController.pressure(LOCATION, fromDate, toDate), PressureResult.class);
+		assertType(pressureController.pressure(TestConstant.LOCATION, fromDate, toDate), PressureResult.class);
 
 	}
 
@@ -218,7 +239,7 @@ public class ControllerTests {
 	public void testTemperature() {
 
 		TemperatureController temperatureController = new TemperatureController(temperatureFinder);
-		assertType(temperatureController.temperature(LOCATION, fromDate, toDate), TemperatureResult.class);
+		assertType(temperatureController.temperature(TestConstant.LOCATION, fromDate, toDate), TemperatureResult.class);
 
 	}
 
@@ -229,7 +250,8 @@ public class ControllerTests {
 	public void testWindDirection() {
 
 		WindDirectionController windDirectionController = new WindDirectionController(windDirectionFinder);
-		assertType(windDirectionController.windDirection(LOCATION, fromDate, toDate), WindDirectionResult.class);
+		assertType(windDirectionController.windDirection(TestConstant.LOCATION, fromDate, toDate),
+				WindDirectionResult.class);
 
 	}
 
@@ -240,7 +262,7 @@ public class ControllerTests {
 	public void testWindSpeed() {
 
 		WindSpeedController windSpeedController = new WindSpeedController(windSpeedFinder);
-		assertType(windSpeedController.windSpeed(LOCATION, fromDate, toDate), WindSpeedResult.class);
+		assertType(windSpeedController.windSpeed(TestConstant.LOCATION, fromDate, toDate), WindSpeedResult.class);
 	}
 
 	/**
@@ -270,7 +292,7 @@ public class ControllerTests {
 	public void testCSVCloudiness() throws IOException {
 
 		CSVCloudinessController csvCloudinessController = new CSVCloudinessController(cloudinessResponder);
-		csvCloudinessController.cloudiness(LOCATION, fromDate, toDate, response);
+		csvCloudinessController.cloudiness(TestConstant.LOCATION, fromDate, toDate, response);
 		assertLength(sw, 2);
 	}
 
@@ -281,7 +303,7 @@ public class ControllerTests {
 	public void testCSVCloudLevel() throws IOException {
 
 		CSVCloudLevelController csvCloudLevelController = new CSVCloudLevelController(cloudLevelResponder);
-		csvCloudLevelController.cloudLevel(LOCATION, fromDate, toDate, response);
+		csvCloudLevelController.cloudLevel(TestConstant.LOCATION, fromDate, toDate, response);
 		assertLength(sw, 4);
 	}
 
@@ -292,7 +314,7 @@ public class ControllerTests {
 	public void testCSVDewPoint() throws IOException {
 
 		CSVDewPointController csvDewPointController = new CSVDewPointController(dewPointResponder);
-		csvDewPointController.dewPoint(LOCATION, fromDate, toDate, response);
+		csvDewPointController.dewPoint(TestConstant.LOCATION, fromDate, toDate, response);
 		assertLength(sw, 2);
 	}
 
@@ -303,7 +325,7 @@ public class ControllerTests {
 	public void testCSVFog() throws IOException {
 
 		CSVFogController csvFogController = new CSVFogController(fogResponder);
-		csvFogController.fog(LOCATION, fromDate, toDate, response);
+		csvFogController.fog(TestConstant.LOCATION, fromDate, toDate, response);
 		assertLength(sw, 2);
 	}
 
@@ -314,7 +336,7 @@ public class ControllerTests {
 	public void testCSVHumidity() throws IOException {
 
 		CSVHumidityController csvHumidityController = new CSVHumidityController(humidityResponder);
-		csvHumidityController.humidity(LOCATION, fromDate, toDate, response);
+		csvHumidityController.humidity(TestConstant.LOCATION, fromDate, toDate, response);
 		assertLength(sw, 2);
 	}
 
@@ -328,7 +350,7 @@ public class ControllerTests {
 		HourlyPrecipitation precip = new HourlyPrecipitation(ik, pv);
 		hpr.save(precip);
 		CSVPrecipitationController csvPrecipitationController = new CSVPrecipitationController(precipitationResponder);
-		csvPrecipitationController.precipitation(LOCATION, fromDate, toDate, response);
+		csvPrecipitationController.precipitation(TestConstant.LOCATION, fromDate, toDate, response);
 		assertLength(sw, 4);
 
 	}
@@ -343,7 +365,7 @@ public class ControllerTests {
 		HourlyPrecipitation precip = new HourlyPrecipitation(ik, pv);
 		hpr.save(precip);
 		CSVPrecipitationController csvPrecipitationController = new CSVPrecipitationController(precipitationResponder);
-		csvPrecipitationController.precipitation(LOCATION, fromDate, toDate, response);
+		csvPrecipitationController.precipitation(TestConstant.LOCATION, fromDate, toDate, response);
 		int len = 4;
 
 		String[] str = sw.toString().split("\n");
@@ -362,7 +384,7 @@ public class ControllerTests {
 	public void testCSVPressure() throws IOException {
 
 		CSVPressureController csvPressureController = new CSVPressureController(pressureResponder);
-		csvPressureController.pressure(LOCATION, fromDate, toDate, response);
+		csvPressureController.pressure(TestConstant.LOCATION, fromDate, toDate, response);
 		assertLength(sw, 2);
 	}
 
@@ -373,7 +395,7 @@ public class ControllerTests {
 	public void testCSVTemperature() throws IOException {
 
 		CSVTemperatureController csvTemperatureController = new CSVTemperatureController(temperatureResponder);
-		csvTemperatureController.temperature(LOCATION, fromDate, toDate, response);
+		csvTemperatureController.temperature(TestConstant.LOCATION, fromDate, toDate, response);
 		assertLength(sw, 2);
 	}
 
@@ -384,7 +406,7 @@ public class ControllerTests {
 	public void testCSVWindDirection() throws IOException {
 
 		CSVWindDirectionController csvWindDirectionController = new CSVWindDirectionController(windDirectionResponder);
-		csvWindDirectionController.windDirection(LOCATION, fromDate, toDate, response);
+		csvWindDirectionController.windDirection(TestConstant.LOCATION, fromDate, toDate, response);
 		assertLength(sw, 3);
 	}
 
@@ -395,7 +417,7 @@ public class ControllerTests {
 	public void testCSVWindSpeed() throws IOException {
 
 		CSVWindSpeedController csvWindSpeedController = new CSVWindSpeedController(windSpeedResponder);
-		csvWindSpeedController.windSpeed(LOCATION, fromDate, toDate, response);
+		csvWindSpeedController.windSpeed(TestConstant.LOCATION, fromDate, toDate, response);
 		assertLength(sw, 4);
 
 	}

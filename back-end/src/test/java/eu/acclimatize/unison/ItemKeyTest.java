@@ -18,10 +18,6 @@ import eu.acclimatize.unison.user.UserInformation;
  */
 public class ItemKeyTest {
 
-	private static final String LOCATION = "UCD";
-	private static final String USER = "conor";
-	private static final String PWD = "pwd";
-
 	/**
 	 * Tests that item keys with the same from hour and location are equal and have
 	 * the same hash code.
@@ -32,10 +28,12 @@ public class ItemKeyTest {
 		Date fh0 = fromHour();
 		Date fh1 = fromHour();
 		BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
-		String encoded = passwordEncoder.encode(PWD);
+		String encoded = passwordEncoder.encode(TestConstant.PASSWORD);
 
-		ItemKey itemKey0 = new ItemKey(fh0, new Location(LOCATION, new UserInformation(USER, encoded), null));
-		ItemKey itemKey1 = new ItemKey(fh1, new Location(LOCATION, new UserInformation(USER, encoded), null));
+		ItemKey itemKey0 = new ItemKey(fh0,
+				new Location(TestConstant.LOCATION, new UserInformation(TestConstant.USERNAME, encoded), null));
+		ItemKey itemKey1 = new ItemKey(fh1,
+				new Location(TestConstant.LOCATION, new UserInformation(TestConstant.USERNAME, encoded), null));
 
 		Assert.assertEquals(itemKey0, itemKey1);
 		Assert.assertEquals(itemKey0.hashCode(), itemKey1.hashCode());

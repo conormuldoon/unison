@@ -22,10 +22,6 @@ import eu.acclimatize.unison.location.LocationRequestService;
 // Tests whether the document is present in the returned optional from the DocumentRequestService.
 public class LocationRequestTests {
 
-	final static private String LOCATION = "UCD";
-	final static private double LONGITUDE = -6.224176;
-	final static private double LATITUDE = 53.308366;
-
 	/**
 	 * Tests that the document is present.
 	 */
@@ -59,8 +55,8 @@ public class LocationRequestTests {
 	}
 
 	private Location createLocation() {
-		Point p = new GeometryFactory().createPoint(new Coordinate(LONGITUDE, LATITUDE));
+		Point p = new GeometryFactory().createPoint(new Coordinate(TestConstant.LONGITUDE, TestConstant.LATITUDE));
 
-		return new Location(LOCATION, null, p);
+		return new Location(TestConstant.LOCATION, null, p);
 	}
 }

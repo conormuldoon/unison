@@ -24,8 +24,6 @@ import eu.acclimatize.unison.user.UserRepository;
 @SpringBootTest
 public class UserControllerTests {
 
-	private static final String USERNAME = "conor";
-	private static final String PASSWORD = "pwd";
 	private static final String NEW_USERNAME = "bob";
 
 	@Autowired
@@ -43,8 +41,8 @@ public class UserControllerTests {
 	@Before
 	public void addInitialUser() {
 		BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
-		String encodedPassword = passwordEncoder.encode(PASSWORD);
-		userRepository.save(new UserInformation(USERNAME, encodedPassword));
+		String encodedPassword = passwordEncoder.encode(TestConstant.PASSWORD);
+		userRepository.save(new UserInformation(TestConstant.USERNAME, encodedPassword));
 
 	}
 
@@ -61,7 +59,7 @@ public class UserControllerTests {
 	 */
 	@Test
 	public void addUser() {
-		addUserController.addUser(USERNAME, PASSWORD, NEW_USERNAME, "bobspassword");
+		addUserController.addUser(TestConstant.USERNAME, TestConstant.PASSWORD, NEW_USERNAME, "bobspassword");
 
 		Assert.assertEquals(2, userRepository.count());
 	}
@@ -73,7 +71,7 @@ public class UserControllerTests {
 	public void existingUser() {
 
 		userRepository.save(new UserInformation(NEW_USERNAME, "bobsEncodedPassword"));
-		int res = addUserController.addUser(USERNAME, PASSWORD, NEW_USERNAME, "");
+		int res = addUserController.addUser(TestConstant.USERNAME, TestConstant.PASSWORD, NEW_USERNAME, "");
 		Assert.assertEquals(ResponseConstant.FAIL, res);
 	}
 
@@ -83,9 +81,9 @@ public class UserControllerTests {
 	@Test
 	public void updatePassword() {
 		Assert.assertEquals(ResponseConstant.SUCCESS,
-				updatePasswordController.updatePassword(USERNAME, PASSWORD, "pwd2"));
+				updatePasswordController.updatePassword(TestConstant.USERNAME, TestConstant.PASSWORD, "pwd2"));
 		Assert.assertEquals(ResponseConstant.INCORRECT_CREDENTIALS,
-				updatePasswordController.updatePassword(USERNAME, PASSWORD, "pwd2"));
+				updatePasswordController.updatePassword(TestConstant.USERNAME, TestConstant.PASSWORD, "pwd2"));
 
 	}
 
