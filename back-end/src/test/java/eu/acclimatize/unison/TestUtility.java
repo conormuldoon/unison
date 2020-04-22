@@ -58,6 +58,24 @@ public class TestUtility {
 	}
 
 	/**
+	 * Saves user information in the database.
+	 * 
+	 * @param userRepository The repository user information is saved in.
+	 */
+	public static void saveUserData(UserRepository userRepository) {
+		userRepository.save(USER_INFORMATION);
+	}
+
+	/**
+	 * Deletes user information from the database.
+	 * 
+	 * @param userRepository The repository user information is deleted from.
+	 */
+	public static void deleteUserData(UserRepository userRepository) {
+		userRepository.deleteAll();
+	}
+
+	/**
 	 * Saves user information and location data in the database.
 	 * 
 	 * @param userRepository     The repository user information is saved in.
@@ -65,7 +83,7 @@ public class TestUtility {
 	 */
 	public static void saveLocationData(UserRepository userRepository, LocationRepository locationRepository) {
 
-		userRepository.save(USER_INFORMATION);
+		saveUserData(userRepository);
 		locationRepository.save(LOCATION);
 
 	}
@@ -78,11 +96,11 @@ public class TestUtility {
 	 */
 	public static void deleteLocationData(LocationRepository locationRepository, UserRepository userRepository) {
 		locationRepository.deleteAll();
-		userRepository.deleteAll();
+		deleteUserData(userRepository);
 	}
 
 	/**
-	 * Saves weather data, and associated user and location, in the database.
+	 * Saves weather, and associated user and location, data in the database.
 	 * 
 	 * @param userRepository     The repository user information is saved in.
 	 * @param locationRepository The repository location data is saved in.
@@ -99,7 +117,7 @@ public class TestUtility {
 	}
 
 	/**
-	 * Deletes weather data, and associated user and location, from the database.
+	 * Deletes weather, and associated user and location, data from the database.
 	 * 
 	 * @param hwr                The repository weather data is deleted from.
 	 * @param userRepository     The repository user information is deleted from.
@@ -113,7 +131,7 @@ public class TestUtility {
 	}
 
 	/**
-	 * Saves the given precipitation data, and associated user and location, in the
+	 * Saves the given precipitation, and associated user and location, data in the
 	 * database.
 	 * 
 	 * @param userRepository     The repository user information is saved in.

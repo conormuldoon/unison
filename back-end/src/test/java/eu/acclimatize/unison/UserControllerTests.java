@@ -7,7 +7,6 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.test.context.junit4.SpringRunner;
 
 import eu.acclimatize.unison.user.AddUserController;
@@ -40,10 +39,9 @@ public class UserControllerTests {
 	 */
 	@Before
 	public void addInitialUser() {
-		BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
-		String encodedPassword = passwordEncoder.encode(TestConstant.PASSWORD);
-		userRepository.save(new UserInformation(TestConstant.USERNAME, encodedPassword));
-
+		
+		TestUtility.saveUserData(userRepository);
+		
 	}
 
 	/**
@@ -51,7 +49,9 @@ public class UserControllerTests {
 	 */
 	@After
 	public void clearData() {
-		userRepository.deleteAll();
+		
+		TestUtility.deleteUserData(userRepository);
+		
 	}
 
 	/**
