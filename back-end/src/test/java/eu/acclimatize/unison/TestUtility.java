@@ -8,6 +8,7 @@ import org.locationtech.jts.geom.Coordinate;
 import org.locationtech.jts.geom.GeometryFactory;
 import org.locationtech.jts.geom.Point;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
 
 import eu.acclimatize.unison.location.Location;
 import eu.acclimatize.unison.location.LocationRepository;
@@ -28,13 +29,14 @@ public class TestUtility {
 	private static final ItemKey ITEM_KEY;
 
 	private static final WeatherValue WEATHER_VALUE;
+
 	private static final PrecipitationValue PRECIPITATION_VALUE;
+
+	private static final PasswordEncoder PASSWORD_ENCODER = new BCryptPasswordEncoder();
 
 	static {
 
-		BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
-		String encodedPassword = passwordEncoder.encode(TestConstant.PASSWORD);
-		USER_INFORMATION = new UserInformation(TestConstant.USERNAME, encodedPassword);
+		USER_INFORMATION = createUserInformation(TestConstant.USERNAME, TestConstant.PASSWORD);
 
 		LOCATION = createLocation(TestConstant.LOCATION, USER_INFORMATION, TestConstant.LONGITUDE,
 				TestConstant.LATITUDE);
@@ -47,6 +49,36 @@ public class TestUtility {
 		WEATHER_VALUE = new WeatherValue(0d, wd, ws, 0d, 0d, 0d, cloud, 0d, 0d);
 
 		PRECIPITATION_VALUE = new PrecipitationValue(0d, 0d, 0d);
+	}
+
+	/**
+	 * Creates an {@link eu.acclimatize.unison.user.UserInformation} object for the
+	 * specified user name and password. The password is encoded prior to the object
+	 * being created.
+	 * 
+	 * @param userName The user name of the user.
+	 * @param password The password of the user.
+	 * @return The created user information object.
+	 */
+	private static UserInformation createUserInformation(String userName, String password) {
+
+		String encodedPassword = PASSWORD_ENCODER.encode(password);
+		UserInformation userInfo = new UserInformation(userName, encodedPassword);
+		return userInfo;
+	}
+
+	/**
+	 * Creates an {@link eu.acclimatize.unison.user.UserInformation} object for the
+	 * specified user name and password and save the user information is the
+	 * repository. The password is encoded prior to the object being created.
+	 * 
+	 * @param userName       The user name of the user.
+	 * @param password       The password of the user.
+	 * @param userRepository The repository where the user informatin is stored.
+	 */
+	public static void addUserInformation(String userName, String password, UserRepository userRepository) {
+		UserInformation userInformation = createUserInformation(userName, password);
+		userRepository.save(userInformation);
 	}
 
 	/**

@@ -2,7 +2,6 @@ package eu.acclimatize.unison.user;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
 /**
  * A configuration class for the user package.
@@ -12,24 +11,21 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 public class UserConfig {
 
 	/**
-	 * Creates an encoder for encrypting and matching user passwords.
-	 * 
-	 * @return The password encoder created.
-	 */
-	@Bean
-	public BCryptPasswordEncoder passwordEncoder() {
-		return new BCryptPasswordEncoder();
-	}
-	
-	/**
-	 * Determines whether the console is present. 
+	 * Determines whether the console is present.
 	 * 
 	 * @return True if the console is present and false otherwise.
 	 */
 	@Bean
 	public Boolean consolePresent() {
-		
-		return Boolean.valueOf(System.console()!=null);
-		
+
+		/*
+		 * Removing the static System.console() call from the injected component is
+		 * useful when testing. During testing, a true value is provided to the injected
+		 * component; the input that would have came from the console is mocked and the
+		 * branch the console is used on avoided. This is required as the system console
+		 * is final and cannot be mocked using Mockito.
+		 */
+		return Boolean.valueOf(System.console() != null);
+
 	}
 }

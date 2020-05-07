@@ -5,33 +5,31 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.PrintWriter;
 import java.security.SecureRandom;
-import java.util.Optional;
 import java.util.concurrent.Executor;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.context.event.ApplicationReadyEvent;
-import org.springframework.context.event.EventListener;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
-import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
-
-import eu.acclimatize.unison.ResponseConstant;
+import org.springframework.context.ApplicationListener;
+import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.stereotype.Component;
 
 /**
- * 
- * A services that enables tasks to be executed that require user credentials.
+ * A service used for encoding and saving user information. The service saves
+ * user information for an initial if there is no user information stored in the
+ * database once the application has been initialized at start time. The
+ * component uses the default.username and default.encoded properties if
+ * provided. Otherwise, initial user information requested if there is a console
+ * available.
  *
  */
-@Service
-public class UserService {
+@Component
+public class UserService implements ApplicationListener<ApplicationReadyEvent> {
 
 	private UserRepository userRepository;
 
 	private Logger logger;
-
-	private BCryptPasswordEncoder passwordEncoder;
 
 	private Boolean consolePresent;
 
@@ -41,13 +39,14 @@ public class UserService {
 
 	private Executor executor;
 
+	private PasswordEncoder passwordEncoder;
+
 	/**
 	 * Creates an instance of UserService.
 	 * 
 	 * @param userRepository  The repository user credentials information is stored.
 	 * @param logger          Used to log events when the user consoles is not
 	 *                        present, such as in testing.
-	 * @param passwordEncoder Used to encrypt and match user passwords.
 	 * @param consolePresent  Used to determine whether to request initial user data
 	 *                        from a {@link CredentialsRequester}.
 	 * @param defaultUserName Assigned using the default.username property. If not
@@ -57,31 +56,37 @@ public class UserService {
 	 *                        default.encoded property. Used in adding an initial
 	 *                        user to the database if not null and no users stored.
 	 * @param executor        Used to request user credentials on a separate thread.
+	 * @param passwordEncoder The encoder used to encrypt passwords.
 	 */
-	public UserService(UserRepository userRepository, Logger logger, BCryptPasswordEncoder passwordEncoder,
-			Boolean consolePresent, @Value("${default.username:#{null}}") String defaultUserName,
-			@Value("${default.encoded:#{null}}") String defaultEncoded, Executor executor) {
+
+	public UserService(UserRepository userRepository, Logger logger, Boolean consolePresent,
+			@Value("${default.username:#{null}}") String defaultUserName,
+			@Value("${default.encoded:#{null}}") String defaultEncoded, Executor executor,
+			PasswordEncoder passwordEncoder) {
+
 		this.userRepository = userRepository;
-		this.passwordEncoder = passwordEncoder;
 		this.logger = logger;
 		this.consolePresent = consolePresent;
 		this.defaultUserName = defaultUserName;
 		this.defaultEncoded = defaultEncoded;
 		this.executor = executor;
+		this.passwordEncoder = passwordEncoder;
+
+	}
+	
+	/**
+	 * Encrypts the user's password and saves the user information in a repository.
+	 * 
+	 * @param userInformation The user information to encrypt and store.
+	 */
+	public void encodeAndSave(UserInformation userInformation) {
+		
+		userInformation.encodePassword(passwordEncoder);
+		userRepository.save(userInformation);
 	}
 
-	/**
-	 * 
-	 * If there are no users stored in the database and the default.username and
-	 * default.password properties are set, they are used to add an initial user to
-	 * the database. Alternatively, if the properties are not set, the console will
-	 * be used to request user information if it is available and the server is
-	 * running in interactive mode.
-	 * 
-	 */
-	@EventListener(ApplicationReadyEvent.class)
-	public void initialUser() {
-
+	@Override
+	public void onApplicationEvent(ApplicationReadyEvent event) {
 		if (userRepository.count() == 0) {
 
 			if (defaultUserName != null && defaultEncoded != null) {
@@ -90,17 +95,22 @@ public class UserService {
 				userRepository.save(userInformation);
 
 			} else if (Boolean.TRUE.equals(consolePresent)) {
+				/*
+				 * During testing, a true value is provided for consolePresent; the input that
+				 * would have came from the console is mocked and the branch the console is used
+				 * on avoided. This is required as the system console is final and cannot be
+				 * mocked using Mockito.
+				 */
 
 				executor.execute(() -> {
 					PrintWriter pw = new PrintWriter(System.out, true);
 					BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
 
-					CredentialsRequester requester = new CredentialsRequester(pw, br, passwordEncoder,
-							new SecureRandom());
+					CredentialsRequester requester = new CredentialsRequester(pw, br, new SecureRandom());
 
 					try {
 						UserInformation userInformation = requester.requestUserInformation();
-						userRepository.save(userInformation);
+						encodeAndSave(userInformation);
 
 						pw.close();
 						br.close();
@@ -116,29 +126,4 @@ public class UserService {
 		}
 
 	}
-	
-
-	/**
-	 * Executes a {@link UserTask} if the user name and password match the
-	 * credentials in the database.
-	 * 
-	 * @param userName The name of the user.
-	 * @param password The user's password.
-	 * @param task     The task to be executed.
-	 * @return The {@link eu.acclimatize.unison.ResponseConstant} value for the
-	 *         result of executing the task.
-	 */
-	@Transactional
-	public int executeTask(String userName, String password, UserTask task) {
-		Optional<UserInformation> oUser = userRepository.findById(userName);
-		if (oUser.isPresent()) {
-			UserInformation user = oUser.get();
-			if (user.passwordMatches(password, passwordEncoder))
-				return task.execute(user);
-
-		}
-		return ResponseConstant.INCORRECT_CREDENTIALS;
-
-	}
-
 }

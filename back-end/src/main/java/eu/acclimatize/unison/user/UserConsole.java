@@ -8,7 +8,8 @@ import java.security.SecureRandom;
 import java.util.logging.Logger;
 
 import org.hibernate.cfg.Configuration;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+
+import eu.acclimatize.unison.UnisonSecurityConfig;
 
 /**
  * A command line tool that enables new users to be added to the database or
@@ -34,10 +35,10 @@ public class UserConsole {
 		PrintWriter pw = new PrintWriter(System.out, true);
 		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
 		Logger logger = Logger.getLogger(UserConsole.class.getName());
-		CredentialsRequester credentialsRequester = new CredentialsRequester(pw, br, new BCryptPasswordEncoder(),
-				new SecureRandom());
+		CredentialsRequester credentialsRequester = new CredentialsRequester(pw, br, new SecureRandom());
 
-		UserHibernateStore uhs = new UserHibernateStore(credentialsRequester, logger);
+		UserHibernateStore uhs = new UserHibernateStore(credentialsRequester,
+				new UnisonSecurityConfig(null).passwordEncoder(), logger);
 		System.out.println("Starting");
 
 		uhs.hideInfoLogs();

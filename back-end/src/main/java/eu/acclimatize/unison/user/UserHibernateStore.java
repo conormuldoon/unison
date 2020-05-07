@@ -10,6 +10,7 @@ import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
 import org.hibernate.cfg.Configuration;
 import org.slf4j.LoggerFactory;
+import org.springframework.security.crypto.password.PasswordEncoder;
 
 import eu.acclimatize.unison.Constant;
 
@@ -28,6 +29,8 @@ public class UserHibernateStore {
 
 	private CredentialsRequester credentialsRequester;
 
+	private PasswordEncoder passwordEncoder;
+
 	private Logger logger;
 
 	/**
@@ -35,12 +38,15 @@ public class UserHibernateStore {
 	 * 
 	 * @param credentialsRequester Used to request and read user names and
 	 *                             passwords.
+	 * @param passwordEncoder      An encoder used for encrypting passwords.
 	 * @param logger               Used for logging errors.
 	 * 
 	 */
-	public UserHibernateStore(CredentialsRequester credentialsRequester, Logger logger) {
+	public UserHibernateStore(CredentialsRequester credentialsRequester, PasswordEncoder passwordEncoder,
+			Logger logger) {
 
 		this.credentialsRequester = credentialsRequester;
+		this.passwordEncoder = passwordEncoder;
 		this.logger = logger;
 
 	}
@@ -84,7 +90,7 @@ public class UserHibernateStore {
 					properties.getProperty("spring.jpa.hibernate.ddl-auto"));
 
 			UserInformation userInformation = credentialsRequester.requestUserInformation();
-
+			userInformation.encodePassword(passwordEncoder);
 			storeUser(userInformation, configuration, logger);
 
 		} catch (IOException e) {

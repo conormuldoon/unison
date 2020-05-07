@@ -26,11 +26,12 @@ import eu.acclimatize.unison.location.Location;
 import eu.acclimatize.unison.location.LocationRequestException;
 import eu.acclimatize.unison.location.LocationRequestService;
 
+/**
+ * Tests for the Unison data harvester.
+ *
+ */
 public class HarvesterTests {
 
-	/**
-	 * Tests that parsed documents are saved.
-	 */
 	private void testParse(String fileName, String timeZone)
 			throws ParserConfigurationException, SAXException, IOException, LocationRequestException {
 
@@ -39,7 +40,7 @@ public class HarvesterTests {
 
 		Logger logger = mock(Logger.class);
 
-		SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd'T'KK:mm:ss'Z'");
+		SimpleDateFormat dateFormat = new SimpleDateFormat(Constant.HARMONIE_DATE_FORMAT);
 		dateFormat.setTimeZone(TimeZone.getTimeZone(timeZone));
 
 		DocumentBuilderFactory dbFactory = DocumentBuilderFactory.newInstance();
@@ -61,21 +62,57 @@ public class HarvesterTests {
 
 	}
 
-	// XML data obtained using the Met Eireann API
+	/**
+	 * Tests that parsed documents for Ireland are saved. The XML data was obtained
+	 * using the Met Eireann API.
+	 * 
+	 * @throws ParserConfigurationException Thrown if there is a problem the the
+	 *                                      parser configuration.
+	 * @throws SAXException                 Thrown if there is a an error in parsing
+	 *                                      the XML.
+	 * 
+	 * @throws IOException                  Thrown if there is an I/O error when
+	 *                                      parsing the document.
+	 * @throws LocationRequestException     Thrown if the XML was not obtained.
+	 */
 	@Test
 	public void testConvertorIrl()
 			throws ParserConfigurationException, SAXException, IOException, LocationRequestException {
 		testParse("/TestIreland.xml", "Europe/Dublin");
 	}
 
-	// XML data obtained using the Met Eireann API
+	/**
+	 * Tests that parsed documents for the U.K. are saved. The XML data was obtained
+	 * using the Met Eireann API.
+	 * 
+	 * @throws ParserConfigurationException Thrown if there is a problem the the
+	 *                                      parser configuration.
+	 * @throws SAXException                 Thrown if there is a an error in parsing
+	 *                                      the XML.
+	 * 
+	 * @throws IOException                  Thrown if there is an I/O error when
+	 *                                      parsing the document.
+	 * @throws LocationRequestException     Thrown if the XML was not obtained.
+	 */
 	@Test
 	public void testConvertorUK()
 			throws ParserConfigurationException, SAXException, IOException, LocationRequestException {
 		testParse("/TestUK.xml", "Europe/Dublin");
 	}
 
-	// XML data obtained using the Norwegian Meteorological Institute API
+	/**
+	 * Tests that parsed documents for Norway are saved. The XML data was obtained
+	 * using the Norwegian Meteorological Institute API.
+	 * 
+	 * @throws ParserConfigurationException Thrown if there is a problem the the
+	 *                                      parser configuration.
+	 * @throws SAXException                 Thrown if there is a an error in parsing
+	 *                                      the XML.
+	 * 
+	 * @throws IOException                  Thrown if there is an I/O error when
+	 *                                      parsing the document.
+	 * @throws LocationRequestException     Thrown if the XML was not obtained.
+	 */
 	@Test
 	public void testConvertorNor()
 			throws ParserConfigurationException, SAXException, IOException, LocationRequestException {

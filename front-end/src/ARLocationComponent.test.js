@@ -13,8 +13,6 @@ it('renders without crashing', async () => {
 });
 
 
-
-
 it('mathes snapshot', () => {
 
 
@@ -25,45 +23,23 @@ it('mathes snapshot', () => {
 });
 
 
-
 it('toggles add location correctly', () => {
+  const confirmSpy = jest.spyOn(window, 'confirm');
+  confirmSpy.mockImplementation(() => true);
 
-  const { getByTestId, getByText } = render(<ARLocationComponent location={'UCD'} obtainData={() => { }} />);
+  const location = 'UCD';
+  const { getByTestId, getByText } = render(<ARLocationComponent location={location} obtainData={() => { }} />);
   expect(getByTestId('lf-button')).toHaveTextContent('Add Location');
-  expect(getByTestId('rf-button')).toHaveTextContent('Remove Location');
+  expect(getByTestId('rm-button')).toHaveTextContent('Remove ' + location);
   fireEvent.click(getByText('Add Location'));
   expect(getByTestId('lf-button')).toHaveTextContent('Hide');
-  expect(getByTestId('rf-button')).toHaveTextContent('Remove Location');
   fireEvent.click(getByText('Hide'));
   expect(getByTestId('lf-button')).toHaveTextContent('Add Location');
-  expect(getByTestId('rf-button')).toHaveTextContent('Remove Location');
   fireEvent.click(getByText('Add Location'));
-  fireEvent.click(getByText('Remove Location'));
+  fireEvent.click(getByText('Remove ' + location));
   expect(getByTestId('lf-button')).toHaveTextContent('Add Location');
-  expect(getByTestId('rf-button')).toHaveTextContent('Hide');
-  fireEvent.click(getByText('Hide'));
-  expect(getByTestId('lf-button')).toHaveTextContent('Add Location');
-  expect(getByTestId('rf-button')).toHaveTextContent('Remove Location');
+
+  confirmSpy.mockClear();
 
 });
 
-it('toggles remove location correctly', () => {
-
-  const { getByTestId, getByText } = render(<ARLocationComponent location='UCD' obtainData={() => { }} />);
-  expect(getByTestId('lf-button')).toHaveTextContent('Add Location');
-  expect(getByTestId('rf-button')).toHaveTextContent('Remove Location');
-  fireEvent.click(getByText('Remove Location'));
-  expect(getByTestId('lf-button')).toHaveTextContent('Add Location');
-  expect(getByTestId('rf-button')).toHaveTextContent('Hide');
-  fireEvent.click(getByText('Hide'));
-  expect(getByTestId('lf-button')).toHaveTextContent('Add Location');
-  expect(getByTestId('rf-button')).toHaveTextContent('Remove Location');
-  fireEvent.click(getByText('Remove Location'));
-  fireEvent.click(getByText('Add Location'));
-  expect(getByTestId('lf-button')).toHaveTextContent('Hide');
-  expect(getByTestId('rf-button')).toHaveTextContent('Remove Location');
-  fireEvent.click(getByText('Hide'));
-  expect(getByTestId('lf-button')).toHaveTextContent('Add Location');
-  expect(getByTestId('rf-button')).toHaveTextContent('Remove Location');
-
-});

@@ -5,6 +5,8 @@ import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 import java.lang.annotation.Target;
 
+import eu.acclimatize.unison.Constant;
+
 /**
  * 
  * An annotation used in specifying CSV header text.
@@ -22,5 +24,5 @@ public @interface CSVHeaderItem {
 	 * 
 	 * @return The text to for an attribute to in a CSV header.
 	 */
-	public String value() default "";
+	public String value() default Constant.CSV_HEADER_DEFAULT;
 }

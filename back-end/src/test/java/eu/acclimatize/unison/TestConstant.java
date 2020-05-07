@@ -22,7 +22,7 @@ public class TestConstant {
 	 * The initial date to retrieve data for.
 	 */
 	public static final Date FROM_DATE;
-	
+
 	/**
 	 * The final date to retrieve data for.
 	 */
@@ -51,7 +51,7 @@ public class TestConstant {
 	 * The longitude coordinate of the location.
 	 */
 	public static final double LONGITUDE = -6.224176;
-	
+
 	/**
 	 * The latitude coordinate of the location.
 	 */
@@ -60,10 +60,22 @@ public class TestConstant {
 	/**
 	 * The test user name.
 	 */
-	public static final String USERNAME = "conor";
-	
+	public static final String USERNAME = "Alice";
+
 	/**
 	 * The test password.
 	 */
-	public static final String PASSWORD = "pwd";
+	public static final String PASSWORD = "AlicesUnencodedPassword";
+
+	/**
+	 * The name of a user not added prior to the location and user controller tests.
+	 */
+	public static final String OTHER_USERNAME = "Bob";
+
+	/**
+	 * The password of a user not added prior to the location and user controller
+	 * tests.
+	 */
+	public static final String OTHER_USER_PASSWORD = "BobsUnencodedPassword";
+
 }

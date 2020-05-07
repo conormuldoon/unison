@@ -40,8 +40,8 @@ reactComponents['LeafletMap'] = Component4;
 import Component5 from '../src/LocationForm.js';
 reactComponents['LocationForm'] = Component5;
 
-import Component6 from '../src/RemoveForm.js';
-reactComponents['RemoveForm'] = Component6;
+import Component6 from '../src/RemoveComponent.js';
+reactComponents['RemoveComponent'] = Component6;
 
 import Component7 from '../src/TabsComponent.js';
 reactComponents['TabsComponent'] = Component7;

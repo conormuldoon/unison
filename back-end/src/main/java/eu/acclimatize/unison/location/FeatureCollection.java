@@ -37,14 +37,14 @@ public class FeatureCollection {
 	 * @throws IOException Thrown if there if there is an I/O error when
 	 *                     serializing.
 	 */
-	public void geoJsonSerialize(JsonGenerator gen) throws IOException {
+	public void geoJSONSerialize(JsonGenerator gen) throws IOException {
 		gen.writeStartObject();
 
 		gen.writeStringField(Constant.TYPE, FEATURE_COLLECTION);
 		gen.writeArrayFieldStart(FEATURES);
 
 		for (Location l : locationList) {
-			l.serialize(gen);
+			l.geoJSONSerialize(gen);
 		}
 		gen.writeEndArray();
 		gen.writeEndObject();

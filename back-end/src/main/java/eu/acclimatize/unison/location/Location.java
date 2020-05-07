@@ -16,6 +16,7 @@ import org.w3c.dom.Document;
 import org.xml.sax.SAXException;
 
 import com.fasterxml.jackson.core.JsonGenerator;
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 
 import eu.acclimatize.unison.Constant;
 import eu.acclimatize.unison.user.UserInformation;
@@ -26,15 +27,13 @@ import eu.acclimatize.unison.user.UserInformation;
  * coordinates.
  *
  */
+
+@JsonSerialize(using = LocationSerializer.class)
 @Entity
 public class Location implements Serializable {
 
 	private static final String POINT = "Point";
-	private static final String COORDINATES = "coordinates";
-	private static final String PROPERTIES = "properties";
-	private static final String GEOMETRY = "geometry";
 	private static final String FEATURE = "Feature";
-	private static final String FN_NAME = "name";
 
 	private static final long serialVersionUID = 1771422791257298902L;
 
@@ -69,7 +68,29 @@ public class Location implements Serializable {
 	}
 
 	/**
-	 * Requests XML data for the longitude and latitude coordinates from the HARMONIE-AROME API.
+	 * Checks if the location exists in the location repository.
+	 * 
+	 * @param locationRepository The repository where locations are stored.
+	 * @return True if the location is stored in the repository or false otherwise.
+	 */
+	public boolean existsIn(LocationRepository locationRepository) {
+
+		return locationRepository.existsById(name);
+	}
+
+	/**
+	 * Uses the location service to delete the location and associated harvested
+	 * data. The authenticated user must be the user that added the location.
+	 * 
+	 * @param locationService The service used to delete the data.
+	 */
+	public void deleteWithService(LocationService locationService) {
+		user.deleteLocation(name, locationService);
+	}
+
+	/**
+	 * Requests XML data for the longitude and latitude coordinates from the
+	 * HARMONIE-AROME API.
 	 * 
 	 * @param uri             The URL template for a HARMONIE-AROME API specified by
 	 *                        app.uri in the application properties file.
@@ -82,7 +103,8 @@ public class Location implements Serializable {
 	 * @throws LocationRequestException Thrown when the generated XML for the
 	 *                                  location was not found.
 	 */
-	public Document requestDocument(String uri, DocumentBuilder documentBuilder,Logger logger) throws SAXException, IOException, LocationRequestException {
+	public Document requestDocument(String uri, DocumentBuilder documentBuilder, Logger logger)
+			throws SAXException, IOException, LocationRequestException {
 
 		String locURI = String.format(uri, geom.getY(), geom.getX()); // Change to just return this string, maybe.
 		logger.log(Level.INFO, () -> "Requesting data for " + name + " from " + locURI + '.');
@@ -90,7 +112,7 @@ public class Location implements Serializable {
 			return documentBuilder.parse(locURI);
 		} catch (FileNotFoundException e) {
 			throw new LocationRequestException(
-					"Problem obtaining document for " + name + ". The gnerated XML was not found.");
+					"Problem obtaining document for " + name + ". The generated XML was not found.");
 		}
 
 	}
@@ -101,23 +123,24 @@ public class Location implements Serializable {
 	 * @param gen The generator object written to.
 	 * @throws IOException Thrown if there is an I/O error while serializing.
 	 */
-	public void serialize(JsonGenerator gen) throws IOException {
+	public void geoJSONSerialize(JsonGenerator gen) throws IOException {
 		gen.writeStartObject();
 
 		gen.writeStringField(Constant.TYPE, FEATURE);
-		
-		gen.writeFieldName(GEOMETRY);
+
+		gen.writeFieldName(LocationConstant.GEOMETRY);
+
 		gen.writeStartObject();
 		gen.writeStringField(Constant.TYPE, POINT);
-		gen.writeArrayFieldStart(COORDINATES);
+		gen.writeArrayFieldStart(LocationConstant.COORDINATES);
 		gen.writeNumber(geom.getX());
 		gen.writeNumber(geom.getY());
 		gen.writeEndArray();
 		gen.writeEndObject();
 
-		gen.writeFieldName(PROPERTIES);
+		gen.writeFieldName(LocationConstant.PROPERTIES);
 		gen.writeStartObject();
-		gen.writeStringField(FN_NAME, name);
+		gen.writeStringField(LocationConstant.LOCATION_NAME, name);
 		gen.writeEndObject();
 
 		gen.writeEndObject();

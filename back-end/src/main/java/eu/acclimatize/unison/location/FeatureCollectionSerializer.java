@@ -9,7 +9,7 @@ import com.fasterxml.jackson.databind.SerializerProvider;
 /**
  * 
  * Jackson uses an instance of this class when serializing a GeoJSON feature collection. The instance
- * invokes {@link FeatureCollection#geoJsonSerialize(JsonGenerator)}.
+ * invokes {@link FeatureCollection#geoJSONSerialize(JsonGenerator)}.
  *
  */
 public class FeatureCollectionSerializer extends JsonSerializer<FeatureCollection>{
@@ -17,6 +17,6 @@ public class FeatureCollectionSerializer extends JsonSerializer<FeatureCollectio
 	@Override
 	public void serialize(FeatureCollection value, JsonGenerator gen, SerializerProvider serializers)
 			throws IOException {
-		value.geoJsonSerialize(gen);	
+		value.geoJSONSerialize(gen);	
 	}
 }

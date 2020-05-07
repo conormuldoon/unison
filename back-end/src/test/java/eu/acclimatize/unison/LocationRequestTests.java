@@ -16,13 +16,21 @@ import eu.acclimatize.unison.location.LocationRequestException;
 import eu.acclimatize.unison.location.LocationRequestService;
 
 /**
- *  Tests whether the document is present in the returned optional from the DocumentRequestService.
+ * Tests whether the document is present in the returned optional from the
+ * DocumentRequestService.
  *
  */
 public class LocationRequestTests {
 
 	/**
 	 * Tests that the document is present.
+	 * 
+	 * @throws SAXException             Thrown if there is a an error in parsing the
+	 *                                  XML, parsing is mocked in this test and the
+	 *                                  exception should not be thrown.
+	 * @throws IOException              Thrown if there is an I/O error when parsing
+	 *                                  the document.
+	 * @throws LocationRequestException Thrown if the XML was not obtained.
 	 */
 	@Test
 	public void testHaveDocument() throws SAXException, IOException, LocationRequestException {
@@ -39,8 +47,17 @@ public class LocationRequestTests {
 	}
 
 	/**
-	 * Tests that if there is a problem obtaining the data, there will be no
-	 * document present.
+	 * Tests that if there is a problem parsing the data, there will be no document
+	 * present.
+	 * 
+	 * @throws SAXException             Thrown if there is a an error in parsing the
+	 *                                  XML. A mock throw of this exception is
+	 *                                  performed in this test, but it should be
+	 *                                  caught by the system under test and should
+	 *                                  not be thrown by the test method.
+	 * @throws IOException              Thrown if there is an I/O error when parsing
+	 *                                  the document.
+	 * @throws LocationRequestException Thrown if the XML was not obtained.
 	 */
 	@Test
 	public void testOptionalEmpty() throws SAXException, IOException, LocationRequestException {

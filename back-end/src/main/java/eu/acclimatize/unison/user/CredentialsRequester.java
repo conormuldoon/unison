@@ -4,8 +4,7 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.security.SecureRandom;
-
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import java.util.Arrays;
 
 /**
  * 
@@ -20,23 +19,19 @@ public class CredentialsRequester {
 
 	private PrintWriter writer;
 	private BufferedReader reader;
-	private BCryptPasswordEncoder encoder;
 	private SecureRandom random;
 
 	/**
 	 * Creates and instance of CredentialsRequester.
 	 * 
-	 * @param writer  Used to display information to the user.
-	 * @param reader  Used to request data from the user.
-	 * @param encoder Used to encrypt the password.
-	 * @param random  Used in generating random passwords.
+	 * @param writer Used to display information to the user.
+	 * @param reader Used to request data from the user.
+	 * @param random Used in generating random passwords.
 	 */
-	public CredentialsRequester(PrintWriter writer, BufferedReader reader, BCryptPasswordEncoder encoder,
-			SecureRandom random) {
+	public CredentialsRequester(PrintWriter writer, BufferedReader reader, SecureRandom random) {
 
 		this.writer = writer;
 		this.reader = reader;
-		this.encoder = encoder;
 		this.random = random;
 
 	}
@@ -57,24 +52,36 @@ public class CredentialsRequester {
 		writer.printf("Generate password (y/N)? ");
 
 		String gp = reader.readLine().toLowerCase();
-		String encoded = null;
+		String password = null;
 
 		if (gp.startsWith("y")) {
 
-			String password = randomPassword();
+			password = randomPassword();
 			writer.printf("Generated password: %s%n", password);
 
-			encoded = encoder.encode(password);
 		} else {
 
-			char[] passwd = System.console().readPassword("%s", "Enter password: ");
-			encoded = encoder.encode(String.valueOf(passwd));
-			java.util.Arrays.fill(passwd, ' '); // See Security note for Console class:
-												// https://docs.oracle.com/javase/7/docs/api/java/io/Console.html
+			boolean different;
+			do {
 
+				char[] passwd = System.console().readPassword("%s", "Enter password: ");
+				char[] confirmPWD = System.console().readPassword("%s", "Confirm password: ");
+				if (Arrays.equals(passwd, confirmPWD)) {
+					different = false;
+					writer.printf("Password confirmed.\n");
+					password = new String(passwd);
+				} else {
+					different = true;
+					writer.printf("The passwords don't match.\n");
+				}
+
+				Arrays.fill(passwd, ' ');
+				Arrays.fill(confirmPWD, ' ');
+
+			} while (different);
 		}
 
-		return new UserInformation(userName, encoded);
+		return new UserInformation(userName, password);
 
 	}
 

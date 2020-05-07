@@ -108,6 +108,9 @@ public class CSVControllerTests {
 
 	/**
 	 * Tests the number of CSV columns for cloudiness data.
+	 * 
+	 * @throws IOException Thrown if there is an I/O error in obtaining a writer
+	 *                     from the HTTP servlet response.
 	 */
 	@Test
 	public void testCSVCloudiness() throws IOException {
@@ -119,6 +122,9 @@ public class CSVControllerTests {
 
 	/**
 	 * Tests the number of CSV columns for cloud level data.
+	 * 
+	 * @throws IOException Thrown if there is an I/O error in obtaining a writer
+	 *                     from the HTTP servlet response.
 	 */
 	@Test
 	public void testCSVCloudLevel() throws IOException {
@@ -130,6 +136,9 @@ public class CSVControllerTests {
 
 	/**
 	 * Tests the number of CSV columns for dew point data.
+	 * 
+	 * @throws IOException Thrown if there is an I/O error in obtaining a writer
+	 *                     from the HTTP servlet response.
 	 */
 	@Test
 	public void testCSVDewPoint() throws IOException {
@@ -140,6 +149,9 @@ public class CSVControllerTests {
 
 	/**
 	 * Tests the number of CSV columns for fog data.
+	 * 
+	 * @throws IOException Thrown if there is an I/O error in obtaining a writer
+	 *                     from the HTTP servlet response.
 	 */
 	@Test
 	public void testCSVFog() throws IOException {
@@ -150,6 +162,9 @@ public class CSVControllerTests {
 
 	/**
 	 * Tests the number of CSV columns for humidity data.
+	 * 
+	 * @throws IOException Thrown if there is an I/O error in obtaining a writer
+	 *                     from the HTTP servlet response.
 	 */
 	@Test
 	public void testCSVHumidity() throws IOException {
@@ -160,6 +175,9 @@ public class CSVControllerTests {
 
 	/**
 	 * Tests the number of CSV columns for pressure data.
+	 * 
+	 * @throws IOException Thrown if there is an I/O error in obtaining a writer
+	 *                     from the HTTP servlet response.
 	 */
 	@Test
 	public void testCSVPressure() throws IOException {
@@ -170,6 +188,9 @@ public class CSVControllerTests {
 
 	/**
 	 * Tests the number of CSV columns for temperature data.
+	 * 
+	 * @throws IOException Thrown if there is an I/O error in obtaining a writer
+	 *                     from the HTTP servlet response.
 	 */
 	@Test
 	public void testCSVTemperature() throws IOException {
@@ -181,6 +202,9 @@ public class CSVControllerTests {
 
 	/**
 	 * Tests the number of CSV columns for wind direction data.
+	 * 
+	 * @throws IOException Thrown if there is an I/O error in obtaining a writer
+	 *                     from the HTTP servlet response.
 	 */
 	@Test
 	public void testCSVWindDirection() throws IOException {
@@ -192,6 +216,9 @@ public class CSVControllerTests {
 
 	/**
 	 * Tests the number of CSV columns for wind speed data.
+	 * 
+	 * @throws IOException Thrown if there is an I/O error in obtaining a writer
+	 *                     from the HTTP servlet response.
 	 */
 	@Test
 	public void testCSVWindSpeed() throws IOException {

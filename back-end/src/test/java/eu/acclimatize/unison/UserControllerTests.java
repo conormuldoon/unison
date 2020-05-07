@@ -7,10 +7,14 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.boot.test.context.SpringBootTest.WebEnvironment;
+import org.springframework.boot.test.web.client.TestRestTemplate;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.security.test.context.support.WithMockUser;
 import org.springframework.test.context.junit4.SpringRunner;
 
-import eu.acclimatize.unison.user.AddUserController;
-import eu.acclimatize.unison.user.UpdatePasswordController;
+import eu.acclimatize.unison.user.UserController;
 import eu.acclimatize.unison.user.UserInformation;
 import eu.acclimatize.unison.user.UserRepository;
 
@@ -20,28 +24,28 @@ import eu.acclimatize.unison.user.UserRepository;
  *
  */
 @RunWith(SpringRunner.class)
-@SpringBootTest
+@SpringBootTest(webEnvironment = WebEnvironment.RANDOM_PORT)
 public class UserControllerTests {
 
-	private static final String NEW_USERNAME = "bob";
+	private static final String SECOND_PASSWORD = "pwd2";
 
 	@Autowired
-	private AddUserController addUserController;
-
-	@Autowired
-	private UpdatePasswordController updatePasswordController;
+	private UserController userController;
 
 	@Autowired
 	private UserRepository userRepository;
+
+	@Autowired
+	private TestRestTemplate template;
 
 	/**
 	 * Adds an initial user.
 	 */
 	@Before
 	public void addInitialUser() {
-		
+
 		TestUtility.saveUserData(userRepository);
-		
+
 	}
 
 	/**
@@ -49,17 +53,19 @@ public class UserControllerTests {
 	 */
 	@After
 	public void clearData() {
-		
+
 		TestUtility.deleteUserData(userRepository);
-		
+
 	}
 
 	/**
 	 * Tests the controller for adding new users.
 	 */
+	@WithMockUser(username = TestConstant.USERNAME)
 	@Test
 	public void addUser() {
-		addUserController.addUser(TestConstant.USERNAME, TestConstant.PASSWORD, NEW_USERNAME, "bobspassword");
+
+		userController.addUser(new UserInformation(TestConstant.OTHER_USERNAME, TestConstant.OTHER_USER_PASSWORD));
 
 		Assert.assertEquals(2, userRepository.count());
 	}
@@ -67,12 +73,21 @@ public class UserControllerTests {
 	/**
 	 * Tests that a pre-existing user will not be added.
 	 */
+	@WithMockUser(username = TestConstant.USERNAME)
 	@Test
 	public void existingUser() {
 
-		userRepository.save(new UserInformation(NEW_USERNAME, "bobsEncodedPassword"));
-		int res = addUserController.addUser(TestConstant.USERNAME, TestConstant.PASSWORD, NEW_USERNAME, "");
-		Assert.assertEquals(ResponseConstant.FAIL, res);
+		TestUtility.addUserInformation(TestConstant.OTHER_USERNAME, TestConstant.OTHER_USER_PASSWORD, userRepository);
+
+		int result = userController
+				.addUser(new UserInformation(TestConstant.OTHER_USERNAME, TestConstant.OTHER_USER_PASSWORD));
+		Assert.assertEquals(ResponseConstant.FAILURE, result);
+	}
+
+	private void testStatus(TestRestTemplate templateWBA, HttpStatus expectedStatus, String password) {
+		ResponseEntity<Void> result = templateWBA.postForEntity(Constant.UPDATE_PASSWORD_MAPPING, password,
+				Void.class);
+		Assert.assertEquals(expectedStatus, result.getStatusCode());
 	}
 
 	/**
@@ -80,10 +95,18 @@ public class UserControllerTests {
 	 */
 	@Test
 	public void updatePassword() {
-		Assert.assertEquals(ResponseConstant.SUCCESS,
-				updatePasswordController.updatePassword(TestConstant.USERNAME, TestConstant.PASSWORD, "pwd2"));
-		Assert.assertEquals(ResponseConstant.INCORRECT_CREDENTIALS,
-				updatePasswordController.updatePassword(TestConstant.USERNAME, TestConstant.PASSWORD, "pwd2"));
+
+		// Tests that the current password works and updates the current password to be
+		// the second password.
+		TestRestTemplate templateWBA = template.withBasicAuth(TestConstant.USERNAME, TestConstant.PASSWORD);
+		testStatus(templateWBA, HttpStatus.OK, SECOND_PASSWORD);
+
+		// Tests that original password does not work.
+		testStatus(templateWBA, HttpStatus.UNAUTHORIZED, null);
+
+		// Tests that the second password works and updates the current password to be
+		templateWBA = template.withBasicAuth(TestConstant.USERNAME, SECOND_PASSWORD);
+		testStatus(templateWBA, HttpStatus.OK, TestConstant.PASSWORD);
 
 	}
 

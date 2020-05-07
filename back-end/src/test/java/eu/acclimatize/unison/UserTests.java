@@ -16,6 +16,8 @@ import org.hibernate.Transaction;
 import org.hibernate.cfg.Configuration;
 import org.junit.Test;
 import org.mockito.Mockito;
+import org.springframework.boot.context.event.ApplicationReadyEvent;
+import org.springframework.context.ApplicationListener;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
 import eu.acclimatize.unison.user.CredentialsRequester;
@@ -25,34 +27,13 @@ import eu.acclimatize.unison.user.UserRepository;
 import eu.acclimatize.unison.user.UserService;
 
 /**
- * Unit tests for the user package.
+ * Non-controller unit tests for the user package.
  */
 public class UserTests {
 
-	/**
-	 * Tests that the password encoder is invoked by the credentials requester.
-	 * 
-	 * @throws IOException Thrown if there is a problem closing a buffered reader or
-	 *                     requesting user information.
-	 */
-	@Test
-	public void testRequestData() throws IOException {
-
-		BCryptPasswordEncoder mockEncoder = Mockito.mock(BCryptPasswordEncoder.class);
-
-		ByteArrayInputStream bais = mockInputStream();
-		BufferedReader br = new BufferedReader(new InputStreamReader(bais));
-		PrintWriter mockWriter = Mockito.mock(PrintWriter.class);
-		CredentialsRequester requester = new CredentialsRequester(mockWriter, br, mockEncoder, new SecureRandom());
-		requester.requestUserInformation();
-		br.close();
-
-		Mockito.verify(mockEncoder, Mockito.times(1)).encode(Mockito.anyString());
-
-	}
-
 	private ByteArrayInputStream mockInputStream() {
-		return new ByteArrayInputStream("conor\ny\n".getBytes());
+
+		return new ByteArrayInputStream((TestConstant.USERNAME + "\ny\n").getBytes());
 
 	}
 
@@ -64,15 +45,15 @@ public class UserTests {
 		UserRepository userRepository = Mockito.mock(UserRepository.class);
 
 		Executor executor = Mockito.mock(Executor.class);
-		UserService userService = new UserService(userRepository, null, null, true, null, null, executor);
-
-		userService.initialUser();
+		ApplicationListener<ApplicationReadyEvent> applicationListener = new UserService(userRepository, null, true,
+				null, null, executor, null);
+		applicationListener.onApplicationEvent(null);
 		Mockito.verify(executor, Mockito.times(1)).execute(Mockito.any(Runnable.class));
 
 	}
 
 	/**
-	 * Test that the initial user credentials are save in the user repository.
+	 * Test that the initial user credentials are saved in the user repository.
 	 */
 	@Test
 	public void testInitiaUser() {
@@ -87,10 +68,11 @@ public class UserTests {
 		};
 
 		UserRepository userRepository = Mockito.mock(UserRepository.class);
-		BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
-		UserService userService = new UserService(userRepository, null, passwordEncoder, true, null, null, executor);
+
+		ApplicationListener<ApplicationReadyEvent> applicationListener = new UserService(userRepository, null, true,
+				null, null, executor, new BCryptPasswordEncoder());
 		System.setIn(mockInputStream());
-		userService.initialUser();
+		applicationListener.onApplicationEvent(null);
 		Mockito.verify(userRepository, Mockito.times(1)).save(Mockito.any(UserInformation.class));
 	}
 
@@ -99,7 +81,7 @@ public class UserTests {
 	 */
 	@Test
 	public void testRandDiff() {
-		CredentialsRequester requester = new CredentialsRequester(null, null, null, new SecureRandom());
+		CredentialsRequester requester = new CredentialsRequester(null, null, new SecureRandom());
 
 		String r0 = requester.randomPassword();
 		String r1 = requester.randomPassword();
@@ -108,7 +90,8 @@ public class UserTests {
 	}
 
 	/**
-	 * Tests that user data is committed using a transaction.
+	 * Tests that that the password encoder is invoked and that user data is
+	 * committed using a transaction.
 	 * 
 	 * @throws IOException Thrown if there is a problem closing a buffered reader or
 	 *                     requesting user information.
@@ -128,11 +111,13 @@ public class UserTests {
 		ByteArrayInputStream bais = mockInputStream();
 		BufferedReader br = new BufferedReader(new InputStreamReader(bais));
 		PrintWriter mockWriter = Mockito.mock(PrintWriter.class);
-		CredentialsRequester requester = new CredentialsRequester(mockWriter, br, mockEncoder, new SecureRandom());
-		UserHibernateStore uhs = new UserHibernateStore(requester, null);
+		CredentialsRequester requester = new CredentialsRequester(mockWriter, br, new SecureRandom());
+		UserHibernateStore uhs = new UserHibernateStore(requester, mockEncoder, null);
 		uhs.hideInfoLogs();
 		uhs.execute(configuration);
 		br.close();
+
+		Mockito.verify(mockEncoder, Mockito.times(1)).encode(Mockito.anyString());
 
 		Mockito.verify(transaction, Mockito.times(1)).commit();
 	}

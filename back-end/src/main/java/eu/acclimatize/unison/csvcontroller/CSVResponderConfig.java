@@ -6,6 +6,7 @@ import java.util.Date;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
+import eu.acclimatize.unison.Constant;
 import eu.acclimatize.unison.ItemListFinder;
 import eu.acclimatize.unison.result.CloudLevelResult;
 import eu.acclimatize.unison.result.CloudinessResult;
@@ -41,7 +42,7 @@ public class CSVResponderConfig {
 						|| ft.equals(Double.class) || ft.equals(String.class)) {
 					String value = csvProperty.value();
 
-					if (value.equals(""))
+					if (value.equals(Constant.CSV_HEADER_DEFAULT))
 						sb.append(f.getName());
 					else
 						sb.append(value);

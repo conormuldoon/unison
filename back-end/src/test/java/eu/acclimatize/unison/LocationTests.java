@@ -11,19 +11,22 @@ import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.locationtech.jts.geom.Coordinate;
 import org.locationtech.jts.geom.GeometryFactory;
-import org.locationtech.jts.io.ParseException;
 import org.mockito.Mockito;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.boot.test.context.SpringBootTest.WebEnvironment;
+import org.springframework.boot.test.web.client.TestRestTemplate;
 import org.springframework.data.domain.Sort;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.test.context.junit4.SpringRunner;
+import org.springframework.web.util.UriComponentsBuilder;
 
 import com.fasterxml.jackson.core.JsonFactory;
 import com.fasterxml.jackson.core.JsonGenerator;
 
-import eu.acclimatize.unison.harvester.HarvesterService;
 import eu.acclimatize.unison.location.AddLocationController;
 import eu.acclimatize.unison.location.DeleteLocationController;
 import eu.acclimatize.unison.location.FeatureCollection;
@@ -32,18 +35,17 @@ import eu.acclimatize.unison.location.Location;
 import eu.acclimatize.unison.location.LocationConfig;
 import eu.acclimatize.unison.location.LocationController;
 import eu.acclimatize.unison.location.LocationRepository;
-import eu.acclimatize.unison.location.LocationRequestException;
-import eu.acclimatize.unison.user.UserInformation;
 import eu.acclimatize.unison.user.UserRepository;
-import eu.acclimatize.unison.user.UserService;
 
+/**
+ * Tests for the controllers in the {@link eu.acclimatize.unison.location}
+ * package.
+ *
+ */
 @RunWith(SpringRunner.class)
-@SpringBootTest(classes = { UnisonServerApplication.class, LocationConfig.class })
-
+@SpringBootTest(classes = { UnisonServerApplication.class,
+		LocationConfig.class }, webEnvironment = WebEnvironment.RANDOM_PORT)
 public class LocationTests {
-
-	@Autowired
-	private UserService userService;
 
 	@Autowired
 	private LocationRepository locationRepository;
@@ -51,8 +53,11 @@ public class LocationTests {
 	@Autowired
 	private UserRepository userRepository;
 
+	@Autowired
+	private TestRestTemplate template;
+
 	/**
-	 * Add initial data to the database.
+	 * Adds an initial user and location to the database.
 	 */
 	@Before
 	public void addData() {
@@ -62,18 +67,11 @@ public class LocationTests {
 	}
 
 	/**
-	 * Removes data from the database.
+	 * Removes all data from the location and user repositories.
 	 */
 	@After
 	public void clearData() {
 		TestUtility.deleteLocationData(locationRepository, userRepository);
-	}
-
-	private UserInformation addUser(String userName, String password) {
-		BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
-		UserInformation userInfo = new UserInformation(userName, passwordEncoder.encode(password));
-		userRepository.save(userInfo);
-		return userInfo;
 	}
 
 	/**
@@ -83,82 +81,81 @@ public class LocationTests {
 	@Test
 	public void locationAlreadyExists() {
 
-		AddLocationController controller = new AddLocationController(locationRepository, userService, null, null, null);
-		Assert.assertEquals(ResponseConstant.FAIL,
-				controller.addLocation(TestConstant.LOCATION, TestConstant.USERNAME, TestConstant.PASSWORD, 0, 0));
+		AddLocationController controller = new AddLocationController(locationRepository, userRepository, null, null,
+				null);
+		Assert.assertEquals(ResponseConstant.FAILURE,
+				controller.addLocation(new Location(TestConstant.LOCATION, null, null)));
 
 	}
 
 	/**
-	 * Tests that a response constant of incorrect credentials is returned if
-	 * incorrect password is provided.
+	 * Test that a location is added if the request is made by an authenticated user
+	 * and the location is not present.
+	 * 
 	 */
 	@Test
-	public void invalidUser() {
+	public void validUser() {
 
-		AddLocationController controller = new AddLocationController(locationRepository, userService, null, null, null);
-		Assert.assertEquals(ResponseConstant.INCORRECT_CREDENTIALS,
-				controller.addLocation(TestConstant.LOCATION, TestConstant.USERNAME, "abc", 0, 0));
-	}
+		Location location = new Location("New Location", null, new GeometryFactory().createPoint(new Coordinate(0, 0)));
 
-	/**
-	 * Test that a success response constant is obtained when a new location is
-	 * added by a valid user.
-	 */
-	@Test
-	public void validUser() throws LocationRequestException {
+		TestRestTemplate templateWBA = template.withBasicAuth(TestConstant.USERNAME, TestConstant.PASSWORD);
+		ResponseEntity<String> result = templateWBA.postForEntity(Constant.ADD_LOCATION_MAPPING, location,
+				String.class);
 
-		HarvesterService hs = Mockito.mock(HarvesterService.class);
-
-		Mockito.when(hs.fetchAndStore(Mockito.any(Location.class))).thenReturn(true);
-
-		AddLocationController controller = new AddLocationController(locationRepository, userService, hs, null,
-				new GeometryFactory());
-		Assert.assertEquals(ResponseConstant.SUCCESS,
-				controller.addLocation("newLocation", TestConstant.USERNAME, TestConstant.PASSWORD, 0, 0));
+		Assert.assertEquals(HttpStatus.OK, result.getStatusCode());
 
 	}
 
 	/**
-	 * Tests that fail response constant obtained if the location is not present and
-	 * request made by a valid user.
+	 * Tests that a {@value eu.acclimatize.unison.ResponseConstant#FAILURE} response
+	 * constant is obtained if the location is not present and request made by a
+	 * valid user.
 	 */
 	@Test
 	public void locationNotPresentValidUser() {
 
-		DeleteLocationController controller = new DeleteLocationController(locationRepository, null, null, userService);
-		Assert.assertEquals(ResponseConstant.FAIL,
-				controller.deleteLocation("otherLocation", TestConstant.USERNAME, TestConstant.PASSWORD));
+		DeleteLocationController controller = new DeleteLocationController(locationRepository, null);
+		Assert.assertEquals(ResponseConstant.FAILURE, controller.deleteLocation("Other Location"));
 	}
 
-	// Test when user does not exist
-	@Test
-	public void invalidLocationOwner() {
+	private void testDelete(String userName, String password, int expectedCount) {
+		TestRestTemplate templateWBA = template.withBasicAuth(userName, password);
 
-		DeleteLocationController controller = new DeleteLocationController(locationRepository, null, null, userService);
-		Assert.assertEquals(ResponseConstant.INCORRECT_CREDENTIALS,
-				controller.deleteLocation(TestConstant.LOCATION, "otherUser", null));
-	}
+		UriComponentsBuilder builder = UriComponentsBuilder.fromUriString(Constant.DELETE_LOCATION_MAPPING);
+		builder.queryParam(Constant.LOCATION, TestConstant.LOCATION);
 
-	// Testing delete when user exists, but other user added location
-	@Test
-	public void otherUserAddedLocation() {
-
-		String ou = "otherUser";
-		String op = "otherPassword";
-		addUser(ou, op);
-
-		DeleteLocationController controller = new DeleteLocationController(locationRepository, null, null, userService);
-		Assert.assertEquals(ResponseConstant.NOT_OWNER, controller.deleteLocation(TestConstant.LOCATION, ou, op));
+		templateWBA.delete(builder.build().toUri());
+		Assert.assertEquals(expectedCount, locationRepository.count());
 
 	}
 
 	/**
-	 * Tests that the length of the list returned by the location controller is
-	 * equal to 1 if only 1 location has been added.
+	 * Tests an authenticated user that added a location can delete the location.
+	 */
+	@Test
+	public void deleteValidUser() {
+
+		testDelete(TestConstant.USERNAME, TestConstant.PASSWORD, 0);
+
+	}
+
+	/**
+	 * Tests an authenticated user that didn't add a location can't delete the
+	 * location.
+	 */
+	@Test
+	public void deleteOtherUser() {
+
+		TestUtility.addUserInformation(TestConstant.OTHER_USERNAME, TestConstant.OTHER_USER_PASSWORD, userRepository);
+
+		testDelete(TestConstant.OTHER_USERNAME, TestConstant.OTHER_USER_PASSWORD, 1);
+	}
+
+	/**
+	 * Tests that the number of features in the GeoJson produced by the location
+	 * controller is equal to 1 if only 1 location has been added.
 	 * 
-	 * @throws IOException
-	 * @throws ParseException
+	 * @throws IOException Thrown by the JSON generator if there is an I/O error.
 	 **/
 	@Test
 	public void testLocationList() throws IOException {
@@ -169,12 +166,17 @@ public class LocationTests {
 		FeatureCollection fc = locationController.location();
 
 		JsonGenerator jg = Mockito.mock(JsonGenerator.class);
-		fc.geoJsonSerialize(jg);
+		fc.geoJSONSerialize(jg);
 		Mockito.verify(jg, Mockito.times(1)).writeStringField("type", "Feature");
 
 	}
 
-	/** Tests the coordinates are serialized in a GeoJSON format correctly. **/
+	/**
+	 * Tests the coordinates are serialized in a GeoJSON format correctly.
+	 * 
+	 * @throws IOException Thrown by the JSON generator if there is an I/O error.
+	 **/
+
 	@Test
 	public void testSerialization() throws IOException {
 		Writer jsonWriter = new StringWriter();
@@ -182,7 +184,7 @@ public class LocationTests {
 
 		Location location = TestUtility.createLocation(TestConstant.LOCATION, null, TestConstant.LONGITUDE,
 				TestConstant.LATITUDE);
-		location.serialize(jsonGenerator);
+		location.geoJSONSerialize(jsonGenerator);
 
 		jsonGenerator.flush();
 
@@ -194,9 +196,12 @@ public class LocationTests {
 
 	/**
 	 * Tests that a feature collection is serialized in a GeoJSON format correctly.
+	 * 
+	 * * @throws IOException Thrown by the JSON generator if there is an I/O error.
+	 * 
 	 **/
 	@Test
-	public void testFCSerialization() throws IOException, ParseException {
+	public void testFCSerialization() throws IOException {
 
 		FeatureCollection featureCollection = new FeatureCollection(new ArrayList<Location>());
 		FeatureCollectionSerializer fcs = new FeatureCollectionSerializer();
@@ -213,9 +218,11 @@ public class LocationTests {
 
 	/**
 	 * Tests that a list of features is serialized in a GeoJSON format correctly.
-	 **/
+	 * 
+	 * @throws IOException Thrown by the JSON generator if there is an I/O error.
+	 */
 	@Test
-	public void testFCArraySerialization() throws IOException, ParseException {
+	public void testFCArraySerialization() throws IOException {
 
 		List<Location> list = new ArrayList<>();
 

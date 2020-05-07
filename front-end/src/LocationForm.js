@@ -3,6 +3,9 @@ import PropTypes from 'prop-types';
 import React, { useState } from 'react';
 import './App.css';
 import { API } from './Constant';
+import { problemConnecting } from './Util';
+import HttpStatus from 'http-status-codes';
+import { SUCCESS, FAILURE } from './ResponseConstant';
 import { locationPostObject } from './Util';
 
 
@@ -19,9 +22,6 @@ function LocationForm(props) {
   const [location, setLocation] = useState('');
   const [lon, setLon] = useState('');
   const [lat, setLat] = useState('');
-  const [uname, setUName] = useState('');
-  const [pword, setPWord] = useState('');
-
 
   function handleLoc(event) {
     setLocation(event.target.value);
@@ -37,13 +37,40 @@ function LocationForm(props) {
 
   }
 
-  function handleUN(event) {
-    setUName(event.target.value);
+  function updateDisplay() {
+    setLocation('');
+    setLon('');
+    setLat('');
+    props.hideDisplay();
+    props.obtainData();
   }
 
-  function handlePassw(event) {
-    setPWord(event.target.value);
+  async function postData() {
+
+    const response = await fetch(API + '/addLocation',
+      locationPostObject(location, lon, lat));
+
+    if (response.ok) {
+      const resVal = await response.json();
+
+      if (resVal === SUCCESS) {
+        alert(location + ' added');
+        updateDisplay();
+
+      }
+      else if (resVal === FAILURE) {
+        alert(location + ' already exists');
+      } else {
+        alert(location + ' added, but did not obtain weather data.')
+        updateDisplay();
+      }
+    } else if (response.status === HttpStatus.UNAUTHORIZED) {
+      alert('Incorrect user name or password');
+    } else {
+      problemConnecting();
+    }
   }
+
 
   function handleSubmit(event) {
 
@@ -53,52 +80,11 @@ function LocationForm(props) {
 
   }
 
-  async function postData() {
-
-    const response = await fetch(API + '/addLocation',
-      locationPostObject(location, uname, pword, lon, lat));
-
-
-
-    if (response.ok) {
-      const resVal = await response.json();
-
-      if (resVal === 0) {
-        alert('Location already exists');
-      } else if (resVal === 1) {
-        alert(location + ' added');
-        updateDisplay();
-
-      } else if (resVal === 2) {
-        alert('Incorrect user name or password');
-      } else {
-        alert(location + ' added, but did not obtain weather data.')
-        updateDisplay();
-      }
-    } else {
-      alert('Problem connecting');
-    }
-
-  }
-
-
-
-  function updateDisplay() {
-    setLocation('');
-    setLon('');
-    setLat('');
-    setUName('');
-    setPWord('');
-    props.hideDisplay();
-    props.obtainData();
-  }
-
 
   let text = 'Add Location';
   if (props.display) {
     text = 'Hide';
   }
-
 
 
   return (<div id='pLeft'>
@@ -118,16 +104,6 @@ function LocationForm(props) {
       <br />
       <label>
         Latitude: <input type="number" step="any" name="lat" value={lat} onChange={handleLat} required />
-      </label>
-      <br />
-      <br />
-      <label>
-        Username: <input type="text" name="un" onChange={handleUN} value={uname} required />
-      </label>
-      <br />
-      <br />
-      <label>
-        Password: <input type="password" name="passwd" onChange={handlePassw} value={pword} required />
       </label>
       <br />
       <br />

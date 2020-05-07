@@ -66,6 +66,9 @@ public class CSVPrecipitationTests {
 	/**
 	 * Tests the number of CSV columns for precipitation data when min and max
 	 * values are not null.
+	 * 
+	 * @throws IOException Thrown if there is an I/O error in obtaining a writer
+	 *                     from the HTTP servlet response.
 	 */
 	@Test
 	public void testCSVPrecipMultiple() throws IOException {
@@ -79,6 +82,8 @@ public class CSVPrecipitationTests {
 	/**
 	 * Tests the values of -1.0 are provided for min and max values for
 	 * precipitation data when the min and max values are null.
+	 * 
+	 * @throws IOException Thrown if there is an I/O error in obtaining a writer from the HTTP servlet response.
 	 */
 	@Test
 	public void testCSVPrecipSingle() throws IOException {

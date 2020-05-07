@@ -24,7 +24,7 @@ public class ItemListFinder {
 	 * Creates an instance of ItemListFinder.
 	 * 
 	 * @param entityManager The JPA entity manager.
-	 * @param query The query to be executed.
+	 * @param query         The query to be executed.
 	 */
 	public ItemListFinder(EntityManager entityManager, String query) {
 		this.entityManager = entityManager;
@@ -37,7 +37,7 @@ public class ItemListFinder {
 	 * 
 	 * @param location The location of the weather or precipitation value.
 	 * @param fromDate The start date (inclusive) for the query.
-	 * @param toDate The end date (inclusive) for the query.
+	 * @param toDate   The end date (inclusive) for the query.
 	 * @return The list of items that match the query parameters.
 	 */
 	public List<HarmonieItem> find(String location, Date fromDate, Date toDate) {

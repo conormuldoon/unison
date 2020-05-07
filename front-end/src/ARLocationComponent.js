@@ -2,7 +2,7 @@ import PropTypes from 'prop-types';
 import React, { useState } from 'react';
 import './App.css';
 import LocationForm from './LocationForm';
-import RemoveForm from './RemoveForm';
+import RemoveComponent from './RemoveComponent';
 
 
 
@@ -17,32 +17,15 @@ import RemoveForm from './RemoveForm';
 function ARLocationComponent(props) {
 
   const [displayAdd, setDisplayAdd] = useState(false);
-  const [displayRemove, setDisplayRemove] = useState(false);
 
   function toggleDisplayAdd() {
-    if (displayRemove && !displayAdd) {
-      setDisplayAdd(true);
-      setDisplayRemove(false);
-    } else {
-      setDisplayAdd(!displayAdd);
-    }
-  }
 
-  function toggleDisplayRemove() {
-    if (displayAdd && !displayRemove) {
-      setDisplayAdd(false);
-      setDisplayRemove(true);
-    } else {
-      setDisplayRemove(!displayRemove);
-    }
+    setDisplayAdd(!displayAdd);
   }
 
   function hideAdd() {
-    setDisplayAdd(false);
-  }
-
-  function hideRemove() {
-    setDisplayRemove(false);
+    if (displayAdd)
+      setDisplayAdd(false);
   }
 
   return (
@@ -52,7 +35,7 @@ function ARLocationComponent(props) {
 
       </div>
       {props.location && <div className='pLeft'>
-        <RemoveForm obtainData={props.obtainData} toggleDisplay={toggleDisplayRemove} display={displayRemove} hideDisplay={hideRemove} location={props.location} />
+        <RemoveComponent obtainData={props.obtainData} hideDisplay={hideAdd} location={props.location} />
       </div>}
     </div>
   );

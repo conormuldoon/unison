@@ -5,32 +5,37 @@ import java.io.Serializable;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.core.userdetails.User;
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.crypto.password.PasswordEncoder;
+
+import eu.acclimatize.unison.location.LocationService;
 
 /**
  * 
- * An entity class user to store user crediatial information in the data base.
+ * An entity class user to store user credential information in the data base.
  *
  */
 @Entity
 public class UserInformation implements Serializable {
 
+	private static final String ROLL = "USER";
 	private static final long serialVersionUID = -6566767228133005900L;
 
 	@Id
 	private String userName;
 
-	private String passwordBCrypt;
+	private String password;
 
 	/**
 	 * Creates an instance of UserInformation.
 	 * 
-	 * @param userName       The name of the user.
-	 * @param passwordBCrypt An encoded password.
+	 * @param userName The name of the user.
+	 * @param password The password of the user.
 	 */
-	public UserInformation(String userName, String passwordBCrypt) {
+	public UserInformation(String userName, String password) {
 		this.userName = userName;
-		this.passwordBCrypt = passwordBCrypt;
+		this.password = password;
 	}
 
 	/**
@@ -41,45 +46,43 @@ public class UserInformation implements Serializable {
 	}
 
 	/**
-	 * Checks whether the given password matches the stored encoded password.
+	 * Checks if the user information exists in the user repository.
 	 * 
-	 * @param password        The password to check.
-	 * @param passwordEncoder The encoder to perform the check.
-	 * @return True if the password matches and false otherwise.
+	 * @param userRepository The repository to check.
+	 * @return True if the user information is stored in the repository or false
+	 *         otherwise.
 	 */
-	public boolean passwordMatches(String password, BCryptPasswordEncoder passwordEncoder) {
-		return passwordEncoder.matches(password, passwordBCrypt);
+	public boolean existIn(UserRepository userRepository) {
+		return userRepository.existsById(userName);
 	}
 
-	@Override
-	public int hashCode() {
-		final int prime = 31;
-		int result = 1;
-		result = prime * result + ((passwordBCrypt == null) ? 0 : passwordBCrypt.hashCode());
-		result = prime * result + ((userName == null) ? 0 : userName.hashCode());
-		return result;
+	/**
+	 * Encrypts the user's password.
+	 * 
+	 * @param passwordEncoder The encoder used to encrypt the password.
+	 */
+	public void encodePassword(PasswordEncoder passwordEncoder) {
+		password = passwordEncoder.encode(password);
 	}
 
-	@Override
-	public boolean equals(Object obj) {
-		if (this == obj)
-			return true;
-		if (obj == null)
-			return false;
-		if (getClass() != obj.getClass())
-			return false;
-		UserInformation other = (UserInformation) obj;
-		if (passwordBCrypt == null) {
-			if (other.passwordBCrypt != null)
-				return false;
-		} else if (!passwordBCrypt.equals(other.passwordBCrypt))
-			return false;
-		if (userName == null) {
-			if (other.userName != null)
-				return false;
-		} else if (!userName.equals(other.userName))
-			return false;
-		return true;
+	/**
+	 * Creates a Spring Security user, which is required for authentication.
+	 * 
+	 * @return The user created.
+	 */
+	public UserDetails buildUser() {
+
+		return User.withUsername(userName).password(password).authorities(ROLL).build();
+	}
+
+	/**
+	 * Deletes the location and associated harvested data.
+	 * 
+	 * @param locationName    The name of the location to delete.
+	 * @param locationService The location service used to delete the data.
+	 */
+	public void deleteLocation(String locationName, LocationService locationService) {
+		locationService.delete(locationName, userName);
 	}
 
 }

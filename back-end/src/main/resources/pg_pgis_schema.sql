@@ -36,7 +36,7 @@
     
     create table UserInformation (
        userName varchar(255) not null,
-        passwordBCrypt varchar(255),
+        password varchar(255),
         primary key (userName)
     );
     

@@ -7,8 +7,10 @@ package eu.acclimatize.unison;
  */
 public class Constant {
 
-	// A private constructor to prevent constant from being instantiated by other
-	// classes.
+	/**
+	 * A private constructor to prevent constant from being instantiated by other
+	 * classes.
+	 */
 	private Constant() {
 
 	}
@@ -77,12 +79,41 @@ public class Constant {
 	 * The Celsius symbol used in CSV headers.
 	 */
 	public static final String CELSIUS_SYMBOL = "(°C)";
-	
-	
+
+	/**
+	 * The default used by
+	 * {@link eu.acclimatize.unison.csvcontroller.CSVHeaderItem}.
+	 */
+	public static final String CSV_HEADER_DEFAULT = "";
+
 	/**
 	 * The GeoJSON type field name.
 	 */
 	public static final String TYPE = "type";
+
+	/**
+	 * The post mapping for adding a location.
+	 */
+	public static final String ADD_LOCATION_MAPPING = "/addLocation";
+
+	/**
+	 * The post mapping for deleting a location.
+	 */
+	public static final String DELETE_LOCATION_MAPPING = "/deleteLocation";
+
+	/**
+	 * The post mapping for adding a user.
+	 */
+	public static final String ADD_USER_MAPPING = "/addUser";
+
+	/**
+	 * The post mapping for updating a password.
+	 */
+	public static final String UPDATE_PASSWORD_MAPPING = "/updatePassword";
 	
+	/**
+	 * The date format used by a HARMONIE-AROME API.
+	 */
+	public static final String HARMONIE_DATE_FORMAT = "yyyy-MM-dd'T'KK:mm:ss'Z'";
 
 }

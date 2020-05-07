@@ -16,3 +16,4 @@ export const CL = "Cloud Level";
 export const VAR_OPT = [PRECIP, 'Humidity', 'Wind Direction', 'Wind Speed', 'Cloudiness', CL, 'Dew Point', 'Pressure', 'Temperature'];
 
 
+
