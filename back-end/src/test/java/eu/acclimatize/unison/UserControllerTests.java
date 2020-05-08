@@ -11,7 +11,6 @@ import org.springframework.boot.test.context.SpringBootTest.WebEnvironment;
 import org.springframework.boot.test.web.client.TestRestTemplate;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.security.test.context.support.WithMockUser;
 import org.springframework.test.context.junit4.SpringRunner;
 
 import eu.acclimatize.unison.user.AddUserController;
@@ -61,7 +60,6 @@ public class UserControllerTests {
 	/**
 	 * Tests the controller for adding new users.
 	 */
-	@WithMockUser(username = TestConstant.USERNAME)
 	@Test
 	public void addUser() {
 
@@ -74,14 +72,12 @@ public class UserControllerTests {
 	/**
 	 * Tests that a pre-existing user will not be added.
 	 */
-	@WithMockUser(username = TestConstant.USERNAME)
 	@Test
 	public void existingUser() {
 
 		TestUtility.addUserInformation(TestConstant.OTHER_USERNAME, TestConstant.OTHER_USER_PASSWORD, userRepository);
 
-		int result = userController
-				.addUser(new UserInformation(TestConstant.OTHER_USERNAME, TestConstant.OTHER_USER_PASSWORD));
+		int result = userController.addUser(new UserInformation(TestConstant.OTHER_USERNAME, null));
 		Assert.assertEquals(ResponseConstant.FAILURE, result);
 	}
 

@@ -23,7 +23,7 @@ public class CSVFogController {
 	private CSVResponder fogResponder;
 	
 
-	private static final String CSV_FOG = "/csvFog*";
+	private static final String CSV_FOG = "/csvFog";
 
 	/**
 	 * Creates an instance of CSVFogController.

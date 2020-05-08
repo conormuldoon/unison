@@ -56,6 +56,36 @@ public class UserTests {
 		Mockito.verify(mockEncoder, Mockito.times(1)).encode(Mockito.anyString());
 
 	}
+	
+	/**
+	 * Tests that user data is committed using a transaction.
+	 * 
+	 * @throws IOException Thrown if there is a problem closing a buffered reader or
+	 *                     requesting user information.
+	 */
+	@Test
+	public void testUserHibernateStore() throws IOException {
+
+		Configuration configuration = Mockito.mock(Configuration.class);
+		SessionFactory factory = Mockito.mock(SessionFactory.class);
+		Mockito.when(configuration.buildSessionFactory()).thenReturn(factory);
+		Session session = Mockito.mock(Session.class);
+		Mockito.when(factory.openSession()).thenReturn(session);
+		Transaction transaction = Mockito.mock(Transaction.class);
+		Mockito.when(session.getTransaction()).thenReturn(transaction);
+
+		BCryptPasswordEncoder mockEncoder = Mockito.mock(BCryptPasswordEncoder.class);
+		ByteArrayInputStream bais = mockInputStream();
+		BufferedReader br = new BufferedReader(new InputStreamReader(bais));
+		PrintWriter mockWriter = Mockito.mock(PrintWriter.class);
+		CredentialsRequester requester = new CredentialsRequester(mockWriter, br, mockEncoder, new SecureRandom());
+		UserHibernateStore uhs = new UserHibernateStore(requester, null);
+		uhs.hideInfoLogs();
+		uhs.execute(configuration);
+		br.close();
+
+		Mockito.verify(transaction, Mockito.times(1)).commit();
+	}
 
 	/**
 	 * Tests that a runnable task is passed to the executor.
@@ -107,36 +137,6 @@ public class UserTests {
 		String r1 = requester.randomPassword();
 
 		assertNotSame(r0, r1);
-	}
-
-	/**
-	 * Tests that user data is committed using a transaction.
-	 * 
-	 * @throws IOException Thrown if there is a problem closing a buffered reader or
-	 *                     requesting user information.
-	 */
-	@Test
-	public void testUserHibernateStore() throws IOException {
-
-		Configuration configuration = Mockito.mock(Configuration.class);
-		SessionFactory factory = Mockito.mock(SessionFactory.class);
-		Mockito.when(configuration.buildSessionFactory()).thenReturn(factory);
-		Session session = Mockito.mock(Session.class);
-		Mockito.when(factory.openSession()).thenReturn(session);
-		Transaction transaction = Mockito.mock(Transaction.class);
-		Mockito.when(session.getTransaction()).thenReturn(transaction);
-
-		BCryptPasswordEncoder mockEncoder = Mockito.mock(BCryptPasswordEncoder.class);
-		ByteArrayInputStream bais = mockInputStream();
-		BufferedReader br = new BufferedReader(new InputStreamReader(bais));
-		PrintWriter mockWriter = Mockito.mock(PrintWriter.class);
-		CredentialsRequester requester = new CredentialsRequester(mockWriter, br, mockEncoder, new SecureRandom());
-		UserHibernateStore uhs = new UserHibernateStore(requester, null);
-		uhs.hideInfoLogs();
-		uhs.execute(configuration);
-		br.close();
-
-		Mockito.verify(transaction, Mockito.times(1)).commit();
 	}
 
 }

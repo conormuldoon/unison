@@ -22,7 +22,7 @@ public class CSVHumidityController {
 
 	private CSVResponder humidityResponder;
 
-	private static final String CSV_HUMIDITY = "/csvHumidity*";
+	private static final String CSV_HUMIDITY = "/csvHumidity";
 
 	/**
 	 * Creates an instance of CSVHumidityController.

@@ -36,7 +36,7 @@ function Unison(props) {
       if (response.ok) {
         const featureCollection = await response.json();
 
-        const locationArray=featureCollection.features;
+        const locationArray = featureCollection.features;
 
         if (active) {
           let n = locationArray.length;
@@ -56,7 +56,7 @@ function Unison(props) {
             setOption(newOption);
             setMarker(newMarker);
             setCurLoc(locationArray[0].properties.name);
-           
+
           } else {
             setOption(undefined);
             setMarker(undefined);
@@ -102,6 +102,13 @@ function Unison(props) {
 
     setToDate(formatDate(selectedDate, FORMAT));
 
+  }
+
+  const dashDate = (date) => {
+
+    console.log(typeof(date));
+    console.log(date);
+    return date.replace(/\//g, '-');
   }
 
 
@@ -167,7 +174,9 @@ function Unison(props) {
 
             </div>
 
-            <a className='pLeft' href={API + '/csv' + curVar.replace(/ /g, '') + '_' + Date.now() + '.csv?location=' + curLoc + '&fromDate=' + fromDate + '&toDate=' + toDate}>
+            <a download={curVar.replace(/ /g, '_') + '_' + dashDate(fromDate) + "_" + dashDate(toDate) + '.csv'}
+              className='pLeft'
+              href={API + '/csv' + curVar.replace(/ /g, '') + '?location=' + curLoc + '&fromDate=' + fromDate + '&toDate=' + toDate}>
 
               <button disabled={!curLoc} >
                 CSV

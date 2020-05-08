@@ -23,7 +23,7 @@ public class CSVCloudLevelController {
 
 	private CSVResponder cloudLevelResponder;
 
-	private static final String CSV_CLOUDLEVEL = "/csvCloudLevel*";
+	private static final String CSV_CLOUDLEVEL = "/csvCloudLevel";
 
 	/**
 	 * Creates an instance of CSVCloudLevelController.

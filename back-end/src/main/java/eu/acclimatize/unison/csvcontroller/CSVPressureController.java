@@ -22,7 +22,7 @@ public class CSVPressureController {
 
 	private CSVResponder pressureResponder;
 
-	private static final String CSV_PRESSURE = "/csvPressure*";
+	private static final String CSV_PRESSURE = "/csvPressure";
 
 	/**
 	 * Creates an instance of CSVPressureController.

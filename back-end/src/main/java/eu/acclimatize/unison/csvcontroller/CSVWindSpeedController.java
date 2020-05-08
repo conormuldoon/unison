@@ -21,7 +21,7 @@ import eu.acclimatize.unison.Constant;
 public class CSVWindSpeedController {
 
 	private CSVResponder windSpeedResponder;
-	private static final String WINSPEED = "/csvWindSpeed*";
+	private static final String WINSPEED = "/csvWindSpeed";
 
 	/**
 	 * Creates an instance of CSVWindSpeedController.
