@@ -35,10 +35,10 @@ public class UserConsole {
 		PrintWriter pw = new PrintWriter(System.out, true);
 		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
 		Logger logger = Logger.getLogger(UserConsole.class.getName());
-		CredentialsRequester credentialsRequester = new CredentialsRequester(pw, br, new SecureRandom());
+		CredentialsRequester credentialsRequester = new CredentialsRequester(pw, br,
+				new UnisonSecurityConfig(null).passwordEncoder(), new SecureRandom());
 
-		UserHibernateStore uhs = new UserHibernateStore(credentialsRequester,
-				new UnisonSecurityConfig(null).passwordEncoder(), logger);
+		UserHibernateStore uhs = new UserHibernateStore(credentialsRequester, logger);
 		System.out.println("Starting");
 
 		uhs.hideInfoLogs();

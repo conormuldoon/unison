@@ -7,7 +7,6 @@ import javax.persistence.Id;
 
 import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
-import org.springframework.security.crypto.password.PasswordEncoder;
 
 import eu.acclimatize.unison.location.LocationService;
 
@@ -25,17 +24,17 @@ public class UserInformation implements Serializable {
 	@Id
 	private String userName;
 
-	private String password;
+	private String encodedPassword;
 
 	/**
 	 * Creates an instance of UserInformation.
 	 * 
 	 * @param userName The name of the user.
-	 * @param password The password of the user.
+	 * @param encodedPassword The encoded password of the user.
 	 */
-	public UserInformation(String userName, String password) {
+	public UserInformation(String userName, String encodedPassword) {
 		this.userName = userName;
-		this.password = password;
+		this.encodedPassword = encodedPassword;
 	}
 
 	/**
@@ -57,22 +56,13 @@ public class UserInformation implements Serializable {
 	}
 
 	/**
-	 * Encrypts the user's password.
-	 * 
-	 * @param passwordEncoder The encoder used to encrypt the password.
-	 */
-	public void encodePassword(PasswordEncoder passwordEncoder) {
-		password = passwordEncoder.encode(password);
-	}
-
-	/**
 	 * Creates a Spring Security user, which is required for authentication.
 	 * 
 	 * @return The user created.
 	 */
 	public UserDetails buildUser() {
 
-		return User.withUsername(userName).password(password).authorities(ROLL).build();
+		return User.withUsername(userName).password(encodedPassword).authorities(ROLL).build();
 	}
 
 	/**

@@ -6,6 +6,8 @@ import java.io.PrintWriter;
 import java.security.SecureRandom;
 import java.util.Arrays;
 
+import org.springframework.security.crypto.password.PasswordEncoder;
+
 /**
  * 
  * A class that uses the console to request user credentials (user name and
@@ -19,19 +21,23 @@ public class CredentialsRequester {
 
 	private PrintWriter writer;
 	private BufferedReader reader;
+	private PasswordEncoder passwordEncoder;
 	private SecureRandom random;
 
 	/**
 	 * Creates and instance of CredentialsRequester.
 	 * 
-	 * @param writer Used to display information to the user.
-	 * @param reader Used to request data from the user.
-	 * @param random Used in generating random passwords.
+	 * @param writer          Used to display information to the user.
+	 * @param reader          Used to request data from the user.
+	 * @param passwordEncoder Used to encrypt passwords.
+	 * @param random          Used in generating random passwords.
 	 */
-	public CredentialsRequester(PrintWriter writer, BufferedReader reader, SecureRandom random) {
+	public CredentialsRequester(PrintWriter writer, BufferedReader reader, PasswordEncoder passwordEncoder,
+			SecureRandom random) {
 
 		this.writer = writer;
 		this.reader = reader;
+		this.passwordEncoder = passwordEncoder;
 		this.random = random;
 
 	}
@@ -52,36 +58,37 @@ public class CredentialsRequester {
 		writer.printf("Generate password (y/N)? ");
 
 		String gp = reader.readLine().toLowerCase();
-		String password = null;
+		String encodedPassword = null;
 
 		if (gp.startsWith("y")) {
 
-			password = randomPassword();
+			String password = randomPassword();
 			writer.printf("Generated password: %s%n", password);
+			encodedPassword = passwordEncoder.encode(password);
 
 		} else {
 
-			boolean different;
+			boolean match;
 			do {
 
 				char[] passwd = System.console().readPassword("%s", "Enter password: ");
 				char[] confirmPWD = System.console().readPassword("%s", "Confirm password: ");
-				if (Arrays.equals(passwd, confirmPWD)) {
-					different = false;
+				match = Arrays.equals(passwd, confirmPWD);
+				Arrays.fill(confirmPWD, ' ');
+				if (match) {
+					encodedPassword = passwordEncoder.encode(new String(passwd));
+				}
+				Arrays.fill(passwd, ' ');
+				if (match) {
 					writer.printf("Password confirmed.\n");
-					password = new String(passwd);
 				} else {
-					different = true;
 					writer.printf("The passwords don't match.\n");
 				}
 
-				Arrays.fill(passwd, ' ');
-				Arrays.fill(confirmPWD, ' ');
-
-			} while (different);
+			} while (!match);
 		}
 
-		return new UserInformation(userName, password);
+		return new UserInformation(userName, encodedPassword);
 
 	}
 

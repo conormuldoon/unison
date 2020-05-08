@@ -14,7 +14,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.security.test.context.support.WithMockUser;
 import org.springframework.test.context.junit4.SpringRunner;
 
-import eu.acclimatize.unison.user.UserController;
+import eu.acclimatize.unison.user.AddUserController;
 import eu.acclimatize.unison.user.UserInformation;
 import eu.acclimatize.unison.user.UserRepository;
 
@@ -30,7 +30,7 @@ public class UserControllerTests {
 	private static final String SECOND_PASSWORD = "pwd2";
 
 	@Autowired
-	private UserController userController;
+	private AddUserController userController;
 
 	@Autowired
 	private UserRepository userRepository;
@@ -65,7 +65,8 @@ public class UserControllerTests {
 	@Test
 	public void addUser() {
 
-		userController.addUser(new UserInformation(TestConstant.OTHER_USERNAME, TestConstant.OTHER_USER_PASSWORD));
+		userController.addUser(
+				TestUtility.createUserInformation(TestConstant.OTHER_USERNAME, TestConstant.OTHER_USER_PASSWORD));
 
 		Assert.assertEquals(2, userRepository.count());
 	}
@@ -85,8 +86,7 @@ public class UserControllerTests {
 	}
 
 	private void testStatus(TestRestTemplate templateWBA, HttpStatus expectedStatus, String password) {
-		ResponseEntity<Void> result = templateWBA.postForEntity(Constant.UPDATE_PASSWORD_MAPPING, password,
-				Void.class);
+		ResponseEntity<Void> result = templateWBA.postForEntity(Constant.UPDATE_PASSWORD_MAPPING, password, Void.class);
 		Assert.assertEquals(expectedStatus, result.getStatusCode());
 	}
 

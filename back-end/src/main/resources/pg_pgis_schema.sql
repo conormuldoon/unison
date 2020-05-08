@@ -36,7 +36,7 @@
     
     create table UserInformation (
        userName varchar(255) not null,
-        password varchar(255),
+        encodedPassword varchar(255),
         primary key (userName)
     );
     

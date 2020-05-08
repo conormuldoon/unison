@@ -7,7 +7,6 @@ import org.junit.Assert;
 import org.locationtech.jts.geom.Coordinate;
 import org.locationtech.jts.geom.GeometryFactory;
 import org.locationtech.jts.geom.Point;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 
 import eu.acclimatize.unison.location.Location;
@@ -32,9 +31,12 @@ public class TestUtility {
 
 	private static final PrecipitationValue PRECIPITATION_VALUE;
 
-	private static final PasswordEncoder PASSWORD_ENCODER = new BCryptPasswordEncoder();
+	private static final PasswordEncoder PASSWORD_ENCODER;
 
 	static {
+
+		UnisonSecurityConfig unisonSecurityConfig = new UnisonSecurityConfig(null);
+		PASSWORD_ENCODER = unisonSecurityConfig.passwordEncoder();
 
 		USER_INFORMATION = createUserInformation(TestConstant.USERNAME, TestConstant.PASSWORD);
 
@@ -60,7 +62,7 @@ public class TestUtility {
 	 * @param password The password of the user.
 	 * @return The created user information object.
 	 */
-	private static UserInformation createUserInformation(String userName, String password) {
+	public static UserInformation createUserInformation(String userName, String password) {
 
 		String encodedPassword = PASSWORD_ENCODER.encode(password);
 		UserInformation userInfo = new UserInformation(userName, encodedPassword);
@@ -69,7 +71,7 @@ public class TestUtility {
 
 	/**
 	 * Creates an {@link eu.acclimatize.unison.user.UserInformation} object for the
-	 * specified user name and password and save the user information is the
+	 * specified user name and password and saves the user information in the
 	 * repository. The password is encoded prior to the object being created.
 	 * 
 	 * @param userName       The user name of the user.
