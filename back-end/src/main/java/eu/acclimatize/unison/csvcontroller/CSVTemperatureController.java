@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import eu.acclimatize.unison.Constant;
+import eu.acclimatize.unison.MappingValueConstant;
 
 /**
  * 
@@ -22,12 +23,11 @@ public class CSVTemperatureController {
 
 	private CSVResponder temperatureResponder;
 
-	private static final String CSV_TEMP = "/csvTemperature";
-
 	/**
 	 * Creates an instance of CSVTemperatureController.
 	 * 
-	 * @param temperatureResponder A responder that prints temperature data in a CSV format.
+	 * @param temperatureResponder A responder that prints temperature data in a CSV
+	 *                             format.
 	 */
 	public CSVTemperatureController(CSVResponder temperatureResponder) {
 		this.temperatureResponder = temperatureResponder;
@@ -38,17 +38,18 @@ public class CSVTemperatureController {
 	 * 
 	 * @param location The location of interest.
 	 * @param fromDate The start date for the data (inclusive).
-	 * @param toDate The end date for the data (inclusive).
+	 * @param toDate   The end date for the data (inclusive).
 	 * @param response Data is written to the writer of the response object.
-	 * @throws IOException Thrown if there is a problem obtaining the writer of the response object.
+	 * @throws IOException Thrown if there is a problem obtaining the writer of the
+	 *                     response object.
 	 */
 	// Specify location, from date, and to date
-	@GetMapping(CSV_TEMP)
+	@GetMapping(MappingValueConstant.TEMPERATURE)
 	public void temperature(@RequestParam(value = Constant.LOCATION) String location,
 			@RequestParam(value = Constant.FROM_DATE) @DateTimeFormat(pattern = Constant.FORMAT) Date fromDate,
 			@RequestParam(value = Constant.TO_DATE) @DateTimeFormat(pattern = Constant.FORMAT) Date toDate,
 			HttpServletResponse response) throws IOException {
-		
+
 		temperatureResponder.handleResponse(response, location, fromDate, toDate);
 
 	}

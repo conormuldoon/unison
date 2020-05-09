@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import eu.acclimatize.unison.Constant;
+import eu.acclimatize.unison.MappingValueConstant;
 
 /**
  * 
@@ -22,8 +23,6 @@ import eu.acclimatize.unison.Constant;
 public class CSVCloudLevelController {
 
 	private CSVResponder cloudLevelResponder;
-
-	private static final String CSV_CLOUDLEVEL = "/csvCloudLevel";
 
 	/**
 	 * Creates an instance of CSVCloudLevelController.
@@ -47,7 +46,7 @@ public class CSVCloudLevelController {
 	 *                     response object.
 	 */
 	// Specify location, from date, and to date
-	@GetMapping(CSV_CLOUDLEVEL)
+	@GetMapping(MappingValueConstant.CLOUD_LEVEL)
 	public void cloudLevel(@RequestParam(value = Constant.LOCATION) String location,
 			@RequestParam(value = Constant.FROM_DATE) @DateTimeFormat(pattern = Constant.FORMAT) Date fromDate,
 			@RequestParam(value = Constant.TO_DATE) @DateTimeFormat(pattern = Constant.FORMAT) Date toDate,

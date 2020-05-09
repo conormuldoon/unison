@@ -18,7 +18,7 @@ import eu.acclimatize.unison.location.LocationService;
 @Entity
 public class UserInformation implements Serializable {
 
-	private static final String ROLL = "USER";
+	private static final String ROLL = "ROLE_USER";
 	private static final long serialVersionUID = -6566767228133005900L;
 
 	@Id

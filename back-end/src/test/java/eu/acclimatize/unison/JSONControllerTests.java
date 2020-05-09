@@ -9,15 +9,15 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
 
 import eu.acclimatize.unison.csvcontroller.CSVResponderConfig;
-import eu.acclimatize.unison.jsoncontroller.CloudLevelController;
-import eu.acclimatize.unison.jsoncontroller.CloudinessController;
-import eu.acclimatize.unison.jsoncontroller.DewPointController;
-import eu.acclimatize.unison.jsoncontroller.FogController;
-import eu.acclimatize.unison.jsoncontroller.HumidityController;
-import eu.acclimatize.unison.jsoncontroller.PressureController;
-import eu.acclimatize.unison.jsoncontroller.TemperatureController;
-import eu.acclimatize.unison.jsoncontroller.WindDirectionController;
-import eu.acclimatize.unison.jsoncontroller.WindSpeedController;
+import eu.acclimatize.unison.jsoncontroller.JSONCloudLevelController;
+import eu.acclimatize.unison.jsoncontroller.JSONCloudinessController;
+import eu.acclimatize.unison.jsoncontroller.JSONDewPointController;
+import eu.acclimatize.unison.jsoncontroller.JSONFogController;
+import eu.acclimatize.unison.jsoncontroller.JSONHumidityController;
+import eu.acclimatize.unison.jsoncontroller.JSONPressureController;
+import eu.acclimatize.unison.jsoncontroller.JSONTemperatureController;
+import eu.acclimatize.unison.jsoncontroller.JSONWindDirectionController;
+import eu.acclimatize.unison.jsoncontroller.JSONWindSpeedController;
 import eu.acclimatize.unison.location.LocationRepository;
 import eu.acclimatize.unison.result.CloudLevelResult;
 import eu.acclimatize.unison.result.CloudinessResult;
@@ -47,31 +47,31 @@ public class JSONControllerTests {
 	private LocationRepository locationRepository;
 
 	@Autowired
-	private CloudinessController cloudinessController;
+	private JSONCloudinessController cloudinessController;
 
 	@Autowired
-	private CloudLevelController cloudLevelController;
+	private JSONCloudLevelController cloudLevelController;
 
 	@Autowired
-	private DewPointController dewPointController;
+	private JSONDewPointController dewPointController;
 
 	@Autowired
-	private FogController fogController;
+	private JSONFogController fogController;
 
 	@Autowired
-	private HumidityController humidityController;
+	private JSONHumidityController humidityController;
 
 	@Autowired
-	private PressureController pressureController;
+	private JSONPressureController pressureController;
 
 	@Autowired
-	private TemperatureController temperatureController;
+	private JSONTemperatureController temperatureController;
 
 	@Autowired
-	private WindDirectionController windDirectionController;
+	private JSONWindDirectionController windDirectionController;
 
 	@Autowired
-	private WindSpeedController windSpeedController;
+	private JSONWindSpeedController windSpeedController;
 
 	@Autowired
 	private UserRepository userRepository;

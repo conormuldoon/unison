@@ -6,7 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
 
-import eu.acclimatize.unison.jsoncontroller.PrecipitationController;
+import eu.acclimatize.unison.jsoncontroller.JSONPrecipitationController;
 import eu.acclimatize.unison.location.LocationRepository;
 import eu.acclimatize.unison.result.PrecipitationResult;
 import eu.acclimatize.unison.user.UserRepository;
@@ -22,7 +22,7 @@ import eu.acclimatize.unison.user.UserRepository;
 public class JSONPrecipitationTest {
 
 	@Autowired
-	private PrecipitationController precipitationController;
+	private JSONPrecipitationController precipitationController;
 
 	@Autowired
 	private HourlyPrecipitationRepository hpr;

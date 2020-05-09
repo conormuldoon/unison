@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import eu.acclimatize.unison.Constant;
+import eu.acclimatize.unison.MappingValueConstant;
 
 /**
  * 
@@ -21,8 +22,6 @@ import eu.acclimatize.unison.Constant;
 public class CSVDewPointController {
 
 	private CSVResponder dewPointResponder;
-
-	private static final String CSV_DEWPOINT = "/csvDewPoint";
 
 	/**
 	 * Creates an instance of CSVDewPointController.
@@ -45,7 +44,7 @@ public class CSVDewPointController {
 	 *                     response object.
 	 */
 	// Specify location, from date, and to date
-	@GetMapping(CSV_DEWPOINT)
+	@GetMapping(MappingValueConstant.DEW_POINT)
 	public void dewPoint(@RequestParam(value = Constant.LOCATION) String location,
 			@RequestParam(value = Constant.FROM_DATE) @DateTimeFormat(pattern = Constant.FORMAT) Date fromDate,
 			@RequestParam(value = Constant.TO_DATE) @DateTimeFormat(pattern = Constant.FORMAT) Date toDate,

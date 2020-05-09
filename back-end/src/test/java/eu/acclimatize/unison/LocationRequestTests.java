@@ -16,8 +16,7 @@ import eu.acclimatize.unison.location.LocationRequestException;
 import eu.acclimatize.unison.location.LocationRequestService;
 
 /**
- * Tests whether the document is present in the returned optional from the
- * DocumentRequestService.
+ * Tests for the location request service.
  *
  */
 public class LocationRequestTests {

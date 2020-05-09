@@ -3,6 +3,7 @@ package eu.acclimatize.unison.jsoncontroller;
 import java.util.Date;
 
 import org.springframework.format.annotation.DateTimeFormat;
+import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
@@ -10,6 +11,7 @@ import org.springframework.web.bind.annotation.RestController;
 import eu.acclimatize.unison.Constant;
 import eu.acclimatize.unison.HarmonieItem;
 import eu.acclimatize.unison.ItemListFinder;
+import eu.acclimatize.unison.MappingValueConstant;
 
 /**
  * 
@@ -17,17 +19,17 @@ import eu.acclimatize.unison.ItemListFinder;
  *
  */
 @RestController
-public class WindDirectionController {
+public class JSONWindDirectionController {
 
 	private ItemListFinder windDirectionFinder;
-	private static final String MAPPING = "/windDirection";
 
 	/**
-	 * Creates an instance of WindDirectionController.
+	 * Creates an instance of JSONWindDirectionController.
 	 * 
-	 * @param windDirectionFinder  Used to find an ordered list of wind direction data.
+	 * @param windDirectionFinder Used to find an ordered list of wind direction
+	 *                            data.
 	 */
-	public WindDirectionController(ItemListFinder windDirectionFinder) {
+	public JSONWindDirectionController(ItemListFinder windDirectionFinder) {
 		this.windDirectionFinder = windDirectionFinder;
 	}
 
@@ -36,10 +38,11 @@ public class WindDirectionController {
 	 * 
 	 * @param location The location of interest.
 	 * @param fromDate The start date for the data (inclusive).
-	 * @param toDate The end date for the data (inclusive).
-	 * @return A list of {@link eu.acclimatize.unison.result.WindDirectionResult} items.
+	 * @param toDate   The end date for the data (inclusive).
+	 * @return A list of {@link eu.acclimatize.unison.result.WindDirectionResult}
+	 *         items.
 	 */
-	@GetMapping(MAPPING)
+	@GetMapping(value = MappingValueConstant.WIND_DIRECTION, consumes = MediaType.APPLICATION_JSON_VALUE)
 	public Iterable<HarmonieItem> windDirection(@RequestParam(Constant.LOCATION) String location,
 			@RequestParam(value = Constant.FROM_DATE) @DateTimeFormat(pattern = Constant.FORMAT) Date fromDate,
 			@RequestParam(value = Constant.TO_DATE) @DateTimeFormat(pattern = Constant.FORMAT) Date toDate) {

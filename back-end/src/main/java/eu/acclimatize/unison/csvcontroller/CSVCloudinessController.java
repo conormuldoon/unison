@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import eu.acclimatize.unison.Constant;
+import eu.acclimatize.unison.MappingValueConstant;
 
 /**
  * 
@@ -21,8 +22,6 @@ import eu.acclimatize.unison.Constant;
 public class CSVCloudinessController {
 
 	private CSVResponder cloudinessResponder;
-
-	private static final String CSV_CLOUDINESS = "/csvCloudiness";
 	
 	/**
 	 * Creates an instance of CSVCloudinessController.
@@ -45,7 +44,7 @@ public class CSVCloudinessController {
 	 *                     response object.
 	 */
 	// Specify location, from date, and to date
-	@GetMapping(CSV_CLOUDINESS)
+	@GetMapping(MappingValueConstant.CLOUDINESS)
 	public void cloudiness(@RequestParam(value = Constant.LOCATION) String location,
 			@RequestParam(value = Constant.FROM_DATE) @DateTimeFormat(pattern = Constant.FORMAT) Date fromDate,
 			@RequestParam(value = Constant.TO_DATE) @DateTimeFormat(pattern = Constant.FORMAT) Date toDate,
