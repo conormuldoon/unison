@@ -13,7 +13,6 @@ import eu.acclimatize.unison.location.DeserializationException;
 import eu.acclimatize.unison.location.LocationExistsException;
 import eu.acclimatize.unison.location.LocationNotFoundException;
 import eu.acclimatize.unison.location.LocationRequestException;
-import eu.acclimatize.unison.user.UserExistsException;
 
 /**
  * 
@@ -65,13 +64,6 @@ public class UnisonAdvice {
 	@ExceptionHandler(LocationExistsException.class)
 	@ResponseStatus(HttpStatus.CONFLICT)
 	public String locationExistsHandler(LocationExistsException exception) {
-		return exception.getMessage();
-	}
-
-	@ResponseBody
-	@ExceptionHandler(UserExistsException.class)
-	@ResponseStatus(HttpStatus.CONFLICT)
-	public String userExistsHandler(UserExistsException exception) {
 		return exception.getMessage();
 	}
 

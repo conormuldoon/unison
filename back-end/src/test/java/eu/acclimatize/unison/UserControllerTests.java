@@ -13,8 +13,7 @@ import org.springframework.test.context.junit4.SpringRunner;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 
-import eu.acclimatize.unison.user.AddUserController;
-import eu.acclimatize.unison.user.UserExistsException;
+import eu.acclimatize.unison.user.UpsertUserController;
 import eu.acclimatize.unison.user.UserInformation;
 import eu.acclimatize.unison.user.UserRepository;
 
@@ -30,7 +29,7 @@ public class UserControllerTests {
 	private static final String SECOND_PASSWORD = "pwd2";
 
 	@Autowired
-	private AddUserController addUserController;
+	private UpsertUserController upsertUserController;
 
 	@Autowired
 	private UserRepository userRepository;
@@ -64,23 +63,10 @@ public class UserControllerTests {
 	@Test
 	public void addUser() {
 
-		addUserController.addUser(
+		upsertUserController.upsertUser(TestConstant.OTHER_USERNAME,
 				TestUtility.createUserInformation(TestConstant.OTHER_USERNAME, TestConstant.OTHER_USER_PASSWORD));
 
 		Assert.assertEquals(2, userRepository.count());
-	}
-
-	/**
-	 * Tests that a pre-existing user will not be added and an exception will be
-	 * thrown.
-	 */
-	@Test(expected = UserExistsException.class)
-	public void existingUser() {
-
-		TestUtility.addUserInformation(TestConstant.OTHER_USERNAME, TestConstant.OTHER_USER_PASSWORD, userRepository);
-
-		addUserController.addUser(new UserInformation(TestConstant.OTHER_USERNAME, null));
-
 	}
 
 	/**
