@@ -2,12 +2,14 @@ package eu.acclimatize.unison.location;
 
 import java.util.Optional;
 
+import javax.annotation.security.RolesAllowed;
+
 import org.springframework.web.bind.annotation.DeleteMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RestController;
 
 import eu.acclimatize.unison.Constant;
-import eu.acclimatize.unison.ResponseConstant;
+import eu.acclimatize.unison.MappingConstant;
 
 /**
  * 
@@ -43,20 +45,14 @@ public class DeleteLocationController {
 	 *         {@value eu.acclimatize.unison.ResponseConstant#SUCCESS} value if the
 	 *         location was successfully removed.
 	 */
-	@DeleteMapping(Constant.DELETE_LOCATION_MAPPING)
-	public int deleteLocation(@RequestParam(Constant.LOCATION) String locationName) {
+	@RolesAllowed(Constant.ROLL_USER)
+	@DeleteMapping(MappingConstant.LOCATION + "/{" + Constant.LOCATION_NAME + "}")
+	public void deleteLocation(@PathVariable(Constant.LOCATION_NAME) String locationName) {
 
-		Optional<Location> optLocation = locationRepository.findById(locationName);
-		if (optLocation.isEmpty()) {
-			return ResponseConstant.FAILURE;
-		} else {
-
-			Location location = optLocation.get();
-			location.deleteWithService(locationService);
-
-			return ResponseConstant.SUCCESS;
+		Optional<String> optOwner = locationRepository.findOwner(locationName);
+		if (optOwner.isPresent()) {
+			locationService.delete(locationName, optOwner.get());
 
 		}
-
 	}
 }

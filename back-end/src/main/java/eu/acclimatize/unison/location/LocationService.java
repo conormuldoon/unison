@@ -49,5 +49,10 @@ public class LocationService {
 		hwr.deleteForLocation(locationName);
 		locationRepository.deleteById(locationName);
 	}
+	
+	@PreAuthorize("#ownerName == authentication.name")
+	public void update(String ownerName, Location location) {
+		locationRepository.save(location);
+	}
 
 }

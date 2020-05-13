@@ -7,11 +7,12 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import eu.acclimatize.unison.Constant;
-import eu.acclimatize.unison.MappingValueConstant;
+import eu.acclimatize.unison.MappingConstant;
 
 /**
  * 
@@ -30,7 +31,7 @@ public class CSVFogController {
 	 */
 	public CSVFogController(CSVResponder fogResponder) {
 		this.fogResponder = fogResponder;
-		
+
 	}
 
 	/**
@@ -44,8 +45,8 @@ public class CSVFogController {
 	 *                     response object.
 	 */
 	// Specify location, from date, and to date
-	@GetMapping(MappingValueConstant.FOG)
-	public void fog(@RequestParam(value = Constant.LOCATION) String location,
+	@GetMapping(MappingConstant.LOCATION_FOG)
+	public void fog(@PathVariable(Constant.LOCATION_NAME) String location,
 			@RequestParam(value = Constant.FROM_DATE) @DateTimeFormat(pattern = Constant.FORMAT) Date fromDate,
 			@RequestParam(value = Constant.TO_DATE) @DateTimeFormat(pattern = Constant.FORMAT) Date toDate,
 			HttpServletResponse response) throws IOException {

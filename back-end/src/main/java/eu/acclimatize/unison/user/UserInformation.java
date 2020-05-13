@@ -8,7 +8,10 @@ import javax.persistence.Id;
 import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
 
-import eu.acclimatize.unison.location.LocationService;
+import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.annotation.JsonProperty.Access;
+
+import eu.acclimatize.unison.Constant;
 
 /**
  * 
@@ -18,18 +21,19 @@ import eu.acclimatize.unison.location.LocationService;
 @Entity
 public class UserInformation implements Serializable {
 
-	private static final String ROLL = "ROLE_USER";
 	private static final long serialVersionUID = -6566767228133005900L;
 
 	@Id
+	@JsonProperty
 	private String userName;
 
+	@JsonProperty(access = Access.WRITE_ONLY)
 	private String encodedPassword;
 
 	/**
 	 * Creates an instance of UserInformation.
 	 * 
-	 * @param userName The name of the user.
+	 * @param userName        The name of the user.
 	 * @param encodedPassword The encoded password of the user.
 	 */
 	public UserInformation(String userName, String encodedPassword) {
@@ -43,6 +47,7 @@ public class UserInformation implements Serializable {
 	public UserInformation() {
 
 	}
+	
 
 	/**
 	 * Checks if the user information exists in the user repository.
@@ -51,7 +56,7 @@ public class UserInformation implements Serializable {
 	 * @return True if the user information is stored in the repository or false
 	 *         otherwise.
 	 */
-	public boolean existIn(UserRepository userRepository) {
+	public boolean existsIn(UserRepository userRepository) {
 		return userRepository.existsById(userName);
 	}
 
@@ -62,17 +67,38 @@ public class UserInformation implements Serializable {
 	 */
 	public UserDetails buildUser() {
 
-		return User.withUsername(userName).password(encodedPassword).authorities(ROLL).build();
+		return User.withUsername(userName).password(encodedPassword).authorities(Constant.ROLL_USER).build();
 	}
 
-	/**
-	 * Deletes the location and associated harvested data.
-	 * 
-	 * @param locationName    The name of the location to delete.
-	 * @param locationService The location service used to delete the data.
-	 */
-	public void deleteLocation(String locationName, LocationService locationService) {
-		locationService.delete(locationName, userName);
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + ((encodedPassword == null) ? 0 : encodedPassword.hashCode());
+		result = prime * result + ((userName == null) ? 0 : userName.hashCode());
+		return result;
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		UserInformation other = (UserInformation) obj;
+		if (encodedPassword == null) {
+			if (other.encodedPassword != null)
+				return false;
+		} else if (!encodedPassword.equals(other.encodedPassword))
+			return false;
+		if (userName == null) {
+			if (other.userName != null)
+				return false;
+		} else if (!userName.equals(other.userName))
+			return false;
+		return true;
 	}
 
 }

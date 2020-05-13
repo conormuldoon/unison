@@ -186,18 +186,7 @@ exports[`mathes Unison snapshot 1`] = `
           </div>
           <div
             class="marginItem"
-          >
-            <select
-              disabled=""
-            >
-              <option
-                selected=""
-                value="Location"
-              >
-                Location
-              </option>
-            </select>
-          </div>
+          />
           <div
             class="pLeft"
           >
@@ -232,17 +221,6 @@ exports[`mathes Unison snapshot 1`] = `
               </div>
             </div>
           </div>
-          <a
-            class="pLeft"
-            download="Precipitation_24-10-2019_25-10-2019.csv"
-            href="/apiacc/csvPrecipitation?location=undefined&fromDate=24/10/2019&toDate=25/10/2019"
-          >
-            <button
-              disabled=""
-            >
-              CSV
-            </button>
-          </a>
         </div>
         <div>
           <div

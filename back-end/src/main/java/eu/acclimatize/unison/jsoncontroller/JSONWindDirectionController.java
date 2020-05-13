@@ -5,13 +5,14 @@ import java.util.Date;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import eu.acclimatize.unison.Constant;
 import eu.acclimatize.unison.HarmonieItem;
 import eu.acclimatize.unison.ItemListFinder;
-import eu.acclimatize.unison.MappingValueConstant;
+import eu.acclimatize.unison.MappingConstant;
 
 /**
  * 
@@ -42,8 +43,8 @@ public class JSONWindDirectionController {
 	 * @return A list of {@link eu.acclimatize.unison.result.WindDirectionResult}
 	 *         items.
 	 */
-	@GetMapping(value = MappingValueConstant.WIND_DIRECTION, consumes = MediaType.APPLICATION_JSON_VALUE)
-	public Iterable<HarmonieItem> windDirection(@RequestParam(Constant.LOCATION) String location,
+	@GetMapping(value = MappingConstant.LOCATION_WIND_DIRECTION, consumes = MediaType.APPLICATION_JSON_VALUE)
+	public Iterable<HarmonieItem> windDirection(@PathVariable(Constant.LOCATION_NAME) String location,
 			@RequestParam(value = Constant.FROM_DATE) @DateTimeFormat(pattern = Constant.FORMAT) Date fromDate,
 			@RequestParam(value = Constant.TO_DATE) @DateTimeFormat(pattern = Constant.FORMAT) Date toDate) {
 

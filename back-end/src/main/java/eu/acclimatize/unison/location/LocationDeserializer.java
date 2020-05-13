@@ -15,6 +15,7 @@ import com.fasterxml.jackson.core.JsonToken;
 import com.fasterxml.jackson.databind.DeserializationContext;
 import com.fasterxml.jackson.databind.JsonDeserializer;
 
+import eu.acclimatize.unison.Constant;
 import eu.acclimatize.unison.user.UserInformation;
 import eu.acclimatize.unison.user.UserRepository;
 
@@ -39,6 +40,7 @@ public class LocationDeserializer extends JsonDeserializer<Location> {
 	public LocationDeserializer(UserRepository userRepository, GeometryFactory geometryFactory) {
 		this.userRepository = userRepository;
 		this.geometryFactory = geometryFactory;
+
 	}
 
 	private String parseProperties(JsonParser parser) throws IOException {
@@ -48,13 +50,14 @@ public class LocationDeserializer extends JsonDeserializer<Location> {
 
 			if (propToken.equals(JsonToken.FIELD_NAME)) {
 				String propName = parser.getCurrentName();
-				if (propName.equals(LocationConstant.LOCATION_NAME)) {
+				if (propName.equals(Constant.LOCATION_NAME)) {
 					parser.nextToken();
 					return parser.getValueAsString();
 				}
 			}
 		}
-		throw new LocationDeserializationException("No location name field in the properties object.");
+		throw new DeserializationException(
+				"No location " + Constant.LOCATION_NAME + " in the properties object.");
 	}
 
 	private double[] parseGeometry(JsonParser parser) throws IOException {
@@ -78,7 +81,8 @@ public class LocationDeserializer extends JsonDeserializer<Location> {
 		}
 
 		if (longitude == null) {
-			throw new LocationDeserializationException("No coordinates in the geometry object.");
+			throw new DeserializationException(
+					"No " + LocationConstant.COORDINATES + " in the geometry object.");
 		}
 
 		double[] coordinates = { longitude, latitude };
@@ -92,30 +96,30 @@ public class LocationDeserializer extends JsonDeserializer<Location> {
 
 		String locationName = null;
 		double[] coordinates = null;
-		
+
 		JsonToken jsonToken;
 		while ((jsonToken = parser.nextToken()) != JsonToken.END_OBJECT) {
 
 			if (jsonToken.equals(JsonToken.FIELD_NAME)) {
 				String currentName = parser.getCurrentName();
 				if (currentName.equals(LocationConstant.GEOMETRY)) {
-					
-					coordinates= parseGeometry(parser);
+
+					coordinates = parseGeometry(parser);
 
 				} else if (currentName.equals(LocationConstant.PROPERTIES)) {
-					
+
 					locationName = parseProperties(parser);
-				
+
 				}
 			}
 		}
-		
-		parser.close();
-		
+
 		if (locationName == null) {
-			throw new LocationDeserializationException("No properties in the GeoJSON point feature object.");
-		}else if(coordinates==null) {
-			throw new LocationDeserializationException("No geometry in the GeoJSON point feature object.");
+			throw new DeserializationException(
+					"No " + LocationConstant.PROPERTIES + " in the GeoJSON point feature object.");
+		} else if (coordinates == null) {
+			throw new DeserializationException(
+					"No " + LocationConstant.GEOMETRY + " in the GeoJSON point feature object.");
 		}
 
 		Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
@@ -124,7 +128,6 @@ public class LocationDeserializer extends JsonDeserializer<Location> {
 
 		return new Location(locationName, oUser.get(),
 				geometryFactory.createPoint(new Coordinate(coordinates[0], coordinates[1])));
-
 
 	}
 

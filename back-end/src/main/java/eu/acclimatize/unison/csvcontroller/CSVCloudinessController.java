@@ -7,11 +7,12 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import eu.acclimatize.unison.Constant;
-import eu.acclimatize.unison.MappingValueConstant;
+import eu.acclimatize.unison.MappingConstant;
 
 /**
  * 
@@ -22,7 +23,7 @@ import eu.acclimatize.unison.MappingValueConstant;
 public class CSVCloudinessController {
 
 	private CSVResponder cloudinessResponder;
-	
+
 	/**
 	 * Creates an instance of CSVCloudinessController.
 	 * 
@@ -44,13 +45,12 @@ public class CSVCloudinessController {
 	 *                     response object.
 	 */
 	// Specify location, from date, and to date
-	@GetMapping(MappingValueConstant.CLOUDINESS)
-	public void cloudiness(@RequestParam(value = Constant.LOCATION) String location,
+	@GetMapping(MappingConstant.LOCATION_CLOUDINESS)
+	public void cloudiness(@PathVariable(Constant.LOCATION_NAME) String location,
 			@RequestParam(value = Constant.FROM_DATE) @DateTimeFormat(pattern = Constant.FORMAT) Date fromDate,
 			@RequestParam(value = Constant.TO_DATE) @DateTimeFormat(pattern = Constant.FORMAT) Date toDate,
 			HttpServletResponse response) throws IOException {
 
-		
 		cloudinessResponder.handleResponse(response, location, fromDate, toDate);
 
 	}

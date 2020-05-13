@@ -2,21 +2,34 @@ package eu.acclimatize.unison.location;
 
 import java.io.IOException;
 
+import org.springframework.boot.jackson.JsonComponent;
+
 import com.fasterxml.jackson.core.JsonGenerator;
 import com.fasterxml.jackson.databind.JsonSerializer;
 import com.fasterxml.jackson.databind.SerializerProvider;
 
 /**
- * 
- * Jackson uses an instance of this class when serializing a location if not
- * serializing the location as feature in a feature collection. The instance
- * invokes {@link Location#geoJSONSerialize(JsonGenerator)}.
+ * A component that serializes locations as GeoJSON point features. The
+ * component invokes {@link Location#geoJSONSerialize(JsonGenerator)}.
  *
  */
+@JsonComponent
 public class LocationSerializer extends JsonSerializer<Location> {
+
+	private WeatherProperty[] weatherProperty;
+
+	/**
+	 * Creates an instance of LocationSerializer.
+	 * 
+	 * @param weatherProperty The weather properties for locations.
+	 */
+	public LocationSerializer(WeatherProperty[] weatherProperty) {
+		this.weatherProperty = weatherProperty;
+	}
 
 	@Override
 	public void serialize(Location value, JsonGenerator gen, SerializerProvider serializers) throws IOException {
-		value.geoJSONSerialize(gen);
+		
+		value.geoJSONSerialize(gen, weatherProperty);
 	}
 }

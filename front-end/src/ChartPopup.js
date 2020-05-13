@@ -32,9 +32,14 @@ function ChartPopup(props) {
 
 
       const loc = props.location.trim();
-      const request = API + '/' + variRequest + '?location=' + loc + "&fromDate=" + props.fromDate + "&toDate=" + props.toDate;
+      const request = API + '/location/' + loc + '/' + variRequest + "?fromDate=" + props.fromDate + "&toDate=" + props.toDate;
 
-      let response = await fetch(request);
+      let response = await fetch(request, {
+        method: 'GET',
+        headers: new Headers({
+          'Content-Type': 'application/json'
+        })
+      });
       let dataArray = await response.json();
 
       if (active) {

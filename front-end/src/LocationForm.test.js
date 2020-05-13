@@ -5,7 +5,7 @@ import { fireEvent, render } from "react-testing-library";
 import { API } from './Constant';
 import LocationForm from './LocationForm';
 import { locationPostObject } from './Util';
-import { SUCCESS, FAILURE } from './ResponseConstant';
+import HttpStatus from 'http-status-codes';
 
 
 it('renders without crashing', async () => {
@@ -31,7 +31,7 @@ function changeValue(getByLabelText, labelText, value) {
 }
 
 it('posts the data in the form when submit is clicked', async (done) => {
-  jest.spyOn(window, 'fetch').mockImplementation(() => { return { ok: true, json: () => 1 } });
+  jest.spyOn(window, 'fetch').mockImplementation(() => { return { headers: { get: () => '0' }, ok: true, json: () => 1 } });
   const hideDisplay = jest.fn();
 
   const location = 'UCD';
@@ -46,7 +46,7 @@ it('posts the data in the form when submit is clicked', async (done) => {
 
     expect(hideDisplay).toHaveBeenCalledTimes(1);
 
-    expect(fetch).toBeCalledWith(API + '/addLocation', locationPostObject(location, lon, lat));
+    expect(fetch).toBeCalledWith(API + '/location', locationPostObject(location, lon, lat));
     done();
   };
 
@@ -65,7 +65,7 @@ it('posts the data in the form when submit is clicked', async (done) => {
 });
 
 it('handles add location', async (done) => {
-  fetchMock.post('end:/addLocation', String(SUCCESS));
+  fetchMock.post('end:/location',{ status: HttpStatus.OK, headers: { 'Content-Length': '0' }});
 
   jest.spyOn(window, 'alert').mockImplementation(() => { });
   const hideDisplay = jest.fn();
@@ -73,7 +73,7 @@ it('handles add location', async (done) => {
   const location = 'UCD';
   const obtainData = () => {
     expect(hideDisplay).toHaveBeenCalledTimes(1);
-    expect(alert).toBeCalledWith(location + ' added');
+    expect(alert).toBeCalledWith(location + ' was added');
     done();
   };
 
@@ -91,7 +91,7 @@ it('handles add location', async (done) => {
 
 
 it('displays that the location is already present', async (done) => {
-  fetchMock.post('end:/addLocation', String(FAILURE));
+  fetchMock.post('end:/location', HttpStatus.CONFLICT);
 
   jest.spyOn(window, 'alert').mockImplementation((messStr) => {
     expect(messStr).toEqual(' already exists');

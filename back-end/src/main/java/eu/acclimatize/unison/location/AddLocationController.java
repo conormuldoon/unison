@@ -1,21 +1,20 @@
 package eu.acclimatize.unison.location;
 
-import java.util.logging.Level;
-import java.util.logging.Logger;
+import javax.annotation.security.RolesAllowed;
 
-import org.locationtech.jts.geom.GeometryFactory;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import eu.acclimatize.unison.Constant;
-import eu.acclimatize.unison.ResponseConstant;
-import eu.acclimatize.unison.harvester.HarvesterService;
+import eu.acclimatize.unison.MappingConstant;
 import eu.acclimatize.unison.user.UserRepository;
 
 /**
  * 
- * A controller to add locations to be tracked.
+ * A controller to add locations to be tracked.In contrast to the
+ * {@link UpsertLocationController}, the controller makes a harvest data request
+ * when adding a location.
  *
  */
 @RestController
@@ -25,23 +24,18 @@ public class AddLocationController {
 
 	private HarvesterService harvesterService;
 
-	private Logger logger;
-
 	/**
 	 * Creates an instance of AddLocationController.
 	 * 
 	 * @param locationRepository The repository where locations are stored.
 	 * @param harvesterService   Used to request data for the location once added.
-	 * @param logger             Logs an error message if the generated XML on the
-	 *                           HARMONIE-AROME API server for the location was not
-	 *                           found.
+	 * @param logger             Used to log harvest location request exceptions.
 	 */
 	public AddLocationController(LocationRepository locationRepository, UserRepository userRepository,
-			HarvesterService harvesterService, Logger logger, GeometryFactory geometryFactory) {
+			HarvesterService harvesterService) {
 
 		this.locationRepository = locationRepository;
 		this.harvesterService = harvesterService;
-		this.logger = logger;
 
 	}
 
@@ -51,39 +45,25 @@ public class AddLocationController {
 	 * 
 	 * @param location The location to be stored in the location repository.
 	 * 
-	 * @return The {@value eu.acclimatize.unison.ResponseConstant#FAILURE} value if
-	 *         failed to add the location, the
-	 *         {@value eu.acclimatize.unison.ResponseConstant#SUCCESS} if
-	 *         successfully added the location, and the
-	 *         {@value eu.acclimatize.unison.ResponseConstant#DATA_NOT_RECEIVED}
-	 *         value if the location was added but failed to obtain data from a
-	 *         HARMONIE-AROME API.
-	 *
+	 * @return An optional harvesting issue if there was a location harvest request
+	 *         exception and an empty optional otherwise.
+	 * @throws LocationRequestException
+	 * 
 	 */
-	@PostMapping(Constant.ADD_LOCATION_MAPPING)
-	public int addLocation(@RequestBody Location location) {
+	@RolesAllowed(Constant.ROLL_USER)
+	@PostMapping(MappingConstant.LOCATION)
+	public void addLocation(@RequestBody Location location) throws LocationRequestException {
 
 		if (location.existsIn(locationRepository)) {
 
-			return ResponseConstant.FAILURE;
+			throw new LocationExistsException("A location with the same name is already being tracked.");
 
-		} else {
-
-			locationRepository.save(location);
-
-			// Request data
-			try {
-				if (harvesterService.fetchAndStore(location)) {
-					return ResponseConstant.SUCCESS;
-				} else {
-					return ResponseConstant.DATA_NOT_RECEIVED;
-				}
-			} catch (LocationRequestException e) {
-
-				logger.log(Level.SEVERE, e.getMessage());
-				return ResponseConstant.DATA_NOT_RECEIVED;
-			}
 		}
+		locationRepository.save(location);
+
+		// Request data
+		harvesterService.fetchAndStore(location);
 
 	}
+
 }

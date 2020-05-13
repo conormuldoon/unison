@@ -19,6 +19,7 @@ public class FogResult implements HarmonieItem {
 	@CSVHeaderItem(Constant.FROM_HOUR)
 	@JsonProperty
 	private Date date;
+	
 
 	@CSVHeaderItem("Fog " + Constant.PERCENTAGE_SYMBOL)
 	@JsonProperty

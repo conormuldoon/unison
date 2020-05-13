@@ -253,4 +253,14 @@ public class TestUtility {
 		Assert.assertEquals(len, st0.length);
 	}
 
+	/**
+	 * Encrypts a password.
+	 * 
+	 * @param password The password to encrypt.
+	 * @return The encoded password.
+	 */
+	public static String encode(String password) {
+		return PASSWORD_ENCODER.encode(password);
+	}
+
 }

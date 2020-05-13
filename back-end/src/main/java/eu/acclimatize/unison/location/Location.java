@@ -16,7 +16,6 @@ import org.w3c.dom.Document;
 import org.xml.sax.SAXException;
 
 import com.fasterxml.jackson.core.JsonGenerator;
-import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 
 import eu.acclimatize.unison.Constant;
 import eu.acclimatize.unison.user.UserInformation;
@@ -28,12 +27,8 @@ import eu.acclimatize.unison.user.UserInformation;
  *
  */
 
-@JsonSerialize(using = LocationSerializer.class)
 @Entity
 public class Location implements Serializable {
-
-	private static final String POINT = "Point";
-	private static final String FEATURE = "Feature";
 
 	private static final long serialVersionUID = 1771422791257298902L;
 
@@ -77,17 +72,7 @@ public class Location implements Serializable {
 
 		return locationRepository.existsById(name);
 	}
-
-	/**
-	 * Uses the location service to delete the location and associated harvested
-	 * data. The authenticated user must be the user that added the location.
-	 * 
-	 * @param locationService The service used to delete the data.
-	 */
-	public void deleteWithService(LocationService locationService) {
-		user.deleteLocation(name, locationService);
-	}
-
+	
 	/**
 	 * Requests XML data for the longitude and latitude coordinates from the
 	 * HARMONIE-AROME API.
@@ -104,15 +89,23 @@ public class Location implements Serializable {
 	 *                                  location was not found.
 	 */
 	public Document requestDocument(String uri, DocumentBuilder documentBuilder, Logger logger)
-			throws SAXException, IOException, LocationRequestException {
+			throws LocationRequestException {
 
 		String locURI = String.format(uri, geom.getY(), geom.getX()); // Change to just return this string, maybe.
 		logger.log(Level.INFO, () -> "Requesting data for " + name + " from " + locURI + '.');
 		try {
 			return documentBuilder.parse(locURI);
 		} catch (FileNotFoundException e) {
+			throw new LocationRequestException("There was a problem when requesting the data  for " + name
+					+ ". The generated XML was not found at " + locURI + ".");
+		} catch (IOException e) {
 			throw new LocationRequestException(
-					"Problem obtaining document for " + name + ". The generated XML was not found.");
+					"There was an I/O error when requesting the data for " + name + " fromm " + locURI + ".");
+
+		} catch (SAXException e) {
+
+			throw new LocationRequestException(
+					"There was a problem parsing the XML document for " + name + " fromm " + locURI + ".");
 		}
 
 	}
@@ -120,18 +113,20 @@ public class Location implements Serializable {
 	/**
 	 * Serializes the location in a GeoJSON format.
 	 * 
-	 * @param gen The generator object written to.
+	 * @param gen             The generator object written to.
+	 * @param weatherProperty
 	 * @throws IOException Thrown if there is an I/O error while serializing.
 	 */
-	public void geoJSONSerialize(JsonGenerator gen) throws IOException {
+	public void geoJSONSerialize(JsonGenerator gen, WeatherProperty[] weatherProperty) throws IOException {
+
 		gen.writeStartObject();
 
-		gen.writeStringField(Constant.TYPE, FEATURE);
+		gen.writeStringField(Constant.TYPE, LocationConstant.FEATURE);
 
 		gen.writeFieldName(LocationConstant.GEOMETRY);
 
 		gen.writeStartObject();
-		gen.writeStringField(Constant.TYPE, POINT);
+		gen.writeStringField(Constant.TYPE, LocationConstant.POINT);
 		gen.writeArrayFieldStart(LocationConstant.COORDINATES);
 		gen.writeNumber(geom.getX());
 		gen.writeNumber(geom.getY());
@@ -140,9 +135,11 @@ public class Location implements Serializable {
 
 		gen.writeFieldName(LocationConstant.PROPERTIES);
 		gen.writeStartObject();
-		gen.writeStringField(LocationConstant.LOCATION_NAME, name);
+		gen.writeStringField(Constant.LOCATION_NAME, name);
+		for (WeatherProperty wp : weatherProperty) {
+			wp.write(gen, name);
+		}
 		gen.writeEndObject();
-
 		gen.writeEndObject();
 
 	}
@@ -151,6 +148,7 @@ public class Location implements Serializable {
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
+		result = prime * result + ((geom == null) ? 0 : geom.hashCode());
 		result = prime * result + ((name == null) ? 0 : name.hashCode());
 		return result;
 	}
@@ -164,6 +162,11 @@ public class Location implements Serializable {
 		if (getClass() != obj.getClass())
 			return false;
 		Location other = (Location) obj;
+		if (geom == null) {
+			if (other.geom != null)
+				return false;
+		} else if (!geom.equals(other.geom))
+			return false;
 		if (name == null) {
 			if (other.name != null)
 				return false;

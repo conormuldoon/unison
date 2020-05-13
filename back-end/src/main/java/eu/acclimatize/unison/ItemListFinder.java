@@ -1,7 +1,7 @@
 package eu.acclimatize.unison;
 
 import static eu.acclimatize.unison.Constant.FROM_DATE;
-import static eu.acclimatize.unison.Constant.LOCATION;
+import static eu.acclimatize.unison.Constant.LOCATION_NAME;
 import static eu.acclimatize.unison.Constant.TO_DATE;
 
 import java.util.Date;
@@ -43,7 +43,7 @@ public class ItemListFinder {
 	public List<HarmonieItem> find(String location, Date fromDate, Date toDate) {
 
 		TypedQuery<HarmonieItem> typedQuery = entityManager.createQuery(query, HarmonieItem.class);
-		typedQuery.setParameter(LOCATION, location);
+		typedQuery.setParameter(LOCATION_NAME, location);
 		typedQuery.setParameter(FROM_DATE, fromDate);
 		typedQuery.setParameter(TO_DATE, toDate);
 		return typedQuery.getResultList();

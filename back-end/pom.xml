@@ -115,8 +115,13 @@
 			<artifactId>spring-security-core</artifactId>
 		</dependency>
 
-		<!-- Hibernate c3p0 connection pool. Required for the execution of UserStore 
-			from the console. -->
+		<dependency>
+			<groupId>org.springframework.security</groupId>
+			<artifactId>spring-security-test</artifactId>
+		</dependency>
+
+		<!-- Hibernate c3p0 connection pool. Required for the execution of the 
+			UserConsole from the terminal. -->
 		<dependency>
 			<groupId>org.hibernate</groupId>
 			<artifactId>hibernate-c3p0</artifactId>

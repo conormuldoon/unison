@@ -4,8 +4,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
-import eu.acclimatize.unison.Constant;
-import eu.acclimatize.unison.ResponseConstant;
+import eu.acclimatize.unison.MappingConstant;
 
 /**
  * 
@@ -38,14 +37,14 @@ public class AddUserController {
 	 *         {@value eu.acclimatize.unison.ResponseConstant#FAILURE} if a user
 	 *         with the same user name has previously been stored.
 	 */
-	@PostMapping(Constant.ADD_USER_MAPPING)
-	public int addUser(@RequestBody UserInformation userInformation) {
+	@PostMapping(MappingConstant.USER)
+	public void addUser(@RequestBody UserInformation userInformation) {
 
-		if (userInformation.existIn(userRepository)) {
-			return ResponseConstant.FAILURE;
+		if (userInformation.existsIn(userRepository)) {
+			throw new UserExistsException("A user with the same user name already exists.");
 		} else {
 			userRepository.save(userInformation);
-			return ResponseConstant.SUCCESS;
+
 		}
 
 	}

@@ -13,14 +13,12 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 
 /**
- * A security configuration class that restricts access to the end points for
- * adding locations and adding users, for deleting locations, and for updating
- * passwords.
+ * A security configuration class.
  *
  */
 @Configuration
 @EnableWebSecurity
-@EnableGlobalMethodSecurity(prePostEnabled = true)
+@EnableGlobalMethodSecurity(prePostEnabled = true, jsr250Enabled = true)
 public class UnisonSecurityConfig extends WebSecurityConfigurerAdapter {
 
 	private UserDetailsService userDetailsService;
@@ -37,12 +35,10 @@ public class UnisonSecurityConfig extends WebSecurityConfigurerAdapter {
 
 	@Override
 	protected void configure(HttpSecurity http) throws Exception {
-		http.csrf().disable().authorizeRequests()
-				.antMatchers(Constant.ADD_LOCATION_MAPPING, Constant.DELETE_LOCATION_MAPPING, Constant.ADD_USER_MAPPING,
-						Constant.UPDATE_PASSWORD_MAPPING)
-				.authenticated().antMatchers("/**").permitAll().and().httpBasic();
+		http.csrf().disable().authorizeRequests().antMatchers(MappingConstant.USER).authenticated().antMatchers("/**")
+				.permitAll().and().httpBasic();
 	}
-	
+
 	/**
 	 * Creates an encoder for encrypting and matching user passwords.
 	 * 

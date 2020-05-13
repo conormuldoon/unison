@@ -26,6 +26,7 @@ function Unison(props) {
   const [marker, setMarker] = useState(undefined);
   const [curLoc, setCurLoc] = useState(undefined);
   const [curVar, setCurVar] = useState(VAR_OPT[0]);
+  const [featureCollection, setFeatureCollection] = useState(undefined);
 
   const obtainData = () => {
     let active = true;
@@ -33,10 +34,12 @@ function Unison(props) {
     async function requestLocation() {
       let response = await fetch(API + '/location');
 
-      if (response.ok) {
-        const featureCollection = await response.json();
+      if (active && response.ok) {
+        const fc = await response.json();
+        setFeatureCollection(fc);
 
-        const locationArray = featureCollection.features;
+
+        const locationArray = fc.features;
 
         if (active) {
           let n = locationArray.length;
@@ -55,7 +58,7 @@ function Unison(props) {
           if (n > 0) {
             setOption(newOption);
             setMarker(newMarker);
-            setCurLoc(locationArray[0].properties.name);
+            setCurLoc(locationArray[0].properties);
 
           } else {
             setOption(undefined);
@@ -78,13 +81,23 @@ function Unison(props) {
   }, []);
 
 
+  const updateCurLoc = (locationName) => {
+    for (let i = 0; i < featureCollection.features.length; i++) {
+
+      if (featureCollection.features[i].properties.name === locationName) {
+        setCurLoc(featureCollection.features[i].properties);
+        break;
+      }
+    }
+  }
+
   const markerClicked = (location) => {
-    setCurLoc(location);
+    updateCurLoc(location);
   }
 
   const _onLocationSelect = (event) => {
 
-    setCurLoc(event.target.value);
+    updateCurLoc(event.target.value);
 
   }
 
@@ -106,11 +119,14 @@ function Unison(props) {
 
   const dashDate = (date) => {
 
-    console.log(typeof(date));
-    console.log(date);
     return date.replace(/\//g, '-');
   }
 
+
+  let locationName;
+  if (curLoc) {
+    locationName = curLoc.name;
+  }
 
   return (
 
@@ -127,7 +143,7 @@ function Unison(props) {
 
       </div>
 
-      <LeafletMap marker={marker} curVar={curVar} curLoc={curLoc}
+      <LeafletMap marker={marker} curVar={curVar} location={locationName}
         markerCallback={markerClicked} fromDate={fromDate} toDate={toDate}
         mapCentre={props.mapCentre}
 
@@ -149,11 +165,11 @@ function Unison(props) {
 
             <div className='marginItem' >
 
-              <select disabled={!curLoc} onChange={_onLocationSelect} defaultValue="Location" value={curLoc}>
+              {curLoc && <select onChange={_onLocationSelect} value={curLoc.name}>
                 {!option && <option key="Location" value="Location" >Location</option>}
                 {option && option.map((opt) => <option key={opt} value={opt}>{opt}</option>)}
 
-              </select>
+              </select>}
 
 
             </div>
@@ -174,15 +190,15 @@ function Unison(props) {
 
             </div>
 
-            <a download={curVar.replace(/ /g, '_') + '_' + dashDate(fromDate) + "_" + dashDate(toDate) + '.csv'}
+            {curLoc && <a download={curVar.replace(/ /g, '_') + '_' + dashDate(fromDate) + "_" + dashDate(toDate) + '.csv'}
               className='pLeft'
-              href={API + '/csv' + curVar.replace(/ /g, '') + '?location=' + curLoc + '&fromDate=' + fromDate + '&toDate=' + toDate}>
+              href={API + '/location/' + curLoc.name + '/' + curVar.replace(/ /g, '') + '?fromDate=' + fromDate + '&toDate=' + toDate}>
 
               <button disabled={!curLoc} >
                 CSV
               </button>
 
-            </a>
+            </a>}
           </div>
 
           <ARLocationComponent obtainData={obtainData} location={curLoc} />

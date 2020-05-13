@@ -4,7 +4,6 @@ import java.io.IOException;
 import java.util.List;
 
 import com.fasterxml.jackson.core.JsonGenerator;
-import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 
 import eu.acclimatize.unison.Constant;
 
@@ -13,11 +12,10 @@ import eu.acclimatize.unison.Constant;
  * A class for representing a GeoJSON feature collection.
  *
  */
-@JsonSerialize(using = FeatureCollectionSerializer.class)
+
 public class FeatureCollection {
 
 	private static final String FEATURE_COLLECTION = "FeatureCollection";
-	private static final String FEATURES = "features";
 
 	private List<Location> locationList;
 
@@ -33,18 +31,19 @@ public class FeatureCollection {
 	/**
 	 * Serializes the feature collection in a GeoJSON format.
 	 * 
-	 * @param gen Used in the serialization process.
+	 * @param gen             Used in the serialization process.
+	 * @param weatherProperty
 	 * @throws IOException Thrown if there if there is an I/O error when
 	 *                     serializing.
 	 */
-	public void geoJSONSerialize(JsonGenerator gen) throws IOException {
+	public void geoJSONSerialize(JsonGenerator gen, WeatherProperty[] weatherProperty) throws IOException {
 		gen.writeStartObject();
 
 		gen.writeStringField(Constant.TYPE, FEATURE_COLLECTION);
-		gen.writeArrayFieldStart(FEATURES);
+		gen.writeArrayFieldStart(LocationConstant.FEATURES);
 
 		for (Location l : locationList) {
-			l.geoJSONSerialize(gen);
+			l.geoJSONSerialize(gen, weatherProperty);
 		}
 		gen.writeEndArray();
 		gen.writeEndObject();

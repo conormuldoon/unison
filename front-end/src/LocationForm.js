@@ -5,7 +5,6 @@ import './App.css';
 import { API } from './Constant';
 import { problemConnecting } from './Util';
 import HttpStatus from 'http-status-codes';
-import { SUCCESS, FAILURE } from './ResponseConstant';
 import { locationPostObject } from './Util';
 
 
@@ -47,23 +46,20 @@ function LocationForm(props) {
 
   async function postData() {
 
-    const response = await fetch(API + '/addLocation',
+    const response = await fetch(API + '/location',
       locationPostObject(location, lon, lat));
 
     if (response.ok) {
-      const resVal = await response.json();
 
-      if (resVal === SUCCESS) {
-        alert(location + ' added');
+      if (response.headers.get("Content-Length") === '0') {
+        alert(location + ' was added');
         updateDisplay();
-
-      }
-      else if (resVal === FAILURE) {
-        alert(location + ' already exists');
       } else {
-        alert(location + ' added, but did not obtain weather data.')
+        alert(location + ' was added, but Unison did not obtain the weather data.')
         updateDisplay();
       }
+    } else if (response.status === HttpStatus.CONFLICT) {
+      alert(location + ' already exists');
     } else if (response.status === HttpStatus.UNAUTHORIZED) {
       alert('Incorrect user name or password');
     } else {

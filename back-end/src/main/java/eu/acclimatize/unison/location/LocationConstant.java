@@ -14,26 +14,35 @@ public class LocationConstant {
 	private LocationConstant() {
 
 	}
-	
+
 	/**
-	 * The GeoJson geometry field name.
+	 * The GeoJSON feature collection field name.
+	 */
+	public static final String FEATURES = "features";
+
+	/**
+	 * The GeoJSON feature field name.
+	 */
+	public static final String FEATURE = "Feature";
+
+	/**
+	 * The GeoJSON point field name.
+	 */
+	public static final String POINT = "Point";
+
+	/**
+	 * The GeoJSON geometry field name.
 	 */
 	public static final String GEOMETRY = "geometry";
-	
+
 	/**
 	 * The GeoJSON coordinates field name.
 	 */
 	public static final String COORDINATES = "coordinates";
-	
+
 	/**
-	 * The GeoJson properties field name.
+	 * The GeoJSON properties field name.
 	 */
 	public static final String PROPERTIES = "properties";
-	
-	/**
-	 * The field name for the location name.
-	 */
-	public static final String LOCATION_NAME = "name";
-	
-	
+
 }

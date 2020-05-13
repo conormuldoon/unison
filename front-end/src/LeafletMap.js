@@ -34,10 +34,10 @@ const image = new Leaflet.Icon({
 
   componentDidUpdate = (prevProps) =>{
 
-    if(prevProps.curVar!==this.props.curVar||prevProps.curLoc!==this.props.curLoc||prevProps.fromDate!==this.props.fromDate||prevProps.toDate!==this.props.toDate){
+    if(prevProps.curVar!==this.props.curVar||prevProps.location!==this.props.location||prevProps.fromDate!==this.props.fromDate||prevProps.toDate!==this.props.toDate){
       if(this.state.popupComponent!==undefined){
         this.closePopup();
-        this.addPopup(this.props.curLoc);
+        this.addPopup(this.props.location);
       }
     }
   }
@@ -96,7 +96,7 @@ LeafletMap.propTypes ={
   curVar: PropTypes.string,
 
   /** Sepecifies the location selected. */
-  curLoc: PropTypes.string,
+  location: PropTypes.string,
 
   /** Specifies the start date for the data that is to be displayed. */
   fromDate: PropTypes.string,

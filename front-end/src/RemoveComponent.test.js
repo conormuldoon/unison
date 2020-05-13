@@ -4,16 +4,15 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import { fireEvent, render } from "react-testing-library";
 import RemoveComponent from './RemoveComponent';
+import HttpStatus from 'http-status-codes';
 
-import { SUCCESS, FAILURE } from './ResponseConstant';
-
-
+const location = { name: 'UCD' };
 
 it('renders without crashing', async () => {
 
   const div = document.createElement('div');
 
-  ReactDOM.render(<RemoveComponent location='UCD'
+  ReactDOM.render(<RemoveComponent location={location}
     obtainData={() => { }} hideDisplay={() => { }} toggleDisplay={() => { }} display={true} />, div);
   ReactDOM.unmountComponentAtNode(div);
 });
@@ -21,7 +20,7 @@ it('renders without crashing', async () => {
 it('mathes snapshot', () => {
 
 
-  const { container } = render(<RemoveComponent display={true} location='UCD' obtainData={() => { }} hideDisplay={() => { }} toggleDisplay={() => { }} />);
+  const { container } = render(<RemoveComponent display={true} location={location} obtainData={() => { }} hideDisplay={() => { }} toggleDisplay={() => { }} />);
 
   expect(container).toMatchSnapshot();
 
@@ -29,8 +28,8 @@ it('mathes snapshot', () => {
 
 
 it('handles remove location', async (done) => {
-  const location = 'UCD';
-  fetchMock.delete('end:/deleteLocation?location=' + location, String(SUCCESS));
+  
+  fetchMock.delete('end:/location/' + location.name, HttpStatus.OK);
 
 
   const alertSpy = jest.spyOn(window, 'alert');
@@ -42,14 +41,14 @@ it('handles remove location', async (done) => {
 
   const obtainData = () => {
     expect(hideDisplay).toHaveBeenCalledTimes(1);
-    expect(alert).toBeCalledWith(location + ' removed');
+    expect(alert).toBeCalledWith(location.name + ' removed');
     done();
   };
 
   const component = <RemoveComponent location={location} display={true} obtainData={obtainData} hideDisplay={hideDisplay} toggleDisplay={() => { }} />;
   const { getByText } = render(component);
 
-  fireEvent.click(getByText('Remove ' + location));
+  fireEvent.click(getByText('Remove ' + location.name));
 
   fetchMock.restore();
   confirmSpy.mockClear();
@@ -58,28 +57,3 @@ it('handles remove location', async (done) => {
 });
 
 
-
-it('displays that the location is not present', async (done) => {
-
-  const location = 'UCD';
-  fetchMock.delete('end:/deleteLocation?location=' + location, String(FAILURE));
-
-  const alertSpy = jest.spyOn(window, 'alert');
-  alertSpy.mockImplementation((messStr) => {
-    expect(messStr).toEqual(location + ' is not being tracked by Unison.');
-    done();
-  });
-  const confirmSpy = jest.spyOn(window, 'confirm');
-  confirmSpy.mockImplementation(() => true);
-
-  const component = <RemoveComponent location={location} display={true} obtainData={() => { }} toggleDisplay={() => { }} hideDisplay={() => { }} />;
-  const { getByText } = render(component);
-
-
-
-  fireEvent.click(getByText('Remove ' + location));
-
-  fetchMock.restore();
-  confirmSpy.mockClear();
-  alertSpy.mockClear();
-});

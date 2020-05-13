@@ -5,6 +5,8 @@ import java.io.StringWriter;
 import java.io.Writer;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.NoSuchElementException;
+import java.util.Optional;
 
 import org.junit.After;
 import org.junit.Assert;
@@ -21,6 +23,7 @@ import org.springframework.boot.test.web.client.TestRestTemplate;
 import org.springframework.data.domain.Sort;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.test.context.support.WithMockUser;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.web.util.UriComponentsBuilder;
 
@@ -28,13 +31,16 @@ import com.fasterxml.jackson.core.JsonFactory;
 import com.fasterxml.jackson.core.JsonGenerator;
 
 import eu.acclimatize.unison.location.AddLocationController;
-import eu.acclimatize.unison.location.DeleteLocationController;
+import eu.acclimatize.unison.location.DeserializationException;
 import eu.acclimatize.unison.location.FeatureCollection;
 import eu.acclimatize.unison.location.FeatureCollectionSerializer;
+import eu.acclimatize.unison.location.GeoJSONLocationController;
 import eu.acclimatize.unison.location.Location;
-import eu.acclimatize.unison.location.LocationConfig;
-import eu.acclimatize.unison.location.LocationController;
+import eu.acclimatize.unison.location.LocationConstant;
+import eu.acclimatize.unison.location.LocationExistsException;
 import eu.acclimatize.unison.location.LocationRepository;
+import eu.acclimatize.unison.location.LocationRequestException;
+import eu.acclimatize.unison.location.WeatherProperty;
 import eu.acclimatize.unison.user.UserRepository;
 
 /**
@@ -43,8 +49,7 @@ import eu.acclimatize.unison.user.UserRepository;
  *
  */
 @RunWith(SpringRunner.class)
-@SpringBootTest(classes = { UnisonServerApplication.class,
-		LocationConfig.class }, webEnvironment = WebEnvironment.RANDOM_PORT)
+@SpringBootTest(webEnvironment = WebEnvironment.RANDOM_PORT)
 public class LocationTests {
 
 	@Autowired
@@ -75,17 +80,22 @@ public class LocationTests {
 	}
 
 	/**
-	 * Tests that a fail response constant is obtained if the location being added
+	 * Tests that a location exists exception is thrown if the location being added
 	 * has the same name as an existing location.
+	 * 
+	 * @throws LocationRequestException Thrown if there was a problem obtaining the
+	 *                                  XML for the locations.
 	 */
-	@Test
-	public void locationAlreadyExists() {
+	@Test(expected = LocationExistsException.class)
+	public void locationAlreadyExists() throws LocationRequestException {
 
-		AddLocationController controller = new AddLocationController(locationRepository, userRepository, null, null,
-				null);
-		Assert.assertEquals(ResponseConstant.FAILURE,
-				controller.addLocation(new Location(TestConstant.LOCATION, null, null)));
+		AddLocationController controller = new AddLocationController(locationRepository, userRepository, null);
+		controller.addLocation(new Location(TestConstant.LOCATION, null, null));
 
+	}
+
+	private Location createLocation(String locationName) {
+		return new Location(locationName, null, new GeometryFactory().createPoint(new Coordinate(0, 0)));
 	}
 
 	/**
@@ -96,37 +106,68 @@ public class LocationTests {
 	@Test
 	public void validUser() {
 
-		Location location = new Location("New Location", null, new GeometryFactory().createPoint(new Coordinate(0, 0)));
+		Location location = createLocation("New Location");
 
 		TestRestTemplate templateWBA = template.withBasicAuth(TestConstant.USERNAME, TestConstant.PASSWORD);
-		ResponseEntity<String> result = templateWBA.postForEntity(Constant.ADD_LOCATION_MAPPING, location,
-				String.class);
+		ResponseEntity<String> result = templateWBA.postForEntity(MappingConstant.LOCATION, location, String.class);
 
 		Assert.assertEquals(HttpStatus.OK, result.getStatusCode());
 
 	}
 
-	/**
-	 * Tests that a {@value eu.acclimatize.unison.ResponseConstant#FAILURE} response
-	 * constant is obtained if the location is not present and request made by a
-	 * valid user.
-	 */
-	@Test
-	public void locationNotPresentValidUser() {
+	private void testUpdate(String userName, String password, boolean expected) {
+		TestUtility.addUserInformation(userName, password, userRepository);
+		TestRestTemplate templateWBA = template.withBasicAuth(userName, password);
+		Location modifiedLocation = createLocation(TestConstant.LOCATION);
+		templateWBA.put(MappingConstant.LOCATION + "/" + TestConstant.LOCATION, modifiedLocation);
+		Optional<Location> oLoc = locationRepository.findById(TestConstant.LOCATION);
+		Location savedLocation = oLoc.get();
+		Assert.assertEquals(expected, modifiedLocation.equals(savedLocation));
 
-		DeleteLocationController controller = new DeleteLocationController(locationRepository, null);
-		Assert.assertEquals(ResponseConstant.FAILURE, controller.deleteLocation("Other Location"));
 	}
 
-	private void testDelete(String userName, String password, int expectedCount) {
+	/**
+	 * Tests that a user can update a location that they added.
+	 * 
+	 */
+	@Test
+	public void updateLocation() {
+		testUpdate(TestConstant.USERNAME, TestConstant.PASSWORD, true);
+
+	}
+
+	/**
+	 * Tests that a user cannot update a location that they didn't add.
+	 * 
+	 */
+	@Test
+	public void updateLocationOther() {
+		testUpdate(TestConstant.OTHER_USERNAME, TestConstant.OTHER_USER_PASSWORD, false);
+	}
+
+	private void testDelete(String userName, String password, int expectedCount, String locationName) {
 		TestRestTemplate templateWBA = template.withBasicAuth(userName, password);
 
-		UriComponentsBuilder builder = UriComponentsBuilder.fromUriString(Constant.DELETE_LOCATION_MAPPING);
-		builder.queryParam(Constant.LOCATION, TestConstant.LOCATION);
+		UriComponentsBuilder builder = UriComponentsBuilder.fromUriString(MappingConstant.LOCATION);
+		builder.queryParam(Constant.LOCATION_NAME, locationName);
 
 		templateWBA.delete(builder.build().toUri());
 		Assert.assertEquals(expectedCount, locationRepository.count());
 
+	}
+
+	/**
+	 * Tests that a location is not deleted if the wrong location name is given, but
+	 * and request made by a valid user.
+	 */
+	@Test
+	public void locationNotPresentValidUser() {
+
+		testDelete(TestConstant.USERNAME, TestConstant.PASSWORD, 1, "Other Location");
+	}
+
+	private void testDelete(String userName, String password, int expectedCount) {
+		testDelete(userName, password, expectedCount, TestConstant.LOCATION);
 	}
 
 	/**
@@ -158,17 +199,58 @@ public class LocationTests {
 	 * @throws IOException Thrown by the JSON generator if there is an I/O error.
 	 **/
 	@Test
-	public void testLocationList() throws IOException {
+	public void locationList() throws IOException {
 
 		Sort sort = Sort.by(Sort.Direction.ASC, "name");
 
-		LocationController locationController = new LocationController(locationRepository, sort);
+		GeoJSONLocationController locationController = new GeoJSONLocationController(locationRepository, sort);
 		FeatureCollection fc = locationController.location();
 
 		JsonGenerator jg = Mockito.mock(JsonGenerator.class);
-		fc.geoJSONSerialize(jg);
-		Mockito.verify(jg, Mockito.times(1)).writeStringField("type", "Feature");
+		fc.geoJSONSerialize(jg, WeatherProperty.values());
+		Mockito.verify(jg, Mockito.times(1)).writeStringField(Constant.TYPE, LocationConstant.FEATURE);
 
+	}
+
+	/**
+	 * Tests a get request for a specific location. Using a mock user as the
+	 * TestRestTemplate performs deserialization, which requires a security context.
+	 * A user does not need to authenticated to make a get request when not testing
+	 * and the system is running as deserialization is not performed.
+	 */
+	@Test
+	@WithMockUser(TestConstant.USERNAME)
+	public void singleLocation() {
+		ResponseEntity<Location> response = null;
+		try {
+			response = template.getForEntity(MappingConstant.LOCATION + "/" + TestConstant.LOCATION, Location.class);
+		} catch (NullPointerException | NoSuchElementException e) {
+			e.printStackTrace();
+			Assert.fail();
+		}
+
+		Assert.assertNotNull(response.getBody());
+	}
+
+	/**
+	 * Tests a get request for a location feature collection. Using a mock user as
+	 * the TestRestTemplate performs deserialization, which requires a security
+	 * context. A user does not need to authenticated to make a get request when not
+	 * testing and the system is running as deserialization is not performed.
+	 */
+	@Test
+	@WithMockUser(TestConstant.USERNAME)
+	public void collectionLocation() {
+		ResponseEntity<FeatureCollection> response = null;
+
+		try {
+			response = template.getForEntity(MappingConstant.LOCATION, FeatureCollection.class);
+		} catch (DeserializationException e) {
+			e.printStackTrace();
+			Assert.fail();
+		}
+
+		Assert.assertNotNull(response.getBody());
 	}
 
 	/**
@@ -178,13 +260,14 @@ public class LocationTests {
 	 **/
 
 	@Test
-	public void testSerialization() throws IOException {
+	public void serialization() throws IOException {
 		Writer jsonWriter = new StringWriter();
 		JsonGenerator jsonGenerator = new JsonFactory().createGenerator(jsonWriter);
 
 		Location location = TestUtility.createLocation(TestConstant.LOCATION, null, TestConstant.LONGITUDE,
 				TestConstant.LATITUDE);
-		location.geoJSONSerialize(jsonGenerator);
+		WeatherProperty[] weatherProperty = {};
+		location.geoJSONSerialize(jsonGenerator, weatherProperty);
 
 		jsonGenerator.flush();
 
@@ -201,10 +284,11 @@ public class LocationTests {
 	 * 
 	 **/
 	@Test
-	public void testFCSerialization() throws IOException {
+	public void collectionSerialization() throws IOException {
 
 		FeatureCollection featureCollection = new FeatureCollection(new ArrayList<Location>());
-		FeatureCollectionSerializer fcs = new FeatureCollectionSerializer();
+
+		FeatureCollectionSerializer fcs = new FeatureCollectionSerializer(null);
 		Writer jsonWriter = new StringWriter();
 		JsonGenerator jsonGenerator = new JsonFactory().createGenerator(jsonWriter);
 
@@ -222,7 +306,7 @@ public class LocationTests {
 	 * @throws IOException Thrown by the JSON generator if there is an I/O error.
 	 */
 	@Test
-	public void testFCArraySerialization() throws IOException {
+	public void collectionArraySerialization() throws IOException {
 
 		List<Location> list = new ArrayList<>();
 
@@ -235,7 +319,9 @@ public class LocationTests {
 		}
 
 		FeatureCollection featureCollection = new FeatureCollection(list);
-		FeatureCollectionSerializer fcs = new FeatureCollectionSerializer();
+
+		WeatherProperty[] weatherProperty = {};
+		FeatureCollectionSerializer fcs = new FeatureCollectionSerializer(weatherProperty);
 		Writer jsonWriter = new StringWriter();
 		JsonGenerator jsonGenerator = new JsonFactory().createGenerator(jsonWriter);
 

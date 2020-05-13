@@ -27,16 +27,16 @@ it('toggles add location correctly', () => {
   const confirmSpy = jest.spyOn(window, 'confirm');
   confirmSpy.mockImplementation(() => true);
 
-  const location = 'UCD';
+  const location = { name: 'UCD' };
   const { getByTestId, getByText } = render(<ARLocationComponent location={location} obtainData={() => { }} />);
   expect(getByTestId('lf-button')).toHaveTextContent('Add Location');
-  expect(getByTestId('rm-button')).toHaveTextContent('Remove ' + location);
+  expect(getByTestId('rm-button')).toHaveTextContent('Remove ' + location.name);
   fireEvent.click(getByText('Add Location'));
   expect(getByTestId('lf-button')).toHaveTextContent('Hide');
   fireEvent.click(getByText('Hide'));
   expect(getByTestId('lf-button')).toHaveTextContent('Add Location');
   fireEvent.click(getByText('Add Location'));
-  fireEvent.click(getByText('Remove ' + location));
+  fireEvent.click(getByText('Remove ' + location.name));
   expect(getByTestId('lf-button')).toHaveTextContent('Add Location');
 
   confirmSpy.mockClear();

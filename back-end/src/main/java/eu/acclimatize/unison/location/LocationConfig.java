@@ -19,20 +19,29 @@ public class LocationConfig {
 	 * @return The geometry factory created.
 	 */
 	@Bean
-	public GeometryFactory geometryFactory(){
+	public GeometryFactory geometryFactory() {
 		return new GeometryFactory();
 	}
-	
-	
+
 	/**
 	 * A bean used to determine how coordinates queries are sorted.
 	 * 
-	 * @return The sort option. Queries are sorted in ascending order base on the location name column.
+	 * @return The sort option. Queries are sorted in ascending order base on the
+	 *         location name column.
 	 */
 	@Bean
 	public Sort sort() {
-		
+
 		return Sort.by(Sort.Direction.ASC, "name");
-		
+
+	}
+
+	@Bean
+	/**
+	 * Properties used in the GeoJSON representation of the locations.
+	 */
+	public WeatherProperty[] weatherProperty() {
+
+		return WeatherProperty.values();
 	}
 }
