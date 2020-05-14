@@ -13,7 +13,6 @@ import org.springframework.test.context.junit4.SpringRunner;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 
-import eu.acclimatize.unison.user.UpsertUserController;
 import eu.acclimatize.unison.user.UserInformation;
 import eu.acclimatize.unison.user.UserRepository;
 
@@ -27,9 +26,6 @@ import eu.acclimatize.unison.user.UserRepository;
 public class UserControllerTests {
 
 	private static final String SECOND_PASSWORD = "pwd2";
-
-	@Autowired
-	private UpsertUserController upsertUserController;
 
 	@Autowired
 	private UserRepository userRepository;
@@ -63,8 +59,8 @@ public class UserControllerTests {
 	@Test
 	public void addUser() {
 
-		upsertUserController.upsertUser(TestConstant.OTHER_USERNAME,
-				TestUtility.createUserInformation(TestConstant.OTHER_USERNAME, TestConstant.OTHER_USER_PASSWORD));
+		TestRestTemplate templateWBA = template.withBasicAuth(TestConstant.USERNAME, TestConstant.PASSWORD);
+		templateWBA.put(MappingConstant.USER+"/"+TestConstant.USERNAME, TestUtility.createUserInformation(TestConstant.OTHER_USERNAME, TestConstant.OTHER_USER_PASSWORD));
 
 		Assert.assertEquals(2, userRepository.count());
 	}

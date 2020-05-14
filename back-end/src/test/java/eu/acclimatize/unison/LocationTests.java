@@ -25,7 +25,6 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.test.context.support.WithMockUser;
 import org.springframework.test.context.junit4.SpringRunner;
-import org.springframework.web.util.UriComponentsBuilder;
 
 import com.fasterxml.jackson.core.JsonFactory;
 import com.fasterxml.jackson.core.JsonGenerator;
@@ -148,10 +147,7 @@ public class LocationTests {
 	private void testDelete(String userName, String password, int expectedCount, String locationName) {
 		TestRestTemplate templateWBA = template.withBasicAuth(userName, password);
 
-		UriComponentsBuilder builder = UriComponentsBuilder.fromUriString(MappingConstant.LOCATION);
-		builder.queryParam(Constant.LOCATION_NAME, locationName);
-
-		templateWBA.delete(builder.build().toUri());
+		templateWBA.delete(MappingConstant.LOCATION + "/" + locationName);
 		Assert.assertEquals(expectedCount, locationRepository.count());
 
 	}

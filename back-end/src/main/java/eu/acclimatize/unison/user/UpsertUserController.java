@@ -1,13 +1,10 @@
 package eu.acclimatize.unison.user;
 
-import javax.annotation.security.RolesAllowed;
-
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
-import eu.acclimatize.unison.Constant;
 import eu.acclimatize.unison.MappingConstant;
 
 /**
@@ -42,7 +39,9 @@ public class UpsertUserController {
 	 * @param principal The user name for the update.
 	 * @param password  The updated user information.
 	 */
-	@RolesAllowed(Constant.ROLL_USER)
+	// The roles allowed annotation is not required here as MappingConstant.USER is
+	// configured to require authorization in the UnisonSecurityConfig
+	// configuration.
 	@PutMapping(MappingConstant.USER + "/{" + USER_NAME + "}")
 	public void upsertUser(@PathVariable(USER_NAME) String userName, @RequestBody UserInformation userInformation) {
 
