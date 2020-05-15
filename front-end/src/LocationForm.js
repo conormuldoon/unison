@@ -44,7 +44,7 @@ function LocationForm(props) {
     props.obtainData();
   }
 
-  async function postData() {
+  async function putData() {
 
     const response = await fetch(API + '/location',
       locationPutObject(location, lon, lat));
@@ -52,8 +52,8 @@ function LocationForm(props) {
     if (response.ok) {
 
       const harvestPath = await response.json();
-      
-      
+
+
       const harvestResponse = await fetch(API + harvestPath, {
         method: 'POST',
         body: location
@@ -64,10 +64,8 @@ function LocationForm(props) {
       } else {
         alert(location + ' was added, but Unison did not obtain the weather data.')
         updateDisplay();
-        
+
       }
-    } else if (response.status === HttpStatus.CONFLICT) {
-      alert(location + ' already exists');
     } else if (response.status === HttpStatus.UNAUTHORIZED) {
       alert('Incorrect user name or password');
     } else {
@@ -75,10 +73,18 @@ function LocationForm(props) {
     }
   }
 
+  async function checkPut() {
+    const response = await fetch(API + '/location/' + location);
+    if (response.ok) {
+      alert(location + ' already exists');
+    } else {
+      putData();
+    }
+  }
 
   function handleSubmit(event) {
 
-    postData();
+    checkPut();
 
     event.preventDefault();
 
