@@ -77,4 +77,11 @@ public class MappingConstant {
 	 */
 	public static final String USER = "/user";
 
+	private static final String USER_PREFIX = USER + "/{" + Constant.USER_NAME + "}/";
+
+	/**
+	 * The mapping for the harvest request.
+	 */
+	public static final String HARVEST = USER_PREFIX + Constant.HARVEST;
+
 }

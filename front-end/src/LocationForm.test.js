@@ -4,7 +4,7 @@ import ReactDOM from 'react-dom';
 import { fireEvent, render } from "react-testing-library";
 import { API } from './Constant';
 import LocationForm from './LocationForm';
-import { locationPostObject } from './Util';
+import { locationPutObject } from './Util';
 import HttpStatus from 'http-status-codes';
 
 
@@ -46,7 +46,7 @@ it('posts the data in the form when submit is clicked', async (done) => {
 
     expect(hideDisplay).toHaveBeenCalledTimes(1);
 
-    expect(fetch).toBeCalledWith(API + '/location', locationPostObject(location, lon, lat));
+    expect(fetch).toBeCalledWith(API + '/location', locationPutObject(location, lon, lat));
     done();
   };
 
@@ -65,7 +65,8 @@ it('posts the data in the form when submit is clicked', async (done) => {
 });
 
 it('handles add location', async (done) => {
-  fetchMock.post('end:/location',{ status: HttpStatus.OK, headers: { 'Content-Length': '0' }});
+  fetchMock.put('end:/location', { status: HttpStatus.OK, body: { json: () => { } } });
+  fetchMock.post('end:/harvest', { status: HttpStatus.OK });
 
   jest.spyOn(window, 'alert').mockImplementation(() => { });
   const hideDisplay = jest.fn();
@@ -89,20 +90,3 @@ it('handles add location', async (done) => {
 
 });
 
-
-it('displays that the location is already present', async (done) => {
-  fetchMock.post('end:/location', HttpStatus.CONFLICT);
-
-  jest.spyOn(window, 'alert').mockImplementation((messStr) => {
-    expect(messStr).toEqual(' already exists');
-    done();
-  });
-
-
-  const component = <LocationForm display={true} obtainData={() => { }} toggleDisplay={() => { }} hideDisplay={() => { }} />;
-  const { getByText } = render(component);
-
-  fireEvent.click(getByText('Submit'));
-
-  fetchMock.restore();
-});

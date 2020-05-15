@@ -9,10 +9,11 @@ import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.ResponseStatus;
 
+import eu.acclimatize.unison.harvester.HarvestParseException;
 import eu.acclimatize.unison.location.DeserializationException;
-import eu.acclimatize.unison.location.LocationExistsException;
 import eu.acclimatize.unison.location.LocationNotFoundException;
-import eu.acclimatize.unison.location.LocationRequestException;
+import eu.acclimatize.unison.location.LocationUpdateException;
+import eu.acclimatize.unison.user.UserUpdateException;
 
 /**
  * 
@@ -49,22 +50,29 @@ public class UnisonAdvice {
 	@ResponseBody
 	@ExceptionHandler(DeserializationException.class)
 	@ResponseStatus(HttpStatus.BAD_REQUEST)
-	public String locationDeserializationHandler(LocationRequestException exception) {
+	public String locationDeserializationHandler(HarvestParseException exception) {
+		return exception.getMessage();
+	}
+	
+	@ResponseBody
+	@ExceptionHandler(LocationUpdateException.class)
+	@ResponseStatus(HttpStatus.FORBIDDEN)
+	public String locationUpdateHandler(LocationUpdateException exception) {
+		return exception.getMessage();
+	}
+	
+	@ResponseBody
+	@ExceptionHandler(UserUpdateException.class)
+	@ResponseStatus(HttpStatus.FORBIDDEN)
+	public String userUpdateHandler(UserUpdateException exception) {
 		return exception.getMessage();
 	}
 
 	@ResponseBody
-	@ExceptionHandler(LocationRequestException.class)
+	@ExceptionHandler(HarvestParseException.class)
 	@ResponseStatus(HttpStatus.OK)
-	public String locationRequestHandler(LocationRequestException exception) {
+	public String locationRequestHandler(HarvestParseException exception) {
 		return handle(exception);
-	}
-
-	@ResponseBody
-	@ExceptionHandler(LocationExistsException.class)
-	@ResponseStatus(HttpStatus.CONFLICT)
-	public String locationExistsHandler(LocationExistsException exception) {
-		return exception.getMessage();
 	}
 
 }

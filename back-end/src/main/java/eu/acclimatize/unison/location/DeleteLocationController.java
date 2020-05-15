@@ -49,10 +49,12 @@ public class DeleteLocationController {
 	@DeleteMapping(MappingConstant.LOCATION + "/{" + Constant.LOCATION_NAME + "}")
 	public void deleteLocation(@PathVariable(Constant.LOCATION_NAME) String locationName) {
 
-		Optional<String> optOwner = locationRepository.findOwner(locationName);
-		if (optOwner.isPresent()) {
-			locationService.delete(locationName, optOwner.get());
+		Optional<Location> optLocation = locationRepository.findById(locationName);
+		if (optLocation.isPresent()) {
+			Location location = optLocation.get();
+			locationService.delete(location);
 
 		}
+
 	}
 }

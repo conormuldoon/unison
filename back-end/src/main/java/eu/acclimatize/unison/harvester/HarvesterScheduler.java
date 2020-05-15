@@ -1,4 +1,4 @@
-package eu.acclimatize.unison.location;
+package eu.acclimatize.unison.harvester;
 
 import javax.annotation.PostConstruct;
 

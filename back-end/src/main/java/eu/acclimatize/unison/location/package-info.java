@@ -1,6 +1,4 @@
 /**
- * Contains classes for storing, obtaining, and deleting location data and
- * for periodically obtaining and parsing data for the locations from a
- * HARMONIE-AROME API.
+ * Contains classes for storing, obtaining, and deleting location data.
  */
 package eu.acclimatize.unison.location;

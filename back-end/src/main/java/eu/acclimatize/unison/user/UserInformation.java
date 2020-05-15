@@ -1,6 +1,7 @@
 package eu.acclimatize.unison.user;
 
 import java.io.Serializable;
+import java.util.Optional;
 
 import javax.persistence.Entity;
 import javax.persistence.Id;
@@ -47,17 +48,13 @@ public class UserInformation implements Serializable {
 	public UserInformation() {
 
 	}
-	
 
-	/**
-	 * Checks if the user information exists in the user repository.
-	 * 
-	 * @param userRepository The repository to check.
-	 * @return True if the user information is stored in the repository or false
-	 *         otherwise.
-	 */
-	public boolean existsIn(UserRepository userRepository) {
-		return userRepository.existsById(userName);
+	public Optional<UserInformation> findCurrent(UserRepository userRepository) {
+		return userRepository.findById(userName);
+	}
+
+	public boolean hasOwner(String ownerName) {
+		return userName.equals(ownerName);
 	}
 
 	/**

@@ -60,7 +60,7 @@ public class UserControllerTests {
 	public void addUser() {
 
 		TestRestTemplate templateWBA = template.withBasicAuth(TestConstant.USERNAME, TestConstant.PASSWORD);
-		templateWBA.put(MappingConstant.USER+"/"+TestConstant.USERNAME, TestUtility.createUserInformation(TestConstant.OTHER_USERNAME, TestConstant.OTHER_USER_PASSWORD));
+		templateWBA.put(MappingConstant.USER, TestUtility.createUserInformation(TestConstant.OTHER_USERNAME, TestConstant.OTHER_USER_PASSWORD));
 
 		Assert.assertEquals(2, userRepository.count());
 	}
@@ -95,7 +95,7 @@ public class UserControllerTests {
 
 		String encodedPassword = TestUtility.encode(password);
 		SerializationStub serializationStub = new SerializationStub(userName, encodedPassword);
-		templateWBA.put(MappingConstant.USER + "/" + userName, serializationStub);
+		templateWBA.put(MappingConstant.USER, serializationStub);
 		UserInformation savedUserInformation = userRepository.findById(userName).get();
 
 		UserInformation userInformation = new UserInformation(userName, encodedPassword);

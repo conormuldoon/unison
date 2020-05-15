@@ -1,19 +1,14 @@
 package eu.acclimatize.unison.location;
 
-import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.Serializable;
-import java.util.logging.Level;
-import java.util.logging.Logger;
+import java.util.Optional;
 
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
-import javax.xml.parsers.DocumentBuilder;
 
 import org.locationtech.jts.geom.Point;
-import org.w3c.dom.Document;
-import org.xml.sax.SAXException;
 
 import com.fasterxml.jackson.core.JsonGenerator;
 
@@ -62,52 +57,20 @@ public class Location implements Serializable {
 
 	}
 
-	/**
-	 * Checks if the location exists in the location repository.
-	 * 
-	 * @param locationRepository The repository where locations are stored.
-	 * @return True if the location is stored in the repository or false otherwise.
-	 */
-	public boolean existsIn(LocationRepository locationRepository) {
-
-		return locationRepository.existsById(name);
+	public Optional<Location> findCurrent(LocationRepository locationRepository) {
+		return locationRepository.findById(name);
 	}
-	
-	/**
-	 * Requests XML data for the longitude and latitude coordinates from the
-	 * HARMONIE-AROME API.
-	 * 
-	 * @param uri             The URL template for a HARMONIE-AROME API specified by
-	 *                        app.uri in the application properties file.
-	 * @param documentBuilder A builder used to parse the XML document.
-	 * @return The an XML document obtained.
-	 * @throws IOException              Thrown if there is an I/O error when
-	 *                                  connecting to the HARMONIE-AROME API.
-	 * @throws SAXException             Thrown if there is an error in parsing the
-	 *                                  document.
-	 * @throws LocationRequestException Thrown when the generated XML for the
-	 *                                  location was not found.
-	 */
-	public Document requestDocument(String uri, DocumentBuilder documentBuilder, Logger logger)
-			throws LocationRequestException {
 
-		String locURI = String.format(uri, geom.getY(), geom.getX()); // Change to just return this string, maybe.
-		logger.log(Level.INFO, () -> "Requesting data for " + name + " from " + locURI + '.');
-		try {
-			return documentBuilder.parse(locURI);
-		} catch (FileNotFoundException e) {
-			throw new LocationRequestException("There was a problem when requesting the data  for " + name
-					+ ". The generated XML was not found at " + locURI + ".");
-		} catch (IOException e) {
-			throw new LocationRequestException(
-					"There was an I/O error when requesting the data for " + name + " fromm " + locURI + ".");
+	public boolean hasOwner(String ownerName) {
+		return user.hasOwner(ownerName);
+	}
 
-		} catch (SAXException e) {
+	public String replaceVariables(String template) {
 
-			throw new LocationRequestException(
-					"There was a problem parsing the XML document for " + name + " fromm " + locURI + ".");
-		}
-
+		// http://metwdb-openaccess.ichec.ie uses a semicolon delimiter rather than an
+		// ampersand so can't use a UriTemplate.
+		template = template.replace("{latitude}", String.valueOf(geom.getY()));
+		return template.replace("{longitude}", String.valueOf(geom.getX()));
 	}
 
 	/**

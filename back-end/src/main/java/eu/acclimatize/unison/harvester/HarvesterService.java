@@ -1,14 +1,17 @@
-package eu.acclimatize.unison.location;
+package eu.acclimatize.unison.harvester;
 
+import java.io.IOException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.Optional;
 import java.util.concurrent.Executor;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Service;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
@@ -26,6 +29,8 @@ import eu.acclimatize.unison.PrecipitationValue;
 import eu.acclimatize.unison.WeatherValue;
 import eu.acclimatize.unison.WindDirection;
 import eu.acclimatize.unison.WindSpeed;
+import eu.acclimatize.unison.location.Location;
+import eu.acclimatize.unison.location.LocationRepository;
 
 /**
  * A service that harvest data from a HARMONIE-AROME API.
@@ -121,11 +126,15 @@ public class HarvesterService {
 			do {
 				fetchException = false;
 				try {
+
 					fetchWeatherData(location);
-				} catch (LocationRequestException e) {
+
+				} catch (HarvestRequestException e) {
 					logger.log(Level.SEVERE, e.getMessage());
 					fetchException = true;
 					Thread.sleep(SLEEP_TIME);
+				} catch (DocumentNotFoundException | HarvestParseException e) {
+					logger.log(Level.WARNING, e.getMessage());
 				}
 
 			} while (fetchException);
@@ -139,21 +148,34 @@ public class HarvesterService {
 	 * 
 	 * @param location The location to obtain data for.
 	 * @return True if the data was received and stored, false otherwise.
-	 * @throws LocationRequestException Thrown when the generated XML for the
-	 *                                  location was not found.
+	 * @throws HarvestParseException     Thrown when the generated XML for the
+	 *                                   location was not found.
+	 * @throws HarvestRequestException
+	 * @throws DocumentNotFoundException
+	 * @throws IOException
 	 */
-	public void fetchAndStore(Location location) throws LocationRequestException {
+	@PreAuthorize("#userName == authentication.name")
+	public boolean fetchAndStore(String userName, String locationName)
+			throws HarvestParseException, HarvestRequestException, DocumentNotFoundException {
 
-		Document document = lrs.documentForLocation(location);
+		Optional<Location> optLocation = locationRepository.findById(locationName);
+		if (optLocation.isPresent()) {
+			Location location = optLocation.get();
+			Document document = lrs.documentForLocation(location);
 
-		List<HourlyPrecipitation> hourlyPrecipitation = new ArrayList<>();
-		List<HourlyWeather> hourlyWeather = new ArrayList<>();
-		processDocument(document, hourlyPrecipitation, hourlyWeather, location);
-		store(hourlyPrecipitation, hourlyWeather);
+			List<HourlyPrecipitation> hourlyPrecipitation = new ArrayList<>();
+			List<HourlyWeather> hourlyWeather = new ArrayList<>();
+			processDocument(document, hourlyPrecipitation, hourlyWeather, location);
+			store(hourlyPrecipitation, hourlyWeather);
+			return true;
+		} else {
+			return false;
+		}
 
 	}
 
-	private void fetchWeatherData(Location location) throws LocationRequestException {
+	private void fetchWeatherData(Location location)
+			throws HarvestParseException, HarvestRequestException, DocumentNotFoundException {
 		Document document = lrs.documentForLocation(location);
 
 		processDocument(document, precipitation, weather, location);

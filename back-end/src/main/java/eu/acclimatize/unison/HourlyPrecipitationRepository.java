@@ -4,6 +4,8 @@ import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.CrudRepository;
 
+import eu.acclimatize.unison.location.Location;
+
 /**
  * A repository for storing hourly precipitation data.
  *
@@ -16,6 +18,6 @@ public interface HourlyPrecipitationRepository extends CrudRepository<HourlyPrec
 	 * @param name The name of the location.
 	 */
 	@Modifying
-	@Query("delete from HourlyPrecipitation hp where hp.key.location.name=:name")
-	public void deleteForLocation(String name);
+	@Query("delete from HourlyPrecipitation hp where hp.key.location=:location")
+	public void deleteForLocation(Location location);
 }

@@ -5,7 +5,6 @@ import java.io.StringWriter;
 import java.io.Writer;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.NoSuchElementException;
 import java.util.Optional;
 
 import org.junit.After;
@@ -21,24 +20,18 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.context.SpringBootTest.WebEnvironment;
 import org.springframework.boot.test.web.client.TestRestTemplate;
 import org.springframework.data.domain.Sort;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.security.test.context.support.WithMockUser;
 import org.springframework.test.context.junit4.SpringRunner;
 
 import com.fasterxml.jackson.core.JsonFactory;
 import com.fasterxml.jackson.core.JsonGenerator;
 
-import eu.acclimatize.unison.location.AddLocationController;
-import eu.acclimatize.unison.location.DeserializationException;
 import eu.acclimatize.unison.location.FeatureCollection;
 import eu.acclimatize.unison.location.FeatureCollectionSerializer;
 import eu.acclimatize.unison.location.GeoJSONLocationController;
 import eu.acclimatize.unison.location.Location;
 import eu.acclimatize.unison.location.LocationConstant;
-import eu.acclimatize.unison.location.LocationExistsException;
 import eu.acclimatize.unison.location.LocationRepository;
-import eu.acclimatize.unison.location.LocationRequestException;
 import eu.acclimatize.unison.location.WeatherProperty;
 import eu.acclimatize.unison.user.UserRepository;
 
@@ -78,21 +71,6 @@ public class LocationTests {
 		TestUtility.deleteLocationData(locationRepository, userRepository);
 	}
 
-	/**
-	 * Tests that a location exists exception is thrown if the location being added
-	 * has the same name as an existing location.
-	 * 
-	 * @throws LocationRequestException Thrown if there was a problem obtaining the
-	 *                                  XML for the locations.
-	 */
-	@Test(expected = LocationExistsException.class)
-	public void locationAlreadyExists() throws LocationRequestException {
-
-		AddLocationController controller = new AddLocationController(locationRepository, userRepository, null);
-		controller.addLocation(new Location(TestConstant.LOCATION, null, null));
-
-	}
-
 	private Location createLocation(String locationName) {
 		return new Location(locationName, null, new GeometryFactory().createPoint(new Coordinate(0, 0)));
 	}
@@ -108,9 +86,9 @@ public class LocationTests {
 		Location location = createLocation("New Location");
 
 		TestRestTemplate templateWBA = template.withBasicAuth(TestConstant.USERNAME, TestConstant.PASSWORD);
-		ResponseEntity<String> result = templateWBA.postForEntity(MappingConstant.LOCATION, location, String.class);
+		templateWBA.put(MappingConstant.LOCATION, location);
 
-		Assert.assertEquals(HttpStatus.OK, result.getStatusCode());
+		Assert.assertEquals(2, locationRepository.count());
 
 	}
 
@@ -118,7 +96,7 @@ public class LocationTests {
 		TestUtility.addUserInformation(userName, password, userRepository);
 		TestRestTemplate templateWBA = template.withBasicAuth(userName, password);
 		Location modifiedLocation = createLocation(TestConstant.LOCATION);
-		templateWBA.put(MappingConstant.LOCATION + "/" + TestConstant.LOCATION, modifiedLocation);
+		templateWBA.put(MappingConstant.LOCATION, modifiedLocation);
 		Optional<Location> oLoc = locationRepository.findById(TestConstant.LOCATION);
 		Location savedLocation = oLoc.get();
 		Assert.assertEquals(expected, modifiedLocation.equals(savedLocation));
@@ -209,43 +187,23 @@ public class LocationTests {
 	}
 
 	/**
-	 * Tests a get request for a specific location. Using a mock user as the
-	 * TestRestTemplate performs deserialization, which requires a security context.
-	 * A user does not need to authenticated to make a get request when not testing
-	 * and the system is running as deserialization is not performed.
+	 * Tests a get request for a specific location.
 	 */
 	@Test
-	@WithMockUser(TestConstant.USERNAME)
-	public void singleLocation() {
-		ResponseEntity<Location> response = null;
-		try {
-			response = template.getForEntity(MappingConstant.LOCATION + "/" + TestConstant.LOCATION, Location.class);
-		} catch (NullPointerException | NoSuchElementException e) {
-			e.printStackTrace();
-			Assert.fail();
-		}
 
+	public void singleLocation() {
+		ResponseEntity<Location> response = template
+				.getForEntity(MappingConstant.LOCATION + "/" + TestConstant.LOCATION, Location.class);
 		Assert.assertNotNull(response.getBody());
 	}
 
 	/**
-	 * Tests a get request for a location feature collection. Using a mock user as
-	 * the TestRestTemplate performs deserialization, which requires a security
-	 * context. A user does not need to authenticated to make a get request when not
-	 * testing and the system is running as deserialization is not performed.
+	 * Tests a get request for a location feature collection.
 	 */
 	@Test
-	@WithMockUser(TestConstant.USERNAME)
 	public void collectionLocation() {
-		ResponseEntity<FeatureCollection> response = null;
-
-		try {
-			response = template.getForEntity(MappingConstant.LOCATION, FeatureCollection.class);
-		} catch (DeserializationException e) {
-			e.printStackTrace();
-			Assert.fail();
-		}
-
+		ResponseEntity<FeatureCollection> response = template.getForEntity(MappingConstant.LOCATION,
+				FeatureCollection.class);
 		Assert.assertNotNull(response.getBody());
 	}
 

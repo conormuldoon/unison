@@ -41,18 +41,24 @@ public class LocationService {
 	 * @param locationName The name of the location to be deleted.
 	 * @param userName     The user name of the user that added the location.
 	 */
-	@PreAuthorize("#userName == authentication.name")
+	@PreAuthorize("#location.hasOwner(authentication.name)")
 	@Transactional
-	public void delete(String locationName, String userName) {
+	public void delete(Location location) {
 
-		hpr.deleteForLocation(locationName);
-		hwr.deleteForLocation(locationName);
-		locationRepository.deleteById(locationName);
+		hpr.deleteForLocation(location);
+		hwr.deleteForLocation(location);
+		locationRepository.delete(location);
 	}
-	
-	@PreAuthorize("#ownerName == authentication.name")
-	public void update(String ownerName, Location location) {
-		locationRepository.save(location);
+
+	/**
+	 * Only the user that added the location can update it.
+	 * 
+	 * @param currentLocation
+	 * @param updatedLocation
+	 */
+	@PreAuthorize("#current.hasOwner(authentication.name)")
+	public void replace(Location current, Location updated) {
+		locationRepository.save(updated);
 	}
 
 }

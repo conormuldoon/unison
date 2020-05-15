@@ -66,6 +66,15 @@ public class Constant {
 	public static final String WIND_SPEED = "windSpeed";
 
 	/**
+	 * The path variable for the user name.
+	 */
+	public static final String USER_NAME = "userName";
+	/**
+	 * The property name for harvest.
+	 */
+	public static final String HARVEST = "harvest";
+
+	/**
 	 * The query string parameter field name, GeoJSON property name, and the JPQL
 	 * query parameter name for the location name.
 	 */

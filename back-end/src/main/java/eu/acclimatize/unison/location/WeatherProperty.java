@@ -26,10 +26,4 @@ public enum WeatherProperty {
 						+ "/" + propertyName + "{?fromDate,toDate}");
 	}
 
-	public void checkConflict(String name) {
-		if (propertyName.equals(name)) {
-			throw new PropertyConflictException(
-					"The content for " + name + " will be obtained by Unison from the HARMONIE-AROME API.");
-		}
-	}
 }

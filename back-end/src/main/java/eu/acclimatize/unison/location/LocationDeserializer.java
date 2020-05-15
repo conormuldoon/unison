@@ -56,8 +56,7 @@ public class LocationDeserializer extends JsonDeserializer<Location> {
 				}
 			}
 		}
-		throw new DeserializationException(
-				"No location " + Constant.LOCATION_NAME + " in the properties object.");
+		throw new DeserializationException("No location " + Constant.LOCATION_NAME + " in the properties object.");
 	}
 
 	private double[] parseGeometry(JsonParser parser) throws IOException {
@@ -81,8 +80,7 @@ public class LocationDeserializer extends JsonDeserializer<Location> {
 		}
 
 		if (longitude == null) {
-			throw new DeserializationException(
-					"No " + LocationConstant.COORDINATES + " in the geometry object.");
+			throw new DeserializationException("No " + LocationConstant.COORDINATES + " in the geometry object.");
 		}
 
 		double[] coordinates = { longitude, latitude };
@@ -122,11 +120,16 @@ public class LocationDeserializer extends JsonDeserializer<Location> {
 					"No " + LocationConstant.GEOMETRY + " in the GeoJSON point feature object.");
 		}
 
+		
+		UserInformation userInformation = null;
 		Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-		String authenticatedUser = authentication.getName();
-		Optional<UserInformation> oUser = userRepository.findById(authenticatedUser);
+		if (authentication != null) {
+			String authenticatedUser = authentication.getName();
+			Optional<UserInformation> oUser = userRepository.findById(authenticatedUser);
+			userInformation = oUser.get();
+		}
 
-		return new Location(locationName, oUser.get(),
+		return new Location(locationName, userInformation,
 				geometryFactory.createPoint(new Coordinate(coordinates[0], coordinates[1])));
 
 	}

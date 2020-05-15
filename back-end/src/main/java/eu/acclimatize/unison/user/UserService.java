@@ -12,9 +12,15 @@ public class UserService {
 		this.userRepository = userRepository;
 	}
 
-	@PreAuthorize("#userName == authentication.name")
-	public void update(String userName, UserInformation userInformation) {
-		userRepository.save(userInformation);
+	/**
+	 * The user repository will be updated if the authenticated added the original
+	 * user information.
+	 * 
+	 * @param current
+	 * @param updated
+	 */
+	@PreAuthorize("#current.hasOwner(authentication.name)")
+	public void replace(UserInformation current, UserInformation updated) {
+		userRepository.save(updated);
 	}
-
 }

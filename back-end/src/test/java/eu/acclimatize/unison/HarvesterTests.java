@@ -1,14 +1,13 @@
 package eu.acclimatize.unison;
 
-import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.ArgumentMatchers.anyCollection;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
-import static org.mockito.Mockito.when;
 
 import java.io.IOException;
 import java.text.SimpleDateFormat;
+import java.util.Optional;
 import java.util.TimeZone;
 import java.util.logging.Logger;
 
@@ -22,10 +21,13 @@ import org.mockito.Mockito;
 import org.w3c.dom.Document;
 import org.xml.sax.SAXException;
 
-import eu.acclimatize.unison.location.HarvesterService;
+import eu.acclimatize.unison.harvester.DocumentNotFoundException;
+import eu.acclimatize.unison.harvester.DocumentRequestService;
+import eu.acclimatize.unison.harvester.HarvestParseException;
+import eu.acclimatize.unison.harvester.HarvestRequestException;
+import eu.acclimatize.unison.harvester.HarvesterService;
 import eu.acclimatize.unison.location.Location;
-import eu.acclimatize.unison.location.LocationRequestException;
-import eu.acclimatize.unison.location.DocumentRequestService;
+import eu.acclimatize.unison.location.LocationRepository;
 
 /**
  * Tests for the Unison data harvester and document request service.
@@ -33,8 +35,8 @@ import eu.acclimatize.unison.location.DocumentRequestService;
  */
 public class HarvesterTests {
 
-	private void testParse(String fileName, String timeZone)
-			throws ParserConfigurationException, SAXException, IOException, LocationRequestException {
+	private void testParse(String fileName, String timeZone) throws ParserConfigurationException, SAXException,
+			IOException, HarvestParseException, HarvestRequestException, DocumentNotFoundException {
 
 		HourlyPrecipitationRepository pr = mock(HourlyPrecipitationRepository.class);
 		HourlyWeatherRepository wr = mock(HourlyWeatherRepository.class);
@@ -46,21 +48,28 @@ public class HarvesterTests {
 
 		DocumentBuilderFactory dbFactory = DocumentBuilderFactory.newInstance();
 		DocumentBuilder dBuilder = dbFactory.newDocumentBuilder();
-		DocumentRequestService lrs = new DocumentRequestService(dBuilder, null, "");
-
-		HarvesterService hs = new HarvesterService(null, pr, wr, lrs, logger, dateFormat,
-				new UnisonServerApplication().executor());
-
 		Document doc = dBuilder.parse(getClass().getResourceAsStream(fileName));
 
-		Location location = mock(Location.class);
+		DocumentBuilder mockBuilder = Mockito.mock(DocumentBuilder.class);
+		Mockito.when(mockBuilder.parse(Mockito.anyString())).thenReturn(doc);
 
-		when(location.requestDocument(any(), any(), any())).thenReturn(doc);
+		DocumentRequestService lrs = new DocumentRequestService(mockBuilder, logger, "classpath:" + fileName);
 
-		hs.fetchAndStore(location);
+		LocationRepository lr = Mockito.mock(LocationRepository.class);
+		Location location = TestUtility.createLocation("New Location", null, 0, 0);
+		Mockito.when(lr.findById(Mockito.anyString())).thenReturn(Optional.of(location));
+		HarvesterService hs = new HarvesterService(lr, pr, wr, lrs, logger, dateFormat,
+				new UnisonServerApplication().executor());
+
+		try {
+		hs.fetchAndStore("", "");
 
 		verify(pr, times(1)).saveAll(anyCollection());
 		verify(wr, times(1)).saveAll(anyCollection());
+		}catch(HarvestRequestException e) {
+			e.printStackTrace();
+			Assert.fail();
+		}
 
 	}
 
@@ -75,11 +84,13 @@ public class HarvesterTests {
 	 * 
 	 * @throws IOException                  Thrown if there is an I/O error when
 	 *                                      parsing the document.
-	 * @throws LocationRequestException     Thrown if the XML was not obtained.
+	 * @throws HarvestParseException        Thrown if the XML was not obtained.
+	 * @throws HarvestRequestException
+	 * @throws DocumentNotFoundException
 	 */
 	@Test
-	public void testConvertorIrl()
-			throws ParserConfigurationException, SAXException, IOException, LocationRequestException {
+	public void testConvertorIrl() throws ParserConfigurationException, SAXException, IOException,
+			HarvestParseException, HarvestRequestException, DocumentNotFoundException {
 		testParse("/TestIreland.xml", "Europe/Dublin");
 	}
 
@@ -94,11 +105,13 @@ public class HarvesterTests {
 	 * 
 	 * @throws IOException                  Thrown if there is an I/O error when
 	 *                                      parsing the document.
-	 * @throws LocationRequestException     Thrown if the XML was not obtained.
+	 * @throws HarvestParseException        Thrown if the XML was not obtained.
+	 * @throws HarvestRequestException
+	 * @throws DocumentNotFoundException
 	 */
 	@Test
-	public void testConvertorUK()
-			throws ParserConfigurationException, SAXException, IOException, LocationRequestException {
+	public void testConvertorUK() throws ParserConfigurationException, SAXException, IOException, HarvestParseException,
+			HarvestRequestException, DocumentNotFoundException {
 		testParse("/TestUK.xml", "Europe/Dublin");
 	}
 
@@ -113,31 +126,37 @@ public class HarvesterTests {
 	 * 
 	 * @throws IOException                  Thrown if there is an I/O error when
 	 *                                      parsing the document.
-	 * @throws LocationRequestException     Thrown if the XML was not obtained.
+	 * @throws HarvestParseException        Thrown if the XML was not obtained.
+	 * @throws HarvestRequestException
+	 * @throws DocumentNotFoundException
 	 */
 	@Test
-	public void testConvertorNor()
-			throws ParserConfigurationException, SAXException, IOException, LocationRequestException {
+	public void testConvertorNor() throws ParserConfigurationException, SAXException, IOException,
+			HarvestParseException, HarvestRequestException, DocumentNotFoundException {
 		testParse("/TestNorway.xml", "Europe/Oslo");
 	}
 
 	/**
 	 * Tests that the document is present.
 	 * 
-	 * @throws SAXException             Thrown if there is a an error in parsing the
-	 *                                  XML, parsing is mocked in this test and the
-	 *                                  exception should not be thrown.
-	 * @throws IOException              Thrown if there is an I/O error when parsing
-	 *                                  the document.
-	 * @throws LocationRequestException Thrown if the XML was not obtained.
+	 * @throws SAXException              Thrown if there is a an error in parsing
+	 *                                   the XML, parsing is mocked in this test and
+	 *                                   the exception should not be thrown.
+	 * @throws IOException               Thrown if there is an I/O error when
+	 *                                   parsing the document.
+	 * @throws HarvestParseException     Thrown if the XML was not obtained.
+	 * @throws HarvestRequestException
+	 * @throws DocumentNotFoundException
 	 */
 	@Test
-	public void testHaveDocument() throws SAXException, IOException, LocationRequestException {
+	public void testHaveDocument() throws SAXException, IOException, HarvestParseException, HarvestRequestException,
+			DocumentNotFoundException {
 		DocumentBuilder documentBuilder = Mockito.mock(DocumentBuilder.class);
 		Logger logger = Mockito.mock(Logger.class);
 
 		Document d = Mockito.mock(Document.class);
 		Mockito.when(documentBuilder.parse(Mockito.anyString())).thenReturn(d);
+
 		DocumentRequestService drc = new DocumentRequestService(documentBuilder, logger, "");
 
 		Document document = drc.documentForLocation(

@@ -1,6 +1,8 @@
 package eu.acclimatize.unison.user;
 
-import org.springframework.web.bind.annotation.PathVariable;
+import java.util.Optional;
+
+import org.springframework.security.access.AccessDeniedException;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
@@ -14,8 +16,6 @@ import eu.acclimatize.unison.MappingConstant;
 @RestController
 public class UpsertUserController {
 
-	private final static String USER_NAME = "userName";
-
 	private UserRepository userRepository;
 	private UserService userService;
 
@@ -24,7 +24,7 @@ public class UpsertUserController {
 	 * 
 	 * @param userService The service used to update the user.
 	 */
-	public UpsertUserController(UserService userService, UserRepository userRepository) {
+	public UpsertUserController(UserRepository userRepository, UserService userService) {
 
 		this.userRepository = userRepository;
 		this.userService = userService;
@@ -42,12 +42,20 @@ public class UpsertUserController {
 	// The roles allowed annotation is not required here as MappingConstant.USER is
 	// configured to require authorization in the UnisonSecurityConfig
 	// configuration.
-	@PutMapping(MappingConstant.USER + "/{" + USER_NAME + "}")
-	public void upsertUser(@PathVariable(USER_NAME) String userName, @RequestBody UserInformation userInformation) {
+	@PutMapping(MappingConstant.USER)
+	public void upsertUser(@RequestBody UserInformation userInformation) {
 
-		if (userInformation.existsIn(userRepository)) {
+		Optional<UserInformation> optCurrent = userInformation.findCurrent(userRepository);
+		if (optCurrent.isPresent()) {
 
-			userService.update(userName, userInformation);
+			try {
+				userService.replace(optCurrent.get(), userInformation);
+			} catch (AccessDeniedException e) {
+				
+				throw new UserUpdateException(
+						"Users may only update their own information. The name of the user in the response body"
+								+ " must match that of the authenticated user.");
+			}
 		} else {
 			userRepository.save(userInformation);
 		}

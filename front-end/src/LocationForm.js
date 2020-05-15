@@ -5,7 +5,7 @@ import './App.css';
 import { API } from './Constant';
 import { problemConnecting } from './Util';
 import HttpStatus from 'http-status-codes';
-import { locationPostObject } from './Util';
+import { locationPutObject } from './Util';
 
 
 
@@ -47,16 +47,24 @@ function LocationForm(props) {
   async function postData() {
 
     const response = await fetch(API + '/location',
-      locationPostObject(location, lon, lat));
+      locationPutObject(location, lon, lat));
 
     if (response.ok) {
 
-      if (response.headers.get("Content-Length") === '0') {
+      const harvestPath = await response.json();
+      
+      
+      const harvestResponse = await fetch(API + harvestPath, {
+        method: 'POST',
+        body: location
+      });
+      if (harvestResponse.ok) {
         alert(location + ' was added');
         updateDisplay();
       } else {
         alert(location + ' was added, but Unison did not obtain the weather data.')
         updateDisplay();
+        
       }
     } else if (response.status === HttpStatus.CONFLICT) {
       alert(location + ' already exists');

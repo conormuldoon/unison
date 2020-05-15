@@ -32,9 +32,9 @@ export const problemConnecting = () => {
 }
 
 
-const postObject = (body) => {
+const putObject = (body) => {
   return {
-    method: 'POST',
+    method: 'PUT',
     headers: new Headers({
       'Content-Type': 'application/geo+json'
     }),
@@ -43,9 +43,9 @@ const postObject = (body) => {
 }
 
 
-export const locationPostObject = (locationName, longitude, latitude) => {
+export const locationPutObject = (locationName, longitude, latitude) => {
   const location = { name: locationName, lng: longitude, lat: latitude };
 
   const geoJSONPoint = GeoJSON.parse(location, { Point: ['lat', 'lng'] });
-  return postObject(JSON.stringify(geoJSONPoint));
+  return putObject(JSON.stringify(geoJSONPoint));
 }
