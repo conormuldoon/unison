@@ -11,7 +11,6 @@ import java.util.concurrent.Executor;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Service;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
@@ -30,6 +29,7 @@ import eu.acclimatize.unison.WeatherValue;
 import eu.acclimatize.unison.WindDirection;
 import eu.acclimatize.unison.WindSpeed;
 import eu.acclimatize.unison.location.Location;
+import eu.acclimatize.unison.location.LocationNotFoundException;
 import eu.acclimatize.unison.location.LocationRepository;
 
 /**
@@ -154,8 +154,7 @@ public class HarvesterService {
 	 * @throws DocumentNotFoundException
 	 * @throws IOException
 	 */
-	@PreAuthorize("#userName == authentication.name")
-	public boolean fetchAndStore(String userName, String locationName)
+	public void fetchAndStore(String locationName)
 			throws HarvestParseException, HarvestRequestException, DocumentNotFoundException {
 
 		Optional<Location> optLocation = locationRepository.findById(locationName);
@@ -167,9 +166,9 @@ public class HarvesterService {
 			List<HourlyWeather> hourlyWeather = new ArrayList<>();
 			processDocument(document, hourlyPrecipitation, hourlyWeather, location);
 			store(hourlyPrecipitation, hourlyWeather);
-			return true;
+			
 		} else {
-			return false;
+			throw new LocationNotFoundException(locationName);
 		}
 
 	}

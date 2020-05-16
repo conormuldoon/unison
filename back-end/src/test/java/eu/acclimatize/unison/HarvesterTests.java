@@ -62,7 +62,7 @@ public class HarvesterTests {
 				new UnisonServerApplication().executor());
 
 		try {
-		hs.fetchAndStore("", "");
+		hs.fetchAndStore( "");
 
 		verify(pr, times(1)).saveAll(anyCollection());
 		verify(wr, times(1)).saveAll(anyCollection());
