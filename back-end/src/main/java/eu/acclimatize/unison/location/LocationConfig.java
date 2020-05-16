@@ -4,9 +4,6 @@ import org.locationtech.jts.geom.GeometryFactory;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.data.domain.Sort;
-import org.springframework.web.util.UriTemplate;
-
-import eu.acclimatize.unison.MappingConstant;
 
 /**
  * 
@@ -48,8 +45,4 @@ public class LocationConfig {
 		return WeatherProperty.values();
 	}
 
-	@Bean
-	public UriTemplate harvestUnison() {
-		return new UriTemplate(MappingConstant.HARVEST);
-	}
 }

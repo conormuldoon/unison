@@ -2,12 +2,10 @@ package eu.acclimatize.unison.harvester;
 
 import java.util.Optional;
 
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
-import eu.acclimatize.unison.Constant;
 import eu.acclimatize.unison.MappingConstant;
 import eu.acclimatize.unison.location.Location;
 import eu.acclimatize.unison.location.LocationNotFoundException;
@@ -37,7 +35,7 @@ public class HarvesterController {
 	}
 
 	@PostMapping(MappingConstant.HARVEST)
-	public void harvester(@PathVariable(Constant.USER_NAME) String userName, @RequestBody String locationName)
+	public void harvester(@RequestBody String locationName)
 			throws HarvestParseException, HarvestRequestException, DocumentNotFoundException {
 
 		Optional<Location> optLocation = locationRepository.findById(locationName);

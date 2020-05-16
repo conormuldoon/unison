@@ -20,6 +20,11 @@ public class MappingConstant {
 	 */
 	public static final String LOCATION = "/location";
 
+	/**
+	 * The mapping for the harvest request.
+	 */
+	public static final String HARVEST = LOCATION + "/" + Constant.HARVEST;
+
 	private static final String PREFIX = LOCATION + "/{" + Constant.LOCATION_NAME + "}/";
 
 	/**
@@ -76,12 +81,5 @@ public class MappingConstant {
 	 * The mapping for adding a user.
 	 */
 	public static final String USER = "/user";
-
-	private static final String USER_PREFIX = USER + "/{" + Constant.USER_NAME + "}/";
-
-	/**
-	 * The mapping for the harvest request.
-	 */
-	public static final String HARVEST = USER_PREFIX + Constant.HARVEST;
 
 }
