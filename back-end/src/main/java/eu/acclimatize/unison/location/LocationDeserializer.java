@@ -3,6 +3,8 @@ package eu.acclimatize.unison.location;
 import java.io.IOException;
 import java.util.Optional;
 
+import javax.annotation.security.RolesAllowed;
+
 import org.locationtech.jts.geom.Coordinate;
 import org.locationtech.jts.geom.GeometryFactory;
 import org.springframework.boot.jackson.JsonComponent;
@@ -16,7 +18,6 @@ import com.fasterxml.jackson.databind.DeserializationContext;
 import com.fasterxml.jackson.databind.JsonDeserializer;
 
 import eu.acclimatize.unison.Constant;
-import eu.acclimatize.unison.user.DeserializationUserException;
 import eu.acclimatize.unison.user.UserInformation;
 import eu.acclimatize.unison.user.UserRepository;
 
@@ -89,6 +90,7 @@ public class LocationDeserializer extends JsonDeserializer<Location> {
 
 	}
 
+	@RolesAllowed(Constant.ROLL_USER)
 	@Override
 	public Location deserialize(JsonParser parser, DeserializationContext ctxt)
 			throws IOException, JsonProcessingException {

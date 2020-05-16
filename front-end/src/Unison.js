@@ -122,6 +122,10 @@ function Unison(props) {
     return date.replace(/\//g, '-');
   }
 
+  const spaceToUnderscore = (s) => {
+    return s.replace(/ /g, '_')
+  }
+
 
   let locationName;
   if (curLoc) {
@@ -190,7 +194,7 @@ function Unison(props) {
 
             </div>
 
-            {curLoc && <a download={curVar.replace(/ /g, '_') + '_' + dashDate(fromDate) + "_" + dashDate(toDate) + '.csv'}
+            {curLoc && <a download={spaceToUnderscore(locationName) + '_' + spaceToUnderscore(curVar) + '_' + dashDate(fromDate) + "_" + dashDate(toDate) + '.csv'}
               className='pLeft'
               href={API + '/location/' + curLoc.name + '/' + curVar.replace(/ /g, '') + '?fromDate=' + fromDate + '&toDate=' + toDate}>
 

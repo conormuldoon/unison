@@ -12,9 +12,9 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 import eu.acclimatize.unison.harvester.DocumentNotFoundException;
 import eu.acclimatize.unison.harvester.HarvestParseException;
 import eu.acclimatize.unison.location.DeserializationException;
+import eu.acclimatize.unison.location.DeserializationUserException;
 import eu.acclimatize.unison.location.LocationNotFoundException;
 import eu.acclimatize.unison.location.LocationUpdateException;
-import eu.acclimatize.unison.user.DeserializationUserException;
 import eu.acclimatize.unison.user.UserUpdateException;
 
 /**
@@ -23,7 +23,7 @@ import eu.acclimatize.unison.user.UserUpdateException;
  *
  */
 @ControllerAdvice
-public class UnisonAdvice {
+public class UnisonAdvice{
 
 	private Logger logger;
 
@@ -80,14 +80,14 @@ public class UnisonAdvice {
 	@ResponseBody
 	@ExceptionHandler(DocumentNotFoundException.class)
 	@ResponseStatus(HttpStatus.BAD_GATEWAY)
-	public String documentNotFoundHandler(HarvestParseException exception) {
+	public String documentNotFoundHandler(DocumentNotFoundException exception) {
 		return exception.getMessage();
 	}
 	
 	@ResponseBody
 	@ExceptionHandler(DeserializationUserException.class)
 	@ResponseStatus(HttpStatus.UNAUTHORIZED)
-	public String anonymousUserHandler(HarvestParseException exception) {
+	public String anonymousUserHandler(DeserializationUserException exception) {
 		return exception.getMessage();
 	}
 

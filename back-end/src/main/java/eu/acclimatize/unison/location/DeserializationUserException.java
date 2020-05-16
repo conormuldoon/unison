@@ -1,4 +1,4 @@
-package eu.acclimatize.unison.user;
+package eu.acclimatize.unison.location;
 
 public class DeserializationUserException extends RuntimeException{
 
