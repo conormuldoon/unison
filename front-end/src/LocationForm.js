@@ -44,7 +44,7 @@ function LocationForm(props) {
     props.obtainData();
   }
 
-  async function putData() {
+  async function putData(locationExists) {
 
     const response = await fetch(API + '/location',
       locationPutObject(location, lon, lat));
@@ -58,35 +58,46 @@ function LocationForm(props) {
         method: 'POST',
         body: location
       });
-      if (harvestResponse.ok) {
-        alert(location + ' was added');
-        updateDisplay();
-      } else {
-        alert(location + ' was added, but Unison did not obtain the weather data.')
-        updateDisplay();
 
+
+      let message;
+      if (locationExists) {
+        message = 'updated';
+      } else {
+        message = 'added';
+      }
+      if (harvestResponse.ok) {
+        alert(location + ' was ' + message);
+        updateDisplay();
+      } else if (harvestResponse.status === HttpStatus.BAD_GATEWAY) {
+        alert(location + ' was ' + message + ', but did did not recieve the weather data. The ' +
+          lon + " and " + lat + " longitude and latitude values may not be covered by the model.");
+      }
+      else {
+        alert(location + ' was ' + message + ', but Unison did not obtain the weather data.')
+        updateDisplay();
       }
     } else if (response.status === HttpStatus.UNAUTHORIZED) {
       alert('Incorrect user name or password');
-    } else {
+    } else if (response.status === HttpStatus.FORBIDDEN) {
+      alert(location + ' was added by another user and was not updated.')
+    }
+    else {
       problemConnecting();
     }
   }
 
-  async function checkPut() {
-    const response = await fetch(API + '/location/' + location);
-    if (response.ok) {
-      alert(location + ' already exists');
-    } else {
-      putData();
-    }
-  }
-
-  function handleSubmit(event) {
-
-    checkPut();
-
+  async function handleSubmit(event) {
     event.preventDefault();
+    const response = await fetch(API + '/location/' + location, { method: 'HEAD' });
+    if (response.ok) {
+      if (window.confirm(location + ' already exists. Would you like to replace it?')) {
+        putData(true);
+      }
+
+    } else {
+      putData(false);
+    }
 
   }
 

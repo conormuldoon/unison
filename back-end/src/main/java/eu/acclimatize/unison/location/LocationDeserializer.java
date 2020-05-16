@@ -120,13 +120,13 @@ public class LocationDeserializer extends JsonDeserializer<Location> {
 					"No " + LocationConstant.GEOMETRY + " in the GeoJSON point feature object.");
 		}
 
-		
 		UserInformation userInformation = null;
 		Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
 		if (authentication != null) {
 			String authenticatedUser = authentication.getName();
 			Optional<UserInformation> oUser = userRepository.findById(authenticatedUser);
-			userInformation = oUser.get();
+			if (oUser.isPresent())
+				userInformation = oUser.get();
 		}
 
 		return new Location(locationName, userInformation,

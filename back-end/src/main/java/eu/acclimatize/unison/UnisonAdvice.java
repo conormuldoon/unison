@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.ResponseStatus;
 
+import eu.acclimatize.unison.harvester.DocumentNotFoundException;
 import eu.acclimatize.unison.harvester.HarvestParseException;
 import eu.acclimatize.unison.location.DeserializationException;
 import eu.acclimatize.unison.location.LocationNotFoundException;
@@ -53,14 +54,14 @@ public class UnisonAdvice {
 	public String locationDeserializationHandler(HarvestParseException exception) {
 		return exception.getMessage();
 	}
-	
+
 	@ResponseBody
 	@ExceptionHandler(LocationUpdateException.class)
 	@ResponseStatus(HttpStatus.FORBIDDEN)
 	public String locationUpdateHandler(LocationUpdateException exception) {
 		return exception.getMessage();
 	}
-	
+
 	@ResponseBody
 	@ExceptionHandler(UserUpdateException.class)
 	@ResponseStatus(HttpStatus.FORBIDDEN)
@@ -70,8 +71,15 @@ public class UnisonAdvice {
 
 	@ResponseBody
 	@ExceptionHandler(HarvestParseException.class)
-	@ResponseStatus(HttpStatus.OK)
+	@ResponseStatus(HttpStatus.BAD_GATEWAY)
 	public String locationRequestHandler(HarvestParseException exception) {
+		return handle(exception);
+	}
+
+	@ResponseBody
+	@ExceptionHandler(DocumentNotFoundException.class)
+	@ResponseStatus(HttpStatus.BAD_GATEWAY)
+	public String documentNotFoundHandler(HarvestParseException exception) {
 		return handle(exception);
 	}
 

@@ -35,7 +35,7 @@ it('posts the data in the form when submit is clicked', async (done) => {
   const hideDisplay = jest.fn();
 
   const location = 'UCD';
-  fetchMock.get('end:' + location, { status: HttpStatus.NOT_FOUND });
+  fetchMock.head('end:' + location, { status: HttpStatus.NOT_FOUND });
 
   const lon = '-6.223682';
   const lat = '53.308441';
@@ -68,7 +68,7 @@ it('posts the data in the form when submit is clicked', async (done) => {
 
 it('handles add location', async (done) => {
   const location = 'UCD';
-  fetchMock.get('end:' + location, { status: HttpStatus.NOT_FOUND });
+  fetchMock.head('end:' + location, { status: HttpStatus.NOT_FOUND });
   fetchMock.put('end:/location', { status: HttpStatus.OK, body: { json: () => { } } });
   fetchMock.post('end:/harvest', { status: HttpStatus.OK });
 
