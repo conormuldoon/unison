@@ -4,15 +4,12 @@ import java.net.URI;
 import java.security.Principal;
 import java.util.Optional;
 
-import javax.annotation.security.RolesAllowed;
-
 import org.springframework.security.access.AccessDeniedException;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.util.UriTemplate;
 
-import eu.acclimatize.unison.Constant;
 import eu.acclimatize.unison.MappingConstant;
 import eu.acclimatize.unison.harvester.HarvesterController;
 
@@ -43,7 +40,8 @@ public class UpsertLocationController {
 	 * @param locationName The name of the location to add.
 	 * @param location     The location to add.
 	 */
-	@RolesAllowed(Constant.ROLL_USER)
+	// @RolesAllowed is used when the location is deserialized so is not required
+	// here.
 	@PutMapping(MappingConstant.LOCATION)
 	public URI upsert(Principal principal, @RequestBody Location location) {
 

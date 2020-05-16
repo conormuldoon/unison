@@ -6,11 +6,11 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
-import java.util.Optional;
 import java.util.concurrent.Executor;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Service;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
@@ -29,7 +29,6 @@ import eu.acclimatize.unison.WeatherValue;
 import eu.acclimatize.unison.WindDirection;
 import eu.acclimatize.unison.WindSpeed;
 import eu.acclimatize.unison.location.Location;
-import eu.acclimatize.unison.location.LocationNotFoundException;
 import eu.acclimatize.unison.location.LocationRepository;
 
 /**
@@ -154,22 +153,16 @@ public class HarvesterService {
 	 * @throws DocumentNotFoundException
 	 * @throws IOException
 	 */
-	public void fetchAndStore(String locationName)
+	@PreAuthorize("#location.hasOwner(authentication.name)")
+	public void fetchAndStore(Location location)
 			throws HarvestParseException, HarvestRequestException, DocumentNotFoundException {
 
-		Optional<Location> optLocation = locationRepository.findById(locationName);
-		if (optLocation.isPresent()) {
-			Location location = optLocation.get();
-			Document document = lrs.documentForLocation(location);
+		Document document = lrs.documentForLocation(location);
 
-			List<HourlyPrecipitation> hourlyPrecipitation = new ArrayList<>();
-			List<HourlyWeather> hourlyWeather = new ArrayList<>();
-			processDocument(document, hourlyPrecipitation, hourlyWeather, location);
-			store(hourlyPrecipitation, hourlyWeather);
-			
-		} else {
-			throw new LocationNotFoundException(locationName);
-		}
+		List<HourlyPrecipitation> hourlyPrecipitation = new ArrayList<>();
+		List<HourlyWeather> hourlyWeather = new ArrayList<>();
+		processDocument(document, hourlyPrecipitation, hourlyWeather, location);
+		store(hourlyPrecipitation, hourlyWeather);
 
 	}
 

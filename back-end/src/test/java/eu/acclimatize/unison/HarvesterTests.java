@@ -61,15 +61,10 @@ public class HarvesterTests {
 		HarvesterService hs = new HarvesterService(lr, pr, wr, lrs, logger, dateFormat,
 				new UnisonServerApplication().executor());
 
-		try {
-		hs.fetchAndStore( "");
+		hs.fetchAndStore(location);
 
 		verify(pr, times(1)).saveAll(anyCollection());
 		verify(wr, times(1)).saveAll(anyCollection());
-		}catch(HarvestRequestException e) {
-			e.printStackTrace();
-			Assert.fail();
-		}
 
 	}
 
