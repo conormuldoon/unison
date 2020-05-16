@@ -14,6 +14,7 @@ import eu.acclimatize.unison.harvester.HarvestParseException;
 import eu.acclimatize.unison.location.DeserializationException;
 import eu.acclimatize.unison.location.LocationNotFoundException;
 import eu.acclimatize.unison.location.LocationUpdateException;
+import eu.acclimatize.unison.user.AnonymousUserException;
 import eu.acclimatize.unison.user.UserUpdateException;
 
 /**
@@ -80,7 +81,14 @@ public class UnisonAdvice {
 	@ExceptionHandler(DocumentNotFoundException.class)
 	@ResponseStatus(HttpStatus.BAD_GATEWAY)
 	public String documentNotFoundHandler(HarvestParseException exception) {
-		return handle(exception);
+		return exception.getMessage();
+	}
+	
+	@ResponseBody
+	@ExceptionHandler(AnonymousUserException.class)
+	@ResponseStatus(HttpStatus.UNAUTHORIZED)
+	public String anonymousUserHandler(HarvestParseException exception) {
+		return exception.getMessage();
 	}
 
 }

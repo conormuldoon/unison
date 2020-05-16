@@ -16,6 +16,7 @@ import com.fasterxml.jackson.databind.DeserializationContext;
 import com.fasterxml.jackson.databind.JsonDeserializer;
 
 import eu.acclimatize.unison.Constant;
+import eu.acclimatize.unison.user.AnonymousUserException;
 import eu.acclimatize.unison.user.UserInformation;
 import eu.acclimatize.unison.user.UserRepository;
 
@@ -125,8 +126,11 @@ public class LocationDeserializer extends JsonDeserializer<Location> {
 		if (authentication != null) {
 			String authenticatedUser = authentication.getName();
 			Optional<UserInformation> oUser = userRepository.findById(authenticatedUser);
-			if (oUser.isPresent())
+			if (oUser.isPresent()) {
 				userInformation = oUser.get();
+			} else {
+				throw new AnonymousUserException("An anonymous user cannot make a put request for a location.");
+			}
 		}
 
 		return new Location(locationName, userInformation,
