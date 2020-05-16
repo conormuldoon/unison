@@ -16,7 +16,7 @@ import com.fasterxml.jackson.databind.DeserializationContext;
 import com.fasterxml.jackson.databind.JsonDeserializer;
 
 import eu.acclimatize.unison.Constant;
-import eu.acclimatize.unison.user.AnonymousUserException;
+import eu.acclimatize.unison.user.DeserializationUserException;
 import eu.acclimatize.unison.user.UserInformation;
 import eu.acclimatize.unison.user.UserRepository;
 
@@ -121,18 +121,19 @@ public class LocationDeserializer extends JsonDeserializer<Location> {
 					"No " + LocationConstant.GEOMETRY + " in the GeoJSON point feature object.");
 		}
 
-		UserInformation userInformation = null;
 		Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-		if (authentication != null) {
-			String authenticatedUser = authentication.getName();
-			Optional<UserInformation> oUser = userRepository.findById(authenticatedUser);
-			if (oUser.isPresent()) {
-				userInformation = oUser.get();
-			} else {
-				throw new AnonymousUserException("An anonymous user cannot make a put request for a location.");
-			}
+		if (authentication == null) {
+			throw new DeserializationUserException(
+					"The authenticated principal from the security context is required when making a put request for a location.");
+		}
+		String authenticatedUser = authentication.getName();
+		Optional<UserInformation> oUser = userRepository.findById(authenticatedUser);
+		if (oUser.isEmpty()) {
+
+			throw new DeserializationUserException("An anonymous user cannot make a put request for a location.");
 		}
 
+		UserInformation userInformation = oUser.get();
 		return new Location(locationName, userInformation,
 				geometryFactory.createPoint(new Coordinate(coordinates[0], coordinates[1])));
 

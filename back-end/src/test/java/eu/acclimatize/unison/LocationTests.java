@@ -21,6 +21,7 @@ import org.springframework.boot.test.context.SpringBootTest.WebEnvironment;
 import org.springframework.boot.test.web.client.TestRestTemplate;
 import org.springframework.data.domain.Sort;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.test.context.support.WithMockUser;
 import org.springframework.test.context.junit4.SpringRunner;
 
 import com.fasterxml.jackson.core.JsonFactory;
@@ -187,10 +188,13 @@ public class LocationTests {
 	}
 
 	/**
-	 * Tests a get request for a specific location.
+	 * Tests a get request for a specific location. Using a mock user as the
+	 * TestRestTemplate performs deserialization, which requires an authenticated
+	 * user. A user does not need to authenticated to make a get request when not
+	 * testing and the system is running as deserialization is not performed.
 	 */
 	@Test
-
+	@WithMockUser(TestConstant.USERNAME)
 	public void singleLocation() {
 		ResponseEntity<Location> response = template
 				.getForEntity(MappingConstant.LOCATION + "/" + TestConstant.LOCATION, Location.class);
@@ -198,9 +202,14 @@ public class LocationTests {
 	}
 
 	/**
-	 * Tests a get request for a location feature collection.
+	 * Tests a get request for a location feature collection. Using a mock user as
+	 * the TestRestTemplate performs deserialization, which requires an
+	 * authenticated user. A user does not need to authenticated to make a get
+	 * request when not testing and the system is running as deserialization is not
+	 * performed.
 	 */
 	@Test
+	@WithMockUser(TestConstant.USERNAME)
 	public void collectionLocation() {
 		ResponseEntity<FeatureCollection> response = template.getForEntity(MappingConstant.LOCATION,
 				FeatureCollection.class);

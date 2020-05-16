@@ -14,7 +14,7 @@ import eu.acclimatize.unison.harvester.HarvestParseException;
 import eu.acclimatize.unison.location.DeserializationException;
 import eu.acclimatize.unison.location.LocationNotFoundException;
 import eu.acclimatize.unison.location.LocationUpdateException;
-import eu.acclimatize.unison.user.AnonymousUserException;
+import eu.acclimatize.unison.user.DeserializationUserException;
 import eu.acclimatize.unison.user.UserUpdateException;
 
 /**
@@ -85,7 +85,7 @@ public class UnisonAdvice {
 	}
 	
 	@ResponseBody
-	@ExceptionHandler(AnonymousUserException.class)
+	@ExceptionHandler(DeserializationUserException.class)
 	@ResponseStatus(HttpStatus.UNAUTHORIZED)
 	public String anonymousUserHandler(HarvestParseException exception) {
 		return exception.getMessage();
