@@ -35,7 +35,6 @@ it('posts the data in the form when submit is clicked', async (done) => {
   const hideDisplay = jest.fn();
 
   const location = 'UCD';
-  fetchMock.head('end:' + location, { status: HttpStatus.NOT_FOUND });
 
   const lon = '-6.223682';
   const lat = '53.308441';
@@ -51,7 +50,10 @@ it('posts the data in the form when submit is clicked', async (done) => {
     done();
   };
 
-  const component = <LocationForm display={true} obtainData={obtainData} hideDisplay={hideDisplay} toggleDisplay={() => { }} />;
+  const map = new Map();
+
+  const component = <LocationForm display={true} obtainData={obtainData} hideDisplay={hideDisplay}
+    toggleDisplay={() => { }} featureProperties={map} />;
   const { getByText, getByLabelText } = render(component);
 
   changeValue(getByLabelText, 'Location name:', location);
@@ -68,7 +70,7 @@ it('posts the data in the form when submit is clicked', async (done) => {
 
 it('handles add location', async (done) => {
   const location = 'UCD';
-  fetchMock.head('end:' + location, { status: HttpStatus.NOT_FOUND });
+ 
   fetchMock.put('end:/location', { status: HttpStatus.OK, body: { json: () => { } } });
   fetchMock.post('end:/harvest', { status: HttpStatus.OK });
 
@@ -79,11 +81,13 @@ it('handles add location', async (done) => {
 
   const obtainData = () => {
     expect(hideDisplay).toHaveBeenCalledTimes(1);
-    expect(alert).toBeCalledWith(location + ' was added');
+    expect(alert).toBeCalledWith(location + ' was added.');
     done();
   };
 
-  const component = <LocationForm display={true} obtainData={obtainData} hideDisplay={hideDisplay} toggleDisplay={() => { }} />;
+  const map = new Map();
+  const component = <LocationForm display={true} obtainData={obtainData} hideDisplay={hideDisplay}
+    toggleDisplay={() => { }} featureProperties={map} />;
   const { getByText, getByLabelText } = render(component);
 
   changeValue(getByLabelText, 'Location name:', location);

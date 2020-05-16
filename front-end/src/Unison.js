@@ -26,7 +26,7 @@ function Unison(props) {
   const [marker, setMarker] = useState(undefined);
   const [curLoc, setCurLoc] = useState(undefined);
   const [curVar, setCurVar] = useState(VAR_OPT[0]);
-  const [featureCollection, setFeatureCollection] = useState(undefined);
+  const [featureProperties, setFeatureProperties] = useState(undefined);
 
   const obtainData = () => {
     let active = true;
@@ -36,7 +36,7 @@ function Unison(props) {
 
       if (active && response.ok) {
         const fc = await response.json();
-        setFeatureCollection(fc);
+        const map = new Map();
 
 
         const locationArray = fc.features;
@@ -52,15 +52,18 @@ function Unison(props) {
             let pos = [locationArray[i].geometry.coordinates[1], locationArray[i].geometry.coordinates[0]];
 
             newMarker.push({ name: locationArray[i].properties.name, position: pos });
+            map.set(locationArray[i].properties.name, locationArray[i].properties);
 
 
           }
           if (n > 0) {
+            setFeatureProperties(map);
             setOption(newOption);
             setMarker(newMarker);
             setCurLoc(locationArray[0].properties);
 
           } else {
+            setFeatureProperties(undefined);
             setOption(undefined);
             setMarker(undefined);
             setCurLoc(undefined);
@@ -82,13 +85,7 @@ function Unison(props) {
 
 
   const updateCurLoc = (locationName) => {
-    for (let i = 0; i < featureCollection.features.length; i++) {
-
-      if (featureCollection.features[i].properties.name === locationName) {
-        setCurLoc(featureCollection.features[i].properties);
-        break;
-      }
-    }
+    setCurLoc(featureProperties.get(locationName));
   }
 
   const markerClicked = (location) => {
@@ -205,7 +202,7 @@ function Unison(props) {
             </a>}
           </div>
 
-          <ARLocationComponent obtainData={obtainData} location={curLoc} />
+          <ARLocationComponent obtainData={obtainData} location={curLoc} featureProperties={featureProperties}/>
 
         </center>
 

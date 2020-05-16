@@ -49,6 +49,13 @@ function LocationForm(props) {
     const response = await fetch(API + '/location',
       locationPutObject(location, lon, lat));
 
+    let message;
+    if (locationExists) {
+      message = 'updated';
+    } else {
+      message = 'added';
+    }
+
     if (response.ok) {
 
       const harvestPath = await response.json();
@@ -59,19 +66,12 @@ function LocationForm(props) {
         body: location
       });
 
-
-      let message;
-      if (locationExists) {
-        message = 'updated';
-      } else {
-        message = 'added';
-      }
       if (harvestResponse.ok) {
-        alert(location + ' was ' + message);
+        alert(location + ' was ' + message + '.');
         updateDisplay();
       } else if (harvestResponse.status === HttpStatus.BAD_GATEWAY) {
         alert(location + ' was ' + message + ', but did did not recieve the weather data. The ' +
-          lon + " and " + lat + " longitude and latitude values may not be covered by the model.");
+          lon + " and " + lat + " longitude and latitude coordinates may not be covered by the model.");
       }
       else {
         alert(location + ' was ' + message + ', but Unison did not obtain the weather data.')
@@ -80,7 +80,7 @@ function LocationForm(props) {
     } else if (response.status === HttpStatus.UNAUTHORIZED) {
       alert('Incorrect user name or password');
     } else if (response.status === HttpStatus.FORBIDDEN) {
-      alert(location + ' was added by another user and was not updated.')
+      alert('A location named ' + location + ' is being tracked by another user and was not ' + message + '.')
     }
     else {
       problemConnecting();
@@ -89,8 +89,8 @@ function LocationForm(props) {
 
   async function handleSubmit(event) {
     event.preventDefault();
-    const response = await fetch(API + '/location/' + location, { method: 'HEAD' });
-    if (response.ok) {
+    if (props.featureProperties.has(location)) {
+
       if (window.confirm(location + ' already exists. Would you like to replace it?')) {
         putData(true);
       }
@@ -151,6 +151,8 @@ LocationForm.propTypes = {
 
   /** Called when a location has been successfully added to obtain the updated location list from the server and add the location to the map. */
   obtainData: PropTypes.func.isRequired,
+
+  featureProperties: PropTypes.object,
 }
 
 export default LocationForm;
