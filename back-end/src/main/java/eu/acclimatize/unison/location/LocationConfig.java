@@ -1,6 +1,7 @@
 package eu.acclimatize.unison.location;
 
 import org.locationtech.jts.geom.GeometryFactory;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.data.domain.Sort;
@@ -40,9 +41,19 @@ public class LocationConfig {
 	/**
 	 * Properties used in the GeoJSON representation of the locations.
 	 */
-	public WeatherProperty[] weatherProperty() {
+	public WeatherProperty[] weatherProperty(@Value("${api.for}") Boolean fogSupported) {
 
-		return WeatherProperty.values();
+		if (fogSupported) {
+			return WeatherProperty.values();
+		} else {
+			// The Met Éireann HARMONIE-AROME API does not support fog.
+			WeatherProperty[] weatherProperty = { WeatherProperty.CLOUDINESS, WeatherProperty.CLOUD_LEVEL,
+					WeatherProperty.DEW_POINT, WeatherProperty.HUMIDITY, WeatherProperty.PRECIPITATION,
+					WeatherProperty.PRESSURE, WeatherProperty.TEMPERATURE, WeatherProperty.WIND_DIRECTION,
+					WeatherProperty.WIND_SPEED };
+			return weatherProperty;
+		}
+
 	}
 
 }

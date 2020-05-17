@@ -2,11 +2,16 @@
   {
     "name": "api.timezone",
     "type": "java.lang.String",
-    "description": "The time zone for the Harmonie API being used."
+    "description": "The time zone for the HARMONIE-AROME API being used."
   },
   {
     "name": "api.uri",
     "type": "java.lang.String",
-    "description": "The URI for the Harmonie API being used."
+    "description": "The URI for the HARMONIE-AROME API being used."
+  },
+  {
+    "name": "api.fog",
+    "type": "java.lang.Boolean",
+    "description": "Specifies whether the HARMONIE-AROME API supports fog."
   }
 ]}
