@@ -3,6 +3,9 @@ package eu.acclimatize.unison.user;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Service;
 
+import eu.acclimatize.unison.Constant;
+import eu.acclimatize.unison.OwnedItem;
+
 @Service
 public class UserService {
 
@@ -19,8 +22,8 @@ public class UserService {
 	 * @param current
 	 * @param updated
 	 */
-	@PreAuthorize("#current.hasOwner(authentication.name)")
-	public void replace(UserInformation current, UserInformation updated) {
+	@PreAuthorize(Constant.OWNED_ITEM)
+	public void replace(OwnedItem ownedItem, UserInformation updated) {
 		userRepository.save(updated);
 	}
 }

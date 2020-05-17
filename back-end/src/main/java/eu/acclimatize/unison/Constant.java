@@ -153,4 +153,8 @@ public class Constant {
 	 */
 	public static final String ROLL_USER = "ROLE_USER";
 
+	/**
+	 * The predicate that the item's owner is the authenticated user.
+	 */
+	public static final String OWNED_ITEM = "#ownedItem.hasOwner(authentication.name)";
 }

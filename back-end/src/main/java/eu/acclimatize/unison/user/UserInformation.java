@@ -13,6 +13,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonProperty.Access;
 
 import eu.acclimatize.unison.Constant;
+import eu.acclimatize.unison.OwnedItem;
 
 /**
  * 
@@ -20,7 +21,7 @@ import eu.acclimatize.unison.Constant;
  *
  */
 @Entity
-public class UserInformation implements Serializable {
+public class UserInformation implements OwnedItem, Serializable {
 
 	private static final long serialVersionUID = -6566767228133005900L;
 

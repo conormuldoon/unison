@@ -13,6 +13,7 @@ import org.locationtech.jts.geom.Point;
 import com.fasterxml.jackson.core.JsonGenerator;
 
 import eu.acclimatize.unison.Constant;
+import eu.acclimatize.unison.OwnedItem;
 import eu.acclimatize.unison.user.UserInformation;
 
 /**
@@ -23,7 +24,7 @@ import eu.acclimatize.unison.user.UserInformation;
  */
 
 @Entity
-public class Location implements Serializable {
+public class Location implements OwnedItem, Serializable {
 
 	private static final long serialVersionUID = 1771422791257298902L;
 

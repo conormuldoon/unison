@@ -5,8 +5,10 @@ import javax.transaction.Transactional;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Service;
 
+import eu.acclimatize.unison.Constant;
 import eu.acclimatize.unison.HourlyPrecipitationRepository;
 import eu.acclimatize.unison.HourlyWeatherRepository;
+import eu.acclimatize.unison.OwnedItem;
 
 /**
  * A service that is used to delete locations.
@@ -41,13 +43,13 @@ public class LocationService {
 	 * @param locationName The name of the location to be deleted.
 	 * @param userName     The user name of the user that added the location.
 	 */
-	@PreAuthorize("#location.hasOwner(authentication.name)")
+	@PreAuthorize(Constant.OWNED_ITEM)
 	@Transactional
-	public void delete(Location location) {
+	public void delete(Location ownedItem) {
 
-		hpr.deleteForLocation(location);
-		hwr.deleteForLocation(location);
-		locationRepository.delete(location);
+		hpr.deleteForLocation(ownedItem);
+		hwr.deleteForLocation(ownedItem);
+		locationRepository.delete(ownedItem);
 	}
 
 	/**
@@ -56,8 +58,8 @@ public class LocationService {
 	 * @param currentLocation
 	 * @param updatedLocation
 	 */
-	@PreAuthorize("#current.hasOwner(authentication.name)")
-	public void replace(Location current, Location updated) {
+	@PreAuthorize(Constant.OWNED_ITEM)
+	public void replace(OwnedItem ownedItem, Location updated) {
 		locationRepository.save(updated);
 	}
 

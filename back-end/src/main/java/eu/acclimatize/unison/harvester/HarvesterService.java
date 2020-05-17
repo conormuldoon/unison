@@ -19,6 +19,7 @@ import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 
 import eu.acclimatize.unison.Cloud;
+import eu.acclimatize.unison.Constant;
 import eu.acclimatize.unison.HourlyPrecipitation;
 import eu.acclimatize.unison.HourlyPrecipitationRepository;
 import eu.acclimatize.unison.HourlyWeather;
@@ -153,15 +154,15 @@ public class HarvesterService {
 	 * @throws DocumentNotFoundException
 	 * @throws IOException
 	 */
-	@PreAuthorize("#location.hasOwner(authentication.name)")
-	public void fetchAndStore(Location location)
+	@PreAuthorize(Constant.OWNED_ITEM)
+	public void fetchAndStore(Location ownedItem)
 			throws HarvestParseException, HarvestRequestException, DocumentNotFoundException {
 
-		Document document = lrs.documentForLocation(location);
+		Document document = lrs.documentForLocation(ownedItem);
 
 		List<HourlyPrecipitation> hourlyPrecipitation = new ArrayList<>();
 		List<HourlyWeather> hourlyWeather = new ArrayList<>();
-		processDocument(document, hourlyPrecipitation, hourlyWeather, location);
+		processDocument(document, hourlyPrecipitation, hourlyWeather, ownedItem);
 		store(hourlyPrecipitation, hourlyWeather);
 
 	}
