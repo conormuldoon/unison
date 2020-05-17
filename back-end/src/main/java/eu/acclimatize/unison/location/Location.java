@@ -62,6 +62,7 @@ public class Location implements OwnedItem, Serializable {
 		return locationRepository.findById(name);
 	}
 
+	@Override
 	public boolean hasOwner(String ownerName) {
 		return user.hasOwner(ownerName);
 	}

@@ -41,7 +41,7 @@ public class LocationConfig {
 	/**
 	 * Properties used in the GeoJSON representation of the locations.
 	 */
-	public WeatherProperty[] weatherProperty(@Value("${api.for}") Boolean fogSupported) {
+	public WeatherProperty[] weatherProperty(@Value("${api.fog}") Boolean fogSupported) {
 
 		if (fogSupported) {
 			return WeatherProperty.values();
@@ -51,6 +51,7 @@ public class LocationConfig {
 					WeatherProperty.DEW_POINT, WeatherProperty.HUMIDITY, WeatherProperty.PRECIPITATION,
 					WeatherProperty.PRESSURE, WeatherProperty.TEMPERATURE, WeatherProperty.WIND_DIRECTION,
 					WeatherProperty.WIND_SPEED };
+
 			return weatherProperty;
 		}
 

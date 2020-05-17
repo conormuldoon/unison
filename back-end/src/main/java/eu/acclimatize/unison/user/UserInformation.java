@@ -54,6 +54,7 @@ public class UserInformation implements OwnedItem, Serializable {
 		return userRepository.findById(userName);
 	}
 
+	@Override
 	public boolean hasOwner(String ownerName) {
 		return userName.equals(ownerName);
 	}
