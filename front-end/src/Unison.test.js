@@ -5,7 +5,26 @@ import ReactDOM from 'react-dom';
 import { fireEvent, render, waitForElement } from "react-testing-library";
 import Unison from './Unison';
 
-const features = { "features": [{ "geometry": { "type": "Point", "coordinates": [-6.223682, 53.308441] }, "properties": { "name": "UCD" } }] };
+const features = {
+    "features": [{
+        "geometry": { "type": "Point", "coordinates": [-6.223682, 53.308441] }, "properties": {
+            "name": "UCD"
+            , links: {
+                cloudiness: "/location/UCD/cloudiness{?fromDate,toDate}",
+                cloudLevel: "/location/UCD/cloudLevel{?fromDate,toDate}",
+                dewPoint: "/location/UCD/dewPoint{?fromDate,toDate}",
+                humidity: "/location/UCD/humidity{?fromDate,toDate}",
+                precipitation: "/location/UCD/precipitation{?fromDate,toDate}",
+                pressure: "/location/UCD/pressure{?fromDate,toDate}",
+                temperature: "/location/UCD/temperature{?fromDate,toDate}",
+                windDirection: "/location/UCD/windDirection{?fromDate,toDate}",
+                windSpeed: "/location/UCD/windSpeed{?fromDate,toDate}",
+                harvest: "/location/UCD/harvest"
+            }
+
+        }
+    }]
+};
 
 it('renders without crashing', async () => {
 
@@ -40,7 +59,7 @@ it('displays popup when marker clicked', async () => {
     fetchMock.get('end:/location', features);
 
 
-    fetchMock.get('end:/precipitation?location=UCD&fromDate=1/9/2019&toDate=23/10/2019', [{
+    fetchMock.get('end:/precipitation?fromDate=1/9/2019&toDate=23/10/2019', [{
         "date": "2019-04-01T23:00:00.000+0000",
         "precipitation": {
             "value": 0,

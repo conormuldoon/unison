@@ -58,12 +58,12 @@ function LocationForm(props) {
 
     if (response.ok) {
 
-      const harvestPath = await response.json();
-
-
-      const harvestResponse = await fetch(API + harvestPath, {
-        method: 'POST',
-        body: location
+      const geoJSONPoint = await response.json();
+      
+      const harvestLink = geoJSONPoint.properties.links.harvest;
+     
+      const harvestResponse = await fetch(API + harvestLink, {
+        method: 'POST'
       });
 
       if (harvestResponse.ok) {

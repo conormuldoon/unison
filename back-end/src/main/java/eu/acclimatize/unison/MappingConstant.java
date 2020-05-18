@@ -20,12 +20,12 @@ public class MappingConstant {
 	 */
 	public static final String LOCATION = "/location";
 
+	private static final String PREFIX = LOCATION + "/{" + Constant.LOCATION_NAME + "}/";
+	
 	/**
 	 * The mapping for the harvest request.
 	 */
-	public static final String HARVEST = LOCATION + "/" + Constant.HARVEST;
-
-	private static final String PREFIX = LOCATION + "/{" + Constant.LOCATION_NAME + "}/";
+	public static final String HARVEST = PREFIX + "/" + Constant.HARVEST;
 
 	/**
 	 * The mapping for cloudiness.

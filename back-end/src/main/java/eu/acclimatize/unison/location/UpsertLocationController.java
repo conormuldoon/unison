@@ -38,7 +38,7 @@ public class UpsertLocationController {
 	// @RolesAllowed is used when the location is deserialized so is not required
 	// here.
 	@PutMapping(MappingConstant.LOCATION)
-	public String upsert(@RequestBody Location location) {
+	public Location upsert(@RequestBody Location location) {
 
 		Optional<Location> optCurrent = location.findCurrent(locationRepository);
 
@@ -49,11 +49,11 @@ public class UpsertLocationController {
 
 				throw new LocationUpdateException("A location can only be updated by the user that added it.");
 			}
+		} else {
+
+			locationRepository.save(location);
 		}
-
-		locationRepository.save(location);
-
-		return MappingConstant.HARVEST;
+		return location;
 	}
 
 }

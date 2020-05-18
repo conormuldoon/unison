@@ -2,6 +2,8 @@ package eu.acclimatize.unison.location;
 
 import java.io.IOException;
 import java.io.Serializable;
+import java.net.URLEncoder;
+import java.nio.charset.StandardCharsets;
 import java.util.Optional;
 
 import javax.persistence.Entity;
@@ -13,6 +15,7 @@ import org.locationtech.jts.geom.Point;
 import com.fasterxml.jackson.core.JsonGenerator;
 
 import eu.acclimatize.unison.Constant;
+import eu.acclimatize.unison.MappingConstant;
 import eu.acclimatize.unison.OwnedItem;
 import eu.acclimatize.unison.user.UserInformation;
 
@@ -27,6 +30,8 @@ import eu.acclimatize.unison.user.UserInformation;
 public class Location implements OwnedItem, Serializable {
 
 	private static final long serialVersionUID = 1771422791257298902L;
+
+	private static final String LINKS = "links";
 
 	@Id
 	private String name;
@@ -101,9 +106,14 @@ public class Location implements OwnedItem, Serializable {
 		gen.writeFieldName(LocationConstant.PROPERTIES);
 		gen.writeStartObject();
 		gen.writeStringField(Constant.LOCATION_NAME, name);
+		gen.writeFieldName(LINKS);
+		gen.writeStartObject();
+		String encodedName = URLEncoder.encode(name, StandardCharsets.UTF_8.toString());
 		for (WeatherProperty wp : weatherProperty) {
-			wp.write(gen, name);
+			wp.write(gen, encodedName);
 		}
+		gen.writeStringField(Constant.HARVEST, MappingConstant.LOCATION+"/"+encodedName+"/"+Constant.HARVEST);
+		gen.writeEndObject();
 		gen.writeEndObject();
 		gen.writeEndObject();
 

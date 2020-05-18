@@ -8,7 +8,6 @@ import org.springframework.stereotype.Service;
 import eu.acclimatize.unison.Constant;
 import eu.acclimatize.unison.HourlyPrecipitationRepository;
 import eu.acclimatize.unison.HourlyWeatherRepository;
-import eu.acclimatize.unison.OwnedItem;
 
 /**
  * A service that is used to delete locations.
@@ -58,8 +57,8 @@ public class LocationService {
 	 * @param currentLocation
 	 * @param updatedLocation
 	 */
-	@PreAuthorize(Constant.OWNED_ITEM)
-	public void replace(OwnedItem ownedItem, Location updated) {
+	@PreAuthorize(Constant.REPLACE_ITEM)
+	public void replace(Location current, Location updated) {
 		locationRepository.save(updated);
 	}
 

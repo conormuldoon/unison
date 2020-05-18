@@ -9,7 +9,7 @@ import ARLocationComponent from './ARLocationComponent';
 import { API, FORMAT, VAR_OPT } from './Constant';
 import DateSelector from './DateSelector';
 import LeafletMap from './LeafletMap';
-import { today, tomorrow } from './Util';
+import { today, tomorrow, expandLink } from './Util';
 
 /**
  * Application component for Unison. Once mounted, it connects to the back-end to receive a list of the locations being tracked.
@@ -51,8 +51,9 @@ function Unison(props) {
             newOption.push(locationArray[i].properties.name);
             let pos = [locationArray[i].geometry.coordinates[1], locationArray[i].geometry.coordinates[0]];
 
-            newMarker.push({ name: locationArray[i].properties.name, position: pos });
-            map.set(locationArray[i].properties.name, locationArray[i].properties);
+            const properties = locationArray[i].properties;
+            newMarker.push({ name: properties.name, position: pos });
+            map.set(properties.name, properties);
 
 
           }
@@ -123,12 +124,6 @@ function Unison(props) {
     return s.replace(/ /g, '_')
   }
 
-
-  let locationName;
-  if (curLoc) {
-    locationName = curLoc.name;
-  }
-
   return (
 
     <div id="mapdiv">
@@ -144,7 +139,7 @@ function Unison(props) {
 
       </div>
 
-      <LeafletMap marker={marker} curVar={curVar} location={locationName}
+      <LeafletMap marker={marker} curVar={curVar} location={curLoc} featureProperties={featureProperties}
         markerCallback={markerClicked} fromDate={fromDate} toDate={toDate}
         mapCentre={props.mapCentre}
 
@@ -191,9 +186,9 @@ function Unison(props) {
 
             </div>
 
-            {curLoc && <a download={spaceToUnderscore(locationName) + '_' + spaceToUnderscore(curVar) + '_' + dashDate(fromDate) + "_" + dashDate(toDate) + '.csv'}
+            {curLoc && <a download={spaceToUnderscore(curLoc.name) + '_' + spaceToUnderscore(curVar) + '_' + dashDate(fromDate) + "_" + dashDate(toDate) + '.csv'}
               className='pLeft'
-              href={API + '/location/' + curLoc.name + '/' + curVar.replace(/ /g, '') + '?fromDate=' + fromDate + '&toDate=' + toDate}>
+              href={expandLink(curLoc, curVar, fromDate, toDate)}>
 
               <button disabled={!curLoc} >
                 CSV
@@ -202,7 +197,7 @@ function Unison(props) {
             </a>}
           </div>
 
-          <ARLocationComponent obtainData={obtainData} location={curLoc} featureProperties={featureProperties}/>
+          <ARLocationComponent obtainData={obtainData} location={curLoc} featureProperties={featureProperties} />
 
         </center>
 

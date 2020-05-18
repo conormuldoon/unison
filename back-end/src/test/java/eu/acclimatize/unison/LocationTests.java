@@ -3,6 +3,8 @@ package eu.acclimatize.unison;
 import java.io.IOException;
 import java.io.StringWriter;
 import java.io.Writer;
+import java.net.URLEncoder;
+import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
@@ -149,6 +151,7 @@ public class LocationTests {
 	 * Tests an authenticated user that added a location can delete the location.
 	 */
 	@Test
+	@WithMockUser(TestConstant.USERNAME)
 	public void deleteValidUser() {
 
 		testDelete(TestConstant.USERNAME, TestConstant.PASSWORD, 0);
@@ -234,9 +237,11 @@ public class LocationTests {
 
 		jsonGenerator.flush();
 
-		Assert.assertEquals("{\"type\":\"Feature\",\"geometry\":{\"type\":\"Point\",\"coordinates\":["
+		String geoStr = "{\"type\":\"Feature\",\"geometry\":{\"type\":\"Point\",\"coordinates\":["
 				+ TestConstant.LONGITUDE + "," + TestConstant.LATITUDE + "]},\"properties\":{\"name\":\""
-				+ TestConstant.LOCATION + "\"}}", jsonWriter.toString());
+				+ TestConstant.LOCATION + "\",\"links\":{\"harvest\":\"/location/"
+				+ URLEncoder.encode(TestConstant.LOCATION, StandardCharsets.UTF_8.toString()) + "/harvest\"}}}";
+		Assert.assertEquals(geoStr, jsonWriter.toString());
 
 	}
 
@@ -292,10 +297,13 @@ public class LocationTests {
 
 		jsonGenerator.flush();
 
+		String utf8 = StandardCharsets.UTF_8.toString();
 		String geoStr = "{\"type\":\"FeatureCollection\",\"features\":[{\"type\":\"Feature\",\"geometry\":{\"type\":\"Point\",\"coordinates\":["
 				+ coordArr[0][0] + "," + coordArr[0][1] + "]},\"properties\":{\"name\":\"" + locArr[0]
-				+ "\"}},{\"type\":\"Feature\",\"geometry\":{\"type\":\"Point\",\"coordinates\":[" + coordArr[1][0] + ","
-				+ coordArr[1][1] + "]},\"properties\":{\"name\":\"" + locArr[1] + "\"}}]}";
+				+ "\",\"links\":{\"harvest\":\"/location/" + URLEncoder.encode(locArr[0], utf8)
+				+ "/harvest\"}}},{\"type\":\"Feature\",\"geometry\":{\"type\":\"Point\",\"coordinates\":["
+				+ coordArr[1][0] + "," + coordArr[1][1] + "]},\"properties\":{\"name\":\"" + locArr[1]
+				+ "\",\"links\":{\"harvest\":\"/location/" + URLEncoder.encode(locArr[1], utf8) + "/harvest\"}}}]}";
 
 		Assert.assertEquals(geoStr, jsonWriter.toString());
 

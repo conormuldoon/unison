@@ -1,11 +1,12 @@
 
-import { FORMAT } from './Constant';
+import { API, FORMAT } from './Constant';
 
 import {
   formatDate
 } from 'react-day-picker/moment';
 
 import GeoJSON from 'geojson';
+import parser from 'uri-template';
 
 export const tomorrow = () => {
 
@@ -31,6 +32,26 @@ export const problemConnecting = () => {
   alert('Problem Connecting');
 }
 
+export const expandLink = (feature, curVar, fromDate, toDate) => {
+  
+  const link = feature.links[varMapping(curVar)];
+  const template = parser.parse(link);
+  return API + template.expand({ fromDate: fromDate, toDate: toDate });
+
+}
+
+// Changing second word in current variable to lower case if present
+export const chartText = (curVar) =>{
+ 
+ let vca = curVar.split(' ');
+  
+ let vc = vca[0];
+ if (vca.length > 1) {
+   vca[1] = vca[1].toLowerCase();
+   vc += ' ' + vca[1];
+ }
+ return vc;
+}
 
 const putObject = (body) => {
   return {

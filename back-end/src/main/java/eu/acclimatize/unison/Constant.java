@@ -153,8 +153,17 @@ public class Constant {
 	 */
 	public static final String ROLL_USER = "ROLE_USER";
 
+	private static final String HAS_OWNER_AUTH = ".hasOwner(authentication.name)";
+
 	/**
 	 * The predicate that the item's owner is the authenticated user.
 	 */
-	public static final String OWNED_ITEM = "#ownedItem.hasOwner(authentication.name)";
+	public static final String OWNED_ITEM = "#ownedItem" + HAS_OWNER_AUTH;
+
+	/**
+	 * The predicated that the current item's owner is the authenticated user and
+	 * updated item's owner is the authenticated user.
+	 */
+	public static final String REPLACE_ITEM = "#current" + HAS_OWNER_AUTH + " and #updated" + HAS_OWNER_AUTH;
+
 }

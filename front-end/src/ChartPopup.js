@@ -2,9 +2,9 @@ import PropTypes from 'prop-types';
 import React, { useEffect, useState } from 'react';
 import { IoMdClose } from "react-icons/io";
 import './App.css';
-import { API, PRECIP } from './Constant';
+import { PRECIP } from './Constant';
 import TabsComponent from './TabsComponent';
-import { varMapping } from './Util';
+import { expandLink, chartText } from './Util';
 
 
 const DLEN = 16;
@@ -28,11 +28,7 @@ function ChartPopup(props) {
     async function obtainData() {
 
 
-      const variRequest = varMapping(props.curVar);
-
-
-      const loc = props.location.trim();
-      const request = API + '/location/' + loc + '/' + variRequest + "?fromDate=" + props.fromDate + "&toDate=" + props.toDate;
+      const request = expandLink(props.location, props.curVar, props.fromDate, props.toDate);
 
       let response = await fetch(request, {
         method: 'GET',
@@ -85,13 +81,7 @@ function ChartPopup(props) {
     e.stopPropagation();
   }
 
-  // Changing second word in current variable to lower case if present
-  let vca = props.curVar.split(' ');
-  let vc = vca[0];
-  if (vca.length > 1) {
-    vca[1] = vca[1].toLowerCase();
-    vc += ' ' + vca[1];
-  }
+  const vc=chartText(props.curVar);
 
   return (
     <div id="popupdiv" data-testid='chart-div' onClick={handleClick}>
@@ -100,7 +90,7 @@ function ChartPopup(props) {
 
       </div>
       <center>
-        {vc} data from {props.location.trim()}
+        {vc} data from {props.location.name.trim()}
 
         {data && <TabsComponent curVar={props.curVar} data={data} zoomDomain={zoomDomain} minMax={minMax}
           setZoomDomain={setZoomDomain} />}
@@ -109,14 +99,15 @@ function ChartPopup(props) {
     </div>
   );
 
+
 }
 
 ChartPopup.propTypes = {
   /** Specifies the weather variable currently selected. */
   curVar: PropTypes.string.isRequired,
 
-  /** Sepecifies the location selected. */
-  location: PropTypes.string.isRequired,
+  /** Specifies the properties of the location selected. */
+  location: PropTypes.object.isRequired,
 
   /** Specifies the start date for the data that is to be displayed. */
   fromDate: PropTypes.string.isRequired,

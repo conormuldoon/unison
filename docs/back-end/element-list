@@ -1,5 +1,6 @@
 eu.acclimatize.unison
 eu.acclimatize.unison.csvcontroller
+eu.acclimatize.unison.harvester
 eu.acclimatize.unison.jsoncontroller
 eu.acclimatize.unison.location
 eu.acclimatize.unison.result

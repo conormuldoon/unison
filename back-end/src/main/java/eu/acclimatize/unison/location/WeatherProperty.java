@@ -1,8 +1,6 @@
 package eu.acclimatize.unison.location;
 
 import java.io.IOException;
-import java.net.URLEncoder;
-import java.nio.charset.StandardCharsets;
 
 import com.fasterxml.jackson.core.JsonGenerator;
 
@@ -20,10 +18,9 @@ public enum WeatherProperty {
 		this.propertyName = propertyName;
 	}
 
-	public void write(JsonGenerator gen, String locationName) throws IOException {
+	public void write(JsonGenerator gen, String encodedName) throws IOException {
 		gen.writeStringField(propertyName,
-				MappingConstant.LOCATION + "/" + URLEncoder.encode(locationName, StandardCharsets.UTF_8.toString())
-						+ "/" + propertyName + "{?fromDate,toDate}");
+				MappingConstant.LOCATION + "/" + encodedName + "/" + propertyName + "{?fromDate,toDate}");
 	}
 
 }

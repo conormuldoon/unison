@@ -8,9 +8,9 @@ import ChartPopup from './ChartPopup';
 
 
 const image = new Leaflet.Icon({
-               iconUrl: require('./2000px-Map_marker.png'),
-               iconSize:     [30, 46],
-           })
+  iconUrl: require('./2000px-Map_marker.png'),
+  iconSize: [30, 46],
+})
 
 
 /**
@@ -20,7 +20,7 @@ const image = new Leaflet.Icon({
  * 
  */
 
- class LeafletMap extends Component {
+class LeafletMap extends Component {
   constructor(props) {
     super(props)
     this.state = {
@@ -32,45 +32,47 @@ const image = new Leaflet.Icon({
     }
   }
 
-  componentDidUpdate = (prevProps) =>{
+  componentDidUpdate = (prevProps) => {
 
-    if(prevProps.curVar!==this.props.curVar||prevProps.location!==this.props.location||prevProps.fromDate!==this.props.fromDate||prevProps.toDate!==this.props.toDate){
-      if(this.state.popupComponent!==undefined){
+    if (prevProps.curVar !== this.props.curVar || prevProps.location !== this.props.location || prevProps.fromDate !== this.props.fromDate || prevProps.toDate !== this.props.toDate) {
+      if (this.state.popupComponent !== undefined) {
         this.closePopup();
         this.addPopup(this.props.location);
       }
     }
   }
 
-  addPopup = (name) =>{
-    this.props.markerCallback(name);
+  addPopup = (properties) => {
+    
+    this.props.markerCallback(properties.name);
 
-    const popupComponent=<ChartPopup curVar={this.props.curVar} location={name} fromDate={this.props.fromDate} toDate={this.props.toDate} closePopup={this.closePopup}/>;
-    this.setState({popupComponent:popupComponent,dragging:false});
+    const popupComponent = <ChartPopup curVar={this.props.curVar} location={properties} fromDate={this.props.fromDate} toDate={this.props.toDate} closePopup={this.closePopup} />;
+    this.setState({ popupComponent: popupComponent, dragging: false });
 
 
   }
 
   markerCallback = (marker) => {
 
-    if(this.state.popupComponent!==undefined){
-        this.closePopup();
+    if (this.state.popupComponent !== undefined) {
+      this.closePopup();
     }
 
-    this.addPopup(marker.name);
+    const properties = this.props.featureProperties.get(marker.name);
+    this.addPopup(properties);
 
   }
 
-  closePopup = () =>{
+  closePopup = () => {
 
-    this.setState({popupComponent:undefined,dragging:true});
+    this.setState({ popupComponent: undefined, dragging: true });
 
   }
 
 
 
   render() {
-    
+
 
     return (
       <Map center={this.props.mapCentre} zoom={this.state.zoom} dragging={this.state.dragging} >
@@ -79,24 +81,24 @@ const image = new Leaflet.Icon({
           url='https://{s}.tile.osm.org/{z}/{x}/{y}.png'
         />
 
-        {this.props.marker&&this.props.marker.map((marker) =>
-         <Marker key={marker.name} position={marker.position} onClick={this.markerCallback.bind(this,marker)} icon={image}/>
+        {this.props.marker && this.props.marker.map((marker) =>
+          <Marker key={marker.name} position={marker.position} onClick={this.markerCallback.bind(this, marker)} icon={image} />
 
-       )}
-       <div id="marginclickdiv" onClick={this.closePopup}>
-       {this.state.popupComponent}
-       </div>
+        )}
+        <div id="marginclickdiv" onClick={this.closePopup}>
+          {this.state.popupComponent}
+        </div>
       </Map>
     );
   }
 }
 
-LeafletMap.propTypes ={
+LeafletMap.propTypes = {
   /** Specifies the weather variable currently selected. */
   curVar: PropTypes.string,
 
-  /** Sepecifies the location selected. */
-  location: PropTypes.string,
+  /** Specifies the properties of the location selected. */
+  location: PropTypes.object,
 
   /** Specifies the start date for the data that is to be displayed. */
   fromDate: PropTypes.string,
@@ -114,6 +116,7 @@ LeafletMap.propTypes ={
   /** The latitude/longitude coordinates for the centre of the map. */
   mapCentre: PropTypes.array.isRequired,
 
+  featureProperties: PropTypes.object
 }
 
 export default LeafletMap;

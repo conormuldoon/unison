@@ -31,7 +31,12 @@ function changeValue(getByLabelText, labelText, value) {
 }
 
 it('posts the data in the form when submit is clicked', async (done) => {
-  jest.spyOn(window, 'fetch').mockImplementation(() => { return { headers: { get: () => '0' }, ok: true, json: () => 1 } });
+  jest.spyOn(window, 'fetch').mockImplementation(() => {
+    return {
+      headers: { get: () => {} }, ok: true,
+      json: () => { return { properties: { links: { harvest: '/harvest' } } } }
+    }
+  });
   const hideDisplay = jest.fn();
 
   const location = 'UCD';
@@ -70,8 +75,8 @@ it('posts the data in the form when submit is clicked', async (done) => {
 
 it('handles add location', async (done) => {
   const location = 'UCD';
- 
-  fetchMock.put('end:/location', { status: HttpStatus.OK, body: { json: () => { } } });
+
+  fetchMock.put('end:/location', { status: HttpStatus.OK, body: { properties: { links: { harvest: '/harvest' } } } });
   fetchMock.post('end:/harvest', { status: HttpStatus.OK });
 
 
