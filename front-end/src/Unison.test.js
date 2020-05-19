@@ -10,6 +10,7 @@ const features = {
         "geometry": { "type": "Point", "coordinates": [-6.223682, 53.308441] }, "properties": {
             "name": "UCD"
             , links: {
+                self: "/location/UCD",
                 cloudiness: "/location/UCD/cloudiness{?fromDate,toDate}",
                 cloudLevel: "/location/UCD/cloudLevel{?fromDate,toDate}",
                 dewPoint: "/location/UCD/dewPoint{?fromDate,toDate}",

@@ -2,8 +2,6 @@ package eu.acclimatize.unison.location;
 
 import java.io.IOException;
 import java.io.Serializable;
-import java.net.URLEncoder;
-import java.nio.charset.StandardCharsets;
 import java.util.Optional;
 
 import javax.persistence.Entity;
@@ -32,6 +30,7 @@ public class Location implements OwnedItem, Serializable {
 	private static final long serialVersionUID = 1771422791257298902L;
 
 	private static final String LINKS = "links";
+	private static final String SELF = "self";
 
 	@Id
 	private String name;
@@ -87,7 +86,7 @@ public class Location implements OwnedItem, Serializable {
 	 * @param weatherProperty
 	 * @throws IOException Thrown if there is an I/O error while serializing.
 	 */
-	public void geoJSONSerialize(JsonGenerator gen, WeatherProperty[] weatherProperty) throws IOException {
+	public void geoJSONSerialize(JsonGenerator gen, WeatherLink[] weatherProperty) throws IOException {
 
 		gen.writeStartObject();
 
@@ -108,11 +107,12 @@ public class Location implements OwnedItem, Serializable {
 		gen.writeStringField(Constant.LOCATION_NAME, name);
 		gen.writeFieldName(LINKS);
 		gen.writeStartObject();
-		String encodedName = URLEncoder.encode(name, StandardCharsets.UTF_8.toString());
-		for (WeatherProperty wp : weatherProperty) {
-			wp.write(gen, encodedName);
+		String selfMapping = MappingConstant.LOCATION + "/" + name;
+		gen.writeStringField(SELF, selfMapping);
+		for (WeatherLink wp : weatherProperty) {
+			wp.write(gen, name);
 		}
-		gen.writeStringField(Constant.HARVEST, MappingConstant.LOCATION+"/"+encodedName+"/"+Constant.HARVEST);
+		gen.writeStringField(Constant.HARVEST, selfMapping + "/" + Constant.HARVEST);
 		gen.writeEndObject();
 		gen.writeEndObject();
 		gen.writeEndObject();

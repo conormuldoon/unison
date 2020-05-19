@@ -6,7 +6,7 @@ import { fireEvent, render } from "react-testing-library";
 import RemoveComponent from './RemoveComponent';
 import HttpStatus from 'http-status-codes';
 
-const location = { name: 'UCD' };
+const location = { name: 'UCD', links: { self: '/location/UCD' } };
 
 it('renders without crashing', async () => {
 
@@ -28,8 +28,8 @@ it('mathes snapshot', () => {
 
 
 it('handles remove location', async (done) => {
-  
-  fetchMock.delete('end:/location/' + location.name, HttpStatus.OK);
+
+  fetchMock.delete('end:/' + location.name, HttpStatus.OK);
 
 
   const alertSpy = jest.spyOn(window, 'alert');

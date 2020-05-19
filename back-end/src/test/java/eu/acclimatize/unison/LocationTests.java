@@ -1,10 +1,11 @@
 package eu.acclimatize.unison;
 
+import java.io.BufferedReader;
 import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
 import java.io.StringWriter;
 import java.io.Writer;
-import java.net.URLEncoder;
-import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
@@ -35,7 +36,7 @@ import eu.acclimatize.unison.location.GeoJSONLocationController;
 import eu.acclimatize.unison.location.Location;
 import eu.acclimatize.unison.location.LocationConstant;
 import eu.acclimatize.unison.location.LocationRepository;
-import eu.acclimatize.unison.location.WeatherProperty;
+import eu.acclimatize.unison.location.WeatherLink;
 import eu.acclimatize.unison.user.UserRepository;
 
 /**
@@ -151,7 +152,6 @@ public class LocationTests {
 	 * Tests an authenticated user that added a location can delete the location.
 	 */
 	@Test
-	@WithMockUser(TestConstant.USERNAME)
 	public void deleteValidUser() {
 
 		testDelete(TestConstant.USERNAME, TestConstant.PASSWORD, 0);
@@ -185,7 +185,7 @@ public class LocationTests {
 		FeatureCollection fc = locationController.location();
 
 		JsonGenerator jg = Mockito.mock(JsonGenerator.class);
-		fc.geoJSONSerialize(jg, WeatherProperty.values());
+		fc.geoJSONSerialize(jg, WeatherLink.values());
 		Mockito.verify(jg, Mockito.times(1)).writeStringField(Constant.TYPE, LocationConstant.FEATURE);
 
 	}
@@ -232,16 +232,16 @@ public class LocationTests {
 
 		Location location = TestUtility.createLocation(TestConstant.LOCATION, null, TestConstant.LONGITUDE,
 				TestConstant.LATITUDE);
-		WeatherProperty[] weatherProperty = {};
-		location.geoJSONSerialize(jsonGenerator, weatherProperty);
+
+		location.geoJSONSerialize(jsonGenerator, WeatherLink.values());
 
 		jsonGenerator.flush();
 
-		String geoStr = "{\"type\":\"Feature\",\"geometry\":{\"type\":\"Point\",\"coordinates\":["
-				+ TestConstant.LONGITUDE + "," + TestConstant.LATITUDE + "]},\"properties\":{\"name\":\""
-				+ TestConstant.LOCATION + "\",\"links\":{\"harvest\":\"/location/"
-				+ URLEncoder.encode(TestConstant.LOCATION, StandardCharsets.UTF_8.toString()) + "/harvest\"}}}";
-		Assert.assertEquals(geoStr, jsonWriter.toString());
+		InputStream is = getClass().getResourceAsStream("/TestPoint.json");
+		BufferedReader br = new BufferedReader(new InputStreamReader(is));
+
+		Assert.assertEquals(br.readLine(), jsonWriter.toString());
+		br.close();
 
 	}
 
@@ -288,8 +288,7 @@ public class LocationTests {
 
 		FeatureCollection featureCollection = new FeatureCollection(list);
 
-		WeatherProperty[] weatherProperty = {};
-		FeatureCollectionSerializer fcs = new FeatureCollectionSerializer(weatherProperty);
+		FeatureCollectionSerializer fcs = new FeatureCollectionSerializer(WeatherLink.values());
 		Writer jsonWriter = new StringWriter();
 		JsonGenerator jsonGenerator = new JsonFactory().createGenerator(jsonWriter);
 
@@ -297,15 +296,11 @@ public class LocationTests {
 
 		jsonGenerator.flush();
 
-		String utf8 = StandardCharsets.UTF_8.toString();
-		String geoStr = "{\"type\":\"FeatureCollection\",\"features\":[{\"type\":\"Feature\",\"geometry\":{\"type\":\"Point\",\"coordinates\":["
-				+ coordArr[0][0] + "," + coordArr[0][1] + "]},\"properties\":{\"name\":\"" + locArr[0]
-				+ "\",\"links\":{\"harvest\":\"/location/" + URLEncoder.encode(locArr[0], utf8)
-				+ "/harvest\"}}},{\"type\":\"Feature\",\"geometry\":{\"type\":\"Point\",\"coordinates\":["
-				+ coordArr[1][0] + "," + coordArr[1][1] + "]},\"properties\":{\"name\":\"" + locArr[1]
-				+ "\",\"links\":{\"harvest\":\"/location/" + URLEncoder.encode(locArr[1], utf8) + "/harvest\"}}}]}";
+		InputStream is = getClass().getResourceAsStream("/TestCollection.json");
+		BufferedReader br = new BufferedReader(new InputStreamReader(is));
 
-		Assert.assertEquals(geoStr, jsonWriter.toString());
+		Assert.assertEquals(br.readLine(), jsonWriter.toString());
+		br.close();
 
 	}
 

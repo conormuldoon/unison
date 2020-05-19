@@ -1,7 +1,7 @@
 
 import PropTypes from 'prop-types';
 import React from 'react';
-import { API } from './Constant';
+import { API, SELF } from './Constant';
 import { problemConnecting } from './Util';
 import HttpStatus from 'http-status-codes';
 
@@ -14,7 +14,7 @@ function RemoveComponent(props) {
 
   async function removeRequest() {
 
-    const response = await fetch(API + '/location/' + props.location.name,
+    const response = await fetch(API + props.location.links[SELF],
       {
         method: 'DELETE'
       });

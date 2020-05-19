@@ -16,52 +16,52 @@ public class Constant {
 	}
 
 	/**
-	 * The property name for cloudiness.
+	 * The link property name for cloudiness.
 	 */
 	public static final String CLOUDINESS = "cloudiness";
 
 	/**
-	 * The property name for cloud level.
+	 * The link property name for cloud level.
 	 */
 	public static final String CLOUD_LEVEL = "cloudLevel";
 
 	/**
-	 * The property name for dew point.
+	 * The link property name for dew point.
 	 */
 	public static final String DEW_POINT = "dewPoint";
 
 	/**
-	 * The property name for fog.
+	 * The link property name for fog.
 	 */
 	public static final String FOG = "fog";
 
 	/**
-	 * The property name for humidity.
+	 * The link property name for humidity.
 	 */
 	public static final String HUMIDITY = "humidity";
 
 	/**
-	 * The property name for precipitation.
+	 * The link property name for precipitation.
 	 */
 	public static final String PRECIPITATION = "precipitation";
 
 	/**
-	 * The property name for pressure.
+	 * The link property name for pressure.
 	 */
 	public static final String PRESSURE = "pressure";
 
 	/**
-	 * The property name for temperature.
+	 * The link property name for temperature.
 	 */
 	public static final String TEMPERATURE = "temperature";
 
 	/**
-	 * The property name for wind direction.
+	 * The link property name for wind direction.
 	 */
 	public static final String WIND_DIRECTION = "windDirection";
 
 	/**
-	 * The property name for wind speed.
+	 * The link property name for wind speed.
 	 */
 	public static final String WIND_SPEED = "windSpeed";
 

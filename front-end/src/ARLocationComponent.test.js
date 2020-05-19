@@ -27,7 +27,7 @@ it('toggles add location correctly', () => {
   const confirmSpy = jest.spyOn(window, 'confirm');
   confirmSpy.mockImplementation(() => true);
 
-  const location = { name: 'UCD' };
+  const location = { name: 'UCD', links: { self: '/location/UCD' } };
   const { getByTestId, getByText } = render(<ARLocationComponent location={location} obtainData={() => { }} />);
   expect(getByTestId('lf-button')).toHaveTextContent('Add Location');
   expect(getByTestId('rm-button')).toHaveTextContent('Remove ' + location.name);

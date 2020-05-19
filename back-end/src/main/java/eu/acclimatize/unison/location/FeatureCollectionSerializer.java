@@ -17,14 +17,14 @@ import com.fasterxml.jackson.databind.SerializerProvider;
 @JsonComponent
 public class FeatureCollectionSerializer extends JsonSerializer<FeatureCollection> {
 
-	private WeatherProperty[] weatherProperty;
+	private WeatherLink[] weatherProperty;
 
 	/**
 	 * Creates an instance of FeatureCollectionSerializer.
 	 * 
 	 * @param weatherProperty The weather properties for locations.
 	 */
-	public FeatureCollectionSerializer(WeatherProperty[] weatherProperty) {
+	public FeatureCollectionSerializer(WeatherLink[] weatherProperty) {
 		this.weatherProperty = weatherProperty;
 
 	}

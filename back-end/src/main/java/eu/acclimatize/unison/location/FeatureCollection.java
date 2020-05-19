@@ -36,7 +36,7 @@ public class FeatureCollection {
 	 * @throws IOException Thrown if there if there is an I/O error when
 	 *                     serializing.
 	 */
-	public void geoJSONSerialize(JsonGenerator gen, WeatherProperty[] weatherProperty) throws IOException {
+	public void geoJSONSerialize(JsonGenerator gen, WeatherLink[] weatherProperty) throws IOException {
 		gen.writeStartObject();
 
 		gen.writeStringField(Constant.TYPE, FEATURE_COLLECTION);

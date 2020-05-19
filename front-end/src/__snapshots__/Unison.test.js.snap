@@ -133,59 +133,6 @@ exports[`mathes Unison snapshot 1`] = `
         <div>
           <div
             id="variDD"
-          >
-            <select
-              disabled=""
-            >
-              <option
-                value="Precipitation"
-              >
-                Precipitation
-              </option>
-              <option
-                value="Humidity"
-              >
-                Humidity
-              </option>
-              <option
-                value="Wind Direction"
-              >
-                Wind Direction
-              </option>
-              <option
-                value="Wind Speed"
-              >
-                Wind Speed
-              </option>
-              <option
-                value="Cloudiness"
-              >
-                Cloudiness
-              </option>
-              <option
-                value="Cloud Level"
-              >
-                Cloud Level
-              </option>
-              <option
-                value="Dew Point"
-              >
-                Dew Point
-              </option>
-              <option
-                value="Pressure"
-              >
-                Pressure
-              </option>
-              <option
-                value="Temperature"
-              >
-                Temperature
-              </option>
-            </select>
-          </div>
-          <div
-            class="marginItem"
           />
           <div
             class="pLeft"

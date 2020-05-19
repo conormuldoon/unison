@@ -6,6 +6,7 @@ import { API } from './Constant';
 import { problemConnecting } from './Util';
 import HttpStatus from 'http-status-codes';
 import { locationPutObject } from './Util';
+import { HARVEST } from './Constant';
 
 
 
@@ -58,9 +59,9 @@ function LocationForm(props) {
 
     if (response.ok) {
 
-      const geoJSONPoint = await response.json();
+      const linkedPoint = await response.json();
       
-      const harvestLink = geoJSONPoint.properties.links.harvest;
+      const harvestLink = linkedPoint.properties.links[HARVEST];
      
       const harvestResponse = await fetch(API + harvestLink, {
         method: 'POST'

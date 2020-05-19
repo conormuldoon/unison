@@ -41,16 +41,16 @@ public class LocationConfig {
 	/**
 	 * Properties used in the GeoJSON representation of the locations.
 	 */
-	public WeatherProperty[] weatherProperty(@Value("${api.fog}") Boolean fogSupported) {
+	public WeatherLink[] weatherProperty(@Value("${api.fog}") Boolean fogSupported) {
 
 		if (fogSupported) {
-			return WeatherProperty.values();
+			return WeatherLink.values();
 		} else {
 			// The Met Éireann HARMONIE-AROME API does not support fog.
-			WeatherProperty[] weatherProperty = { WeatherProperty.CLOUDINESS, WeatherProperty.CLOUD_LEVEL,
-					WeatherProperty.DEW_POINT, WeatherProperty.HUMIDITY, WeatherProperty.PRECIPITATION,
-					WeatherProperty.PRESSURE, WeatherProperty.TEMPERATURE, WeatherProperty.WIND_DIRECTION,
-					WeatherProperty.WIND_SPEED };
+			WeatherLink[] weatherProperty = { WeatherLink.CLOUDINESS, WeatherLink.CLOUD_LEVEL,
+					WeatherLink.DEW_POINT, WeatherLink.HUMIDITY, WeatherLink.PRECIPITATION,
+					WeatherLink.PRESSURE, WeatherLink.TEMPERATURE, WeatherLink.WIND_DIRECTION,
+					WeatherLink.WIND_SPEED };
 
 			return weatherProperty;
 		}
