@@ -18,10 +18,15 @@ public class MappingConstant {
 	/**
 	 * The mapping for the set of locations.
 	 */
-	public static final String LOCATION = "/location";
+	public static final String LOCATION_COLLECTION = "/" + Constant.LOCATION_COLLECTION;
 
-	private static final String PREFIX = LOCATION + "/{" + Constant.LOCATION_NAME + "}/";
-	
+	/**
+	 * The mapping for a specific location.
+	 */
+	public static final String SPECIFIC_LOCATION = LOCATION_COLLECTION + "/{" + Constant.LOCATION_NAME + "}";
+
+	private static final String PREFIX = SPECIFIC_LOCATION + "/";
+
 	/**
 	 * The mapping for the harvest request.
 	 */

@@ -1,6 +1,5 @@
 package eu.acclimatize.unison.location;
 
-import org.springframework.data.domain.Sort;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RestController;
@@ -19,8 +18,7 @@ public class GeoJSONLocationController {
 
 	private static final String GEOJSON_MEDIA_TYPE = "application/geo+json";
 
-	private LocationRepository locationRepository;
-	private Sort sort;
+	private LocationService locationService;
 
 	/**
 	 * Creates and instance of GeoJSONLocationController.
@@ -29,21 +27,23 @@ public class GeoJSONLocationController {
 	 * @param sort               Determines that order of the features in the
 	 *                           feature collection.
 	 */
-	public GeoJSONLocationController(LocationRepository locationRepository, Sort sort) {
-		this.locationRepository = locationRepository;
-		this.sort = sort;
+	public GeoJSONLocationController(LocationService locationService) {
+		this.locationService = locationService;
+
 	}
 
 	/**
 	 * Obtains a feature collection where the features represent a sorted list of
 	 * all coordinates in the spatial database.
 	 * 
-	 * @return A list of Jackson annotated coordinates.
+	 * @return A list of GeoJSON feature collection of point features for the added
+	 *         locations.
 	 */
-	@GetMapping(value = MappingConstant.LOCATION, produces = GEOJSON_MEDIA_TYPE)
+	@GetMapping(value = MappingConstant.LOCATION_COLLECTION, consumes = GEOJSON_MEDIA_TYPE, produces=GEOJSON_MEDIA_TYPE)
 	public FeatureCollection location() {
 
-		return new FeatureCollection(locationRepository.findAll(sort));
+		return new FeatureCollection(locationService.findAllSorted());
+		
 
 	}
 
@@ -53,13 +53,11 @@ public class GeoJSONLocationController {
 	 * @param locationName The name of the location.
 	 * @return The location obtained from the repository.
 	 */
-	@GetMapping(value = MappingConstant.LOCATION + "/{" + Constant.LOCATION_NAME + "}", produces = GEOJSON_MEDIA_TYPE)
+	@GetMapping(value = MappingConstant.SPECIFIC_LOCATION, consumes = GEOJSON_MEDIA_TYPE, produces=GEOJSON_MEDIA_TYPE)
 	public Location location(@PathVariable(Constant.LOCATION_NAME) String locationName) {
 
-		Location location = locationRepository.findById(locationName)
-				.orElseThrow(() -> new LocationNotFoundException(locationName));
-
-		return location;
+		return locationService.find(locationName);
+		
 	}
 
 }

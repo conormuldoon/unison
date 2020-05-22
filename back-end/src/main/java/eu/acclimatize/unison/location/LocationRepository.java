@@ -1,12 +1,13 @@
 package eu.acclimatize.unison.location;
 
-import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.repository.PagingAndSortingRepository;
 
 /**
  * 
  * A repository for storing location data.
  *
  */
-public interface LocationRepository extends JpaRepository<Location, String> {
+//@RepositoryRestResource(exported = false)
+public interface LocationRepository extends PagingAndSortingRepository<Location, String> {
 
 }

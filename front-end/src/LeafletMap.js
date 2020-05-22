@@ -43,10 +43,11 @@ class LeafletMap extends Component {
   }
 
   addPopup = (properties) => {
-    
+
     this.props.markerCallback(properties.name);
 
-    const popupComponent = <ChartPopup curVar={this.props.curVar} location={properties} fromDate={this.props.fromDate} toDate={this.props.toDate} closePopup={this.closePopup} />;
+    const popupComponent = <ChartPopup curVar={this.props.curVar} location={properties} fromDate={this.props.fromDate}
+      toDate={this.props.toDate} closePopup={this.closePopup} linksProperty={this.props.linksProperty} />;
     this.setState({ popupComponent: popupComponent, dragging: false });
 
 
@@ -116,7 +117,9 @@ LeafletMap.propTypes = {
   /** The latitude/longitude coordinates for the centre of the map. */
   mapCentre: PropTypes.array.isRequired,
 
-  featureProperties: PropTypes.object
+  featureProperties: PropTypes.object,
+
+  linksProperty: PropTypes.object,
 }
 
 export default LeafletMap;

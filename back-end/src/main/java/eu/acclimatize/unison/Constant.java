@@ -74,6 +74,12 @@ public class Constant {
 	 */
 	public static final String HARVEST = "harvest";
 
+	
+	/**
+	 * 
+	 */
+	public static final String LOCATION_COLLECTION = "locationCollection";
+
 	/**
 	 * The query string parameter field name, GeoJSON property name, and the JPQL
 	 * query parameter name for the location name.
@@ -101,16 +107,6 @@ public class Constant {
 	 * The location of the application properties file.
 	 */
 	public static final String PROPERTIES_FILE = "/application.properties";
-
-	/**
-	 * The field name for the new user name query string parameter.
-	 */
-	public static final String NEW_USERNAME = "newUsername";
-
-	/**
-	 * The field name for the new password query string parameter.
-	 */
-	public static final String NEW_PASSWORD = "newPassword";
 
 	/**
 	 * The date/time CSV header text.

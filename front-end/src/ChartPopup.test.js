@@ -3,7 +3,7 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import { render, waitForElement } from "react-testing-library";
 import ChartPopup from './ChartPopup';
-import { VAR_OPT } from './Constant';
+import { PRECIP, CL } from './Constant';
 import { chartText } from './Util';
 
 const fromDate = '1/2/2018';
@@ -62,7 +62,7 @@ it('mathes snapshot', () => {
 it('displays text for the selected variable and location', () => {
 
   fetchMock.get(apiRequest, []);
-
+  const VAR_OPT = [PRECIP, 'Humidity', 'Wind Direction', 'Wind Speed', 'Cloudiness', CL, 'Dew Point', 'Pressure', 'Temperature'];
   for (const vo of VAR_OPT) {
     let sOpt = chartText(vo);
     for (const loc of [{

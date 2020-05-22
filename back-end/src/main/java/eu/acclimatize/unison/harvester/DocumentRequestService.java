@@ -2,8 +2,6 @@ package eu.acclimatize.unison.harvester;
 
 import java.io.FileNotFoundException;
 import java.io.IOException;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 import javax.xml.parsers.DocumentBuilder;
 
@@ -23,7 +21,6 @@ import eu.acclimatize.unison.location.Location;
 @Service
 public class DocumentRequestService {
 
-	private Logger logger;
 	private DocumentBuilder documentBuilder;
 	private String template;
 
@@ -31,15 +28,11 @@ public class DocumentRequestService {
 	 * Creates an instance of DocumentRequestService.
 	 * 
 	 * @param documentBuilder A builder used to parse the XML document.
-	 * @param logger          Used to log URIs for requested documents and
-	 *                        exceptions.
 	 * @param uri             The URL template for a HARMONIE-AROME API specified by
 	 *                        app.uri in the application properties file.
 	 */
-	public DocumentRequestService(DocumentBuilder documentBuilder, Logger logger,
-			@Value("${api.uri}") String template) {
+	public DocumentRequestService(DocumentBuilder documentBuilder, @Value("${api.uri}") String template) {
 
-		this.logger = logger;
 		this.documentBuilder = documentBuilder;
 		this.template = template;
 	}
@@ -58,7 +51,6 @@ public class DocumentRequestService {
 
 		String locationURI = location.replaceVariables(template);
 
-		logger.log(Level.INFO, () -> "Requesting data for " + locationURI + '.');
 		try {
 			return documentBuilder.parse(locationURI);
 		} catch (FileNotFoundException e) {

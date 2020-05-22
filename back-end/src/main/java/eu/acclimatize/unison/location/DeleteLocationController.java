@@ -46,7 +46,7 @@ public class DeleteLocationController {
 	 *         location was successfully removed.
 	 */
 	@RolesAllowed(Constant.ROLL_USER)
-	@DeleteMapping(MappingConstant.LOCATION + "/{" + Constant.LOCATION_NAME + "}")
+	@DeleteMapping(MappingConstant.SPECIFIC_LOCATION)
 	public void deleteLocation(@PathVariable(Constant.LOCATION_NAME) String locationName) {
 
 		Optional<Location> optLocation = locationRepository.findById(locationName);

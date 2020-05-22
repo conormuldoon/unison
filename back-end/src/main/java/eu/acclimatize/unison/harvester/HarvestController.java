@@ -18,7 +18,7 @@ import eu.acclimatize.unison.location.LocationRepository;
  *
  */
 @RestController
-public class HarvesterController {
+public class HarvestController {
 
 	private HarvesterService harvesterService;
 	private LocationRepository locationRepository;
@@ -28,7 +28,7 @@ public class HarvesterController {
 	 * 
 	 *
 	 */
-	public HarvesterController(HarvesterService harvesterService, LocationRepository locationRepository) {
+	public HarvestController(HarvesterService harvesterService, LocationRepository locationRepository) {
 
 		this.harvesterService = harvesterService;
 		this.locationRepository = locationRepository;
@@ -36,7 +36,7 @@ public class HarvesterController {
 	}
 
 	@PostMapping(MappingConstant.HARVEST)
-	public void harvester(
+	public void harvest(
 			@PathVariable(Constant.LOCATION_NAME) String locationName)
 			throws HarvestParseException, HarvestRequestException, DocumentNotFoundException {
 

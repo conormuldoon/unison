@@ -22,7 +22,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.context.SpringBootTest.WebEnvironment;
 import org.springframework.boot.test.web.client.TestRestTemplate;
-import org.springframework.data.domain.Sort;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.test.context.support.WithMockUser;
 import org.springframework.test.context.junit4.SpringRunner;
@@ -36,7 +35,6 @@ import eu.acclimatize.unison.location.GeoJSONLocationController;
 import eu.acclimatize.unison.location.Location;
 import eu.acclimatize.unison.location.LocationConstant;
 import eu.acclimatize.unison.location.LocationRepository;
-import eu.acclimatize.unison.location.WeatherLink;
 import eu.acclimatize.unison.user.UserRepository;
 
 /**
@@ -50,6 +48,9 @@ public class LocationTests {
 
 	@Autowired
 	private LocationRepository locationRepository;
+	
+	@Autowired
+	private GeoJSONLocationController geoLocationController;
 
 	@Autowired
 	private UserRepository userRepository;
@@ -90,7 +91,7 @@ public class LocationTests {
 		Location location = createLocation("New Location");
 
 		TestRestTemplate templateWBA = template.withBasicAuth(TestConstant.USERNAME, TestConstant.PASSWORD);
-		templateWBA.put(MappingConstant.LOCATION, location);
+		templateWBA.put(MappingConstant.SPECIFIC_LOCATION, location);
 
 		Assert.assertEquals(2, locationRepository.count());
 
@@ -100,7 +101,7 @@ public class LocationTests {
 		TestUtility.addUserInformation(userName, password, userRepository);
 		TestRestTemplate templateWBA = template.withBasicAuth(userName, password);
 		Location modifiedLocation = createLocation(TestConstant.LOCATION);
-		templateWBA.put(MappingConstant.LOCATION, modifiedLocation);
+		templateWBA.put(MappingConstant.SPECIFIC_LOCATION, modifiedLocation);
 		Optional<Location> oLoc = locationRepository.findById(TestConstant.LOCATION);
 		Location savedLocation = oLoc.get();
 		Assert.assertEquals(expected, modifiedLocation.equals(savedLocation));
@@ -129,7 +130,7 @@ public class LocationTests {
 	private void testDelete(String userName, String password, int expectedCount, String locationName) {
 		TestRestTemplate templateWBA = template.withBasicAuth(userName, password);
 
-		templateWBA.delete(MappingConstant.LOCATION + "/" + locationName);
+		templateWBA.delete(MappingConstant.SPECIFIC_LOCATION + "/" + locationName);
 		Assert.assertEquals(expectedCount, locationRepository.count());
 
 	}
@@ -179,13 +180,10 @@ public class LocationTests {
 	@Test
 	public void locationList() throws IOException {
 
-		Sort sort = Sort.by(Sort.Direction.ASC, "name");
-
-		GeoJSONLocationController locationController = new GeoJSONLocationController(locationRepository, sort);
-		FeatureCollection fc = locationController.location();
+		FeatureCollection fc = geoLocationController.location();
 
 		JsonGenerator jg = Mockito.mock(JsonGenerator.class);
-		fc.geoJSONSerialize(jg, WeatherLink.values());
+		fc.geoJSONSerialize(jg);
 		Mockito.verify(jg, Mockito.times(1)).writeStringField(Constant.TYPE, LocationConstant.FEATURE);
 
 	}
@@ -200,7 +198,7 @@ public class LocationTests {
 	@WithMockUser(TestConstant.USERNAME)
 	public void singleLocation() {
 		ResponseEntity<Location> response = template
-				.getForEntity(MappingConstant.LOCATION + "/" + TestConstant.LOCATION, Location.class);
+				.getForEntity(MappingConstant.SPECIFIC_LOCATION + "/" + TestConstant.LOCATION, Location.class);
 		Assert.assertNotNull(response.getBody());
 	}
 
@@ -214,7 +212,7 @@ public class LocationTests {
 	@Test
 	@WithMockUser(TestConstant.USERNAME)
 	public void collectionLocation() {
-		ResponseEntity<FeatureCollection> response = template.getForEntity(MappingConstant.LOCATION,
+		ResponseEntity<FeatureCollection> response = template.getForEntity(MappingConstant.SPECIFIC_LOCATION,
 				FeatureCollection.class);
 		Assert.assertNotNull(response.getBody());
 	}
@@ -233,7 +231,7 @@ public class LocationTests {
 		Location location = TestUtility.createLocation(TestConstant.LOCATION, null, TestConstant.LONGITUDE,
 				TestConstant.LATITUDE);
 
-		location.geoJSONSerialize(jsonGenerator, WeatherLink.values());
+		location.geoJSONSerialize(jsonGenerator);
 
 		jsonGenerator.flush();
 
@@ -256,7 +254,7 @@ public class LocationTests {
 
 		FeatureCollection featureCollection = new FeatureCollection(new ArrayList<Location>());
 
-		FeatureCollectionSerializer fcs = new FeatureCollectionSerializer(null);
+		FeatureCollectionSerializer fcs = new FeatureCollectionSerializer();
 		Writer jsonWriter = new StringWriter();
 		JsonGenerator jsonGenerator = new JsonFactory().createGenerator(jsonWriter);
 
@@ -288,7 +286,7 @@ public class LocationTests {
 
 		FeatureCollection featureCollection = new FeatureCollection(list);
 
-		FeatureCollectionSerializer fcs = new FeatureCollectionSerializer(WeatherLink.values());
+		FeatureCollectionSerializer fcs = new FeatureCollectionSerializer();
 		Writer jsonWriter = new StringWriter();
 		JsonGenerator jsonGenerator = new JsonFactory().createGenerator(jsonWriter);
 

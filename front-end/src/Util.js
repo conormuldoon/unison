@@ -1,5 +1,5 @@
 
-import { API, FORMAT } from './Constant';
+import { FORMAT } from './Constant';
 
 import {
   formatDate
@@ -29,28 +29,32 @@ export const varMapping = (varCur) => {
 }
 
 export const problemConnecting = () => {
-  alert('Problem Connecting');
+  alert('There was a problem connecting to Unison. Please try again later.');
 }
 
-export const expandLink = (feature, curVar, fromDate, toDate) => {
-  
-  const link = feature.links[varMapping(curVar)];
-  const template = parser.parse(link);
-  return API + template.expand({ fromDate: fromDate, toDate: toDate });
+export const expandLink = (linksProperty, feature, curVar, fromDate, toDate) => {
+
+  const href = linksProperty[varMapping(curVar)].href;
+  const template = parser.parse(href);
+  return template.expand({ name: feature.name, fromDate: fromDate, toDate: toDate });
 
 }
+
 
 // Changing second word in current variable to lower case if present
-export const chartText = (curVar) =>{
- 
- let vca = curVar.split(' ');
-  
- let vc = vca[0];
- if (vca.length > 1) {
-   vca[1] = vca[1].toLowerCase();
-   vc += ' ' + vca[1];
- }
- return vc;
+export const chartText = (curVar) => {
+
+  let vca = curVar.split(' ');
+
+  let vc = vca[0];
+
+  if (vca.length > 1) {
+    vca[1] = vca[1].toLowerCase();
+
+    vc += ' ' + vca[1];
+  }
+
+  return vc;
 }
 
 const putObject = (body) => {
@@ -61,6 +65,7 @@ const putObject = (body) => {
     }),
     body: body
   }
+
 }
 
 

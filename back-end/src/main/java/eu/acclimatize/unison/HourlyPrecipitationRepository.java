@@ -10,11 +10,12 @@ import eu.acclimatize.unison.location.Location;
  * A repository for storing hourly precipitation data.
  *
  */
-public interface HourlyPrecipitationRepository extends CrudRepository<HourlyPrecipitation, ItemKey> { 
+//@RepositoryRestResource(exported=false)
+public interface HourlyPrecipitationRepository extends CrudRepository<HourlyPrecipitation, ItemKey> {
 
-	
 	/**
 	 * Deletes the hourly precipitation data for a given location.
+	 * 
 	 * @param name The name of the location.
 	 */
 	@Modifying

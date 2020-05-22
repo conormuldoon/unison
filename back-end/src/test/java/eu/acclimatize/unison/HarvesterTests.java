@@ -53,7 +53,7 @@ public class HarvesterTests {
 		DocumentBuilder mockBuilder = Mockito.mock(DocumentBuilder.class);
 		Mockito.when(mockBuilder.parse(Mockito.anyString())).thenReturn(doc);
 
-		DocumentRequestService lrs = new DocumentRequestService(mockBuilder, logger, "classpath:" + fileName);
+		DocumentRequestService lrs = new DocumentRequestService(mockBuilder, "classpath:" + fileName);
 
 		LocationRepository lr = Mockito.mock(LocationRepository.class);
 		Location location = TestUtility.createLocation("New Location", null, 0, 0);
@@ -147,12 +147,11 @@ public class HarvesterTests {
 	public void testHaveDocument() throws SAXException, IOException, HarvestParseException, HarvestRequestException,
 			DocumentNotFoundException {
 		DocumentBuilder documentBuilder = Mockito.mock(DocumentBuilder.class);
-		Logger logger = Mockito.mock(Logger.class);
 
 		Document d = Mockito.mock(Document.class);
 		Mockito.when(documentBuilder.parse(Mockito.anyString())).thenReturn(d);
 
-		DocumentRequestService drc = new DocumentRequestService(documentBuilder, logger, "");
+		DocumentRequestService drc = new DocumentRequestService(documentBuilder, "");
 
 		Document document = drc.documentForLocation(
 				TestUtility.createLocation(TestConstant.LOCATION, null, TestConstant.LONGITUDE, TestConstant.LATITUDE));

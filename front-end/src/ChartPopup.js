@@ -27,8 +27,7 @@ function ChartPopup(props) {
 
     async function obtainData() {
 
-
-      const request = expandLink(props.location, props.curVar, props.fromDate, props.toDate);
+      const request = expandLink(props.linksProperty, props.location, props.curVar, props.fromDate, props.toDate);
 
       let response = await fetch(request, {
         method: 'GET',
@@ -75,13 +74,13 @@ function ChartPopup(props) {
     const cancel = () => active = false;
     return cancel;
 
-  }, [props.curVar, props.location, props.fromDate, props.toDate]);
+  }, [props.linksProperty, props.curVar, props.location, props.fromDate, props.toDate]);
 
   function handleClick(e) {
     e.stopPropagation();
   }
 
-  const vc=chartText(props.curVar);
+  const vc = chartText(props.curVar);
 
   return (
     <div id="popupdiv" data-testid='chart-div' onClick={handleClick}>
@@ -118,6 +117,7 @@ ChartPopup.propTypes = {
   /** Called when the close icon is clicked. */
   closePopup: PropTypes.func.isRequired,
 
+  linksProperty: PropTypes.object.isRequired,
 }
 
 export default ChartPopup;

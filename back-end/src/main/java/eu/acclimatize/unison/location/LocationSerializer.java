@@ -15,21 +15,11 @@ import com.fasterxml.jackson.databind.SerializerProvider;
  */
 @JsonComponent
 public class LocationSerializer extends JsonSerializer<Location> {
-
-	private WeatherLink[] weatherProperty;
-
-	/**
-	 * Creates an instance of LocationSerializer.
-	 * 
-	 * @param weatherProperty The weather properties for locations.
-	 */
-	public LocationSerializer(WeatherLink[] weatherProperty) {
-		this.weatherProperty = weatherProperty;
-	}
+	
 
 	@Override
 	public void serialize(Location value, JsonGenerator gen, SerializerProvider serializers) throws IOException {
 		
-		value.geoJSONSerialize(gen, weatherProperty);
+		value.geoJSONSerialize(gen);
 	}
 }

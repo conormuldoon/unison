@@ -47,10 +47,9 @@ public class LocationConfig {
 			return WeatherLink.values();
 		} else {
 			// The Met Éireann HARMONIE-AROME API does not support fog.
-			WeatherLink[] weatherProperty = { WeatherLink.CLOUDINESS, WeatherLink.CLOUD_LEVEL,
-					WeatherLink.DEW_POINT, WeatherLink.HUMIDITY, WeatherLink.PRECIPITATION,
-					WeatherLink.PRESSURE, WeatherLink.TEMPERATURE, WeatherLink.WIND_DIRECTION,
-					WeatherLink.WIND_SPEED };
+			WeatherLink[] weatherProperty = { WeatherLink.CLOUDINESS, WeatherLink.CLOUD_LEVEL, WeatherLink.DEW_POINT,
+					WeatherLink.HUMIDITY, WeatherLink.PRECIPITATION, WeatherLink.PRESSURE, WeatherLink.TEMPERATURE,
+					WeatherLink.WIND_DIRECTION, WeatherLink.WIND_SPEED };
 
 			return weatherProperty;
 		}

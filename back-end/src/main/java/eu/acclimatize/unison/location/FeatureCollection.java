@@ -1,11 +1,11 @@
 package eu.acclimatize.unison.location;
 
 import java.io.IOException;
-import java.util.List;
 
 import com.fasterxml.jackson.core.JsonGenerator;
 
 import eu.acclimatize.unison.Constant;
+
 
 /**
  * 
@@ -13,19 +13,19 @@ import eu.acclimatize.unison.Constant;
  *
  */
 
-public class FeatureCollection {
+public class FeatureCollection{
 
 	private static final String FEATURE_COLLECTION = "FeatureCollection";
 
-	private List<Location> locationList;
+	private Iterable<Location> features;
 
 	/**
 	 * Creates an instance of FeatureCollection.
 	 * 
 	 * @param locationList A list of features.
 	 */
-	public FeatureCollection(List<Location> locationList) {
-		this.locationList = locationList;
+	public FeatureCollection(Iterable<Location> features) {
+		this.features = features;
 	}
 
 	/**
@@ -36,14 +36,14 @@ public class FeatureCollection {
 	 * @throws IOException Thrown if there if there is an I/O error when
 	 *                     serializing.
 	 */
-	public void geoJSONSerialize(JsonGenerator gen, WeatherLink[] weatherProperty) throws IOException {
+	public void geoJSONSerialize(JsonGenerator gen) throws IOException {
 		gen.writeStartObject();
 
 		gen.writeStringField(Constant.TYPE, FEATURE_COLLECTION);
 		gen.writeArrayFieldStart(LocationConstant.FEATURES);
 
-		for (Location l : locationList) {
-			l.geoJSONSerialize(gen, weatherProperty);
+		for (Location l : features) {
+			l.geoJSONSerialize(gen);
 		}
 		gen.writeEndArray();
 		gen.writeEndObject();

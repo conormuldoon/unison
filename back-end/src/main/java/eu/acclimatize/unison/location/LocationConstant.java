@@ -14,6 +14,8 @@ public class LocationConstant {
 	private LocationConstant() {
 
 	}
+	
+	public static final String FEATURE_COLLECTION = "FeatureCollection";
 
 	/**
 	 * The GeoJSON feature collection field name.

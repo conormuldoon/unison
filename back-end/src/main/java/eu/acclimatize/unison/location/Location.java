@@ -1,7 +1,13 @@
 package eu.acclimatize.unison.location;
 
+import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.linkTo;
+import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.methodOn;
+
 import java.io.IOException;
 import java.io.Serializable;
+import java.net.URI;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Optional;
 
 import javax.persistence.Entity;
@@ -9,6 +15,9 @@ import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 
 import org.locationtech.jts.geom.Point;
+import org.springframework.hateoas.Link;
+import org.springframework.hateoas.UriTemplate;
+import org.springframework.hateoas.server.mvc.BasicLinkBuilder;
 
 import com.fasterxml.jackson.core.JsonGenerator;
 
@@ -28,9 +37,6 @@ import eu.acclimatize.unison.user.UserInformation;
 public class Location implements OwnedItem, Serializable {
 
 	private static final long serialVersionUID = 1771422791257298902L;
-
-	private static final String LINKS = "links";
-	private static final String SELF = "self";
 
 	@Id
 	private String name;
@@ -79,6 +85,23 @@ public class Location implements OwnedItem, Serializable {
 		return template.replace("{longitude}", String.valueOf(geom.getX()));
 	}
 
+	public List<Link> createList(WeatherLink[] weatherLink) {
+		List<Link> list = new ArrayList<>();
+		list.add(linkTo(methodOn(HATEOASLocationController.class).location(name)).withSelfRel());
+		list.add(linkTo(methodOn(HATEOASLocationController.class).location()).withRel(Constant.LOCATION_COLLECTION));
+
+		for (WeatherLink wl : weatherLink) {
+			list.add(wl.createLink(name));
+		}
+
+		String baseUri = BasicLinkBuilder.linkToCurrentMapping().toString();
+		UriTemplate uriTemplate = UriTemplate.of(baseUri + MappingConstant.HARVEST);
+		URI harvestURI = uriTemplate.expand(name);
+		Link link = Link.of(harvestURI.toString(), Constant.HARVEST);
+		list.add(link.withRel(Constant.HARVEST));
+		return list;
+	}
+
 	/**
 	 * Serializes the location in a GeoJSON format.
 	 * 
@@ -86,7 +109,7 @@ public class Location implements OwnedItem, Serializable {
 	 * @param weatherProperty
 	 * @throws IOException Thrown if there is an I/O error while serializing.
 	 */
-	public void geoJSONSerialize(JsonGenerator gen, WeatherLink[] weatherProperty) throws IOException {
+	public void geoJSONSerialize(JsonGenerator gen) throws IOException {
 
 		gen.writeStartObject();
 
@@ -105,15 +128,7 @@ public class Location implements OwnedItem, Serializable {
 		gen.writeFieldName(LocationConstant.PROPERTIES);
 		gen.writeStartObject();
 		gen.writeStringField(Constant.LOCATION_NAME, name);
-		gen.writeFieldName(LINKS);
-		gen.writeStartObject();
-		String selfMapping = MappingConstant.LOCATION + "/" + name;
-		gen.writeStringField(SELF, selfMapping);
-		for (WeatherLink wp : weatherProperty) {
-			wp.write(gen, name);
-		}
-		gen.writeStringField(Constant.HARVEST, selfMapping + "/" + Constant.HARVEST);
-		gen.writeEndObject();
+
 		gen.writeEndObject();
 		gen.writeEndObject();
 

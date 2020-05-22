@@ -1,9 +1,10 @@
 
 import PropTypes from 'prop-types';
 import React from 'react';
-import { API, SELF } from './Constant';
 import { problemConnecting } from './Util';
 import HttpStatus from 'http-status-codes';
+import parser from 'uri-template';
+import { LOCATION } from './Constant';
 
 /**
  * A component to enable the user to remove a location from being tracked.
@@ -14,20 +15,24 @@ function RemoveComponent(props) {
 
   async function removeRequest() {
 
-    const response = await fetch(API + props.location.links[SELF],
+    const href = props.linksProperty[LOCATION].href;
+    const template = parser.parse(href);
+    const uri = template.expand({ name: props.location.name });
+
+    const response = await fetch(uri,
       {
         method: 'DELETE'
       });
-
+      
     if (response.ok) {
 
-      alert(props.location.name + ' removed');
+      alert(props.location.name + ' was removed.');
       props.obtainData();
 
     } else if (response.status === HttpStatus.UNAUTHORIZED) {
       alert('Incorrect user name or password');
     } else if (response.status === HttpStatus.FORBIDDEN) {
-      alert('You do not have permission to delete ' + props.location + '.');
+      alert('You do not have permission to delete ' + props.location.name + '.');
     } else {
       console.log(response.status)
       problemConnecting();
@@ -63,6 +68,8 @@ RemoveComponent.propTypes = {
 
   /** Called when a location has been successfully removed to obtain the updated location list from the server. */
   obtainData: PropTypes.func.isRequired,
+
+  linksProperty: PropTypes.object
 }
 
 export default RemoveComponent;

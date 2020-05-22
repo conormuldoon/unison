@@ -2,13 +2,13 @@
 import PropTypes from 'prop-types';
 import React, { useState } from 'react';
 import './App.css';
-import { API } from './Constant';
+
 import { problemConnecting } from './Util';
 import HttpStatus from 'http-status-codes';
 import { locationPutObject } from './Util';
-import { HARVEST } from './Constant';
+import { SELF, HARVEST } from './Constant';
 
-
+import parser from 'uri-template';
 
 /**
  * A component for displaying a form to add new locations to be tracked.
@@ -47,25 +47,21 @@ function LocationForm(props) {
 
   async function putData(locationExists) {
 
-    const response = await fetch(API + '/location',
+    const response = await fetch(props.linksProperty[SELF].href,
       locationPutObject(location, lon, lat));
-
-    let message;
-    if (locationExists) {
-      message = 'updated';
-    } else {
-      message = 'added';
-    }
 
     if (response.ok) {
 
-      const linkedPoint = await response.json();
-      
-      const harvestLink = linkedPoint.properties.links[HARVEST];
-     
-      const harvestResponse = await fetch(API + harvestLink, {
-        method: 'POST'
+      const href = props.linksProperty[HARVEST].href;
+      const template = parser.parse(href);
+      const uri = template.expand({ name: location });
+
+      const harvestResponse = await fetch(uri, {
+        method: 'POST',
+        redirect: 'follow'
       });
+
+      let message = (locationExists) ? 'updated' : 'added';
 
       if (harvestResponse.ok) {
         alert(location + ' was ' + message + '.');
@@ -81,7 +77,7 @@ function LocationForm(props) {
     } else if (response.status === HttpStatus.UNAUTHORIZED) {
       alert('Incorrect user name or password');
     } else if (response.status === HttpStatus.FORBIDDEN) {
-      alert('A location named ' + location + ' is being tracked by another user and was not ' + message + '.')
+      alert('You do not have permission to add ' + location + '. A location of the same name may have been added by another user.');
     }
     else {
       problemConnecting();
@@ -154,6 +150,8 @@ LocationForm.propTypes = {
   obtainData: PropTypes.func.isRequired,
 
   featureProperties: PropTypes.object,
+
+  linksProperty: PropTypes.object,
 }
 
 export default LocationForm;

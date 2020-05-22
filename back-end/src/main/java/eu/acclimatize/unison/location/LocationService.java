@@ -2,6 +2,7 @@ package eu.acclimatize.unison.location;
 
 import javax.transaction.Transactional;
 
+import org.springframework.data.domain.Sort;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Service;
 
@@ -19,6 +20,7 @@ public class LocationService {
 	private LocationRepository locationRepository;
 	private HourlyPrecipitationRepository hpr;
 	private HourlyWeatherRepository hwr;
+	private Sort sort;
 
 	/**
 	 * Creates an instance of LocationSerivce.
@@ -28,10 +30,11 @@ public class LocationService {
 	 * @param hwr                The repository where weather data is stored.
 	 */
 	public LocationService(LocationRepository locationRepository, HourlyPrecipitationRepository hpr,
-			HourlyWeatherRepository hwr) {
+			HourlyWeatherRepository hwr, Sort sort) {
 		this.locationRepository = locationRepository;
 		this.hpr = hpr;
 		this.hwr = hwr;
+		this.sort = sort;
 
 	}
 
@@ -60,6 +63,17 @@ public class LocationService {
 	@PreAuthorize(Constant.REPLACE_ITEM)
 	public void replace(Location current, Location updated) {
 		locationRepository.save(updated);
+	}
+
+	public Iterable<Location> findAllSorted() {
+		return locationRepository.findAll(sort);
+	}
+
+	public Location find(String locationName) {
+		Location location = locationRepository.findById(locationName)
+				.orElseThrow(() -> new LocationNotFoundException(locationName));
+		return location;
+
 	}
 
 }

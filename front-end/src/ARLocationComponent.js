@@ -32,11 +32,11 @@ function ARLocationComponent(props) {
     <div>
       <div className='pLeft'>
         <LocationForm obtainData={props.obtainData} toggleDisplay={toggleDisplayAdd} display={displayAdd} hideDisplay={hideAdd}
-          featureProperties={props.featureProperties} />
+          featureProperties={props.featureProperties} linksProperty={props.linksProperty} />
 
       </div>
       {props.location && <div className='pLeft'>
-        <RemoveComponent obtainData={props.obtainData} hideDisplay={hideAdd} location={props.location} />
+        <RemoveComponent obtainData={props.obtainData} hideDisplay={hideAdd} location={props.location} linksProperty={props.linksProperty} />
       </div>}
     </div>
   );
@@ -50,7 +50,10 @@ ARLocationComponent.propTypes = {
   /** Called when a location has been successfully added/removed to obtain the updated location list from the server and update the locations displayed on the map. */
   obtainData: PropTypes.func.isRequired,
 
-  featureProperties: PropTypes.object
+  featureProperties: PropTypes.object,
+
+  linksProperty: PropTypes.object,
+
 }
 
 export default ARLocationComponent;

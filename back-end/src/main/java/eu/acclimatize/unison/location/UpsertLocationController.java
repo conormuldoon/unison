@@ -8,11 +8,11 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import eu.acclimatize.unison.MappingConstant;
-import eu.acclimatize.unison.harvester.HarvesterController;
+import eu.acclimatize.unison.harvester.HarvestController;
 
 /**
  * A controller for adding or updating a location. In contrast to the
- * {@link HarvesterController}, the controller does not make a harvest data
+ * {@link HarvestController}, the controller does not make a harvest data
  * request when adding a location.
  *
  */
@@ -37,7 +37,7 @@ public class UpsertLocationController {
 	 */
 	// @RolesAllowed is used when the location is deserialized so is not required
 	// here.
-	@PutMapping(MappingConstant.LOCATION)
+	@PutMapping(MappingConstant.LOCATION_COLLECTION)
 	public Location upsert(@RequestBody Location location) {
 
 		Optional<Location> optCurrent = location.findCurrent(locationRepository);

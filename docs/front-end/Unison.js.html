@@ -72,10 +72,11 @@ import 'react-day-picker/lib/style.css';
 import { formatDate } from 'react-day-picker/moment';
 import './App.css';
 import ARLocationComponent from './ARLocationComponent';
-import { API, FORMAT, VAR_OPT } from './Constant';
+import { FORMAT, EXCLUDE_REL } from './Constant';
 import DateSelector from './DateSelector';
 import LeafletMap from './LeafletMap';
-import { today, tomorrow, expandLink } from './Util';
+import { today, tomorrow, expandLink, problemConnecting } from './Util';
+import HttpStatus from 'http-status-codes';
 
 /**
  * Application component for Unison. Once mounted, it connects to the back-end to receive a list of the locations being tracked.
@@ -91,27 +92,37 @@ function Unison(props) {
   const [option, setOption] = useState(undefined);
   const [marker, setMarker] = useState(undefined);
   const [curLoc, setCurLoc] = useState(undefined);
-  const [curVar, setCurVar] = useState(VAR_OPT[0]);
+  const [curVar, setCurVar] = useState(undefined);
+  const [varOpt, setVarOpt] = useState(undefined);
   const [featureProperties, setFeatureProperties] = useState(undefined);
+  const [linksProperty, setLinksProperty] = useState(undefined);
+
 
   const obtainData = () => {
     let active = true;
 
-    async function requestLocation() {
-      let response = await fetch(API + '/location');
+
+    async function requestLocation(uri) {
+      const response = await fetch(uri);
+
+
 
       if (active &amp;&amp; response.ok) {
-        const fc = await response.json();
-        const map = new Map();
-
-
-        const locationArray = fc.features;
+        const model = await response.json();
 
         if (active) {
+          const map = new Map();
+
+          const fc = model.content;
+
+
+          const locationArray = fc.features;
+
+
           let n = locationArray.length;
 
-          let newOption = [];
-          let newMarker = [];
+          const newOption = [];
+          const newMarker = [];
 
           for (let i = 0; i &lt; n; i++) {
             newOption.push(locationArray[i].properties.name);
@@ -123,23 +134,73 @@ function Unison(props) {
 
 
           }
+
+          setFeatureProperties(map);
+
           if (n > 0) {
-            setFeatureProperties(map);
+
+
             setOption(newOption);
             setMarker(newMarker);
             setCurLoc(locationArray[0].properties);
 
           } else {
-            setFeatureProperties(undefined);
+
             setOption(undefined);
             setMarker(undefined);
             setCurLoc(undefined);
+
           }
+
+          const varOpt = [];
+
+          for (const rel in model._links) {
+            if (EXCLUDE_REL.includes(rel)) {
+              continue;
+            }
+
+            const s = rel.charAt(0).toUpperCase() + rel.substring(1);
+            let optName = '';
+            let sw = 0;
+            for (let i = 1; i &lt; s.length; i++) {
+              const c = s.charAt(i);
+              if (c >= 'A' &amp;&amp; c &lt;= 'Z') {
+                optName += s.substring(sw, i) + ' ';
+                sw = i;
+              }
+            }
+            optName += s.substring(sw);
+            varOpt.push(optName);
+          }
+
+          if (varOpt.length > 0) {
+            setCurVar(varOpt[0]);
+            setVarOpt(varOpt)
+          } else {
+            alert("No weather data is associated with the collection.")
+          }
+
+          setLinksProperty(model._links);
+
         }
+
       }
     }
 
-    requestLocation();
+    async function requestModel() {
+      const response = await fetch('/hal');
+
+      if (active &amp;&amp; response.ok) {
+        const model = await response.json();
+
+        if (active)
+          requestLocation(model._links.locationCollection.href);
+      } else if (response.status === HttpStatus.GATEWAY_TIMEOUT) {
+        problemConnecting();
+      }
+    }
+
+    requestModel();
 
     const cancel = () => active = false;
     return cancel;
@@ -166,6 +227,7 @@ function Unison(props) {
   }
 
   const _onVarSelect = (event) => {
+
     setCurVar(event.target.value);
 
   }
@@ -207,34 +269,32 @@ function Unison(props) {
 
       &lt;LeafletMap marker={marker} curVar={curVar} location={curLoc} featureProperties={featureProperties}
         markerCallback={markerClicked} fromDate={fromDate} toDate={toDate}
-        mapCentre={props.mapCentre}
+        mapCentre={props.mapCentre} linksProperty={linksProperty} />
 
-      />
-      &lt;div id="selectdiv" >
+      {linksProperty &amp;&amp; &lt;div id="selectdiv" >
 
         &lt;center>
 
           &lt;div>
             &lt;div id='variDD' >
 
-              &lt;select disabled={!curLoc} onChange={_onVarSelect}>
+              {varOpt &amp;&amp; &lt;select onChange={_onVarSelect}>
 
-                {VAR_OPT.map((opt) => &lt;option key={opt} value={opt}>{opt}&lt;/option>)}
-
-              &lt;/select>
-
-            &lt;/div>
-
-            &lt;div className='marginItem' >
-
-              {curLoc &amp;&amp; &lt;select onChange={_onLocationSelect} value={curLoc.name}>
-                {!option &amp;&amp; &lt;option key="Location" value="Location" >Location&lt;/option>}
-                {option &amp;&amp; option.map((opt) => &lt;option key={opt} value={opt}>{opt}&lt;/option>)}
+                {varOpt.map((opt) => &lt;option key={opt} value={opt}>{opt}&lt;/option>)}
 
               &lt;/select>}
 
-
             &lt;/div>
+
+            {curLoc &amp;&amp; &lt;div className='marginItem' >
+
+              &lt;select onChange={_onLocationSelect} value={curLoc.name}>
+                {!option &amp;&amp; &lt;option key="Location" value="Location" >Location&lt;/option>}
+                {option &amp;&amp; option.map((opt) => &lt;option key={opt} value={opt}>{opt}&lt;/option>)}
+
+              &lt;/select>
+
+            &lt;/div>}
 
 
             &lt;div className='pLeft' >
@@ -252,9 +312,9 @@ function Unison(props) {
 
             &lt;/div>
 
-            {curLoc &amp;&amp; &lt;a download={spaceToUnderscore(curLoc.name) + '_' + spaceToUnderscore(curVar) + '_' + dashDate(fromDate) + "_" + dashDate(toDate) + '.csv'}
+            {curLoc &amp;&amp; curVar &amp;&amp; &lt;a download={spaceToUnderscore(curLoc.name) + '_' + spaceToUnderscore(curVar) + '_' + dashDate(fromDate) + "_" + dashDate(toDate) + '.csv'}
               className='pLeft'
-              href={expandLink(curLoc, curVar, fromDate, toDate)}>
+              href={expandLink(linksProperty, curLoc, curVar, fromDate, toDate)}>
 
               &lt;button disabled={!curLoc} >
                 CSV
@@ -263,11 +323,11 @@ function Unison(props) {
             &lt;/a>}
           &lt;/div>
 
-          &lt;ARLocationComponent obtainData={obtainData} location={curLoc} featureProperties={featureProperties} />
+          &lt;ARLocationComponent obtainData={obtainData} location={curLoc} featureProperties={featureProperties} linksProperty={linksProperty} />
 
         &lt;/center>
 
-      &lt;/div>
+      &lt;/div>}
 
 
 
@@ -309,7 +369,7 @@ export default Unison;
 
 <footer class="footer">
     <div class="content has-text-centered">
-        <p>Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.6.3</a> on Mon May 18 2020 18:45:17 GMT+0100 (Irish Standard Time)</p>
+        <p>Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.6.3</a> on Fri May 22 2020 19:19:50 GMT+0100 (Irish Standard Time)</p>
         <p class="sidebar-created-by">
             <a href="https://github.com/SoftwareBrothers/better-docs" target="_blank">BetterDocs theme</a> provided with <i class="fas fa-heart"></i> by 
             <a href="http://softwarebrothers.co" target="_blank">SoftwareBrothers - JavaScript Development Agency</a>
