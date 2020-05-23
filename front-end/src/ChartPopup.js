@@ -27,15 +27,15 @@ function ChartPopup(props) {
 
     async function obtainData() {
 
-      const request = expandLink(props.linksProperty, props.location, props.curVar, props.fromDate, props.toDate);
+      const uri = expandLink(props.linksProperty, props.location, props.curVar, props.fromDate, props.toDate);
 
-      let response = await fetch(request, {
+      const response = await fetch(uri, {
         method: 'GET',
         headers: new Headers({
           'Content-Type': 'application/json'
         })
       });
-      let dataArray = await response.json();
+      const dataArray = await response.json();
 
       if (active) {
         const n = dataArray.length;

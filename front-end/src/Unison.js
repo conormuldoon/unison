@@ -122,7 +122,13 @@ function Unison(props) {
     }
 
     async function requestModel() {
-      const response = await fetch('/hal');
+
+      const response = await fetch('/', {
+        method: 'GET',
+        headers: new Headers({
+          'Content-Type': 'application/hal+json'
+        })
+      });
 
       if (active && response.ok) {
         const model = await response.json();

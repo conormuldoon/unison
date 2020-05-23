@@ -17,4 +17,3 @@ export const LOCATION = "location";
 
 export const EXCLUDE_REL = Object.freeze([HARVEST, SELF, LOCATION]);
 
-

@@ -3,7 +3,10 @@ const { createProxyMiddleware } = require('http-proxy-middleware');
 
 const filter = function (pathName, req) {
 
-  if (pathName === '/hal'|| pathName.startsWith('/locationCollection')) {
+  if (pathName.startsWith('/locationCollection') ||
+    req.rawHeaders.includes('application/hal+json') ||
+    pathName === '/index') {
+
     return true;
   }
   return false;
