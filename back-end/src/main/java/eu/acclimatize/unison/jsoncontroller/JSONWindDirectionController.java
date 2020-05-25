@@ -43,7 +43,7 @@ public class JSONWindDirectionController {
 	 * @return A list of {@link eu.acclimatize.unison.result.WindDirectionResult}
 	 *         items.
 	 */
-	@GetMapping(value = MappingConstant.LOCATION_WIND_DIRECTION, consumes = MediaType.APPLICATION_JSON_VALUE)
+	@GetMapping(value = MappingConstant.LOCATION_WIND_DIRECTION, produces = MediaType.APPLICATION_JSON_VALUE)
 	public Iterable<HarmonieItem> windDirection(@PathVariable(Constant.LOCATION_NAME) String location,
 			@RequestParam(value = Constant.FROM_DATE) @DateTimeFormat(pattern = Constant.FORMAT) Date fromDate,
 			@RequestParam(value = Constant.TO_DATE) @DateTimeFormat(pattern = Constant.FORMAT) Date toDate) {

@@ -16,8 +16,6 @@ import eu.acclimatize.unison.MappingConstant;
 @RestController
 public class GeoJSONLocationController {
 
-	private static final String GEOJSON_MEDIA_TYPE = "application/geo+json";
-
 	private LocationService locationService;
 
 	/**
@@ -39,11 +37,10 @@ public class GeoJSONLocationController {
 	 * @return A list of GeoJSON feature collection of point features for the added
 	 *         locations.
 	 */
-	@GetMapping(value = MappingConstant.LOCATION_COLLECTION, consumes = GEOJSON_MEDIA_TYPE, produces=GEOJSON_MEDIA_TYPE)
+	@GetMapping(value = MappingConstant.LOCATION_COLLECTION, produces = LocationConstant.GEOJSON_MEDIA_TYPE)
 	public FeatureCollection location() {
 
 		return new FeatureCollection(locationService.findAllSorted());
-		
 
 	}
 
@@ -53,11 +50,11 @@ public class GeoJSONLocationController {
 	 * @param locationName The name of the location.
 	 * @return The location obtained from the repository.
 	 */
-	@GetMapping(value = MappingConstant.SPECIFIC_LOCATION, consumes = GEOJSON_MEDIA_TYPE, produces=GEOJSON_MEDIA_TYPE)
+	@GetMapping(value = MappingConstant.SPECIFIC_LOCATION, produces = LocationConstant.GEOJSON_MEDIA_TYPE)
 	public Location location(@PathVariable(Constant.LOCATION_NAME) String locationName) {
 
 		return locationService.find(locationName);
-		
+
 	}
 
 }

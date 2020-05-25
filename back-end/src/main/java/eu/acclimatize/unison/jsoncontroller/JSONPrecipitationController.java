@@ -43,7 +43,7 @@ public class JSONPrecipitationController {
 	 * @return A list of {@link eu.acclimatize.unison.result.PrecipitationResult}
 	 *         items.
 	 */
-	@GetMapping(value = MappingConstant.LOCATION_PRECIPITATION, consumes = MediaType.APPLICATION_JSON_VALUE)
+	@GetMapping(value = MappingConstant.LOCATION_PRECIPITATION, produces = MediaType.APPLICATION_JSON_VALUE)
 	public Iterable<HarmonieItem> precipitation(@PathVariable(Constant.LOCATION_NAME) String location,
 			@RequestParam(value = Constant.FROM_DATE) @DateTimeFormat(pattern = Constant.FORMAT) Date fromDate,
 			@RequestParam(value = Constant.TO_DATE) @DateTimeFormat(pattern = Constant.FORMAT) Date toDate) {

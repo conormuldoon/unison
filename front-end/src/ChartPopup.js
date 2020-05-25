@@ -32,7 +32,7 @@ function ChartPopup(props) {
       const response = await fetch(uri, {
         method: 'GET',
         headers: new Headers({
-          'Content-Type': 'application/json'
+          'Accept': 'application/json'
         })
       });
       const dataArray = await response.json();

@@ -46,5 +46,7 @@ public class LocationConstant {
 	 * The GeoJSON properties field name.
 	 */
 	public static final String PROPERTIES = "properties";
+	
+	public static final String GEOJSON_MEDIA_TYPE = "application/geo+json";
 
 }

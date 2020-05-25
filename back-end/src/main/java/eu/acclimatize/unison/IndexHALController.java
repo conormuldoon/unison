@@ -8,15 +8,17 @@ import java.util.List;
 
 import org.springframework.hateoas.Link;
 import org.springframework.hateoas.MediaTypes;
+import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.servlet.ModelAndView;
 
 import eu.acclimatize.unison.location.HATEOASLocationController;
 
 @RestController
 public class IndexHALController {
 
-	@GetMapping(value = "/", consumes = MediaTypes.HAL_JSON_VALUE, produces = MediaTypes.HAL_JSON_VALUE)
+	@GetMapping(value = "/", produces = MediaTypes.HAL_JSON_VALUE)
 	public UnisonModel createModel() {
 
 		List<Link> list = new ArrayList<>();
@@ -30,6 +32,13 @@ public class IndexHALController {
 	@GetMapping(value = "/index", produces = MediaTypes.HAL_JSON_VALUE)
 	public UnisonModel index() {
 		return createModel();
+	}
+
+	@GetMapping(value = "/", produces = MediaType.TEXT_HTML_VALUE)
+	public ModelAndView indexHTML() {
+
+		return new ModelAndView("forward:/index.html");
+
 	}
 
 }

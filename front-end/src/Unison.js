@@ -35,11 +35,19 @@ function Unison(props) {
   const obtainData = () => {
     let active = true;
 
+    const halGetHeader = {
+      method: 'GET',
+      headers: new Headers({
+        'Accept': 'application/hal+json'
+      })
+    }
 
     async function requestLocation(uri) {
-      const response = await fetch(uri);
 
+      const response = await fetch(uri, halGetHeader);
 
+      console.log(uri);
+      console.log(response);
 
       if (active && response.ok) {
         const model = await response.json();
@@ -123,12 +131,7 @@ function Unison(props) {
 
     async function requestModel() {
 
-      const response = await fetch('/', {
-        method: 'GET',
-        headers: new Headers({
-          'Content-Type': 'application/hal+json'
-        })
-      });
+      const response = await fetch('/', halGetHeader);
 
       if (active && response.ok) {
         const model = await response.json();
@@ -256,7 +259,7 @@ function Unison(props) {
               className='pLeft'
               href={expandLink(linksProperty, curLoc, curVar, fromDate, toDate)}>
 
-              <button disabled={!curLoc} >
+              <button>
                 CSV
               </button>
 

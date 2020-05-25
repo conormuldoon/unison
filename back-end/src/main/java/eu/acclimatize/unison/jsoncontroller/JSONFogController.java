@@ -41,7 +41,7 @@ public class JSONFogController {
 	 * @param toDate   The end date for the data (inclusive).
 	 * @return A list of {@link eu.acclimatize.unison.result.FogResult} items.
 	 */
-	@GetMapping(value = MappingConstant.LOCATION_FOG, consumes = MediaType.APPLICATION_JSON_VALUE)
+	@GetMapping(value = MappingConstant.LOCATION_FOG, produces = MediaType.APPLICATION_JSON_VALUE)
 	public Iterable<HarmonieItem> fog(@PathVariable(Constant.LOCATION_NAME) String location,
 			@RequestParam(value = Constant.FROM_DATE) @DateTimeFormat(pattern = Constant.FORMAT) Date fromDate,
 			@RequestParam(value = Constant.TO_DATE) @DateTimeFormat(pattern = Constant.FORMAT) Date toDate) {

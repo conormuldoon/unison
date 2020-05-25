@@ -42,7 +42,7 @@ public class JSONCloudinessController {
 	 * @return A list of {@link eu.acclimatize.unison.result.CloudinessResult}
 	 *         items.
 	 */
-	@GetMapping(value = MappingConstant.LOCATION_CLOUDINESS, consumes = MediaType.APPLICATION_JSON_VALUE)
+	@GetMapping(value = MappingConstant.LOCATION_CLOUDINESS, produces = MediaType.APPLICATION_JSON_VALUE)
 	public Iterable<HarmonieItem> cloudiness(@PathVariable(Constant.LOCATION_NAME) String location,
 			@RequestParam(value = Constant.FROM_DATE) @DateTimeFormat(pattern = Constant.FORMAT) Date fromDate,
 			@RequestParam(value = Constant.TO_DATE) @DateTimeFormat(pattern = Constant.FORMAT) Date toDate) {

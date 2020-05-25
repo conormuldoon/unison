@@ -41,7 +41,7 @@ public class JSONHumidityController {
 	 * @param toDate   The end date for the data (inclusive).
 	 * @return A list of {@link eu.acclimatize.unison.result.HumidityResult} items.
 	 */
-	@GetMapping(value = MappingConstant.LOCATION_HUMIDITY, consumes = MediaType.APPLICATION_JSON_VALUE)
+	@GetMapping(value = MappingConstant.LOCATION_HUMIDITY, produces = MediaType.APPLICATION_JSON_VALUE)
 	public Iterable<HarmonieItem> humidity(@PathVariable(Constant.LOCATION_NAME) String location,
 			@RequestParam(value = Constant.FROM_DATE) @DateTimeFormat(pattern = Constant.FORMAT) Date fromDate,
 			@RequestParam(value = Constant.TO_DATE) @DateTimeFormat(pattern = Constant.FORMAT) Date toDate) {

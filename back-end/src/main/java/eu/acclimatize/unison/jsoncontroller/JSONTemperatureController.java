@@ -42,7 +42,7 @@ public class JSONTemperatureController {
 	 * @return A list of {@link eu.acclimatize.unison.result.TemperatureResult}
 	 *         items.
 	 */
-	@GetMapping(value = MappingConstant.LOCATION_TEMPERATURE, consumes = MediaType.APPLICATION_JSON_VALUE)
+	@GetMapping(value = MappingConstant.LOCATION_TEMPERATURE, produces = MediaType.APPLICATION_JSON_VALUE)
 	public Iterable<HarmonieItem> temperature(@PathVariable(Constant.LOCATION_NAME) String location,
 			@RequestParam(value = Constant.FROM_DATE) @DateTimeFormat(pattern = Constant.FORMAT) Date fromDate,
 			@RequestParam(value = Constant.TO_DATE) @DateTimeFormat(pattern = Constant.FORMAT) Date toDate) {
