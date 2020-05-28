@@ -9,12 +9,12 @@ import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.ResponseStatus;
 
-import eu.acclimatize.unison.harvester.DocumentNotFoundException;
-import eu.acclimatize.unison.harvester.HarvestParseException;
 import eu.acclimatize.unison.location.DeserializationException;
 import eu.acclimatize.unison.location.DeserializationUserException;
 import eu.acclimatize.unison.location.LocationNotFoundException;
 import eu.acclimatize.unison.location.LocationUpdateException;
+import eu.acclimatize.unison.location.harvester.DocumentNotFoundException;
+import eu.acclimatize.unison.location.harvester.HarvestParseException;
 import eu.acclimatize.unison.user.UserUpdateException;
 
 /**

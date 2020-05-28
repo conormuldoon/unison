@@ -21,13 +21,13 @@ import org.mockito.Mockito;
 import org.w3c.dom.Document;
 import org.xml.sax.SAXException;
 
-import eu.acclimatize.unison.harvester.DocumentNotFoundException;
-import eu.acclimatize.unison.harvester.DocumentRequestService;
-import eu.acclimatize.unison.harvester.HarvestParseException;
-import eu.acclimatize.unison.harvester.HarvestRequestException;
-import eu.acclimatize.unison.harvester.HarvesterService;
 import eu.acclimatize.unison.location.Location;
 import eu.acclimatize.unison.location.LocationRepository;
+import eu.acclimatize.unison.location.harvester.DocumentNotFoundException;
+import eu.acclimatize.unison.location.harvester.DocumentRequestService;
+import eu.acclimatize.unison.location.harvester.HarvestParseException;
+import eu.acclimatize.unison.location.harvester.HarvestRequestException;
+import eu.acclimatize.unison.location.harvester.HarvesterService;
 
 /**
  * Tests for the Unison data harvester and document request service.

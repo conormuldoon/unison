@@ -10,11 +10,11 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 public class LocationModel extends RepresentationModel<LocationModel> {
 
 	@JsonProperty
-	private Location content;
+	private String name;
 
-	public LocationModel(List<Link> list, Location content) {
+	public LocationModel(List<Link> list, String name) {
 		super(list);
-		this.content = content;
+		this.name = name;
 	}
 
 }

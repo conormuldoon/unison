@@ -48,7 +48,7 @@ public class LocationTests {
 
 	@Autowired
 	private LocationRepository locationRepository;
-	
+
 	@Autowired
 	private GeoJSONLocationController geoLocationController;
 
@@ -91,7 +91,7 @@ public class LocationTests {
 		Location location = createLocation("New Location");
 
 		TestRestTemplate templateWBA = template.withBasicAuth(TestConstant.USERNAME, TestConstant.PASSWORD);
-		templateWBA.put(MappingConstant.SPECIFIC_LOCATION, location);
+		templateWBA.put(MappingConstant.LOCATION_COLLECTION, location);
 
 		Assert.assertEquals(2, locationRepository.count());
 
@@ -101,7 +101,7 @@ public class LocationTests {
 		TestUtility.addUserInformation(userName, password, userRepository);
 		TestRestTemplate templateWBA = template.withBasicAuth(userName, password);
 		Location modifiedLocation = createLocation(TestConstant.LOCATION);
-		templateWBA.put(MappingConstant.SPECIFIC_LOCATION, modifiedLocation);
+		templateWBA.put(MappingConstant.LOCATION_COLLECTION, modifiedLocation);
 		Optional<Location> oLoc = locationRepository.findById(TestConstant.LOCATION);
 		Location savedLocation = oLoc.get();
 		Assert.assertEquals(expected, modifiedLocation.equals(savedLocation));
@@ -130,7 +130,7 @@ public class LocationTests {
 	private void testDelete(String userName, String password, int expectedCount, String locationName) {
 		TestRestTemplate templateWBA = template.withBasicAuth(userName, password);
 
-		templateWBA.delete(MappingConstant.SPECIFIC_LOCATION + "/" + locationName);
+		templateWBA.delete(MappingConstant.LOCATION_COLLECTION + "?" + Constant.LOCATION_NAME + "=" + locationName);
 		Assert.assertEquals(expectedCount, locationRepository.count());
 
 	}
@@ -197,8 +197,9 @@ public class LocationTests {
 	@Test
 	@WithMockUser(TestConstant.USERNAME)
 	public void singleLocation() {
-		ResponseEntity<Location> response = template
-				.getForEntity(MappingConstant.SPECIFIC_LOCATION + "/" + TestConstant.LOCATION, Location.class);
+		ResponseEntity<Location> response = template.getForEntity(
+				MappingConstant.LOCATION_COLLECTION + "?" + Constant.LOCATION_NAME + "=" + TestConstant.LOCATION,
+				Location.class);
 		Assert.assertNotNull(response.getBody());
 	}
 
@@ -212,7 +213,7 @@ public class LocationTests {
 	@Test
 	@WithMockUser(TestConstant.USERNAME)
 	public void collectionLocation() {
-		ResponseEntity<FeatureCollection> response = template.getForEntity(MappingConstant.SPECIFIC_LOCATION,
+		ResponseEntity<FeatureCollection> response = template.getForEntity(MappingConstant.LOCATION_COLLECTION,
 				FeatureCollection.class);
 		Assert.assertNotNull(response.getBody());
 	}

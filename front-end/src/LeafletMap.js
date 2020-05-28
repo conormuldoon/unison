@@ -34,20 +34,20 @@ class LeafletMap extends Component {
 
   componentDidUpdate = (prevProps) => {
 
-    if (prevProps.curVar !== this.props.curVar || prevProps.location !== this.props.location || prevProps.fromDate !== this.props.fromDate || prevProps.toDate !== this.props.toDate) {
+    if (prevProps.curVar !== this.props.curVar || prevProps.linksProperty !== this.props.linksProperty || prevProps.fromDate !== this.props.fromDate || prevProps.toDate !== this.props.toDate) {
       if (this.state.popupComponent !== undefined) {
         this.closePopup();
-        this.addPopup(this.props.location);
+        this.addPopup(this.props.linksProperty);
       }
     }
   }
 
-  addPopup = (properties) => {
+  addPopup = (linksProperty) => {
 
-    this.props.markerCallback(properties.name);
+    this.props.markerCallback(linksProperty.name);
 
-    const popupComponent = <ChartPopup curVar={this.props.curVar} location={properties} fromDate={this.props.fromDate}
-      toDate={this.props.toDate} closePopup={this.closePopup} linksProperty={this.props.linksProperty} />;
+    const popupComponent = <ChartPopup curVar={this.props.curVar} fromDate={this.props.fromDate}
+      toDate={this.props.toDate} closePopup={this.closePopup} linksProperty={linksProperty} />;
     this.setState({ popupComponent: popupComponent, dragging: false });
 
 
@@ -98,8 +98,6 @@ LeafletMap.propTypes = {
   /** Specifies the weather variable currently selected. */
   curVar: PropTypes.string,
 
-  /** Specifies the properties of the location selected. */
-  location: PropTypes.object,
 
   /** Specifies the start date for the data that is to be displayed. */
   fromDate: PropTypes.string,

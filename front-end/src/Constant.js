@@ -11,9 +11,6 @@ export const HIGH = "High";
 export const PRECIP = "Precipitation";
 export const CL = "Cloud Level";
 
-export const HARVEST = "harvest";
 export const SELF = "self";
-export const LOCATION = "location";
 
-export const EXCLUDE_REL = Object.freeze([HARVEST, SELF, LOCATION]);
 

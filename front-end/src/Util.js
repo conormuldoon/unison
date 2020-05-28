@@ -32,11 +32,11 @@ export const problemConnecting = () => {
   alert('There was a problem connecting to Unison. Please try again later.');
 }
 
-export const expandLink = (linksProperty, feature, curVar, fromDate, toDate) => {
+export const expandLink = (linksProperty, curVar, fromDate, toDate) => {
 
-  const href = linksProperty[varMapping(curVar)].href;
+  const href = linksProperty._links[varMapping(curVar)].href;
   const template = parser.parse(href);
-  return template.expand({ name: feature.name, fromDate: fromDate, toDate: toDate });
+  return template.expand({ name: linksProperty.name, fromDate: fromDate, toDate: toDate });
 
 }
 

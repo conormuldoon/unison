@@ -27,7 +27,7 @@ function ChartPopup(props) {
 
     async function obtainData() {
 
-      const uri = expandLink(props.linksProperty, props.location, props.curVar, props.fromDate, props.toDate);
+      const uri = expandLink(props.linksProperty, props.curVar, props.fromDate, props.toDate);
 
       const response = await fetch(uri, {
         method: 'GET',
@@ -74,7 +74,7 @@ function ChartPopup(props) {
     const cancel = () => active = false;
     return cancel;
 
-  }, [props.linksProperty, props.curVar, props.location, props.fromDate, props.toDate]);
+  }, [props.linksProperty, props.curVar, props.fromDate, props.toDate]);
 
   function handleClick(e) {
     e.stopPropagation();
@@ -89,7 +89,7 @@ function ChartPopup(props) {
 
       </div>
       <center>
-        {vc} data from {props.location.name.trim()}
+        {vc} data from {props.linksProperty.name.trim()}
 
         {data && <TabsComponent curVar={props.curVar} data={data} zoomDomain={zoomDomain} minMax={minMax}
           setZoomDomain={setZoomDomain} />}
@@ -104,9 +104,6 @@ function ChartPopup(props) {
 ChartPopup.propTypes = {
   /** Specifies the weather variable currently selected. */
   curVar: PropTypes.string.isRequired,
-
-  /** Specifies the properties of the location selected. */
-  location: PropTypes.object.isRequired,
 
   /** Specifies the start date for the data that is to be displayed. */
   fromDate: PropTypes.string.isRequired,

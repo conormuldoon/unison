@@ -6,7 +6,7 @@ import 'react-day-picker/lib/style.css';
 import { formatDate } from 'react-day-picker/moment';
 import './App.css';
 import ARLocationComponent from './ARLocationComponent';
-import { FORMAT, EXCLUDE_REL } from './Constant';
+import { FORMAT, SELF } from './Constant';
 import DateSelector from './DateSelector';
 import LeafletMap from './LeafletMap';
 import { today, tomorrow, expandLink, problemConnecting } from './Util';
@@ -29,39 +29,25 @@ function Unison(props) {
   const [curVar, setCurVar] = useState(undefined);
   const [varOpt, setVarOpt] = useState(undefined);
   const [featureProperties, setFeatureProperties] = useState(undefined);
-  const [linksProperty, setLinksProperty] = useState(undefined);
 
 
   const obtainData = () => {
     let active = true;
 
-    const halGetHeader = {
-      method: 'GET',
-      headers: new Headers({
-        'Accept': 'application/hal+json'
-      })
-    }
-
-    async function requestLocation(uri) {
-
-      const response = await fetch(uri, halGetHeader);
-
-      console.log(uri);
-      console.log(response);
+    async function requestFeatureCollection(uri) {
+      const response = await fetch(uri, {
+        method: 'GET',
+        headers: new Headers({
+          'Accept': 'application/geo+json'
+        })
+      });
 
       if (active && response.ok) {
-        const model = await response.json();
+        const fc = await response.json();
 
         if (active) {
-          const map = new Map();
-
-          const fc = model.content;
-
-
           const locationArray = fc.features;
-
-
-          let n = locationArray.length;
+          const n = locationArray.length;
 
           const newOption = [];
           const newMarker = [];
@@ -72,61 +58,95 @@ function Unison(props) {
 
             const properties = locationArray[i].properties;
             newMarker.push({ name: properties.name, position: pos });
-            map.set(properties.name, properties);
-
 
           }
-
-          setFeatureProperties(map);
 
           if (n > 0) {
 
-
             setOption(newOption);
             setMarker(newMarker);
-            setCurLoc(locationArray[0].properties);
-
-          } else {
-
-            setOption(undefined);
-            setMarker(undefined);
-            setCurLoc(undefined);
+            return true;
 
           }
-
-          const varOpt = [];
-
-          for (const rel in model._links) {
-            if (EXCLUDE_REL.includes(rel)) {
-              continue;
-            }
-
-            const s = rel.charAt(0).toUpperCase() + rel.substring(1);
-            let optName = '';
-            let sw = 0;
-            for (let i = 1; i < s.length; i++) {
-              const c = s.charAt(i);
-              if (c >= 'A' && c <= 'Z') {
-                optName += s.substring(sw, i) + ' ';
-                sw = i;
-              }
-            }
-            optName += s.substring(sw);
-            varOpt.push(optName);
-          }
-
-          if (varOpt.length > 0) {
-            setCurVar(varOpt[0]);
-            setVarOpt(varOpt)
-          } else {
-            alert("No weather data is associated with the collection.")
-          }
-
-          setLinksProperty(model._links);
-
         }
 
+
       }
+
+      return false;
+
+    }
+
+    const halGetHeader = {
+      method: 'GET',
+      headers: new Headers({
+        'Accept': 'application/hal+json'
+      })
+    }
+
+    async function requestCollectionHAL(uri) {
+
+      const response = await fetch(uri, halGetHeader);
+
+      if (active && response.ok) {
+        const model = await response.json();
+        if (active) {
+          const map = new Map();
+          if (model._embedded) {
+            const list = model._embedded.locationModelList;
+            const n = list.length;
+            for (let i = 0; i < n; i++) {
+              map.set(list[i].name, list[i]);
+            }
+
+            const locationData = await requestFeatureCollection(uri);
+            if (active && locationData) {
+              setFeatureProperties(map);
+
+              const varOpt = [];
+
+              if (n > 0) {
+
+                for (const rel in list[0]._links) {
+                  if (SELF === rel) {
+                    continue;
+                  }
+
+                  const s = rel.charAt(0).toUpperCase() + rel.substring(1);
+                  let optName = '';
+                  let sw = 0;
+                  for (let i = 1; i < s.length; i++) {
+                    const c = s.charAt(i);
+                    if (c >= 'A' && c <= 'Z') {
+                      optName += s.substring(sw, i) + ' ';
+                      sw = i;
+                    }
+                  }
+                  optName += s.substring(sw);
+                  varOpt.push(optName);
+                }
+              }
+              if (varOpt.length > 0) {
+                setCurLoc(list[0]);
+                setCurVar(varOpt[0]);
+                setVarOpt(varOpt);
+                return;
+
+              } else {
+                alert("No weather data is associated with the collection.")
+              }
+
+
+            }
+          }
+        }
+      }
+
+      setCurVar(undefined);
+      setVarOpt(undefined);
+      setOption(undefined);
+      setMarker(undefined);
+      setCurLoc(undefined);
     }
 
     async function requestModel() {
@@ -137,7 +157,7 @@ function Unison(props) {
         const model = await response.json();
 
         if (active)
-          requestLocation(model._links.locationCollection.href);
+          requestCollectionHAL(model._links.locationCollection.href);
       } else if (response.status === HttpStatus.GATEWAY_TIMEOUT) {
         problemConnecting();
       }
@@ -195,6 +215,23 @@ function Unison(props) {
     return s.replace(/ /g, '_')
   }
 
+
+  const handleCSV = async () => {
+
+    const response = await fetch(expandLink(curLoc, curVar, fromDate, toDate));
+
+    if (response.ok) {
+      const blob = await response.blob();
+      const a = document.createElement('a');
+      a.href = window.URL.createObjectURL(blob);
+      a.download = spaceToUnderscore(curLoc.name) + '_' + spaceToUnderscore(curVar) + '_'
+        + dashDate(fromDate) + "_" + dashDate(toDate) + '.csv';
+      a.click();
+    } else if (response.status === HttpStatus.GATEWAY_TIMEOUT) {
+      problemConnecting();
+    }
+  }
+
   return (
 
     <div id="mapdiv">
@@ -210,16 +247,16 @@ function Unison(props) {
 
       </div>
 
-      <LeafletMap marker={marker} curVar={curVar} location={curLoc} featureProperties={featureProperties}
+      <LeafletMap marker={marker} curVar={curVar} featureProperties={featureProperties}
         markerCallback={markerClicked} fromDate={fromDate} toDate={toDate}
-        mapCentre={props.mapCentre} linksProperty={linksProperty} />
+        mapCentre={props.mapCentre} linksProperty={curLoc} />
 
-      {linksProperty && <div id="selectdiv" >
+      <div id="selectdiv" >
 
         <center>
 
           <div>
-            <div id='variDD' >
+            {curLoc && <div id='variDD' >
 
               {varOpt && <select onChange={_onVarSelect}>
 
@@ -227,7 +264,7 @@ function Unison(props) {
 
               </select>}
 
-            </div>
+            </div>}
 
             {curLoc && <div className='marginItem' >
 
@@ -255,22 +292,14 @@ function Unison(props) {
 
             </div>
 
-            {curLoc && curVar && <a download={spaceToUnderscore(curLoc.name) + '_' + spaceToUnderscore(curVar) + '_' + dashDate(fromDate) + "_" + dashDate(toDate) + '.csv'}
-              className='pLeft'
-              href={expandLink(linksProperty, curLoc, curVar, fromDate, toDate)}>
-
-              <button>
-                CSV
-              </button>
-
-            </a>}
+            {curLoc && curVar && <div className='pLeft'> <button onClick={handleCSV}>CSV</button> </div>}
           </div>
 
-          <ARLocationComponent obtainData={obtainData} location={curLoc} featureProperties={featureProperties} linksProperty={linksProperty} />
+          <ARLocationComponent obtainData={obtainData} linksProperty={curLoc} />
 
         </center>
 
-      </div>}
+      </div>
 
 
 

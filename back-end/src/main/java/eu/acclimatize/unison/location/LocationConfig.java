@@ -6,6 +6,8 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.data.domain.Sort;
 
+import eu.acclimatize.unison.WeatherLink;
+
 /**
  * 
  * A configuration class for the location package.

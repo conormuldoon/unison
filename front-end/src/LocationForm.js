@@ -6,9 +6,6 @@ import './App.css';
 import { problemConnecting } from './Util';
 import HttpStatus from 'http-status-codes';
 import { locationPutObject } from './Util';
-import { SELF, HARVEST } from './Constant';
-
-import parser from 'uri-template';
 
 /**
  * A component for displaying a form to add new locations to be tracked.
@@ -45,56 +42,57 @@ function LocationForm(props) {
     props.obtainData();
   }
 
-  async function putData(locationExists) {
+  async function putData() {
 
-    const response = await fetch(props.linksProperty[SELF].href,
-      locationPutObject(location, lon, lat));
+    const response = await fetch('/', {
+      method: 'GET',
+      headers: new Headers({
+        'Accept': 'application/hal+json'
+      })
+    });
 
     if (response.ok) {
 
-      const href = props.linksProperty[HARVEST].href;
-      const template = parser.parse(href);
-      const uri = template.expand({ name: location });
+      const model = await response.json();
 
-      const harvestResponse = await fetch(uri, {
-        method: 'POST',
-        redirect: 'follow'
-      });
+      const putResponse = await fetch(model._links.locationCollection.href,
+        locationPutObject(location, lon, lat));
 
-      let message = (locationExists) ? 'updated' : 'added';
+      if (putResponse.ok) {
 
-      if (harvestResponse.ok) {
-        alert(location + ' was ' + message + '.');
-        updateDisplay();
-      } else if (harvestResponse.status === HttpStatus.BAD_GATEWAY) {
-        alert(location + ' was ' + message + ', but did did not recieve the weather data. The ' +
-          lon + " and " + lat + " longitude and latitude coordinates may not be covered by the model.");
+        const harvestResponse = await fetch(model._links.locationCollection.href + '/' + location, {
+          method: 'POST'
+        });
+
+
+        if (harvestResponse.ok) {
+          alert(location + ' was added.');
+          updateDisplay();
+        } else if (harvestResponse.status === HttpStatus.BAD_GATEWAY) {
+          alert(location + ' was added, but did did not recieve the weather data. The ' +
+            lon + " and " + lat + " longitude and latitude coordinates may not be covered by the model.");
+        }
+        else {
+          alert(location + ' was added, but Unison did not obtain the weather data.')
+          updateDisplay();
+        }
+      } else if (response.status === HttpStatus.UNAUTHORIZED) {
+        alert('Incorrect user name or password');
+      } else if (response.status === HttpStatus.FORBIDDEN) {
+        alert('You do not have permission to add ' + location + '. A location of the same name may have been added by another user.');
       }
       else {
-        alert(location + ' was ' + message + ', but Unison did not obtain the weather data.')
-        updateDisplay();
+        problemConnecting();
       }
-    } else if (response.status === HttpStatus.UNAUTHORIZED) {
-      alert('Incorrect user name or password');
-    } else if (response.status === HttpStatus.FORBIDDEN) {
-      alert('You do not have permission to add ' + location + '. A location of the same name may have been added by another user.');
-    }
-    else {
+    } else {
       problemConnecting();
     }
   }
 
   async function handleSubmit(event) {
     event.preventDefault();
-    if (props.featureProperties.has(location)) {
 
-      if (window.confirm(location + ' already exists. Would you like to replace it?')) {
-        putData(true);
-      }
-
-    } else {
-      putData(false);
-    }
+    putData();
 
   }
 

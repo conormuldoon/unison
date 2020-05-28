@@ -35,7 +35,7 @@ public class JSONPrecipitationController {
 	}
 
 	/**
-	 * Finds a list of Jackson annotated preciptation data.
+	 * Finds a list of Jackson annotated precipitation data.
 	 * 
 	 * @param location The location of interest.
 	 * @param fromDate The start date for the data (inclusive).

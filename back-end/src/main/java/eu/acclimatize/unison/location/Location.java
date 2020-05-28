@@ -5,7 +5,6 @@ import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.methodOn;
 
 import java.io.IOException;
 import java.io.Serializable;
-import java.net.URI;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
@@ -16,14 +15,12 @@ import javax.persistence.ManyToOne;
 
 import org.locationtech.jts.geom.Point;
 import org.springframework.hateoas.Link;
-import org.springframework.hateoas.UriTemplate;
-import org.springframework.hateoas.server.mvc.BasicLinkBuilder;
 
 import com.fasterxml.jackson.core.JsonGenerator;
 
 import eu.acclimatize.unison.Constant;
-import eu.acclimatize.unison.MappingConstant;
 import eu.acclimatize.unison.OwnedItem;
+import eu.acclimatize.unison.WeatherLink;
 import eu.acclimatize.unison.user.UserInformation;
 
 /**
@@ -85,23 +82,16 @@ public class Location implements OwnedItem, Serializable {
 		return template.replace("{longitude}", String.valueOf(geom.getX()));
 	}
 
-	public List<Link> createList(WeatherLink[] weatherLink) {
+	public LocationModel createModel(WeatherLink[] weatherLink) {
 		List<Link> list = new ArrayList<>();
-		list.add(linkTo(methodOn(HATEOASLocationController.class).location(name)).withSelfRel());
-		list.add(linkTo(methodOn(HATEOASLocationController.class).location()).withRel(Constant.LOCATION_COLLECTION));
+		list.add(linkTo(methodOn(HALLocationController.class).location(name)).withSelfRel());
 
 		for (WeatherLink wl : weatherLink) {
 			list.add(wl.createLink(name));
 		}
-
-		String baseUri = BasicLinkBuilder.linkToCurrentMapping().toString();
-		UriTemplate uriTemplate = UriTemplate.of(baseUri + MappingConstant.HARVEST);
-		URI harvestURI = uriTemplate.expand(name);
-		Link link = Link.of(harvestURI.toString(), Constant.HARVEST);
-		list.add(link.withRel(Constant.HARVEST));
-		return list;
+		return new LocationModel(list, name);
 	}
-
+	
 	/**
 	 * Serializes the location in a GeoJSON format.
 	 * 

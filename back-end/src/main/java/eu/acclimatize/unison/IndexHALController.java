@@ -8,36 +8,46 @@ import java.util.List;
 
 import org.springframework.hateoas.Link;
 import org.springframework.hateoas.MediaTypes;
-import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.ModelAndView;
 
-import eu.acclimatize.unison.location.HATEOASLocationController;
+import eu.acclimatize.unison.location.HALLocationController;
 
 @RestController
 public class IndexHALController {
+
+	private static final String EXTENSION = ".html";
 
 	@GetMapping(value = "/", produces = MediaTypes.HAL_JSON_VALUE)
 	public UnisonModel createModel() {
 
 		List<Link> list = new ArrayList<>();
-		list.add(linkTo(methodOn(HATEOASLocationController.class).location()).withRel(Constant.LOCATION_COLLECTION));
-		list.add(linkTo(IndexHALController.class).withSelfRel());
-		list.add(linkTo(methodOn(IndexHALController.class).index()).withSelfRel());
-		UnisonModel model = new UnisonModel(list);
-		return model;
+
+		list.add(linkTo(methodOn(IndexHALController.class).createModel()).withSelfRel());
+		list.add(linkTo(methodOn(IndexHALController.class).indexHAL()).withSelfRel());
+
+		list.add(linkTo(methodOn(HALLocationController.class).createModel()).withRel(Constant.LOCATION_COLLECTION));
+
+		return new UnisonModel(list);
 	}
 
-	@GetMapping(value = "/index", produces = MediaTypes.HAL_JSON_VALUE)
-	public UnisonModel index() {
+	@GetMapping(value = MappingConstant.INDEX, produces = MediaTypes.HAL_JSON_VALUE)
+	public UnisonModel indexHAL() {
 		return createModel();
 	}
 
-	@GetMapping(value = "/", produces = MediaType.TEXT_HTML_VALUE)
+	@GetMapping("/")
+	public ModelAndView rootHTML() {
+
+		return new ModelAndView(MappingConstant.INDEX + EXTENSION);
+
+	}
+
+	@GetMapping(MappingConstant.INDEX)
 	public ModelAndView indexHTML() {
 
-		return new ModelAndView("forward:/index.html");
+		return new ModelAndView(MappingConstant.INDEX + EXTENSION);
 
 	}
 

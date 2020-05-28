@@ -69,12 +69,11 @@ public class Constant {
 	 * The path variable for the user name.
 	 */
 	public static final String USER_NAME = "userName";
-	/**
-	 * The property name for harvest.
-	 */
-	public static final String HARVEST = "harvest";
 
-	
+	public static final String USER = "user";
+
+	public static final String INDEX = "index";
+
 	/**
 	 * 
 	 */

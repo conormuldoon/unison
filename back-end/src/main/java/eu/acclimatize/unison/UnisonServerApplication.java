@@ -10,11 +10,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.web.servlet.FilterRegistrationBean;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Scope;
-import org.springframework.http.HttpMethod;
 import org.springframework.scheduling.annotation.EnableScheduling;
-import org.springframework.web.cors.CorsConfiguration;
-import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
-import org.springframework.web.filter.CorsFilter;
 import org.springframework.web.filter.ForwardedHeaderFilter;
 
 /**
@@ -63,41 +59,6 @@ public class UnisonServerApplication {
 	public FilterRegistrationBean<ForwardedHeaderFilter> forwardedHeaderFilter() {
 		return new FilterRegistrationBean<>(new ForwardedHeaderFilter());
 
-	}
-
-	@Bean
-	public FilterRegistrationBean<CorsFilter> corsFilter() {
-
-		CorsConfiguration config = new CorsConfiguration();
-		//config.applyPermitDefaultValues();
-		
-		
-		config.addAllowedOrigin("http://localhost:3000");
-		config.addAllowedMethod(HttpMethod.OPTIONS);
-		config.addAllowedMethod(HttpMethod.HEAD);
-		config.addAllowedMethod(HttpMethod.GET);
-		config.addAllowedMethod(HttpMethod.PUT);
-		config.addAllowedMethod(HttpMethod.POST);
-		config.addAllowedMethod(HttpMethod.DELETE);
-		
-		config.addAllowedHeader("*");
-		config.setAllowCredentials(true);
-		config.addExposedHeader("Access-Control-Allow-Origin");
-		config.addExposedHeader("Access-Control-Allow-Credentials");
-		config.addExposedHeader("Access-Control-Max-Age");
-		config.addExposedHeader("Access-Control-Allow-Methods");
-		config.addExposedHeader("Access-Control-Allow-Origin");
-		config.addExposedHeader("Access-Control-Allow-Headers");
-		config.addExposedHeader("WWW-Authenticate");
-		config.addExposedHeader("Authorization");
-		
-		
-
-		UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
-		source.registerCorsConfiguration("/**", config);
-		CorsFilter corsFilter = new CorsFilter(source);
-
-		return new FilterRegistrationBean<>(corsFilter);
 	}
 
 }

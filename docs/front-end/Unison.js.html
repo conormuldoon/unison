@@ -72,7 +72,7 @@ import 'react-day-picker/lib/style.css';
 import { formatDate } from 'react-day-picker/moment';
 import './App.css';
 import ARLocationComponent from './ARLocationComponent';
-import { FORMAT, EXCLUDE_REL } from './Constant';
+import { FORMAT, SELF } from './Constant';
 import DateSelector from './DateSelector';
 import LeafletMap from './LeafletMap';
 import { today, tomorrow, expandLink, problemConnecting } from './Util';
@@ -95,31 +95,25 @@ function Unison(props) {
   const [curVar, setCurVar] = useState(undefined);
   const [varOpt, setVarOpt] = useState(undefined);
   const [featureProperties, setFeatureProperties] = useState(undefined);
-  const [linksProperty, setLinksProperty] = useState(undefined);
 
 
   const obtainData = () => {
     let active = true;
 
-
-    async function requestLocation(uri) {
-      const response = await fetch(uri);
-
-
+    async function requestFeatureCollection(uri) {
+      const response = await fetch(uri, {
+        method: 'GET',
+        headers: new Headers({
+          'Accept': 'application/geo+json'
+        })
+      });
 
       if (active &amp;&amp; response.ok) {
-        const model = await response.json();
+        const fc = await response.json();
 
         if (active) {
-          const map = new Map();
-
-          const fc = model.content;
-
-
           const locationArray = fc.features;
-
-
-          let n = locationArray.length;
+          const n = locationArray.length;
 
           const newOption = [];
           const newMarker = [];
@@ -130,71 +124,106 @@ function Unison(props) {
 
             const properties = locationArray[i].properties;
             newMarker.push({ name: properties.name, position: pos });
-            map.set(properties.name, properties);
-
 
           }
-
-          setFeatureProperties(map);
 
           if (n > 0) {
 
-
             setOption(newOption);
             setMarker(newMarker);
-            setCurLoc(locationArray[0].properties);
-
-          } else {
-
-            setOption(undefined);
-            setMarker(undefined);
-            setCurLoc(undefined);
+            return true;
 
           }
-
-          const varOpt = [];
-
-          for (const rel in model._links) {
-            if (EXCLUDE_REL.includes(rel)) {
-              continue;
-            }
-
-            const s = rel.charAt(0).toUpperCase() + rel.substring(1);
-            let optName = '';
-            let sw = 0;
-            for (let i = 1; i &lt; s.length; i++) {
-              const c = s.charAt(i);
-              if (c >= 'A' &amp;&amp; c &lt;= 'Z') {
-                optName += s.substring(sw, i) + ' ';
-                sw = i;
-              }
-            }
-            optName += s.substring(sw);
-            varOpt.push(optName);
-          }
-
-          if (varOpt.length > 0) {
-            setCurVar(varOpt[0]);
-            setVarOpt(varOpt)
-          } else {
-            alert("No weather data is associated with the collection.")
-          }
-
-          setLinksProperty(model._links);
-
         }
 
+
       }
+
+      return false;
+
+    }
+
+    const halGetHeader = {
+      method: 'GET',
+      headers: new Headers({
+        'Accept': 'application/hal+json'
+      })
+    }
+
+    async function requestCollectionHAL(uri) {
+
+      const response = await fetch(uri, halGetHeader);
+
+      if (active &amp;&amp; response.ok) {
+        const model = await response.json();
+        if (active) {
+          const map = new Map();
+          if (model._embedded) {
+            const list = model._embedded.locationModelList;
+            const n = list.length;
+            for (let i = 0; i &lt; n; i++) {
+              map.set(list[i].name, list[i]);
+            }
+
+            const locationData = await requestFeatureCollection(uri);
+            if (active &amp;&amp; locationData) {
+              setFeatureProperties(map);
+
+              const varOpt = [];
+
+              if (n > 0) {
+
+                for (const rel in list[0]._links) {
+                  if (SELF === rel) {
+                    continue;
+                  }
+
+                  const s = rel.charAt(0).toUpperCase() + rel.substring(1);
+                  let optName = '';
+                  let sw = 0;
+                  for (let i = 1; i &lt; s.length; i++) {
+                    const c = s.charAt(i);
+                    if (c >= 'A' &amp;&amp; c &lt;= 'Z') {
+                      optName += s.substring(sw, i) + ' ';
+                      sw = i;
+                    }
+                  }
+                  optName += s.substring(sw);
+                  varOpt.push(optName);
+                }
+              }
+              if (varOpt.length > 0) {
+                setCurLoc(list[0]);
+                setCurVar(varOpt[0]);
+                setVarOpt(varOpt);
+                return;
+
+              } else {
+                alert("No weather data is associated with the collection.")
+              }
+
+
+            }
+          }
+        }
+      }
+
+      setCurVar(undefined);
+      setVarOpt(undefined);
+      setOption(undefined);
+      setMarker(undefined);
+      setCurLoc(undefined);
     }
 
     async function requestModel() {
-      const response = await fetch('/hal');
+
+      const response = await fetch('/', halGetHeader);
 
       if (active &amp;&amp; response.ok) {
         const model = await response.json();
 
         if (active)
-          requestLocation(model._links.locationCollection.href);
+          requestCollectionHAL(model._links.locationCollection.href);
       } else if (response.status === HttpStatus.GATEWAY_TIMEOUT) {
         problemConnecting();
       }
@@ -252,6 +281,23 @@ function Unison(props) {
     return s.replace(/ /g, '_')
   }
 
+
+  const handleCSV = async () => {
+
+    const response = await fetch(expandLink(curLoc, curVar, fromDate, toDate));
+
+    if (response.ok) {
+      const blob = await response.blob();
+      const a = document.createElement('a');
+      a.href = window.URL.createObjectURL(blob);
+      a.download = spaceToUnderscore(curLoc.name) + '_' + spaceToUnderscore(curVar) + '_'
+        + dashDate(fromDate) + "_" + dashDate(toDate) + '.csv';
+      a.click();
+    } else if (response.status === HttpStatus.GATEWAY_TIMEOUT) {
+      problemConnecting();
+    }
+  }
+
   return (
 
     &lt;div id="mapdiv">
@@ -267,16 +313,16 @@ function Unison(props) {
 
       &lt;/div>
 
-      &lt;LeafletMap marker={marker} curVar={curVar} location={curLoc} featureProperties={featureProperties}
+      &lt;LeafletMap marker={marker} curVar={curVar} featureProperties={featureProperties}
         markerCallback={markerClicked} fromDate={fromDate} toDate={toDate}
-        mapCentre={props.mapCentre} linksProperty={linksProperty} />
+        mapCentre={props.mapCentre} linksProperty={curLoc} />
 
-      {linksProperty &amp;&amp; &lt;div id="selectdiv" >
+      &lt;div id="selectdiv" >
 
         &lt;center>
 
           &lt;div>
-            &lt;div id='variDD' >
+            {curLoc &amp;&amp; &lt;div id='variDD' >
 
               {varOpt &amp;&amp; &lt;select onChange={_onVarSelect}>
 
@@ -284,7 +330,7 @@ function Unison(props) {
 
               &lt;/select>}
 
-            &lt;/div>
+            &lt;/div>}
 
             {curLoc &amp;&amp; &lt;div className='marginItem' >
 
@@ -312,22 +358,14 @@ function Unison(props) {
 
             &lt;/div>
 
-            {curLoc &amp;&amp; curVar &amp;&amp; &lt;a download={spaceToUnderscore(curLoc.name) + '_' + spaceToUnderscore(curVar) + '_' + dashDate(fromDate) + "_" + dashDate(toDate) + '.csv'}
-              className='pLeft'
-              href={expandLink(linksProperty, curLoc, curVar, fromDate, toDate)}>
-
-              &lt;button disabled={!curLoc} >
-                CSV
-              &lt;/button>
-
-            &lt;/a>}
+            {curLoc &amp;&amp; curVar &amp;&amp; &lt;div className='pLeft'> &lt;button onClick={handleCSV}>CSV&lt;/button> &lt;/div>}
           &lt;/div>
 
-          &lt;ARLocationComponent obtainData={obtainData} location={curLoc} featureProperties={featureProperties} linksProperty={linksProperty} />
+          &lt;ARLocationComponent obtainData={obtainData} linksProperty={curLoc} />
 
         &lt;/center>
 
-      &lt;/div>}
+      &lt;/div>
 
 
 
@@ -369,7 +407,7 @@ export default Unison;
 
 <footer class="footer">
     <div class="content has-text-centered">
-        <p>Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.6.3</a> on Fri May 22 2020 19:19:50 GMT+0100 (Irish Standard Time)</p>
+        <p>Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.6.3</a> on Thu May 28 2020 20:21:36 GMT+0100 (Irish Standard Time)</p>
         <p class="sidebar-created-by">
             <a href="https://github.com/SoftwareBrothers/better-docs" target="_blank">BetterDocs theme</a> provided with <i class="fas fa-heart"></i> by 
             <a href="http://softwarebrothers.co" target="_blank">SoftwareBrothers - JavaScript Development Agency</a>
