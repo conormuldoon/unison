@@ -84,4 +84,6 @@ public class MappingConstant {
 
 	public static final String INDEX = "/" + Constant.INDEX;
 
+	public static final String CONTAINS = LOCATION_COLLECTION + "/" + Constant.CONTAINS;
+
 }

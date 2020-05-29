@@ -42,7 +42,42 @@ function LocationForm(props) {
     props.obtainData();
   }
 
-  async function putData() {
+  async function putData(model) {
+
+    const response = await fetch(model._links.locationCollection.href,
+      locationPutObject(location, lon, lat));
+
+    if (response.ok) {
+
+      const harvestResponse = await fetch(model._links.locationCollection.href + '/' + location, {
+        method: 'POST'
+      });
+
+
+      if (harvestResponse.ok) {
+        alert(location + ' was added.');
+        updateDisplay();
+      } else if (harvestResponse.status === HttpStatus.BAD_GATEWAY) {
+        alert(location + ' was added, but did did not recieve the weather data. The ' +
+          lon + " and " + lat + " longitude and latitude coordinates may not be covered by the model.");
+      }
+      else {
+        alert(location + ' was added, but Unison did not obtain the weather data.')
+        updateDisplay();
+      }
+    } else if (response.status === HttpStatus.UNAUTHORIZED) {
+      alert('Incorrect user name or password');
+    } else if (response.status === HttpStatus.FORBIDDEN) {
+      alert('You do not have permission to add ' + location + '. A location of the same name may have been added by another user.');
+    }
+    else {
+      problemConnecting();
+    }
+
+  }
+
+  async function handleSubmit(event) {
+    event.preventDefault();
 
     const response = await fetch('/', {
       method: 'GET',
@@ -54,45 +89,12 @@ function LocationForm(props) {
     if (response.ok) {
 
       const model = await response.json();
+      putData(model);
 
-      const putResponse = await fetch(model._links.locationCollection.href,
-        locationPutObject(location, lon, lat));
-
-      if (putResponse.ok) {
-
-        const harvestResponse = await fetch(model._links.locationCollection.href + '/' + location, {
-          method: 'POST'
-        });
-
-
-        if (harvestResponse.ok) {
-          alert(location + ' was added.');
-          updateDisplay();
-        } else if (harvestResponse.status === HttpStatus.BAD_GATEWAY) {
-          alert(location + ' was added, but did did not recieve the weather data. The ' +
-            lon + " and " + lat + " longitude and latitude coordinates may not be covered by the model.");
-        }
-        else {
-          alert(location + ' was added, but Unison did not obtain the weather data.')
-          updateDisplay();
-        }
-      } else if (response.status === HttpStatus.UNAUTHORIZED) {
-        alert('Incorrect user name or password');
-      } else if (response.status === HttpStatus.FORBIDDEN) {
-        alert('You do not have permission to add ' + location + '. A location of the same name may have been added by another user.');
-      }
-      else {
-        problemConnecting();
-      }
     } else {
       problemConnecting();
     }
-  }
 
-  async function handleSubmit(event) {
-    event.preventDefault();
-
-    putData();
 
   }
 
@@ -148,8 +150,6 @@ LocationForm.propTypes = {
   obtainData: PropTypes.func.isRequired,
 
   featureProperties: PropTypes.object,
-
-  linksProperty: PropTypes.object,
 }
 
 export default LocationForm;

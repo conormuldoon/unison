@@ -74,6 +74,8 @@ public class Constant {
 
 	public static final String INDEX = "index";
 
+	public static final String CONTAINS = "contaions";
+
 	/**
 	 * 
 	 */

@@ -1,5 +1,6 @@
 const { createProxyMiddleware } = require('http-proxy-middleware');
 const XMLHttpRequest = require("xmlhttprequest").XMLHttpRequest;
+const HttpStatus = require('http-status-codes');
 
 const filter = function (pathName, req) {
 
@@ -15,8 +16,8 @@ const filter = function (pathName, req) {
   request.open('HEAD', req.hostname + pathName, false);  // The `false` argument makes the request synchronous.
   request.send(null);
 
-  if (request.ok) {
-    return false;
+  if (request.status === HttpStatus.NOT_FOUND) {
+    return true;
   }
 
   return false;
