@@ -8,6 +8,7 @@ import java.util.List;
 
 import org.springframework.hateoas.Link;
 import org.springframework.hateoas.MediaTypes;
+import org.springframework.hateoas.server.mvc.BasicLinkBuilder;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.ModelAndView;
@@ -28,6 +29,9 @@ public class IndexHALController {
 		list.add(linkTo(methodOn(IndexHALController.class).indexHAL()).withSelfRel());
 
 		list.add(linkTo(methodOn(HALLocationController.class).createModel()).withRel(Constant.LOCATION_COLLECTION));
+
+		String baseUri = BasicLinkBuilder.linkToCurrentMapping().toString();
+		list.add(Link.of(baseUri + MappingConstant.USER, Constant.USER));
 
 		return new UnisonModel(list);
 	}

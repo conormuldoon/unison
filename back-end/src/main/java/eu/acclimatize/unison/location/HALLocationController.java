@@ -9,6 +9,7 @@ import java.util.Collection;
 import org.springframework.hateoas.CollectionModel;
 import org.springframework.hateoas.Link;
 import org.springframework.hateoas.MediaTypes;
+import org.springframework.hateoas.server.mvc.BasicLinkBuilder;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RestController;
@@ -58,7 +59,11 @@ public class HALLocationController {
 		}
 
 		Link link = linkTo(methodOn(HALLocationController.class).createModel()).withSelfRel();
-		return CollectionModel.of(locationCollection, link);
+		String baseUri = BasicLinkBuilder.linkToCurrentMapping().toString();
+		Link containsLink = Link.of(baseUri + MappingConstant.CONTAINS + "{?" + Constant.LOCATION_NAME + "}",
+				Constant.CONTAINS);
+
+		return CollectionModel.of(locationCollection, link, containsLink);
 
 	}
 

@@ -2,11 +2,14 @@ package eu.acclimatize.unison.user;
 
 import java.util.Optional;
 
+import javax.servlet.http.HttpServletResponse;
+
 import org.springframework.security.access.AccessDeniedException;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
+import eu.acclimatize.unison.Constant;
 import eu.acclimatize.unison.MappingConstant;
 
 /**
@@ -43,7 +46,7 @@ public class UpsertUserController {
 	// configured to require authorization in the UnisonSecurityConfig
 	// configuration.
 	@PutMapping(MappingConstant.USER)
-	public void upsertUser(@RequestBody UserInformation userInformation) {
+	public void upsertUser(@RequestBody UserInformation userInformation, HttpServletResponse response) {
 
 		Optional<UserInformation> optCurrent = userInformation.findCurrent(userRepository);
 		if (optCurrent.isPresent()) {
@@ -58,6 +61,8 @@ public class UpsertUserController {
 			}
 		} else {
 			userRepository.save(userInformation);
+			response.setStatus(Constant.CREATED);
+			userInformation.addHeader(response);
 		}
 
 	}

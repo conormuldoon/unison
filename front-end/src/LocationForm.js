@@ -7,6 +7,8 @@ import { problemConnecting } from './Util';
 import HttpStatus from 'http-status-codes';
 import { locationPutObject } from './Util';
 
+import parser from 'uri-template';
+
 /**
  * A component for displaying a form to add new locations to be tracked.
  * 
@@ -44,33 +46,36 @@ function LocationForm(props) {
 
   async function putData(model) {
 
-    const response = await fetch(model._links.locationCollection.href,
+    const response = await fetch(model._links.self.href,
       locationPutObject(location, lon, lat));
+
+
 
     if (response.ok) {
 
-      const harvestResponse = await fetch(model._links.locationCollection.href + '/' + location, {
+      const harvestResponse = await fetch(model._links.self.href + '/' + location, {
         method: 'POST'
       });
 
+      const message = (response.status === HttpStatus.CREATED) ? 'added' : 'updated';
 
       if (harvestResponse.ok) {
-        alert(location + ' was added.');
+        alert(location + ' was ' + message + '.');
         updateDisplay();
       } else if (harvestResponse.status === HttpStatus.BAD_GATEWAY) {
-        alert(location + ' was added, but did did not recieve the weather data. The ' +
+        alert(location + ' was ' + message + ', but did did not recieve the weather data. The ' +
           lon + " and " + lat + " longitude and latitude coordinates may not be covered by the model.");
       }
       else {
-        alert(location + ' was added, but Unison did not obtain the weather data.')
+        alert(location + ' was ' + message + ', but Unison did not obtain the weather data.')
         updateDisplay();
       }
     } else if (response.status === HttpStatus.UNAUTHORIZED) {
       alert('Incorrect user name or password');
     } else if (response.status === HttpStatus.FORBIDDEN) {
-      alert('You do not have permission to add ' + location + '. A location of the same name may have been added by another user.');
-    }
-    else {
+      alert('You do not have permission to update ' + location +
+        '. A location of the same name may have been added by another user.');
+    } else {
       problemConnecting();
     }
 
@@ -79,17 +84,23 @@ function LocationForm(props) {
   async function handleSubmit(event) {
     event.preventDefault();
 
-    const response = await fetch('/', {
-      method: 'GET',
-      headers: new Headers({
-        'Accept': 'application/hal+json'
-      })
-    });
+    const template = parser.parse(props.collectionModel._links.contains.href);
+    const uri = template.expand({ name: location });
+
+    const response = await fetch(uri);
 
     if (response.ok) {
 
-      const model = await response.json();
-      putData(model);
+      const contains = await response.json();
+      if (contains.value) {
+
+        if (window.confirm('A location named ' + location + " was previously added. Would you like to update it?")) {
+          putData(props.collectionModel);
+        }
+
+      } else {
+        putData(props.collectionModel);
+      }
 
     } else {
       problemConnecting();
@@ -150,6 +161,8 @@ LocationForm.propTypes = {
   obtainData: PropTypes.func.isRequired,
 
   featureProperties: PropTypes.object,
+
+  collectionModel: PropTypes.object,
 }
 
 export default LocationForm;

@@ -29,10 +29,26 @@ function Unison(props) {
   const [curVar, setCurVar] = useState(undefined);
   const [varOpt, setVarOpt] = useState(undefined);
   const [featureProperties, setFeatureProperties] = useState(undefined);
+  const [collectionModel, setCollectionModel] = useState(undefined);
 
 
   const obtainData = () => {
-    let active = true;
+    let unmounted = false;
+
+    function throwUnmountedError() {
+      throw new Error('Unison was unmounted.');
+    }
+
+    class ResponseError extends Error {
+      constructor(message, status) {
+        super(message);
+        this.status = status;
+      }
+    }
+
+    function throwResponseError(status) {
+      throw new ResponseError('Bad response.', status);
+    }
 
     async function requestFeatureCollection(uri) {
       const response = await fetch(uri, {
@@ -42,38 +58,46 @@ function Unison(props) {
         })
       });
 
-      if (active && response.ok) {
-        const fc = await response.json();
+      if (unmounted) {
+        throwUnmountedError();
+      }
 
-        if (active) {
-          const locationArray = fc.features;
-          const n = locationArray.length;
+      if (!response.ok) {
+        throwResponseError(response.status);
+      }
 
-          const newOption = [];
-          const newMarker = [];
+      const fc = await response.json();
 
-          for (let i = 0; i < n; i++) {
-            newOption.push(locationArray[i].properties.name);
-            let pos = [locationArray[i].geometry.coordinates[1], locationArray[i].geometry.coordinates[0]];
+      if (unmounted) {
+        throwUnmountedError();
+      }
 
-            const properties = locationArray[i].properties;
-            newMarker.push({ name: properties.name, position: pos });
+      const locationArray = fc.features;
+      const n = locationArray.length;
 
-          }
+      const newOption = [];
+      const newMarker = [];
 
-          if (n > 0) {
+      for (let i = 0; i < n; i++) {
+        newOption.push(locationArray[i].properties.name);
+        let pos = [locationArray[i].geometry.coordinates[1], locationArray[i].geometry.coordinates[0]];
 
-            setOption(newOption);
-            setMarker(newMarker);
-            return true;
-
-          }
-        }
-
+        const properties = locationArray[i].properties;
+        newMarker.push({ name: properties.name, position: pos });
 
       }
 
-      return false;
+      if (n > 0) {
+
+        setOption(newOption);
+        setMarker(newMarker);
+
+
+      } else {
+        setOption(undefined);
+        setMarker(undefined);
+      }
+
 
     }
 
@@ -88,84 +112,118 @@ function Unison(props) {
 
       const response = await fetch(uri, halGetHeader);
 
-      if (active && response.ok) {
-        const model = await response.json();
-        if (active) {
-          const map = new Map();
-          if (model._embedded) {
-            const list = model._embedded.locationModelList;
-            const n = list.length;
-            for (let i = 0; i < n; i++) {
-              map.set(list[i].name, list[i]);
-            }
-
-            const locationData = await requestFeatureCollection(uri);
-            if (active && locationData) {
-              setFeatureProperties(map);
-
-              const varOpt = [];
-
-              if (n > 0) {
-
-                for (const rel in list[0]._links) {
-                  if (SELF === rel) {
-                    continue;
-                  }
-
-                  const s = rel.charAt(0).toUpperCase() + rel.substring(1);
-                  let optName = '';
-                  let sw = 0;
-                  for (let i = 1; i < s.length; i++) {
-                    const c = s.charAt(i);
-                    if (c >= 'A' && c <= 'Z') {
-                      optName += s.substring(sw, i) + ' ';
-                      sw = i;
-                    }
-                  }
-                  optName += s.substring(sw);
-                  varOpt.push(optName);
-                }
-              }
-              if (varOpt.length > 0) {
-                setCurLoc(list[0]);
-                setCurVar(varOpt[0]);
-                setVarOpt(varOpt);
-                return;
-
-              } else {
-                alert("No weather data is associated with the collection.")
-              }
-
-
-            }
-          }
-        }
+      if (unmounted) {
+        throwUnmountedError();
       }
 
-      setCurVar(undefined);
-      setVarOpt(undefined);
-      setOption(undefined);
-      setMarker(undefined);
-      setCurLoc(undefined);
+      if (!response.ok) {
+        throwResponseError(response.status);
+      }
+
+      const model = await response.json();
+
+      if (unmounted) {
+        throwUnmountedError();
+      }
+
+      setCollectionModel(model);
+      const map = new Map();
+      if (model._embedded) {
+        const list = model._embedded.locationModelList;
+        const n = list.length;
+        for (let i = 0; i < n; i++) {
+          map.set(list[i].name, list[i]);
+        }
+
+        await requestFeatureCollection(uri);
+
+        if (unmounted) {
+          throwUnmountedError();
+        }
+        setFeatureProperties(map);
+
+        const varOpt = [];
+
+        if (n > 0) {
+
+          for (const rel in list[0]._links) {
+            if (SELF === rel) {
+              continue;
+            }
+
+            const s = rel.charAt(0).toUpperCase() + rel.substring(1);
+            let optName = '';
+            let sw = 0;
+            for (let i = 1; i < s.length; i++) {
+              const c = s.charAt(i);
+              if (c >= 'A' && c <= 'Z') {
+                optName += s.substring(sw, i) + ' ';
+                sw = i;
+              }
+            }
+            optName += s.substring(sw);
+            varOpt.push(optName);
+          }
+        }
+        if (varOpt.length > 0) {
+          setCurLoc(list[0]);
+          setCurVar(varOpt[0]);
+          setVarOpt(varOpt);
+          return;
+
+        } else {
+          setCurLoc(undefined);
+          setCurVar(undefined);
+          setVarOpt(undefined);
+          alert("No weather data is associated with the collection.")
+        }
+
+
+      } else {
+        setCurVar(undefined);
+        setVarOpt(undefined);
+        setOption(undefined);
+        setMarker(undefined);
+        setCurLoc(undefined);
+      }
+
+
     }
 
     async function requestModel() {
 
       const response = await fetch('/', halGetHeader);
 
-      if (active && response.ok) {
-        const model = await response.json();
-
-        if (active)
-          requestCollectionHAL(model._links.locationCollection.href);
-      } else if (response.status === HttpStatus.GATEWAY_TIMEOUT) {
-        problemConnecting();
+      if (unmounted) {
+        throwUnmountedError();
       }
+
+      if (!response.ok) {
+        throwResponseError(response.status);
+      }
+
+
+      const model = await response.json();
+      if (unmounted) {
+        throwUnmountedError();
+      }
+
+      requestCollectionHAL(model._links.locationCollection.href);
+
     }
 
-    requestModel();
+    try {
+      requestModel();
 
-    const cancel = () => active = false;
+    } catch (e) {
+      if (e instanceof ResponseError) {
+        problemConnecting();
+      }
+      console.log(e);
+
+    }
+
+    const cancel = () => unmounted = true;
     return cancel;
   };
 
@@ -295,7 +353,7 @@ function Unison(props) {
             {curLoc && curVar && <div className='pLeft'> <button onClick={handleCSV}>CSV</button> </div>}
           </div>
 
-          <ARLocationComponent obtainData={obtainData} linksProperty={curLoc} />
+          <ARLocationComponent obtainData={obtainData} linksProperty={curLoc} collectionModel={collectionModel} />
 
         </center>
 

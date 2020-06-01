@@ -1,5 +1,7 @@
 package eu.acclimatize.unison;
 
+import org.springframework.http.HttpStatus;
+
 /**
  * 
  * A class that defines constants.
@@ -74,7 +76,7 @@ public class Constant {
 
 	public static final String INDEX = "index";
 
-	public static final String CONTAINS = "contaions";
+	public static final String CONTAINS = "contains";
 
 	/**
 	 * 
@@ -162,5 +164,9 @@ public class Constant {
 	 * updated item's owner is the authenticated user.
 	 */
 	public static final String REPLACE_ITEM = "#current" + HAS_OWNER_AUTH + " and #updated" + HAS_OWNER_AUTH;
+
+	public static final int CREATED = HttpStatus.CREATED.value();
+
+	public static final String LOCATION_HEADER = "Location";
 
 }
