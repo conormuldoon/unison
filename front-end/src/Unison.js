@@ -28,15 +28,15 @@ function Unison(props) {
   const [curLoc, setCurLoc] = useState(undefined);
   const [curVar, setCurVar] = useState(undefined);
   const [varOpt, setVarOpt] = useState(undefined);
-  const [featureProperties, setFeatureProperties] = useState(undefined);
+  const [locationMap, setLocationMap] = useState(undefined);
   const [collectionModel, setCollectionModel] = useState(undefined);
-
 
   const obtainData = () => {
     let unmounted = false;
 
-    function throwUnmountedError() {
-      throw new Error('Unison was unmounted.');
+    function checkUnmounted() {
+      if (unmounted === true)
+        throw new Error('Unison was unmounted.');
     }
 
     class ResponseError extends Error {
@@ -46,8 +46,9 @@ function Unison(props) {
       }
     }
 
-    function throwResponseError(status) {
-      throw new ResponseError('Bad response.', status);
+    function checkResponse(response, endpoint) {
+      if (!response.ok)
+        throw new ResponseError('Bad response for ' + endpoint, response.status);
     }
 
     async function requestFeatureCollection(uri) {
@@ -58,19 +59,12 @@ function Unison(props) {
         })
       });
 
-      if (unmounted) {
-        throwUnmountedError();
-      }
-
-      if (!response.ok) {
-        throwResponseError(response.status);
-      }
+      checkUnmounted();
+      checkResponse(response, uri);
 
       const fc = await response.json();
 
-      if (unmounted) {
-        throwUnmountedError();
-      }
+      checkUnmounted();
 
       const locationArray = fc.features;
       const n = locationArray.length;
@@ -108,39 +102,36 @@ function Unison(props) {
       })
     }
 
+    function clearCurrent() {
+      setCurLoc(undefined);
+      setCurVar(undefined);
+      setVarOpt(undefined);
+      setLocationMap(undefined);
+      
+    }
+
     async function requestCollectionHAL(uri) {
 
       const response = await fetch(uri, halGetHeader);
 
-      if (unmounted) {
-        throwUnmountedError();
-      }
-
-      if (!response.ok) {
-        throwResponseError(response.status);
-      }
+      checkUnmounted();
+      checkResponse(response, uri);
 
       const model = await response.json();
 
-      if (unmounted) {
-        throwUnmountedError();
-      }
+      checkUnmounted();
 
       setCollectionModel(model);
-      const map = new Map();
+
       if (model._embedded) {
         const list = model._embedded.locationModelList;
         const n = list.length;
+        const map=new Map();
         for (let i = 0; i < n; i++) {
           map.set(list[i].name, list[i]);
         }
 
-        await requestFeatureCollection(uri);
-
-        if (unmounted) {
-          throwUnmountedError();
-        }
-        setFeatureProperties(map);
+        setLocationMap(map);
 
         const varOpt = [];
 
@@ -172,19 +163,14 @@ function Unison(props) {
           return;
 
         } else {
-          setCurLoc(undefined);
-          setCurVar(undefined);
-          setVarOpt(undefined);
+
+          clearCurrent();
           alert("No weather data is associated with the collection.")
         }
 
 
       } else {
-        setCurVar(undefined);
-        setVarOpt(undefined);
-        setOption(undefined);
-        setMarker(undefined);
-        setCurLoc(undefined);
+        clearCurrent();
       }
 
 
@@ -192,23 +178,21 @@ function Unison(props) {
 
     async function requestModel() {
 
-      const response = await fetch('/', halGetHeader);
+      const root = '/';
+      const response = await fetch(root, halGetHeader);
 
-      if (unmounted) {
-        throwUnmountedError();
-      }
-
-      if (!response.ok) {
-        throwResponseError(response.status);
-      }
+      checkUnmounted();
+      checkResponse(response, root);
 
 
       const model = await response.json();
-      if (unmounted) {
-        throwUnmountedError();
-      }
+      checkUnmounted();
 
-      requestCollectionHAL(model._links.locationCollection.href);
+      const uri = model._links.locationCollection.href;
+      await requestCollectionHAL(uri);
+      checkUnmounted();
+      await requestFeatureCollection(uri);
+
 
     }
 
@@ -234,7 +218,7 @@ function Unison(props) {
 
 
   const updateCurLoc = (locationName) => {
-    setCurLoc(featureProperties.get(locationName));
+    setCurLoc(locationMap.get(locationName));
   }
 
   const markerClicked = (location) => {
@@ -305,7 +289,7 @@ function Unison(props) {
 
       </div>
 
-      <LeafletMap marker={marker} curVar={curVar} featureProperties={featureProperties}
+      <LeafletMap marker={marker} curVar={curVar} featureProperties={locationMap}
         markerCallback={markerClicked} fromDate={fromDate} toDate={toDate}
         mapCentre={props.mapCentre} linksProperty={curLoc} />
 
