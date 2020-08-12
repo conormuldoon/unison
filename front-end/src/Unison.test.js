@@ -5,32 +5,31 @@ import ReactDOM from 'react-dom';
 import { fireEvent, render, waitForElement } from "react-testing-library";
 import Unison from './Unison';
 
-const features = {
-    "features": [{
-        "geometry": { "type": "Point", "coordinates": [-6.223682, 53.308441] }, "properties": {
-            "name": "UCD"
-            , links: {
-                self: "/location/UCD",
-                cloudiness: "/location/UCD/cloudiness{?fromDate,toDate}",
-                cloudLevel: "/location/UCD/cloudLevel{?fromDate,toDate}",
-                dewPoint: "/location/UCD/dewPoint{?fromDate,toDate}",
-                humidity: "/location/UCD/humidity{?fromDate,toDate}",
-                precipitation: "/location/UCD/precipitation{?fromDate,toDate}",
-                pressure: "/location/UCD/pressure{?fromDate,toDate}",
-                temperature: "/location/UCD/temperature{?fromDate,toDate}",
-                windDirection: "/location/UCD/windDirection{?fromDate,toDate}",
-                windSpeed: "/location/UCD/windSpeed{?fromDate,toDate}",
-                harvest: "/location/UCD/harvest"
-            }
 
+
+const unisonModel = {
+    "_links": {
+        "self": [
+            {
+                "href": "http://localhost:8080/"
+            },
+            {
+                "href": "http://localhost:8080/index"
+            }
+        ],
+        "locationCollection": {
+            "href": "http://localhost:8080/locationCollection"
+        },
+        "user": {
+            "href": "http://localhost:8080/user"
         }
-    }]
+    }
 };
 
 it('renders without crashing', async () => {
 
 
-    fetchMock.get('end:/location', features);
+    fetchMock.get('/', unisonModel);
 
     const div = document.createElement('div');
 
@@ -43,7 +42,8 @@ it('renders without crashing', async () => {
 it('mathes Unison snapshot', () => {
 
 
-    fetchMock.get('end:/location', features);
+    fetchMock.get('/', unisonModel);
+
     const mockDateNow = jest.fn(() => 1571875200000);
     const dn = global.Date.now;
     global.Date.now = mockDateNow;
@@ -57,7 +57,100 @@ it('mathes Unison snapshot', () => {
 });
 
 it('displays popup when marker clicked', async () => {
-    fetchMock.get('end:/location', features);
+
+
+    const locationModelHAL = {
+        "_embedded": {
+            "locationModelList": [
+                {
+                    "name": "UCD",
+                    "_links": {
+                        "self": {
+                            "href": "http://localhost:8080/locationCollection/UCD"
+                        },
+                        "cloudiness": {
+                            "href": "http://localhost:8080/locationCollection/UCD/cloudiness{?fromDate,toDate}",
+                            "templated": true
+                        },
+                        "cloudLevel": {
+                            "href": "http://localhost:8080/locationCollection/UCD/cloudLevel{?fromDate,toDate}",
+                            "templated": true
+                        },
+                        "dewPoint": {
+                            "href": "http://localhost:8080/locationCollection/UCD/dewPoint{?fromDate,toDate}",
+                            "templated": true
+                        },
+                        "humidity": {
+                            "href": "http://localhost:8080/locationCollection/UCD/humidity{?fromDate,toDate}",
+                            "templated": true
+                        },
+                        "precipitation": {
+                            "href": "http://localhost:8080/locationCollection/UCD/precipitation{?fromDate,toDate}",
+                            "templated": true
+                        },
+                        "pressure": {
+                            "href": "http://localhost:8080/locationCollection/UCD/pressure{?fromDate,toDate}",
+                            "templated": true
+                        },
+                        "temperature": {
+                            "href": "http://localhost:8080/locationCollection/UCD/temperature{?fromDate,toDate}",
+                            "templated": true
+                        },
+                        "windDirection": {
+                            "href": "http://localhost:8080/locationCollection/UCD/windDirection{?fromDate,toDate}",
+                            "templated": true
+                        },
+                        "windSpeed": {
+                            "href": "http://localhost:8080/locationCollection/UCD/windSpeed{?fromDate,toDate}",
+                            "templated": true
+                        }
+                    }
+                }
+            ]
+        },
+        "_links": {
+            "self": {
+                "href": "http://localhost:8080/locationCollection"
+            },
+            "contains": {
+                "href": "http://localhost:8080/locationCollection/contains{?name}",
+                "templated": true
+            }
+        }
+    };
+
+    const locationCollection = {
+        "type": "FeatureCollection",
+        "features": [
+            {
+                "type": "Feature",
+                "geometry": {
+                    "type": "Point",
+                    "coordinates": [
+                        -6.4,
+                        53.4
+                    ]
+                },
+                "properties": {
+                    "name": "UCD"
+                }
+            }
+        ]
+    };
+
+    const headers = {
+        "Accept": "application/hal+json"
+    };
+    const options = { headers: headers };
+
+    const headersGEO = {
+        "Accept": "application/geo+json"
+    };
+    const optionsGEO = { headers: headersGEO };
+
+    fetchMock.get('end:/locationCollection', locationModelHAL, options);
+
+    fetchMock.get('end:/locationCollection', locationCollection, { overwriteRoutes: false });
 
 
     fetchMock.get('end:/precipitation?fromDate=1/9/2019&toDate=23/10/2019', [{
@@ -157,15 +250,25 @@ it('displays popup when marker clicked', async () => {
         }
     }]);
 
-    const { getAllByAltText, getByText /*, debug*/ } = render(<Unison mapCentre={[59.922326, 10.751560]} />);
+
+
+    fetchMock.get('/', unisonModel);
+
+    const unison = <Unison mapCentre={[59.922326, 10.751560]} />;
+    const { getAllByAltText, getByText /*, debug*/ } = render(unison);
 
     const marker = await waitForElement(() => getAllByAltText('')[1]);
 
-    fireEvent.click(marker);
-    const text = await waitForElement(() => getByText('UCD'));
 
+    fireEvent.click(marker);
+
+    const text = await waitForElement(() => getByText('UCD'));
     expect(text).toBeDefined();
     //debug();
+
+
+
+
     fetchMock.restore();
 });
 

@@ -32,12 +32,6 @@ function Unison(props) {
   const [collectionModel, setCollectionModel] = useState(undefined);
 
   const obtainData = () => {
-    let unmounted = false;
-
-    function checkUnmounted() {
-      if (unmounted === true)
-        throw new Error('Unison was unmounted.');
-    }
 
     class ResponseError extends Error {
       constructor(message, status) {
@@ -59,12 +53,10 @@ function Unison(props) {
         })
       });
 
-      checkUnmounted();
+
       checkResponse(response, uri);
 
       const fc = await response.json();
-
-      checkUnmounted();
 
       const locationArray = fc.features;
       const n = locationArray.length;
@@ -107,26 +99,25 @@ function Unison(props) {
       setCurVar(undefined);
       setVarOpt(undefined);
       setLocationMap(undefined);
-      
+
     }
 
     async function requestCollectionHAL(uri) {
 
       const response = await fetch(uri, halGetHeader);
 
-      checkUnmounted();
+
       checkResponse(response, uri);
 
       const model = await response.json();
 
-      checkUnmounted();
 
       setCollectionModel(model);
 
       if (model._embedded) {
         const list = model._embedded.locationModelList;
         const n = list.length;
-        const map=new Map();
+        const map = new Map();
         for (let i = 0; i < n; i++) {
           map.set(list[i].name, list[i]);
         }
@@ -181,16 +172,13 @@ function Unison(props) {
       const root = '/';
       const response = await fetch(root, halGetHeader);
 
-      checkUnmounted();
       checkResponse(response, root);
 
 
       const model = await response.json();
-      checkUnmounted();
 
       const uri = model._links.locationCollection.href;
       await requestCollectionHAL(uri);
-      checkUnmounted();
       await requestFeatureCollection(uri);
 
 
@@ -207,13 +195,12 @@ function Unison(props) {
 
     }
 
-    const cancel = () => unmounted = true;
-    return cancel;
+    
   };
 
   useEffect(() => {
 
-    return obtainData();
+    obtainData();
   }, []);
 
 

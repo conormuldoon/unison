@@ -130,7 +130,7 @@ public class LocationTests {
 	private void testDelete(String userName, String password, int expectedCount, String locationName) {
 		TestRestTemplate templateWBA = template.withBasicAuth(userName, password);
 
-		templateWBA.delete(MappingConstant.LOCATION_COLLECTION + "?" + Constant.LOCATION_NAME + "=" + locationName);
+		templateWBA.delete(MappingConstant.SPECIFIC_LOCATION, locationName);
 		Assert.assertEquals(expectedCount, locationRepository.count());
 
 	}
@@ -239,6 +239,8 @@ public class LocationTests {
 		InputStream is = getClass().getResourceAsStream("/TestPoint.json");
 		BufferedReader br = new BufferedReader(new InputStreamReader(is));
 
+		String line=jsonWriter.toString();
+		System.out.println("\n\n\n"+line);
 		Assert.assertEquals(br.readLine(), jsonWriter.toString());
 		br.close();
 
@@ -298,6 +300,8 @@ public class LocationTests {
 		InputStream is = getClass().getResourceAsStream("/TestCollection.json");
 		BufferedReader br = new BufferedReader(new InputStreamReader(is));
 
+		String line=jsonWriter.toString();
+		System.out.println(line);
 		Assert.assertEquals(br.readLine(), jsonWriter.toString());
 		br.close();
 

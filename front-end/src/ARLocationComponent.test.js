@@ -22,13 +22,58 @@ it('mathes snapshot', () => {
 
 });
 
+const linksProperty = {
+  "name": "UCD",
+  "_links": {
+    "self": {
+      "href": "http://localhost:8080/locationCollection/UCD"
+    },
+    "cloudiness": {
+      "href": "http://localhost:8080/locationCollection/UCD/cloudiness{?fromDate,toDate}",
+      "templated": true
+    },
+    "cloudLevel": {
+      "href": "http://localhost:8080/locationCollection/UCD/cloudLevel{?fromDate,toDate}",
+      "templated": true
+    },
+    "dewPoint": {
+      "href": "http://localhost:8080/locationCollection/UCD/dewPoint{?fromDate,toDate}",
+      "templated": true
+    },
+    "humidity": {
+      "href": "http://localhost:8080/locationCollection/UCD/humidity{?fromDate,toDate}",
+      "templated": true
+    },
+    "precipitation": {
+      "href": "http://localhost:8080/locationCollection/UCD/precipitation{?fromDate,toDate}",
+      "templated": true
+    },
+    "pressure": {
+      "href": "http://localhost:8080/locationCollection/UCD/pressure{?fromDate,toDate}",
+      "templated": true
+    },
+    "temperature": {
+      "href": "http://localhost:8080/locationCollection/UCD/temperature{?fromDate,toDate}",
+      "templated": true
+    },
+    "windDirection": {
+      "href": "http://localhost:8080/locationCollection/UCD/windDirection{?fromDate,toDate}",
+      "templated": true
+    },
+    "windSpeed": {
+      "href": "http://localhost:8080/locationCollection/UCD/windSpeed{?fromDate,toDate}",
+      "templated": true
+    }
+  }
+}
+
 
 it('toggles add location correctly', () => {
   const confirmSpy = jest.spyOn(window, 'confirm');
   confirmSpy.mockImplementation(() => true);
 
   const location = { name: 'UCD', links: { self: '/location/UCD' } };
-  const { getByTestId, getByText } = render(<ARLocationComponent location={location} obtainData={() => { }} />);
+  const { getByTestId, getByText } = render(<ARLocationComponent location={location} obtainData={() => { }} linksProperty={linksProperty} />);
   expect(getByTestId('lf-button')).toHaveTextContent('Add Location');
   expect(getByTestId('rm-button')).toHaveTextContent('Remove ' + location.name);
   fireEvent.click(getByText('Add Location'));

@@ -10,23 +10,52 @@ const fromDate = '1/2/2018';
 const toDate = '7/10/2019';
 
 const location = {
-  name: "UCD",
-  links: {
-    cloudiness: "/location/UCD/cloudiness{?fromDate,toDate}",
-    cloudLevel: "/location/UCD/cloudLevel{?fromDate,toDate}",
-    dewPoint: "/location/UCD/dewPoint{?fromDate,toDate}",
-    humidity: "/location/UCD/humidity{?fromDate,toDate}",
-    precipitation: "/location/UCD/precipitation{?fromDate,toDate}",
-    pressure: "/location/UCD/pressure{?fromDate,toDate}",
-    temperature: "/location/UCD/temperature{?fromDate,toDate}",
-    windDirection: "/location/UCD/windDirection{?fromDate,toDate}",
-    windSpeed: "/location/UCD/windSpeed{?fromDate,toDate}",
-    harvest: "/location/UCD/harvest"
+  "name": "UCD",
+  "_links": {
+    "self": {
+      "href": "http://localhost:8080/locationCollection/UCD"
+    },
+    "cloudiness": {
+      "href": "http://localhost:8080/locationCollection/UCD/cloudiness{?fromDate,toDate}",
+      "templated": true
+    },
+    "cloudLevel": {
+      "href": "http://localhost:8080/locationCollection/UCD/cloudLevel{?fromDate,toDate}",
+      "templated": true
+    },
+    "dewPoint": {
+      "href": "http://localhost:8080/locationCollection/UCD/dewPoint{?fromDate,toDate}",
+      "templated": true
+    },
+    "humidity": {
+      "href": "http://localhost:8080/locationCollection/UCD/humidity{?fromDate,toDate}",
+      "templated": true
+    },
+    "precipitation": {
+      "href": "http://localhost:8080/locationCollection/UCD/precipitation{?fromDate,toDate}",
+      "templated": true
+    },
+    "pressure": {
+      "href": "http://localhost:8080/locationCollection/UCD/pressure{?fromDate,toDate}",
+      "templated": true
+    },
+    "temperature": {
+      "href": "http://localhost:8080/locationCollection/UCD/temperature{?fromDate,toDate}",
+      "templated": true
+    },
+    "windDirection": {
+      "href": "http://localhost:8080/locationCollection/UCD/windDirection{?fromDate,toDate}",
+      "templated": true
+    },
+    "windSpeed": {
+      "href": "http://localhost:8080/locationCollection/UCD/windSpeed{?fromDate,toDate}",
+      "templated": true
+    }
   }
-};
+}
 
 const chartPopup = <ChartPopup curVar='Precipitation'
-  fromDate={fromDate} toDate={toDate} closePopup={() => { }} location={location} />;
+  fromDate={fromDate} toDate={toDate} closePopup={() => { }} linksProperty={location} />;
 
 const apiRequest = 'end:?fromDate=1%2F2%2F2018&toDate=7%2F10%2F2019';
 
@@ -66,33 +95,93 @@ it('displays text for the selected variable and location', () => {
   for (const vo of VAR_OPT) {
     let sOpt = chartText(vo);
     for (const loc of [{
-      name: 'Dublin', links: {
-        cloudiness: "/location/Dublin/cloudiness{?fromDate,toDate}",
-        cloudLevel: "/location/Dublin/cloudLevel{?fromDate,toDate}",
-        dewPoint: "/location/Dublin/dewPoint{?fromDate,toDate}",
-        humidity: "/location/Dublin/humidity{?fromDate,toDate}",
-        precipitation: "/location/Dublin/precipitation{?fromDate,toDate}",
-        pressure: "/location/Dublin/pressure{?fromDate,toDate}",
-        temperature: "/location/Dublin/temperature{?fromDate,toDate}",
-        windDirection: "/location/Dublin/windDirection{?fromDate,toDate}",
-        windSpeed: "/location/Dublin/windSpeed{?fromDate,toDate}",
-        harvest: "/location/Dublin/harvest"
+      "name": "Dublin",
+      "_links": {
+        "self": {
+          "href": "http://localhost:8080/locationCollection/Dublin"
+        },
+        "cloudiness": {
+          "href": "http://localhost:8080/locationCollection/Dublin/cloudiness{?fromDate,toDate}",
+          "templated": true
+        },
+        "cloudLevel": {
+          "href": "http://localhost:8080/locationCollection/Dublin/cloudLevel{?fromDate,toDate}",
+          "templated": true
+        },
+        "dewPoint": {
+          "href": "http://localhost:8080/locationCollection/Dublin/dewPoint{?fromDate,toDate}",
+          "templated": true
+        },
+        "humidity": {
+          "href": "http://localhost:8080/locationCollection/Dublin/humidity{?fromDate,toDate}",
+          "templated": true
+        },
+        "precipitation": {
+          "href": "http://localhost:8080/locationCollection/Dublin/precipitation{?fromDate,toDate}",
+          "templated": true
+        },
+        "pressure": {
+          "href": "http://localhost:8080/locationCollection/Dublin/pressure{?fromDate,toDate}",
+          "templated": true
+        },
+        "temperature": {
+          "href": "http://localhost:8080/locationCollection/Dublin/temperature{?fromDate,toDate}",
+          "templated": true
+        },
+        "windDirection": {
+          "href": "http://localhost:8080/locationCollection/Dublin/windDirection{?fromDate,toDate}",
+          "templated": true
+        },
+        "windSpeed": {
+          "href": "http://localhost:8080/locationCollection/Dublin/windSpeed{?fromDate,toDate}",
+          "templated": true
+        }
       }
     }, {
-      name: 'London', links: {
-        cloudiness: "/location/London/cloudiness{?fromDate,toDate}",
-        cloudLevel: "/location/London/cloudLevel{?fromDate,toDate}",
-        dewPoint: "/location/London/dewPoint{?fromDate,toDate}",
-        humidity: "/location/London/humidity{?fromDate,toDate}",
-        precipitation: "/location/London/precipitation{?fromDate,toDate}",
-        pressure: "/location/London/pressure{?fromDate,toDate}",
-        temperature: "/location/London/temperature{?fromDate,toDate}",
-        windDirection: "/location/London/windDirection{?fromDate,toDate}",
-        windSpeed: "/location/London/windSpeed{?fromDate,toDate}",
-        harvest: "/location/London/harvest"
+      "name": "London",
+      "_links": {
+        "self": {
+          "href": "http://localhost:8080/locationCollection/London"
+        },
+        "cloudiness": {
+          "href": "http://localhost:8080/locationCollection/London/cloudiness{?fromDate,toDate}",
+          "templated": true
+        },
+        "cloudLevel": {
+          "href": "http://localhost:8080/locationCollection/London/cloudLevel{?fromDate,toDate}",
+          "templated": true
+        },
+        "dewPoint": {
+          "href": "http://localhost:8080/locationCollection/London/dewPoint{?fromDate,toDate}",
+          "templated": true
+        },
+        "humidity": {
+          "href": "http://localhost:8080/locationCollection/London/humidity{?fromDate,toDate}",
+          "templated": true
+        },
+        "precipitation": {
+          "href": "http://localhost:8080/locationCollection/London/precipitation{?fromDate,toDate}",
+          "templated": true
+        },
+        "pressure": {
+          "href": "http://localhost:8080/locationCollection/London/pressure{?fromDate,toDate}",
+          "templated": true
+        },
+        "temperature": {
+          "href": "http://localhost:8080/locationCollection/London/temperature{?fromDate,toDate}",
+          "templated": true
+        },
+        "windDirection": {
+          "href": "http://localhost:8080/locationCollection/London/windDirection{?fromDate,toDate}",
+          "templated": true
+        },
+        "windSpeed": {
+          "href": "http://localhost:8080/locationCollection/London/windSpeed{?fromDate,toDate}",
+          "templated": true
+        }
       }
     }]) {
-      const { getByText } = render(<ChartPopup curVar={vo} location={loc} fromDate={fromDate} toDate={toDate} closePopup={() => { }} />);
+      const { getByText } = render(<ChartPopup curVar={vo} linksProperty={loc} fromDate={fromDate} toDate={toDate} closePopup={() => { }} />);
 
       getByText(sOpt + ' data from ' + loc.name);
     }
@@ -106,7 +195,7 @@ it('displays a lower case letter for second word', () => {
 
   fetchMock.get(apiRequest, []);
 
-  const { getByText } = render(<ChartPopup curVar={'Wind Direction'} location={location} fromDate={fromDate} toDate={toDate}
+  const { getByText } = render(<ChartPopup curVar={'Wind Direction'} linksProperty={location} fromDate={fromDate} toDate={toDate}
     closePopup={() => { }} />);
 
   getByText('Wind direction data from ' + location.name);

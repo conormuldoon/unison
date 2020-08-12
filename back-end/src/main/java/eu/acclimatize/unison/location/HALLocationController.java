@@ -80,5 +80,6 @@ public class HALLocationController {
 
 		return location.createModel(weatherLink);
 	}
+	
 
 }

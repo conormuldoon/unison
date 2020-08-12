@@ -8,11 +8,22 @@ import HttpStatus from 'http-status-codes';
 
 const location = { name: 'UCD', links: { self: '/location/UCD' } };
 
+const linksProperty = {
+  "name": "UCD",
+  "_links": {
+
+    "self": {
+      "href": "http://localhost:8080/locationCollection/UCD"
+    }
+  }
+
+};
+
 it('renders without crashing', async () => {
 
   const div = document.createElement('div');
 
-  ReactDOM.render(<RemoveComponent location={location}
+  ReactDOM.render(<RemoveComponent location={location} linksProperty={linksProperty}
     obtainData={() => { }} hideDisplay={() => { }} toggleDisplay={() => { }} display={true} />, div);
   ReactDOM.unmountComponentAtNode(div);
 });
@@ -20,7 +31,7 @@ it('renders without crashing', async () => {
 it('mathes snapshot', () => {
 
 
-  const { container } = render(<RemoveComponent display={true} location={location} obtainData={() => { }} hideDisplay={() => { }} toggleDisplay={() => { }} />);
+  const { container } = render(<RemoveComponent display={true} location={location} linksProperty={linksProperty} obtainData={() => { }} hideDisplay={() => { }} toggleDisplay={() => { }} />);
 
   expect(container).toMatchSnapshot();
 
@@ -41,11 +52,11 @@ it('handles remove location', async (done) => {
 
   const obtainData = () => {
     expect(hideDisplay).toHaveBeenCalledTimes(1);
-    expect(alert).toBeCalledWith(location.name + ' removed');
+    expect(alert).toBeCalledWith(location.name + ' was removed.');
     done();
   };
 
-  const component = <RemoveComponent location={location} display={true} obtainData={obtainData} hideDisplay={hideDisplay} toggleDisplay={() => { }} />;
+  const component = <RemoveComponent location={location} display={true} linksProperty={linksProperty} obtainData={obtainData} hideDisplay={hideDisplay} toggleDisplay={() => { }} />;
   const { getByText } = render(component);
 
   fireEvent.click(getByText('Remove ' + location.name));

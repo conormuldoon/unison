@@ -57,7 +57,7 @@ function LocationForm(props) {
         method: 'POST'
       });
 
-      const message = (response.status === HttpStatus.CREATED) ? 'added' : 'updated';
+      const message = (response.status === HttpStatus.OK) ? 'updated' : 'added';
 
       if (harvestResponse.ok) {
         alert(location + ' was ' + message + '.');

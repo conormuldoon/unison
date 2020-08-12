@@ -7,20 +7,50 @@ import fetchMock from 'fetch-mock';
 
 
 const location = {
-  name: "UCD",
-  links: {
-    cloudiness: "/location/UCD/cloudiness{?fromDate,toDate}",
-    cloudLevel: "/location/UCD/cloudLevel{?fromDate,toDate}",
-    dewPoint: "/location/UCD/dewPoint{?fromDate,toDate}",
-    humidity: "/location/UCD/humidity{?fromDate,toDate}",
-    precipitation: "/location/UCD/precipitation{?fromDate,toDate}",
-    pressure: "/location/UCD/pressure{?fromDate,toDate}",
-    temperature: "/location/UCD/temperature{?fromDate,toDate}",
-    windDirection: "/location/UCD/windDirection{?fromDate,toDate}",
-    windSpeed: "/location/UCD/windSpeed{?fromDate,toDate}",
-    harvest: "/location/UCD/harvest"
+  "name": "UCD",
+  "_links": {
+    "self": {
+      "href": "http://localhost:8080/locationCollection/UCD"
+    },
+    "cloudiness": {
+      "href": "http://localhost:8080/locationCollection/UCD/cloudiness{?fromDate,toDate}",
+      "templated": true
+    },
+    "cloudLevel": {
+      "href": "http://localhost:8080/locationCollection/UCD/cloudLevel{?fromDate,toDate}",
+      "templated": true
+    },
+    "dewPoint": {
+      "href": "http://localhost:8080/locationCollection/UCD/dewPoint{?fromDate,toDate}",
+      "templated": true
+    },
+    "humidity": {
+      "href": "http://localhost:8080/locationCollection/UCD/humidity{?fromDate,toDate}",
+      "templated": true
+    },
+    "precipitation": {
+      "href": "http://localhost:8080/locationCollection/UCD/precipitation{?fromDate,toDate}",
+      "templated": true
+    },
+    "pressure": {
+      "href": "http://localhost:8080/locationCollection/UCD/pressure{?fromDate,toDate}",
+      "templated": true
+    },
+    "temperature": {
+      "href": "http://localhost:8080/locationCollection/UCD/temperature{?fromDate,toDate}",
+      "templated": true
+    },
+    "windDirection": {
+      "href": "http://localhost:8080/locationCollection/UCD/windDirection{?fromDate,toDate}",
+      "templated": true
+    },
+    "windSpeed": {
+      "href": "http://localhost:8080/locationCollection/UCD/windSpeed{?fromDate,toDate}",
+      "templated": true
+    }
   }
-};
+}
+
 
 it('renders without crashing', async () => {
 
@@ -33,7 +63,7 @@ it('renders without crashing', async () => {
 it('mathes snapshot', () => {
 
 
-  const { container } = render(<LeafletMap location={location} mapCentre={[59.922326, 10.751560]} />);
+  const { container } = render(<LeafletMap linksProperty={location} mapCentre={[59.922326, 10.751560]} />);
 
   expect(container).toMatchSnapshot();
 
@@ -56,7 +86,7 @@ it('displays popup', () => {
 
   const featureProperties = new Map();
   featureProperties.set(location.name, location);
-  const { getAllByAltText } = render(<LeafletMap location={location} featureProperties={featureProperties}
+  const { getAllByAltText } = render(<LeafletMap linksProperty={location} featureProperties={featureProperties}
     curVar={curVar} mapCentre={mapCentre} markerCallback={markerCallback} marker={marker} fromDate={fromDate} toDate={toDate} />);
 
   // Firing click event for marker icon image
