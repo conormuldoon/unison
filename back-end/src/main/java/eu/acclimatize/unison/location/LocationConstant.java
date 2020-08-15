@@ -15,6 +15,9 @@ public class LocationConstant {
 
 	}
 	
+	/**
+	 * The GeoJSON feature collection type.
+	 */
 	public static final String FEATURE_COLLECTION = "FeatureCollection";
 
 	/**
@@ -47,6 +50,9 @@ public class LocationConstant {
 	 */
 	public static final String PROPERTIES = "properties";
 	
+	/**
+	 * The media type for GeoJSON.
+	 */
 	public static final String GEOJSON_MEDIA_TYPE = "application/geo+json";
 
 }

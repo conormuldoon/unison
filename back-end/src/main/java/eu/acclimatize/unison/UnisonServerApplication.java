@@ -46,7 +46,7 @@ public class UnisonServerApplication {
 	}
 
 	/**
-	 * Creates a single threaded executor for executing runnable tasks.s.
+	 * Creates a single threaded executor for executing runnable tasks.
 	 * 
 	 * @return The executor created.
 	 */
@@ -55,6 +55,13 @@ public class UnisonServerApplication {
 		return Executors.newSingleThreadExecutor();
 	}
 
+	/**
+	 * Used to forward headers. This is required when the application is operating
+	 * behind a proxy and using HAL.
+	 * 
+	 * @return A bean that registers a forward header filter in the servlet
+	 *         container.
+	 */
 	@Bean
 	public FilterRegistrationBean<ForwardedHeaderFilter> forwardedHeaderFilter() {
 		return new FilterRegistrationBean<>(new ForwardedHeaderFilter());

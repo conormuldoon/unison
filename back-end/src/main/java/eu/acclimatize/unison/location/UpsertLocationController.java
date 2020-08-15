@@ -25,6 +25,12 @@ public class UpsertLocationController {
 	private LocationRepository locationRepository;
 	private LocationService locationService;
 
+	/**
+	 * Creates an instance of UpsertLocationController.
+	 * 
+	 * @param locationRepository The repository where the locations are stored.
+	 * @param locationService    The service used to replace locations.
+	 */
 	public UpsertLocationController(LocationRepository locationRepository, LocationService locationService) {
 		this.locationRepository = locationRepository;
 		this.locationService = locationService;
@@ -35,8 +41,9 @@ public class UpsertLocationController {
 	 * Add a location if the location does not exist in the location repository or
 	 * updates a location if the authenticated user added the location.
 	 * 
-	 * @param locationName The name of the location to add.
-	 * @param location     The location to add.
+	 * @param location The location to add.
+	 * @param response The HTTP servlet response that a location header is added to
+	 *                 if the location was not already stored in the repository.
 	 */
 	// @RolesAllowed is used when the location is deserialized so is not required
 	// here.
@@ -53,7 +60,7 @@ public class UpsertLocationController {
 				throw new LocationUpdateException("A location can only be updated by the user that added it.");
 			}
 		} else {
-			
+
 			locationRepository.save(location);
 			response.setStatus(Constant.CREATED);
 			location.addHeader(response);

@@ -6,6 +6,10 @@ import org.springframework.hateoas.Link;
 import org.springframework.hateoas.UriTemplate;
 import org.springframework.hateoas.server.mvc.BasicLinkBuilder;
 
+/**
+ * An enumberation for HATEOAS weather links.
+ *
+ */
 public enum WeatherLink {
 
 	CLOUDINESS(Constant.CLOUDINESS, MappingConstant.LOCATION_CLOUDINESS),
@@ -28,6 +32,13 @@ public enum WeatherLink {
 		this.propertyMapping = propertyMapping;
 	}
 
+	/**
+	 * Creates a link using the current mapping using the specified location
+	 * name. 
+	 * 
+	 * @param name The location name.
+	 * @return The link created.
+	 */
 	public Link createLink(String name) {
 
 		String baseUri = BasicLinkBuilder.linkToCurrentMapping().toString();

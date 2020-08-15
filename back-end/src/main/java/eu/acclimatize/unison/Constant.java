@@ -18,27 +18,27 @@ public class Constant {
 	}
 
 	/**
-	 * The link property name for cloudiness.
+	 * The link name and mapping suffix for cloudiness.
 	 */
 	public static final String CLOUDINESS = "cloudiness";
 
 	/**
-	 * The link property name for cloud level.
+	 * The link name and mapping suffix for cloud level.
 	 */
 	public static final String CLOUD_LEVEL = "cloudLevel";
 
 	/**
-	 * The link property name for dew point.
+	 * The link name and mapping suffix for dew point.
 	 */
 	public static final String DEW_POINT = "dewPoint";
 
 	/**
-	 * The link property name for fog.
+	 * The link name and mapping suffix for fog.
 	 */
 	public static final String FOG = "fog";
 
 	/**
-	 * The link property name for humidity.
+	 * The link name and mapping suffix for humidity.
 	 */
 	public static final String HUMIDITY = "humidity";
 
@@ -48,22 +48,22 @@ public class Constant {
 	public static final String PRECIPITATION = "precipitation";
 
 	/**
-	 * The link property name for pressure.
+	 * The link name and mapping suffix for pressure.
 	 */
 	public static final String PRESSURE = "pressure";
 
 	/**
-	 * The link property name for temperature.
+	 * The link name and mapping suffix for temperature.
 	 */
 	public static final String TEMPERATURE = "temperature";
 
 	/**
-	 * The link property name for wind direction.
+	 * The link name and mapping suffix for wind direction.
 	 */
 	public static final String WIND_DIRECTION = "windDirection";
 
 	/**
-	 * The link property name for wind speed.
+	 * The link name and mapping suffix for wind speed.
 	 */
 	public static final String WIND_SPEED = "windSpeed";
 
@@ -72,14 +72,23 @@ public class Constant {
 	 */
 	public static final String USER_NAME = "userName";
 
+	/**
+	 * The link name and mapping suffix for a user.
+	 */
 	public static final String USER = "user";
 
+	/**
+	 * The mapping suffix and file name (without extension) for the index.
+	 */
 	public static final String INDEX = "index";
 
+	/**
+	 * The mapping suffix for contains.
+	 */
 	public static final String CONTAINS = "contains";
 
 	/**
-	 * 
+	 * The link name and mapping suffix for the location collection.
 	 */
 	public static final String LOCATION_COLLECTION = "locationCollection";
 
@@ -165,8 +174,14 @@ public class Constant {
 	 */
 	public static final String REPLACE_ITEM = "#current" + HAS_OWNER_AUTH + " and #updated" + HAS_OWNER_AUTH;
 
+	/**
+	 * The created HTTP status code.
+	 */
 	public static final int CREATED = HttpStatus.CREATED.value();
 
+	/**
+	 * The HTTP location header name.
+	 */
 	public static final String LOCATION_HEADER = "Location";
 
 }

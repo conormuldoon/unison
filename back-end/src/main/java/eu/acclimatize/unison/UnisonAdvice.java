@@ -27,6 +27,11 @@ public class UnisonAdvice{
 
 	private Logger logger;
 
+	/**
+	 * Creates an instance of UnisonAdvice.
+	 * 
+	 * @param logger Used for logging exception messages.
+	 */
 	public UnisonAdvice(Logger logger) {
 		this.logger = logger;
 	}
@@ -38,9 +43,10 @@ public class UnisonAdvice{
 	}
 
 	/**
+	 * Used for handling location not found exceptions.
 	 * 
-	 * 
-	 * @return
+	 * @param exception The exception thrown.
+	 * @return The exception message.
 	 */
 	@ResponseBody
 	@ExceptionHandler(LocationNotFoundException.class)
@@ -49,13 +55,25 @@ public class UnisonAdvice{
 		return handle(exception);
 	}
 
+	/**
+	 * Used for handling deserialization exceptions thrown for location data.
+	 * 
+	 * @param exception The exception thrown.
+	 * @return The exception message.
+	 */
 	@ResponseBody
 	@ExceptionHandler(DeserializationException.class)
 	@ResponseStatus(HttpStatus.BAD_REQUEST)
-	public String locationDeserializationHandler(HarvestParseException exception) {
+	public String locationDeserializationHandler(DeserializationException exception) {
 		return exception.getMessage();
 	}
 
+	/**
+	 * Used for handling location update exceptions.
+	 * 
+	 * @param exception The exception thrown.
+	 * @return The exception message.
+	 */
 	@ResponseBody
 	@ExceptionHandler(LocationUpdateException.class)
 	@ResponseStatus(HttpStatus.FORBIDDEN)
@@ -63,6 +81,12 @@ public class UnisonAdvice{
 		return exception.getMessage();
 	}
 
+	/**
+	 * Used for handling user update exceptions.
+	 * 
+	 * @param exception The exception thrown.
+	 * @return The exception message.
+	 */
 	@ResponseBody
 	@ExceptionHandler(UserUpdateException.class)
 	@ResponseStatus(HttpStatus.FORBIDDEN)
@@ -70,6 +94,12 @@ public class UnisonAdvice{
 		return exception.getMessage();
 	}
 
+	/**
+	 * Used for handling exceptions thrown when parsing harvested data.
+	 * 
+	 * @param exception The exception thrown.
+	 * @return The exception message.
+	 */
 	@ResponseBody
 	@ExceptionHandler(HarvestParseException.class)
 	@ResponseStatus(HttpStatus.BAD_GATEWAY)
@@ -77,6 +107,12 @@ public class UnisonAdvice{
 		return handle(exception);
 	}
 
+	/**
+	 * Used for handling document not found exceptions thrown when harvesting data.
+	 * 
+	 * @param exception The exception thrown.
+	 * @return The exception message.
+	 */
 	@ResponseBody
 	@ExceptionHandler(DocumentNotFoundException.class)
 	@ResponseStatus(HttpStatus.BAD_GATEWAY)
@@ -84,6 +120,12 @@ public class UnisonAdvice{
 		return exception.getMessage();
 	}
 	
+	/**
+	 * Used for handling exceptions thrown when deserializing user data.
+	 * 
+	 * @param exception The exception thrown.
+	 * @return The exception message.
+	 */
 	@ResponseBody
 	@ExceptionHandler(DeserializationUserException.class)
 	@ResponseStatus(HttpStatus.UNAUTHORIZED)

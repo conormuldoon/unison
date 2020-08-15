@@ -55,6 +55,14 @@ public class UserInformation implements OwnedItem, Serializable {
 
 	}
 
+	/**
+	 * Finds the currently stored user information.
+	 * 
+	 * @param userRepository The repository where user information is stored.
+	 * @return An optional of UserInformation if the user name is present in the
+	 *         repository or an empty optional otherwise.
+	 * 
+	 */
 	public Optional<UserInformation> findCurrent(UserRepository userRepository) {
 		return userRepository.findById(userName);
 	}
@@ -64,6 +72,12 @@ public class UserInformation implements OwnedItem, Serializable {
 		return userName.equals(ownerName);
 	}
 
+	/**
+	 * Used to add a location header to the HTTP servlet response when new user
+	 * information has been stored.
+	 * 
+	 * @param response The response the header is added to.
+	 */
 	public void addHeader(HttpServletResponse response) {
 		String baseUri = BasicLinkBuilder.linkToCurrentMapping().toString();
 		UriTemplate uriTemplate = UriTemplate.of(baseUri + MAPPING);

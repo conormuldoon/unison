@@ -40,10 +40,6 @@ public class DeleteLocationController {
 	 * authenticated user added the location.
 	 * 
 	 * @param locationName The name of the location to delete.
-	 * @return The {@value eu.acclimatize.unison.ResponseConstant#FAILURE} value if
-	 *         failed to delete the location or the
-	 *         {@value eu.acclimatize.unison.ResponseConstant#SUCCESS} value if the
-	 *         location was successfully removed.
 	 */
 	@RolesAllowed(Constant.ROLL_USER)
 	@DeleteMapping(MappingConstant.SPECIFIC_LOCATION)

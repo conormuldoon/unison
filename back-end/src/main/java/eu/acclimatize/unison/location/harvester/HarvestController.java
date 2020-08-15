@@ -28,7 +28,10 @@ public class HarvestController {
 	/**
 	 * Creates an instance of HarvestController.
 	 * 
-	 *
+	 * 
+	 * @param harvesterService   The service used to fetch and store data for the
+	 *                           location.
+	 * @param locationRepository The repository where locations are stored.
 	 */
 	public HarvestController(HarvesterService harvesterService, LocationRepository locationRepository) {
 
@@ -37,6 +40,20 @@ public class HarvestController {
 
 	}
 
+	/**
+	 * Harvests data for a specific location. Only the user that added the location
+	 * can asynchronously trigger a harvest for the location.
+	 * 
+	 * @param locationName The name of the location.
+	 * 
+	 *                     * @throws HarvestParseException Thrown if there was a SAX
+	 *                     exception when parsing.
+	 * @throws HarvestRequestException   Thrown if there was an I/O exception when
+	 *                                   connecting to the URI.
+	 * @throws DocumentNotFoundException Thrown if there was no XML document found
+	 *                                   at the URI.
+	 * 
+	 */
 	@RolesAllowed(Constant.ROLL_USER)
 	@PostMapping(MappingConstant.SPECIFIC_LOCATION)
 	public void harvest(@PathVariable(Constant.LOCATION_NAME) String locationName)

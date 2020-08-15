@@ -1,5 +1,5 @@
 # Unison
-Unison enables (HARMONIE-AROME) numerical weather forecast data from meteorological services to be tracked and visualised through a web interface and historical data to be accessed via an API. The version of the code in this repository (deployed at https://aqua.ucd.ie/unison/) has been configured for use with Met Éireann's model (coverage of Ireland and the UK), but Unison can also be used with the Norwegian Meteorological Institute's API or other APIs that conform to the same schema. The service has been developed using Spring Boot, JPA, and React and can be configured for use with either an embedded GeoDB geospatial database or Postgres/PostGIS for a production environment.
+Unison enables (HARMONIE-AROME) numerical weather forecast data from meteorological services to be tracked and visualised through a web interface and historical data to be accessed via an API. The version of the code in this repository (deployed at https://aqua.ucd.ie/unison/) has been configured for use with Met Éireann's model (coverage of Ireland and the UK), but Unison can also be used with the Norwegian Meteorological Institute's endpoint or other endpoints that conform to the same schema. The service has been developed using Spring Boot, JPA, and React and can be configured for use with either an embedded GeoDB geospatial database or Postgres/PostGIS for a production environment.
 
 ## Documentation
 See the [Javadoc](https://conormuldoon.github.io/unison/docs/back-end/) for a description of the Java classes for the back-end or the [JSDoc](https://conormuldoon.github.io/unison/docs/front-end/) for an overview of the React components.
@@ -93,7 +93,7 @@ It is recommended that the `spring.datasource.password` property be changed to a
 
 ## Changing the model
 
-To change the model, edit the (HARMONIE-AROME) API URI `api.uri` and the associated time zone `api.timezone` properties in the `back-end/src/main/resources/application.properties` file and restart the server. Alternatively, if running a packaged version of the application, override the `api.uri` and `api.timezone` properties using Java system properties or the `--api.uri` and `--api.timezone` arguments for main.
+To change the model, edit the (HARMONIE-AROME) endpoint URI `api.uri` and the associated time zone `api.timezone` properties in the `back-end/src/main/resources/application.properties` file and restart the server. Alternatively, if running a packaged version of the application, override the `api.uri` and `api.timezone` properties using Java system properties or the `--api.uri` and `--api.timezone` arguments for main.
 
 ## Acknowlegements
 Unison has been developed as part of the Acclimatize Project (https://www.acclimatize.eu/), which is partly funded under the EU Ireland Wales European Territorial Co-operation (ETC) programme.

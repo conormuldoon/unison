@@ -14,7 +14,7 @@ import eu.acclimatize.unison.location.Location;
 
 /**
  * 
- * A service that obtains XML weather data documents from a HARMONIE-AROME API
+ * A service that obtains XML weather data documents from a HARMONIE-AROME endpoint
  * for the coordinates of locations.
  *
  */
@@ -27,8 +27,8 @@ public class DocumentRequestService {
 	/**
 	 * Creates an instance of DocumentRequestService.
 	 * 
-	 * @param documentBuilder A builder used to parse the XML document.
-	 * @param uri             The URL template for a HARMONIE-AROME API specified by
+	 * @param documentBuilder
+	 * @param template The template for a HARMONIE-AROME endpoint specified by
 	 *                        app.uri in the application properties file.
 	 */
 	public DocumentRequestService(DocumentBuilder documentBuilder, @Value("${api.uri}") String template) {
@@ -41,10 +41,12 @@ public class DocumentRequestService {
 	 * Obtains an XML weather document document.
 	 * 
 	 * @param location The location used in obtaining data.
-	 * @return
-	 * @throws HarvestParseException
-	 * @throws HarvestRequestException
-	 * @throws DocumentNotFoundException
+	 * @return The requested document.
+	 * 
+	 * @throws HarvestParseException Thrown if there was a SAX exception when parsing.
+	 * @throws HarvestRequestException Thrown if there was an I/O exception when connecting to the URI.
+	 * @throws DocumentNotFoundException Thrown if there was no XML document found at the URI.
+	 * 
 	 */
 	public Document documentForLocation(Location location)
 			throws HarvestRequestException, DocumentNotFoundException, HarvestParseException {

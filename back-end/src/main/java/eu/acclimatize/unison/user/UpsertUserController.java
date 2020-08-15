@@ -39,8 +39,11 @@ public class UpsertUserController {
 	 * users with the same user name. The user can only update their own
 	 * information.
 	 * 
-	 * @param principal The user name for the update.
-	 * @param password  The updated user information.
+	 * 
+	 * @param userInformation The new user information.
+	 * @param response        The response that a location header is added to if a
+	 *                        new user was stored rather than an existing user
+	 *                        updated.
 	 */
 	// The roles allowed annotation is not required here as MappingConstant.USER is
 	// configured to require authorization in the UnisonSecurityConfig
@@ -54,7 +57,7 @@ public class UpsertUserController {
 			try {
 				userService.replace(optCurrent.get(), userInformation);
 			} catch (AccessDeniedException e) {
-				
+
 				throw new UserUpdateException(
 						"Users may only update their own information. The name of the user in the response body"
 								+ " must match that of the authenticated user.");

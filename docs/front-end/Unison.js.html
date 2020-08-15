@@ -94,11 +94,22 @@ function Unison(props) {
   const [curLoc, setCurLoc] = useState(undefined);
   const [curVar, setCurVar] = useState(undefined);
   const [varOpt, setVarOpt] = useState(undefined);
-  const [featureProperties, setFeatureProperties] = useState(undefined);
-
+  const [locationMap, setLocationMap] = useState(undefined);
+  const [collectionModel, setCollectionModel] = useState(undefined);
 
   const obtainData = () => {
-    let active = true;
+
+    class ResponseError extends Error {
+      constructor(message, status) {
+        super(message);
+        this.status = status;
+      }
+    }
+
+    function checkResponse(response, endpoint) {
+      if (!response.ok)
+        throw new ResponseError('Bad response for ' + endpoint, response.status);
+    }
 
     async function requestFeatureCollection(uri) {
       const response = await fetch(uri, {
@@ -108,38 +119,37 @@ function Unison(props) {
         })
       });
 
-      if (active &amp;&amp; response.ok) {
-        const fc = await response.json();
 
-        if (active) {
-          const locationArray = fc.features;
-          const n = locationArray.length;
+      checkResponse(response, uri);
 
-          const newOption = [];
-          const newMarker = [];
+      const fc = await response.json();
 
-          for (let i = 0; i &lt; n; i++) {
-            newOption.push(locationArray[i].properties.name);
-            let pos = [locationArray[i].geometry.coordinates[1], locationArray[i].geometry.coordinates[0]];
+      const locationArray = fc.features;
+      const n = locationArray.length;
 
-            const properties = locationArray[i].properties;
-            newMarker.push({ name: properties.name, position: pos });
+      const newOption = [];
+      const newMarker = [];
 
-          }
+      for (let i = 0; i &lt; n; i++) {
+        newOption.push(locationArray[i].properties.name);
+        let pos = [locationArray[i].geometry.coordinates[1], locationArray[i].geometry.coordinates[0]];
 
-          if (n > 0) {
-
-            setOption(newOption);
-            setMarker(newMarker);
-            return true;
-
-          }
-        }
-
+        const properties = locationArray[i].properties;
+        newMarker.push({ name: properties.name, position: pos });
 
       }
 
-      return false;
+      if (n > 0) {
+
+        setOption(newOption);
+        setMarker(newMarker);
+
+
+      } else {
+        setOption(undefined);
+        setMarker(undefined);
+      }
+
 
     }
 
@@ -150,99 +160,118 @@ function Unison(props) {
       })
     }
 
+    function clearCurrent() {
+      setCurLoc(undefined);
+      setCurVar(undefined);
+      setVarOpt(undefined);
+      setLocationMap(undefined);
+
+    }
+
     async function requestCollectionHAL(uri) {
 
       const response = await fetch(uri, halGetHeader);
 
-      if (active &amp;&amp; response.ok) {
-        const model = await response.json();
-        if (active) {
-          const map = new Map();
-          if (model._embedded) {
-            const list = model._embedded.locationModelList;
-            const n = list.length;
-            for (let i = 0; i &lt; n; i++) {
-              map.set(list[i].name, list[i]);
+
+      checkResponse(response, uri);
+
+      const model = await response.json();
+
+
+      setCollectionModel(model);
+
+      if (model._embedded) {
+        const list = model._embedded.locationModelList;
+        const n = list.length;
+        const map = new Map();
+        for (let i = 0; i &lt; n; i++) {
+          map.set(list[i].name, list[i]);
+        }
+
+        setLocationMap(map);
+
+        const varOpt = [];
+
+        if (n > 0) {
+
+          for (const rel in list[0]._links) {
+            if (SELF === rel) {
+              continue;
             }
 
-            const locationData = await requestFeatureCollection(uri);
-            if (active &amp;&amp; locationData) {
-              setFeatureProperties(map);
-
-              const varOpt = [];
-
-              if (n > 0) {
-
-                for (const rel in list[0]._links) {
-                  if (SELF === rel) {
-                    continue;
-                  }
-
-                  const s = rel.charAt(0).toUpperCase() + rel.substring(1);
-                  let optName = '';
-                  let sw = 0;
-                  for (let i = 1; i &lt; s.length; i++) {
-                    const c = s.charAt(i);
-                    if (c >= 'A' &amp;&amp; c &lt;= 'Z') {
-                      optName += s.substring(sw, i) + ' ';
-                      sw = i;
-                    }
-                  }
-                  optName += s.substring(sw);
-                  varOpt.push(optName);
-                }
+            const s = rel.charAt(0).toUpperCase() + rel.substring(1);
+            let optName = '';
+            let sw = 0;
+            for (let i = 1; i &lt; s.length; i++) {
+              const c = s.charAt(i);
+              if (c >= 'A' &amp;&amp; c &lt;= 'Z') {
+                optName += s.substring(sw, i) + ' ';
+                sw = i;
               }
-              if (varOpt.length > 0) {
-                setCurLoc(list[0]);
-                setCurVar(varOpt[0]);
-                setVarOpt(varOpt);
-                return;
-
-              } else {
-                alert("No weather data is associated with the collection.")
-              }
-
-
             }
+            optName += s.substring(sw);
+            varOpt.push(optName);
           }
         }
+        if (varOpt.length > 0) {
+          setCurLoc(list[0]);
+          setCurVar(varOpt[0]);
+          setVarOpt(varOpt);
+          return;
+
+        } else {
+
+          clearCurrent();
+          alert("No weather data is associated with the collection.")
+        }
+
+
+      } else {
+        clearCurrent();
       }
 
-      setCurVar(undefined);
-      setVarOpt(undefined);
-      setOption(undefined);
-      setMarker(undefined);
-      setCurLoc(undefined);
+
     }
 
     async function requestModel() {
 
-      const response = await fetch('/', halGetHeader);
+      const root = '/';
+      const response = await fetch(root, halGetHeader);
 
-      if (active &amp;&amp; response.ok) {
-        const model = await response.json();
+      checkResponse(response, root);
 
-        if (active)
-          requestCollectionHAL(model._links.locationCollection.href);
-      } else if (response.status === HttpStatus.GATEWAY_TIMEOUT) {
-        problemConnecting();
-      }
+
+      const model = await response.json();
+
+      const uri = model._links.locationCollection.href;
+      await requestCollectionHAL(uri);
+      await requestFeatureCollection(uri);
+
+
     }
 
-    requestModel();
+    try {
+      requestModel();
 
-    const cancel = () => active = false;
-    return cancel;
+    } catch (e) {
+      if (e instanceof ResponseError) {
+        problemConnecting();
+      }
+      console.log(e);
+
+    }
+
+    
   };
 
   useEffect(() => {
 
-    return obtainData();
+    obtainData();
   }, []);
 
 
   const updateCurLoc = (locationName) => {
-    setCurLoc(featureProperties.get(locationName));
+    setCurLoc(locationMap.get(locationName));
   }
 
   const markerClicked = (location) => {
@@ -313,7 +342,7 @@ function Unison(props) {
 
       &lt;/div>
 
-      &lt;LeafletMap marker={marker} curVar={curVar} featureProperties={featureProperties}
+      &lt;LeafletMap marker={marker} curVar={curVar} featureProperties={locationMap}
         markerCallback={markerClicked} fromDate={fromDate} toDate={toDate}
         mapCentre={props.mapCentre} linksProperty={curLoc} />
 
@@ -361,7 +390,7 @@ function Unison(props) {
             {curLoc &amp;&amp; curVar &amp;&amp; &lt;div className='pLeft'> &lt;button onClick={handleCSV}>CSV&lt;/button> &lt;/div>}
           &lt;/div>
 
-          &lt;ARLocationComponent obtainData={obtainData} linksProperty={curLoc} />
+          &lt;ARLocationComponent obtainData={obtainData} linksProperty={curLoc} collectionModel={collectionModel} />
 
         &lt;/center>
 
@@ -407,7 +436,7 @@ export default Unison;
 
 <footer class="footer">
     <div class="content has-text-centered">
-        <p>Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.6.3</a> on Thu May 28 2020 20:21:36 GMT+0100 (Irish Standard Time)</p>
+        <p>Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.6.3</a> on Sat Aug 15 2020 19:03:26 GMT+0100 (Irish Standard Time)</p>
         <p class="sidebar-created-by">
             <a href="https://github.com/SoftwareBrothers/better-docs" target="_blank">BetterDocs theme</a> provided with <i class="fas fa-heart"></i> by 
             <a href="http://softwarebrothers.co" target="_blank">SoftwareBrothers - JavaScript Development Agency</a>

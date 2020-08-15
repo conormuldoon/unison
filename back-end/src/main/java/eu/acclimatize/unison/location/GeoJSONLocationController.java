@@ -21,9 +21,8 @@ public class GeoJSONLocationController {
 	/**
 	 * Creates and instance of GeoJSONLocationController.
 	 * 
-	 * @param locationRepository The repository where the location data is stored.
-	 * @param sort               Determines that order of the features in the
-	 *                           feature collection.
+	 * 
+	 * @param locationService The service that is used to obtain a list of locations.
 	 */
 	public GeoJSONLocationController(LocationService locationService) {
 		this.locationService = locationService;

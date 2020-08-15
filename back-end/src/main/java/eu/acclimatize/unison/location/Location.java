@@ -67,6 +67,13 @@ public class Location implements OwnedItem, Serializable {
 
 	}
 
+	/**
+	 * Finds the stored location data.
+	 * 
+	 * @param locationRepository The repository that stored location data.
+	 * @return An optional of the location if a location for the location name has
+	 *         been stored, or an empty optional otherwise.
+	 */
 	public Optional<Location> findCurrent(LocationRepository locationRepository) {
 		return locationRepository.findById(name);
 	}
@@ -76,6 +83,15 @@ public class Location implements OwnedItem, Serializable {
 		return user.hasOwner(ownerName);
 	}
 
+	/**
+	 * Replaces the {latitude} and {longitude} placeholders with the respective
+	 * values.
+	 * 
+	 * @param template The template containing the placeholders.
+	 *                 http://metwdb-openaccess.ichec.ie uses a semicolon delimiter
+	 *                 rather than an ampersand so can't use a UriTemplate.
+	 * @return The URI with the placeholders replaced.
+	 */
 	public String replaceVariables(String template) {
 
 		// http://metwdb-openaccess.ichec.ie uses a semicolon delimiter rather than an
@@ -88,6 +104,12 @@ public class Location implements OwnedItem, Serializable {
 		return linkTo(methodOn(HALLocationController.class).location(name));
 	}
 
+	/**
+	 * Creates a representational model using the given links.
+	 * 
+	 * @param weatherLink The links used in creating the model.
+	 * @return A HAL model for the location.
+	 */
 	public LocationModel createModel(WeatherLink[] weatherLink) {
 		List<Link> list = new ArrayList<>();
 		list.add(createBuilder().withSelfRel());
@@ -98,6 +120,11 @@ public class Location implements OwnedItem, Serializable {
 		return new LocationModel(list, name);
 	}
 
+	/**
+	 * Adds the location header to the HTTP servlet response.
+	 * 
+	 * @param response The response the header is added to.
+	 */
 	public void addHeader(HttpServletResponse response) {
 
 		response.setHeader(Constant.LOCATION_HEADER, createBuilder().toString());
@@ -107,7 +134,6 @@ public class Location implements OwnedItem, Serializable {
 	 * Serializes the location in a GeoJSON format.
 	 * 
 	 * @param gen             The generator object written to.
-	 * @param weatherProperty
 	 * @throws IOException Thrown if there is an I/O error while serializing.
 	 */
 	public void geoJSONSerialize(JsonGenerator gen) throws IOException {

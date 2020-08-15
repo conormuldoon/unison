@@ -82,8 +82,14 @@ public class MappingConstant {
 	 */
 	public static final String USER = "/" + Constant.USER;
 
+	/**
+	 * The mapping for the index.
+	 */
 	public static final String INDEX = "/" + Constant.INDEX;
 
+	/**
+	 * The mapping for checking whether a location collection contains a location.
+	 */
 	public static final String CONTAINS = LOCATION_COLLECTION + "/" + Constant.CONTAINS;
 
 }

@@ -39,9 +39,15 @@ public class LocationConfig {
 
 	}
 
-	@Bean
 	/**
-	 * Properties used in the GeoJSON representation of the locations.
+	 * Links used for HAL representational models of locations and the location
+	 * collection.
+	 * 
+	 * * @param fogSupported Determines whether the fog link should be included in
+	 * the returned array.
+	 * 
+	 * @return The weather links to use in the models.
+	 * 
 	 */
 	public WeatherLink[] weatherProperty(@Value("${api.fog}") Boolean fogSupported) {
 

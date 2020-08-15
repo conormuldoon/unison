@@ -1,6 +1,5 @@
 package eu.acclimatize.unison.location.harvester;
 
-import java.io.IOException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -33,7 +32,7 @@ import eu.acclimatize.unison.location.Location;
 import eu.acclimatize.unison.location.LocationRepository;
 
 /**
- * A service that harvest data from a HARMONIE-AROME API.
+ * A service that harvest data from a HARMONIE-AROME endpoint.
  */
 @Service
 public class HarvesterService {
@@ -146,13 +145,12 @@ public class HarvesterService {
 	 * Requests and stores weather data from a HARMONIE-AROME API for a given
 	 * location.
 	 * 
-	 * @param location The location to obtain data for.
-	 * @return True if the data was received and stored, false otherwise.
-	 * @throws HarvestParseException     Thrown when the generated XML for the
-	 *                                   location was not found.
-	 * @throws HarvestRequestException
-	 * @throws DocumentNotFoundException
-	 * @throws IOException
+	 * @param ownedItem The location to obtain data for.
+	 * 
+	 * @throws HarvestParseException Thrown if there was a SAX exception when parsing.
+	 * @throws HarvestRequestException Thrown if there was an I/O exception when connecting to the URI.
+	 * @throws DocumentNotFoundException Thrown if there was no XML document found at the URI.
+	 * 
 	 */
 	@PreAuthorize(Constant.OWNED_ITEM)
 	public void fetchAndStore(Location ownedItem)

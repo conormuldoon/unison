@@ -21,7 +21,7 @@ import eu.acclimatize.unison.WeatherLink;
 /**
  * 
  * A controller to obtain an ordered list of location names and coordinates
- * sorted by location name and formatted as a GeoJSON feature collection.
+ * sorted by location name and represented in a HAL format.
  *
  */
 @RestController
@@ -31,11 +31,11 @@ public class HALLocationController {
 	private WeatherLink[] weatherLink;
 
 	/**
-	 * Creates and instance of GeoJSONLocationController.
+	 * Creates and instance of HALLocationController.
 	 * 
-	 * @param locationRepository The repository where the location data is stored.
-	 * @param sort               Determines that order of the features in the
-	 *                           feature collection.
+	 * @param locationService The service used to obtain the list of locations.
+	 * @param weatherLink     The HAL weather links that are used in the
+	 *                        representational model.
 	 */
 	public HALLocationController(LocationService locationService, WeatherLink[] weatherLink) {
 		this.locationService = locationService;
@@ -43,10 +43,10 @@ public class HALLocationController {
 	}
 
 	/**
-	 * Obtains a feature collection where the features represent a sorted list of
-	 * all coordinates in the spatial database.
+	 * Obtains a representational model of a sorted list of all locations in the
+	 * spatial database.
 	 * 
-	 * @return A list of Jackson annotated coordinates.
+	 * @return A representational model of stored locations.
 	 */
 	@GetMapping(value = MappingConstant.LOCATION_COLLECTION, produces = MediaTypes.HAL_JSON_VALUE)
 	public CollectionModel<LocationModel> createModel() {
@@ -68,10 +68,10 @@ public class HALLocationController {
 	}
 
 	/**
-	 * Obtains the location for the specified location name.
+	 * Obtains the location model for the specified location name.
 	 * 
 	 * @param locationName The name of the location.
-	 * @return The location obtained from the repository.
+	 * @return The HAL representational model.
 	 */
 	@GetMapping(value = MappingConstant.SPECIFIC_LOCATION, produces = MediaTypes.HAL_JSON_VALUE)
 	public LocationModel location(@PathVariable(Constant.LOCATION_NAME) String locationName) {
@@ -80,6 +80,5 @@ public class HALLocationController {
 
 		return location.createModel(weatherLink);
 	}
-	
 
 }

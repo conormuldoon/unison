@@ -12,11 +12,20 @@ import com.fasterxml.jackson.core.JsonToken;
 import com.fasterxml.jackson.databind.DeserializationContext;
 import com.fasterxml.jackson.databind.JsonDeserializer;
 
+/**
+ * A component deserializing GeoJSON feature collections.
+ *
+ */
 @JsonComponent
 public class FeatureCollectionDeserializer extends JsonDeserializer<FeatureCollection> {
 
 	private LocationDeserializer locationDeserializer;
 
+	/**
+	 * Creates an instance of FeatureCollectionDeserializer.
+	 * 
+	 * @param locationDeserializer The deserializer used for individual locations.
+	 */
 	public FeatureCollectionDeserializer(LocationDeserializer locationDeserializer) {
 
 		this.locationDeserializer = locationDeserializer;

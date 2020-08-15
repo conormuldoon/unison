@@ -15,11 +15,20 @@ import org.springframework.web.servlet.ModelAndView;
 
 import eu.acclimatize.unison.location.HALLocationController;
 
+/** 
+ * 
+ * A controller class for the root or index mappings. 
+ */
 @RestController
 public class IndexHALController {
 
 	private static final String EXTENSION = ".html";
 
+	/**
+	 * Creates a HAL representation for the root.
+	 * 
+	 * @return A representational model for Unison.
+	 */
 	@GetMapping(value = "/", produces = MediaTypes.HAL_JSON_VALUE)
 	public UnisonModel createModel() {
 
@@ -36,18 +45,33 @@ public class IndexHALController {
 		return new UnisonModel(list);
 	}
 
+	/**
+	 * Creates a HAL representation for the index.
+	 * 
+	 * @return A representational model for Unison.
+	 */
 	@GetMapping(value = MappingConstant.INDEX, produces = MediaTypes.HAL_JSON_VALUE)
 	public UnisonModel indexHAL() {
 		return createModel();
 	}
 
+	/**
+	 * Maps root to the index HTML file.
+	 * 
+	 * @return A model and view of the index file.
+	 */
 	@GetMapping("/")
 	public ModelAndView rootHTML() {
 
-		return new ModelAndView(MappingConstant.INDEX + EXTENSION);
+		return indexHTML();
 
 	}
 
+	/**
+	 * Map index to the index HTML file. 
+	 * 
+	 * @return A model and view of the index file.
+	 */
 	@GetMapping(MappingConstant.INDEX)
 	public ModelAndView indexHTML() {
 

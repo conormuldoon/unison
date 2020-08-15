@@ -17,7 +17,7 @@ public interface HourlyWeatherRepository extends CrudRepository<HourlyWeather, I
 	/**
 	 * Deletes the hourly weather data for a given location.
 	 * 
-	 * @param name The name of the location.
+	 * @param location The location to delete data for.
 	 */
 	@Modifying
 	@Query("delete from HourlyWeather hw where hw.key.location=:location")

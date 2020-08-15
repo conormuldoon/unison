@@ -22,7 +22,7 @@ public class FeatureCollection{
 	/**
 	 * Creates an instance of FeatureCollection.
 	 * 
-	 * @param locationList A list of features.
+	 * @param features The locations within the collection.
 	 */
 	public FeatureCollection(Iterable<Location> features) {
 		this.features = features;
@@ -32,7 +32,6 @@ public class FeatureCollection{
 	 * Serializes the feature collection in a GeoJSON format.
 	 * 
 	 * @param gen             Used in the serialization process.
-	 * @param weatherProperty
 	 * @throws IOException Thrown if there if there is an I/O error when
 	 *                     serializing.
 	 */
