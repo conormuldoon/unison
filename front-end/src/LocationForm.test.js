@@ -2,7 +2,6 @@ import fetchMock from 'fetch-mock';
 import React from 'react';
 import ReactDOM from 'react-dom';
 import { fireEvent, render } from "react-testing-library";
-import { API } from './Constant';
 import LocationForm from './LocationForm';
 import { locationPutObject } from './Util';
 import HttpStatus from 'http-status-codes';
