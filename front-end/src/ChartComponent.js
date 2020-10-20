@@ -18,20 +18,20 @@ const PREVAL = "precipitation.value";
  * @component
  * 
  */
-function ChartComponent(props) {
+function ChartComponent({ curVar, minMax, index, data, zoomDomain, handleZoom }) {
 
   let yVal;
   let yLabel;
 
 
   // 'Precipitation','Humidity','Wind Direction','Wind Speed','Cloudiness','Cloud Level','Dew Point','Pressure','Temperature'
-  const variRequest = varMapping(props.curVar);
+  const variRequest = varMapping(curVar);
 
   if (variRequest === "precipitation") {
-    if (props.minMax) {
-      if (props.index === 0) {
+    if (minMax) {
+      if (index === 0) {
         yVal = "precipitation.minvalue";
-      } else if (props.index === 1) {
+      } else if (index === 1) {
         yVal = PREVAL;
       } else {
         yVal = "precipitation.maxvalue";
@@ -57,9 +57,9 @@ function ChartComponent(props) {
     yVal = variRequest;
     yLabel = PERCENT;
   } else if (variRequest === "cloudLevel") {
-    if (props.index === 0) {
+    if (index === 0) {
       yVal = "cloud.low";
-    } else if (props.index === 1) {
+    } else if (index === 1) {
       yVal = "cloud.medium";
     } else {
       yVal = "cloud.high";
@@ -77,7 +77,7 @@ function ChartComponent(props) {
   }
 
 
-  if (has(props.data[0], yVal)) {
+  if (has(data[0], yVal)) {
 
     return (
 
@@ -88,8 +88,8 @@ function ChartComponent(props) {
         containerComponent={
           <VictoryZoomContainer
             zoomDimension="x"
-            zoomDomain={props.zoomDomain}
-            onZoomDomainChange={props.handleZoom}
+            zoomDomain={zoomDomain}
+            onZoomDomainChange={handleZoom}
           />
         }
       >
@@ -98,7 +98,7 @@ function ChartComponent(props) {
             data: { stroke: "#c43a31" },
             parent: { border: "1px solid #ccc" }
           }}
-          data={props.data}
+          data={data}
           x="date"
           y={yVal}
         />

@@ -76,7 +76,7 @@ it('toggles add location correctly', () => {
   const location = { name: 'UCD', links: { self: '/location/UCD' } };
   const obtainData = () => { };
   const { getByTestId, getByText } = render(<ARLocationComponent createLocation={createLocationFactory(obtainData, undefined)}
-    createRemove={createRemoveFactory(obtainData, linksProperty)} />);
+    createRemove={createRemoveFactory(obtainData, linksProperty._links.self.href, linksProperty.name)} />);
 
   expect(getByTestId('lf-button')).toHaveTextContent('Add Location');
   expect(getByTestId('rm-button')).toHaveTextContent('Remove ' + location.name);

@@ -23,15 +23,15 @@ it('renders without crashing', async () => {
 
   const div = document.createElement('div');
 
-  ReactDOM.render(<RemoveComponent location={location} linksProperty={linksProperty}
-    obtainData={() => { }} hideDisplay={() => { }} toggleDisplay={() => { }} display={true} />, div);
+  ReactDOM.render(<RemoveComponent href={linksProperty._links['self'].href} name={linksProperty.name}
+    obtainData={() => { }} hideDisplay={() => { }}  />, div);
   ReactDOM.unmountComponentAtNode(div);
 });
 
 it('mathes snapshot', () => {
 
 
-  const { container } = render(<RemoveComponent display={true} location={location} linksProperty={linksProperty} obtainData={() => { }} hideDisplay={() => { }} toggleDisplay={() => { }} />);
+  const { container } = render(<RemoveComponent name={linksProperty.name} href={linksProperty._links['self'].href} obtainData={() => { }} hideDisplay={() => { }}  />);
 
   expect(container).toMatchSnapshot();
 
@@ -56,7 +56,7 @@ it('handles remove location', async (done) => {
     done();
   };
 
-  const component = <RemoveComponent location={location} display={true} linksProperty={linksProperty} obtainData={obtainData} hideDisplay={hideDisplay} toggleDisplay={() => { }} />;
+  const component = <RemoveComponent name={linksProperty.name} href={linksProperty._links['self'].href} obtainData={obtainData} hideDisplay={hideDisplay}  />;
   const { getByText } = render(component);
 
   fireEvent.click(getByText('Remove ' + location.name));

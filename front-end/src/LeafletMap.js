@@ -4,6 +4,7 @@ import PropTypes from 'prop-types';
 import React, { Component } from 'react';
 import { Map, Marker, TileLayer } from 'react-leaflet';
 import ChartPopup from './ChartPopup';
+import { expandLink } from './Util';
 
 
 
@@ -46,8 +47,10 @@ class LeafletMap extends Component {
 
     this.props.markerCallback(linksProperty.name);
 
-    const popupComponent = <ChartPopup curVar={this.props.curVar} fromDate={this.props.fromDate}
-      toDate={this.props.toDate} closePopup={this.closePopup} linksProperty={linksProperty} />;
+    const uri = expandLink(linksProperty, this.props.curVar, this.props.fromDate, this.props.toDate);
+
+    const popupComponent = <ChartPopup uri={uri} name={linksProperty.name}
+      curVar={this.props.curVar} closePopup={this.closePopup} />;
     this.setState({ popupComponent: popupComponent, dragging: false });
 
 

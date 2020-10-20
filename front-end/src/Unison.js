@@ -318,7 +318,7 @@ function Unison(props) {
           </div>
 
           <ARLocationComponent createLocation={createLocationFactory(obtainData, collectionModel)}
-            createRemove={curLoc ? createRemoveFactory(obtainData, curLoc) : undefined} />
+            createRemove={curLoc ? createRemoveFactory(obtainData, curLoc._links[SELF].href, curLoc.name) : undefined} />
 
         </center>
 

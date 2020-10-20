@@ -21,11 +21,13 @@ export function createLocationFactory(obtainData, collectionModel) {
     }
 }
 
-export function createRemoveFactory(obtainData, linksProperty) {
+export function createRemoveFactory(obtainData, href, name) {
 
-    return function (hideAdd) {
+    return function (hideDisplay) {
         return <RemoveComponent obtainData={obtainData}
-            hideDisplay={hideAdd}
-            linksProperty={linksProperty} />;
+            hideDisplay={hideDisplay}
+            href={href} 
+            name={name}
+            />;
     }
 }

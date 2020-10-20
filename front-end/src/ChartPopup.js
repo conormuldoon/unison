@@ -4,7 +4,7 @@ import { IoMdClose } from "react-icons/io";
 import './App.css';
 import { PRECIP } from './Constant';
 import TabsComponent from './TabsComponent';
-import { expandLink, chartText } from './Util';
+import { chartText } from './Util';
 
 
 const DLEN = 16;
@@ -15,7 +15,7 @@ const DLEN = 16;
  * 
  * @component
  */
-function ChartPopup(props) {
+function ChartPopup({ uri, curVar, name, closePopup }) {
 
   const [data, setData] = useState(undefined);
   const [zoomDomain, setZoomDomain] = useState(undefined);
@@ -27,7 +27,6 @@ function ChartPopup(props) {
 
     async function obtainData() {
 
-      const uri = expandLink(props.linksProperty, props.curVar, props.fromDate, props.toDate);
 
       const response = await fetch(uri, {
         method: 'GET',
@@ -51,7 +50,7 @@ function ChartPopup(props) {
           const fd = dataArray[0].date;
           const td = dataArray[dataArray.length - 1].date;
 
-          if (props.curVar === PRECIP && dataArray[0].precipitation.minvalue !== undefined) {
+          if (curVar === PRECIP && dataArray[0].precipitation.minvalue !== undefined) {
 
             setMinMax(true);
           } else {
@@ -74,24 +73,24 @@ function ChartPopup(props) {
     const cancel = () => active = false;
     return cancel;
 
-  }, [props.linksProperty, props.curVar, props.fromDate, props.toDate]);
+  }, [uri, curVar]);
 
   function handleClick(e) {
     e.stopPropagation();
   }
 
-  const vc = chartText(props.curVar);
+  const vc = chartText(curVar);
 
   return (
     <div id="popupdiv" data-testid='chart-div' onClick={handleClick}>
       <div id="iicon">
-        <IoMdClose onClick={props.closePopup} size={20} color="rgb(192, 57, 43)" />
+        <IoMdClose onClick={closePopup} size={20} color="rgb(192, 57, 43)" />
 
       </div>
       <center>
-        {vc} data from {props.linksProperty.name.trim()}
+        {vc} data from {name.trim()}
 
-        {data && <TabsComponent curVar={props.curVar} data={data} zoomDomain={zoomDomain} minMax={minMax}
+        {data && <TabsComponent curVar={curVar} data={data} zoomDomain={zoomDomain} minMax={minMax}
           setZoomDomain={setZoomDomain} />}
 
       </center>
@@ -102,19 +101,16 @@ function ChartPopup(props) {
 }
 
 ChartPopup.propTypes = {
+
   /** Specifies the weather variable currently selected. */
   curVar: PropTypes.string.isRequired,
-
-  /** Specifies the start date for the data that is to be displayed. */
-  fromDate: PropTypes.string.isRequired,
-
-  /** Specifies the end date for the data that is to be displayed. */
-  toDate: PropTypes.string.isRequired,
 
   /** Called when the close icon is clicked. */
   closePopup: PropTypes.func.isRequired,
 
-  linksProperty: PropTypes.object.isRequired,
+  name: PropTypes.string.isRequired,
+
+  uri: PropTypes.string.isRequired,
 }
 
 export default ChartPopup;

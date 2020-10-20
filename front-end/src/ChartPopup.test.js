@@ -5,6 +5,7 @@ import { render, waitForElement } from "react-testing-library";
 import ChartPopup from './ChartPopup';
 import { PRECIP, CL } from './Constant';
 import { chartText } from './Util';
+import { expandLink } from './Util';
 
 const fromDate = '1/2/2018';
 const toDate = '7/10/2019';
@@ -54,8 +55,10 @@ const location = {
   }
 }
 
+const uri = expandLink(location, 'Precipitation', fromDate, toDate);
+
 const chartPopup = <ChartPopup curVar='Precipitation'
-  fromDate={fromDate} toDate={toDate} closePopup={() => { }} linksProperty={location} />;
+  closePopup={() => { }} uri={uri} name={location.name} />;
 
 const apiRequest = 'end:?fromDate=1%2F2%2F2018&toDate=7%2F10%2F2019';
 
@@ -181,7 +184,9 @@ it('displays text for the selected variable and location', () => {
         }
       }
     }]) {
-      const { getByText } = render(<ChartPopup curVar={vo} linksProperty={loc} fromDate={fromDate} toDate={toDate} closePopup={() => { }} />);
+
+      const uri = expandLink(loc, 'Wind Speed', fromDate, toDate);
+      const { getByText } = render(<ChartPopup curVar={vo} name={loc.name} uri={uri} closePopup={() => { }} />);
 
       getByText(sOpt + ' data from ' + loc.name);
     }
@@ -194,8 +199,7 @@ it('displays text for the selected variable and location', () => {
 it('displays a lower case letter for second word', () => {
 
   fetchMock.get(apiRequest, []);
-
-  const { getByText } = render(<ChartPopup curVar={'Wind Direction'} linksProperty={location} fromDate={fromDate} toDate={toDate}
+  const { getByText } = render(<ChartPopup curVar={'Wind Direction'} name={location.name} uri={location._links.windDirection.href}
     closePopup={() => { }} />);
 
   getByText('Wind direction data from ' + location.name);
