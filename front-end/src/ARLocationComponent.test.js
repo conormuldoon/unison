@@ -3,12 +3,13 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import { fireEvent, render } from "react-testing-library";
 import ARLocationComponent from './ARLocationComponent';
+import { createLocationFactory, createRemoveFactory } from './closureFactory';
 
 it('renders without crashing', async () => {
 
   const div = document.createElement('div');
 
-  ReactDOM.render(<ARLocationComponent obtainData={() => { }} />, div);
+  ReactDOM.render(<ARLocationComponent createLocation={() => { }} />, div);
   ReactDOM.unmountComponentAtNode(div);
 });
 
@@ -16,7 +17,7 @@ it('renders without crashing', async () => {
 it('mathes snapshot', () => {
 
 
-  const { container } = render(<ARLocationComponent obtainData={() => { }} />);
+  const { container } = render(<ARLocationComponent createLocation={createLocationFactory(() => { })} />);
 
   expect(container).toMatchSnapshot();
 
@@ -73,7 +74,10 @@ it('toggles add location correctly', () => {
   confirmSpy.mockImplementation(() => true);
 
   const location = { name: 'UCD', links: { self: '/location/UCD' } };
-  const { getByTestId, getByText } = render(<ARLocationComponent location={location} obtainData={() => { }} linksProperty={linksProperty} />);
+  const obtainData = () => { };
+  const { getByTestId, getByText } = render(<ARLocationComponent createLocation={createLocationFactory(obtainData, undefined)}
+    createRemove={createRemoveFactory(obtainData, linksProperty)} />);
+
   expect(getByTestId('lf-button')).toHaveTextContent('Add Location');
   expect(getByTestId('rm-button')).toHaveTextContent('Remove ' + location.name);
   fireEvent.click(getByText('Add Location'));

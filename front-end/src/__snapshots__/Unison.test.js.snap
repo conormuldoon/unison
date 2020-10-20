@@ -8,16 +8,7 @@ exports[`mathes Unison snapshot 1`] = `
     <div
       id="logos"
     >
-      <center>
-        <img
-          alt=""
-          id="logoitem"
-        />
-        <img
-          alt=""
-          id="logoitem"
-        />
-      </center>
+      <center />
     </div>
     <div
       class="leaflet-container leaflet-grab leaflet-touch-drag"

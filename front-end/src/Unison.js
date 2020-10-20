@@ -7,10 +7,11 @@ import { formatDate } from 'react-day-picker/moment';
 import './App.css';
 import ARLocationComponent from './ARLocationComponent';
 import { FORMAT, SELF } from './Constant';
-import DateSelector from './DateSelector';
-import LeafletMap from './LeafletMap';
+import createSelector from './selectorFactory';
 import { today, tomorrow, expandLink, problemConnecting } from './Util';
 import HttpStatus from 'http-status-codes';
+
+import { createLocationFactory, createRemoveFactory } from './closureFactory';
 
 /**
  * Application component for Unison. Once mounted, it connects to the back-end to receive a list of the locations being tracked.
@@ -195,7 +196,7 @@ function Unison(props) {
 
     }
 
-    
+
   };
 
   useEffect(() => {
@@ -268,17 +269,13 @@ function Unison(props) {
       <div id="logos">
 
         <center>
-          <img id="logoitem" alt="" src={props.logoLeft} />
-
-
-          <img id="logoitem" alt="" src={props.logoRight} />
+          {props.logoLeft}
+          {props.logoRight}
         </center>
 
       </div>
 
-      <LeafletMap marker={marker} curVar={curVar} featureProperties={locationMap}
-        markerCallback={markerClicked} fromDate={fromDate} toDate={toDate}
-        mapCentre={props.mapCentre} linksProperty={curLoc} />
+      {props.createMap(marker, curVar, locationMap, markerClicked, fromDate, toDate, curLoc)}
 
       <div id="selectdiv" >
 
@@ -306,25 +303,22 @@ function Unison(props) {
             </div>}
 
 
-            <div className='pLeft' >
-              <DateSelector
-                label="From date" dateValue={fromDate}
-                handleDayChange={handleStartChange}
-              />
+            <div className='pLeft' >{
+              createSelector("From date", fromDate, handleStartChange)
+            }
             </div>
 
             <div className='pLeft' >
-              <DateSelector
-                label="To date" dateValue={toDate}
-                handleDayChange={handleEndChange}
-              />
-
+              {
+                createSelector("To date", toDate, handleEndChange)
+              }
             </div>
 
             {curLoc && curVar && <div className='pLeft'> <button onClick={handleCSV}>CSV</button> </div>}
           </div>
 
-          <ARLocationComponent obtainData={obtainData} linksProperty={curLoc} collectionModel={collectionModel} />
+          <ARLocationComponent createLocation={createLocationFactory(obtainData, collectionModel)}
+            createRemove={curLoc ? createRemoveFactory(obtainData, curLoc) : undefined} />
 
         </center>
 
@@ -339,8 +333,8 @@ function Unison(props) {
 
 Unison.propTypes = {
 
-  /** The latitude/longitude coordinates for the centre of the map. */
-  mapCentre: PropTypes.array.isRequired,
+  /** A function for creating the map. */
+  createMap: PropTypes.func.isRequired,
 
   /** A logo displayed at the bottom of the screen. It will be displayed to the left
    * if the logoRight prop is defined.

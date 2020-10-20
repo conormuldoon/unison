@@ -5,6 +5,9 @@ import ReactDOM from 'react-dom';
 import { fireEvent, render, waitForElement } from "react-testing-library";
 import Unison from './Unison';
 
+import { createMapFactory } from './closureFactory';
+
+
 
 
 const unisonModel = {
@@ -26,6 +29,9 @@ const unisonModel = {
     }
 };
 
+const mapCentre = [59.922326, 10.751560];
+const mapFactory = createMapFactory(mapCentre);
+
 it('renders without crashing', async () => {
 
 
@@ -33,7 +39,7 @@ it('renders without crashing', async () => {
 
     const div = document.createElement('div');
 
-    ReactDOM.render(<Unison mapCentre={[59.922326, 10.751560]} />, div);
+    ReactDOM.render(<Unison createMap={mapFactory} />, div);
     ReactDOM.unmountComponentAtNode(div);
 
     fetchMock.restore();
@@ -48,7 +54,7 @@ it('mathes Unison snapshot', () => {
     const dn = global.Date.now;
     global.Date.now = mockDateNow;
 
-    const { container } = render(<Unison mapCentre={[59.922326, 10.751560]} />);
+    const { container } = render(<Unison createMap={mapFactory} />);
 
     expect(container).toMatchSnapshot();
     global.Date.now = dn;
@@ -254,7 +260,7 @@ it('displays popup when marker clicked', async () => {
 
     fetchMock.get('/', unisonModel);
 
-    const unison = <Unison mapCentre={[59.922326, 10.751560]} />;
+    const unison = <Unison createMap={mapFactory} />;
     const { getAllByAltText, getByText /*, debug*/ } = render(unison);
 
     const marker = await waitForElement(() => getAllByAltText('')[1]);

@@ -1,10 +1,6 @@
 import PropTypes from 'prop-types';
 import React, { useState } from 'react';
 import './App.css';
-import LocationForm from './LocationForm';
-import RemoveComponent from './RemoveComponent';
-
-
 
 
 /**
@@ -31,12 +27,10 @@ function ARLocationComponent(props) {
   return (
     <div>
       <div className='pLeft'>
-        <LocationForm obtainData={props.obtainData} toggleDisplay={toggleDisplayAdd}
-          display={displayAdd} hideDisplay={hideAdd} collectionModel={props.collectionModel} />
-
+        {props.createLocation(toggleDisplayAdd, displayAdd, hideAdd)}
       </div>
-      {props.linksProperty && <div className='pLeft'>
-        <RemoveComponent obtainData={props.obtainData} hideDisplay={hideAdd} linksProperty={props.linksProperty} />
+      {props.createRemove && <div className='pLeft'>
+        {props.createRemove(hideAdd)}
       </div>}
     </div>
   );
@@ -46,10 +40,8 @@ function ARLocationComponent(props) {
 ARLocationComponent.propTypes = {
 
 
-  /** Called when a location has been successfully added/removed to obtain the updated location list from the server and update the locations displayed on the map. */
-  obtainData: PropTypes.func.isRequired,
-  linksPropert: PropTypes.object,
-  collectionModel: PropTypes.object
+  createLocation: PropTypes.func.isRequired,
+  createRemove: PropTypes.func,
 }
 
 export default ARLocationComponent;
