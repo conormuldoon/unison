@@ -23,6 +23,7 @@ public class LocationConfig {
 	 */
 	@Bean
 	public GeometryFactory geometryFactory() {
+		
 		return new GeometryFactory();
 	}
 
@@ -49,7 +50,8 @@ public class LocationConfig {
 	 * @return The weather links to use in the models.
 	 * 
 	 */
-	public WeatherLink[] weatherProperty(@Value("${api.fog}") Boolean fogSupported) {
+	@Bean
+	public WeatherLink[] weatherLink(@Value("${api.fog}") Boolean fogSupported) {
 
 		if (fogSupported) {
 			return WeatherLink.values();
@@ -58,7 +60,7 @@ public class LocationConfig {
 			WeatherLink[] weatherProperty = { WeatherLink.CLOUDINESS, WeatherLink.CLOUD_LEVEL, WeatherLink.DEW_POINT,
 					WeatherLink.HUMIDITY, WeatherLink.PRECIPITATION, WeatherLink.PRESSURE, WeatherLink.TEMPERATURE,
 					WeatherLink.WIND_DIRECTION, WeatherLink.WIND_SPEED };
-
+			
 			return weatherProperty;
 		}
 

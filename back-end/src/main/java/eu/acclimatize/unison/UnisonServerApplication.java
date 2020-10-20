@@ -2,6 +2,7 @@ package eu.acclimatize.unison;
 
 import java.util.concurrent.Executor;
 import java.util.concurrent.Executors;
+//import java.util.logging.Level;
 import java.util.logging.Logger;
 
 import org.springframework.beans.factory.InjectionPoint;
@@ -12,6 +13,7 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Scope;
 import org.springframework.scheduling.annotation.EnableScheduling;
 import org.springframework.web.filter.ForwardedHeaderFilter;
+
 
 /**
  * 
@@ -42,7 +44,9 @@ public class UnisonServerApplication {
 	@Scope("prototype")
 	public Logger logger(InjectionPoint injectionPoint) {
 
-		return Logger.getLogger(injectionPoint.getMethodParameter().getContainingClass().getName());
+		Logger logger= Logger.getLogger(injectionPoint.getMethodParameter().getContainingClass().getName());
+		//logger.setLevel(Level.SEVERE);
+		return logger;
 	}
 
 	/**
