@@ -2,7 +2,7 @@ import "@testing-library/jest-dom/extend-expect";
 import fetchMock from 'fetch-mock';
 import React from 'react';
 import ReactDOM from 'react-dom';
-import { fireEvent, render } from "react-testing-library";
+import { fireEvent, render } from "@testing-library/react";
 import RemoveComponent from './RemoveComponent';
 import HttpStatus from 'http-status-codes';
 

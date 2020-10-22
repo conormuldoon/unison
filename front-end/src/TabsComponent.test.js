@@ -1,7 +1,7 @@
 import "@testing-library/jest-dom/extend-expect";
 import fetchMock from 'fetch-mock';
 import React from 'react';
-import { render } from "react-testing-library";
+import { render } from "@testing-library/react";
 import TabsComponent from './TabsComponent';
 
 const DLEN = 16;

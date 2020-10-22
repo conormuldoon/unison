@@ -1,7 +1,7 @@
 import "@testing-library/jest-dom/extend-expect";
 import React from 'react';
 import ReactDOM from 'react-dom';
-import { fireEvent, render } from "react-testing-library";
+import { fireEvent, render } from "@testing-library/react";
 import ARLocationComponent from './ARLocationComponent';
 import { createLocationFactory, createRemoveFactory } from './closureFactory';
 

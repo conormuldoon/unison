@@ -1,7 +1,7 @@
 import fetchMock from 'fetch-mock';
 import React from 'react';
 import ReactDOM from 'react-dom';
-import { render, waitForElement } from "react-testing-library";
+import { render,  waitFor, screen } from "@testing-library/react";
 import ChartPopup from './ChartPopup';
 import { PRECIP, CL } from './Constant';
 import { chartText } from './Util';
@@ -212,8 +212,8 @@ it('adds a chart', () => {
 
   fetchMock.get(apiRequest, data);
 
-  const { getByTestId } = render(chartPopup);
-  waitForElement(() => getByTestId('chart'));
+  render(chartPopup);
+  waitFor(() => screen.getByTestId('chart'));
   fetchMock.restore();
 });
 

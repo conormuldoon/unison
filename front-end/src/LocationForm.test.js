@@ -1,7 +1,7 @@
 import fetchMock from 'fetch-mock';
 import React from 'react';
 import ReactDOM from 'react-dom';
-import { fireEvent, render } from "react-testing-library";
+import { fireEvent, render } from "@testing-library/react";
 import LocationForm from './LocationForm';
 import { locationPutObject } from './Util';
 import HttpStatus from 'http-status-codes';

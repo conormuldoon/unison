@@ -2,8 +2,9 @@ import "@testing-library/jest-dom/extend-expect";
 import fetchMock from 'fetch-mock';
 import React from 'react';
 import ReactDOM from 'react-dom';
-import { fireEvent, render, waitForElement } from "react-testing-library";
+import { fireEvent, render, waitFor, screen } from "@testing-library/react";
 import Unison from './Unison';
+
 
 import { createMapFactory } from './closureFactory';
 
@@ -261,14 +262,14 @@ it('displays popup when marker clicked', async () => {
     fetchMock.get('/', unisonModel);
 
     const unison = <Unison createMap={mapFactory} />;
-    const { getAllByAltText, getByText /*, debug*/ } = render(unison);
+    render(unison);
 
-    const marker = await waitForElement(() => getAllByAltText('')[1]);
+    await waitFor(() => screen.getAllByAltText('')[1]);
 
 
-    fireEvent.click(marker);
+    fireEvent.click(screen.getAllByAltText('')[1]);
 
-    const text = await waitForElement(() => getByText('UCD'));
+    const text = await waitFor(() => screen.getByText('UCD'));
     expect(text).toBeDefined();
     //debug();
 
