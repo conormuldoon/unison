@@ -27,7 +27,7 @@ class LeafletMap extends Component {
     this.state = {
 
       zoom: 12,
-      popupComponent: undefined,
+      popupComponent: null,
       dragging: true,
 
     }
@@ -36,7 +36,7 @@ class LeafletMap extends Component {
   componentDidUpdate = (prevProps) => {
 
     if (prevProps.curVar !== this.props.curVar || prevProps.linksProperty !== this.props.linksProperty || prevProps.fromDate !== this.props.fromDate || prevProps.toDate !== this.props.toDate) {
-      if (this.state.popupComponent !== undefined) {
+      if (this.state.popupComponent !== null) {
         this.closePopup();
         this.addPopup(this.props.linksProperty);
       }
@@ -58,7 +58,7 @@ class LeafletMap extends Component {
 
   markerCallback = (marker) => {
 
-    if (this.state.popupComponent !== undefined) {
+    if (this.state.popupComponent !== null) {
       this.closePopup();
     }
 
@@ -69,7 +69,7 @@ class LeafletMap extends Component {
 
   closePopup = () => {
 
-    this.setState({ popupComponent: undefined, dragging: true });
+    this.setState({ popupComponent: null, dragging: true });
 
   }
 

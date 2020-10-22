@@ -24,13 +24,13 @@ function Unison(props) {
 
   const [fromDate, setFromDate] = useState(today());
   const [toDate, setToDate] = useState(tomorrow());
-  const [option, setOption] = useState(undefined);
-  const [marker, setMarker] = useState(undefined);
-  const [curLoc, setCurLoc] = useState(undefined);
-  const [curVar, setCurVar] = useState(undefined);
-  const [varOpt, setVarOpt] = useState(undefined);
-  const [locationMap, setLocationMap] = useState(undefined);
-  const [collectionModel, setCollectionModel] = useState(undefined);
+  const [option, setOption] = useState(null);
+  const [marker, setMarker] = useState(null);
+  const [curLoc, setCurLoc] = useState(null);
+  const [curVar, setCurVar] = useState(null);
+  const [varOpt, setVarOpt] = useState(null);
+  const [locationMap, setLocationMap] = useState(null);
+  const [collectionModel, setCollectionModel] = useState(null);
 
   const obtainData = () => {
 
@@ -81,8 +81,8 @@ function Unison(props) {
 
 
       } else {
-        setOption(undefined);
-        setMarker(undefined);
+        setOption(null);
+        setMarker(null);
       }
 
 
@@ -96,10 +96,10 @@ function Unison(props) {
     }
 
     function clearCurrent() {
-      setCurLoc(undefined);
-      setCurVar(undefined);
-      setVarOpt(undefined);
-      setLocationMap(undefined);
+      setCurLoc(null);
+      setCurVar(null);
+      setVarOpt(null);
+      setLocationMap(null);
 
     }
 
@@ -318,7 +318,7 @@ function Unison(props) {
           </div>
 
           <ARLocationComponent createLocation={createLocationFactory(obtainData, collectionModel)}
-            createRemove={curLoc ? createRemoveFactory(obtainData, curLoc._links[SELF].href, curLoc.name) : undefined} />
+            createRemove={curLoc ? createRemoveFactory(obtainData, curLoc._links[SELF].href, curLoc.name) : null} />
 
         </center>
 

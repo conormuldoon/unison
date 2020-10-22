@@ -17,8 +17,8 @@ const DLEN = 16;
  */
 function ChartPopup({ uri, curVar, name, closePopup }) {
 
-  const [data, setData] = useState(undefined);
-  const [zoomDomain, setZoomDomain] = useState(undefined);
+  const [data, setData] = useState(null);
+  const [zoomDomain, setZoomDomain] = useState(null);
   const [minMax, setMinMax] = useState(false);
 
   useEffect(() => {
@@ -61,8 +61,8 @@ function ChartPopup({ uri, curVar, name, closePopup }) {
           setZoomDomain({ x: [fd, td] });
         } else {
 
-          setData(undefined);
-          setZoomDomain(undefined);
+          setData(null);
+          setZoomDomain(null);
           setMinMax(false);
         }
       }
