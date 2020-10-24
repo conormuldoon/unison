@@ -236,11 +236,6 @@ function Unison(props) {
 
   }
 
-  const dashDate = (date) => {
-
-    return date.replace(/\//g, '-');
-  }
-
   const spaceToUnderscore = (s) => {
     return s.replace(/ /g, '_')
   }
@@ -255,7 +250,7 @@ function Unison(props) {
       const a = document.createElement('a');
       a.href = window.URL.createObjectURL(blob);
       a.download = spaceToUnderscore(curLoc.name) + '_' + spaceToUnderscore(curVar) + '_'
-        + dashDate(fromDate) + "_" + dashDate(toDate) + '.csv';
+        + fromDate + "_" + toDate + '.csv';
       a.click();
     } else if (response.status === HttpStatus.GATEWAY_TIMEOUT) {
       problemConnecting();

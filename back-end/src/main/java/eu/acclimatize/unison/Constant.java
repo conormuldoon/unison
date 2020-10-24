@@ -101,7 +101,7 @@ public class Constant {
 	/**
 	 * The format for the from date and to date query string parameters.
 	 */
-	public static final String FORMAT = "d/M/yyyy";
+	public static final String FORMAT = "d-M-yyyy";
 
 	/**
 	 * The query string parameter field name and the JPQL query parameter name for
