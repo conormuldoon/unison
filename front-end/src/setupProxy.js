@@ -25,7 +25,7 @@ const filter = function (pathName, req) {
 };
 
 const apiProxy = createProxyMiddleware(filter, {
-  target: 'https://aqua.ucd.ie/unison',
+  target: 'http:/localhost:8080',
 });
 
 module.exports = function (app) {

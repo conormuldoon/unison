@@ -43,7 +43,7 @@ function Unison(props) {
 
     function checkResponse(response, endpoint) {
       if (!response.ok)
-        throw new ResponseError('Bad response for ', response.status);
+        throw new ResponseError('Bad response for ' + endpoint, response.status);
     }
 
     async function requestFeatureCollection(uri) {
