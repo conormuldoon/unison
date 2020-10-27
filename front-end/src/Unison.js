@@ -170,32 +170,29 @@ function Unison(props) {
 
     async function requestModel() {
 
-      const root = '/';
-      const response = await fetch(root, halGetHeader);
+      try {
+        const root = '/';
+        const response = await fetch(root, halGetHeader);
 
-      checkResponse(response, root);
-
-
-      const model = await response.json();
-
-      const uri = model._links.locationCollection.href;
-      await requestCollectionHAL(uri);
-      await requestFeatureCollection(uri);
+        checkResponse(response, root);
 
 
-    }
+        const model = await response.json();
 
-    try {
-      requestModel();
+        const uri = model._links.locationCollection.href;
+        await requestCollectionHAL(uri);
+        await requestFeatureCollection(uri);
 
-    } catch (e) {
-      if (e instanceof ResponseError) {
-        problemConnecting();
+      } catch (e) {
+        if (e instanceof ResponseError) {
+          problemConnecting();
+        }
+        console.log(e);
+
       }
-      console.log(e);
-
     }
 
+    requestModel();
 
   };
 
