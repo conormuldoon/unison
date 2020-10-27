@@ -28,8 +28,7 @@
     "uri-template": "^1.0.1",
     "victory": "^33.1.0",
     "xmlhttprequest": "^1.8.0"
-  },
-  "scripts": {
+  },"scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test --env=jest-environment-jsdom-sixteen",
@@ -69,6 +68,5 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
-  },
-  "proxy": "https://aqua.ucd.ie/unison"
+  }
 }

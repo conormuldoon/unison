@@ -43,7 +43,7 @@ function Unison(props) {
 
     function checkResponse(response, endpoint) {
       if (!response.ok)
-        throw new ResponseError('Bad response for ' + endpoint, response.status);
+        throw new ResponseError('Bad response for ', response.status);
     }
 
     async function requestFeatureCollection(uri) {
@@ -184,10 +184,13 @@ function Unison(props) {
         await requestFeatureCollection(uri);
 
       } catch (e) {
+
+        console.error(e);
         if (e instanceof ResponseError) {
+          console.error("HTTP status code: " + e.status);
           problemConnecting();
         }
-        console.log(e);
+
 
       }
     }
