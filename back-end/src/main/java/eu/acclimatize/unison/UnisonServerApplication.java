@@ -13,7 +13,7 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Scope;
 import org.springframework.scheduling.annotation.EnableScheduling;
 import org.springframework.web.filter.ForwardedHeaderFilter;
-
+import org.springframework.web.filter.ShallowEtagHeaderFilter;
 
 /**
  * 
@@ -44,8 +44,8 @@ public class UnisonServerApplication {
 	@Scope("prototype")
 	public Logger logger(InjectionPoint injectionPoint) {
 
-		Logger logger= Logger.getLogger(injectionPoint.getMethodParameter().getContainingClass().getName());
-		//logger.setLevel(Level.SEVERE);
+		Logger logger = Logger.getLogger(injectionPoint.getMethodParameter().getContainingClass().getName());
+		// logger.setLevel(Level.SEVERE);
 		return logger;
 	}
 
@@ -71,10 +71,15 @@ public class UnisonServerApplication {
 		return new FilterRegistrationBean<>(new ForwardedHeaderFilter());
 
 	}
-	
+
 	@Bean
 	public CacheSupport cacheSupport() {
 		return new CacheSupport();
+	}
+
+	@Bean
+	public ShallowEtagHeaderFilter shallowEtagHeaderFilter() {
+		return new ShallowEtagHeaderFilter();
 	}
 
 }
