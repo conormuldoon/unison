@@ -71,5 +71,10 @@ public class UnisonServerApplication {
 		return new FilterRegistrationBean<>(new ForwardedHeaderFilter());
 
 	}
+	
+	@Bean
+	public CacheSupport cacheSupport() {
+		return new CacheSupport();
+	}
 
 }

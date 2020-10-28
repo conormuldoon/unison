@@ -11,8 +11,6 @@ import javax.persistence.EntityManager;
 import javax.persistence.TypedQuery;
 import javax.servlet.http.HttpServletResponse;
 
-import org.springframework.http.HttpHeaders;
-
 /**
  * 
  * A class that finds a list of items based on a JPQL query.
@@ -22,6 +20,7 @@ public class ItemListFinder {
 
 	private String query;
 	private EntityManager entityManager;
+	private CacheSupport cacheSupport;
 
 	/**
 	 * Creates an instance of ItemListFinder.
@@ -29,9 +28,10 @@ public class ItemListFinder {
 	 * @param entityManager The JPA entity manager.
 	 * @param query         The query to be executed.
 	 */
-	public ItemListFinder(EntityManager entityManager, String query) {
+	public ItemListFinder(EntityManager entityManager, String query, CacheSupport cacheSupport) {
 		this.entityManager = entityManager;
 		this.query = query;
+		this.cacheSupport = cacheSupport;
 
 	}
 
@@ -45,12 +45,13 @@ public class ItemListFinder {
 	 */
 	public List<HarmonieItem> find(HttpServletResponse response, String location, Date fromDate, Date toDate) {
 
-		response.setHeader(HttpHeaders.VARY, HttpHeaders.ACCEPT);
-
 		TypedQuery<HarmonieItem> typedQuery = entityManager.createQuery(query, HarmonieItem.class);
 		typedQuery.setParameter(LOCATION_NAME, location);
 		typedQuery.setParameter(FROM_DATE, fromDate);
 		typedQuery.setParameter(TO_DATE, toDate);
+		
+		cacheSupport.addHeader(toDate, response);
+		
 		return typedQuery.getResultList();
 	}
 

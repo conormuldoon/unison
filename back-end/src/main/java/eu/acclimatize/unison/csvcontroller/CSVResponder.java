@@ -7,8 +7,7 @@ import java.util.List;
 
 import javax.servlet.http.HttpServletResponse;
 
-import org.springframework.http.HttpHeaders;
-
+import eu.acclimatize.unison.CacheSupport;
 import eu.acclimatize.unison.HarmonieItem;
 import eu.acclimatize.unison.ItemListFinder;
 
@@ -22,6 +21,7 @@ public class CSVResponder {
 	private ItemListFinder itemListFinder;
 	private String header;
 
+	private CacheSupport cacheSupport;
 	/**
 	 * Creates an instance of CSVResponder.
 	 * 
@@ -30,9 +30,10 @@ public class CSVResponder {
 	 * @param header         The CSV header printed by the responder.
 	 */
 
-	public CSVResponder(ItemListFinder itemListFinder, String header) {
+	public CSVResponder(ItemListFinder itemListFinder, String header, CacheSupport cacheSupport) {
 		this.itemListFinder = itemListFinder;
 		this.header = header;
+		this.cacheSupport=cacheSupport;
 	}
 
 	/**
@@ -51,7 +52,8 @@ public class CSVResponder {
 	public void handleResponse(HttpServletResponse response, String location, Date fromDate, Date toDate)
 			throws IOException {
 		response.setContentType(CSV_CONTENT);
-		response.setHeader(HttpHeaders.VARY, HttpHeaders.ACCEPT);
+		cacheSupport.addHeader(toDate, response);
+		
 		PrintWriter pw = response.getWriter();
 
 		pw.println(header);
