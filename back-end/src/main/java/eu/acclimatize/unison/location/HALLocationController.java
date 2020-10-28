@@ -6,11 +6,13 @@ import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.methodOn;
 import java.util.ArrayList;
 import java.util.Collection;
 
+import javax.servlet.http.HttpServletResponse;
+
 import org.springframework.hateoas.CollectionModel;
 import org.springframework.hateoas.Link;
 import org.springframework.hateoas.MediaTypes;
 import org.springframework.hateoas.server.mvc.BasicLinkBuilder;
-import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.http.HttpHeaders;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RestController;
@@ -50,16 +52,16 @@ public class HALLocationController {
 	 * @return A representational model of stored locations.
 	 */
 	@GetMapping(value = MappingConstant.LOCATION_COLLECTION, produces = MediaTypes.HAL_JSON_VALUE)
-	public CollectionModel<LocationModel> createModel() {
-
+	public CollectionModel<LocationModel> createModel(HttpServletResponse response) {
+		response.setHeader(HttpHeaders.VARY, HttpHeaders.ACCEPT);
 		Iterable<Location> locationList = locationService.findAllSorted();
 
 		Collection<LocationModel> locationCollection = new ArrayList<>();
 		for (Location l : locationList) {
-			locationCollection.add(l.createModel(weatherLink));
+			locationCollection.add(l.createModel(response, weatherLink));
 		}
 
-		Link link = linkTo(methodOn(HALLocationController.class).createModel()).withSelfRel();
+		Link link = linkTo(methodOn(HALLocationController.class).createModel(response)).withSelfRel();
 		String baseUri = BasicLinkBuilder.linkToCurrentMapping().toString();
 		Link containsLink = Link.of(baseUri + MappingConstant.CONTAINS + "{?" + Constant.LOCATION_NAME + "}",
 				Constant.CONTAINS);
@@ -75,11 +77,14 @@ public class HALLocationController {
 	 * @return The HAL representational model.
 	 */
 	@GetMapping(value = MappingConstant.SPECIFIC_LOCATION, produces = MediaTypes.HAL_JSON_VALUE)
-	public LocationModel location(@PathVariable(Constant.LOCATION_NAME) String locationName) {
+	public LocationModel location(HttpServletResponse response,
+			@PathVariable(Constant.LOCATION_NAME) String locationName) {
+
+		response.setHeader(HttpHeaders.VARY, HttpHeaders.ACCEPT);
 
 		Location location = locationService.find(locationName);
 
-		return location.createModel(weatherLink);
+		return location.createModel(response, weatherLink);
 	}
 
 }

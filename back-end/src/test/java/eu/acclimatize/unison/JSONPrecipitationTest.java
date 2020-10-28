@@ -1,7 +1,10 @@
 package eu.acclimatize.unison;
 
+import javax.servlet.http.HttpServletResponse;
+
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.mockito.Mockito;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
@@ -26,7 +29,7 @@ public class JSONPrecipitationTest {
 
 	@Autowired
 	private HourlyPrecipitationRepository hpr;
-	
+
 	@Autowired
 	private LocationRepository locationRepository;
 
@@ -39,10 +42,11 @@ public class JSONPrecipitationTest {
 	@Test
 	public void testPreciptiation() {
 
-		TestUtility.savePrecipitationData(userRepository, locationRepository,hpr);
+		HttpServletResponse response = Mockito.mock(HttpServletResponse.class);
+		TestUtility.savePrecipitationData(userRepository, locationRepository, hpr);
 
 		TestUtility.assertType(precipitationController.precipitation(TestConstant.LOCATION, TestConstant.FROM_DATE,
-				TestConstant.TO_DATE), PrecipitationResult.class);
+				TestConstant.TO_DATE, response), PrecipitationResult.class);
 
 		TestUtility.deletePrecipitationData(hpr, locationRepository, userRepository);
 	}

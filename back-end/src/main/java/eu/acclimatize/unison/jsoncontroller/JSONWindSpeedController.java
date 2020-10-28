@@ -2,6 +2,8 @@ package eu.acclimatize.unison.jsoncontroller;
 
 import java.util.Date;
 
+import javax.servlet.http.HttpServletResponse;
+
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -44,9 +46,10 @@ public class JSONWindSpeedController {
 	@GetMapping(value = MappingConstant.LOCATION_WIND_SPEED, produces = MediaType.APPLICATION_JSON_VALUE)
 	public Iterable<HarmonieItem> windSpeed(@PathVariable(Constant.LOCATION_NAME) String location,
 			@RequestParam(value = Constant.FROM_DATE) @DateTimeFormat(pattern = Constant.FORMAT) Date fromDate,
-			@RequestParam(value = Constant.TO_DATE) @DateTimeFormat(pattern = Constant.FORMAT) Date toDate) {
+			@RequestParam(value = Constant.TO_DATE) @DateTimeFormat(pattern = Constant.FORMAT) Date toDate,
+			HttpServletResponse response) {
 
-		return windSpeedFinder.find(location, fromDate, toDate);
+		return windSpeedFinder.find(response, location, fromDate, toDate);
 	}
 
 }

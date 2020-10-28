@@ -183,10 +183,12 @@ function Unison(props) {
         await requestFeatureCollection(uri);
       } catch (e) {
         if (e instanceof ResponseError) {
-          problemConnecting();
+          console.error("HTTP status code: " + e.status);
+          
         }
         console.error(e);
-        console.error("HTTP status code: "+e.status);
+        problemConnecting();
+
 
       }
 

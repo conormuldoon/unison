@@ -10,6 +10,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
+import javax.servlet.http.HttpServletResponse;
+
 import org.junit.After;
 import org.junit.Assert;
 import org.junit.Before;
@@ -180,7 +182,8 @@ public class LocationTests {
 	@Test
 	public void locationList() throws IOException {
 
-		FeatureCollection fc = geoLocationController.location();
+		HttpServletResponse response = Mockito.mock(HttpServletResponse.class);
+		FeatureCollection fc = geoLocationController.location(response);
 
 		JsonGenerator jg = Mockito.mock(JsonGenerator.class);
 		fc.geoJSONSerialize(jg);
@@ -239,8 +242,8 @@ public class LocationTests {
 		InputStream is = getClass().getResourceAsStream("/TestPoint.json");
 		BufferedReader br = new BufferedReader(new InputStreamReader(is));
 
-		String line=jsonWriter.toString();
-		System.out.println("\n\n\n"+line);
+		String line = jsonWriter.toString();
+		System.out.println("\n\n\n" + line);
 		Assert.assertEquals(br.readLine(), jsonWriter.toString());
 		br.close();
 
@@ -300,7 +303,7 @@ public class LocationTests {
 		InputStream is = getClass().getResourceAsStream("/TestCollection.json");
 		BufferedReader br = new BufferedReader(new InputStreamReader(is));
 
-		String line=jsonWriter.toString();
+		String line = jsonWriter.toString();
 		System.out.println(line);
 		Assert.assertEquals(br.readLine(), jsonWriter.toString());
 		br.close();

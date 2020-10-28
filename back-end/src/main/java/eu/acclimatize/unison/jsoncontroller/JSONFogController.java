@@ -2,6 +2,8 @@ package eu.acclimatize.unison.jsoncontroller;
 
 import java.util.Date;
 
+import javax.servlet.http.HttpServletResponse;
+
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -44,9 +46,10 @@ public class JSONFogController {
 	@GetMapping(value = MappingConstant.LOCATION_FOG, produces = MediaType.APPLICATION_JSON_VALUE)
 	public Iterable<HarmonieItem> fog(@PathVariable(Constant.LOCATION_NAME) String location,
 			@RequestParam(value = Constant.FROM_DATE) @DateTimeFormat(pattern = Constant.FORMAT) Date fromDate,
-			@RequestParam(value = Constant.TO_DATE) @DateTimeFormat(pattern = Constant.FORMAT) Date toDate) {
+			@RequestParam(value = Constant.TO_DATE) @DateTimeFormat(pattern = Constant.FORMAT) Date toDate,
+			HttpServletResponse response) {
 
-		return fogFinder.find(location, fromDate, toDate);
+		return fogFinder.find(response, location, fromDate, toDate);
 	}
 
 }

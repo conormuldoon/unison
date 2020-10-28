@@ -37,7 +37,6 @@ export const expandLink = (linksProperty, curVar, fromDate, toDate) => {
   const href = linksProperty._links[varMapping(curVar)].href;
   const template = parser.parse(href);
   return template.expand({ name: linksProperty.name, fromDate: fromDate, toDate: toDate });
-
 }
 
 

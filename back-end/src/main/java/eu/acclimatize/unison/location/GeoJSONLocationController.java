@@ -1,5 +1,8 @@
 package eu.acclimatize.unison.location;
 
+import javax.servlet.http.HttpServletResponse;
+
+import org.springframework.http.HttpHeaders;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RestController;
@@ -22,7 +25,8 @@ public class GeoJSONLocationController {
 	 * Creates and instance of GeoJSONLocationController.
 	 * 
 	 * 
-	 * @param locationService The service that is used to obtain a list of locations.
+	 * @param locationService The service that is used to obtain a list of
+	 *                        locations.
 	 */
 	public GeoJSONLocationController(LocationService locationService) {
 		this.locationService = locationService;
@@ -37,8 +41,9 @@ public class GeoJSONLocationController {
 	 *         locations.
 	 */
 	@GetMapping(value = MappingConstant.LOCATION_COLLECTION, produces = LocationConstant.GEOJSON_MEDIA_TYPE)
-	public FeatureCollection location() {
+	public FeatureCollection location(HttpServletResponse response) {
 
+		response.setHeader(HttpHeaders.VARY, HttpHeaders.ACCEPT);
 		return new FeatureCollection(locationService.findAllSorted());
 
 	}
@@ -50,8 +55,8 @@ public class GeoJSONLocationController {
 	 * @return The location obtained from the repository.
 	 */
 	@GetMapping(value = MappingConstant.SPECIFIC_LOCATION, produces = LocationConstant.GEOJSON_MEDIA_TYPE)
-	public Location location(@PathVariable(Constant.LOCATION_NAME) String locationName) {
-
+	public Location location(HttpServletResponse response, @PathVariable(Constant.LOCATION_NAME) String locationName) {
+		response.setHeader(HttpHeaders.VARY, HttpHeaders.ACCEPT);
 		return locationService.find(locationName);
 
 	}

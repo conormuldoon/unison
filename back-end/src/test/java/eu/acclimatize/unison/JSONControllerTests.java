@@ -1,9 +1,12 @@
 package eu.acclimatize.unison;
 
+import javax.servlet.http.HttpServletResponse;
+
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.mockito.Mockito;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
@@ -76,13 +79,15 @@ public class JSONControllerTests {
 	@Autowired
 	private UserRepository userRepository;
 
+	private HttpServletResponse response = Mockito.mock(HttpServletResponse.class);
+
 	/**
 	 * Adds initial data to the database.
 	 */
 	@Before
 	public void addWeatherData() {
 
-		TestUtility.saveWeatherData( userRepository, locationRepository,  hwr);
+		TestUtility.saveWeatherData(userRepository, locationRepository, hwr);
 
 	}
 
@@ -101,9 +106,8 @@ public class JSONControllerTests {
 	@Test
 	public void testCloudiness() {
 
-		TestUtility.assertType(
-				cloudinessController.cloudiness(TestConstant.LOCATION, TestConstant.FROM_DATE, TestConstant.TO_DATE),
-				CloudinessResult.class);
+		TestUtility.assertType(cloudinessController.cloudiness(TestConstant.LOCATION, TestConstant.FROM_DATE,
+				TestConstant.TO_DATE, response), CloudinessResult.class);
 
 	}
 
@@ -113,9 +117,8 @@ public class JSONControllerTests {
 	@Test
 	public void testCloudLevel() {
 
-		TestUtility.assertType(
-				cloudLevelController.cloudLevel(TestConstant.LOCATION, TestConstant.FROM_DATE, TestConstant.TO_DATE),
-				CloudLevelResult.class);
+		TestUtility.assertType(cloudLevelController.cloudLevel(TestConstant.LOCATION, TestConstant.FROM_DATE,
+				TestConstant.TO_DATE, response), CloudLevelResult.class);
 
 	}
 
@@ -125,9 +128,8 @@ public class JSONControllerTests {
 	@Test
 	public void testDewPoint() {
 
-		TestUtility.assertType(
-				dewPointController.dewPoint(TestConstant.LOCATION, TestConstant.FROM_DATE, TestConstant.TO_DATE),
-				DewPointResult.class);
+		TestUtility.assertType(dewPointController.dewPoint(TestConstant.LOCATION, TestConstant.FROM_DATE,
+				TestConstant.TO_DATE, response), DewPointResult.class);
 
 	}
 
@@ -137,7 +139,8 @@ public class JSONControllerTests {
 	@Test
 	public void testFog() {
 
-		TestUtility.assertType(fogController.fog(TestConstant.LOCATION, TestConstant.FROM_DATE, TestConstant.TO_DATE),
+		TestUtility.assertType(
+				fogController.fog(TestConstant.LOCATION, TestConstant.FROM_DATE, TestConstant.TO_DATE, response),
 				FogResult.class);
 
 	}
@@ -148,9 +151,8 @@ public class JSONControllerTests {
 	@Test
 	public void testHumidity() {
 
-		TestUtility.assertType(
-				humidityController.humidity(TestConstant.LOCATION, TestConstant.FROM_DATE, TestConstant.TO_DATE),
-				HumidityResult.class);
+		TestUtility.assertType(humidityController.humidity(TestConstant.LOCATION, TestConstant.FROM_DATE,
+				TestConstant.TO_DATE, response), HumidityResult.class);
 
 	}
 
@@ -160,9 +162,8 @@ public class JSONControllerTests {
 	@Test
 	public void testPressure() {
 
-		TestUtility.assertType(
-				pressureController.pressure(TestConstant.LOCATION, TestConstant.FROM_DATE, TestConstant.TO_DATE),
-				PressureResult.class);
+		TestUtility.assertType(pressureController.pressure(TestConstant.LOCATION, TestConstant.FROM_DATE,
+				TestConstant.TO_DATE, response), PressureResult.class);
 
 	}
 
@@ -172,9 +173,8 @@ public class JSONControllerTests {
 	@Test
 	public void testTemperature() {
 
-		TestUtility.assertType(
-				temperatureController.temperature(TestConstant.LOCATION, TestConstant.FROM_DATE, TestConstant.TO_DATE),
-				TemperatureResult.class);
+		TestUtility.assertType(temperatureController.temperature(TestConstant.LOCATION, TestConstant.FROM_DATE,
+				TestConstant.TO_DATE, response), TemperatureResult.class);
 
 	}
 
@@ -185,7 +185,7 @@ public class JSONControllerTests {
 	public void testWindDirection() {
 
 		TestUtility.assertType(windDirectionController.windDirection(TestConstant.LOCATION, TestConstant.FROM_DATE,
-				TestConstant.TO_DATE), WindDirectionResult.class);
+				TestConstant.TO_DATE, response), WindDirectionResult.class);
 
 	}
 
@@ -195,9 +195,8 @@ public class JSONControllerTests {
 	@Test
 	public void testWindSpeed() {
 
-		TestUtility.assertType(
-				windSpeedController.windSpeed(TestConstant.LOCATION, TestConstant.FROM_DATE, TestConstant.TO_DATE),
-				WindSpeedResult.class);
+		TestUtility.assertType(windSpeedController.windSpeed(TestConstant.LOCATION, TestConstant.FROM_DATE,
+				TestConstant.TO_DATE, response), WindSpeedResult.class);
 	}
 
 }

@@ -9,6 +9,9 @@ import java.util.List;
 
 import javax.persistence.EntityManager;
 import javax.persistence.TypedQuery;
+import javax.servlet.http.HttpServletResponse;
+
+import org.springframework.http.HttpHeaders;
 
 /**
  * 
@@ -40,7 +43,9 @@ public class ItemListFinder {
 	 * @param toDate   The end date (inclusive) for the query.
 	 * @return The list of items that match the query parameters.
 	 */
-	public List<HarmonieItem> find(String location, Date fromDate, Date toDate) {
+	public List<HarmonieItem> find(HttpServletResponse response, String location, Date fromDate, Date toDate) {
+
+		response.setHeader(HttpHeaders.VARY, HttpHeaders.ACCEPT);
 
 		TypedQuery<HarmonieItem> typedQuery = entityManager.createQuery(query, HarmonieItem.class);
 		typedQuery.setParameter(LOCATION_NAME, location);

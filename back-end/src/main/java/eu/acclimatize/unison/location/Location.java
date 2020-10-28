@@ -100,8 +100,8 @@ public class Location implements OwnedItem, Serializable {
 		return template.replace("{longitude}", String.valueOf(geom.getX()));
 	}
 
-	private WebMvcLinkBuilder createBuilder() {
-		return linkTo(methodOn(HALLocationController.class).location(name));
+	private WebMvcLinkBuilder createBuilder(HttpServletResponse response) {
+		return linkTo(methodOn(HALLocationController.class).location(response, name));
 	}
 
 	/**
@@ -110,9 +110,9 @@ public class Location implements OwnedItem, Serializable {
 	 * @param weatherLink The links used in creating the model.
 	 * @return A HAL model for the location.
 	 */
-	public LocationModel createModel(WeatherLink[] weatherLink) {
+	public LocationModel createModel(HttpServletResponse response,WeatherLink[] weatherLink) {
 		List<Link> list = new ArrayList<>();
-		list.add(createBuilder().withSelfRel());
+		list.add(createBuilder(response).withSelfRel());
 
 		for (WeatherLink wl : weatherLink) {
 			list.add(wl.createLink(name));
@@ -127,13 +127,13 @@ public class Location implements OwnedItem, Serializable {
 	 */
 	public void addHeader(HttpServletResponse response) {
 
-		response.setHeader(Constant.LOCATION_HEADER, createBuilder().toString());
+		response.setHeader(Constant.LOCATION_HEADER, createBuilder(response).toString());
 	}
 
 	/**
 	 * Serializes the location in a GeoJSON format.
 	 * 
-	 * @param gen             The generator object written to.
+	 * @param gen The generator object written to.
 	 * @throws IOException Thrown if there is an I/O error while serializing.
 	 */
 	public void geoJSONSerialize(JsonGenerator gen) throws IOException {

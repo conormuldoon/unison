@@ -7,6 +7,8 @@ import java.util.List;
 
 import javax.servlet.http.HttpServletResponse;
 
+import org.springframework.http.HttpHeaders;
+
 import eu.acclimatize.unison.HarmonieItem;
 import eu.acclimatize.unison.ItemListFinder;
 
@@ -25,12 +27,12 @@ public class CSVResponder {
 	 * 
 	 * @param itemListFinder Used to obtain a list of data based on query
 	 *                       parameters.
-	 * @param header The CSV header printed by the responder.
+	 * @param header         The CSV header printed by the responder.
 	 */
 
 	public CSVResponder(ItemListFinder itemListFinder, String header) {
 		this.itemListFinder = itemListFinder;
-		this.header=header;
+		this.header = header;
 	}
 
 	/**
@@ -49,11 +51,12 @@ public class CSVResponder {
 	public void handleResponse(HttpServletResponse response, String location, Date fromDate, Date toDate)
 			throws IOException {
 		response.setContentType(CSV_CONTENT);
+		response.setHeader(HttpHeaders.VARY, HttpHeaders.ACCEPT);
 		PrintWriter pw = response.getWriter();
 
 		pw.println(header);
 
-		List<HarmonieItem> list = itemListFinder.find(location, fromDate, toDate);
+		List<HarmonieItem> list = itemListFinder.find(response, location, fromDate, toDate);
 
 		for (HarmonieItem item : list) {
 			item.printItem(pw);
