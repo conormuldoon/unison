@@ -92,7 +92,8 @@ function Unison(props) {
       method: 'GET',
       headers: new Headers({
         'Accept': 'application/hal+json'
-      })
+      }),
+
     }
 
     function clearCurrent() {
@@ -170,7 +171,9 @@ function Unison(props) {
 
     async function requestModel() {
       try {
+
         const root = process.env.PUBLIC_URL;
+
         const response = await fetch(root, halGetHeader);
 
         checkResponse(response, root);
@@ -181,17 +184,16 @@ function Unison(props) {
         const uri = model._links.locationCollection.href;
         await requestCollectionHAL(uri);
         await requestFeatureCollection(uri);
+
       } catch (e) {
         if (e instanceof ResponseError) {
           console.error("HTTP status code: " + e.status);
-          
+
         }
-        console.error(e);
+        alert(e);
         problemConnecting();
 
-
       }
-
 
     }
 

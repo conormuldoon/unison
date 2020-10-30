@@ -1,7 +1,8 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
-import registerServiceWorker from './registerServiceWorker';
+//import registerServiceWorker from './registerServiceWorker';
+import { unregister } from './registerServiceWorker';
 import Unison from './Unison';
 import { createMapFactory } from './closureFactory';
 
@@ -23,4 +24,5 @@ const logoRight=createLogo(require('./partners-logos.jpg'));
 
 
 ReactDOM.render(<Unison createMap={createMapFactory(mapCentre)} logoLeft={logoLeft} logoRight={logoRight} />, document.getElementById('root'));
-registerServiceWorker();
+//registerServiceWorker();
+unregister();
