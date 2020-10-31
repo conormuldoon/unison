@@ -40,7 +40,6 @@ import eu.acclimatize.unison.location.LocationRepository;
 public class HarvesterService {
 
 	private static final int SLEEP_TIME = 60000;
-
 	private static final String VALUE = "value";
 	private static final String PERCENT = "percent";
 
@@ -58,6 +57,8 @@ public class HarvesterService {
 	private SimpleDateFormat dateFormat;
 
 	private Executor executor;
+	
+	private Set<String> displayedUnknown;
 
 	/**
 	 * Creates an instance of HarvesterService.
@@ -91,6 +92,8 @@ public class HarvesterService {
 
 		this.dateFormat = simpleDateFormat;
 		this.executor = executor;
+		
+		displayedUnknown = new HashSet<>();
 
 	}
 
@@ -121,7 +124,6 @@ public class HarvesterService {
 
 	private void harvestData(Iterable<? extends Location> iterable) throws InterruptedException {
 
-		Set<String> displayedUnknown = new HashSet<>();
 		for (Location location : iterable) {
 
 			boolean fetchException;
@@ -129,7 +131,7 @@ public class HarvesterService {
 				fetchException = false;
 				try {
 
-					fetchWeatherData(location, displayedUnknown);
+					fetchWeatherData(location);
 
 				} catch (HarvestRequestException e) {
 					logger.log(Level.SEVERE, e.getMessage());
@@ -166,21 +168,21 @@ public class HarvesterService {
 
 		List<HourlyPrecipitation> hourlyPrecipitation = new ArrayList<>();
 		List<HourlyWeather> hourlyWeather = new ArrayList<>();
-		processDocument(document, hourlyPrecipitation, hourlyWeather, ownedItem, new HashSet<>());
+		processDocument(document, hourlyPrecipitation, hourlyWeather, ownedItem);
 		store(hourlyPrecipitation, hourlyWeather);
 
 	}
 
-	private void fetchWeatherData(Location location, Set<String> displayedUnknown)
+	private void fetchWeatherData(Location location)
 			throws HarvestParseException, HarvestRequestException, DocumentNotFoundException {
 		Document document = lrs.documentForLocation(location);
 
-		processDocument(document, precipitation, weather, location, displayedUnknown);
+		processDocument(document, precipitation, weather, location);
 
 	}
 
 	private void processDocument(Document doc, List<HourlyPrecipitation> hPrecipitation, List<HourlyWeather> hWeather,
-			Location location, Set<String> displayedUnknown) {
+			Location location) {
 
 		doc.getDocumentElement().normalize();
 
@@ -209,7 +211,7 @@ public class HarvesterService {
 
 				} else {
 
-					addWeather(loc.getChildNodes(), ik, hWeather, displayedUnknown);
+					addWeather(loc.getChildNodes(), ik, hWeather);
 
 				}
 
@@ -237,7 +239,7 @@ public class HarvesterService {
 		hPrecipitation.add(new HourlyPrecipitation(ik, new PrecipitationValue(Double.parseDouble(value), mnV, mxV)));
 	}
 
-	private void addWeather(NodeList locChild, ItemKey ik, List<HourlyWeather> hWeather, Set<String> displayedUnknown) {
+	private void addWeather(NodeList locChild, ItemKey ik, List<HourlyWeather> hWeather) {
 		int m = locChild.getLength();
 
 		Double t = null;
