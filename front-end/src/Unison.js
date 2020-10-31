@@ -190,7 +190,6 @@ function Unison(props) {
           console.error("HTTP status code: " + e.status);
 
         }
-        alert(e);
         problemConnecting();
 
       }

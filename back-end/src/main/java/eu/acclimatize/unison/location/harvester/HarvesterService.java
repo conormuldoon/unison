@@ -4,7 +4,9 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 import java.util.concurrent.Executor;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -119,6 +121,7 @@ public class HarvesterService {
 
 	private void harvestData(Iterable<? extends Location> iterable) throws InterruptedException {
 
+		Set<String> displayedUnknown = new HashSet<>();
 		for (Location location : iterable) {
 
 			boolean fetchException;
@@ -126,7 +129,7 @@ public class HarvesterService {
 				fetchException = false;
 				try {
 
-					fetchWeatherData(location);
+					fetchWeatherData(location, displayedUnknown);
 
 				} catch (HarvestRequestException e) {
 					logger.log(Level.SEVERE, e.getMessage());
@@ -147,9 +150,12 @@ public class HarvesterService {
 	 * 
 	 * @param ownedItem The location to obtain data for.
 	 * 
-	 * @throws HarvestParseException Thrown if there was a SAX exception when parsing.
-	 * @throws HarvestRequestException Thrown if there was an I/O exception when connecting to the URI.
-	 * @throws DocumentNotFoundException Thrown if there was no XML document found at the URI.
+	 * @throws HarvestParseException     Thrown if there was a SAX exception when
+	 *                                   parsing.
+	 * @throws HarvestRequestException   Thrown if there was an I/O exception when
+	 *                                   connecting to the URI.
+	 * @throws DocumentNotFoundException Thrown if there was no XML document found
+	 *                                   at the URI.
 	 * 
 	 */
 	@PreAuthorize(Constant.OWNED_ITEM)
@@ -160,21 +166,21 @@ public class HarvesterService {
 
 		List<HourlyPrecipitation> hourlyPrecipitation = new ArrayList<>();
 		List<HourlyWeather> hourlyWeather = new ArrayList<>();
-		processDocument(document, hourlyPrecipitation, hourlyWeather, ownedItem);
+		processDocument(document, hourlyPrecipitation, hourlyWeather, ownedItem, new HashSet<>());
 		store(hourlyPrecipitation, hourlyWeather);
 
 	}
 
-	private void fetchWeatherData(Location location)
+	private void fetchWeatherData(Location location, Set<String> displayedUnknown)
 			throws HarvestParseException, HarvestRequestException, DocumentNotFoundException {
 		Document document = lrs.documentForLocation(location);
 
-		processDocument(document, precipitation, weather, location);
+		processDocument(document, precipitation, weather, location, displayedUnknown);
 
 	}
 
 	private void processDocument(Document doc, List<HourlyPrecipitation> hPrecipitation, List<HourlyWeather> hWeather,
-			Location location) {
+			Location location, Set<String> displayedUnknown) {
 
 		doc.getDocumentElement().normalize();
 
@@ -203,7 +209,7 @@ public class HarvesterService {
 
 				} else {
 
-					addWeather(loc.getChildNodes(), ik, hWeather);
+					addWeather(loc.getChildNodes(), ik, hWeather, displayedUnknown);
 
 				}
 
@@ -231,7 +237,7 @@ public class HarvesterService {
 		hPrecipitation.add(new HourlyPrecipitation(ik, new PrecipitationValue(Double.parseDouble(value), mnV, mxV)));
 	}
 
-	private void addWeather(NodeList locChild, ItemKey ik, List<HourlyWeather> hWeather) {
+	private void addWeather(NodeList locChild, ItemKey ik, List<HourlyWeather> hWeather, Set<String> displayedUnknown) {
 		int m = locChild.getLength();
 
 		Double t = null;
@@ -295,7 +301,10 @@ public class HarvesterService {
 
 			} else if (!nn.equals("#text")) {
 
-				logger.log(Level.WARNING, () -> "Unknown tag in data converter. Tag name: " + nn);
+				if (!displayedUnknown.contains(nn)) {
+					displayedUnknown.add(nn);
+					logger.log(Level.WARNING, () -> "Unknown tag in data converter. Tag name: " + nn);
+				}
 			}
 
 		}
