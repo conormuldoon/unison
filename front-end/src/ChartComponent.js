@@ -105,7 +105,7 @@ function ChartComponent({ curVar, minMax, index, data, zoomDomain, handleZoom })
 
         <VictoryAxis fixLabelOverlap={true} />
         <VictoryAxis dependentAxis label={yLabel} style={{ axisLabel: { padding: 45 } }} tickFormat={
-          (x) => { if (x < .001) { return x.toFixed(3); } if (x > 999) { return Math.round(x); } return x; }} />
+          (x) => { if (Math.abs(x) < .001 ) { return parseFloat(x.toFixed(3)); } if (Math.abs(x) > 999) { return Math.round(x); } return x; }} />
 
       </VictoryChart>
 
