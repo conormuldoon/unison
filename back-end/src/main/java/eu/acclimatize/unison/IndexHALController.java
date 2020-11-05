@@ -18,14 +18,12 @@ import org.springframework.web.servlet.ModelAndView;
 
 import eu.acclimatize.unison.location.HALLocationController;
 
-/** 
+/**
  * 
- * A controller class for the root or index mappings. 
+ * A controller class for the root or index mappings.
  */
 @RestController
 public class IndexHALController {
-
-	private static final String EXTENSION = ".html";
 
 	/**
 	 * Creates a HAL representation for the root.
@@ -40,10 +38,12 @@ public class IndexHALController {
 		list.add(linkTo(methodOn(IndexHALController.class).createModel(response)).withSelfRel());
 		list.add(linkTo(methodOn(IndexHALController.class).indexHAL(response)).withSelfRel());
 
-		list.add(linkTo(methodOn(HALLocationController.class).createModel(response)).withRel(Constant.LOCATION_COLLECTION));
+		list.add(linkTo(methodOn(HALLocationController.class).createModel(response))
+				.withRel(Constant.LOCATION_COLLECTION));
 
-		String baseUri = BasicLinkBuilder.linkToCurrentMapping().toString();
-		list.add(Link.of(baseUri + MappingConstant.USER, Constant.USER));
+		String baseURI = BasicLinkBuilder.linkToCurrentMapping().toString();
+		list.add(Link.of(baseURI + MappingConstant.USER, Constant.USER));
+		list.add(Link.of(baseURI + MappingConstant.EXPLORER, Constant.EXPLORER));
 
 		return new UnisonModel(list);
 	}
@@ -71,14 +71,14 @@ public class IndexHALController {
 	}
 
 	/**
-	 * Map index to the index HTML file. 
+	 * Maps the /index endpoint to the root index HTML file.
 	 * 
 	 * @return A model and view of the index file.
 	 */
 	@GetMapping(MappingConstant.INDEX)
 	public ModelAndView indexHTML(HttpServletResponse response) {
 		response.setHeader(HttpHeaders.VARY, HttpHeaders.ACCEPT);
-		return new ModelAndView(MappingConstant.INDEX + EXTENSION);
+		return new ModelAndView(Constant.INDEX_FILE);
 
 	}
 

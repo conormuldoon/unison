@@ -68,6 +68,11 @@ public class Constant {
 	public static final String WIND_SPEED = "windSpeed";
 
 	/**
+	 *  The link name and mapping suffix for the API explorer.
+	 */
+	public static final String EXPLORER = "explorer";
+
+	/**
 	 * The path variable for the user name.
 	 */
 	public static final String USER_NAME = "userName";
@@ -183,6 +188,10 @@ public class Constant {
 	 * The HTTP location header name.
 	 */
 	public static final String LOCATION_HEADER = "Location";
-	
+
+	/**
+	 * The index file name for the root and explorer directories.
+	 */
+	public static final String INDEX_FILE = MappingConstant.INDEX + ".html";
 
 }

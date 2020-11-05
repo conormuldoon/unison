@@ -92,4 +92,9 @@ public class MappingConstant {
 	 */
 	public static final String CONTAINS = LOCATION_COLLECTION + "/" + Constant.CONTAINS;
 
+	/**
+	 * The mapping for the API explored.
+	 **/
+	public static final String EXPLORER = "/" + Constant.EXPLORER;
+
 }
