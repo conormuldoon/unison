@@ -57,7 +57,7 @@ public class HarvesterService {
 	private SimpleDateFormat dateFormat;
 
 	private Executor executor;
-	
+
 	private Set<String> displayedUnknown;
 
 	/**
@@ -92,7 +92,7 @@ public class HarvesterService {
 
 		this.dateFormat = simpleDateFormat;
 		this.executor = executor;
-		
+
 		displayedUnknown = new HashSet<>();
 
 	}
@@ -229,12 +229,20 @@ public class HarvesterService {
 		String value = precip.getAttribute(VALUE);
 		String mnval = precip.getAttribute("minvalue");
 		Double mnV = null;
-		if (!mnval.equals(""))
+		if (!mnval.equals("")) {
 			mnV = Double.parseDouble(mnval);
+			if(mnV<0) 
+				mnV=null;
+			
+		}
+
 		String mxval = precip.getAttribute("maxvalue");
 		Double mxV = null;
-		if (!mxval.equals(""))
+		if (!mxval.equals("")) {
 			mxV = Double.parseDouble(mxval);
+			if (mxV < 0)
+				mxV = null;
+		}
 
 		hPrecipitation.add(new HourlyPrecipitation(ik, new PrecipitationValue(Double.parseDouble(value), mnV, mxV)));
 	}
