@@ -44,5 +44,9 @@ public class PrecipitationResult implements HarmonieItem {
 		precipitation.printItem(pw);
 
 	}
+	
+	public boolean ternary() {
+		return precipitation.ternary();
+	}
 
 }

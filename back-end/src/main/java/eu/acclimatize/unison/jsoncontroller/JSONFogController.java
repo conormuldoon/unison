@@ -24,14 +24,14 @@ import eu.acclimatize.unison.MappingConstant;
 @RestController
 public class JSONFogController {
 
-	private ItemListFinder fogFinder;
+	private ItemListFinder<HarmonieItem> fogFinder;
 
 	/**
 	 * Creates an instance of JSONFogController.
 	 * 
 	 * @param fogFinder Used to find an ordered list of fog data.
 	 */
-	public JSONFogController(ItemListFinder fogFinder) {
+	public JSONFogController(ItemListFinder<HarmonieItem> fogFinder) {
 		this.fogFinder = fogFinder;
 	}
 

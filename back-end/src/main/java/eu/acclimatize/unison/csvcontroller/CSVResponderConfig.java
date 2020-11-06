@@ -8,6 +8,7 @@ import org.springframework.context.annotation.Configuration;
 
 import eu.acclimatize.unison.CacheSupport;
 import eu.acclimatize.unison.Constant;
+import eu.acclimatize.unison.HarmonieItem;
 import eu.acclimatize.unison.ItemListFinder;
 import eu.acclimatize.unison.result.CloudLevelResult;
 import eu.acclimatize.unison.result.CloudinessResult;
@@ -70,7 +71,7 @@ public class CSVResponderConfig {
 	 *         finder.
 	 */
 	@Bean
-	CSVResponder precipitationResponder(ItemListFinder precipitationFinder, CacheSupport cacheSupport) {
+	public CSVResponder precipitationResponder(ItemListFinder<PrecipitationResult> precipitationFinder, CacheSupport cacheSupport) {
 		return new CSVResponder(precipitationFinder, createHeader(PrecipitationResult.class), cacheSupport);
 	}
 
@@ -82,7 +83,7 @@ public class CSVResponderConfig {
 	 *         finder.
 	 */
 	@Bean
-	CSVResponder cloudLevelResponder(ItemListFinder cloudLevelFinder, CacheSupport cacheSupport) {
+	public CSVResponder cloudLevelResponder(ItemListFinder<HarmonieItem> cloudLevelFinder, CacheSupport cacheSupport) {
 		return new CSVResponder(cloudLevelFinder, createHeader(CloudLevelResult.class), cacheSupport);
 	}
 
@@ -94,7 +95,7 @@ public class CSVResponderConfig {
 	 *         finder.
 	 */
 	@Bean
-	CSVResponder windSpeedResponder(ItemListFinder windSpeedFinder, CacheSupport cacheSupport) {
+	public CSVResponder windSpeedResponder(ItemListFinder<HarmonieItem> windSpeedFinder, CacheSupport cacheSupport) {
 		return new CSVResponder(windSpeedFinder, createHeader(WindSpeedResult.class), cacheSupport);
 	}
 
@@ -106,7 +107,7 @@ public class CSVResponderConfig {
 	 *         finder.
 	 */
 	@Bean
-	CSVResponder windDirectionResponder(ItemListFinder windDirectionFinder, CacheSupport cacheSupport) {
+	public CSVResponder windDirectionResponder(ItemListFinder<HarmonieItem> windDirectionFinder, CacheSupport cacheSupport) {
 		return new CSVResponder(windDirectionFinder, createHeader(WindDirectionResult.class), cacheSupport);
 	}
 
@@ -117,7 +118,7 @@ public class CSVResponderConfig {
 	 * @return A new instance of {@link CVSResponder} that uses the humidity finder.
 	 */
 	@Bean
-	CSVResponder humidityResponder(ItemListFinder humidityFinder, CacheSupport cacheSupport) {
+	public CSVResponder humidityResponder(ItemListFinder<HarmonieItem> humidityFinder, CacheSupport cacheSupport) {
 		return new CSVResponder(humidityFinder, createHeader(HumidityResult.class), cacheSupport);
 	}
 
@@ -128,7 +129,7 @@ public class CSVResponderConfig {
 	 * @return A new instance of {@link CVSResponder} that uses the fog finder.
 	 */
 	@Bean
-	CSVResponder fogResponder(ItemListFinder fogFinder, CacheSupport cacheSupport) {
+	public CSVResponder fogResponder(ItemListFinder<HarmonieItem> fogFinder, CacheSupport cacheSupport) {
 		return new CSVResponder(fogFinder, createHeader(FogResult.class), cacheSupport);
 	}
 
@@ -140,7 +141,7 @@ public class CSVResponderConfig {
 	 *         finder.
 	 */
 	@Bean
-	CSVResponder cloudinessResponder(ItemListFinder cloudinessFinder, CacheSupport cacheSupport) {
+	public CSVResponder cloudinessResponder(ItemListFinder<HarmonieItem> cloudinessFinder, CacheSupport cacheSupport) {
 		return new CSVResponder(cloudinessFinder, createHeader(CloudinessResult.class), cacheSupport);
 	}
 
@@ -151,7 +152,7 @@ public class CSVResponderConfig {
 	 * @return A new instance of {@link CVSResponder} that uses the pressure finder.
 	 */
 	@Bean
-	CSVResponder pressureResponder(ItemListFinder pressureFinder, CacheSupport cacheSupport) {
+	public CSVResponder pressureResponder(ItemListFinder<HarmonieItem> pressureFinder, CacheSupport cacheSupport) {
 		return new CSVResponder(pressureFinder, createHeader(PressureResult.class), cacheSupport);
 	}
 
@@ -163,7 +164,7 @@ public class CSVResponderConfig {
 	 *         finder.
 	 */
 	@Bean
-	CSVResponder dewPointResponder(ItemListFinder dewPointFinder, CacheSupport cacheSupport) {
+	public CSVResponder dewPointResponder(ItemListFinder<HarmonieItem> dewPointFinder, CacheSupport cacheSupport) {
 		return new CSVResponder(dewPointFinder, createHeader(DewPointResult.class), cacheSupport);
 	}
 
@@ -175,7 +176,7 @@ public class CSVResponderConfig {
 	 *         finder.
 	 */
 	@Bean
-	CSVResponder temperatureResponder(ItemListFinder temperatureFinder, CacheSupport cacheSupport) {
+	public CSVResponder temperatureResponder(ItemListFinder<HarmonieItem> temperatureFinder, CacheSupport cacheSupport) {
 		return new CSVResponder(temperatureFinder, createHeader(TemperatureResult.class), cacheSupport);
 	}
 

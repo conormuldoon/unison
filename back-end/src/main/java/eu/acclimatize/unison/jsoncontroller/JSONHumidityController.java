@@ -24,14 +24,14 @@ import eu.acclimatize.unison.MappingConstant;
 @RestController
 public class JSONHumidityController {
 
-	private ItemListFinder humidityFinder;
+	private ItemListFinder<HarmonieItem> humidityFinder;
 
 	/**
 	 * Creates an instance of JSONHumidityController.
 	 * 
 	 * @param humidityFinder Used to find an ordered list of humidity data.
 	 */
-	public JSONHumidityController(ItemListFinder humidityFinder) {
+	public JSONHumidityController(ItemListFinder<HarmonieItem> humidityFinder) {
 		this.humidityFinder = humidityFinder;
 	}
 

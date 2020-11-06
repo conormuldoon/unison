@@ -231,9 +231,9 @@ public class HarvesterService {
 		Double mnV = null;
 		if (!mnval.equals("")) {
 			mnV = Double.parseDouble(mnval);
-			if(mnV<0) 
-				mnV=null;
-			
+			if (mnV < 0)
+				mnV = null;
+
 		}
 
 		String mxval = precip.getAttribute("maxvalue");

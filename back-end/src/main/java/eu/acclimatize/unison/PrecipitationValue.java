@@ -50,9 +50,13 @@ public class PrecipitationValue implements HarmonieItem {
 
 	}
 
+	public boolean ternary() {
+		return minvalue != null && maxvalue != null;
+	}
+
 	@Override
 	public void printItem(PrintWriter pw) {
-		if (minvalue != null) {
+		if (ternary()) {
 			pw.println(value + "," + minvalue + "," + maxvalue + ",");
 		} else {
 			pw.println(value + ",-1.0,-1.0,");

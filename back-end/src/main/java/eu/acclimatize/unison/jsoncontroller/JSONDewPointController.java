@@ -24,14 +24,14 @@ import eu.acclimatize.unison.MappingConstant;
 @RestController
 public class JSONDewPointController {
 
-	private ItemListFinder dewPointFinder;
+	private ItemListFinder<HarmonieItem> dewPointFinder;
 
 	/**
 	 * Creates an instance of JSONDewPointController.
 	 * 
 	 * @param dewPointFinder Used to find an ordered list of dew point data.
 	 */
-	public JSONDewPointController(ItemListFinder dewPointFinder) {
+	public JSONDewPointController(ItemListFinder<HarmonieItem> dewPointFinder) {
 		this.dewPointFinder = dewPointFinder;
 	}
 

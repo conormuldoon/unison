@@ -24,14 +24,14 @@ import eu.acclimatize.unison.MappingConstant;
 @RestController
 public class JSONCloudLevelController {
 
-	private ItemListFinder cloudLevelFinder;
+	private ItemListFinder<HarmonieItem> cloudLevelFinder;
 
 	/**
 	 * Creates an instance of JSONCloudLevelController.
 	 * 
 	 * @param cloudLevelFinder Used to find an ordered list of cloud level data.
 	 */
-	public JSONCloudLevelController(ItemListFinder cloudLevelFinder) {
+	public JSONCloudLevelController(ItemListFinder<HarmonieItem> cloudLevelFinder) {
 		this.cloudLevelFinder = cloudLevelFinder;
 	}
 

@@ -23,14 +23,14 @@ import eu.acclimatize.unison.MappingConstant;
 @RestController
 public class JSONCloudinessController {
 
-	private ItemListFinder cloudinessFinder;
+	private ItemListFinder<HarmonieItem> cloudinessFinder;
 
 	/**
 	 * Creates an instance of JSONCloudinessController.
 	 * 
 	 * @param cloudinessFinder Used to find an ordered list of cloudiness data.
 	 */
-	public JSONCloudinessController(ItemListFinder cloudinessFinder) {
+	public JSONCloudinessController(ItemListFinder<HarmonieItem> cloudinessFinder) {
 		this.cloudinessFinder = cloudinessFinder;
 
 	}

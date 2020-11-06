@@ -24,14 +24,14 @@ import eu.acclimatize.unison.MappingConstant;
 @RestController
 public class JSONPressureController {
 
-	private ItemListFinder pressureFinder;
+	private ItemListFinder<HarmonieItem> pressureFinder;
 
 	/**
 	 * Creates an instance of JSONPressureController.
 	 * 
 	 * @param pressureFinder Used to find an ordered list of pressure data.
 	 */
-	public JSONPressureController(ItemListFinder pressureFinder) {
+	public JSONPressureController(ItemListFinder<HarmonieItem> pressureFinder) {
 		this.pressureFinder = pressureFinder;
 	}
 

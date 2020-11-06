@@ -24,7 +24,7 @@ import eu.acclimatize.unison.MappingConstant;
 @RestController
 public class JSONWindDirectionController {
 
-	private ItemListFinder windDirectionFinder;
+	private ItemListFinder<HarmonieItem> windDirectionFinder;
 
 	/**
 	 * Creates an instance of JSONWindDirectionController.
@@ -32,7 +32,7 @@ public class JSONWindDirectionController {
 	 * @param windDirectionFinder Used to find an ordered list of wind direction
 	 *                            data.
 	 */
-	public JSONWindDirectionController(ItemListFinder windDirectionFinder) {
+	public JSONWindDirectionController(ItemListFinder<HarmonieItem> windDirectionFinder) {
 		this.windDirectionFinder = windDirectionFinder;
 	}
 

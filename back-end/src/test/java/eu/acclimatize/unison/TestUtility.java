@@ -232,9 +232,9 @@ public class TestUtility {
 	 * @param list A collection of items.
 	 * @param cls  The required type.
 	 */
-	public static void assertType(Iterable<HarmonieItem> list, Class<? extends HarmonieItem> cls) {
+	public static void assertType(Iterable<? extends HarmonieItem> list, Class<? extends HarmonieItem> cls) {
 
-		Iterator<HarmonieItem> itr = list.iterator();
+		Iterator<? extends HarmonieItem> itr = list.iterator();
 		HarmonieItem item = itr.next();
 		Assert.assertTrue(cls.isInstance(item));
 	}

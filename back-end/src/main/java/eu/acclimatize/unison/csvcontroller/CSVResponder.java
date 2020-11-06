@@ -18,7 +18,7 @@ import eu.acclimatize.unison.ItemListFinder;
 public class CSVResponder {
 
 	private static final String CSV_CONTENT = "text/csv";
-	private ItemListFinder itemListFinder;
+	private ItemListFinder<? extends HarmonieItem> itemListFinder;
 	private String header;
 
 	private CacheSupport cacheSupport;
@@ -30,7 +30,7 @@ public class CSVResponder {
 	 * @param header         The CSV header printed by the responder.
 	 */
 
-	public CSVResponder(ItemListFinder itemListFinder, String header, CacheSupport cacheSupport) {
+	public CSVResponder(ItemListFinder<? extends HarmonieItem> itemListFinder, String header, CacheSupport cacheSupport) {
 		this.itemListFinder = itemListFinder;
 		this.header = header;
 		this.cacheSupport=cacheSupport;
@@ -58,7 +58,7 @@ public class CSVResponder {
 
 		pw.println(header);
 
-		List<HarmonieItem> list = itemListFinder.find(response, location, fromDate, toDate);
+		List<? extends HarmonieItem> list = itemListFinder.find(response, location, fromDate, toDate);
 
 		for (HarmonieItem item : list) {
 			item.printItem(pw);

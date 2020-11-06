@@ -24,14 +24,14 @@ import eu.acclimatize.unison.MappingConstant;
 @RestController
 public class JSONWindSpeedController {
 
-	private ItemListFinder windSpeedFinder;
+	private ItemListFinder<HarmonieItem> windSpeedFinder;
 
 	/**
 	 * Creates an instance of WindSpeedController.
 	 * 
 	 * @param windSpeedFinder Used to find an ordered list of wind speed data.
 	 */
-	public JSONWindSpeedController(ItemListFinder windSpeedFinder) {
+	public JSONWindSpeedController(ItemListFinder<HarmonieItem> windSpeedFinder) {
 		this.windSpeedFinder = windSpeedFinder;
 	}
 

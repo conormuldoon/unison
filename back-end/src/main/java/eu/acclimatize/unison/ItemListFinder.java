@@ -16,11 +16,12 @@ import javax.servlet.http.HttpServletResponse;
  * A class that finds a list of items based on a JPQL query.
  *
  */
-public class ItemListFinder {
+public class ItemListFinder<T extends HarmonieItem> {
 
 	private String query;
 	private EntityManager entityManager;
 	private CacheSupport cacheSupport;
+	private Class<T> queryClass;
 
 	/**
 	 * Creates an instance of ItemListFinder.
@@ -28,10 +29,11 @@ public class ItemListFinder {
 	 * @param entityManager The JPA entity manager.
 	 * @param query         The query to be executed.
 	 */
-	public ItemListFinder(EntityManager entityManager, String query, CacheSupport cacheSupport) {
+	public ItemListFinder(EntityManager entityManager, String query, CacheSupport cacheSupport, Class<T> queryClass) {
 		this.entityManager = entityManager;
 		this.query = query;
 		this.cacheSupport = cacheSupport;
+		this.queryClass = queryClass;
 
 	}
 
@@ -43,15 +45,15 @@ public class ItemListFinder {
 	 * @param toDate   The end date (inclusive) for the query.
 	 * @return The list of items that match the query parameters.
 	 */
-	public List<HarmonieItem> find(HttpServletResponse response, String location, Date fromDate, Date toDate) {
+	public List<T> find(HttpServletResponse response, String location, Date fromDate, Date toDate) {
 
-		TypedQuery<HarmonieItem> typedQuery = entityManager.createQuery(query, HarmonieItem.class);
+		TypedQuery<T> typedQuery = entityManager.createQuery(query, queryClass);
 		typedQuery.setParameter(LOCATION_NAME, location);
 		typedQuery.setParameter(FROM_DATE, fromDate);
 		typedQuery.setParameter(TO_DATE, toDate);
-		
+
 		cacheSupport.addHeader(toDate, response);
-		
+
 		return typedQuery.getResultList();
 	}
 
