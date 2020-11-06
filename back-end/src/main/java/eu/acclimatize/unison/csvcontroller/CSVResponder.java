@@ -22,6 +22,7 @@ public class CSVResponder {
 	private String header;
 
 	private CacheSupport cacheSupport;
+
 	/**
 	 * Creates an instance of CSVResponder.
 	 * 
@@ -30,10 +31,11 @@ public class CSVResponder {
 	 * @param header         The CSV header printed by the responder.
 	 */
 
-	public CSVResponder(ItemListFinder<? extends HarmonieItem> itemListFinder, String header, CacheSupport cacheSupport) {
+	public CSVResponder(ItemListFinder<? extends HarmonieItem> itemListFinder, String header,
+			CacheSupport cacheSupport) {
 		this.itemListFinder = itemListFinder;
 		this.header = header;
-		this.cacheSupport=cacheSupport;
+		this.cacheSupport = cacheSupport;
 	}
 
 	/**
@@ -51,14 +53,32 @@ public class CSVResponder {
 	 */
 	public void handleResponse(HttpServletResponse response, String location, Date fromDate, Date toDate)
 			throws IOException {
+
+		List<? extends HarmonieItem> list = itemListFinder.find(response, location, fromDate, toDate);
+
+		handleResponse(response, toDate, list);
+	}
+
+	/**
+	 * Writes the list to the HTTP servlet response object in a CSV format and
+	 * alters caching headers subject to the last date for the query range.
+	 * 
+	 * @param location The location of interest.
+	 * @param fromDate The start date for the data (inclusive).
+	 * @param toDate   The end date for the data (inclusive).
+	 * @param response Data is written to the writer of the response object and the
+	 *                 content type is set to text/csv.
+	 * @throws IOException Thrown if there is a problem obtaining the writer of the
+	 *                     response object.
+	 */
+	public void handleResponse(HttpServletResponse response, Date toDate, List<? extends HarmonieItem> list)
+			throws IOException {
 		response.setContentType(CSV_CONTENT);
 		cacheSupport.addHeader(toDate, response);
-		
+
 		PrintWriter pw = response.getWriter();
 
 		pw.println(header);
-
-		List<? extends HarmonieItem> list = itemListFinder.find(response, location, fromDate, toDate);
 
 		for (HarmonieItem item : list) {
 			item.printItem(pw);

@@ -1,8 +1,6 @@
 package eu.acclimatize.unison.jsoncontroller;
 
-import java.util.ArrayList;
 import java.util.Date;
-import java.util.List;
 
 import javax.servlet.http.HttpServletResponse;
 
@@ -15,9 +13,8 @@ import org.springframework.web.bind.annotation.RestController;
 
 import eu.acclimatize.unison.Constant;
 import eu.acclimatize.unison.HarmonieItem;
-import eu.acclimatize.unison.ItemListFinder;
 import eu.acclimatize.unison.MappingConstant;
-import eu.acclimatize.unison.result.PrecipitationResult;
+import eu.acclimatize.unison.PrecipitationResultFilter;
 
 /**
  * 
@@ -27,16 +24,17 @@ import eu.acclimatize.unison.result.PrecipitationResult;
 @RestController
 public class JSONPrecipitationController {
 
-	private ItemListFinder<PrecipitationResult> precipitationFinder;
+	private PrecipitationResultFilter resultFilter;
 
 	/**
 	 * Creates an instance of JSONPrecipitationController.
 	 * 
-	 * @param precipitationFinder Used to find an ordered list of precipitation
-	 *                            data.
+	 * @param restultFilter Used to find an ordered list of precipitation data
+	 *                      containing either ternary or single value precipitation
+	 *                      values.
 	 */
-	public JSONPrecipitationController(ItemListFinder<PrecipitationResult> precipitationFinder) {
-		this.precipitationFinder = precipitationFinder;
+	public JSONPrecipitationController(PrecipitationResultFilter resultFilter) {
+		this.resultFilter = resultFilter;
 	}
 
 	/**
@@ -49,31 +47,13 @@ public class JSONPrecipitationController {
 	 *         items.
 	 */
 	@GetMapping(value = MappingConstant.LOCATION_PRECIPITATION, produces = MediaType.APPLICATION_JSON_VALUE)
-	public Iterable<? extends HarmonieItem> precipitation(@PathVariable(Constant.LOCATION_NAME) String location,
+	public Iterable<HarmonieItem> precipitation(@PathVariable(Constant.LOCATION_NAME) String location,
 			@RequestParam(value = Constant.FROM_DATE) @DateTimeFormat(pattern = Constant.FORMAT) Date fromDate,
 			@RequestParam(value = Constant.TO_DATE) @DateTimeFormat(pattern = Constant.FORMAT) Date toDate,
 			HttpServletResponse response) {
-
-		List<PrecipitationResult> list = precipitationFinder.find(response, location, fromDate, toDate);
-		ArrayList<HarmonieItem> ret = new ArrayList<>();
 		
-		int n = list.size();
-		
-		if (n > 0) {
-			PrecipitationResult first = list.get(0);
-			boolean firstT = first.ternary();
-			ret.add(first);
-			for (int i = 1; i < n; i++) {
-				PrecipitationResult pr = list.get(i);
-				if (pr.ternary() == firstT) {
-					ret.add(pr);
-				}
-			}
-
-		}
-		
-		return ret;
-
+		return resultFilter.filterResults(response, location, fromDate, toDate);
+	
 	}
 
 }

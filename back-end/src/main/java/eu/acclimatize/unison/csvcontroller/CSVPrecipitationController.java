@@ -2,6 +2,7 @@ package eu.acclimatize.unison.csvcontroller;
 
 import java.io.IOException;
 import java.util.Date;
+import java.util.List;
 
 import javax.servlet.http.HttpServletResponse;
 
@@ -12,7 +13,9 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import eu.acclimatize.unison.Constant;
+import eu.acclimatize.unison.HarmonieItem;
 import eu.acclimatize.unison.MappingConstant;
+import eu.acclimatize.unison.PrecipitationResultFilter;
 
 /**
  * 
@@ -23,6 +26,7 @@ import eu.acclimatize.unison.MappingConstant;
 public class CSVPrecipitationController {
 
 	private CSVResponder precipitationResponder;
+	private PrecipitationResultFilter resultFilter;
 
 	/**
 	 * Creates an instance of CSVPrecipitationController.
@@ -30,8 +34,9 @@ public class CSVPrecipitationController {
 	 * @param precipitationResponder A responder that prints precipitation data in a
 	 *                               CSV format.
 	 */
-	public CSVPrecipitationController(CSVResponder precipitationResponder) {
+	public CSVPrecipitationController(CSVResponder precipitationResponder, PrecipitationResultFilter resultFilter) {
 		this.precipitationResponder = precipitationResponder;
+		this.resultFilter = resultFilter;
 	}
 
 	/**
@@ -51,7 +56,9 @@ public class CSVPrecipitationController {
 			@RequestParam(value = Constant.TO_DATE) @DateTimeFormat(pattern = Constant.FORMAT) Date toDate,
 			HttpServletResponse response) throws IOException {
 
-		precipitationResponder.handleResponse(response, location, fromDate, toDate);
+		List<HarmonieItem> list = resultFilter.filterResults(response, location, fromDate, toDate);
+
+		precipitationResponder.handleResponse(response, toDate, list);
 
 	}
 

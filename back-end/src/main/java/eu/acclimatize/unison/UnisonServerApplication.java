@@ -15,6 +15,8 @@ import org.springframework.scheduling.annotation.EnableScheduling;
 import org.springframework.web.filter.ForwardedHeaderFilter;
 import org.springframework.web.filter.ShallowEtagHeaderFilter;
 
+import eu.acclimatize.unison.result.PrecipitationResult;
+
 /**
  * 
  * The application class that starts spring and configures beans.
@@ -72,14 +74,36 @@ public class UnisonServerApplication {
 
 	}
 
+	/**
+	 * Used to alter caching header, which conditional on the date range of queries.
+	 * 
+	 * @return A bean for altering caching headers.
+	 */
 	@Bean
 	public CacheSupport cacheSupport() {
 		return new CacheSupport();
 	}
 
+	/**
+	 * Use to add strong ETag headers.
+	 * 
+	 * @return A bean that computes ETag values for responses.
+	 */
 	@Bean
 	public ShallowEtagHeaderFilter shallowEtagHeaderFilter() {
 		return new ShallowEtagHeaderFilter();
+	}
+
+	/**
+	 * Used to ensure responses contain only single value or ternary precipitation
+	 * results.
+	 * 
+	 * @param precipitationFinder The finder used to obtain precipitation results.
+	 * @return A bean for filtering precipitation results.
+	 */
+	@Bean
+	public PrecipitationResultFilter resultFilter(ItemListFinder<PrecipitationResult> precipitationFinder) {
+		return new PrecipitationResultFilter(precipitationFinder);
 	}
 
 }
