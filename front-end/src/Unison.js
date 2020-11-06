@@ -7,7 +7,7 @@ import { formatDate } from 'react-day-picker/moment';
 import './App.css';
 import ARLocationComponent from './ARLocationComponent';
 import { FORMAT, SELF } from './Constant';
-import createSelector from './selectorFactory';
+import DateSelector from './DateSelector';
 import { today, tomorrow, expandLink, problemConnecting } from './Util';
 import HttpStatus from 'http-status-codes';
 
@@ -260,6 +260,11 @@ function Unison(props) {
     } else if (response.status === HttpStatus.GATEWAY_TIMEOUT) {
       problemConnecting();
     }
+  }
+
+
+  function createSelector(label, dateValue, handleDayChange){
+    return <DateSelector label={label} dateValue={dateValue} handleDayChange={handleDayChange} />;
   }
 
   return (

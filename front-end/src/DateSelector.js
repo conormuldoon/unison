@@ -9,7 +9,7 @@ import { FORMAT } from './Constant';
  * Creates a component for selecting a date.
  * 
  */
-function createSelector(label, dateValue, handleDayChange) {
+function DateSelector({label, dateValue, handleDayChange}) {
 
 
   return (
@@ -32,4 +32,4 @@ function createSelector(label, dateValue, handleDayChange) {
 
 
 
-export default createSelector;
+export default DateSelector;

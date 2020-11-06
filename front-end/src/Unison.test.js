@@ -2,7 +2,7 @@ import "@testing-library/jest-dom/extend-expect";
 import fetchMock from 'fetch-mock';
 import React from 'react';
 import ReactDOM from 'react-dom';
-import { fireEvent, render, waitFor, screen } from "@testing-library/react";
+import { fireEvent, render, waitFor, screen, wait } from "@testing-library/react";
 import Unison from './Unison';
 
 
@@ -268,6 +268,7 @@ it('displays popup when marker clicked', async () => {
 
 
     fireEvent.click(screen.getAllByAltText('')[1]);
+
 
     const text = await waitFor(() => screen.getByText('UCD'));
     expect(text).toBeDefined();
