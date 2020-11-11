@@ -76,8 +76,8 @@ it('displays popup', () => {
   const marker = [{ name: location.name, position: [53.308441, -6.223682] }];
 
   const curVar = 'Temperature';
-  const fromDate = '1/2/2018';
-  const toDate = '7/10/2019';
+  const fromDate = '1-2-2018';
+  const toDate = '7-10-2019';
   const mapCentre = [53.35014, -6.266155];
 
   fetchMock.get('end:/temperature?fromDate=' + fromDate + '&toDate=' + toDate, []);
