@@ -1,9 +1,10 @@
 import ReactDOM from 'react-dom';
 import { render } from "@testing-library/react";
-import createSelector from './selectorFactory';
+import DateSelector from './DateSelector';
+import React from 'react';
 
 
-const dateSelector = createSelector('Test Label', '23/10/2019', () => { });
+const dateSelector = <DateSelector label={'Test Label'} dateValue={'11-11-2020'} handleDayChange={() => { }} />;
 
 it('renders without crashing', () => {
   const div = document.createElement('div');
