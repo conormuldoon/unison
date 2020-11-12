@@ -1,7 +1,7 @@
 import fetchMock from 'fetch-mock';
 import React from 'react';
 import ReactDOM from 'react-dom';
-import { fireEvent, render } from "@testing-library/react";
+import { fireEvent, render, waitFor } from "@testing-library/react";
 import LocationForm from './LocationForm';
 import { locationPutObject } from './Util';
 import HttpStatus from 'http-status-codes';
@@ -25,8 +25,9 @@ it('mathes snapshot', () => {
 
 });
 
-function changeValue(getByLabelText, labelText, value) {
-  fireEvent.change(getByLabelText(labelText), { target: { value: value } });
+async function changeValue(getByLabelText, labelText, value) {
+
+  fireEvent.change(await waitFor(() => getByLabelText(labelText)), { target: { value: value } });
 }
 
 const collectionModel = {
@@ -42,8 +43,8 @@ const collectionModel = {
   }
 }
 
-it('sends the data in the form when submit is clicked', async (done) => {
-  jest.spyOn(window, 'fetch').mockImplementation(() => {
+it('sends the data in the form when submit is clicked', async () => {
+  const fetch = jest.spyOn(window, 'fetch').mockImplementation(() => {
     return {
       headers: { get: () => { } }, ok: true,
       json: () => { return { properties: { links: { harvest: '/harvest' } } } }
@@ -62,8 +63,8 @@ it('sends the data in the form when submit is clicked', async (done) => {
 
     expect(hideDisplay).toHaveBeenCalledTimes(1);
 
-    expect(fetch).toBeCalledWith('http://localhost:8080/locationCollection', locationPutObject(location, lon, lat));
-    done();
+
+
   };
 
   const map = new Map();
@@ -72,24 +73,26 @@ it('sends the data in the form when submit is clicked', async (done) => {
     toggleDisplay={() => { }} featureProperties={map} />;
   const { getByText, getByLabelText } = render(component);
 
-  changeValue(getByLabelText, 'Location name:', location);
-  changeValue(getByLabelText, 'Longitude:', lon);
-  changeValue(getByLabelText, 'Latitude:', lat);
+  await changeValue(getByLabelText, 'Location name:', location);
+  await changeValue(getByLabelText, 'Longitude:', lon);
+  await changeValue(getByLabelText, 'Latitude:', lat);
 
   jest.spyOn(window, 'alert').mockImplementation(() => { });
+  fetchMock.put('end:locationCollection', 202);
+  fetchMock.post('end:locationCollection/UCD', 200);
+  fireEvent.click(await waitFor(() => getByText('Submit')));
+  await changeValue(getByLabelText, 'Latitude:', '');
 
-  fireEvent.click(getByText('Submit'));
   fetchMock.restore();
 
 
 });
 
-it('handles add location', async (done) => {
+it('handles add location', async () => {
   const location = 'UCD';
 
-  fetchMock.get('end:contains?name=UCD', { value: false });
+  fetchMock.get('end:contains?name='+location, { value: false });
   fetchMock.put('end:/location', { status: HttpStatus.OK, body: { properties: { links: { harvest: '/harvest' } } } });
-  fetchMock.post('end:/harvest', { status: HttpStatus.OK });
 
 
   jest.spyOn(window, 'alert').mockImplementation(() => { });
@@ -97,9 +100,9 @@ it('handles add location', async (done) => {
 
 
   const obtainData = () => {
-    expect(hideDisplay).toHaveBeenCalledTimes(1);
+
     expect(alert).toBeCalledWith(location + ' was added.');
-    done();
+
   };
 
   const map = new Map();
@@ -107,9 +110,14 @@ it('handles add location', async (done) => {
     toggleDisplay={() => { }} featureProperties={map} />;
   const { getByText, getByLabelText } = render(component);
 
-  changeValue(getByLabelText, 'Location name:', location);
+  await changeValue(getByLabelText, 'Location name:', location);
 
-  fireEvent.click(getByText('Submit'));
+  fetchMock.put('end:locationCollection', 202);
+  fetchMock.post('end:locationCollection/'+location, 200);
+  const button = await waitFor(() => getByText('Submit'));
+  fireEvent.click(button);
+  await changeValue(getByLabelText, 'Latitude:', '');
+  expect(hideDisplay).toHaveBeenCalledTimes(1);
 
   fetchMock.restore();
 

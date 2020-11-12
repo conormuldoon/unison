@@ -2,7 +2,7 @@ import "@testing-library/jest-dom/extend-expect";
 import fetchMock from 'fetch-mock';
 import React from 'react';
 import ReactDOM from 'react-dom';
-import { fireEvent, render, waitFor, screen, wait } from "@testing-library/react";
+import { fireEvent, render, waitFor, screen } from "@testing-library/react";
 import Unison from './Unison';
 
 
@@ -160,7 +160,7 @@ it('displays popup when marker clicked', async () => {
     fetchMock.get('end:/locationCollection', locationCollection, { overwriteRoutes: false });
 
 
-    fetchMock.get('end:/precipitation?fromDate=1/9/2019&toDate=23/10/2019', [{
+    fetchMock.get('end:/precipitation?fromDate=1-9-2019&toDate=23-10-2019', [{
         "date": "2019-04-01T23:00:00.000+0000",
         "precipitation": {
             "value": 0,
@@ -260,6 +260,11 @@ it('displays popup when marker clicked', async () => {
 
 
     fetchMock.get('/', unisonModel);
+    fetchMock.get('end:fromDate=24-10-2019&toDate=25-10-2019', []);
+
+    const mockDateNow = jest.fn(() => 1571875200000);
+    const dn = global.Date.now;
+    global.Date.now = mockDateNow;
 
     const unison = <Unison createMap={mapFactory} />;
     render(unison);
@@ -274,8 +279,7 @@ it('displays popup when marker clicked', async () => {
     expect(text).toBeDefined();
     //debug();
 
-
-
+    global.Date.now = dn;
 
     fetchMock.restore();
 });

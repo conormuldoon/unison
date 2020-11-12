@@ -2,7 +2,7 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import LeafletMap from './LeafletMap';
 
-import { render, fireEvent } from "@testing-library/react";
+import { render, fireEvent, waitFor } from "@testing-library/react";
 import fetchMock from 'fetch-mock';
 
 
@@ -69,7 +69,7 @@ it('mathes snapshot', () => {
 
 });
 
-it('displays popup', () => {
+it('displays popup', async () => {
 
 
   // position: [lat, lon]
@@ -90,7 +90,8 @@ it('displays popup', () => {
     curVar={curVar} mapCentre={mapCentre} markerCallback={markerCallback} marker={marker} fromDate={fromDate} toDate={toDate} />);
 
   // Firing click event for marker icon image
-  fireEvent.click(getAllByAltText('')[1]);
+  const arr = await waitFor(() => getAllByAltText(''));
+  fireEvent.click(arr[1]);
   expect(markerCallback).toHaveBeenCalledWith(location.name);
 
   fetchMock.restore();

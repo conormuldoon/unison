@@ -1,7 +1,7 @@
 import fetchMock from 'fetch-mock';
 import React from 'react';
 import ReactDOM from 'react-dom';
-import { render,  waitFor, screen } from "@testing-library/react";
+import { render, waitFor, screen, act } from "@testing-library/react";
 import ChartPopup from './ChartPopup';
 import { PRECIP, CL } from './Constant';
 import { chartText } from './Util';
@@ -68,30 +68,32 @@ const data = [{ "date": "2019-02-23T19:00:00.000+0000", "precipitation": { "valu
 it('renders without crashing', async () => {
 
 
-  fetchMock.get(apiRequest, data);
+  fetchMock.get(apiRequest, []);
 
   const div = document.createElement('div');
 
   ReactDOM.render(chartPopup, div);
+
   ReactDOM.unmountComponentAtNode(div);
   fetchMock.restore();
 });
 
 
 
-it('mathes snapshot', () => {
+it('mathes snapshot', async () => {
 
   fetchMock.get(apiRequest, data);
 
-  const { container } = render(chartPopup);
-
+  const { container, getByText } = render(chartPopup);
+  await waitFor(() => getByText('Precipitation data from ' + location.name));
   expect(container).toMatchSnapshot();
 
   fetchMock.restore();
 
 });
 
-it('displays text for the selected variable and location', () => {
+
+it('displays text for the selected variable and location', async () => {
 
   fetchMock.get(apiRequest, []);
   const VAR_OPT = [PRECIP, 'Humidity', 'Wind Direction', 'Wind Speed', 'Cloudiness', CL, 'Dew Point', 'Pressure', 'Temperature'];
@@ -188,7 +190,7 @@ it('displays text for the selected variable and location', () => {
       const uri = expandLink(loc, 'Wind Speed', fromDate, toDate);
       const { getByText } = render(<ChartPopup curVar={vo} name={loc.name} uri={uri} closePopup={() => { }} />);
 
-      getByText(sOpt + ' data from ' + loc.name);
+      await waitFor(() => getByText(sOpt + ' data from ' + loc.name));
     }
   }
 
@@ -196,7 +198,8 @@ it('displays text for the selected variable and location', () => {
 });
 
 
-it('displays a lower case letter for second word', () => {
+
+it('displays a lower case letter for second word', async () => {
 
   fetchMock.get(apiRequest, []);
   const wdURI = expandLink(location, 'Wind Direction', fromDate, toDate);
@@ -204,18 +207,18 @@ it('displays a lower case letter for second word', () => {
   const { getByText } = render(<ChartPopup curVar={'Wind Direction'} name={location.name} uri={wdURI}
     closePopup={() => { }} />);
 
-  getByText('Wind direction data from ' + location.name);
+  await waitFor(() => getByText('Wind direction data from ' + location.name));
 
 
   fetchMock.restore();
 });
 
-it('adds a chart', () => {
+it('adds a chart', async () => {
 
   fetchMock.get(apiRequest, data);
 
   render(chartPopup);
-  waitFor(() => screen.getByTestId('chart'));
+  await waitFor(() => screen.getByTestId('chart'));
   fetchMock.restore();
 });
 

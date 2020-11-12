@@ -38,7 +38,7 @@ it('mathes snapshot', () => {
 });
 
 
-it('handles remove location', async (done) => {
+it('handles remove location', (done) => {
 
   fetchMock.delete('end:/' + location.name, HttpStatus.OK);
 

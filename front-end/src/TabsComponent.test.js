@@ -1,7 +1,7 @@
 import "@testing-library/jest-dom/extend-expect";
 import fetchMock from 'fetch-mock';
 import React from 'react';
-import { render } from "@testing-library/react";
+import { render, waitFor } from "@testing-library/react";
 import TabsComponent from './TabsComponent';
 
 const DLEN = 16;
@@ -21,7 +21,7 @@ const addChart = async (weatherVariable, dataArray, zoomDomain) => {
     const { getByTestId /*, debug */} = render(<TabsComponent curVar={weatherVariable} data={dataArray} zoomDomain={zoomDomain} minMax={false} setZoomDomain={() => { }} />);
 
 
-    getByTestId('chart');
+    await waitFor(()=>getByTestId('chart'));
 
 
     fetchMock.restore();
