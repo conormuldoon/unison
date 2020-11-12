@@ -5,7 +5,7 @@ import RemoveComponent from './RemoveComponent';
 
 export function createMapFactory(mapCentre) {
 
-    return function (marker, curVar, locationMap, markerClicked, fromDate, toDate, curLoc) {
+    return function mapFactory(marker, curVar, locationMap, markerClicked, fromDate, toDate, curLoc) {
         return <LeafletMap marker={marker} curVar={curVar} featureProperties={locationMap}
             markerCallback={markerClicked} fromDate={fromDate} toDate={toDate}
             mapCentre={mapCentre} linksProperty={curLoc} />;
@@ -15,7 +15,7 @@ export function createMapFactory(mapCentre) {
 
 export function createLocationFactory(obtainData, collectionModel) {
 
-    return function (toggleDisplayAdd, displayAdd, hideAdd) {
+    return function locationFactory(toggleDisplayAdd, displayAdd, hideAdd) {
         return <LocationForm obtainData={obtainData} toggleDisplay={toggleDisplayAdd}
             display={displayAdd} hideDisplay={hideAdd} collectionModel={collectionModel} />;
     }
@@ -23,11 +23,11 @@ export function createLocationFactory(obtainData, collectionModel) {
 
 export function createRemoveFactory(obtainData, href, name) {
 
-    return function (hideDisplay) {
+    return function removeFactory(hideDisplay) {
         return <RemoveComponent obtainData={obtainData}
             hideDisplay={hideDisplay}
-            href={href} 
+            href={href}
             name={name}
-            />;
+        />;
     }
 }

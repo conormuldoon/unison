@@ -1,7 +1,7 @@
 import fetchMock from 'fetch-mock';
 import React from 'react';
 import ReactDOM from 'react-dom';
-import { render, waitFor, screen, act } from "@testing-library/react";
+import { render, waitFor, screen } from "@testing-library/react";
 import ChartPopup from './ChartPopup';
 import { PRECIP, CL } from './Constant';
 import { chartText } from './Util';

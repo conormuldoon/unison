@@ -1,5 +1,6 @@
 import React from 'react';
 import DayPickerInput from 'react-day-picker/DayPickerInput';
+import PropTypes from 'prop-types';
 import 'react-day-picker/lib/style.css';
 import { formatDate, parseDate } from 'react-day-picker/moment';
 import { FORMAT } from './Constant';
@@ -27,6 +28,19 @@ function DateSelector({label, dateValue, handleDayChange}) {
       />
     </div>
   );
+
+}
+
+DateSelector.propTypes = {
+
+  /** The label to display over the selector. */
+  label: PropTypes.string.isRequired,
+
+  /** The initial date value to display. */
+  dateValue: PropTypes.string.isRequired,
+
+  /** A callback function called when the date is changed. */
+  handleDayChange: PropTypes.func.isRequired,
 
 }
 
