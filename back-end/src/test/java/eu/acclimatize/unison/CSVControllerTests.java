@@ -6,14 +6,14 @@ import java.io.StringWriter;
 
 import javax.servlet.http.HttpServletResponse;
 
-import org.junit.After;
-import org.junit.Before;
-import org.junit.Test;
-import org.junit.runner.RunWith;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.Mockito;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.test.context.junit4.SpringRunner;
+import org.springframework.test.context.junit.jupiter.SpringExtension;
 
 import eu.acclimatize.unison.csvcontroller.CSVCloudLevelController;
 import eu.acclimatize.unison.csvcontroller.CSVCloudinessController;
@@ -33,9 +33,8 @@ import eu.acclimatize.unison.user.UserRepository;
  * Tests the CSV controllers for querying weather data.
  *
  */
-@RunWith(SpringRunner.class)
+@ExtendWith(SpringExtension.class)
 @SpringBootTest(classes = { UnisonServerApplication.class, FinderConfig.class, CSVResponderConfig.class })
-
 public class CSVControllerTests {
 
 	@Autowired
@@ -90,7 +89,7 @@ public class CSVControllerTests {
 	/**
 	 * Add initial data to the database.
 	 */
-	@Before
+	@BeforeEach
 	public void addWeatherData() {
 
 		TestUtility.saveWeatherData(userRepository, locationRepository, hwr);
@@ -100,7 +99,7 @@ public class CSVControllerTests {
 	/**
 	 * Clears saved data from the database.
 	 */
-	@After
+	@AfterEach
 	public void deleteData() {
 
 		TestUtility.deleteWeatherData(hwr, locationRepository, userRepository);

@@ -15,9 +15,11 @@ import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.ParserConfigurationException;
 
-import org.junit.Assert;
-import org.junit.Test;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.Mockito;
+import org.springframework.test.context.junit.jupiter.SpringExtension;
 import org.w3c.dom.Document;
 import org.xml.sax.SAXException;
 
@@ -33,6 +35,7 @@ import eu.acclimatize.unison.location.harvester.HarvesterService;
  * Tests for the Unison data harvester and document request service.
  *
  */
+@ExtendWith(SpringExtension.class)
 public class HarvesterTests {
 
 	private void testParse(String fileName, String timeZone) throws ParserConfigurationException, SAXException,
@@ -155,6 +158,6 @@ public class HarvesterTests {
 
 		Document document = drc.documentForLocation(
 				TestUtility.createLocation(TestConstant.LOCATION, null, TestConstant.LONGITUDE, TestConstant.LATITUDE));
-		Assert.assertNotNull(document);
+		Assertions.assertNotNull(document);
 	}
 }

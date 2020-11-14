@@ -4,8 +4,8 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.GregorianCalendar;
 
-import org.junit.Assert;
-import org.junit.Test;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Test;
 
 import eu.acclimatize.unison.location.Location;
 
@@ -31,8 +31,8 @@ public class ItemKeyTest {
 		ItemKey itemKey1 = new ItemKey(fh1,
 				new Location(TestConstant.LOCATION, null, null));
 
-		Assert.assertEquals(itemKey0, itemKey1);
-		Assert.assertEquals(itemKey0.hashCode(), itemKey1.hashCode());
+		Assertions.assertEquals(itemKey0, itemKey1);
+		Assertions.assertEquals(itemKey0.hashCode(), itemKey1.hashCode());
 
 	}
 

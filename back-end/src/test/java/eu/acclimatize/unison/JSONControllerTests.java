@@ -2,14 +2,14 @@ package eu.acclimatize.unison;
 
 import javax.servlet.http.HttpServletResponse;
 
-import org.junit.After;
-import org.junit.Before;
-import org.junit.Test;
-import org.junit.runner.RunWith;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.Mockito;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.test.context.junit4.SpringRunner;
+import org.springframework.test.context.junit.jupiter.SpringExtension;
 
 import eu.acclimatize.unison.csvcontroller.CSVResponderConfig;
 import eu.acclimatize.unison.jsoncontroller.JSONCloudLevelController;
@@ -38,7 +38,7 @@ import eu.acclimatize.unison.user.UserRepository;
  * Tests the JSON controllers for querying weather data.
  *
  */
-@RunWith(SpringRunner.class)
+@ExtendWith(SpringExtension.class)
 @SpringBootTest(classes = { UnisonServerApplication.class, FinderConfig.class, CSVResponderConfig.class })
 
 public class JSONControllerTests {
@@ -84,7 +84,7 @@ public class JSONControllerTests {
 	/**
 	 * Adds initial data to the database.
 	 */
-	@Before
+	@BeforeEach
 	public void addWeatherData() {
 
 		TestUtility.saveWeatherData(userRepository, locationRepository, hwr);
@@ -94,7 +94,7 @@ public class JSONControllerTests {
 	/**
 	 * Clears saved data from the database.
 	 */
-	@After
+	@AfterEach
 	public void deleteData() {
 
 		TestUtility.deleteWeatherData(hwr, locationRepository, userRepository);

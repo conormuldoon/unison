@@ -1,6 +1,6 @@
 package eu.acclimatize.unison;
 
-import static org.junit.Assert.assertNotSame;
+
 
 import java.io.BufferedReader;
 import java.io.ByteArrayInputStream;
@@ -14,15 +14,16 @@ import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
 import org.hibernate.cfg.Configuration;
-import org.junit.Test;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
 import eu.acclimatize.unison.user.CredentialsRequester;
 import eu.acclimatize.unison.user.UserHibernateStore;
 import eu.acclimatize.unison.user.UserInformation;
-import eu.acclimatize.unison.user.UserRepository;
 import eu.acclimatize.unison.user.UserReadyEventListener;
+import eu.acclimatize.unison.user.UserRepository;
 
 /**
  * Non-controller unit tests for the user package.
@@ -136,7 +137,7 @@ public class UserTests {
 		String r0 = requester.randomPassword();
 		String r1 = requester.randomPassword();
 
-		assertNotSame(r0, r1);
+		Assertions.assertNotEquals(r0, r1);
 	}
 
 }

@@ -2,12 +2,12 @@ package eu.acclimatize.unison;
 
 import javax.servlet.http.HttpServletResponse;
 
-import org.junit.Test;
-import org.junit.runner.RunWith;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.Mockito;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.test.context.junit4.SpringRunner;
+import org.springframework.test.context.junit.jupiter.SpringExtension;
 
 import eu.acclimatize.unison.jsoncontroller.JSONPrecipitationController;
 import eu.acclimatize.unison.location.LocationRepository;
@@ -19,7 +19,7 @@ import eu.acclimatize.unison.user.UserRepository;
  * Tests the JSON controller for querying precipitation data.
  *
  */
-@RunWith(SpringRunner.class)
+@ExtendWith(SpringExtension.class)
 @SpringBootTest
 
 public class JSONPrecipitationTest {

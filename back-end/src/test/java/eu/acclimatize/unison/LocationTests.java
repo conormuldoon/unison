@@ -12,11 +12,11 @@ import java.util.Optional;
 
 import javax.servlet.http.HttpServletResponse;
 
-import org.junit.After;
-import org.junit.Assert;
-import org.junit.Before;
-import org.junit.Test;
-import org.junit.runner.RunWith;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
 import org.locationtech.jts.geom.Coordinate;
 import org.locationtech.jts.geom.GeometryFactory;
 import org.mockito.Mockito;
@@ -26,7 +26,7 @@ import org.springframework.boot.test.context.SpringBootTest.WebEnvironment;
 import org.springframework.boot.test.web.client.TestRestTemplate;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.test.context.support.WithMockUser;
-import org.springframework.test.context.junit4.SpringRunner;
+import org.springframework.test.context.junit.jupiter.SpringExtension;
 
 import com.fasterxml.jackson.core.JsonFactory;
 import com.fasterxml.jackson.core.JsonGenerator;
@@ -44,7 +44,7 @@ import eu.acclimatize.unison.user.UserRepository;
  * package.
  *
  */
-@RunWith(SpringRunner.class)
+@ExtendWith(SpringExtension.class)
 @SpringBootTest(webEnvironment = WebEnvironment.RANDOM_PORT)
 public class LocationTests {
 
@@ -63,7 +63,7 @@ public class LocationTests {
 	/**
 	 * Adds an initial user and location to the database.
 	 */
-	@Before
+	@BeforeEach
 	public void addData() {
 
 		TestUtility.saveLocationData(userRepository, locationRepository);
@@ -73,7 +73,7 @@ public class LocationTests {
 	/**
 	 * Removes all data from the location and user repositories.
 	 */
-	@After
+	@AfterEach
 	public void clearData() {
 		TestUtility.deleteLocationData(locationRepository, userRepository);
 	}
@@ -95,7 +95,7 @@ public class LocationTests {
 		TestRestTemplate templateWBA = template.withBasicAuth(TestConstant.USERNAME, TestConstant.PASSWORD);
 		templateWBA.put(MappingConstant.LOCATION_COLLECTION, location);
 
-		Assert.assertEquals(2, locationRepository.count());
+		Assertions.assertEquals(2, locationRepository.count());
 
 	}
 
@@ -106,7 +106,7 @@ public class LocationTests {
 		templateWBA.put(MappingConstant.LOCATION_COLLECTION, modifiedLocation);
 		Optional<Location> oLoc = locationRepository.findById(TestConstant.LOCATION);
 		Location savedLocation = oLoc.get();
-		Assert.assertEquals(expected, modifiedLocation.equals(savedLocation));
+		Assertions.assertEquals(expected, modifiedLocation.equals(savedLocation));
 
 	}
 
@@ -133,7 +133,7 @@ public class LocationTests {
 		TestRestTemplate templateWBA = template.withBasicAuth(userName, password);
 
 		templateWBA.delete(MappingConstant.SPECIFIC_LOCATION, locationName);
-		Assert.assertEquals(expectedCount, locationRepository.count());
+		Assertions.assertEquals(expectedCount, locationRepository.count());
 
 	}
 
@@ -203,7 +203,7 @@ public class LocationTests {
 		ResponseEntity<Location> response = template.getForEntity(
 				MappingConstant.LOCATION_COLLECTION + "?" + Constant.LOCATION_NAME + "=" + TestConstant.LOCATION,
 				Location.class);
-		Assert.assertNotNull(response.getBody());
+		Assertions.assertNotNull(response.getBody());
 	}
 
 	/**
@@ -218,7 +218,7 @@ public class LocationTests {
 	public void collectionLocation() {
 		ResponseEntity<FeatureCollection> response = template.getForEntity(MappingConstant.LOCATION_COLLECTION,
 				FeatureCollection.class);
-		Assert.assertNotNull(response.getBody());
+		Assertions.assertNotNull(response.getBody());
 	}
 
 	/**
@@ -244,7 +244,7 @@ public class LocationTests {
 
 		String line = jsonWriter.toString();
 		System.out.println("\n\n\n" + line);
-		Assert.assertEquals(br.readLine(), jsonWriter.toString());
+		Assertions.assertEquals(br.readLine(), jsonWriter.toString());
 		br.close();
 
 	}
@@ -268,7 +268,7 @@ public class LocationTests {
 
 		jsonGenerator.flush();
 
-		Assert.assertEquals("{\"type\":\"FeatureCollection\",\"features\":[]}", jsonWriter.toString());
+		Assertions.assertEquals("{\"type\":\"FeatureCollection\",\"features\":[]}", jsonWriter.toString());
 
 	}
 
@@ -305,7 +305,7 @@ public class LocationTests {
 
 		String line = jsonWriter.toString();
 		System.out.println(line);
-		Assert.assertEquals(br.readLine(), jsonWriter.toString());
+		Assertions.assertEquals(br.readLine(), jsonWriter.toString());
 		br.close();
 
 	}

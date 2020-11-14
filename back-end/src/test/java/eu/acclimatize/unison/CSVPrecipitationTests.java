@@ -6,14 +6,14 @@ import java.io.StringWriter;
 
 import javax.servlet.http.HttpServletResponse;
 
-import org.junit.After;
-import org.junit.Assert;
-import org.junit.Test;
-import org.junit.runner.RunWith;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.Mockito;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.test.context.junit4.SpringRunner;
+import org.springframework.test.context.junit.jupiter.SpringExtension;
 
 import eu.acclimatize.unison.csvcontroller.CSVPrecipitationController;
 import eu.acclimatize.unison.csvcontroller.CSVResponderConfig;
@@ -25,7 +25,7 @@ import eu.acclimatize.unison.user.UserRepository;
  * Tests the CSV controller for querying precipitation data.
  *
  */
-@RunWith(SpringRunner.class)
+@ExtendWith(SpringExtension.class)
 @SpringBootTest(classes = { UnisonServerApplication.class, FinderConfig.class, CSVResponderConfig.class })
 
 public class CSVPrecipitationTests {
@@ -57,7 +57,7 @@ public class CSVPrecipitationTests {
 	/**
 	 * Clears saved data from the database.
 	 */
-	@After
+	@AfterEach
 	public void deleteData() {
 
 		TestUtility.deletePrecipitationData(hpr, locationRepository, userRepository);
@@ -97,10 +97,10 @@ public class CSVPrecipitationTests {
 		String[] str = sw.toString().split("\n");
 		String[] st0 = str[0].split(",");
 		String[] st1 = str[1].split(",");
-		Assert.assertEquals(len, st1.length);
-		Assert.assertEquals(len, st0.length);
-		Assert.assertEquals("-1.0", st1[2]);
-		Assert.assertEquals("-1.0", st1[3]);
+		Assertions.assertEquals(len, st1.length);
+		Assertions.assertEquals(len, st0.length);
+		Assertions.assertEquals("-1.0", st1[2]);
+		Assertions.assertEquals("-1.0", st1[3]);
 	}
 
 }

@@ -1,15 +1,15 @@
 package eu.acclimatize.unison;
 
-import org.junit.After;
-import org.junit.Assert;
-import org.junit.Before;
-import org.junit.Test;
-import org.junit.runner.RunWith;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.context.SpringBootTest.WebEnvironment;
 import org.springframework.boot.test.web.client.TestRestTemplate;
-import org.springframework.test.context.junit4.SpringRunner;
+import org.springframework.test.context.junit.jupiter.SpringExtension;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 
@@ -21,7 +21,7 @@ import eu.acclimatize.unison.user.UserRepository;
  * Tests the controllers for managing user credentials.
  *
  */
-@RunWith(SpringRunner.class)
+@ExtendWith(SpringExtension.class)
 @SpringBootTest(webEnvironment = WebEnvironment.RANDOM_PORT)
 public class UserControllerTests {
 
@@ -36,7 +36,7 @@ public class UserControllerTests {
 	/**
 	 * Adds an initial user.
 	 */
-	@Before
+	@BeforeEach
 	public void addInitialUser() {
 
 		TestUtility.saveUserData(userRepository);
@@ -46,7 +46,7 @@ public class UserControllerTests {
 	/**
 	 * Removes user data from the database.
 	 */
-	@After
+	@AfterEach
 	public void clearData() {
 
 		TestUtility.deleteUserData(userRepository);
@@ -62,7 +62,7 @@ public class UserControllerTests {
 		TestRestTemplate templateWBA = template.withBasicAuth(TestConstant.USERNAME, TestConstant.PASSWORD);
 		templateWBA.put(MappingConstant.USER, TestUtility.createUserInformation(TestConstant.OTHER_USERNAME, TestConstant.OTHER_USER_PASSWORD));
 
-		Assert.assertEquals(2, userRepository.count());
+		Assertions.assertEquals(2, userRepository.count());
 	}
 
 	/**
@@ -99,7 +99,7 @@ public class UserControllerTests {
 		UserInformation savedUserInformation = userRepository.findById(userName).get();
 
 		UserInformation userInformation = new UserInformation(userName, encodedPassword);
-		Assert.assertEquals(expected, userInformation.equals(savedUserInformation));
+		Assertions.assertEquals(expected, userInformation.equals(savedUserInformation));
 	}
 
 	private void testUpdate(TestRestTemplate templateWBA, boolean expected, String password) {

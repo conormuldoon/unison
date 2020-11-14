@@ -3,7 +3,7 @@ package eu.acclimatize.unison;
 import java.io.StringWriter;
 import java.util.Iterator;
 
-import org.junit.Assert;
+import org.junit.jupiter.api.Assertions;
 import org.locationtech.jts.geom.Coordinate;
 import org.locationtech.jts.geom.GeometryFactory;
 import org.locationtech.jts.geom.Point;
@@ -236,7 +236,7 @@ public class TestUtility {
 
 		Iterator<? extends HarmonieItem> itr = list.iterator();
 		HarmonieItem item = itr.next();
-		Assert.assertTrue(cls.isInstance(item));
+		Assertions.assertTrue(cls.isInstance(item));
 	}
 
 	/**
@@ -249,8 +249,8 @@ public class TestUtility {
 		String[] str = sw.toString().split("\n");
 		String[] st0 = str[0].split(",");
 		String[] st1 = str[1].split(",");
-		Assert.assertEquals(len, st1.length);
-		Assert.assertEquals(len, st0.length);
+		Assertions.assertEquals(len, st1.length);
+		Assertions.assertEquals(len, st0.length);
 	}
 
 	/**
