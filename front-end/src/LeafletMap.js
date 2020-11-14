@@ -6,8 +6,14 @@ import { Map, Marker, TileLayer } from 'react-leaflet';
 import ChartPopup from './ChartPopup';
 import { expandLink } from './Util';
 
+
+let uri = require('./2000px-Map_marker.png');
+if (uri.default) {
+  uri = uri.default;
+}
+
 const image = new Leaflet.Icon({
-  iconUrl: (require('./2000px-Map_marker.png').default) ? require('./2000px-Map_marker.png').default : require('./2000px-Map_marker.png'),
+  iconUrl: uri,
   iconSize: [30, 46],
 })
 
