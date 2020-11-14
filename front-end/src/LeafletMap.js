@@ -2,16 +2,14 @@
 import Leaflet from 'leaflet';
 import PropTypes from 'prop-types';
 import React, { Component } from 'react';
-import { Map, Marker, TileLayer} from 'react-leaflet';
+import { Map, Marker, TileLayer } from 'react-leaflet';
 import ChartPopup from './ChartPopup';
 import { expandLink } from './Util';
 
-//const iu=require('./2000px-Map_marker.png');
-
 const image = new Leaflet.Icon({
-   iconUrl: require('./2000px-Map_marker.png').default,
-   iconSize: [30, 46],
- })
+  iconUrl: (require('./2000px-Map_marker.png').default) ? require('./2000px-Map_marker.png').default : require('./2000px-Map_marker.png'),
+  iconSize: [30, 46],
+})
 
 
 /**
@@ -80,7 +78,7 @@ class LeafletMap extends Component {
 
   render() {
 
-    
+
     return (
       <Map center={this.props.mapCentre} zoom={this.state.zoom} dragging={this.state.dragging} >
         <TileLayer
