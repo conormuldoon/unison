@@ -23,7 +23,7 @@ public class FogResult implements HarmonieItem {
 
 	@CSVHeaderItem("Fog " + Constant.PERCENTAGE_SYMBOL)
 	@JsonProperty
-	private double fog;
+	private Double fog;
 
 	/**
 	 * Creates and instance of FogResult.
@@ -31,7 +31,7 @@ public class FogResult implements HarmonieItem {
 	 * @param date The hour from which the results relates.
 	 * @param fog  The amount of fog.
 	 */
-	public FogResult(Date date, double fog) {
+	public FogResult(Date date, Double fog) {
 		this.date = date;
 		this.fog = fog;
 	}

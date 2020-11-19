@@ -22,7 +22,7 @@ public class GlobalRadiationResult implements HarmonieItem {
 
 	@CSVHeaderItem("Global Radiation (W/m^2)")
 	@JsonProperty
-	private double globalRadiation;
+	private Double globalRadiation;
 
 	/**
 	 * Creates and instance of GlobalRadiationResult.
@@ -30,7 +30,7 @@ public class GlobalRadiationResult implements HarmonieItem {
 	 * @param date            The hour from which the results relates.
 	 * @param globalRadiation The level of global radiation.
 	 */
-	public GlobalRadiationResult(Date date, double globalRadiation) {
+	public GlobalRadiationResult(Date date, Double globalRadiation) {
 		this.date = date;
 		this.globalRadiation = globalRadiation;
 	}
