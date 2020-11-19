@@ -33,6 +33,11 @@ public class Constant {
 	public static final String DEW_POINT = "dewPoint";
 
 	/**
+	 * The link name and mapping suffix for global radiation.
+	 */
+	public static final String GLOBAL_RADIATION = "globalRadiation";
+	
+	/**
 	 * The link name and mapping suffix for fog.
 	 */
 	public static final String FOG = "fog";
@@ -68,7 +73,7 @@ public class Constant {
 	public static final String WIND_SPEED = "windSpeed";
 
 	/**
-	 *  The link name and mapping suffix for the API explorer.
+	 * The link name and mapping suffix for the API explorer.
 	 */
 	public static final String EXPLORER = "explorer";
 

@@ -65,6 +65,7 @@ function LocationForm(props) {
       } else if (harvestResponse.status === HttpStatus.BAD_GATEWAY) {
         alert(location + ' was ' + message + ', but did did not recieve the weather data. The ' +
           lon + " and " + lat + " longitude and latitude coordinates may not be covered by the model.");
+          updateDisplay();
       }
       else {
         alert(location + ' was ' + message + ', but Unison did not obtain the weather data.')

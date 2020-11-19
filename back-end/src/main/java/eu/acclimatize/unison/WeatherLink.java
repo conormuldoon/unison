@@ -14,8 +14,9 @@ public enum WeatherLink {
 
 	CLOUDINESS(Constant.CLOUDINESS, MappingConstant.LOCATION_CLOUDINESS),
 	CLOUD_LEVEL(Constant.CLOUD_LEVEL, MappingConstant.LOCATION_CLOUD_LEVEL),
-	DEW_POINT(Constant.DEW_POINT, MappingConstant.LOCATION_DEW_POINT), FOG(Constant.FOG, MappingConstant.LOCATION_FOG),
-	HUMIDITY(Constant.HUMIDITY, MappingConstant.LOCATION_HUMIDITY),
+	DEW_POINT(Constant.DEW_POINT, MappingConstant.LOCATION_DEW_POINT),
+	GLOBAL_RADIATION(Constant.GLOBAL_RADIATION, MappingConstant.LOCATION_GLOBAL_RADIATION),
+	FOG(Constant.FOG, MappingConstant.LOCATION_FOG), HUMIDITY(Constant.HUMIDITY, MappingConstant.LOCATION_HUMIDITY),
 	PRECIPITATION(Constant.PRECIPITATION, MappingConstant.LOCATION_PRECIPITATION),
 	PRESSURE(Constant.PRESSURE, MappingConstant.LOCATION_PRESSURE),
 	TEMPERATURE(Constant.TEMPERATURE, MappingConstant.LOCATION_TEMPERATURE),
@@ -33,8 +34,7 @@ public enum WeatherLink {
 	}
 
 	/**
-	 * Creates a link using the current mapping using the specified location
-	 * name. 
+	 * Creates a link using the current mapping using the specified location name.
 	 * 
 	 * @param name The location name.
 	 * @return The link created.

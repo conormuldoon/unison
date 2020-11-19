@@ -3,6 +3,13 @@
 !.mvn/wrapper/maven-wrapper.jar
 __pycache__/
 
+# Gradle #
+.gradle/
+build/
+
+# JaCoCo #
+jacoco/
+
 ### STS ###
 .apt_generated
 .classpath

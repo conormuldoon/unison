@@ -46,6 +46,11 @@ public class MappingConstant {
 	 * The mapping for fog.
 	 */
 	public static final String LOCATION_FOG = PREFIX + Constant.FOG;
+	
+	/**
+	 * The mapping for global radiation.
+	 */
+	public static final String LOCATION_GLOBAL_RADIATION = PREFIX + Constant.GLOBAL_RADIATION;
 
 	/**
 	 * The mapping for humidity.

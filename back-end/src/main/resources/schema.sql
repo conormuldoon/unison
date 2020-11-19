@@ -1,5 +1,12 @@
     
-    create table if not exists HourlyPrecipitation (
+    create table if not exists Location (
+       name varchar(255) not null,
+        geom GEOMETRY,
+        user_userName varchar(255),
+        primary key (name)
+    );
+    
+	create table if not exists HourlyPrecipitation (
        fromHour timestamp not null,
         maxvalue double,
         minvalue double,
@@ -16,6 +23,7 @@
         mediumClouds double,
         cloudiness double,
         dewPoint double,
+        globalRadiation double,
         fog double,
         humidity double,
         pressure double,
@@ -29,13 +37,6 @@
         primary key (fromHour, location_name)
     );
 
-    
-    create table if not exists Location (
-       name varchar(255) not null,
-        geom GEOMETRY,
-        user_userName varchar(255),
-        primary key (name)
-    );
 
     
     create table if not exists UserInformation (

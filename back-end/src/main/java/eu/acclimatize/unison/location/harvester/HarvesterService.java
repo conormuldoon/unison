@@ -261,35 +261,36 @@ public class HarvesterService {
 		Double hc = null;
 		Double dp = null;
 		Double f = null;
+		Double gr = null;
 
 		for (int j = 0; j < m; j++) {
 			Node chNode = locChild.item(j);
 			String nn = chNode.getNodeName();
 
 			NamedNodeMap nnm = chNode.getAttributes();
-			if (nn.equals("temperature")) {
+			if (nn.equals(Constant.TEMPERATURE)) {
 
 				String value = textContent(nnm, VALUE);
 				t = Double.parseDouble(value);
 
-			} else if (nn.equals("windDirection")) {
+			} else if (nn.equals(Constant.WIND_DIRECTION)) {
 				String deg = textContent(nnm, "deg");
 				String name = textContent(nnm, "name");
 				wd = new WindDirection(Double.parseDouble(deg), name);
-			} else if (nn.equals("windSpeed")) {
+			} else if (nn.equals(Constant.WIND_SPEED)) {
 				String mps = textContent(nnm, "mps");
 				String beaufort = textContent(nnm, "beaufort");
 				String name = textContent(nnm, "name");
 				ws = new WindSpeed(Double.parseDouble(mps), Integer.parseInt(beaufort), name);
 
-			} else if (nn.equals("humidity")) {
+			} else if (nn.equals(Constant.HUMIDITY)) {
 				String value = textContent(nnm, VALUE);
 				h = Double.parseDouble(value);
 
-			} else if (nn.equals("pressure")) {
+			} else if (nn.equals(Constant.PRESSURE)) {
 				String value = textContent(nnm, VALUE);
 				p = Double.parseDouble(value);
-			} else if (nn.equals("cloudiness")) {
+			} else if (nn.equals(Constant.CLOUDINESS)) {
 				String percent = textContent(nnm, PERCENT);
 				c = Double.parseDouble(percent);
 			} else if (nn.equals("lowClouds")) {
@@ -305,9 +306,15 @@ public class HarvesterService {
 				String value = textContent(nnm, VALUE);
 				dp = Double.parseDouble(value);
 
-			} else if (nn.equals("fog")) {
+			} else if (nn.equals(Constant.FOG)) {
 				String percent = textContent(nnm, PERCENT);
 				f = Double.parseDouble(percent);
+
+			} else if (nn.equals(Constant.GLOBAL_RADIATION)) {
+
+				String globalRadiation = textContent(nnm, VALUE);
+
+				gr = Double.parseDouble(globalRadiation);
 
 			} else if (!nn.equals("#text")) {
 
@@ -321,7 +328,7 @@ public class HarvesterService {
 
 		Cloud cloud = new Cloud(lc, mc, hc);
 
-		WeatherValue weatherValue = new WeatherValue(t, wd, ws, h, p, c, cloud, dp, f);
+		WeatherValue weatherValue = new WeatherValue(t, wd, ws, h, p, c, cloud, dp, f, gr);
 		hWeather.add(new HourlyWeather(ik, weatherValue));
 
 	}

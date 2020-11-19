@@ -23,7 +23,7 @@ public class LocationConfig {
 	 */
 	@Bean
 	public GeometryFactory geometryFactory() {
-		
+
 		return new GeometryFactory();
 	}
 
@@ -51,17 +51,32 @@ public class LocationConfig {
 	 * 
 	 */
 	@Bean
-	public WeatherLink[] weatherLink(@Value("${api.fog}") Boolean fogSupported) {
+	public WeatherLink[] weatherLink(@Value("${api.fog}") Boolean fogSupported,
+			@Value("${api.globalRadiation}") Boolean grSupported) {
 
-		if (fogSupported) {
+		if (fogSupported && grSupported) {
 			return WeatherLink.values();
+		} else if (fogSupported) {
+			// The Met Éireann HARMONIE-AROME end-point does not support fog.
+			WeatherLink[] weatherLink = { WeatherLink.CLOUDINESS, WeatherLink.CLOUD_LEVEL, WeatherLink.DEW_POINT,
+					WeatherLink.FOG, WeatherLink.HUMIDITY, WeatherLink.PRECIPITATION, WeatherLink.PRESSURE,
+					WeatherLink.TEMPERATURE, WeatherLink.WIND_DIRECTION, WeatherLink.WIND_SPEED };
+
+			return weatherLink;
+		} else if (grSupported) {
+			// The Norwegian Meteorological Institute HARMONIE-AROME end-ooint does not
+			// support global radiation.
+			WeatherLink[] weatherLink = { WeatherLink.CLOUDINESS, WeatherLink.CLOUD_LEVEL, WeatherLink.DEW_POINT,
+					WeatherLink.GLOBAL_RADIATION, WeatherLink.HUMIDITY, WeatherLink.PRECIPITATION, WeatherLink.PRESSURE,
+					WeatherLink.TEMPERATURE, WeatherLink.WIND_DIRECTION, WeatherLink.WIND_SPEED };
+
+			return weatherLink;
 		} else {
-			// The Met Éireann HARMONIE-AROME API does not support fog.
-			WeatherLink[] weatherProperty = { WeatherLink.CLOUDINESS, WeatherLink.CLOUD_LEVEL, WeatherLink.DEW_POINT,
+			WeatherLink[] weatherLink = { WeatherLink.CLOUDINESS, WeatherLink.CLOUD_LEVEL, WeatherLink.DEW_POINT,
 					WeatherLink.HUMIDITY, WeatherLink.PRECIPITATION, WeatherLink.PRESSURE, WeatherLink.TEMPERATURE,
 					WeatherLink.WIND_DIRECTION, WeatherLink.WIND_SPEED };
-			
-			return weatherProperty;
+			return weatherLink;
+
 		}
 
 	}

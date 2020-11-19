@@ -48,7 +48,7 @@ public class TestUtility {
 		WindDirection wd = new WindDirection(0, "Lett bris");
 		WindSpeed ws = new WindSpeed(0, 0, "W");
 		Cloud cloud = new Cloud(0d, 0d, 0d);
-		WEATHER_VALUE = new WeatherValue(0d, wd, ws, 0d, 0d, 0d, cloud, 0d, 0d);
+		WEATHER_VALUE = new WeatherValue(0d, wd, ws, 0d, 0d, 0d, cloud, 0d, 0d, 0d);
 
 		PRECIPITATION_VALUE = new PrecipitationValue(0d, 0d, 0d);
 	}
