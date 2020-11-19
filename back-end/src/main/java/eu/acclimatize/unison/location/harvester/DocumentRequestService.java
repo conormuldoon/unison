@@ -31,7 +31,7 @@ public class DocumentRequestService {
 	 * @param template The template for a HARMONIE-AROME endpoint specified by
 	 *                        app.uri in the application properties file.
 	 */
-	public DocumentRequestService(DocumentBuilder documentBuilder, @Value("${api.uri}") String template) {
+	public DocumentRequestService(DocumentBuilder documentBuilder, @Value("${harmonie.uri}") String template) {
 
 		this.documentBuilder = documentBuilder;
 		this.template = template;

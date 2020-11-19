@@ -7,6 +7,7 @@ import eu.acclimatize.unison.result.CloudLevelResult;
 import eu.acclimatize.unison.result.CloudinessResult;
 import eu.acclimatize.unison.result.DewPointResult;
 import eu.acclimatize.unison.result.FogResult;
+import eu.acclimatize.unison.result.GlobalRadiationResult;
 import eu.acclimatize.unison.result.HumidityResult;
 import eu.acclimatize.unison.result.PrecipitationResult;
 import eu.acclimatize.unison.result.PressureResult;
@@ -112,6 +113,17 @@ public class ResultQueryConfig {
 	@Bean
 	public String cloudinessQuery() {
 		return createQuery(WEA_TABLE, CloudinessResult.class, VALUE + ".cloudiness");
+	}
+	
+	/**
+	 * Creates a JPQL query for global radiation.
+	 * 
+	 * @return A parameterized query string with parameters for the location, from
+	 *         date, and to date.
+	 */
+	@Bean
+	public String globalRadiationQuery() {
+		return createQuery(WEA_TABLE, GlobalRadiationResult.class, VALUE + ".cloudiness");
 	}
 
 	/**

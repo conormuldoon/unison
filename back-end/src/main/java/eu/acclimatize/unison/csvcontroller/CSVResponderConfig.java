@@ -121,6 +121,17 @@ public class CSVResponderConfig {
 	public CSVResponder humidityResponder(ItemListFinder<HarmonieItem> humidityFinder, CacheSupport cacheSupport) {
 		return new CSVResponder(humidityFinder, createHeader(HumidityResult.class), cacheSupport);
 	}
+	
+	/**
+	 * Creates a {@link CVSResponder} bean for globalRadiation data.
+	 * 
+	 * @param globalRadationFinder An {@link ItemListFinder} for global radiation data.
+	 * @return A new instance of {@link CVSResponder} that uses the global radiation finder.
+	 */
+	@Bean
+	public CSVResponder globalRadiationResponder(ItemListFinder<HarmonieItem> globalRadiationFinder, CacheSupport cacheSupport) {
+		return new CSVResponder(globalRadiationFinder, createHeader(HumidityResult.class), cacheSupport);
+	}
 
 	/**
 	 * Creates a {@link CVSResponder} bean for fog data.

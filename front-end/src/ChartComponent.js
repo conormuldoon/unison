@@ -56,6 +56,9 @@ function ChartComponent({ curVar, minMax, index, data, zoomDomain, handleZoom })
   } else if (variRequest === "cloudiness") {
     yVal = variRequest;
     yLabel = PERCENT;
+  } else if(variRequest === "globalRadiation"){
+    yVal=variRequest;
+    yLabel = "Watts per meter squared";
   } else if (variRequest === "cloudLevel") {
     if (index === 0) {
       yVal = "cloud.low";

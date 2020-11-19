@@ -41,7 +41,7 @@ public class HarvesterConfig {
 	 * @return A singleton scope date format.
 	 */
 	@Bean
-	public SimpleDateFormat simpleDateFormat(@Value("${api.timezone}") String timeZone) {
+	public SimpleDateFormat simpleDateFormat(@Value("${harmonie.timezone}") String timeZone) {
 		SimpleDateFormat dateFormat = new SimpleDateFormat(Constant.HARMONIE_DATE_FORMAT);
 		dateFormat.setTimeZone(TimeZone.getTimeZone(timeZone));
 		return dateFormat;

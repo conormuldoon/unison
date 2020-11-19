@@ -107,6 +107,20 @@ public class FinderConfig {
 			CacheSupport cacheSupport) {
 		return new ItemListFinder<>(entityManager, cloudinessQuery, cacheSupport, HarmonieItem.class);
 	}
+	
+	
+	/**
+	 * Creates an {@link ItemListFinder} for global radiation data.
+	 * 
+	 * @param entityManager   The JPA entity manager.
+	 * @param cloudinessQuery The query for global radiation data.
+	 * @return The {@link ItemListFinder} created.
+	 */
+	@Bean
+	ItemListFinder<HarmonieItem> globalRadiationFinder(EntityManager entityManager, String globalRadiationQuery,
+			CacheSupport cacheSupport) {
+		return new ItemListFinder<>(entityManager, globalRadiationQuery, cacheSupport, HarmonieItem.class);
+	}
 
 	/**
 	 * Creates an {@link ItemListFinder} for pressure.
