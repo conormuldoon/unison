@@ -123,7 +123,7 @@ public class ResultQueryConfig {
 	 */
 	@Bean
 	public String globalRadiationQuery() {
-		return createQuery(WEA_TABLE, GlobalRadiationResult.class, VALUE + ".cloudiness");
+		return createQuery(WEA_TABLE, GlobalRadiationResult.class, VALUE + ".globalRadiation");
 	}
 
 	/**
