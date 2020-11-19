@@ -3,7 +3,9 @@ package eu.acclimatize.unison.result;
 import java.io.PrintWriter;
 import java.util.Date;
 
+import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.annotation.JsonInclude.Include;
 
 import eu.acclimatize.unison.Constant;
 import eu.acclimatize.unison.HarmonieItem;
@@ -14,12 +16,12 @@ import eu.acclimatize.unison.csvcontroller.CSVHeaderItem;
  * fog data query.
  *
  */
+@JsonInclude(Include.NON_NULL)
 public class FogResult implements HarmonieItem {
 
 	@CSVHeaderItem(Constant.FROM_HOUR)
 	@JsonProperty
 	private Date date;
-	
 
 	@CSVHeaderItem("Fog " + Constant.PERCENTAGE_SYMBOL)
 	@JsonProperty
@@ -38,7 +40,8 @@ public class FogResult implements HarmonieItem {
 
 	@Override
 	public void printItem(PrintWriter pw) {
-		pw.println(date.toString() + ',' + fog + ',');
+		if (fog != null)
+			pw.println(date.toString() + ',' + fog + ',');
 
 	}
 }

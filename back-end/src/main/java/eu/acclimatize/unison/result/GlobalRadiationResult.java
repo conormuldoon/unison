@@ -3,7 +3,9 @@ package eu.acclimatize.unison.result;
 import java.io.PrintWriter;
 import java.util.Date;
 
+import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.annotation.JsonInclude.Include;
 
 import eu.acclimatize.unison.Constant;
 import eu.acclimatize.unison.HarmonieItem;
@@ -14,6 +16,7 @@ import eu.acclimatize.unison.csvcontroller.CSVHeaderItem;
  * global radiation data query.
  *
  */
+@JsonInclude(Include.NON_NULL)
 public class GlobalRadiationResult implements HarmonieItem {
 
 	@CSVHeaderItem(Constant.FROM_HOUR)
@@ -37,7 +40,8 @@ public class GlobalRadiationResult implements HarmonieItem {
 
 	@Override
 	public void printItem(PrintWriter pw) {
-		pw.println(date.toString() + ',' + globalRadiation + ',');
+		if (globalRadiation != null)
+			pw.println(date.toString() + ',' + globalRadiation + ',');
 
 	}
 }
