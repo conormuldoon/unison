@@ -30,6 +30,7 @@ function ChartPopup({ uri, curVar, name, closePopup }) {
 
       const response = await fetch(uri, {
         method: 'GET',
+        credentials: 'omit',
         headers: new Headers({
           'Accept': 'application/json'
         })

@@ -49,6 +49,7 @@ function Unison(props) {
     async function requestFeatureCollection(uri) {
       const response = await fetch(uri, {
         method: 'GET',
+        credentials: 'omit',
         headers: new Headers({
           'Accept': 'application/geo+json'
         })
@@ -90,6 +91,7 @@ function Unison(props) {
 
     const halGetHeader = {
       method: 'GET',
+      credentials: 'omit',
       headers: new Headers({
         'Accept': 'application/hal+json'
       }),
@@ -248,7 +250,9 @@ function Unison(props) {
 
   const handleCSV = async () => {
 
-    const response = await fetch(expandLink(curLoc, curVar, fromDate, toDate));
+    const response = await fetch(expandLink(curLoc, curVar, fromDate, toDate), {
+      credentials: 'omit'
+    });
 
     if (response.ok) {
       const blob = await response.blob();
@@ -263,7 +267,7 @@ function Unison(props) {
   }
 
 
-  function createSelector(label, dateValue, handleDayChange){
+  function createSelector(label, dateValue, handleDayChange) {
     return <DateSelector label={label} dateValue={dateValue} handleDayChange={handleDayChange} />;
   }
 
