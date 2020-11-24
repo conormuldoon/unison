@@ -6,10 +6,10 @@ import java.util.Date;
 import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.format.annotation.DateTimeFormat;
+import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
 
 import eu.acclimatize.unison.Constant;
 import eu.acclimatize.unison.MappingConstant;
@@ -19,7 +19,7 @@ import eu.acclimatize.unison.MappingConstant;
  * A controller for accessing temperature data in a CSV format.
  *
  */
-@RestController
+@Controller
 public class CSVTemperatureController {
 
 	private CSVResponder temperatureResponder;
