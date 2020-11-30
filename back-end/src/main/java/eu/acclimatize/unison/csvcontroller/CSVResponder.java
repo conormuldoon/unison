@@ -29,6 +29,8 @@ public class CSVResponder {
 	 * @param itemListFinder Used to obtain a list of data based on query
 	 *                       parameters.
 	 * @param header         The CSV header printed by the responder.
+	 * @param cacheSupport   Used for adding conditional the Vary header and a
+	 *                       conditional cache control header.
 	 */
 
 	public CSVResponder(ItemListFinder<? extends HarmonieItem> itemListFinder, String header,
@@ -63,8 +65,6 @@ public class CSVResponder {
 	 * Writes the list to the HTTP servlet response object in a CSV format and
 	 * alters caching headers subject to the last date for the query range.
 	 * 
-	 * @param location The location of interest.
-	 * @param fromDate The start date for the data (inclusive).
 	 * @param toDate   The end date for the data (inclusive).
 	 * @param response Data is written to the writer of the response object and the
 	 *                 content type is set to text/csv.

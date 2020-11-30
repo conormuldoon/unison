@@ -2,62 +2,87 @@
 
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    
-    <meta charset="utf-8">
-    <title>JSDoc: RemoveComponent.js</title>
 
-    <script src="https://cdn.jsdelivr.net/gh/google/code-prettify@master/loader/run_prettify.js"></script>
-    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
-    <script src="./build/entry.js"></script>
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-    <!--[if lt IE 9]>
-      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
-    <![endif]-->
-    <link href="https://fonts.googleapis.com/css?family=Muli:100,400,700|Oswald:300|Inconsolata,700" rel="stylesheet">
-    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.3/css/all.css" integrity="sha384-UHRtZLI+pbxtHCWp1t77Bi1L4ZtiqrqD80Kn4Z8NTSRyMA2Fd33n5dQ8lWUE00s/" crossorigin="anonymous">
-    <link type="text/css" rel="stylesheet" href="https://jmblog.github.io/color-themes-for-google-code-prettify/themes/tomorrow-night.min.css">
-    <link type="text/css" rel="stylesheet" href="styles/app.min.css">
-    <link type="text/css" rel="stylesheet" href="styles/iframe.css">
+<head>
+  
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title> RemoveComponent.js</title>
+
+  <script src="https://cdn.jsdelivr.net/gh/google/code-prettify@master/loader/run_prettify.js"></script>
+  <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+  <script src="./build/entry.js"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+  <!--[if lt IE 9]>
+    <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+  <![endif]-->
+  <link href="https://fonts.googleapis.com/css?family=Roboto:100,400,700|Inconsolata,700" rel="stylesheet">
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.3/css/all.css" integrity="sha384-UHRtZLI+pbxtHCWp1t77Bi1L4ZtiqrqD80Kn4Z8NTSRyMA2Fd33n5dQ8lWUE00s/" crossorigin="anonymous">
+  <link type="text/css" rel="stylesheet" href="https://jmblog.github.io/color-themes-for-google-code-prettify/themes/tomorrow-night.min.css">
+  <link type="text/css" rel="stylesheet" href="styles/app.min.css">
+  <link type="text/css" rel="stylesheet" href="styles/iframe.css">
+  <link type="text/css" rel="stylesheet" href="">
+  <script async defer src="https://buttons.github.io/buttons.js"></script>
+
+  
 </head>
 
-<body>
+
+
+<body class="layout small-header">
     <div id="stickyNavbarOverlay"></div>
-    <div class="top-navbar">
-        <div class="container">
-            <nav class="navbar" role="navigation" aria-label="main navigation">
-                <div class="navbar-brand">
-                    
-                     
-                        <h1 class="navbar-item">Unison React components</h1>
-                    
-                    <a id="hamburger" role="button" class="navbar-burger" aria-label="menu" aria-expanded="false">
-                        <span aria-hidden="true"></span>
-                        <span aria-hidden="true"></span>
-                        <span aria-hidden="true"></span>
-                    </a>
-                </div>
+    
+
+<div class="top-nav">
+    <div class="inner">
+        <a id="hamburger" role="button" class="navbar-burger" aria-label="menu" aria-expanded="false">
+            <span aria-hidden="true"></span>
+            <span aria-hidden="true"></span>
+            <span aria-hidden="true"></span>
+        </a>
+        <div class="logo">
+            
+             
+                <a href="index.html">
+                    <h1 class="navbar-item">Unison React components</h1>
+                </a>
+            
+        </div>
+        <div class="menu">
+            
+            <div class="navigation">
+                <a
+                    href="index.html"
+                    class="link"
+                >
+                    API Documentation
+                </a>
+                
+                
+                
+            </div>
+        </div>
+    </div>
+</div>
+    <div id="main">
+        <div
+            class="sidebar "
+            id="sidebarNav"
+        >
+            
+            <nav>
+                
+                    <h2><a href="index.html">Documentation</a></h2><div class="category"><h3>Components</h3><ul><li><a href="ARLocationComponent.html">ARLocationComponent</a></li><li><a href="ChartComponent.html">ChartComponent</a></li><li><a href="ChartPopup.html">ChartPopup</a></li><li><a href="LeafletMap.html">LeafletMap</a></li><li><a href="LocationForm.html">LocationForm</a></li><li><a href="RemoveComponent.html">RemoveComponent</a></li><li><a href="TabsComponent.html">TabsComponent</a></li><li><a href="Unison.html">Unison</a></li></ul><h3>Global</h3><ul><li><a href="global.html#DateSelector">DateSelector</a></li></ul></div>
                 
             </nav>
         </div>
-    </div>
-    <div class="container">
-        <div class="columns">
-            <div class="column is-3" id="sidebarNav">
-                <div class="sidebar">
-                    <nav>
-                        <h2><a href="index.html">Home</a></h2><div class="category"><h3>Components</h3><ul><li><a href="ARLocationComponent.html">ARLocationComponent</a></li><li><a href="ChartComponent.html">ChartComponent</a></li><li><a href="ChartPopup.html">ChartPopup</a></li><li><a href="DateSelector.html">DateSelector</a></li><li><a href="LeafletMap.html">LeafletMap</a></li><li><a href="LocationForm.html">LocationForm</a></li><li><a href="RemoveComponent.html">RemoveComponent</a></li><li><a href="TabsComponent.html">TabsComponent</a></li><li><a href="Unison.html">Unison</a></li></ul></div>
-                    </nav>
-                </div>
-            </div>
-            <div class="column is-9-desktop">
-                <div class="content" id="main-content-wrapper">
-                    <header class="page-title">
-                        <p>Source</p>
-                        <h1>RemoveComponent.js</h1>
-                    </header>
-                    
-                    
+        <div class="core" id="main-content-wrapper">
+            <div class="content">
+                <header class="page-title">
+                    <p>Source</p>
+                    <h1>RemoveComponent.js</h1>
+                </header>
+                
 
 
 
@@ -69,30 +94,29 @@ import PropTypes from 'prop-types';
 import React from 'react';
 import { problemConnecting } from './Util';
 import HttpStatus from 'http-status-codes';
-import { SELF } from './Constant';
 
 /**
  * A component to enable the user to remove a location from being tracked.
  * 
  * @component
  */
-function RemoveComponent(props) {
+function RemoveComponent({obtainData, hideDisplay, href, name }) {
 
   async function removeRequest() {
 
-    const response = await fetch(props.linksProperty._links[SELF].href, {
+    const response = await fetch(href, {
       method: 'DELETE'
     });
 
     if (response.ok) {
 
-      alert(props.linksProperty.name + ' was removed.');
-      props.obtainData();
+      alert(name + ' was removed.');
+      obtainData();
 
     } else if (response.status === HttpStatus.UNAUTHORIZED) {
       alert('Incorrect user name or password');
     } else if (response.status === HttpStatus.FORBIDDEN) {
-      alert('You do not have permission to delete ' + props.linksProperty.name + '.');
+      alert('You do not have permission to delete ' + name + '.');
     } else {
       console.log(response.status)
       problemConnecting();
@@ -101,9 +125,9 @@ function RemoveComponent(props) {
   }
 
   function handleClick() {
-    props.hideDisplay();
-    if (window.confirm("Are you sure you would like to remove " + props.linksProperty.name +
-      "? This will also delete all of the harvested data assoicated with " + props.linksProperty.name + ".")) {
+    hideDisplay();
+    if (window.confirm("Are you sure you would like to remove " + name +
+      "? This will also delete all of the harvested data assoicated with " + name + ".")) {
       removeRequest();
     }
   }
@@ -111,7 +135,7 @@ function RemoveComponent(props) {
 
   return (
 
-    &lt;button data-testid='rm-button' onClick={handleClick}>{'Remove ' + props.linksProperty.name}&lt;/button>
+    &lt;button data-testid='rm-button' onClick={handleClick}>{'Remove ' + name}&lt;/button>
 
   );
 
@@ -126,7 +150,9 @@ RemoveComponent.propTypes = {
   /** Called when a location has been successfully removed to obtain the updated location list from the server. */
   obtainData: PropTypes.func.isRequired,
 
-  linksProperty: PropTypes.object.isRequired,
+  name: PropTypes.string.isRequired,
+
+  href: PropTypes.string.isRequired,
 }
 
 export default RemoveComponent;
@@ -137,24 +163,25 @@ export default RemoveComponent;
 
 
 
-                </div>
             </div>
+            
+            <footer class="footer">
+                <div class="content has-text-centered">
+                    <p>Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.6.6</a></p>
+                    <p class="sidebar-created-by">
+                        <a href="https://github.com/SoftwareBrothers/better-docs" target="_blank">BetterDocs theme</a> provided with <i class="fas fa-heart"></i> by 
+                        <a href="http://softwarebrothers.co" target="_blank">SoftwareBrothers - JavaScript Development Agency</a>
+                    </p>
+                </div>
+            </footer>
+            
+        </div>
+        <div id="side-nav" class="side-nav">
         </div>
     </div>
-
-
-<footer class="footer">
-    <div class="content has-text-centered">
-        <p>Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.6.3</a> on Sat Aug 15 2020 19:03:26 GMT+0100 (Irish Standard Time)</p>
-        <p class="sidebar-created-by">
-            <a href="https://github.com/SoftwareBrothers/better-docs" target="_blank">BetterDocs theme</a> provided with <i class="fas fa-heart"></i> by 
-            <a href="http://softwarebrothers.co" target="_blank">SoftwareBrothers - JavaScript Development Agency</a>
-        </p>
-    </div>
-</footer>
-
-
 <script src="scripts/app.min.js"></script>
+<script>PR.prettyPrint();</script>
 <script src="scripts/linenumber.js"> </script>
+
 </body>
 </html>

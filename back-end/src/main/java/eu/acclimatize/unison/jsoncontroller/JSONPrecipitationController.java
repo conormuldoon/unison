@@ -29,7 +29,7 @@ public class JSONPrecipitationController {
 	/**
 	 * Creates an instance of JSONPrecipitationController.
 	 * 
-	 * @param restultFilter Used to find an ordered list of precipitation data
+	 * @param resultFilter Used to find an ordered list of precipitation data
 	 *                      containing either ternary or single value precipitation
 	 *                      values.
 	 */

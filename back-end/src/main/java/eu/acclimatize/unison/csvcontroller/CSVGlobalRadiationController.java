@@ -27,7 +27,7 @@ public class CSVGlobalRadiationController {
 	/**
 	 * Creates an instance of CSVGlobalRadiationController.
 	 * 
-	 * @param dewPointResponder A responder that prints dew point data in a CSV
+	 * @param globalRadiationResponder A responder that prints dew point data in a CSV
 	 *                          format.
 	 */
 	public CSVGlobalRadiationController(CSVResponder globalRadiationResponder) {

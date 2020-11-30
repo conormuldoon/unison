@@ -1,6 +1,6 @@
 {
   "name": "@conormuldoon/unison",
-  "version": "0.7.0-alpha",
+  "version": "0.7.0",
   "license": "MIT",
   "dependencies": {
     "@testing-library/jest-dom": "^5.11.4",
@@ -36,15 +36,19 @@
   },
   "homepage": ".",
   "devDependencies": {
+    "@babel/core": "^7.0.0-0",
+    "@babel/plugin-proposal-class-properties": "^7.12.1",
+    "@babel/preset-env": "^7.12.7",
+    "@babel/preset-react": "^7.12.7",
     "@stryker-mutator/core": "^2.3.0",
     "@stryker-mutator/html-reporter": "^2.3.0",
     "@stryker-mutator/javascript-mutator": "^2.3.0",
     "@stryker-mutator/jest-runner": "^2.3.0",
-    "better-docs": "^2.3.2",
+    "better-docs": "2.3.2",
     "eslint": "^7.13.0",
     "eslint-plugin-react": "^7.21.5",
     "fetch-mock": "^9.10.7",
-    "jsdoc": "^3.6.3"
+    "jsdoc": "^3.6.6"
   },
   "publishConfig": {
     "registry": "https://npm.pkg.github.com/"

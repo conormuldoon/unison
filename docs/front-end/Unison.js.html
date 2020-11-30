@@ -2,62 +2,87 @@
 
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    
-    <meta charset="utf-8">
-    <title>JSDoc: Unison.js</title>
 
-    <script src="https://cdn.jsdelivr.net/gh/google/code-prettify@master/loader/run_prettify.js"></script>
-    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
-    <script src="./build/entry.js"></script>
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-    <!--[if lt IE 9]>
-      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
-    <![endif]-->
-    <link href="https://fonts.googleapis.com/css?family=Muli:100,400,700|Oswald:300|Inconsolata,700" rel="stylesheet">
-    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.3/css/all.css" integrity="sha384-UHRtZLI+pbxtHCWp1t77Bi1L4ZtiqrqD80Kn4Z8NTSRyMA2Fd33n5dQ8lWUE00s/" crossorigin="anonymous">
-    <link type="text/css" rel="stylesheet" href="https://jmblog.github.io/color-themes-for-google-code-prettify/themes/tomorrow-night.min.css">
-    <link type="text/css" rel="stylesheet" href="styles/app.min.css">
-    <link type="text/css" rel="stylesheet" href="styles/iframe.css">
+<head>
+  
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title> Unison.js</title>
+
+  <script src="https://cdn.jsdelivr.net/gh/google/code-prettify@master/loader/run_prettify.js"></script>
+  <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+  <script src="./build/entry.js"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+  <!--[if lt IE 9]>
+    <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+  <![endif]-->
+  <link href="https://fonts.googleapis.com/css?family=Roboto:100,400,700|Inconsolata,700" rel="stylesheet">
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.3/css/all.css" integrity="sha384-UHRtZLI+pbxtHCWp1t77Bi1L4ZtiqrqD80Kn4Z8NTSRyMA2Fd33n5dQ8lWUE00s/" crossorigin="anonymous">
+  <link type="text/css" rel="stylesheet" href="https://jmblog.github.io/color-themes-for-google-code-prettify/themes/tomorrow-night.min.css">
+  <link type="text/css" rel="stylesheet" href="styles/app.min.css">
+  <link type="text/css" rel="stylesheet" href="styles/iframe.css">
+  <link type="text/css" rel="stylesheet" href="">
+  <script async defer src="https://buttons.github.io/buttons.js"></script>
+
+  
 </head>
 
-<body>
+
+
+<body class="layout small-header">
     <div id="stickyNavbarOverlay"></div>
-    <div class="top-navbar">
-        <div class="container">
-            <nav class="navbar" role="navigation" aria-label="main navigation">
-                <div class="navbar-brand">
-                    
-                     
-                        <h1 class="navbar-item">Unison React components</h1>
-                    
-                    <a id="hamburger" role="button" class="navbar-burger" aria-label="menu" aria-expanded="false">
-                        <span aria-hidden="true"></span>
-                        <span aria-hidden="true"></span>
-                        <span aria-hidden="true"></span>
-                    </a>
-                </div>
+    
+
+<div class="top-nav">
+    <div class="inner">
+        <a id="hamburger" role="button" class="navbar-burger" aria-label="menu" aria-expanded="false">
+            <span aria-hidden="true"></span>
+            <span aria-hidden="true"></span>
+            <span aria-hidden="true"></span>
+        </a>
+        <div class="logo">
+            
+             
+                <a href="index.html">
+                    <h1 class="navbar-item">Unison React components</h1>
+                </a>
+            
+        </div>
+        <div class="menu">
+            
+            <div class="navigation">
+                <a
+                    href="index.html"
+                    class="link"
+                >
+                    API Documentation
+                </a>
+                
+                
+                
+            </div>
+        </div>
+    </div>
+</div>
+    <div id="main">
+        <div
+            class="sidebar "
+            id="sidebarNav"
+        >
+            
+            <nav>
+                
+                    <h2><a href="index.html">Documentation</a></h2><div class="category"><h3>Components</h3><ul><li><a href="ARLocationComponent.html">ARLocationComponent</a></li><li><a href="ChartComponent.html">ChartComponent</a></li><li><a href="ChartPopup.html">ChartPopup</a></li><li><a href="LeafletMap.html">LeafletMap</a></li><li><a href="LocationForm.html">LocationForm</a></li><li><a href="RemoveComponent.html">RemoveComponent</a></li><li><a href="TabsComponent.html">TabsComponent</a></li><li><a href="Unison.html">Unison</a></li></ul><h3>Global</h3><ul><li><a href="global.html#DateSelector">DateSelector</a></li></ul></div>
                 
             </nav>
         </div>
-    </div>
-    <div class="container">
-        <div class="columns">
-            <div class="column is-3" id="sidebarNav">
-                <div class="sidebar">
-                    <nav>
-                        <h2><a href="index.html">Home</a></h2><div class="category"><h3>Components</h3><ul><li><a href="ARLocationComponent.html">ARLocationComponent</a></li><li><a href="ChartComponent.html">ChartComponent</a></li><li><a href="ChartPopup.html">ChartPopup</a></li><li><a href="DateSelector.html">DateSelector</a></li><li><a href="LeafletMap.html">LeafletMap</a></li><li><a href="LocationForm.html">LocationForm</a></li><li><a href="RemoveComponent.html">RemoveComponent</a></li><li><a href="TabsComponent.html">TabsComponent</a></li><li><a href="Unison.html">Unison</a></li></ul></div>
-                    </nav>
-                </div>
-            </div>
-            <div class="column is-9-desktop">
-                <div class="content" id="main-content-wrapper">
-                    <header class="page-title">
-                        <p>Source</p>
-                        <h1>Unison.js</h1>
-                    </header>
-                    
-                    
+        <div class="core" id="main-content-wrapper">
+            <div class="content">
+                <header class="page-title">
+                    <p>Source</p>
+                    <h1>Unison.js</h1>
+                </header>
+                
 
 
 
@@ -74,9 +99,10 @@ import './App.css';
 import ARLocationComponent from './ARLocationComponent';
 import { FORMAT, SELF } from './Constant';
 import DateSelector from './DateSelector';
-import LeafletMap from './LeafletMap';
 import { today, tomorrow, expandLink, problemConnecting } from './Util';
 import HttpStatus from 'http-status-codes';
+
+import { createLocationFactory, createRemoveFactory } from './closureFactory';
 
 /**
  * Application component for Unison. Once mounted, it connects to the back-end to receive a list of the locations being tracked.
@@ -89,13 +115,13 @@ function Unison(props) {
 
   const [fromDate, setFromDate] = useState(today());
   const [toDate, setToDate] = useState(tomorrow());
-  const [option, setOption] = useState(undefined);
-  const [marker, setMarker] = useState(undefined);
-  const [curLoc, setCurLoc] = useState(undefined);
-  const [curVar, setCurVar] = useState(undefined);
-  const [varOpt, setVarOpt] = useState(undefined);
-  const [locationMap, setLocationMap] = useState(undefined);
-  const [collectionModel, setCollectionModel] = useState(undefined);
+  const [option, setOption] = useState(null);
+  const [marker, setMarker] = useState(null);
+  const [curLoc, setCurLoc] = useState(null);
+  const [curVar, setCurVar] = useState(null);
+  const [varOpt, setVarOpt] = useState(null);
+  const [locationMap, setLocationMap] = useState(null);
+  const [collectionModel, setCollectionModel] = useState(null);
 
   const obtainData = () => {
 
@@ -114,6 +140,7 @@ function Unison(props) {
     async function requestFeatureCollection(uri) {
       const response = await fetch(uri, {
         method: 'GET',
+        credentials: 'omit',
         headers: new Headers({
           'Accept': 'application/geo+json'
         })
@@ -146,8 +173,8 @@ function Unison(props) {
 
 
       } else {
-        setOption(undefined);
-        setMarker(undefined);
+        setOption(null);
+        setMarker(null);
       }
 
 
@@ -155,16 +182,18 @@ function Unison(props) {
 
     const halGetHeader = {
       method: 'GET',
+      credentials: 'omit',
       headers: new Headers({
         'Accept': 'application/hal+json'
-      })
+      }),
+
     }
 
     function clearCurrent() {
-      setCurLoc(undefined);
-      setCurVar(undefined);
-      setVarOpt(undefined);
-      setLocationMap(undefined);
+      setCurLoc(null);
+      setCurVar(null);
+      setVarOpt(null);
+      setLocationMap(null);
 
     }
 
@@ -234,34 +263,38 @@ function Unison(props) {
     }
 
     async function requestModel() {
+      try {
 
-      const root = '/';
-      const response = await fetch(root, halGetHeader);
+        const root = process.env.PUBLIC_URL;
 
-      checkResponse(response, root);
+        const response = await fetch(root, halGetHeader);
 
-
-      const model = await response.json();
-
-      const uri = model._links.locationCollection.href;
-      await requestCollectionHAL(uri);
-      await requestFeatureCollection(uri);
+        checkResponse(response, root);
 
 
-    }
+        const model = await response.json();
 
-    try {
-      requestModel();
+        const uri = model._links.locationCollection.href;
+        await requestCollectionHAL(uri);
+        await requestFeatureCollection(uri);
 
-    } catch (e) {
-      if (e instanceof ResponseError) {
+      } catch (e) {
+        if (e instanceof ResponseError) {
+          console.error("HTTP status code: " + e.status);
+
+        }
         problemConnecting();
+
       }
-      console.log(e);
 
     }
 
-    
+
+    requestModel();
+
+
+
+
   };
 
   useEffect(() => {
@@ -301,11 +334,6 @@ function Unison(props) {
 
   }
 
-  const dashDate = (date) => {
-
-    return date.replace(/\//g, '-');
-  }
-
   const spaceToUnderscore = (s) => {
     return s.replace(/ /g, '_')
   }
@@ -313,18 +341,25 @@ function Unison(props) {
 
   const handleCSV = async () => {
 
-    const response = await fetch(expandLink(curLoc, curVar, fromDate, toDate));
+    const response = await fetch(expandLink(curLoc, curVar, fromDate, toDate), {
+      credentials: 'omit'
+    });
 
     if (response.ok) {
       const blob = await response.blob();
       const a = document.createElement('a');
       a.href = window.URL.createObjectURL(blob);
       a.download = spaceToUnderscore(curLoc.name) + '_' + spaceToUnderscore(curVar) + '_'
-        + dashDate(fromDate) + "_" + dashDate(toDate) + '.csv';
+        + fromDate + "_" + toDate + '.csv';
       a.click();
     } else if (response.status === HttpStatus.GATEWAY_TIMEOUT) {
       problemConnecting();
     }
+  }
+
+
+  function createSelector(label, dateValue, handleDayChange) {
+    return &lt;DateSelector label={label} dateValue={dateValue} handleDayChange={handleDayChange} />;
   }
 
   return (
@@ -334,17 +369,13 @@ function Unison(props) {
       &lt;div id="logos">
 
         &lt;center>
-          &lt;img id="logoitem" alt="" src={props.logoLeft} />
-
-
-          &lt;img id="logoitem" alt="" src={props.logoRight} />
+          {props.logoLeft}
+          {props.logoRight}
         &lt;/center>
 
       &lt;/div>
 
-      &lt;LeafletMap marker={marker} curVar={curVar} featureProperties={locationMap}
-        markerCallback={markerClicked} fromDate={fromDate} toDate={toDate}
-        mapCentre={props.mapCentre} linksProperty={curLoc} />
+      {props.createMap(marker, curVar, locationMap, markerClicked, fromDate, toDate, curLoc)}
 
       &lt;div id="selectdiv" >
 
@@ -372,25 +403,22 @@ function Unison(props) {
             &lt;/div>}
 
 
-            &lt;div className='pLeft' >
-              &lt;DateSelector
-                label="From date" dateValue={fromDate}
-                handleDayChange={handleStartChange}
-              />
+            &lt;div className='pLeft' >{
+              createSelector("From date", fromDate, handleStartChange)
+            }
             &lt;/div>
 
             &lt;div className='pLeft' >
-              &lt;DateSelector
-                label="To date" dateValue={toDate}
-                handleDayChange={handleEndChange}
-              />
-
+              {
+                createSelector("To date", toDate, handleEndChange)
+              }
             &lt;/div>
 
             {curLoc &amp;&amp; curVar &amp;&amp; &lt;div className='pLeft'> &lt;button onClick={handleCSV}>CSV&lt;/button> &lt;/div>}
           &lt;/div>
 
-          &lt;ARLocationComponent obtainData={obtainData} linksProperty={curLoc} collectionModel={collectionModel} />
+          &lt;ARLocationComponent createLocation={createLocationFactory(obtainData, collectionModel)}
+            createRemove={curLoc ? createRemoveFactory(obtainData, curLoc._links[SELF].href, curLoc.name) : null} />
 
         &lt;/center>
 
@@ -405,8 +433,8 @@ function Unison(props) {
 
 Unison.propTypes = {
 
-  /** The latitude/longitude coordinates for the centre of the map. */
-  mapCentre: PropTypes.array.isRequired,
+  /** A function for creating the map. */
+  createMap: PropTypes.func.isRequired,
 
   /** A logo displayed at the bottom of the screen. It will be displayed to the left
    * if the logoRight prop is defined.
@@ -428,24 +456,25 @@ export default Unison;
 
 
 
-                </div>
             </div>
+            
+            <footer class="footer">
+                <div class="content has-text-centered">
+                    <p>Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.6.6</a></p>
+                    <p class="sidebar-created-by">
+                        <a href="https://github.com/SoftwareBrothers/better-docs" target="_blank">BetterDocs theme</a> provided with <i class="fas fa-heart"></i> by 
+                        <a href="http://softwarebrothers.co" target="_blank">SoftwareBrothers - JavaScript Development Agency</a>
+                    </p>
+                </div>
+            </footer>
+            
+        </div>
+        <div id="side-nav" class="side-nav">
         </div>
     </div>
-
-
-<footer class="footer">
-    <div class="content has-text-centered">
-        <p>Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.6.3</a> on Sat Aug 15 2020 19:03:26 GMT+0100 (Irish Standard Time)</p>
-        <p class="sidebar-created-by">
-            <a href="https://github.com/SoftwareBrothers/better-docs" target="_blank">BetterDocs theme</a> provided with <i class="fas fa-heart"></i> by 
-            <a href="http://softwarebrothers.co" target="_blank">SoftwareBrothers - JavaScript Development Agency</a>
-        </p>
-    </div>
-</footer>
-
-
 <script src="scripts/app.min.js"></script>
+<script>PR.prettyPrint();</script>
 <script src="scripts/linenumber.js"> </script>
+
 </body>
 </html>
