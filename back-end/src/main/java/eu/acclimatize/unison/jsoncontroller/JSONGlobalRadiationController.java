@@ -29,7 +29,7 @@ public class JSONGlobalRadiationController {
 	 * Creates an instance of JSONGlobalRadiationController.
 	 * 
 	 * @param globalRadiationFinder Used to find an ordered list of global radiation
-	 *                         data.
+	 *                              data.
 	 */
 	public JSONGlobalRadiationController(ItemListFinder<HarmonieItem> globalRadiationFinder) {
 		this.globalRadiationFinder = globalRadiationFinder;

@@ -48,7 +48,7 @@ dependencies {
 }
 
 group = 'eu.acclimatize'
-version = '0.7.0'
+version = '0.8.0-SNAPSHOT'
 description = 'unison-server'
 java.sourceCompatibility = JavaVersion.VERSION_1_8
 

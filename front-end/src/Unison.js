@@ -13,6 +13,8 @@ import HttpStatus from 'http-status-codes';
 
 import { createLocationFactory, createRemoveFactory } from './closureFactory';
 
+
+
 /**
  * Application component for Unison. Once mounted, it connects to the back-end to receive a list of the locations being tracked.
  * 
@@ -322,6 +324,8 @@ function Unison(props) {
                 createSelector("To date", toDate, handleEndChange)
               }
             </div>
+
+
 
             {curLoc && curVar && <div className='pLeft'> <button onClick={handleCSV}>CSV</button> </div>}
           </div>

@@ -1,6 +1,4 @@
 const { createProxyMiddleware } = require('http-proxy-middleware');
-const XMLHttpRequest = require("xmlhttprequest").XMLHttpRequest;
-const HttpStatus = require('http-status-codes');
 
 const filter = function (pathName, req) {
 
@@ -8,19 +6,13 @@ const filter = function (pathName, req) {
   const accept = headers.accept;
 
   if (accept === 'application/hal+json' || accept === 'application/geo+jason' ||
-    accept === 'application/json') {
-    return true;
-  }
-
-  var request = new XMLHttpRequest();
-  request.open('HEAD', req.hostname + pathName, false);  // The `false` argument makes the request synchronous.
-  request.send(null);
-
-  if (request.status === HttpStatus.NOT_FOUND) {
+    accept === 'application/json' || pathName.startsWith("/locationCollection")) {
     return true;
   }
 
   return false;
+
+
 
 };
 

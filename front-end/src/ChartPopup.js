@@ -5,10 +5,12 @@ import './App.css';
 import { PRECIP } from './Constant';
 import TabsComponent from './TabsComponent';
 import { chartText } from './Util';
+import { EmailShareButton, EmailIcon, WhatsappShareButton, WhatsappIcon, } from "react-share";
 
 
 const DLEN = 16;
 
+const SSIZE = 24;
 /**
  * A popup that displays a TabsComponent. Once mounted, it connects to the back-end to obtain data
  * for the from date, to date, location, and weather variable selected.
@@ -28,6 +30,7 @@ function ChartPopup({ uri, curVar, name, closePopup }) {
     async function obtainData() {
 
 
+      console.log(uri);
       const response = await fetch(uri, {
         method: 'GET',
         credentials: 'omit',
@@ -82,14 +85,36 @@ function ChartPopup({ uri, curVar, name, closePopup }) {
 
   const vc = chartText(curVar);
 
+  const subject = vc + ' data from ' + name.trim();
+  console.log(uri);
+
+  console.log(uri);
+
   return (
     <div id="popupdiv" data-testid='chart-div' onClick={handleClick}>
       <div id="iicon">
         <IoMdClose onClick={closePopup} size={20} color="rgb(192, 57, 43)" />
 
       </div>
+      <div>
+        <EmailShareButton
+          url={uri}
+          subject={subject}
+        >
+          <EmailIcon size={SSIZE} />
+        </EmailShareButton>
+  
+        <WhatsappShareButton
+          url={uri}
+          title={subject}
+        >
+          <WhatsappIcon size={SSIZE} />
+        </WhatsappShareButton>
+      </div>
+
+
       <center>
-        {vc} data from {name.trim()}
+        {subject}
 
         {data && <TabsComponent curVar={curVar} data={data} zoomDomain={zoomDomain} minMax={minMax}
           setZoomDomain={setZoomDomain} />}
