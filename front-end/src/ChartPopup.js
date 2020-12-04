@@ -84,9 +84,6 @@ function ChartPopup({ uri, curVar, name, closePopup }) {
   const vc = chartText(curVar);
 
   const subject = vc + ' data from ' + name.trim();
-  console.log(uri);
-
-  console.log(uri);
 
   return (
     <div id="popupdiv" data-testid='chart-div' onClick={handleClick}>
