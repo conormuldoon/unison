@@ -29,8 +29,6 @@ function ChartPopup({ uri, curVar, name, closePopup }) {
 
     async function obtainData() {
 
-
-      console.log(uri);
       const response = await fetch(uri, {
         method: 'GET',
         credentials: 'omit',
