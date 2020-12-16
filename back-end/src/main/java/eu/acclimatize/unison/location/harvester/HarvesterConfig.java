@@ -1,5 +1,6 @@
 package eu.acclimatize.unison.location.harvester;
 
+import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.TimeZone;
 
@@ -34,14 +35,14 @@ public class HarvesterConfig {
 	}
 
 	/**
-	 * Creates a SimpleDateFormat for the 'api.timezone' value specified in the
+	 * Creates a DateFormat for the 'harmonie.timezone' value specified in the
 	 * application properties file.
 	 * 
 	 * @param timeZone The time zone for the date format.
 	 * @return A singleton scope date format.
 	 */
 	@Bean
-	public SimpleDateFormat simpleDateFormat(@Value("${harmonie.timezone}") String timeZone) {
+	public DateFormat harmonieDateFormat(@Value("${harmonie.timezone}") String timeZone) {
 		SimpleDateFormat dateFormat = new SimpleDateFormat(Constant.HARMONIE_DATE_FORMAT);
 		dateFormat.setTimeZone(TimeZone.getTimeZone(timeZone));
 		return dateFormat;

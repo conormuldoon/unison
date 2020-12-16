@@ -1,6 +1,8 @@
 package eu.acclimatize.unison.csvcontroller;
 
 import java.lang.reflect.Field;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 
 import org.springframework.context.annotation.Bean;
@@ -30,6 +32,15 @@ import eu.acclimatize.unison.result.WindSpeedResult;
 public class CSVResponderConfig {
 
 	private static final char DELIMITER = ',';
+
+	private DateFormat dateFormat;
+
+	/**
+	 * Creates an instance of CSVResponder.
+	 */
+	public CSVResponderConfig() {
+		dateFormat = new SimpleDateFormat(Constant.FORMAT);
+	}
 
 	// Recursively appends the double, Double, int, Date, and String CSVHeaderItem
 	// values of the attributes of the result classes to create a CSV header string.
@@ -75,7 +86,8 @@ public class CSVResponderConfig {
 	@Bean
 	public CSVResponder precipitationResponder(ItemListFinder<PrecipitationResult> precipitationFinder,
 			CacheSupport cacheSupport) {
-		return new CSVResponder(precipitationFinder, createHeader(PrecipitationResult.class), cacheSupport);
+		return new CSVResponder(precipitationFinder, createHeader(PrecipitationResult.class), cacheSupport,
+				"Precipitation", dateFormat);
 	}
 
 	/**
@@ -89,7 +101,8 @@ public class CSVResponderConfig {
 	 */
 	@Bean
 	public CSVResponder cloudLevelResponder(ItemListFinder<HarmonieItem> cloudLevelFinder, CacheSupport cacheSupport) {
-		return new CSVResponder(cloudLevelFinder, createHeader(CloudLevelResult.class), cacheSupport);
+		return new CSVResponder(cloudLevelFinder, createHeader(CloudLevelResult.class), cacheSupport, "Cloud_Level",
+				dateFormat);
 	}
 
 	/**
@@ -103,7 +116,8 @@ public class CSVResponderConfig {
 	 */
 	@Bean
 	public CSVResponder windSpeedResponder(ItemListFinder<HarmonieItem> windSpeedFinder, CacheSupport cacheSupport) {
-		return new CSVResponder(windSpeedFinder, createHeader(WindSpeedResult.class), cacheSupport);
+		return new CSVResponder(windSpeedFinder, createHeader(WindSpeedResult.class), cacheSupport, "Wind_Speed",
+				dateFormat);
 	}
 
 	/**
@@ -118,7 +132,8 @@ public class CSVResponderConfig {
 	@Bean
 	public CSVResponder windDirectionResponder(ItemListFinder<HarmonieItem> windDirectionFinder,
 			CacheSupport cacheSupport) {
-		return new CSVResponder(windDirectionFinder, createHeader(WindDirectionResult.class), cacheSupport);
+		return new CSVResponder(windDirectionFinder, createHeader(WindDirectionResult.class), cacheSupport,
+				"Wind_Direction", dateFormat);
 	}
 
 	/**
@@ -131,7 +146,8 @@ public class CSVResponderConfig {
 	 */
 	@Bean
 	public CSVResponder humidityResponder(ItemListFinder<HarmonieItem> humidityFinder, CacheSupport cacheSupport) {
-		return new CSVResponder(humidityFinder, createHeader(HumidityResult.class), cacheSupport);
+		return new CSVResponder(humidityFinder, createHeader(HumidityResult.class), cacheSupport, "Humdity",
+				dateFormat);
 	}
 
 	/**
@@ -147,7 +163,8 @@ public class CSVResponderConfig {
 	@Bean
 	public CSVResponder globalRadiationResponder(ItemListFinder<HarmonieItem> globalRadiationFinder,
 			CacheSupport cacheSupport) {
-		return new CSVResponder(globalRadiationFinder, createHeader(HumidityResult.class), cacheSupport);
+		return new CSVResponder(globalRadiationFinder, createHeader(HumidityResult.class), cacheSupport,
+				"Global_Radiation", dateFormat);
 	}
 
 	/**
@@ -164,7 +181,7 @@ public class CSVResponderConfig {
 	 */
 	@Bean
 	public CSVResponder fogResponder(ItemListFinder<HarmonieItem> fogFinder, CacheSupport cacheSupport) {
-		return new CSVResponder(fogFinder, createHeader(FogResult.class), cacheSupport);
+		return new CSVResponder(fogFinder, createHeader(FogResult.class), cacheSupport, "Fog", dateFormat);
 	}
 
 	/**
@@ -179,7 +196,8 @@ public class CSVResponderConfig {
 	 */
 	@Bean
 	public CSVResponder cloudinessResponder(ItemListFinder<HarmonieItem> cloudinessFinder, CacheSupport cacheSupport) {
-		return new CSVResponder(cloudinessFinder, createHeader(CloudinessResult.class), cacheSupport);
+		return new CSVResponder(cloudinessFinder, createHeader(CloudinessResult.class), cacheSupport, "Cloudiness",
+				dateFormat);
 	}
 
 	/**
@@ -193,7 +211,8 @@ public class CSVResponderConfig {
 	 */
 	@Bean
 	public CSVResponder pressureResponder(ItemListFinder<HarmonieItem> pressureFinder, CacheSupport cacheSupport) {
-		return new CSVResponder(pressureFinder, createHeader(PressureResult.class), cacheSupport);
+		return new CSVResponder(pressureFinder, createHeader(PressureResult.class), cacheSupport, "Pressure",
+				dateFormat);
 	}
 
 	/**
@@ -207,7 +226,8 @@ public class CSVResponderConfig {
 	 */
 	@Bean
 	public CSVResponder dewPointResponder(ItemListFinder<HarmonieItem> dewPointFinder, CacheSupport cacheSupport) {
-		return new CSVResponder(dewPointFinder, createHeader(DewPointResult.class), cacheSupport);
+		return new CSVResponder(dewPointFinder, createHeader(DewPointResult.class), cacheSupport, "Dew Point",
+				dateFormat);
 	}
 
 	/**
@@ -222,7 +242,8 @@ public class CSVResponderConfig {
 	@Bean
 	public CSVResponder temperatureResponder(ItemListFinder<HarmonieItem> temperatureFinder,
 			CacheSupport cacheSupport) {
-		return new CSVResponder(temperatureFinder, createHeader(TemperatureResult.class), cacheSupport);
+		return new CSVResponder(temperatureFinder, createHeader(TemperatureResult.class), cacheSupport, "Temperature",
+				dateFormat);
 	}
 
 }

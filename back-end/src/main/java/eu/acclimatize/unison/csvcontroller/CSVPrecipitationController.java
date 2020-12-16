@@ -58,7 +58,7 @@ public class CSVPrecipitationController {
 
 		List<HarmonieItem> list = resultFilter.filterResults(response, location, fromDate, toDate);
 
-		precipitationResponder.handleResponse(response, toDate, list);
+		precipitationResponder.handleResponse(response, location, fromDate, toDate, list);
 
 	}
 

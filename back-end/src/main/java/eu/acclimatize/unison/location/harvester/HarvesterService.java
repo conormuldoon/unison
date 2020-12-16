@@ -1,7 +1,7 @@
 package eu.acclimatize.unison.location.harvester;
 
+import java.text.DateFormat;
 import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashSet;
@@ -54,7 +54,7 @@ public class HarvesterService {
 
 	private Logger logger;
 
-	private SimpleDateFormat dateFormat;
+	private DateFormat dateFormat;
 
 	private Executor executor;
 
@@ -79,7 +79,7 @@ public class HarvesterService {
 	 */
 	public HarvesterService(LocationRepository locationRepository,
 			HourlyPrecipitationRepository precipitationRepository, HourlyWeatherRepository weatherRepository,
-			DocumentRequestService lrs, Logger logger, SimpleDateFormat simpleDateFormat, Executor executor) {
+			DocumentRequestService lrs, Logger logger, DateFormat harmonieDateFormat, Executor executor) {
 
 		this.locationRepository = locationRepository;
 		this.weatherRepository = weatherRepository;
@@ -90,7 +90,7 @@ public class HarvesterService {
 		weather = new ArrayList<>();
 		this.logger = logger;
 
-		this.dateFormat = simpleDateFormat;
+		this.dateFormat = harmonieDateFormat;
 		this.executor = executor;
 
 		displayedUnknown = new HashSet<>();
