@@ -54,6 +54,9 @@ div{
 }
 
 
+#iicon{
+  float: left;
+}
 
 #iicon:hover {
   cursor: pointer;

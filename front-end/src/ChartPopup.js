@@ -87,34 +87,41 @@ function ChartPopup({ uri, curVar, name, closePopup }) {
 
   return (
     <div id="popupdiv" data-testid='chart-div' onClick={handleClick}>
+
+
       <div id="iicon">
         <IoMdClose onClick={closePopup} size={20} color="rgb(192, 57, 43)" />
 
-      </div>
-      <div>
+
         <EmailShareButton
           url={uri}
           subject={subject}
         >
           <EmailIcon size={SSIZE} />
         </EmailShareButton>
-  
+
         <WhatsappShareButton
           url={uri}
           title={subject}
         >
           <WhatsappIcon size={SSIZE} />
         </WhatsappShareButton>
+
       </div>
 
 
       <center>
-        {subject}
+
+        <div style={{marginTop:10, marginBottom: 20}}>
+          {subject}
+        </div>
+
 
         {data && <TabsComponent curVar={curVar} data={data} zoomDomain={zoomDomain} minMax={minMax}
           setZoomDomain={setZoomDomain} />}
 
       </center>
+
     </div>
   );
 
