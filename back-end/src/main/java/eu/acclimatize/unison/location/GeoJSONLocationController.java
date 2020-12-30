@@ -37,11 +37,11 @@ public class GeoJSONLocationController {
 	 * Obtains a feature collection where the features represent a sorted list of
 	 * all coordinates in the spatial database.
 	 * 
-	 * @return A list of GeoJSON feature collection of point features for the added
+	 * @return A GeoJSON feature collection of point features for the added
 	 *         locations.
 	 */
 	@GetMapping(value = MappingConstant.LOCATION_COLLECTION, produces = LocationConstant.GEOJSON_MEDIA_TYPE)
-	public FeatureCollection location(HttpServletResponse response) {
+	public FeatureCollection featureCollection(HttpServletResponse response) {
 
 		response.setHeader(HttpHeaders.VARY, HttpHeaders.ACCEPT);
 		return new FeatureCollection(locationService.findAllSorted());
