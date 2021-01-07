@@ -90,8 +90,10 @@ public class CSVResponder {
 		response.setContentType(CSV_CONTENT);
 		cacheSupport.addHeader(toDate, response);
 
-		response.setHeader(HttpHeaders.CONTENT_DISPOSITION, "attachment; filename=\"" + locationName + "_"
-				+ uVariableName + "_" + dateFormat.format(fromDate) + "_" + dateFormat.format(toDate) + ".csv\"");
+		String uLoc = locationName.replaceAll(" ", "_");
+
+		response.setHeader(HttpHeaders.CONTENT_DISPOSITION, "attachment; filename=\"" + uLoc + "_" + uVariableName + "_"
+				+ dateFormat.format(fromDate) + "_" + dateFormat.format(toDate) + ".csv\"");
 
 		PrintWriter pw = response.getWriter();
 
