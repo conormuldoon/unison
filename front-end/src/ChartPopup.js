@@ -5,7 +5,7 @@ import './App.css';
 import { PRECIP } from './Constant';
 import TabsComponent from './TabsComponent';
 import { chartText } from './Util';
-import { EmailShareButton, EmailIcon, WhatsappShareButton, WhatsappIcon, } from "react-share";
+import { EmailShareButton, EmailIcon, WhatsappShareButton, WhatsappIcon, TelegramShareButton, TelegramIcon } from "react-share";
 
 
 const DLEN = 16;
@@ -107,12 +107,19 @@ function ChartPopup({ uri, curVar, name, closePopup }) {
           <WhatsappIcon size={SSIZE} />
         </WhatsappShareButton>
 
+        <TelegramShareButton
+          url={uri}
+          title={subject}
+        >
+          <TelegramIcon size={SSIZE} />
+        </TelegramShareButton>
+
       </div>
 
 
       <center>
 
-        <div style={{marginTop:10, marginBottom: 20}}>
+        <div style={{ marginTop: 10, marginBottom: 20 }}>
           {subject}
         </div>
 
