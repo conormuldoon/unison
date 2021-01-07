@@ -183,7 +183,7 @@ public class LocationTests {
 	public void locationList() throws IOException {
 
 		HttpServletResponse response = Mockito.mock(HttpServletResponse.class);
-		FeatureCollection fc = geoLocationController.location(response);
+		FeatureCollection fc = geoLocationController.featureCollection(response);
 
 		JsonGenerator jg = Mockito.mock(JsonGenerator.class);
 		fc.geoJSONSerialize(jg);
