@@ -47,8 +47,8 @@ public class JSONWindDirectionController {
 	 */
 	@GetMapping(value = MappingConstant.LOCATION_WIND_DIRECTION, produces = MediaType.APPLICATION_JSON_VALUE)
 	public Iterable<HarmonieItem> windDirection(@PathVariable(Constant.LOCATION_NAME) String location,
-			@RequestParam(value = Constant.FROM_DATE) @DateTimeFormat(pattern = Constant.FORMAT) Date fromDate,
-			@RequestParam(value = Constant.TO_DATE) @DateTimeFormat(pattern = Constant.FORMAT) Date toDate,
+			@RequestParam(Constant.FROM_DATE) @DateTimeFormat(pattern = Constant.FORMAT) Date fromDate,
+			@RequestParam(Constant.TO_DATE) @DateTimeFormat(pattern = Constant.FORMAT) Date toDate,
 			HttpServletResponse response) {
 
 		return windDirectionFinder.find(response, location, fromDate, toDate);

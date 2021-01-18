@@ -85,9 +85,8 @@ public class LocationService {
 	 * @return The location found.
 	 */
 	public Location find(String locationName) {
-		Location location = locationRepository.findById(locationName)
-				.orElseThrow(() -> new LocationNotFoundException(locationName));
-		return location;
+
+		return locationRepository.findById(locationName).orElseThrow(() -> new LocationNotFoundException(locationName));
 
 	}
 

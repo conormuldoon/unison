@@ -20,5 +20,5 @@ public interface HourlyPrecipitationRepository extends CrudRepository<HourlyPrec
 	 */
 	@Modifying
 	@Query("delete from HourlyPrecipitation hp where hp.key.location=:location")
-	public void deleteForLocation(Location location);
+	void deleteForLocation(Location location);
 }

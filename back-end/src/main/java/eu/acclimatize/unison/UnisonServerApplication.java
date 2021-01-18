@@ -46,9 +46,9 @@ public class UnisonServerApplication {
 	@Scope("prototype")
 	public Logger logger(InjectionPoint injectionPoint) {
 
-		Logger logger = Logger.getLogger(injectionPoint.getMethodParameter().getContainingClass().getName());
+		return Logger.getLogger(injectionPoint.getMethodParameter().getContainingClass().getName());
 		// logger.setLevel(Level.SEVERE);
-		return logger;
+
 	}
 
 	/**

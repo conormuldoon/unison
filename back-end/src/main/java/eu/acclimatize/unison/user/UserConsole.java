@@ -21,7 +21,11 @@ import eu.acclimatize.unison.UnisonSecurityConfig;
  * 
  *
  */
-public class UserConsole {
+public final class UserConsole {
+
+	private UserConsole() {
+
+	}
 
 	/**
 	 * Creates a {@link CredentialsRequester} to request credentials from a user and

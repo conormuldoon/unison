@@ -49,8 +49,8 @@ public class CSVCloudLevelController {
 	// Specify location, from date, and to date
 	@GetMapping(MappingConstant.LOCATION_CLOUD_LEVEL)
 	public void cloudLevel(@PathVariable(Constant.LOCATION_NAME) String location,
-			@RequestParam(value = Constant.FROM_DATE) @DateTimeFormat(pattern = Constant.FORMAT) Date fromDate,
-			@RequestParam(value = Constant.TO_DATE) @DateTimeFormat(pattern = Constant.FORMAT) Date toDate,
+			@RequestParam(Constant.FROM_DATE) @DateTimeFormat(pattern = Constant.FORMAT) Date fromDate,
+			@RequestParam(Constant.TO_DATE) @DateTimeFormat(pattern = Constant.FORMAT) Date toDate,
 			HttpServletResponse response) throws IOException {
 
 		cloudLevelResponder.handleResponse(response, location, fromDate, toDate);

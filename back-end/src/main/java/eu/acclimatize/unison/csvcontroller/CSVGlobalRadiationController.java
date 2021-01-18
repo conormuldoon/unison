@@ -27,8 +27,8 @@ public class CSVGlobalRadiationController {
 	/**
 	 * Creates an instance of CSVGlobalRadiationController.
 	 * 
-	 * @param globalRadiationResponder A responder that prints global radiation data in a CSV
-	 *                          format.
+	 * @param globalRadiationResponder A responder that prints global radiation data
+	 *                                 in a CSV format.
 	 */
 	public CSVGlobalRadiationController(CSVResponder globalRadiationResponder) {
 		this.globalRadiationResponder = globalRadiationResponder;
@@ -47,8 +47,8 @@ public class CSVGlobalRadiationController {
 	// Specify location, from date, and to date
 	@GetMapping(MappingConstant.LOCATION_GLOBAL_RADIATION)
 	public void dewPoint(@PathVariable(Constant.LOCATION_NAME) String location,
-			@RequestParam(value = Constant.FROM_DATE) @DateTimeFormat(pattern = Constant.FORMAT) Date fromDate,
-			@RequestParam(value = Constant.TO_DATE) @DateTimeFormat(pattern = Constant.FORMAT) Date toDate,
+			@RequestParam(Constant.FROM_DATE) @DateTimeFormat(pattern = Constant.FORMAT) Date fromDate,
+			@RequestParam(Constant.TO_DATE) @DateTimeFormat(pattern = Constant.FORMAT) Date toDate,
 			HttpServletResponse response) throws IOException {
 
 		globalRadiationResponder.handleResponse(response, location, fromDate, toDate);

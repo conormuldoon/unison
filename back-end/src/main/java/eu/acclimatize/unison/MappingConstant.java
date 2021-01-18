@@ -5,7 +5,7 @@ package eu.acclimatize.unison;
  * user controllers.
  *
  */
-public class MappingConstant {
+public final class MappingConstant {
 
 	/**
 	 * A private constructor to prevent constant from being instantiated by other

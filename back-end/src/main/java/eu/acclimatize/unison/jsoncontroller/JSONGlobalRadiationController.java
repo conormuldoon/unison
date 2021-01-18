@@ -47,8 +47,8 @@ public class JSONGlobalRadiationController {
 	 */
 	@GetMapping(value = MappingConstant.LOCATION_GLOBAL_RADIATION, produces = MediaType.APPLICATION_JSON_VALUE)
 	public Iterable<HarmonieItem> cloudiness(@PathVariable(Constant.LOCATION_NAME) String location,
-			@RequestParam(value = Constant.FROM_DATE) @DateTimeFormat(pattern = Constant.FORMAT) Date fromDate,
-			@RequestParam(value = Constant.TO_DATE) @DateTimeFormat(pattern = Constant.FORMAT) Date toDate,
+			@RequestParam(Constant.FROM_DATE) @DateTimeFormat(pattern = Constant.FORMAT) Date fromDate,
+			@RequestParam(Constant.TO_DATE) @DateTimeFormat(pattern = Constant.FORMAT) Date toDate,
 			HttpServletResponse response) {
 
 		return globalRadiationFinder.find(response, location, fromDate, toDate);

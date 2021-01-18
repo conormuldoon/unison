@@ -45,8 +45,8 @@ public class JSONDewPointController {
 	 */
 	@GetMapping(value = MappingConstant.LOCATION_DEW_POINT, produces = MediaType.APPLICATION_JSON_VALUE)
 	public Iterable<HarmonieItem> dewPoint(@PathVariable(Constant.LOCATION_NAME) String location,
-			@RequestParam(value = Constant.FROM_DATE) @DateTimeFormat(pattern = Constant.FORMAT) Date fromDate,
-			@RequestParam(value = Constant.TO_DATE) @DateTimeFormat(pattern = Constant.FORMAT) Date toDate,
+			@RequestParam(Constant.FROM_DATE) @DateTimeFormat(pattern = Constant.FORMAT) Date fromDate,
+			@RequestParam(Constant.TO_DATE) @DateTimeFormat(pattern = Constant.FORMAT) Date toDate,
 			HttpServletResponse response) {
 
 		return dewPointFinder.find(response, location, fromDate, toDate);

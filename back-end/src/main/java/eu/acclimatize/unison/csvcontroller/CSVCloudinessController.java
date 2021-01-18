@@ -47,8 +47,8 @@ public class CSVCloudinessController {
 	// Specify location, from date, and to date
 	@GetMapping(MappingConstant.LOCATION_CLOUDINESS)
 	public void cloudiness(@PathVariable(Constant.LOCATION_NAME) String location,
-			@RequestParam(value = Constant.FROM_DATE) @DateTimeFormat(pattern = Constant.FORMAT) Date fromDate,
-			@RequestParam(value = Constant.TO_DATE) @DateTimeFormat(pattern = Constant.FORMAT) Date toDate,
+			@RequestParam(Constant.FROM_DATE) @DateTimeFormat(pattern = Constant.FORMAT) Date fromDate,
+			@RequestParam(Constant.TO_DATE) @DateTimeFormat(pattern = Constant.FORMAT) Date toDate,
 			HttpServletResponse response) throws IOException {
 
 		cloudinessResponder.handleResponse(response, location, fromDate, toDate);

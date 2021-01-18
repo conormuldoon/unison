@@ -5,7 +5,7 @@ package eu.acclimatize.unison.location;
  * A class for constants used in the location pacakge.
  *
  */
-public class LocationConstant {
+public final class LocationConstant {
 
 	/**
 	 * A private constructor to prevent constant from being instantiated by other

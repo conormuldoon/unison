@@ -45,8 +45,8 @@ public class JSONPressureController {
 	 */
 	@GetMapping(value = MappingConstant.LOCATION_PRESSURE, produces = MediaType.APPLICATION_JSON_VALUE)
 	public Iterable<HarmonieItem> pressure(@PathVariable(Constant.LOCATION_NAME) String location,
-			@RequestParam(value = Constant.FROM_DATE) @DateTimeFormat(pattern = Constant.FORMAT) Date fromDate,
-			@RequestParam(value = Constant.TO_DATE) @DateTimeFormat(pattern = Constant.FORMAT) Date toDate,
+			@RequestParam(Constant.FROM_DATE) @DateTimeFormat(pattern = Constant.FORMAT) Date fromDate,
+			@RequestParam(Constant.TO_DATE) @DateTimeFormat(pattern = Constant.FORMAT) Date toDate,
 			HttpServletResponse response) {
 
 		return pressureFinder.find(response, location, fromDate, toDate);

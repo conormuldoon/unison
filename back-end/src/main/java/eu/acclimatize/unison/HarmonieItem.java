@@ -12,5 +12,5 @@ public interface HarmonieItem {
 	 * Prints the body in CSV format.
 	 * @param pw The writer the body is printed to.
 	 */
-	public void printItem(PrintWriter pw);
+	void printItem(PrintWriter pw);
 }

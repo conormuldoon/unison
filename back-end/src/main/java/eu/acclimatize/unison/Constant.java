@@ -7,7 +7,7 @@ import org.springframework.http.HttpStatus;
  * A class that defines constants.
  *
  */
-public class Constant {
+public final class Constant {
 
 	/**
 	 * A private constructor to prevent constant from being instantiated by other

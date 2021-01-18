@@ -45,8 +45,7 @@ public enum WeatherLink {
 		UriTemplate uriTemplate = UriTemplate.of(baseUri + propertyMapping);
 		URI uri = uriTemplate.expand(name);
 
-		Link link = Link.of(uri.toString() + REQUEST_PARAM, propertyName);
-		return link;
+		return Link.of(uri.toString() + REQUEST_PARAM, propertyName);
 	}
 
 }
