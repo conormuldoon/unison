@@ -1,14 +1,13 @@
-// This config was generated using a preset.
-// Please see the handbook for more information: https://github.com/stryker-mutator/stryker-handbook/blob/master/stryker/guides/react.md#react
-module.exports = function(config) {
-  config.set({
-    mutate: ["src/**/*.js?(x)", "!src/**/*@(.test|register*|setup*|index*).js?(x)"],
-    mutator: "javascript",
-    testRunner: "jest",
-    reporters: ["progress", "clear-text", "html"],
-    coverageAnalysis: "off",
-    jest: {
-      projectType: "react"
-    }
-  });
+/**
+ * @type {import('@stryker-mutator/api/core').StrykerOptions}
+ */
+module.exports = {
+  _comment:
+    "This config was generated using a preset. Please see the handbook for more information: https://github.com/stryker-mutator/stryker-handbook/blob/master/stryker/guides/react.md#react",
+  testRunner: "jest",
+  reporters: ["progress", "clear-text", "html"],
+  coverageAnalysis: "off",
+  jest: {
+    projectType: "create-react-app",
+  },
 };

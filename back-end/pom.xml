@@ -224,6 +224,7 @@
 				<version>1.6.2</version>
 
 
+<!-- 
 				<configuration>
 					<targetClasses>
 						<param>eu.acclimatize.unison*</param>
@@ -232,14 +233,13 @@
 						<param>eu.acclimatize.unison*Test*</param>
 					</targetTests>
 
-					<!-- See JaCoCo plug-in excludes comment. -->
+					 See JaCoCo plug-in excludes comment. 
 					<excludedTestClasses>
 						<param>*UserConsole</param>
 					</excludedTestClasses>
 
-
-
 				</configuration>
+				-->
 
 
 			</plugin>
