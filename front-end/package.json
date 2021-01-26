@@ -41,16 +41,16 @@
     "@babel/preset-react": "^7.12.7",
     "@stryker-mutator/core": "^4.4.0",
     "@stryker-mutator/jest-runner": "^4.4.0",
-    "@testing-library/dom": "^7.29.4",
     "@testing-library/jest-dom": "^5.11.9",
     "@testing-library/react": "^11.2.3",
     "@testing-library/user-event": "^12.6.2",
     "better-docs": "2.3.2",
     "eslint": "^7.13.0",
     "eslint-plugin-react": "^7.21.5",
-    "fetch-mock": "^9.10.7",
+    "fetch-mock": "^9.11.0",
     "jest-watch-typeahead": "^0.6.1",
-    "jsdoc": "^3.6.6"
+    "jsdoc": "^3.6.6",
+    "node-fetch": "^2.6.1"
   },
   "publishConfig": {
     "registry": "https://npm.pkg.github.com/"
