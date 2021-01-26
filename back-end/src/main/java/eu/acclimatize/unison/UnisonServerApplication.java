@@ -11,6 +11,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.web.servlet.FilterRegistrationBean;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Scope;
+import org.springframework.core.MethodParameter;
 import org.springframework.scheduling.annotation.EnableScheduling;
 import org.springframework.web.filter.ForwardedHeaderFilter;
 import org.springframework.web.filter.ShallowEtagHeaderFilter;
@@ -41,12 +42,18 @@ public class UnisonServerApplication {
 	 * @param injectionPoint A descriptor for the constructor where the logger will
 	 *                       be injected.
 	 * @return The per injection point logger created.
+	 * @throws NoMethodParameterException
 	 */
 	@Bean
 	@Scope("prototype")
-	public Logger logger(InjectionPoint injectionPoint) {
+	public Logger logger(InjectionPoint injectionPoint) throws NoMethodParameterException {
 
-		return Logger.getLogger(injectionPoint.getMethodParameter().getContainingClass().getName());
+		MethodParameter mp = injectionPoint.getMethodParameter();
+		if (mp == null) {
+			throw new NoMethodParameterException(
+					"A null method parameter was received for the injection point for the logger.");
+		}
+		return Logger.getLogger(mp.getContainingClass().getName());
 		// logger.setLevel(Level.SEVERE);
 
 	}
