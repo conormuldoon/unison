@@ -1,12 +1,12 @@
 package eu.acclimatize.unison.location;
 
+import java.util.ArrayList;
+
 import org.locationtech.jts.geom.GeometryFactory;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.data.domain.Sort;
-
-import eu.acclimatize.unison.WeatherLink;
 
 /**
  * 
@@ -54,30 +54,37 @@ public class LocationConfig {
 	public WeatherLink[] weatherLink(@Value("${harmonie.fog}") Boolean fogSupported,
 			@Value("${harmonie.globalRadiation}") Boolean grSupported) {
 
-		if (fogSupported && grSupported) {
-			return WeatherLink.values();
-		} else if (fogSupported) {
-			// The Met Éireann HARMONIE-AROME endpoint does not support fog.
-			WeatherLink[] weatherLink = { WeatherLink.CLOUDINESS, WeatherLink.CLOUD_LEVEL, WeatherLink.DEW_POINT,
-					WeatherLink.FOG, WeatherLink.HUMIDITY, WeatherLink.PRECIPITATION, WeatherLink.PRESSURE,
-					WeatherLink.TEMPERATURE, WeatherLink.WIND_DIRECTION, WeatherLink.WIND_SPEED };
+		WeatherLink[] values = WeatherLink.values();
+		int n = values.length;
 
-			return weatherLink;
-		} else if (grSupported) {
-			// The Norwegian Meteorological Institute HARMONIE-AROME endpoint does not
-			// support global radiation.
-			WeatherLink[] weatherLink = { WeatherLink.CLOUDINESS, WeatherLink.CLOUD_LEVEL, WeatherLink.DEW_POINT,
-					WeatherLink.GLOBAL_RADIATION, WeatherLink.HUMIDITY, WeatherLink.PRECIPITATION, WeatherLink.PRESSURE,
-					WeatherLink.TEMPERATURE, WeatherLink.WIND_DIRECTION, WeatherLink.WIND_SPEED };
-
-			return weatherLink;
-		} else {
-			WeatherLink[] weatherLink = { WeatherLink.CLOUDINESS, WeatherLink.CLOUD_LEVEL, WeatherLink.DEW_POINT,
-					WeatherLink.HUMIDITY, WeatherLink.PRECIPITATION, WeatherLink.PRESSURE, WeatherLink.TEMPERATURE,
-					WeatherLink.WIND_DIRECTION, WeatherLink.WIND_SPEED };
-			return weatherLink;
-
+		// The Met Éireann HARMONIE-AROME endpoint does not support fog.
+		if (!fogSupported) {
+			n--;
 		}
+
+		// The Norwegian Meteorological Institute HARMONIE-AROME endpoint does not
+		// support global radiation.
+		if (!grSupported) {
+			n--;
+		}
+
+		WeatherLink[] wl = new WeatherLink[n];
+		int curI = 0;
+		for (WeatherLink v : values) {
+			if (v == WeatherLink.FOG) {
+				if (fogSupported) {
+					wl[curI++] = v;
+				}
+			} else if (v == WeatherLink.GLOBAL_RADIATION) {
+				if (grSupported) {
+					wl[curI++] = v;
+				}
+			} else {
+				wl[curI++] = v;
+			}
+		}
+
+		return wl;
 
 	}
 

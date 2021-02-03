@@ -22,7 +22,6 @@ import com.fasterxml.jackson.core.JsonGenerator;
 
 import eu.acclimatize.unison.Constant;
 import eu.acclimatize.unison.OwnedItem;
-import eu.acclimatize.unison.WeatherLink;
 import eu.acclimatize.unison.user.UserInformation;
 
 /**

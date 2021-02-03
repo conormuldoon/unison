@@ -1,4 +1,4 @@
-package eu.acclimatize.unison;
+package eu.acclimatize.unison.location;
 
 import java.net.URI;
 
@@ -6,8 +6,11 @@ import org.springframework.hateoas.Link;
 import org.springframework.hateoas.UriTemplate;
 import org.springframework.hateoas.server.mvc.BasicLinkBuilder;
 
+import eu.acclimatize.unison.Constant;
+import eu.acclimatize.unison.MappingConstant;
+
 /**
- * An enumberation for HATEOAS weather links.
+ * An enumeration for HATEOAS weather links.
  *
  */
 public enum WeatherLink {

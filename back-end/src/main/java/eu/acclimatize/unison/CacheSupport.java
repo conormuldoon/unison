@@ -17,7 +17,7 @@ public class CacheSupport {
 	 * Adds Vary and conditional cache control headers.
 	 * 
 	 * @param toDate The end date for the request.
-	 * @param response The respone to add headers to.
+	 * @param response The response to add headers to.
 	 */
 	public void addHeader(Date toDate, HttpServletResponse response) {
 

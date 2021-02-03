@@ -19,7 +19,6 @@ import org.springframework.web.bind.annotation.RestController;
 
 import eu.acclimatize.unison.Constant;
 import eu.acclimatize.unison.MappingConstant;
-import eu.acclimatize.unison.WeatherLink;
 
 /**
  * 
