@@ -67,7 +67,7 @@ public class LocationConfig {
 		if (!grSupported) {
 			n--;
 		}
-
+		
 		WeatherLink[] wl = new WeatherLink[n];
 		int curI = 0;
 		for (WeatherLink v : values) {

@@ -88,7 +88,6 @@ public class CSVResponder {
 	public void handleResponse(HttpServletResponse response, String locationName, Date fromDate, Date toDate,
 			List<? extends HarmonieItem> list) throws IOException {
 		response.setContentType(CSV_CONTENT);
-		cacheSupport.addHeader(toDate, response);
 
 		String uLoc = locationName.replaceAll(" ", "_");
 
