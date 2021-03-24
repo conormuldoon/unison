@@ -13,6 +13,15 @@ import org.springframework.http.HttpHeaders;
  */
 public class CacheSupport {
 
+	private Date today() {
+		Calendar c = Calendar.getInstance();
+		c.set(Calendar.HOUR_OF_DAY, 0);
+		c.set(Calendar.MINUTE, 0);
+		c.set(Calendar.SECOND, 0);
+		c.set(Calendar.MILLISECOND, 0);
+		return c.getTime();
+	}
+	
 	/**
 	 * Adds Vary and conditional cache control headers.
 	 * 
@@ -23,7 +32,7 @@ public class CacheSupport {
 
 		response.setHeader(HttpHeaders.VARY, HttpHeaders.ACCEPT);
 
-		Date today = Calendar.getInstance().getTime();
+		Date today = today();
 
 		if (toDate.before(today)) {
 			// 2628000 seconds is 1 month
