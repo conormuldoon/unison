@@ -4,6 +4,7 @@ import { IoMdClose } from "react-icons/io";
 import './App.css';
 import { PRECIP } from './Constant';
 import TabsComponent from './TabsComponent';
+import { createChartFactory } from './closureFactory';
 import { chartText } from './Util';
 import { EmailShareButton, EmailIcon, WhatsappShareButton, WhatsappIcon, TelegramShareButton, TelegramIcon } from "react-share";
 
@@ -85,6 +86,8 @@ function ChartPopup({ uri, curVar, name, closePopup }) {
 
   const subject = vc + ' data from ' + name.trim();
 
+  const chartFactory = createChartFactory(data, zoomDomain, setZoomDomain, curVar, minMax);
+
   return (
     <div id="popupdiv" data-testid='chart-div' onClick={handleClick}>
 
@@ -125,7 +128,7 @@ function ChartPopup({ uri, curVar, name, closePopup }) {
 
 
         {data && <TabsComponent curVar={curVar} data={data} zoomDomain={zoomDomain} minMax={minMax}
-          setZoomDomain={setZoomDomain} />}
+          setZoomDomain={setZoomDomain} chartFactory={chartFactory} />}
 
       </center>
 

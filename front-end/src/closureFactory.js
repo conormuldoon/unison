@@ -2,6 +2,7 @@ import React from 'react';
 import LeafletMap from './LeafletMap';
 import LocationForm from './LocationForm';
 import RemoveComponent from './RemoveComponent';
+import ChartComponent from './ChartComponent';
 
 export function createMapFactory(mapCentre) {
 
@@ -13,11 +14,11 @@ export function createMapFactory(mapCentre) {
 
 }
 
-export function createLocationFactory(obtainData, collectionModel) {
+export function createLocationFactory(obtainData, selfRef, containsRef) {
 
     return function locationFactory(toggleDisplayAdd, displayAdd, hideAdd) {
         return <LocationForm obtainData={obtainData} toggleDisplay={toggleDisplayAdd}
-            display={displayAdd} hideDisplay={hideAdd} collectionModel={collectionModel} />;
+            display={displayAdd} hideDisplay={hideAdd} selfRef={selfRef} containsRef={containsRef} />;
     }
 }
 
@@ -29,5 +30,15 @@ export function createRemoveFactory(obtainData, href, name) {
             href={href}
             name={name}
         />;
+    }
+}
+
+export function createChartFactory(data, zoomDomain, handleZoom, curVar, minMax) {
+
+    return function chartFactory(index) {
+    
+        return <ChartComponent data={data} zoomDomain={zoomDomain} index={index}
+            handleZoom={handleZoom}
+            curVar={curVar} minMax={minMax} />
     }
 }

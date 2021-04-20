@@ -79,7 +79,6 @@ function ChartComponent({ curVar, minMax, index, data, zoomDomain, handleZoom })
     yLabel = CELSIUS;
   }
 
-
   if (has(data[0], yVal)) {
 
     return (

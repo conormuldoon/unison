@@ -2,7 +2,6 @@ import PropTypes from 'prop-types';
 import React from 'react';
 import { Tab, TabList, TabPanel, Tabs } from 'react-tabs';
 import "react-tabs/style/react-tabs.css";
-import ChartComponent from './ChartComponent';
 import { CL, HIGH, HPER, LOW, LPER, MEDIAN, MEDIUM } from './Constant';
 
 /**
@@ -12,29 +11,33 @@ import { CL, HIGH, HPER, LOW, LPER, MEDIAN, MEDIUM } from './Constant';
  *  
  * @component
  */
-function TabsComponent(props) {
+function TabsComponent({ minMax, curVar, chartFactory }) {
 
   let tabs;
 
-  if (props.minMax) {
+  if (minMax) {
 
     tabs = [LPER, MEDIAN, HPER];
 
-  } else if (props.curVar === CL) {
+  } else if (curVar === CL) {
 
     tabs = [LOW, MEDIUM, HIGH];
 
   }
 
   function tabsPanel(index) {
+    const tChart = chartFactory(index);
     return (<TabPanel >
       <div id="tabdiv" data-testid='chart' >
-        <ChartComponent data={props.data} zoomDomain={props.zoomDomain} index={index}
-          handleZoom={props.setZoomDomain}
-          curVar={props.curVar} minMax={props.minMax} />
+        {tChart}
       </div>
     </TabPanel>
     );
+  }
+
+  let chart;
+  if (!tabs) {
+    chart = chartFactory()
   }
 
   return (<div id="chartdiv">
@@ -52,8 +55,7 @@ function TabsComponent(props) {
     </Tabs>}
 
     {!tabs && <div data-testid='chart' id="singlevar">
-      <ChartComponent data={props.data} zoomDomain={props.zoomDomain} handleZoom={props.setZoomDomain}
-        curVar={props.curVar} minMax={props.minMax} />
+      {chart}
     </div>
     }
   </div>
@@ -64,8 +66,7 @@ function TabsComponent(props) {
 
 TabsComponent.propTypes = {
 
-  /** An array of data to be displayed on one or more charts. */
-  data: PropTypes.array.isRequired,
+  chartFactory: PropTypes.func.isRequired,
 
   /** The current weather variable selected. */
   curVar: PropTypes.string.isRequired,
@@ -74,12 +75,6 @@ TabsComponent.propTypes = {
    * some locations and models only provide a single preciption value (no minimum or maximum).
    */
   minMax: PropTypes.bool,
-
-  /** Determines the range of data to be displayed. */
-  zoomDomain: PropTypes.object,
-
-  /** A function used to change the zoom domain. */
-  setZoomDomain: PropTypes.func.isRequired,
 
 
 }

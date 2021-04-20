@@ -326,12 +326,11 @@ function Unison(props) {
             </div>
 
 
-
             {curLoc && curVar && <div className='pLeft'> <button onClick={handleCSV}>CSV</button> </div>}
           </div>
 
-          <ARLocationComponent createLocation={createLocationFactory(obtainData, collectionModel)}
-            createRemove={curLoc ? createRemoveFactory(obtainData, curLoc._links[SELF].href, curLoc.name) : null} />
+          {collectionModel && <ARLocationComponent createLocation={createLocationFactory(obtainData, collectionModel._links.self.href, collectionModel._links.contains.href)}
+            createRemove={curLoc ? createRemoveFactory(obtainData, curLoc._links[SELF].href, curLoc.name) : null} />}
 
         </center>
 

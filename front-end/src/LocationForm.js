@@ -14,7 +14,7 @@ import parser from 'uri-template';
  * 
  * @component 
  */
-function LocationForm(props) {
+function LocationForm({ display, hideDisplay, toggleDisplay, obtainData, selfRef, containsRef }) {
 
 
 
@@ -40,20 +40,20 @@ function LocationForm(props) {
     setLocation('');
     setLon('');
     setLat('');
-    props.hideDisplay();
-    props.obtainData();
+    hideDisplay();
+    obtainData();
   }
 
-  async function putData(model) {
+  async function putData(selfRef) {
 
-    const response = await fetch(model._links.self.href,
+    const response = await fetch(selfRef,
       locationPutObject(location, lon, lat));
 
 
 
     if (response.ok) {
 
-      const harvestResponse = await fetch(model._links.self.href + '/' + location, {
+      const harvestResponse = await fetch(selfRef + '/' + location, {
         method: 'POST'
       });
 
@@ -65,7 +65,7 @@ function LocationForm(props) {
       } else if (harvestResponse.status === HttpStatus.BAD_GATEWAY) {
         alert(location + ' was ' + message + ', but did did not recieve the weather data. The ' +
           lon + " and " + lat + " longitude and latitude coordinates may not be covered by the model.");
-          updateDisplay();
+        updateDisplay();
       }
       else {
         alert(location + ' was ' + message + ', but Unison did not obtain the weather data.')
@@ -85,7 +85,7 @@ function LocationForm(props) {
   async function handleSubmit(event) {
     event.preventDefault();
 
-    const template = parser.parse(props.collectionModel._links.contains.href);
+    const template = parser.parse(containsRef);
     const uri = template.expand({ name: location });
 
     const response = await fetch(uri);
@@ -96,11 +96,11 @@ function LocationForm(props) {
       if (contains.value) {
 
         if (window.confirm('A location named ' + location + " was previously added. Would you like to update it?")) {
-          putData(props.collectionModel);
+          putData(selfRef);
         }
 
       } else {
-        putData(props.collectionModel);
+        putData(selfRef);
       }
 
     } else {
@@ -112,16 +112,16 @@ function LocationForm(props) {
 
 
   let text = 'Add Location';
-  if (props.display) {
+  if (display) {
     text = 'Hide';
   }
 
 
   return (<div id='pLeft'>
 
-    <button data-testid="lf-button" onClick={props.toggleDisplay}>{text}</button>
+    <button data-testid="lf-button" onClick={toggleDisplay}>{text}</button>
 
-    {props.display && <form id='locForm' onSubmit={handleSubmit}>
+    {display && <form id='locForm' onSubmit={handleSubmit}>
       <label>
         Location name: <input type="text" name="name" value={location} onChange={handleLoc} required />
       </label>
@@ -163,7 +163,10 @@ LocationForm.propTypes = {
 
   featureProperties: PropTypes.object,
 
-  collectionModel: PropTypes.object,
+  selfRef: PropTypes.string,
+
+  containsRef: PropTypes.string,
+
 }
 
 export default LocationForm;
