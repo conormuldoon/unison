@@ -3,7 +3,6 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import { fireEvent, render, waitFor } from "@testing-library/react";
 import LocationForm from './LocationForm';
-import { locationPutObject } from './Util';
 import HttpStatus from 'http-status-codes';
 
 
@@ -28,19 +27,6 @@ it('mathes snapshot', () => {
 async function changeValue(getByLabelText, labelText, value) {
 
   fireEvent.change(await waitFor(() => getByLabelText(labelText)), { target: { value: value } });
-}
-
-const collectionModel = {
-
-  "_links": {
-    "self": {
-      "href": "http://localhost:8080/locationCollection"
-    },
-    "contains": {
-      "href": "http://localhost:8080/locationCollection/contains{?name}",
-      "templated": true
-    }
-  }
 }
 
 it('sends the data in the form when submit is clicked', async () => {
@@ -69,7 +55,7 @@ it('sends the data in the form when submit is clicked', async () => {
 
   const map = new Map();
 
-  const component = <LocationForm display={true} collectionModel={collectionModel} obtainData={obtainData} hideDisplay={hideDisplay}
+  const component = <LocationForm display={true} containsRef={"http://localhost:8080/locationCollection/contains{?name}"} selfRef={"http://localhost:8080/locationCollection"} obtainData={obtainData} hideDisplay={hideDisplay}
     toggleDisplay={() => { }} featureProperties={map} />;
   const { getByText, getByLabelText } = render(component);
 
@@ -106,7 +92,7 @@ it('handles add location', async () => {
   };
 
   const map = new Map();
-  const component = <LocationForm display={true} collectionModel={collectionModel} obtainData={obtainData} hideDisplay={hideDisplay}
+  const component = <LocationForm display={true} containsRef={"http://localhost:8080/locationCollection/contains{?name}"} selfRef={"http://localhost:8080/locationCollection"} obtainData={obtainData} hideDisplay={hideDisplay}
     toggleDisplay={() => { }} featureProperties={map} />;
   const { getByText, getByLabelText } = render(component);
 

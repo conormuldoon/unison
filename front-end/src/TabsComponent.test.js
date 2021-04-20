@@ -3,6 +3,7 @@ import fetchMock from 'fetch-mock';
 import React from 'react';
 import { render, waitFor } from "@testing-library/react";
 import TabsComponent from './TabsComponent';
+import { createChartFactory } from './closureFactory';
 
 const DLEN = 16;
 
@@ -17,11 +18,12 @@ const addChart = async (weatherVariable, dataArray, zoomDomain) => {
 
     }
 
+    const chartFactory = createChartFactory(dataArray, zoomDomain, () => { }, weatherVariable, false);
 
-    const { getByTestId /*, debug */} = render(<TabsComponent curVar={weatherVariable} data={dataArray} zoomDomain={zoomDomain} minMax={false} setZoomDomain={() => { }} />);
+    const { getByTestId /*, debug */ } = render(<TabsComponent curVar={weatherVariable} minMax={false} chartFactory={chartFactory} />);
 
 
-    await waitFor(()=>getByTestId('chart'));
+    await waitFor(() => getByTestId('chart'));
 
 
     fetchMock.restore();

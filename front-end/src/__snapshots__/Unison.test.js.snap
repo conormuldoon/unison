@@ -157,21 +157,6 @@ exports[`mathes Unison snapshot 1`] = `
             </div>
           </div>
         </div>
-        <div>
-          <div
-            class="pLeft"
-          >
-            <div
-              id="pLeft"
-            >
-              <button
-                data-testid="lf-button"
-              >
-                Add Location
-              </button>
-            </div>
-          </div>
-        </div>
       </center>
     </div>
   </div>
