@@ -253,16 +253,16 @@ function Unison({ createMap, logoLeft, logoRight }) {
     return s.replace(/ /g, '_')
   }
 
-  function expandLink(linksProperty) {
+  function expandLink() {
 
-    const href = linksProperty._links[varMapping(curVar)].href;
+    const href = curLoc._links[varMapping(curVar)].href;
     const template = parser.parse(href);
-    return template.expand({ name: linksProperty.name, fromDate: fromDate, toDate: toDate });
+    return template.expand({ name: curLoc.name, fromDate: fromDate, toDate: toDate });
   }
 
   const handleCSV = async () => {
 
-    const response = await fetch(expandLink(curLoc), {
+    const response = await fetch(expandLink(), {
       credentials: 'omit'
     });
 
@@ -285,7 +285,7 @@ function Unison({ createMap, logoLeft, logoRight }) {
 
   let popupFactory;
   if (curLoc && curVar) {
-    const uri = expandLink(curLoc);
+    const uri = expandLink();
     popupFactory = createPopupFactory(uri, curVar, curLoc.name);
   }
 
