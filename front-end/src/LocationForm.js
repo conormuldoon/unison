@@ -9,6 +9,14 @@ import { locationPutObject } from './Util';
 
 import parser from 'uri-template';
 
+export function createLocationFactory(obtainData, selfRef, containsRef) {
+
+  return function locationFactory(toggleDisplayAdd, displayAdd, hideAdd) {
+      return <LocationForm obtainData={obtainData} toggleDisplay={toggleDisplayAdd}
+          display={displayAdd} hideDisplay={hideAdd} selfRef={selfRef} containsRef={containsRef} />;
+  }
+}
+
 /**
  * A component for displaying a form to add new locations to be tracked.
  * 

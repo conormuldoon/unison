@@ -5,7 +5,6 @@ import { render, waitFor, screen } from "@testing-library/react";
 import ChartPopup from './ChartPopup';
 import { PRECIP, CL } from './Constant';
 import { chartText } from './Util';
-import { expandLink } from './Util';
 
 const fromDate = '1-2-2018';
 const toDate = '7-10-2019';
@@ -55,7 +54,8 @@ const location = {
   }
 }
 
-const uri = expandLink(location, 'Precipitation', fromDate, toDate);
+
+const uri = "http://localhost:8080/locationCollection/UCD/precipitation?fromDate=" + fromDate + "&toDate=" + toDate;
 
 const chartPopup = <ChartPopup curVar='Precipitation'
   closePopup={() => { }} uri={uri} name={location.name} />;
@@ -187,7 +187,8 @@ it('displays text for the selected variable and location', async () => {
       }
     }]) {
 
-      const uri = expandLink(loc, 'Wind Speed', fromDate, toDate);
+
+      const uri = "http://localhost:8080/locationCollection/London/windSpeed?fromDate=" + fromDate + "&toDate=" + toDate;
       const { getByText } = render(<ChartPopup curVar={vo} name={loc.name} uri={uri} closePopup={() => { }} />);
 
       await waitFor(() => getByText(sOpt + ' data from ' + loc.name));
@@ -202,8 +203,8 @@ it('displays text for the selected variable and location', async () => {
 it('displays a lower case letter for second word', async () => {
 
   fetchMock.get(apiRequest, []);
-  const wdURI = expandLink(location, 'Wind Direction', fromDate, toDate);
 
+  const wdURI = "http://localhost:8080/locationCollection/London/windDirection?fromDate=" + fromDate + "&toDate=" + toDate;
   const { getByText } = render(<ChartPopup curVar={'Wind Direction'} name={location.name} uri={wdURI}
     closePopup={() => { }} />);
 

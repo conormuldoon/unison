@@ -3,7 +3,7 @@ import fetchMock from 'fetch-mock';
 import React from 'react';
 import { render, waitFor } from "@testing-library/react";
 import TabsComponent from './TabsComponent';
-import { createChartFactory } from './closureFactory';
+import { createChartFactory } from './ChartComponent';
 
 const DLEN = 16;
 

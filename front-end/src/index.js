@@ -3,7 +3,7 @@ import ReactDOM from 'react-dom';
 import './index.css';
 import { unregister } from './registerServiceWorker';
 import Unison from './Unison';
-import { createMapFactory } from './closureFactory';
+import { createMapFactory } from './LeafletMap';
 
 // Map coordinates
 // Dublin

@@ -11,7 +11,7 @@ exports[`mathes Unison snapshot 1`] = `
       <center />
     </div>
     <div
-      class="leaflet-container leaflet-grab leaflet-touch-drag"
+      class="leaflet-container"
       style="position: relative;"
       tabindex="0"
     >

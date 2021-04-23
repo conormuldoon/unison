@@ -3,7 +3,8 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import { fireEvent, render } from "@testing-library/react";
 import ARLocationComponent from './ARLocationComponent';
-import { createLocationFactory, createRemoveFactory } from './closureFactory';
+import { createLocationFactory } from './LocationForm';
+import { createRemoveFactory } from './RemoveComponent';
 
 it('renders without crashing', async () => {
 

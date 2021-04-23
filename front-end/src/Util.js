@@ -6,7 +6,6 @@ import {
 } from 'react-day-picker/moment';
 
 import GeoJSON from 'geojson';
-import parser from 'uri-template';
 
 export const tomorrow = () => {
 
@@ -30,13 +29,6 @@ export const varMapping = (varCur) => {
 
 export const problemConnecting = () => {
   alert('There was a problem connecting to Unison. Please try again later.');
-}
-
-export const expandLink = (linksProperty, curVar, fromDate, toDate) => {
-
-  const href = linksProperty._links[varMapping(curVar)].href;
-  const template = parser.parse(href);
-  return template.expand({ name: linksProperty.name, fromDate: fromDate, toDate: toDate });
 }
 
 

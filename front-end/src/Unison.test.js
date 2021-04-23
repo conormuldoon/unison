@@ -6,7 +6,7 @@ import { fireEvent, render, waitFor, screen } from "@testing-library/react";
 import Unison from './Unison';
 
 
-import { createMapFactory } from './closureFactory';
+import { createMapFactory } from './LeafletMap';
 
 
 

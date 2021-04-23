@@ -10,7 +10,7 @@ import './App.css';
  * @component
  * 
  */
-function ARLocationComponent(props) {
+function ARLocationComponent({ createLocation, createRemove }) {
 
   const [displayAdd, setDisplayAdd] = useState(false);
 
@@ -27,10 +27,10 @@ function ARLocationComponent(props) {
   return (
     <div>
       <div className='pLeft'>
-        {props.createLocation(toggleDisplayAdd, displayAdd, hideAdd)}
+        {createLocation(toggleDisplayAdd, displayAdd, hideAdd)}
       </div>
-      {props.createRemove && <div className='pLeft'>
-        {props.createRemove(hideAdd)}
+      {createRemove && <div className='pLeft'>
+        {createRemove(hideAdd)}
       </div>}
     </div>
   );

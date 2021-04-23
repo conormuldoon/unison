@@ -4,7 +4,7 @@ import { IoMdClose } from "react-icons/io";
 import './App.css';
 import { PRECIP } from './Constant';
 import TabsComponent from './TabsComponent';
-import { createChartFactory } from './closureFactory';
+import { createChartFactory } from './ChartComponent';
 import { chartText } from './Util';
 import { EmailShareButton, EmailIcon, WhatsappShareButton, WhatsappIcon, TelegramShareButton, TelegramIcon } from "react-share";
 
@@ -12,6 +12,16 @@ import { EmailShareButton, EmailIcon, WhatsappShareButton, WhatsappIcon, Telegra
 const DLEN = 16;
 
 const SSIZE = 24;
+
+
+export function createPopupFactory(uri, curVar, name) {
+
+  return function popupFactory(closePopup) {
+
+    return <ChartPopup uri={uri} curVar={curVar} name={name} closePopup={closePopup} />
+      
+  }
+}
 /**
  * A popup that displays a TabsComponent. Once mounted, it connects to the back-end to obtain data
  * for the from date, to date, location, and weather variable selected.
@@ -42,6 +52,7 @@ function ChartPopup({ uri, curVar, name, closePopup }) {
       if (active) {
         const n = dataArray.length;
 
+        
         for (let i = 0; i < n; i++) {
           const dateS = dataArray[i].date;
           dataArray[i].date = new Date(dateS.substring(0, DLEN));
@@ -62,6 +73,7 @@ function ChartPopup({ uri, curVar, name, closePopup }) {
 
           setData(dataArray);
           setZoomDomain({ x: [fd, td] });
+          
         } else {
 
           setData(null);

@@ -12,6 +12,16 @@ const CELSIUS = "Celsius";
 
 const PREVAL = "precipitation.value";
 
+export function createChartFactory(data, zoomDomain, handleZoom, curVar, minMax) {
+
+  return function chartFactory(index) {
+  
+      return <ChartComponent data={data} zoomDomain={zoomDomain} index={index}
+          handleZoom={handleZoom}
+          curVar={curVar} minMax={minMax} />
+  }
+}
+
 /**
  * A component for displaying line graphs.
  * 
@@ -22,7 +32,6 @@ function ChartComponent({ curVar, minMax, index, data, zoomDomain, handleZoom })
 
   let yVal;
   let yLabel;
-
 
   // 'Precipitation','Humidity','Wind Direction','Wind Speed','Cloudiness','Cloud Level','Dew Point','Pressure','Temperature'
   const variRequest = varMapping(curVar);

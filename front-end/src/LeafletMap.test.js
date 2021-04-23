@@ -4,6 +4,7 @@ import LeafletMap from './LeafletMap';
 
 import { render, fireEvent, waitFor } from "@testing-library/react";
 import fetchMock from 'fetch-mock';
+import { createPopupFactory } from './ChartPopup';
 
 
 const location = {
@@ -86,8 +87,11 @@ it('displays popup', async () => {
 
   const featureProperties = new Map();
   featureProperties.set(location.name, location);
-  const { getAllByAltText } = render(<LeafletMap linksProperty={location} featureProperties={featureProperties}
-    curVar={curVar} mapCentre={mapCentre} markerCallback={markerCallback} marker={marker} fromDate={fromDate} toDate={toDate} />);
+
+  const popupFactory = createPopupFactory("http://localhost:8080/locationCollection/UCD/temperature?fromDate=" + fromDate + "&toDate=" + toDate,
+    "Temperature", location.name);
+  const { getAllByAltText } = render(<LeafletMap
+    mapCentre={mapCentre} markerCallback={markerCallback} marker={marker} popupFactory={popupFactory} />);
 
   // Firing click event for marker icon image
   const arr = await waitFor(() => getAllByAltText(''));

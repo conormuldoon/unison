@@ -4,6 +4,18 @@ import React from 'react';
 import { problemConnecting } from './Util';
 import HttpStatus from 'http-status-codes';
 
+
+export function createRemoveFactory(obtainData, href, name) {
+
+  return function removeFactory(hideDisplay) {
+      return <RemoveComponent obtainData={obtainData}
+          hideDisplay={hideDisplay}
+          href={href}
+          name={name}
+      />;
+  }
+}
+
 /**
  * A component to enable the user to remove a location from being tracked.
  * 

@@ -8,10 +8,14 @@ import './App.css';
 import ARLocationComponent from './ARLocationComponent';
 import { FORMAT, SELF } from './Constant';
 import DateSelector from './DateSelector';
-import { today, tomorrow, expandLink, problemConnecting } from './Util';
+import { today, tomorrow, problemConnecting, varMapping } from './Util';
 import HttpStatus from 'http-status-codes';
 
-import { createLocationFactory, createRemoveFactory } from './closureFactory';
+import { createLocationFactory } from './LocationForm';
+
+import { createRemoveFactory } from './RemoveComponent';
+import { createPopupFactory } from './ChartPopup';
+import parser from 'uri-template';
 
 
 
@@ -21,7 +25,7 @@ import { createLocationFactory, createRemoveFactory } from './closureFactory';
  * @component
  * 
  */
-function Unison(props) {
+function Unison({ createMap, logoLeft, logoRight }) {
 
 
   const [fromDate, setFromDate] = useState(today());
@@ -249,10 +253,16 @@ function Unison(props) {
     return s.replace(/ /g, '_')
   }
 
+  function expandLink(linksProperty) {
+
+    const href = linksProperty._links[varMapping(curVar)].href;
+    const template = parser.parse(href);
+    return template.expand({ name: linksProperty.name, fromDate: fromDate, toDate: toDate });
+  }
 
   const handleCSV = async () => {
 
-    const response = await fetch(expandLink(curLoc, curVar, fromDate, toDate), {
+    const response = await fetch(expandLink(curLoc), {
       credentials: 'omit'
     });
 
@@ -273,6 +283,12 @@ function Unison(props) {
     return <DateSelector label={label} dateValue={dateValue} handleDayChange={handleDayChange} />;
   }
 
+  let popupFactory;
+  if (curLoc && curVar) {
+    const uri = expandLink(curLoc);
+    popupFactory = createPopupFactory(uri, curVar, curLoc.name);
+  }
+
   return (
 
     <div id="mapdiv">
@@ -280,13 +296,13 @@ function Unison(props) {
       <div id="logos">
 
         <center>
-          {props.logoLeft}
-          {props.logoRight}
+          {logoLeft}
+          {logoRight}
         </center>
 
       </div>
 
-      {props.createMap(marker, curVar, locationMap, markerClicked, fromDate, toDate, curLoc)}
+      {createMap(marker, markerClicked, popupFactory)}
 
       <div id="selectdiv" >
 
