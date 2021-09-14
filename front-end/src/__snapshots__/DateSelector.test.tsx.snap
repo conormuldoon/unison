@@ -1,0 +1,19 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`mathes snapshot 1`] = `
+<div>
+  <div>
+    <p>
+      Test Label
+    </p>
+    <div
+      class="DayPickerInput"
+    >
+      <input
+        placeholder="YYYY-M-D"
+        value="14-10-2021"
+      />
+    </div>
+  </div>
+</div>
+`;

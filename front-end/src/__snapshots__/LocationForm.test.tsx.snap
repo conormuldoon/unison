@@ -1,0 +1,60 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`mathes snapshot 1`] = `
+<div>
+  <div
+    id="pLeft"
+  >
+    <button
+      data-testid="lf-button"
+    >
+      Hide
+    </button>
+    <form
+      id="locForm"
+    >
+      <label>
+        Location name: 
+        <input
+          name="name"
+          required=""
+          type="text"
+          value=""
+        />
+      </label>
+      <br />
+      <br />
+      <label>
+        Longitude: 
+        <input
+          name="lon"
+          required=""
+          step="any"
+          type="number"
+          value=""
+        />
+      </label>
+      <br />
+      <br />
+      <label>
+        Latitude: 
+        <input
+          name="lat"
+          required=""
+          step="any"
+          type="number"
+          value=""
+        />
+      </label>
+      <br />
+      <br />
+      <div>
+        <input
+          type="submit"
+          value="Submit"
+        />
+      </div>
+    </form>
+  </div>
+</div>
+`;
