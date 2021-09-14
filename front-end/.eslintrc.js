@@ -5,10 +5,11 @@ module.exports = {
     'jest': true,
     'node': true,
   },
-  'parser': 'babel-eslint',
+  'parser': '@typescript-eslint/parser',
   'extends': [
     'eslint:recommended',
     'plugin:react/recommended',
+    "plugin:@typescript-eslint/recommended",
   ],
   'globals': {
     'Atomics': 'readonly',
@@ -24,6 +25,7 @@ module.exports = {
   },
   'plugins': [
     'react',
+    "@typescript-eslint"
   ],
   'settings': {
     'react': {
@@ -32,5 +34,6 @@ module.exports = {
     }
   },
   'rules': {
+    '@typescript-eslint/no-var-requires': 0,
   },
 };
