@@ -35,5 +35,20 @@ module.exports = {
   },
   'rules': {
     '@typescript-eslint/no-var-requires': 0,
+    "@typescript-eslint/explicit-module-boundary-types": "off",
   },
+  "overrides": [
+    {
+      // enable the rule specifically for TypeScript files
+      "files": [
+        "*.ts",
+        "*.tsx"
+      ],
+      "rules": {
+        "@typescript-eslint/explicit-module-boundary-types": [
+          "error"
+        ]
+      }
+    }
+  ]
 };

@@ -68,7 +68,13 @@ const halGetHeader: RequestInit = {
 
 }
 
-function createLinkMap(listItem: any) {
+type Link = {
+  [key: string]: {
+    href: string
+  };
+}
+
+function createLinkMap(listItem: Link) {
   const itemMap = new Map<string, string>();
   for (const rel in listItem) {
     itemMap.set(rel, listItem[rel].href);
@@ -81,7 +87,21 @@ const spaceToUnderscore = (s: string) => {
   return s.replace(/ /g, '_')
 }
 
-type Link = Map<string, string>;
+function optionName(s: string) {
+  let optName = '';
+  let sw = 0;
+  for (let i = 1; i < s.length; i++) {
+    const c = s.charAt(i);
+    if (c >= 'A' && c <= 'Z') {
+      optName += s.substring(sw, i) + ' ';
+      sw = i;
+    }
+  }
+  optName += s.substring(sw);
+  return optName;
+}
+
+type LinkMap = Map<string, string>;
 
 /**
  * Application component for Unison. Once mounted, it connects to the back-end to receive a list of the locations being tracked.
@@ -96,10 +116,10 @@ function Unison({ createMap, logoLeft, logoRight }: UnisonProps): JSX.Element {
   const [toDate, setToDate] = useState(tomorrow());
   const [option, setOption] = useState<string[] | null>(null);
   const [marker, setMarker] = useState<MapMarker[] | null>(null);
-  const [curLoc, setCurLoc] = useState<string | null | undefined>(null);
+  const [curLoc, setCurLoc] = useState<string | null>(null);
   const [curVar, setCurVar] = useState<string | null>(null);
   const [varOpt, setVarOpt] = useState<string[] | null>(null);
-  const [locationMap, setLocationMap] = useState<Map<string, Link> | null>(null);
+  const [locationMap, setLocationMap] = useState<Map<string, LinkMap> | null>(null);
   const [modelLink, setModelLink] = useState<ModelLink | null>(null);
 
   async function requestFeatureCollection(uri: string) {
@@ -154,7 +174,7 @@ function Unison({ createMap, logoLeft, logoRight }: UnisonProps): JSX.Element {
 
   }
 
-  function processModelList(list: any) {
+  function processModelList(list: [{ name: string, _links: Link }]) {
 
     const n = list.length;
     const map = new Map();
@@ -176,16 +196,7 @@ function Unison({ createMap, logoLeft, logoRight }: UnisonProps): JSX.Element {
         }
 
         const s = rel.charAt(0).toUpperCase() + rel.substring(1);
-        let optName = '';
-        let sw = 0;
-        for (let i = 1; i < s.length; i++) {
-          const c = s.charAt(i);
-          if (c >= 'A' && c <= 'Z') {
-            optName += s.substring(sw, i) + ' ';
-            sw = i;
-          }
-        }
-        optName += s.substring(sw);
+        const optName = optionName(s);
         varOpt.push(optName);
       }
     }
@@ -267,12 +278,7 @@ function Unison({ createMap, logoLeft, logoRight }: UnisonProps): JSX.Element {
 
   };
 
-  useEffect(() => {
-
-    obtainData();
-  }, []);
-
-
+  useEffect(obtainData, []);
 
   const markerClicked = (location: string) => {
     setCurLoc(location);
@@ -353,7 +359,7 @@ function Unison({ createMap, logoLeft, logoRight }: UnisonProps): JSX.Element {
     let createRemove = null;
 
 
-    if (curLoc && curLoc.link && locationMap) {
+    if (curLoc && locationMap) {
 
       const linkMap = locationMap.get(curLoc);
       if (linkMap) {

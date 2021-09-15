@@ -11,6 +11,6 @@ export const HIGH = "High";
 export const PRECIP = "Precipitation";
 export const CL = "Cloud Level";
 
-export const SELF:string = "self";
+export const SELF = "self";
 
 
