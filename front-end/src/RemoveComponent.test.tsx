@@ -1,5 +1,8 @@
+import { enableFetchMocks } from 'jest-fetch-mock';
+enableFetchMocks();
+
 import "@testing-library/jest-dom/extend-expect";
-import fetchMock from 'fetch-mock';
+import fetchMock from 'jest-fetch-mock';
 import React from 'react';
 import ReactDOM from 'react-dom';
 import { fireEvent, render } from "@testing-library/react";
@@ -24,14 +27,14 @@ it('renders without crashing', async () => {
   const div = document.createElement('div');
 
   ReactDOM.render(<RemoveComponent href={linksProperty._links['self'].href} name={linksProperty.name}
-    obtainData={() => { }} hideDisplay={() => { }}  />, div);
+    obtainData={() => { }} hideAdd={() => { }} />, div);
   ReactDOM.unmountComponentAtNode(div);
 });
 
 it('mathes snapshot', () => {
 
 
-  const { container } = render(<RemoveComponent name={linksProperty.name} href={linksProperty._links['self'].href} obtainData={() => { }} hideDisplay={() => { }}  />);
+  const { container } = render(<RemoveComponent name={linksProperty.name} href={linksProperty._links['self'].href} obtainData={() => { }} hideAdd={() => { }} />);
 
   expect(container).toMatchSnapshot();
 
@@ -40,7 +43,7 @@ it('mathes snapshot', () => {
 
 it('handles remove location', (done) => {
 
-  fetchMock.delete('end:/' + location.name, HttpStatus.OK);
+  fetchMock.mockResponse("", { status: 200 });
 
 
   const alertSpy = jest.spyOn(window, 'alert');
@@ -56,14 +59,14 @@ it('handles remove location', (done) => {
     done();
   };
 
-  const component = <RemoveComponent name={linksProperty.name} href={linksProperty._links['self'].href} obtainData={obtainData} hideDisplay={hideDisplay}  />;
+  const component = <RemoveComponent name={linksProperty.name} href={linksProperty._links['self'].href} obtainData={obtainData} hideAdd={hideDisplay} />;
   const { getByText } = render(component);
 
   fireEvent.click(getByText('Remove ' + location.name));
 
-  fetchMock.restore();
   confirmSpy.mockClear();
   alertSpy.mockClear();
+  fetchMock.resetMocks();
 
 });
 

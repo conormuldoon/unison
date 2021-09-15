@@ -1,9 +1,12 @@
+import { enableFetchMocks } from 'jest-fetch-mock';
+enableFetchMocks();
+
 import React from 'react';
 import ReactDOM from 'react-dom';
 import LeafletMap from './LeafletMap';
 
 import { render, fireEvent, waitFor } from "@testing-library/react";
-import fetchMock from 'fetch-mock';
+import fetchMock from 'jest-fetch-mock';
 import { createPopupFactory } from './ChartPopup';
 
 
@@ -81,7 +84,7 @@ it('displays popup', async () => {
   const toDate = '7-10-2019';
   const mapCentre = [53.35014, -6.266155];
 
-  fetchMock.get('end:/temperature?fromDate=' + fromDate + '&toDate=' + toDate, []);
+  fetchMock.mockResponse("[]");
 
   const markerCallback = jest.fn();
 
@@ -98,6 +101,6 @@ it('displays popup', async () => {
   fireEvent.click(arr[1]);
   expect(markerCallback).toHaveBeenCalledWith(location.name);
 
-  fetchMock.restore();
+  fetchMock.resetMocks();
 
 });

@@ -1,10 +1,13 @@
+
+import { enableFetchMocks } from 'jest-fetch-mock';
+enableFetchMocks();
 import "@testing-library/jest-dom/extend-expect";
-import fetchMock from 'fetch-mock';
+import fetchMock from 'jest-fetch-mock';
 import React from 'react';
 import ReactDOM from 'react-dom';
 import { fireEvent, render, waitFor, screen } from "@testing-library/react";
 import Unison from './Unison';
-
+import HttpStatus from 'http-status-codes';
 
 import { createMapFactory } from './LeafletMap';
 
@@ -30,26 +33,25 @@ const unisonModel = {
     }
 };
 
-const mapCentre = [59.922326, 10.751560];
+const mapCentre: [number, number] = [59.922326, 10.751560];
 const mapFactory = createMapFactory(mapCentre);
 
 it('renders without crashing', async () => {
 
-
-    fetchMock.get('/', unisonModel);
+    fetchMock.mockOnce(JSON.stringify(unisonModel));
 
     const div = document.createElement('div');
 
     ReactDOM.render(<Unison createMap={mapFactory} />, div);
     ReactDOM.unmountComponentAtNode(div);
 
-    fetchMock.restore();
+
 });
 
 it('mathes Unison snapshot', () => {
 
 
-    fetchMock.get('/', unisonModel);
+    fetchMock.mockOnce(JSON.stringify(unisonModel));
 
     const mockDateNow = jest.fn(() => 1571875200000);
     const dn = global.Date.now;
@@ -59,7 +61,7 @@ it('mathes Unison snapshot', () => {
 
     expect(container).toMatchSnapshot();
     global.Date.now = dn;
-    fetchMock.restore();
+
 
 });
 
@@ -155,12 +157,7 @@ it('displays popup when marker clicked', async () => {
     };
     const optionsGEO = { headers: headersGEO };
 
-    fetchMock.get('end:/locationCollection', locationModelHAL, options);
-
-    fetchMock.get('end:/locationCollection', locationCollection, { overwriteRoutes: false });
-
-
-    fetchMock.get('end:/precipitation?fromDate=1-9-2019&toDate=23-10-2019', [{
+    const precipData = [{
         "date": "2019-04-01T23:00:00.000+0000",
         "precipitation": {
             "value": 0,
@@ -255,12 +252,17 @@ it('displays popup when marker clicked', async () => {
             "minvalue": 0,
             "maxvalue": 0
         }
-    }]);
+    }];
 
 
+    fetchMock.mockResponses(
 
-    fetchMock.get('/', unisonModel);
-    fetchMock.get('end:fromDate=24-10-2019&toDate=25-10-2019', []);
+        [JSON.stringify(unisonModel), { status: 200 }],
+        [JSON.stringify(locationModelHAL), { status: 200 }],
+        [JSON.stringify(locationCollection), { status: 200 }],
+        [JSON.stringify([]), { status: 200 }],
+        [JSON.stringify({ value: false }), { status: 200 }],
+    );
 
     const mockDateNow = jest.fn(() => 1571875200000);
     const dn = global.Date.now;
@@ -271,7 +273,6 @@ it('displays popup when marker clicked', async () => {
 
     await waitFor(() => screen.getAllByAltText('')[1]);
 
-
     fireEvent.click(screen.getAllByAltText('')[1]);
 
 
@@ -281,6 +282,6 @@ it('displays popup when marker clicked', async () => {
 
     global.Date.now = dn;
 
-    fetchMock.restore();
+    fetchMock.resetMocks();
 });
 

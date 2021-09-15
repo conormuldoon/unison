@@ -53,20 +53,23 @@ class ResponseError extends Error {
   }
 }
 
-function checkResponse(response: Response, endpoint: string) {
-  if (!response.ok)
-    throw new ResponseError('Bad response for ' + endpoint, response.status);
+function checkResponse(ok: boolean, endpoint: string, status: number) {
+  if (!ok)
+    throw new ResponseError('Bad response for ' + endpoint, status);
 }
 
+const OMIT = 'omit';
 
-const halGetHeader: RequestInit = {
-  method: 'GET',
-  credentials: 'omit',
-  headers: new Headers({
-    'Accept': 'application/hal+json'
-  }),
-
+function jsonHeader(accept: 'geo' | 'hal'): RequestInit {
+  return {
+    credentials: OMIT,
+    headers: new Headers({
+      'Accept': 'application/' + accept + '+json'
+    })
+  }
 }
+
+const halGetHeader: RequestInit = jsonHeader('hal');
 
 type Link = {
   [key: string]: {
@@ -101,7 +104,20 @@ function optionName(s: string) {
   return optName;
 }
 
+function variableOptions(vo: string[], link: Link) {
+  for (const rel in link) {
+    if (SELF === rel) {
+      continue;
+    }
+
+    const s = rel.charAt(0).toUpperCase() + rel.substring(1);
+    const optName = optionName(s);
+    vo.push(optName);
+  }
+}
+
 type LinkMap = Map<string, string>;
+
 
 /**
  * Application component for Unison. Once mounted, it connects to the back-end to receive a list of the locations being tracked.
@@ -123,16 +139,10 @@ function Unison({ createMap, logoLeft, logoRight }: UnisonProps): JSX.Element {
   const [modelLink, setModelLink] = useState<ModelLink | null>(null);
 
   async function requestFeatureCollection(uri: string) {
-    const response = await fetch(uri, {
-      method: 'GET',
-      credentials: 'omit',
-      headers: new Headers({
-        'Accept': 'application/geo+json'
-      })
-    });
+    const response = await fetch(uri, jsonHeader('geo'));
 
 
-    checkResponse(response, uri);
+    checkResponse(response.ok, uri, response.status);
 
     const fc = await response.json();
 
@@ -186,25 +196,17 @@ function Unison({ createMap, logoLeft, logoRight }: UnisonProps): JSX.Element {
 
     setLocationMap(map);
 
-    const varOpt = [];
+    const vo: string[] = [];
 
     if (n > 0) {
+      variableOptions(vo, list[0]._links);
 
-      for (const rel in list[0]._links) {
-        if (SELF === rel) {
-          continue;
-        }
-
-        const s = rel.charAt(0).toUpperCase() + rel.substring(1);
-        const optName = optionName(s);
-        varOpt.push(optName);
-      }
     }
 
-    if (varOpt.length > 0) {
+    if (vo.length > 0) {
       setCurLoc(list[0].name);
-      setCurVar(varOpt[0]);
-      setVarOpt(varOpt);
+      setCurVar(vo[0]);
+      setVarOpt(vo);
 
     } else {
 
@@ -218,7 +220,7 @@ function Unison({ createMap, logoLeft, logoRight }: UnisonProps): JSX.Element {
     const response = await fetch(uri, halGetHeader);
 
 
-    checkResponse(response, uri);
+    checkResponse(response.ok, uri, response.status);
 
     const model = await response.json();
 
@@ -243,15 +245,9 @@ function Unison({ createMap, logoLeft, logoRight }: UnisonProps): JSX.Element {
 
         const root = process.env.PUBLIC_URL;
 
-        const response = await fetch(root, {
-          method: 'GET',
-          credentials: 'omit',
-          headers: new Headers({
-            'Accept': 'application/hal+json'
-          })
-        });
+        const response = await fetch(root, jsonHeader('hal'));
 
-        checkResponse(response, root);
+        checkResponse(response.ok, root, response.status);
         const model = await response.json();
         const uri = model._links.locationCollection.href;
         await requestCollectionHAL(uri);
@@ -328,7 +324,7 @@ function Unison({ createMap, logoLeft, logoRight }: UnisonProps): JSX.Element {
 
 
     const response = await fetch(expandLink(), {
-      credentials: 'omit'
+      credentials: OMIT
     });
 
     if (response.ok && curVar && curLoc) {

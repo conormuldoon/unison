@@ -58,7 +58,7 @@
     "better-docs": "2.3.2",
     "eslint": "^7.13.0",
     "eslint-plugin-react": "^7.21.5",
-    "fetch-mock": "^9.11.0",
+    "jest-fetch-mock": "^3.0.3",
     "jest-watch-typeahead": "^0.6.1",
     "jsdoc": "^3.6.6",
     "node-fetch": "^3.0.0"
@@ -77,6 +77,9 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
+  },
+  "jest": {
+    "resetMocks": false
   },
   "proxy": "http://localhost:8080"
 }

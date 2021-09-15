@@ -3,8 +3,10 @@ import { render } from "@testing-library/react";
 import DateSelector from './DateSelector';
 import React from 'react';
 
+function handle(d: Date) {
 
-const dateSelector = <DateSelector label={'Test Label'} dateValue={new Date(2021,9,14)} handleDayChange={() => { }} />;
+}
+const dateSelector = <DateSelector label={'Test Label'} dateValue={'14/9/2021'} handleDayChange={handle} />;
 
 it('renders without crashing', () => {
   const div = document.createElement('div');
