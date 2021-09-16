@@ -8,11 +8,11 @@
     "http-status-codes": "^1.4.0",
     "leaflet": "^1.7.1",
     "moment": "^2.22.2",
-    "react": "^17.0.1",
+    "react": "^17.0.2",
     "react-date-picker": "^6.10.4",
     "react-dates": "^17.0.0",
     "react-day-picker": "^7.4.10",
-    "react-dom": "^17.0.1",
+    "react-dom": "^17.0.2",
     "react-icons": "^3.7.0",
     "react-leaflet": "2.8.0",
     "react-scripts": "^4.0.1",
@@ -58,6 +58,7 @@
     "better-docs": "2.3.2",
     "eslint": "^7.13.0",
     "eslint-plugin-react": "^7.21.5",
+    "jest-dom": "^4.0.0",
     "jest-fetch-mock": "^3.0.3",
     "jest-watch-typeahead": "^0.6.1",
     "jsdoc": "^3.6.6",
@@ -79,7 +80,10 @@
     ]
   },
   "jest": {
-    "resetMocks": false
+    "resetMocks": false,
+    "collectCoverageFrom": [
+      "src/**/*.tsx"
+    ]
   },
   "proxy": "http://localhost:8080"
 }

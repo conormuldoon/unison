@@ -24,7 +24,6 @@ public class CSVResponder {
 	private ItemListFinder<? extends HarmonieItem> itemListFinder;
 	private String header;
 
-	private CacheSupport cacheSupport;
 
 	private String uVariableName;
 	private DateFormat dateFormat;
@@ -47,7 +46,6 @@ public class CSVResponder {
 			String uVariableName, DateFormat dateFormat) {
 		this.itemListFinder = itemListFinder;
 		this.header = header;
-		this.cacheSupport = cacheSupport;
 		this.uVariableName = uVariableName;
 		this.dateFormat = dateFormat;
 	}

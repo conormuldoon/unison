@@ -1,7 +1,5 @@
 package eu.acclimatize.unison.location;
 
-import java.util.ArrayList;
-
 import org.locationtech.jts.geom.GeometryFactory;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
