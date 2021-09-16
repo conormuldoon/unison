@@ -10,7 +10,6 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.http.HttpHeaders;
 
-import eu.acclimatize.unison.CacheSupport;
 import eu.acclimatize.unison.HarmonieItem;
 import eu.acclimatize.unison.ItemListFinder;
 
@@ -24,7 +23,6 @@ public class CSVResponder {
 	private ItemListFinder<? extends HarmonieItem> itemListFinder;
 	private String header;
 
-
 	private String uVariableName;
 	private DateFormat dateFormat;
 
@@ -34,16 +32,14 @@ public class CSVResponder {
 	 * @param itemListFinder Used to obtain a list of data based on query
 	 *                       parameters.
 	 * @param header         The CSV header printed by the responder.
-	 * @param cacheSupport   Used for adding conditional the Vary header and a
-	 *                       conditional cache control header.
 	 * @param variableName   The name of the weather variable with spaces
 	 *                       underscored.
 	 * @param dateFormat     the date format used when specifying the file name in
 	 *                       the content disposition header.
 	 */
 
-	public CSVResponder(ItemListFinder<? extends HarmonieItem> itemListFinder, String header, CacheSupport cacheSupport,
-			String uVariableName, DateFormat dateFormat) {
+	public CSVResponder(ItemListFinder<? extends HarmonieItem> itemListFinder, String header, String uVariableName,
+			DateFormat dateFormat) {
 		this.itemListFinder = itemListFinder;
 		this.header = header;
 		this.uVariableName = uVariableName;

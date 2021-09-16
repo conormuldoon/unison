@@ -8,7 +8,6 @@ import java.util.Date;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
-import eu.acclimatize.unison.CacheSupport;
 import eu.acclimatize.unison.Constant;
 import eu.acclimatize.unison.HarmonieItem;
 import eu.acclimatize.unison.ItemListFinder;
@@ -78,62 +77,50 @@ public class CSVResponderConfig {
 	 * Creates a {@link CSVResponder} bean for precipitation data.
 	 * 
 	 * @param precipitationFinder An {@link ItemListFinder} for precipitation data.
-	 * @param cacheSupport        Used for adding conditional the Vary header and a
-	 *                            conditional cache control header.
 	 * @return A new instance of {@link CSVResponder} that uses the precipitation
 	 *         finder.
 	 */
 	@Bean
-	public CSVResponder precipitationResponder(ItemListFinder<PrecipitationResult> precipitationFinder,
-			CacheSupport cacheSupport) {
-		return new CSVResponder(precipitationFinder, createHeader(PrecipitationResult.class), cacheSupport,
-				"Precipitation", dateFormat);
+	public CSVResponder precipitationResponder(ItemListFinder<PrecipitationResult> precipitationFinder) {
+		return new CSVResponder(precipitationFinder, createHeader(PrecipitationResult.class), "Precipitation",
+				dateFormat);
 	}
 
 	/**
 	 * Creates a {@link CSVResponder} bean for cloud level data.
 	 * 
 	 * @param cloudLevelFinder An {@link ItemListFinder} for cloud level data.
-	 * @param cacheSupport     Used for adding conditional the Vary header and a
-	 *                         conditional cache control header.
 	 * @return A new instance of {@link CSVResponder} that uses the cloud level
 	 *         finder.
 	 */
 	@Bean
-	public CSVResponder cloudLevelResponder(ItemListFinder<HarmonieItem> cloudLevelFinder, CacheSupport cacheSupport) {
-		return new CSVResponder(cloudLevelFinder, createHeader(CloudLevelResult.class), cacheSupport, "Cloud_Level",
-				dateFormat);
+	public CSVResponder cloudLevelResponder(ItemListFinder<HarmonieItem> cloudLevelFinder) {
+		return new CSVResponder(cloudLevelFinder, createHeader(CloudLevelResult.class), "Cloud_Level", dateFormat);
 	}
 
 	/**
 	 * Creates a {@link CSVResponder} bean for wind speed data.
 	 * 
 	 * @param windSpeedFinder An {@link ItemListFinder} for wind speed data.
-	 * @param cacheSupport    Used for adding conditional the Vary header and a
-	 *                        conditional cache control header.
 	 * @return A new instance of {@link CSVResponder} that uses the wind speed
 	 *         finder.
 	 */
 	@Bean
-	public CSVResponder windSpeedResponder(ItemListFinder<HarmonieItem> windSpeedFinder, CacheSupport cacheSupport) {
-		return new CSVResponder(windSpeedFinder, createHeader(WindSpeedResult.class), cacheSupport, "Wind_Speed",
-				dateFormat);
+	public CSVResponder windSpeedResponder(ItemListFinder<HarmonieItem> windSpeedFinder) {
+		return new CSVResponder(windSpeedFinder, createHeader(WindSpeedResult.class), "Wind_Speed", dateFormat);
 	}
 
 	/**
 	 * Creates a {@link CSVResponder} bean for wind direction data.
 	 * 
 	 * @param windDirectionFinder An {@link ItemListFinder} for wind direction data.
-	 * @param cacheSupport        Used for adding conditional the Vary header and a
-	 *                            conditional cache control header.
 	 * @return A new instance of {@link CSVResponder} that uses the wind direction
 	 *         finder.
 	 */
 	@Bean
-	public CSVResponder windDirectionResponder(ItemListFinder<HarmonieItem> windDirectionFinder,
-			CacheSupport cacheSupport) {
-		return new CSVResponder(windDirectionFinder, createHeader(WindDirectionResult.class), cacheSupport,
-				"Wind_Direction", dateFormat);
+	public CSVResponder windDirectionResponder(ItemListFinder<HarmonieItem> windDirectionFinder) {
+		return new CSVResponder(windDirectionFinder, createHeader(WindDirectionResult.class), "Wind_Direction",
+				dateFormat);
 	}
 
 	/**
@@ -145,9 +132,8 @@ public class CSVResponderConfig {
 	 * @return A new instance of {@link CSVResponder} that uses the humidity finder.
 	 */
 	@Bean
-	public CSVResponder humidityResponder(ItemListFinder<HarmonieItem> humidityFinder, CacheSupport cacheSupport) {
-		return new CSVResponder(humidityFinder, createHeader(HumidityResult.class), cacheSupport, "Humdity",
-				dateFormat);
+	public CSVResponder humidityResponder(ItemListFinder<HarmonieItem> humidityFinder) {
+		return new CSVResponder(humidityFinder, createHeader(HumidityResult.class), "Humdity", dateFormat);
 	}
 
 	/**
@@ -155,16 +141,13 @@ public class CSVResponderConfig {
 	 * 
 	 * @param globalRadiationFinder An {@link ItemListFinder} for global radiation
 	 *                              data.
-	 * @param cacheSupport          Used for adding conditional the Vary header and
-	 *                              a conditional cache control header.
 	 * @return A new instance of {@link CSVResponder} that uses the global radiation
 	 *         finder.
 	 */
 	@Bean
-	public CSVResponder globalRadiationResponder(ItemListFinder<HarmonieItem> globalRadiationFinder,
-			CacheSupport cacheSupport) {
-		return new CSVResponder(globalRadiationFinder, createHeader(HumidityResult.class), cacheSupport,
-				"Global_Radiation", dateFormat);
+	public CSVResponder globalRadiationResponder(ItemListFinder<HarmonieItem> globalRadiationFinder) {
+		return new CSVResponder(globalRadiationFinder, createHeader(HumidityResult.class), "Global_Radiation",
+				dateFormat);
 	}
 
 	/**
@@ -174,14 +157,11 @@ public class CSVResponderConfig {
 	 *                     cacheSupport Used for adding conditional the Vary header
 	 *                     and a conditional cache control header.
 	 * 
-	 * @param cacheSupport Used for adding conditional the Vary header and a
-	 *                     conditional cache control header.
-	 * 
 	 * @return A new instance of {@link CSVResponder} that uses the fog finder.
 	 */
 	@Bean
-	public CSVResponder fogResponder(ItemListFinder<HarmonieItem> fogFinder, CacheSupport cacheSupport) {
-		return new CSVResponder(fogFinder, createHeader(FogResult.class), cacheSupport, "Fog", dateFormat);
+	public CSVResponder fogResponder(ItemListFinder<HarmonieItem> fogFinder) {
+		return new CSVResponder(fogFinder, createHeader(FogResult.class), "Fog", dateFormat);
 	}
 
 	/**
@@ -189,15 +169,12 @@ public class CSVResponderConfig {
 	 * 
 	 * @param cloudinessFinder An {@link ItemListFinder} for cloudiness data.
 	 * 
-	 * @param cacheSupport     Used for adding conditional the Vary header and a
-	 *                         conditional cache control header.
 	 * @return A new instance of {@link CSVResponder} that uses the cloudiness
 	 *         finder.
 	 */
 	@Bean
-	public CSVResponder cloudinessResponder(ItemListFinder<HarmonieItem> cloudinessFinder, CacheSupport cacheSupport) {
-		return new CSVResponder(cloudinessFinder, createHeader(CloudinessResult.class), cacheSupport, "Cloudiness",
-				dateFormat);
+	public CSVResponder cloudinessResponder(ItemListFinder<HarmonieItem> cloudinessFinder) {
+		return new CSVResponder(cloudinessFinder, createHeader(CloudinessResult.class), "Cloudiness", dateFormat);
 	}
 
 	/**
@@ -205,45 +182,35 @@ public class CSVResponderConfig {
 	 * 
 	 * @param pressureFinder An {@link ItemListFinder} for pressure data.
 	 * 
-	 * @param cacheSupport   Used for adding conditional the Vary header and a
-	 *                       conditional cache control header.
 	 * @return A new instance of {@link CSVResponder} that uses the pressure finder.
 	 */
 	@Bean
-	public CSVResponder pressureResponder(ItemListFinder<HarmonieItem> pressureFinder, CacheSupport cacheSupport) {
-		return new CSVResponder(pressureFinder, createHeader(PressureResult.class), cacheSupport, "Pressure",
-				dateFormat);
+	public CSVResponder pressureResponder(ItemListFinder<HarmonieItem> pressureFinder) {
+		return new CSVResponder(pressureFinder, createHeader(PressureResult.class), "Pressure", dateFormat);
 	}
 
 	/**
 	 * Creates a {@link CSVResponder} bean for dew point data.
 	 * 
 	 * @param dewPointFinder An {@link ItemListFinder} for dew point data.
-	 * @param cacheSupport   Used for adding conditional the Vary header and a
-	 *                       conditional cache control header.
 	 * @return A new instance of {@link CSVResponder} that uses the dew point
 	 *         finder.
 	 */
 	@Bean
-	public CSVResponder dewPointResponder(ItemListFinder<HarmonieItem> dewPointFinder, CacheSupport cacheSupport) {
-		return new CSVResponder(dewPointFinder, createHeader(DewPointResult.class), cacheSupport, "Dew Point",
-				dateFormat);
+	public CSVResponder dewPointResponder(ItemListFinder<HarmonieItem> dewPointFinder) {
+		return new CSVResponder(dewPointFinder, createHeader(DewPointResult.class), "Dew Point", dateFormat);
 	}
 
 	/**
 	 * Creates a {@link CSVResponder} bean for temperature data.
 	 * 
 	 * @param temperatureFinder An {@link ItemListFinder} for temperature data.
-	 * @param cacheSupport      Used for adding conditional the Vary header and a
-	 *                          conditional cache control header.
 	 * @return A new instance of {@link CSVResponder} that uses the temperature
 	 *         finder.
 	 */
 	@Bean
-	public CSVResponder temperatureResponder(ItemListFinder<HarmonieItem> temperatureFinder,
-			CacheSupport cacheSupport) {
-		return new CSVResponder(temperatureFinder, createHeader(TemperatureResult.class), cacheSupport, "Temperature",
-				dateFormat);
+	public CSVResponder temperatureResponder(ItemListFinder<HarmonieItem> temperatureFinder) {
+		return new CSVResponder(temperatureFinder, createHeader(TemperatureResult.class), "Temperature", dateFormat);
 	}
 
 }
