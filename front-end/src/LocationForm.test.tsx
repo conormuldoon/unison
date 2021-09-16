@@ -3,7 +3,7 @@ import { enableFetchMocks } from 'jest-fetch-mock';
 enableFetchMocks();
 import fetchMock from 'jest-fetch-mock';
 import React from 'react';
-import ReactDOM from 'react-dom';
+
 import { fireEvent, render, waitFor } from "@testing-library/react";
 import LocationForm from './LocationForm';
 import HttpStatus from 'http-status-codes';
@@ -11,10 +11,8 @@ import HttpStatus from 'http-status-codes';
 
 it('renders without crashing', async () => {
 
-  const div = document.createElement('div');
-
-  ReactDOM.render(<LocationForm obtainData={() => { }} hideDisplay={() => { }} toggleDisplay={() => { }} display={true} />, div);
-  ReactDOM.unmountComponentAtNode(div);
+  render(<LocationForm obtainData={() => { }} hideDisplay={() => { }} toggleDisplay={() => { }} display={true} />);
+  
 });
 
 

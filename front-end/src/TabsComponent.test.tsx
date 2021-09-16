@@ -11,6 +11,22 @@ import { createChartFactory } from './ChartComponent';
 const DLEN = 16;
 
 
+it('renders without crashing', async () => {
+
+    render(<TabsComponent minMax={false} curVar='Cloudiness' chartFactory={(index) => null} />);
+});
+
+it('mathes snapshot', () => {
+
+
+    const { container } = render(<TabsComponent minMax={false} curVar='Cloudiness' chartFactory={(index) => null} />);
+
+    expect(container).toMatchSnapshot();
+
+});
+
+
+
 const addChart = async (weatherVariable, dataArray, zoomDomain) => {
 
     const n = dataArray.length;

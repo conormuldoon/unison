@@ -1,5 +1,4 @@
 import React from 'react';
-import ReactDOM from 'react-dom';
 import { render } from "@testing-library/react";
 import ChartComponent from './ChartComponent';
 
@@ -12,10 +11,8 @@ const chartComponent = <ChartComponent curVar='Precipitation' data={data} yVal={
 
 it('renders without crashing', async () => {
 
-  const div = document.createElement('div');
-
-  ReactDOM.render(chartComponent, div);
-  ReactDOM.unmountComponentAtNode(div);
+  render(chartComponent);
+ 
 });
 
 it('mathes snapshot', () => {

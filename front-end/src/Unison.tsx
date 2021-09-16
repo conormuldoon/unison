@@ -246,7 +246,6 @@ function Unison({ createMap, logoLeft, logoRight }: UnisonProps): JSX.Element {
         const root = process.env.PUBLIC_URL;
 
         const response = await fetch(root, jsonHeader('hal'));
-
         checkResponse(response.ok, root, response.status);
         const model = await response.json();
         const uri = model._links.locationCollection.href;
@@ -275,6 +274,7 @@ function Unison({ createMap, logoLeft, logoRight }: UnisonProps): JSX.Element {
   };
 
   useEffect(obtainData, []);
+
 
   const markerClicked = (location: string) => {
     setCurLoc(location);
@@ -367,7 +367,6 @@ function Unison({ createMap, logoLeft, logoRight }: UnisonProps): JSX.Element {
   }
 
   return (
-
     <div id="mapdiv">
 
       <div id="logos" style={{ textAlign: "center" }} >
@@ -420,7 +419,6 @@ function Unison({ createMap, logoLeft, logoRight }: UnisonProps): JSX.Element {
         </div>
 
         {arc}
-
 
       </div>
 

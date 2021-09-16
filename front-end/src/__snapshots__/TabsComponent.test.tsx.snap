@@ -1,0 +1,14 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`mathes snapshot 1`] = `
+<div>
+  <div
+    id="chartdiv"
+  >
+    <div
+      data-testid="chart"
+      id="singlevar"
+    />
+  </div>
+</div>
+`;

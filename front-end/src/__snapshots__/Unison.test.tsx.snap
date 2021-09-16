@@ -47,7 +47,15 @@ exports[`mathes Unison snapshot 1`] = `
         />
         <div
           class="leaflet-pane leaflet-marker-pane"
-        />
+        >
+          <img
+            alt=""
+            class="leaflet-marker-icon leaflet-zoom-hide leaflet-interactive"
+            src="2000px-Map_marker.png"
+            style="margin-left: -15px; margin-top: -23px; width: 30px; height: 46px; left: -49957px; top: 34673px; z-index: 34673;"
+            tabindex="0"
+          />
+        </div>
         <div
           class="leaflet-pane leaflet-tooltip-pane"
         />
@@ -122,6 +130,68 @@ exports[`mathes Unison snapshot 1`] = `
     >
       <div>
         <div
+          id="variDD"
+        >
+          <select>
+            <option
+              value="Cloudiness"
+            >
+              Cloudiness
+            </option>
+            <option
+              value="Cloud Level"
+            >
+              Cloud Level
+            </option>
+            <option
+              value="Dew Point"
+            >
+              Dew Point
+            </option>
+            <option
+              value="Humidity"
+            >
+              Humidity
+            </option>
+            <option
+              value="Precipitation"
+            >
+              Precipitation
+            </option>
+            <option
+              value="Pressure"
+            >
+              Pressure
+            </option>
+            <option
+              value="Temperature"
+            >
+              Temperature
+            </option>
+            <option
+              value="Wind Direction"
+            >
+              Wind Direction
+            </option>
+            <option
+              value="Wind Speed"
+            >
+              Wind Speed
+            </option>
+          </select>
+        </div>
+        <div
+          class="marginItem"
+        >
+          <select>
+            <option
+              value="UCD"
+            >
+              UCD
+            </option>
+          </select>
+        </div>
+        <div
           class="pLeft"
         >
           <div>
@@ -154,6 +224,39 @@ exports[`mathes Unison snapshot 1`] = `
               />
             </div>
           </div>
+        </div>
+        <div
+          class="pLeft"
+        >
+           
+          <button>
+            CSV
+          </button>
+           
+        </div>
+      </div>
+      <div>
+        <div
+          class="pLeft"
+        >
+          <div
+            id="pLeft"
+          >
+            <button
+              data-testid="lf-button"
+            >
+              Add Location
+            </button>
+          </div>
+        </div>
+        <div
+          class="pLeft"
+        >
+          <button
+            data-testid="rm-button"
+          >
+            Remove UCD
+          </button>
         </div>
       </div>
     </div>

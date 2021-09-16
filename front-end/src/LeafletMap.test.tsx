@@ -2,10 +2,10 @@ import { enableFetchMocks } from 'jest-fetch-mock';
 enableFetchMocks();
 
 import React from 'react';
-import ReactDOM from 'react-dom';
+
 import LeafletMap from './LeafletMap';
 
-import { render, fireEvent, waitFor } from "@testing-library/react";
+import { render, fireEvent, screen } from "@testing-library/react";
 import fetchMock from 'jest-fetch-mock';
 import { createPopupFactory } from './ChartPopup';
 
@@ -58,10 +58,7 @@ const location = {
 
 it('renders without crashing', async () => {
 
-  const div = document.createElement('div');
-
-  ReactDOM.render(<LeafletMap location={location} mapCentre={[59.922326, 10.751560]} />, div);
-  ReactDOM.unmountComponentAtNode(div);
+  render(<LeafletMap location={location} mapCentre={[59.922326, 10.751560]} />);
 });
 
 it('mathes snapshot', () => {
@@ -79,7 +76,6 @@ it('displays popup', async () => {
   // position: [lat, lon]
   const marker = [{ name: location.name, position: [53.308441, -6.223682] }];
 
-  const curVar = 'Temperature';
   const fromDate = '1-2-2018';
   const toDate = '7-10-2019';
   const mapCentre = [53.35014, -6.266155];
@@ -93,12 +89,15 @@ it('displays popup', async () => {
 
   const popupFactory = createPopupFactory("http://localhost:8080/locationCollection/UCD/temperature?fromDate=" + fromDate + "&toDate=" + toDate,
     "Temperature", location.name);
-  const { getAllByAltText } = render(<LeafletMap
+  render(<LeafletMap
     mapCentre={mapCentre} markerCallback={markerCallback} marker={marker} popupFactory={popupFactory} />);
 
   // Firing click event for marker icon image
-  const arr = await waitFor(() => getAllByAltText(''));
+  const arr = await screen.findAllByAltText('');
+
   fireEvent.click(arr[1]);
+
+  await screen.findByRole('button', { name: 'email' });
   expect(markerCallback).toHaveBeenCalledWith(location.name);
 
   fetchMock.resetMocks();

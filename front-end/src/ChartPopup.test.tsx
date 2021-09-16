@@ -3,7 +3,6 @@ enableFetchMocks();
 
 import fetchMock from 'jest-fetch-mock';
 import React from 'react';
-import ReactDOM from 'react-dom';
 import { render, waitFor, screen } from "@testing-library/react";
 import ChartPopup from './ChartPopup';
 import { PRECIP, CL } from './Constant';
@@ -73,11 +72,8 @@ it('renders without crashing', async () => {
 
   fetchMock.mockOnce("[]");
 
-  const div = document.createElement('div');
-
-  ReactDOM.render(chartPopup, div);
-
-  ReactDOM.unmountComponentAtNode(div);
+  render(chartPopup);
+  await screen.findByRole('button', { name: 'email' });
 
 });
 

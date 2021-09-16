@@ -1,6 +1,5 @@
 import "@testing-library/jest-dom/extend-expect";
 import React from 'react';
-import ReactDOM from 'react-dom';
 import { fireEvent, render } from "@testing-library/react";
 import ARLocationComponent from './ARLocationComponent';
 import { createLocationFactory } from './LocationForm';
@@ -8,10 +7,8 @@ import { createRemoveFactory } from './RemoveComponent';
 
 it('renders without crashing', async () => {
 
-  const div = document.createElement('div');
+  render(<ARLocationComponent createLocation={() => { }} />);
 
-  ReactDOM.render(<ARLocationComponent createLocation={() => { }} />, div);
-  ReactDOM.unmountComponentAtNode(div);
 });
 
 
