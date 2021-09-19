@@ -75,7 +75,7 @@ function RemoveComponent({ obtainData, hideAdd, href, name }:
 
 RemoveComponent.propTypes = {
 
-  hideDisplay: PropTypes.func.isRequired,
+  hideAdd: PropTypes.func.isRequired,
 
   obtainData: PropTypes.func.isRequired,
 
