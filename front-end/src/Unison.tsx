@@ -20,11 +20,21 @@ import parser from 'uri-template';
 
 interface UnisonProps {
 
+  /**
+   * A function for creating the map. 
+   */
   createMap: (marker: MapMarker[] | null,
     markerCallback: (locationName: string) => void,
     popupFactory?: (closePopup: () => void) => React.ReactNode) => JSX.Element | undefined;
 
+  /** A logo displayed at the bottom of the screen. It will be displayed to the left
+   * if the logoRight prop is defined.
+   */
   logoLeft?: React.ReactNode;
+
+  /** A logo displayed at the bottom of the screen. It will be displayed to the right
+   * if the logoLeft prop is defined.
+   */
   logoRight?: React.ReactNode;
 }
 
@@ -36,7 +46,10 @@ type ModelLink = {
 }
 
 
-
+/**
+ * Thrown when there is a bad response from the server in obtaining the
+ * HAL models or the GeoJSON location collection. 
+ */
 class ResponseError extends Error {
 
   private status: number;
@@ -77,6 +90,12 @@ type Link = {
   };
 }
 
+/**
+ * Creates a mapping between HAL rels and URIs.
+ * 
+ * @param listItem An object that has a number of HAL rels.
+ * @returns The map created, which will be associated with a specific location..
+ */
 function createLinkMap(listItem: Link) {
   const itemMap = new Map<string, string>();
   for (const rel in listItem) {
@@ -138,6 +157,12 @@ function Unison({ createMap, logoLeft, logoRight }: UnisonProps): JSX.Element {
   const [locationMap, setLocationMap] = useState<Map<string, LinkMap> | null>(null);
   const [modelLink, setModelLink] = useState<ModelLink | null>(null);
 
+  /**
+   * Requests data in a GeoJSON Feature Collection format and
+   * adds markers for locations to the Leaflet map.
+   * 
+   * @param uri The URI where the data is obtained from.
+   */
   async function requestFeatureCollection(uri: string) {
     const response = await fetch(uri, jsonHeader('geo'));
 
@@ -215,6 +240,11 @@ function Unison({ createMap, logoLeft, logoRight }: UnisonProps): JSX.Element {
     }
   }
 
+  /**
+   * Obtains a HAL model of the collection of locations stored on the server and stores links associated with locations.
+   * 
+   * @param uri The URI to obtain the model from.
+   */
   async function requestCollectionHAL(uri: string) {
 
     const response = await fetch(uri, halGetHeader);

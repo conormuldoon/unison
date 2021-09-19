@@ -20,9 +20,18 @@ export function createRemoveFactory(obtainData: () => void, name: string, href?:
 }
 
 interface RemoveProps {
+
+  /** Called when a location has been successfully removed to obtain the updated location list from the server. */
   obtainData: () => void;
+
+  /** Called when the remove button is clicked to hide the add location form if it is displayed. */
   hideAdd: () => void;
+
+
+  /** The URI used to delete the lcoation. */
   href: string;
+
+  /** The name of the currently selected location. */
   name: string;
 
 }

@@ -27,9 +27,17 @@ export function createPopupFactory(uri: string, curVar: string, name: string) {
 export type ChartData = Record<string, unknown>[];
 
 interface PopupProps {
+
+  /** The URI where data for the chart it obtained from. */
   uri: string;
+
+  /** Specifies the weather variable currently selected. */
   curVar: string;
+
+  /** The name of the location currently selected. */
   name: string;
+
+  /** Called when the close icon is clicked. */
   closePopup: () => void;
 }
 /**
