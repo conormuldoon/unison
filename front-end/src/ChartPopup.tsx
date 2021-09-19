@@ -6,6 +6,7 @@ import { PRECIP } from './Constant';
 import TabsComponent from './TabsComponent';
 import { createChartFactory } from './ChartComponent';
 import { chartText } from './Util';
+import PropTypes from 'prop-types';
 import { EmailShareButton, EmailIcon, WhatsappShareButton, WhatsappIcon, TelegramShareButton, TelegramIcon } from 'react-share';
 import { DomainPropType } from 'victory'
 
@@ -155,6 +156,14 @@ function ChartPopup({ uri, curVar, name, closePopup }: PopupProps): JSX.Element 
   );
 
 
+}
+
+ChartPopup.propTypes = {
+
+  curVar: PropTypes.string.isRequired,
+  closePopup: PropTypes.func.isRequired,
+  name: PropTypes.string.isRequired,
+  uri: PropTypes.string.isRequired,
 }
 
 

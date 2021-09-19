@@ -3,6 +3,7 @@
 import React from 'react';
 import { problemConnecting } from './Util';
 import HttpStatus from 'http-status-codes';
+import PropTypes from 'prop-types';
 
 
 export function createRemoveFactory(obtainData: () => void, name: string, href?: string) {
@@ -72,6 +73,16 @@ function RemoveComponent({ obtainData, hideAdd, href, name }:
 
 }
 
+RemoveComponent.propTypes = {
+
+  hideDisplay: PropTypes.func.isRequired,
+
+  obtainData: PropTypes.func.isRequired,
+
+  name: PropTypes.string.isRequired,
+
+  href: PropTypes.string.isRequired,
+}
 
 
 export default RemoveComponent;

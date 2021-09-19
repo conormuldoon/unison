@@ -2,6 +2,8 @@
 import React, { useState } from 'react';
 import './App.css';
 
+import PropTypes from 'prop-types';
+
 interface ARLocationProps {
 
   createLocation: (toggleDisplayAdd: () => void, displayAdd: boolean, hideAdd: () => void) => React.ReactNode;
@@ -41,6 +43,12 @@ function ARLocationComponent({ createLocation, createRemove }: ARLocationProps):
   );
 }
 
+ARLocationComponent.propTypes = {
+
+
+  createLocation: PropTypes.func.isRequired,
+  createRemove: PropTypes.func,
+}
 
 
 export default ARLocationComponent;

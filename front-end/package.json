@@ -82,7 +82,16 @@
   "jest": {
     "resetMocks": false,
     "collectCoverageFrom": [
-      "src/**/*.tsx"
+      "src/**/*.{ts,tsx}"
+    ]
+  },
+  "babel": {
+    "presets": [
+      "@babel/preset-typescript",
+      "@babel/preset-react"
+    ],
+    "plugins": [
+      "babel-plugin-typescript-to-proptypes"
     ]
   },
   "proxy": "http://localhost:8080"

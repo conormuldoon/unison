@@ -8,7 +8,7 @@ import { FORMAT, SELF } from './Constant';
 import DateSelector from './DateSelector';
 import { today, tomorrow, problemConnecting, varMapping } from './Util';
 import HttpStatus from 'http-status-codes';
-
+import PropTypes from 'prop-types';
 import { MapMarker } from './LeafletMap';
 
 import { createLocationFactory } from './LocationForm';
@@ -424,6 +424,16 @@ function Unison({ createMap, logoLeft, logoRight }: UnisonProps): JSX.Element {
 
     </div>
   );
+
+}
+
+
+Unison.propTypes = {
+
+
+  createMap: PropTypes.func.isRequired,
+  logoLeft: PropTypes.any,
+  logoRight: PropTypes.any,
 
 }
 
