@@ -1,8 +1,5 @@
 package eu.acclimatize.unison;
 
-import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.linkTo;
-import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.methodOn;
-
 import java.util.ArrayList;
 import java.util.List;
 
@@ -10,13 +7,10 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.hateoas.Link;
 import org.springframework.hateoas.MediaTypes;
-import org.springframework.hateoas.server.mvc.BasicLinkBuilder;
 import org.springframework.http.HttpHeaders;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.ModelAndView;
-
-import eu.acclimatize.unison.location.HALLocationController;
 
 /**
  * 
@@ -24,6 +18,16 @@ import eu.acclimatize.unison.location.HALLocationController;
  */
 @RestController
 public class IndexHALController {
+
+	private RootURIBuilder builder;
+
+	public IndexHALController(RootURIBuilder builder) {
+		this.builder = builder;
+	}
+
+	private void addLink(String baseURI, String mapping, String rel, List<Link> list) {
+		list.add(Link.of(baseURI + mapping, rel));
+	}
 
 	/**
 	 * Creates a HAL representation for the root.
@@ -35,15 +39,13 @@ public class IndexHALController {
 		response.setHeader(HttpHeaders.VARY, HttpHeaders.ACCEPT);
 		List<Link> list = new ArrayList<>();
 
-		list.add(linkTo(methodOn(IndexHALController.class).createModel(response)).withSelfRel());
-		list.add(linkTo(methodOn(IndexHALController.class).indexHAL(response)).withSelfRel());
+		String baseURI = builder.build();
+		list.add(Link.of(baseURI).withSelfRel());
+		list.add(Link.of(baseURI + MappingConstant.INDEX).withSelfRel());
 
-		list.add(linkTo(methodOn(HALLocationController.class).createModel(response))
-				.withRel(Constant.LOCATION_COLLECTION));
-
-		String baseURI = BasicLinkBuilder.linkToCurrentMapping().toString();
-		list.add(Link.of(baseURI + MappingConstant.USER, Constant.USER));
-		list.add(Link.of(baseURI + MappingConstant.EXPLORER, Constant.EXPLORER));
+		addLink(baseURI, MappingConstant.LOCATION_COLLECTION, Constant.LOCATION_COLLECTION, list);
+		addLink(baseURI, MappingConstant.USER, Constant.USER, list);
+		addLink(baseURI, MappingConstant.EXPLORER, Constant.EXPLORER, list);
 
 		return new UnisonModel(list);
 	}

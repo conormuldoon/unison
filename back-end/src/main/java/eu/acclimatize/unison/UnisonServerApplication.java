@@ -113,4 +113,9 @@ public class UnisonServerApplication {
 		return new PrecipitationResultFilter(precipitationFinder);
 	}
 
+	@Bean
+	public RootURIBuilder builder() {
+		return new RootURIBuilder();
+	}
+
 }
