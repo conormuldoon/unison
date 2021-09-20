@@ -29,7 +29,7 @@ public class UserService {
 	 * user information.
 	 * 
 	 * @param current The user information stored in the repository.
-	 * @param updated The new user informaiton with the same user name.
+	 * @param updated The new user information with the same user name.
 	 */
 	@PreAuthorize(Constant.REPLACE_ITEM)
 	public void replace(UserInformation current, UserInformation updated) {

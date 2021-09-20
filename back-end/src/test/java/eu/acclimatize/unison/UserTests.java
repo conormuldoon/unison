@@ -1,7 +1,5 @@
 package eu.acclimatize.unison;
 
-
-
 import java.io.BufferedReader;
 import java.io.ByteArrayInputStream;
 import java.io.IOException;
@@ -57,7 +55,7 @@ public class UserTests {
 		Mockito.verify(mockEncoder, Mockito.times(1)).encode(Mockito.anyString());
 
 	}
-	
+
 	/**
 	 * Tests that user data is committed using a transaction.
 	 * 
@@ -138,6 +136,38 @@ public class UserTests {
 		String r1 = requester.randomPassword();
 
 		Assertions.assertNotEquals(r0, r1);
+	}
+
+	@Test
+	public void equalityAndHashTest() {
+
+		UserInformation ui0 = new UserInformation(TestConstant.USERNAME, "");
+		UserInformation ui1 = new UserInformation(TestConstant.USERNAME, "");
+
+		Assertions.assertEquals(ui0, ui0);
+		Assertions.assertEquals(ui0, ui1);
+		Assertions.assertEquals(ui0.hashCode(), ui1.hashCode());
+
+	}
+
+	@Test
+	public void differenceUserInfo() {
+		UserInformation ui0 = new UserInformation(TestConstant.USERNAME, "");
+		UserInformation ui1 = new UserInformation(TestConstant.OTHER_USERNAME, "");
+		Assertions.assertNotEquals(ui0, null);
+		Assertions.assertNotEquals(null, ui1);
+		Assertions.assertNotEquals(ui0, ui1);
+		
+		UserInformation ui2 = new UserInformation(TestConstant.USERNAME, " ");
+		Assertions.assertNotEquals(ui0, ui2);
+		
+		UserInformation ui3 = new UserInformation(TestConstant.USERNAME, null);
+		
+		Assertions.assertNotEquals(ui0, ui3);
+		
+		UserInformation ui4 = new UserInformation(null, "");
+		Assertions.assertNotEquals(ui0, ui4);
+		
 	}
 
 }

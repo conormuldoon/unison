@@ -44,4 +44,18 @@ public class IndexHALControllerTests {
 		controller.createModel(response, request);
 		Mockito.verify(response).setHeader(HttpHeaders.VARY, HttpHeaders.ACCEPT);
 	}
+
+	@Test
+	public void portAdded() {
+		RootURIBuilder builder = new RootURIBuilder();
+		HttpServletRequest request = Mockito.mock(HttpServletRequest.class);
+		int port = 5000;
+		Mockito.when(request.getServerPort()).thenReturn(port);
+		Mockito.when(request.getScheme()).thenReturn("http");
+		String uri = builder.build(request);
+		Assertions.assertTrue(uri.contains(":" + port));
+		Mockito.when(request.getScheme()).thenReturn("https");
+		uri = builder.build(request);
+		Assertions.assertTrue(uri.contains(":" + port));
+	}
 }
