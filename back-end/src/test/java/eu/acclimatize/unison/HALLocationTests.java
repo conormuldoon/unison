@@ -2,6 +2,7 @@ package eu.acclimatize.unison;
 
 import java.util.Optional;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import org.junit.jupiter.api.AfterEach;
@@ -45,13 +46,15 @@ public class HALLocationTests {
 
 	private HttpServletResponse response;
 
-	/**
-	 * Adds an initial user and location to the database.
+	private HttpServletRequest request;
+
+	/**.
 	 */
 	@BeforeEach
-	public void addData() {
+	public void init() {
+		request = Mockito.mock(HttpServletRequest.class);
 		RootURIBuilder builder = Mockito.mock(RootURIBuilder.class);
-		Mockito.when(builder.build()).thenReturn("http://localhost:8080");
+		Mockito.when(builder.build(request)).thenReturn("http://localhost:8080");
 		controller = new HALLocationController(locationService, weatherLink, builder);
 		response = Mockito.mock(HttpServletResponse.class);
 
@@ -75,7 +78,7 @@ public class HALLocationTests {
 	@Test
 	public void lcSelfRef() {
 
-		CollectionModel<LocationModel> model = controller.createModel(response);
+		CollectionModel<LocationModel> model = controller.createModel(response, request);
 		hasSelf(model);
 
 	}
@@ -83,7 +86,7 @@ public class HALLocationTests {
 	@Test
 	void locaitonSelfRef() {
 
-		LocationModel model = controller.location(response, TestConstant.LOCATION);
+		LocationModel model = controller.location(response, request, TestConstant.LOCATION);
 		hasSelf(model);
 	}
 
@@ -93,13 +96,13 @@ public class HALLocationTests {
 
 	@Test
 	public void lcVaryAccept() {
-		controller.createModel(response);
+		controller.createModel(response, request);
 		verifyVaryAccept();
 	}
 
 	@Test
 	public void locationVaryAccept() {
-		controller.location(response, TestConstant.LOCATION);
+		controller.location(response, request, TestConstant.LOCATION);
 		verifyVaryAccept();
 	}
 }

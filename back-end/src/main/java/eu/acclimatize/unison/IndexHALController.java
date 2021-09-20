@@ -3,6 +3,7 @@ package eu.acclimatize.unison;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.hateoas.Link;
@@ -35,11 +36,11 @@ public class IndexHALController {
 	 * @return A representational model for Unison.
 	 */
 	@GetMapping(value = "/", produces = MediaTypes.HAL_JSON_VALUE)
-	public UnisonModel createModel(HttpServletResponse response) {
+	public UnisonModel createModel(HttpServletResponse response, HttpServletRequest request) {
 		response.setHeader(HttpHeaders.VARY, HttpHeaders.ACCEPT);
 		List<Link> list = new ArrayList<>();
 
-		String baseURI = builder.build();
+		String baseURI = builder.build(request);
 		list.add(Link.of(baseURI).withSelfRel());
 		list.add(Link.of(baseURI + MappingConstant.INDEX).withSelfRel());
 
@@ -56,8 +57,8 @@ public class IndexHALController {
 	 * @return A representational model for Unison.
 	 */
 	@GetMapping(value = MappingConstant.INDEX, produces = MediaTypes.HAL_JSON_VALUE)
-	public UnisonModel indexHAL(HttpServletResponse response) {
-		return createModel(response);
+	public UnisonModel indexHAL(HttpServletResponse response, HttpServletRequest request) {
+		return createModel(response, request);
 	}
 
 	/**

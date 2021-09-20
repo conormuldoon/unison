@@ -2,6 +2,7 @@ package eu.acclimatize.unison.location;
 
 import java.util.Optional;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.security.access.AccessDeniedException;
@@ -52,7 +53,7 @@ public class UpsertLocationController {
 	// @RolesAllowed is used when the location is deserialized so is not required
 	// here.
 	@PutMapping(MappingConstant.LOCATION_COLLECTION)
-	public void upsert(@RequestBody Location location, HttpServletResponse response) {
+	public void upsert(@RequestBody Location location, HttpServletResponse response,HttpServletRequest request) {
 
 		Optional<Location> optCurrent = location.findCurrent(locationRepository);
 
@@ -67,7 +68,7 @@ public class UpsertLocationController {
 
 			locationRepository.save(location);
 			response.setStatus(Constant.CREATED);
-			location.addHeader(response, builder.build());
+			location.addHeader(response, builder.build(request));
 		}
 
 	}

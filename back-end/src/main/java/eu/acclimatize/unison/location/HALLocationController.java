@@ -3,6 +3,7 @@ package eu.acclimatize.unison.location;
 import java.util.ArrayList;
 import java.util.Collection;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.hateoas.CollectionModel;
@@ -50,11 +51,11 @@ public class HALLocationController {
 	 * @return A representational model of stored locations.
 	 */
 	@GetMapping(value = MappingConstant.LOCATION_COLLECTION, produces = MediaTypes.HAL_JSON_VALUE)
-	public CollectionModel<LocationModel> createModel(HttpServletResponse response) {
+	public CollectionModel<LocationModel> createModel(HttpServletResponse response, HttpServletRequest request) {
 		response.setHeader(HttpHeaders.VARY, HttpHeaders.ACCEPT);
 		Iterable<Location> locationList = locationService.findAllSorted();
 
-		String baseUri = builder.build();
+		String baseUri = builder.build(request);
 
 		Collection<LocationModel> locationCollection = new ArrayList<>();
 		for (Location l : locationList) {
@@ -77,14 +78,14 @@ public class HALLocationController {
 	 * @return The HAL representational model.
 	 */
 	@GetMapping(value = MappingConstant.SPECIFIC_LOCATION, produces = MediaTypes.HAL_JSON_VALUE)
-	public LocationModel location(HttpServletResponse response,
+	public LocationModel location(HttpServletResponse response, HttpServletRequest request,
 			@PathVariable(Constant.LOCATION_NAME) String locationName) {
 
 		response.setHeader(HttpHeaders.VARY, HttpHeaders.ACCEPT);
 
 		Location location = locationService.find(locationName);
 
-		String baseURI = builder.build();
+		String baseURI = builder.build(request);
 		return location.createModel(weatherLink, baseURI);
 	}
 
