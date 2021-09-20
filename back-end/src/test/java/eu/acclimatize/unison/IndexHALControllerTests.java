@@ -12,10 +12,15 @@ import org.springframework.http.HttpHeaders;
 
 public class IndexHALControllerTests {
 
+	private RootURIBuilder builder;
+	
+	public IndexHALControllerTests() {
+		builder = Mockito.mock(RootURIBuilder.class);
+		Mockito.when(builder.build()).thenReturn("http://localhost:8080");
+	}
 	@Test
 	public void hasSelfRel() {
-		RootURIBuilder builder = Mockito.mock(RootURIBuilder.class);
-		Mockito.when(builder.build()).thenReturn("http://localhost:8080");
+		
 		IndexHALController controller = new IndexHALController(builder);
 		HttpServletResponse response = Mockito.mock(HttpServletResponse.class);
 		UnisonModel model = controller.createModel(response);
@@ -27,8 +32,7 @@ public class IndexHALControllerTests {
 
 	@Test
 	public void varyAcceptAdded() {
-		RootURIBuilder builder = Mockito.mock(RootURIBuilder.class);
-		Mockito.when(builder.build()).thenReturn("http://localhost:8080");
+		
 		IndexHALController controller = new IndexHALController(builder);
 		HttpServletResponse response = Mockito.mock(HttpServletResponse.class);
 		controller.createModel(response);

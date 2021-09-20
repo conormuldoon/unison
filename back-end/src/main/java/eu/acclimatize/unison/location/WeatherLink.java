@@ -4,7 +4,6 @@ import java.net.URI;
 
 import org.springframework.hateoas.Link;
 import org.springframework.hateoas.UriTemplate;
-import org.springframework.hateoas.server.mvc.BasicLinkBuilder;
 
 import eu.acclimatize.unison.Constant;
 import eu.acclimatize.unison.MappingConstant;
@@ -42,10 +41,9 @@ public enum WeatherLink {
 	 * @param name The location name.
 	 * @return The link created.
 	 */
-	public Link createLink(String name) {
+	public Link createLink(String name, String baseURI) {
 
-		String baseUri = BasicLinkBuilder.linkToCurrentMapping().toString();
-		UriTemplate uriTemplate = UriTemplate.of(baseUri + propertyMapping);
+		UriTemplate uriTemplate = UriTemplate.of(baseURI + propertyMapping);
 		URI uri = uriTemplate.expand(name);
 
 		return Link.of(uri.toString() + REQUEST_PARAM, propertyName);

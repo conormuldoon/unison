@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import eu.acclimatize.unison.Constant;
 import eu.acclimatize.unison.MappingConstant;
+import eu.acclimatize.unison.RootURIBuilder;
 import eu.acclimatize.unison.location.harvester.HarvestController;
 
 /**
@@ -24,6 +25,7 @@ public class UpsertLocationController {
 
 	private LocationRepository locationRepository;
 	private LocationService locationService;
+	private RootURIBuilder builder;
 
 	/**
 	 * Creates an instance of UpsertLocationController.
@@ -31,9 +33,11 @@ public class UpsertLocationController {
 	 * @param locationRepository The repository where the locations are stored.
 	 * @param locationService    The service used to replace locations.
 	 */
-	public UpsertLocationController(LocationRepository locationRepository, LocationService locationService) {
+	public UpsertLocationController(LocationRepository locationRepository, LocationService locationService,
+			RootURIBuilder builder) {
 		this.locationRepository = locationRepository;
 		this.locationService = locationService;
+		this.builder = builder;
 
 	}
 
@@ -63,7 +67,7 @@ public class UpsertLocationController {
 
 			locationRepository.save(location);
 			response.setStatus(Constant.CREATED);
-			location.addHeader(response);
+			location.addHeader(response, builder.build());
 		}
 
 	}

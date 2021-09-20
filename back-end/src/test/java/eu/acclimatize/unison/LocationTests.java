@@ -60,6 +60,7 @@ public class LocationTests {
 	@Autowired
 	private TestRestTemplate template;
 
+
 	/**
 	 * Adds an initial user and location to the database.
 	 */
@@ -309,5 +310,7 @@ public class LocationTests {
 		br.close();
 
 	}
+
+
 
 }

@@ -1,10 +1,8 @@
 package eu.acclimatize.unison.location;
 
-import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.linkTo;
-import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.methodOn;
-
 import java.io.IOException;
 import java.io.Serializable;
+import java.net.URI;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
@@ -16,11 +14,12 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.locationtech.jts.geom.Point;
 import org.springframework.hateoas.Link;
-import org.springframework.hateoas.server.mvc.WebMvcLinkBuilder;
+import org.springframework.hateoas.UriTemplate;
 
 import com.fasterxml.jackson.core.JsonGenerator;
 
 import eu.acclimatize.unison.Constant;
+import eu.acclimatize.unison.MappingConstant;
 import eu.acclimatize.unison.OwnedItem;
 import eu.acclimatize.unison.user.UserInformation;
 
@@ -99,8 +98,12 @@ public class Location implements OwnedItem, Serializable {
 		return template.replace("{longitude}", String.valueOf(geom.getX()));
 	}
 
-	private WebMvcLinkBuilder createBuilder(HttpServletResponse response) {
-		return linkTo(methodOn(HALLocationController.class).location(response, name));
+	private String createHREF(String baseURI) {
+
+		UriTemplate uriTemplate = UriTemplate.of(baseURI + MappingConstant.SPECIFIC_LOCATION);
+		URI uri = uriTemplate.expand(name);
+
+		return uri.toString();
 	}
 
 	/**
@@ -109,12 +112,13 @@ public class Location implements OwnedItem, Serializable {
 	 * @param weatherLink The links used in creating the model.
 	 * @return A HAL model for the location.
 	 */
-	public LocationModel createModel(HttpServletResponse response,WeatherLink[] weatherLink) {
+	public LocationModel createModel(WeatherLink[] weatherLink, String baseURI) {
 		List<Link> list = new ArrayList<>();
-		list.add(createBuilder(response).withSelfRel());
+		String href = createHREF(baseURI);
+		list.add(Link.of(href).withSelfRel());
 
 		for (WeatherLink wl : weatherLink) {
-			list.add(wl.createLink(name));
+			list.add(wl.createLink(name, baseURI));
 		}
 		return new LocationModel(list, name);
 	}
@@ -124,9 +128,9 @@ public class Location implements OwnedItem, Serializable {
 	 * 
 	 * @param response The response the header is added to.
 	 */
-	public void addHeader(HttpServletResponse response) {
+	public void addHeader(HttpServletResponse response, String baseURI) {
 
-		response.setHeader(Constant.LOCATION_HEADER, createBuilder(response).toString());
+		response.setHeader(Constant.LOCATION_HEADER, createHREF(baseURI));
 	}
 
 	/**

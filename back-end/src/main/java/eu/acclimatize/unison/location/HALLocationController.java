@@ -1,8 +1,5 @@
 package eu.acclimatize.unison.location;
 
-import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.linkTo;
-import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.methodOn;
-
 import java.util.ArrayList;
 import java.util.Collection;
 
@@ -11,7 +8,6 @@ import javax.servlet.http.HttpServletResponse;
 import org.springframework.hateoas.CollectionModel;
 import org.springframework.hateoas.Link;
 import org.springframework.hateoas.MediaTypes;
-import org.springframework.hateoas.server.mvc.BasicLinkBuilder;
 import org.springframework.http.HttpHeaders;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -19,6 +15,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import eu.acclimatize.unison.Constant;
 import eu.acclimatize.unison.MappingConstant;
+import eu.acclimatize.unison.RootURIBuilder;
 
 /**
  * 
@@ -31,6 +28,7 @@ public class HALLocationController {
 
 	private LocationService locationService;
 	private WeatherLink[] weatherLink;
+	private RootURIBuilder builder;
 
 	/**
 	 * Creates and instance of HALLocationController.
@@ -39,9 +37,10 @@ public class HALLocationController {
 	 * @param weatherLink     The HAL weather links that are used in the
 	 *                        representational model.
 	 */
-	public HALLocationController(LocationService locationService, WeatherLink[] weatherLink) {
+	public HALLocationController(LocationService locationService, WeatherLink[] weatherLink, RootURIBuilder builder) {
 		this.locationService = locationService;
 		this.weatherLink = weatherLink;
+		this.builder = builder;
 	}
 
 	/**
@@ -55,13 +54,15 @@ public class HALLocationController {
 		response.setHeader(HttpHeaders.VARY, HttpHeaders.ACCEPT);
 		Iterable<Location> locationList = locationService.findAllSorted();
 
+		String baseUri = builder.build();
+
 		Collection<LocationModel> locationCollection = new ArrayList<>();
 		for (Location l : locationList) {
-			locationCollection.add(l.createModel(response, weatherLink));
+			locationCollection.add(l.createModel(weatherLink, baseUri));
 		}
 
-		Link link = linkTo(methodOn(HALLocationController.class).createModel(response)).withSelfRel();
-		String baseUri = BasicLinkBuilder.linkToCurrentMapping().toString();
+		Link link = Link.of(baseUri + MappingConstant.LOCATION_COLLECTION).withSelfRel();
+
 		Link containsLink = Link.of(baseUri + MappingConstant.CONTAINS + "{?" + Constant.LOCATION_NAME + "}",
 				Constant.CONTAINS);
 
@@ -83,7 +84,8 @@ public class HALLocationController {
 
 		Location location = locationService.find(locationName);
 
-		return location.createModel(response, weatherLink);
+		String baseURI = builder.build();
+		return location.createModel(weatherLink, baseURI);
 	}
 
 }
