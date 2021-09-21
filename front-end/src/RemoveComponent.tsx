@@ -1,7 +1,7 @@
 
 
 import React from 'react';
-import { problemConnecting } from './Util';
+import { problemConnecting, csrfToken } from './Util';
 import HttpStatus from 'http-status-codes';
 import PropTypes from 'prop-types';
 
@@ -46,7 +46,10 @@ function RemoveComponent({ obtainData, hideAdd, href, name }:
   async function removeRequest() {
 
     const response = await fetch(href, {
-      method: 'DELETE'
+      method: 'DELETE',
+      headers: new Headers({
+        'X-XSRF-TOKEN': csrfToken()
+      })
     });
 
     if (response.ok) {

@@ -22,7 +22,7 @@ import eu.acclimatize.unison.user.UserRepository;
 @ExtendWith(SpringExtension.class)
 @SpringBootTest
 
-public class JSONPrecipitationTest {
+class JSONPrecipitationTest {
 
 	@Autowired
 	private JSONPrecipitationController precipitationController;
@@ -40,7 +40,7 @@ public class JSONPrecipitationTest {
 	 * Test that the results returned are of type PrecipitationResult.
 	 */
 	@Test
-	public void testPreciptiation() {
+	void testPreciptiation() {
 
 		HttpServletResponse response = Mockito.mock(HttpServletResponse.class);
 		TestUtility.savePrecipitationData(userRepository, locationRepository, hpr);

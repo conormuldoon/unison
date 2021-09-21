@@ -26,7 +26,7 @@ import eu.acclimatize.unison.user.UserRepository;
 /**
  * Non-controller unit tests for the user package.
  */
-public class UserTests {
+class UserTests {
 
 	private ByteArrayInputStream mockInputStream() {
 
@@ -41,7 +41,7 @@ public class UserTests {
 	 *                     requesting user information.
 	 */
 	@Test
-	public void testRequestData() throws IOException {
+	void testRequestData() throws IOException {
 
 		BCryptPasswordEncoder mockEncoder = Mockito.mock(BCryptPasswordEncoder.class);
 
@@ -63,7 +63,7 @@ public class UserTests {
 	 *                     requesting user information.
 	 */
 	@Test
-	public void testUserHibernateStore() throws IOException {
+	void testUserHibernateStore() throws IOException {
 
 		Configuration configuration = Mockito.mock(Configuration.class);
 		SessionFactory factory = Mockito.mock(SessionFactory.class);
@@ -90,7 +90,7 @@ public class UserTests {
 	 * Tests that a runnable task is passed to the executor.
 	 */
 	@Test
-	public void testTaskSubmitted() {
+	void testTaskSubmitted() {
 		UserRepository userRepository = Mockito.mock(UserRepository.class);
 
 		Executor executor = Mockito.mock(Executor.class);
@@ -105,7 +105,7 @@ public class UserTests {
 	 * Test that the initial user credentials are saved in the user repository.
 	 */
 	@Test
-	public void testInitiaUser() {
+	void testInitiaUser() {
 
 		Executor executor = new Executor() { // Runs a runnable task on the current thread.
 
@@ -129,7 +129,7 @@ public class UserTests {
 	 * Check that randomly generated passwords are different
 	 */
 	@Test
-	public void testRandDiff() {
+	void testRandDiff() {
 		CredentialsRequester requester = new CredentialsRequester(null, null, null, new SecureRandom());
 
 		String r0 = requester.randomPassword();
@@ -139,7 +139,7 @@ public class UserTests {
 	}
 
 	@Test
-	public void equalityAndHashTest() {
+	void equalityAndHashTest() {
 
 		UserInformation ui0 = new UserInformation(TestConstant.USERNAME, "");
 		UserInformation ui1 = new UserInformation(TestConstant.USERNAME, "");
@@ -151,7 +151,7 @@ public class UserTests {
 	}
 
 	@Test
-	public void differenceUserInfo() {
+	void differenceUserInfo() {
 		UserInformation ui0 = new UserInformation(TestConstant.USERNAME, "");
 		UserInformation ui1 = new UserInformation(TestConstant.OTHER_USERNAME, "");
 		Assertions.assertNotEquals(ui0, null);

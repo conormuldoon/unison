@@ -46,7 +46,7 @@ import eu.acclimatize.unison.user.UserRepository;
  */
 @ExtendWith(SpringExtension.class)
 @SpringBootTest(webEnvironment = WebEnvironment.RANDOM_PORT)
-public class LocationTests {
+class LocationTests {
 
 	@Autowired
 	private LocationRepository locationRepository;
@@ -65,7 +65,7 @@ public class LocationTests {
 	 * Adds an initial user and location to the database.
 	 */
 	@BeforeEach
-	public void addData() {
+	void addData() {
 
 		TestUtility.saveLocationData(userRepository, locationRepository);
 
@@ -75,7 +75,7 @@ public class LocationTests {
 	 * Removes all data from the location and user repositories.
 	 */
 	@AfterEach
-	public void clearData() {
+	void clearData() {
 		TestUtility.deleteLocationData(locationRepository, userRepository);
 	}
 
@@ -89,7 +89,7 @@ public class LocationTests {
 	 * 
 	 */
 	@Test
-	public void validUser() {
+	void validUser() {
 
 		Location location = createLocation("New Location");
 
@@ -116,7 +116,7 @@ public class LocationTests {
 	 * 
 	 */
 	@Test
-	public void updateLocation() {
+	void updateLocation() {
 		testUpdate(TestConstant.USERNAME, TestConstant.PASSWORD, true);
 
 	}
@@ -126,7 +126,7 @@ public class LocationTests {
 	 * 
 	 */
 	@Test
-	public void updateLocationOther() {
+	void updateLocationOther() {
 		testUpdate(TestConstant.OTHER_USERNAME, TestConstant.OTHER_USER_PASSWORD, false);
 	}
 
@@ -143,7 +143,7 @@ public class LocationTests {
 	 * and request made by a valid user.
 	 */
 	@Test
-	public void locationNotPresentValidUser() {
+	void locationNotPresentValidUser() {
 
 		testDelete(TestConstant.USERNAME, TestConstant.PASSWORD, 1, "Other Location");
 	}
@@ -156,7 +156,7 @@ public class LocationTests {
 	 * Tests an authenticated user that added a location can delete the location.
 	 */
 	@Test
-	public void deleteValidUser() {
+	void deleteValidUser() {
 
 		testDelete(TestConstant.USERNAME, TestConstant.PASSWORD, 0);
 
@@ -167,7 +167,7 @@ public class LocationTests {
 	 * location.
 	 */
 	@Test
-	public void deleteOtherUser() {
+	void deleteOtherUser() {
 
 		TestUtility.addUserInformation(TestConstant.OTHER_USERNAME, TestConstant.OTHER_USER_PASSWORD, userRepository);
 
@@ -181,7 +181,7 @@ public class LocationTests {
 	 * @throws IOException Thrown by the JSON generator if there is an I/O error.
 	 **/
 	@Test
-	public void locationList() throws IOException {
+	void locationList() throws IOException {
 
 		HttpServletResponse response = Mockito.mock(HttpServletResponse.class);
 		FeatureCollection fc = geoLocationController.featureCollection(response);
@@ -200,7 +200,7 @@ public class LocationTests {
 	 */
 	@Test
 	@WithMockUser(TestConstant.USERNAME)
-	public void singleLocation() {
+	void singleLocation() {
 		ResponseEntity<Location> response = template.getForEntity(
 				MappingConstant.LOCATION_COLLECTION + "?" + Constant.LOCATION_NAME + "=" + TestConstant.LOCATION,
 				Location.class);
@@ -216,7 +216,7 @@ public class LocationTests {
 	 */
 	@Test
 	@WithMockUser(TestConstant.USERNAME)
-	public void collectionLocation() {
+	void collectionLocation() {
 		ResponseEntity<FeatureCollection> response = template.getForEntity(MappingConstant.LOCATION_COLLECTION,
 				FeatureCollection.class);
 		Assertions.assertNotNull(response.getBody());
@@ -229,7 +229,7 @@ public class LocationTests {
 	 **/
 
 	@Test
-	public void serialization() throws IOException {
+	void serialization() throws IOException {
 		Writer jsonWriter = new StringWriter();
 		JsonGenerator jsonGenerator = new JsonFactory().createGenerator(jsonWriter);
 
@@ -257,7 +257,7 @@ public class LocationTests {
 	 * 
 	 **/
 	@Test
-	public void collectionSerialization() throws IOException {
+	void collectionSerialization() throws IOException {
 
 		FeatureCollection featureCollection = new FeatureCollection(new ArrayList<Location>());
 
@@ -279,7 +279,7 @@ public class LocationTests {
 	 * @throws IOException Thrown by the JSON generator if there is an I/O error.
 	 */
 	@Test
-	public void collectionArraySerialization() throws IOException {
+	void collectionArraySerialization() throws IOException {
 
 		List<Location> list = new ArrayList<>();
 

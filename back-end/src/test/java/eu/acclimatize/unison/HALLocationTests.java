@@ -29,7 +29,7 @@ import eu.acclimatize.unison.user.UserRepository;
 
 @ExtendWith(SpringExtension.class)
 @SpringBootTest(classes = { UnisonServerApplication.class, LocationConfig.class })
-public class HALLocationTests {
+class HALLocationTests {
 	@Autowired
 	private LocationService locationService;
 
@@ -52,7 +52,7 @@ public class HALLocationTests {
 	 * .
 	 */
 	@BeforeEach
-	public void init() {
+	void init() {
 		request = Mockito.mock(HttpServletRequest.class);
 		BaseURIBuilder builder = Mockito.mock(BaseURIBuilder.class);
 		Mockito.when(builder.build(request.getScheme(), request.getServerName(), request.getServerPort(),
@@ -68,7 +68,7 @@ public class HALLocationTests {
 	 * Removes all data from the location and user repositories.
 	 */
 	@AfterEach
-	public void clearData() {
+	void clearData() {
 		TestUtility.deleteLocationData(locationRepository, userRepository);
 	}
 
@@ -78,7 +78,7 @@ public class HALLocationTests {
 	}
 
 	@Test
-	public void lcSelfRef() {
+	void lcSelfRef() {
 
 		CollectionModel<LocationModel> model = controller.createModel(response, request);
 		hasSelf(model);
@@ -97,13 +97,13 @@ public class HALLocationTests {
 	}
 
 	@Test
-	public void lcVaryAccept() {
+	void lcVaryAccept() {
 		controller.createModel(response, request);
 		verifyVaryAccept();
 	}
 
 	@Test
-	public void locationVaryAccept() {
+	void locationVaryAccept() {
 		controller.location(response, request, TestConstant.LOCATION);
 		verifyVaryAccept();
 	}

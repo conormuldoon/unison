@@ -29,6 +29,7 @@ public class HarvesterConfig {
 	@Bean
 	public DocumentBuilder documentBuilder() throws ParserConfigurationException {
 		DocumentBuilderFactory dbFactory = DocumentBuilderFactory.newInstance();
+		dbFactory.setFeature("http://apache.org/xml/features/disallow-doctype-decl", true);
 		dbFactory.setFeature(XMLConstants.FEATURE_SECURE_PROCESSING, true);
 		return dbFactory.newDocumentBuilder();
 

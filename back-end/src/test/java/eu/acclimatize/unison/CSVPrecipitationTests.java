@@ -28,7 +28,7 @@ import eu.acclimatize.unison.user.UserRepository;
 @ExtendWith(SpringExtension.class)
 @SpringBootTest(classes = { UnisonServerApplication.class, FinderConfig.class, CSVResponderConfig.class })
 
-public class CSVPrecipitationTests {
+class CSVPrecipitationTests {
 
 	@Autowired
 	private CSVPrecipitationController csvPrecipitationController;
@@ -45,7 +45,7 @@ public class CSVPrecipitationTests {
 	private HttpServletResponse response;
 	private StringWriter sw;
 
-	public CSVPrecipitationTests() throws IOException {
+	CSVPrecipitationTests() throws IOException {
 
 		response = Mockito.mock(HttpServletResponse.class);
 		sw = new StringWriter();
@@ -58,7 +58,7 @@ public class CSVPrecipitationTests {
 	 * Clears saved data from the database.
 	 */
 	@AfterEach
-	public void deleteData() {
+	void deleteData() {
 
 		TestUtility.deletePrecipitationData(hpr, locationRepository, userRepository);
 	}
@@ -71,7 +71,7 @@ public class CSVPrecipitationTests {
 	 *                     from the HTTP servlet response.
 	 */
 	@Test
-	public void testCSVPrecipMultiple() throws IOException {
+	void testCSVPrecipMultiple() throws IOException {
 		TestUtility.savePrecipitationData(userRepository, locationRepository, hpr);
 		csvPrecipitationController.precipitation(TestConstant.LOCATION, TestConstant.FROM_DATE, TestConstant.TO_DATE,
 				response);
@@ -86,7 +86,7 @@ public class CSVPrecipitationTests {
 	 * @throws IOException Thrown if there is an I/O error in obtaining a writer from the HTTP servlet response.
 	 */
 	@Test
-	public void testCSVPrecipSingle() throws IOException {
+	void testCSVPrecipSingle() throws IOException {
 		TestUtility.savePrecipitationData(userRepository, locationRepository, new PrecipitationValue(0d, null, null),
 				hpr);
 		csvPrecipitationController.precipitation(TestConstant.LOCATION, TestConstant.FROM_DATE, TestConstant.TO_DATE,

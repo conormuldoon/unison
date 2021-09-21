@@ -14,14 +14,14 @@ import eu.acclimatize.unison.location.Location;
  * Tests that item key equality and hash function.
  *
  */
-public class ItemKeyTest {
+class ItemKeyTest {
 
 	/**
 	 * Tests that item keys with the same from hour and location are equal and have
 	 * the same hash code.
 	 */
 	@Test
-	public void equalityAndHashTest() {
+	void equalityAndHashTest() {
 
 		Date fh0 = fromHour(4);
 		Date fh1 = fromHour(4);
@@ -40,7 +40,7 @@ public class ItemKeyTest {
 	 * Tests that item keys with a different from hour and location are not equal.
 	 */
 	@Test
-	public void differentKey() {
+	void differentKey() {
 
 		Date fh0 = fromHour(4);
 		Date fh1 = fromHour(5);

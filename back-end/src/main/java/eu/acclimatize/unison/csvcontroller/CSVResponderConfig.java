@@ -41,6 +41,7 @@ public class CSVResponderConfig {
 		dateFormat = new SimpleDateFormat(Constant.FORMAT);
 	}
 
+
 	// Recursively appends the double, Double, int, Date, and String CSVHeaderItem
 	// values of the attributes of the result classes to create a CSV header string.
 	private void appendFieldNames(Class<?> c, StringBuilder sb) {
@@ -50,20 +51,24 @@ public class CSVResponderConfig {
 			CSVHeaderItem csvProperty = f.getAnnotation(CSVHeaderItem.class);
 			if (csvProperty != null) {
 				Class<?> ft = f.getType();
-				if (ft.equals(Date.class) || ft.equals(Double.TYPE) || ft.equals(Integer.TYPE)
-						|| ft.equals(Double.class) || ft.equals(String.class)) {
-					String value = csvProperty.value();
-
-					if (value.equals(Constant.CSV_HEADER_DEFAULT))
-						sb.append(f.getName());
-					else
-						sb.append(value);
-
-					sb.append(DELIMITER);
-				} else {
-					appendFieldNames(ft, sb);
-				}
+				recurseAppend(ft,csvProperty,f,sb);
 			}
+		}
+	}
+	
+	private void recurseAppend(Class<?> ft, CSVHeaderItem csvProperty, Field f, StringBuilder sb) {
+		if (ft.equals(Date.class) || ft.equals(Double.TYPE) || ft.equals(Integer.TYPE) || ft.equals(Double.class)
+				|| ft.equals(String.class)) {
+			String value = csvProperty.value();
+
+			if (value.equals(Constant.CSV_HEADER_DEFAULT))
+				sb.append(f.getName());
+			else
+				sb.append(value);
+
+			sb.append(DELIMITER);
+		} else {
+			appendFieldNames(ft, sb);
 		}
 	}
 
@@ -153,9 +158,9 @@ public class CSVResponderConfig {
 	/**
 	 * Creates a {@link CSVResponder} bean for fog data.
 	 * 
-	 * @param fogFinder    An {@link ItemListFinder} for fog data. * @param
-	 *                     cacheSupport Used for adding conditional the Vary header
-	 *                     and a conditional cache control header.
+	 * @param fogFinder An {@link ItemListFinder} for fog data. * @param
+	 *                  cacheSupport Used for adding conditional the Vary header and
+	 *                  a conditional cache control header.
 	 * 
 	 * @return A new instance of {@link CSVResponder} that uses the fog finder.
 	 */

@@ -41,7 +41,7 @@ import eu.acclimatize.unison.user.UserRepository;
 @ExtendWith(SpringExtension.class)
 @SpringBootTest(classes = { UnisonServerApplication.class, FinderConfig.class, CSVResponderConfig.class })
 
-public class JSONControllerTests {
+class JSONControllerTests {
 
 	@Autowired
 	private HourlyWeatherRepository hwr;
@@ -85,7 +85,7 @@ public class JSONControllerTests {
 	 * Adds initial data to the database.
 	 */
 	@BeforeEach
-	public void addWeatherData() {
+	void addWeatherData() {
 
 		TestUtility.saveWeatherData(userRepository, locationRepository, hwr);
 
@@ -95,7 +95,7 @@ public class JSONControllerTests {
 	 * Clears saved data from the database.
 	 */
 	@AfterEach
-	public void deleteData() {
+	void deleteData() {
 
 		TestUtility.deleteWeatherData(hwr, locationRepository, userRepository);
 	}
@@ -104,7 +104,7 @@ public class JSONControllerTests {
 	 * Test that the results returned are of type CloudinessResult.
 	 */
 	@Test
-	public void testCloudiness() {
+	void testCloudiness() {
 
 		TestUtility.assertType(cloudinessController.cloudiness(TestConstant.LOCATION, TestConstant.FROM_DATE,
 				TestConstant.TO_DATE, response), CloudinessResult.class);
@@ -115,7 +115,7 @@ public class JSONControllerTests {
 	 * Test that the results returned are of type CloudLevelResult.
 	 */
 	@Test
-	public void testCloudLevel() {
+	void testCloudLevel() {
 
 		TestUtility.assertType(cloudLevelController.cloudLevel(TestConstant.LOCATION, TestConstant.FROM_DATE,
 				TestConstant.TO_DATE, response), CloudLevelResult.class);
@@ -126,7 +126,7 @@ public class JSONControllerTests {
 	 * Test that the results returned are of type DewPointResult.
 	 */
 	@Test
-	public void testDewPoint() {
+	void testDewPoint() {
 
 		TestUtility.assertType(dewPointController.dewPoint(TestConstant.LOCATION, TestConstant.FROM_DATE,
 				TestConstant.TO_DATE, response), DewPointResult.class);
@@ -137,7 +137,7 @@ public class JSONControllerTests {
 	 * Test that the results returned are of type FogResult.
 	 */
 	@Test
-	public void testFog() {
+	void testFog() {
 
 		TestUtility.assertType(
 				fogController.fog(TestConstant.LOCATION, TestConstant.FROM_DATE, TestConstant.TO_DATE, response),
@@ -149,7 +149,7 @@ public class JSONControllerTests {
 	 * Test that the results returned are of type HumidityResult.
 	 */
 	@Test
-	public void testHumidity() {
+	void testHumidity() {
 
 		TestUtility.assertType(humidityController.humidity(TestConstant.LOCATION, TestConstant.FROM_DATE,
 				TestConstant.TO_DATE, response), HumidityResult.class);
@@ -160,7 +160,7 @@ public class JSONControllerTests {
 	 * Test that the results returned are of type PressureResult.
 	 */
 	@Test
-	public void testPressure() {
+	void testPressure() {
 
 		TestUtility.assertType(pressureController.pressure(TestConstant.LOCATION, TestConstant.FROM_DATE,
 				TestConstant.TO_DATE, response), PressureResult.class);
@@ -171,7 +171,7 @@ public class JSONControllerTests {
 	 * Test that the results returned are of type TemperatureResult.
 	 */
 	@Test
-	public void testTemperature() {
+	void testTemperature() {
 
 		TestUtility.assertType(temperatureController.temperature(TestConstant.LOCATION, TestConstant.FROM_DATE,
 				TestConstant.TO_DATE, response), TemperatureResult.class);
@@ -182,7 +182,7 @@ public class JSONControllerTests {
 	 * Test that the results returned are of type WindDirectionResult.
 	 */
 	@Test
-	public void testWindDirection() {
+	void testWindDirection() {
 
 		TestUtility.assertType(windDirectionController.windDirection(TestConstant.LOCATION, TestConstant.FROM_DATE,
 				TestConstant.TO_DATE, response), WindDirectionResult.class);
@@ -193,7 +193,7 @@ public class JSONControllerTests {
 	 * Test that the results returned are of type WindSpeedResult.
 	 */
 	@Test
-	public void testWindSpeed() {
+	void testWindSpeed() {
 
 		TestUtility.assertType(windSpeedController.windSpeed(TestConstant.LOCATION, TestConstant.FROM_DATE,
 				TestConstant.TO_DATE, response), WindSpeedResult.class);

@@ -48,11 +48,20 @@ export const chartText = (curVar: string): string => {
   return vc;
 }
 
+export function csrfToken(): string {
+
+  return document.cookie.replace(/(?:(?:^|.*;\s*)XSRF-TOKEN\s*=\s*([^;]*).*$)|^.*$/, "$1");
+
+}
+
+
+
 const putObject = (body: string) => {
   return {
     method: 'PUT',
     headers: new Headers({
-      'Content-Type': 'application/geo+json'
+      'Content-Type': 'application/geo+json',
+      'X-XSRF-TOKEN': csrfToken()
     }),
     body: body
   }
@@ -62,7 +71,7 @@ const putObject = (body: string) => {
 
 export const locationPutObject = (locationName: string, longitude: string, latitude: string):
   Record<string, unknown> => {
-    
+
   const location = { name: locationName, lng: longitude, lat: latitude };
 
   const geoJSONPoint = GeoJSON.parse(location, { Point: ['lat', 'lng'] });

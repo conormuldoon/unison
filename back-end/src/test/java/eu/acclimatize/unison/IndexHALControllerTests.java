@@ -12,14 +12,14 @@ import org.mockito.Mockito;
 import org.springframework.hateoas.Link;
 import org.springframework.http.HttpHeaders;
 
-public class IndexHALControllerTests {
+class IndexHALControllerTests {
 
 	private BaseURIBuilder builder;
 	private HttpServletResponse response;
 	private HttpServletRequest request;
 
 	@BeforeEach
-	public void init() {
+	void init() {
 		builder = Mockito.mock(BaseURIBuilder.class);
 		request = Mockito.mock(HttpServletRequest.class);
 		Mockito.when(builder.build(request.getScheme(), request.getServerName(), request.getServerPort(),
@@ -29,7 +29,7 @@ public class IndexHALControllerTests {
 	}
 
 	@Test
-	public void hasSelfRel() {
+	void hasSelfRel() {
 
 		IndexHALController controller = new IndexHALController(builder);
 		UnisonModel model = controller.createModel(response, request);
@@ -40,7 +40,7 @@ public class IndexHALControllerTests {
 	}
 
 	@Test
-	public void varyAcceptAdded() {
+	void varyAcceptAdded() {
 
 		IndexHALController controller = new IndexHALController(builder);
 		controller.createModel(response, request);
@@ -48,7 +48,7 @@ public class IndexHALControllerTests {
 	}
 
 	@Test
-	public void portAdded() {
+	void portAdded() {
 		BaseURIBuilder builder = new BaseURIBuilder();
 		int port = 5000;
 		String uri = builder.build("http", "localhost", port, "");

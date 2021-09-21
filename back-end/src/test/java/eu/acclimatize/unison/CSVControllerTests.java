@@ -35,7 +35,7 @@ import eu.acclimatize.unison.user.UserRepository;
  */
 @ExtendWith(SpringExtension.class)
 @SpringBootTest(classes = { UnisonServerApplication.class, FinderConfig.class, CSVResponderConfig.class })
-public class CSVControllerTests {
+class CSVControllerTests {
 
 	@Autowired
 	private CSVCloudinessController csvCloudinessController;
@@ -77,7 +77,7 @@ public class CSVControllerTests {
 
 	private StringWriter sw;
 
-	public CSVControllerTests() throws IOException {
+	CSVControllerTests() throws IOException {
 
 		response = Mockito.mock(HttpServletResponse.class);
 		sw = new StringWriter();
@@ -90,7 +90,7 @@ public class CSVControllerTests {
 	 * Add initial data to the database.
 	 */
 	@BeforeEach
-	public void addWeatherData() {
+	void addWeatherData() {
 
 		TestUtility.saveWeatherData(userRepository, locationRepository, hwr);
 
@@ -100,7 +100,7 @@ public class CSVControllerTests {
 	 * Clears saved data from the database.
 	 */
 	@AfterEach
-	public void deleteData() {
+	void deleteData() {
 
 		TestUtility.deleteWeatherData(hwr, locationRepository, userRepository);
 	}
@@ -112,7 +112,7 @@ public class CSVControllerTests {
 	 *                     from the HTTP servlet response.
 	 */
 	@Test
-	public void testCSVCloudiness() throws IOException {
+	void testCSVCloudiness() throws IOException {
 
 		csvCloudinessController.cloudiness(TestConstant.LOCATION, TestConstant.FROM_DATE, TestConstant.TO_DATE,
 				response);
@@ -126,7 +126,7 @@ public class CSVControllerTests {
 	 *                     from the HTTP servlet response.
 	 */
 	@Test
-	public void testCSVCloudLevel() throws IOException {
+	void testCSVCloudLevel() throws IOException {
 
 		csvCloudLevelController.cloudLevel(TestConstant.LOCATION, TestConstant.FROM_DATE, TestConstant.TO_DATE,
 				response);
@@ -140,7 +140,7 @@ public class CSVControllerTests {
 	 *                     from the HTTP servlet response.
 	 */
 	@Test
-	public void testCSVDewPoint() throws IOException {
+	void testCSVDewPoint() throws IOException {
 
 		csvDewPointController.dewPoint(TestConstant.LOCATION, TestConstant.FROM_DATE, TestConstant.TO_DATE, response);
 		TestUtility.assertLength(sw, 2);
@@ -153,7 +153,7 @@ public class CSVControllerTests {
 	 *                     from the HTTP servlet response.
 	 */
 	@Test
-	public void testCSVFog() throws IOException {
+	void testCSVFog() throws IOException {
 
 		csvFogController.fog(TestConstant.LOCATION, TestConstant.FROM_DATE, TestConstant.TO_DATE, response);
 		TestUtility.assertLength(sw, 2);
@@ -166,7 +166,7 @@ public class CSVControllerTests {
 	 *                     from the HTTP servlet response.
 	 */
 	@Test
-	public void testCSVHumidity() throws IOException {
+	void testCSVHumidity() throws IOException {
 
 		csvHumidityController.humidity(TestConstant.LOCATION, TestConstant.FROM_DATE, TestConstant.TO_DATE, response);
 		TestUtility.assertLength(sw, 2);
@@ -179,7 +179,7 @@ public class CSVControllerTests {
 	 *                     from the HTTP servlet response.
 	 */
 	@Test
-	public void testCSVPressure() throws IOException {
+	void testCSVPressure() throws IOException {
 
 		csvPressureController.pressure(TestConstant.LOCATION, TestConstant.FROM_DATE, TestConstant.TO_DATE, response);
 		TestUtility.assertLength(sw, 2);
@@ -192,7 +192,7 @@ public class CSVControllerTests {
 	 *                     from the HTTP servlet response.
 	 */
 	@Test
-	public void testCSVTemperature() throws IOException {
+	void testCSVTemperature() throws IOException {
 
 		csvTemperatureController.temperature(TestConstant.LOCATION, TestConstant.FROM_DATE, TestConstant.TO_DATE,
 				response);
@@ -206,7 +206,7 @@ public class CSVControllerTests {
 	 *                     from the HTTP servlet response.
 	 */
 	@Test
-	public void testCSVWindDirection() throws IOException {
+	void testCSVWindDirection() throws IOException {
 
 		csvWindDirectionController.windDirection(TestConstant.LOCATION, TestConstant.FROM_DATE, TestConstant.TO_DATE,
 				response);
@@ -220,7 +220,7 @@ public class CSVControllerTests {
 	 *                     from the HTTP servlet response.
 	 */
 	@Test
-	public void testCSVWindSpeed() throws IOException {
+	void testCSVWindSpeed() throws IOException {
 
 		csvWindSpeedController.windSpeed(TestConstant.LOCATION, TestConstant.FROM_DATE, TestConstant.TO_DATE, response);
 		TestUtility.assertLength(sw, 4);

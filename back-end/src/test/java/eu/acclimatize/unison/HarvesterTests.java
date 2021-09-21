@@ -36,7 +36,7 @@ import eu.acclimatize.unison.location.harvester.HarvesterService;
  *
  */
 @ExtendWith(SpringExtension.class)
-public class HarvesterTests {
+class HarvesterTests {
 
 	private void testParse(String fileName, String timeZone) throws ParserConfigurationException, SAXException,
 			IOException, HarvestParseException, HarvestRequestException, DocumentNotFoundException {
@@ -87,7 +87,7 @@ public class HarvesterTests {
 	 * @throws DocumentNotFoundException
 	 */
 	@Test
-	public void testConvertorIrl() throws ParserConfigurationException, SAXException, IOException,
+	void testConvertorIrl() throws ParserConfigurationException, SAXException, IOException,
 			HarvestParseException, HarvestRequestException, DocumentNotFoundException {
 		testParse("/TestIreland.xml", "Europe/Dublin");
 	}
@@ -108,7 +108,7 @@ public class HarvesterTests {
 	 * @throws DocumentNotFoundException
 	 */
 	@Test
-	public void testConvertorUK() throws ParserConfigurationException, SAXException, IOException, HarvestParseException,
+	void testConvertorUK() throws ParserConfigurationException, SAXException, IOException, HarvestParseException,
 			HarvestRequestException, DocumentNotFoundException {
 		testParse("/TestUK.xml", "Europe/Dublin");
 	}
@@ -129,7 +129,7 @@ public class HarvesterTests {
 	 * @throws DocumentNotFoundException
 	 */
 	@Test
-	public void testConvertorNor() throws ParserConfigurationException, SAXException, IOException,
+	void testConvertorNor() throws ParserConfigurationException, SAXException, IOException,
 			HarvestParseException, HarvestRequestException, DocumentNotFoundException {
 		testParse("/TestNorway.xml", "Europe/Oslo");
 	}
@@ -147,7 +147,7 @@ public class HarvesterTests {
 	 * @throws DocumentNotFoundException
 	 */
 	@Test
-	public void testHaveDocument() throws SAXException, IOException, HarvestParseException, HarvestRequestException,
+	void testHaveDocument() throws SAXException, IOException, HarvestParseException, HarvestRequestException,
 			DocumentNotFoundException {
 		DocumentBuilder documentBuilder = Mockito.mock(DocumentBuilder.class);
 

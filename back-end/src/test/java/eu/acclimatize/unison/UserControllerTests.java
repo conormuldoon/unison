@@ -23,7 +23,7 @@ import eu.acclimatize.unison.user.UserRepository;
  */
 @ExtendWith(SpringExtension.class)
 @SpringBootTest(webEnvironment = WebEnvironment.RANDOM_PORT)
-public class UserControllerTests {
+class UserControllerTests {
 
 	private static final String SECOND_PASSWORD = "pwd2";
 
@@ -37,7 +37,7 @@ public class UserControllerTests {
 	 * Adds an initial user.
 	 */
 	@BeforeEach
-	public void addInitialUser() {
+	void addInitialUser() {
 
 		TestUtility.saveUserData(userRepository);
 
@@ -47,7 +47,7 @@ public class UserControllerTests {
 	 * Removes user data from the database.
 	 */
 	@AfterEach
-	public void clearData() {
+	void clearData() {
 
 		TestUtility.deleteUserData(userRepository);
 
@@ -57,7 +57,7 @@ public class UserControllerTests {
 	 * Tests the controller for adding new users.
 	 */
 	@Test
-	public void addUser() {
+	void addUser() {
 
 		TestRestTemplate templateWBA = template.withBasicAuth(TestConstant.USERNAME, TestConstant.PASSWORD);
 		templateWBA.put(MappingConstant.USER, TestUtility.createUserInformation(TestConstant.OTHER_USERNAME, TestConstant.OTHER_USER_PASSWORD));
@@ -110,7 +110,7 @@ public class UserControllerTests {
 	 * Tests the controller for updating passwords.
 	 */
 	@Test
-	public void updatePasswordUser() {
+	void updatePasswordUser() {
 
 		// Tests that the current password works and updates the current password to be
 		// the second password.
@@ -131,7 +131,7 @@ public class UserControllerTests {
 	 * Tests that the authenticated user cannot update the passwords of other users.
 	 */
 	@Test
-	public void updatePasswordOther() {
+	void updatePasswordOther() {
 
 		TestRestTemplate templateWBA = template.withBasicAuth(TestConstant.USERNAME, TestConstant.PASSWORD);
 		TestUtility.addUserInformation(TestConstant.OTHER_USERNAME, TestConstant.OTHER_USER_PASSWORD, userRepository);
