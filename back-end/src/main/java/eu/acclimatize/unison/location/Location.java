@@ -102,7 +102,7 @@ public class Location implements OwnedItem, Serializable {
 
 		UriTemplate uriTemplate = UriTemplate.of(baseURI + MappingConstant.SPECIFIC_LOCATION);
 		URI uri = uriTemplate.expand(name);
-
+		
 		return uri.toString();
 	}
 

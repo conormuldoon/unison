@@ -14,15 +14,17 @@ import org.springframework.http.HttpHeaders;
 
 public class IndexHALControllerTests {
 
-	private RootURIBuilder builder;
+	private BaseURIBuilder builder;
 	private HttpServletResponse response;
 	private HttpServletRequest request;
 
 	@BeforeEach
 	public void init() {
-		builder = Mockito.mock(RootURIBuilder.class);
+		builder = Mockito.mock(BaseURIBuilder.class);
 		request = Mockito.mock(HttpServletRequest.class);
-		Mockito.when(builder.build(request)).thenReturn("http://localhost:8080");
+		Mockito.when(builder.build(request.getScheme(), request.getServerName(), request.getServerPort(),
+				request.getContextPath())).thenReturn("http://localhost:8080");
+		
 		response = Mockito.mock(HttpServletResponse.class);
 	}
 
@@ -47,15 +49,11 @@ public class IndexHALControllerTests {
 
 	@Test
 	public void portAdded() {
-		RootURIBuilder builder = new RootURIBuilder();
-		HttpServletRequest request = Mockito.mock(HttpServletRequest.class);
+		BaseURIBuilder builder = new BaseURIBuilder();
 		int port = 5000;
-		Mockito.when(request.getServerPort()).thenReturn(port);
-		Mockito.when(request.getScheme()).thenReturn("http");
-		String uri = builder.build(request);
+		String uri = builder.build("http", "localhost", port, "");
 		Assertions.assertTrue(uri.contains(":" + port));
-		Mockito.when(request.getScheme()).thenReturn("https");
-		uri = builder.build(request);
+		uri = builder.build("https", "localhost", port, "");
 		Assertions.assertTrue(uri.contains(":" + port));
 	}
 }

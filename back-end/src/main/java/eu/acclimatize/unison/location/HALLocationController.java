@@ -16,7 +16,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import eu.acclimatize.unison.Constant;
 import eu.acclimatize.unison.MappingConstant;
-import eu.acclimatize.unison.RootURIBuilder;
+import eu.acclimatize.unison.BaseURIBuilder;
 
 /**
  * 
@@ -29,7 +29,7 @@ public class HALLocationController {
 
 	private LocationService locationService;
 	private WeatherLink[] weatherLink;
-	private RootURIBuilder builder;
+	private BaseURIBuilder builder;
 
 	/**
 	 * Creates and instance of HALLocationController.
@@ -38,7 +38,7 @@ public class HALLocationController {
 	 * @param weatherLink     The HAL weather links that are used in the
 	 *                        representational model.
 	 */
-	public HALLocationController(LocationService locationService, WeatherLink[] weatherLink, RootURIBuilder builder) {
+	public HALLocationController(LocationService locationService, WeatherLink[] weatherLink, BaseURIBuilder builder) {
 		this.locationService = locationService;
 		this.weatherLink = weatherLink;
 		this.builder = builder;
@@ -55,7 +55,8 @@ public class HALLocationController {
 		response.setHeader(HttpHeaders.VARY, HttpHeaders.ACCEPT);
 		Iterable<Location> locationList = locationService.findAllSorted();
 
-		String baseUri = builder.build(request);
+		String baseUri = builder.build(request.getScheme(), request.getServerName(), request.getServerPort(),
+				request.getContextPath());
 
 		Collection<LocationModel> locationCollection = new ArrayList<>();
 		for (Location l : locationList) {
@@ -85,7 +86,8 @@ public class HALLocationController {
 
 		Location location = locationService.find(locationName);
 
-		String baseURI = builder.build(request);
+		String baseURI = builder.build(request.getScheme(), request.getServerName(), request.getServerPort(),
+				request.getContextPath());
 		return location.createModel(weatherLink, baseURI);
 	}
 

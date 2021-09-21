@@ -48,13 +48,15 @@ public class HALLocationTests {
 
 	private HttpServletRequest request;
 
-	/**.
+	/**
+	 * .
 	 */
 	@BeforeEach
 	public void init() {
 		request = Mockito.mock(HttpServletRequest.class);
-		RootURIBuilder builder = Mockito.mock(RootURIBuilder.class);
-		Mockito.when(builder.build(request)).thenReturn("http://localhost:8080");
+		BaseURIBuilder builder = Mockito.mock(BaseURIBuilder.class);
+		Mockito.when(builder.build(request.getScheme(), request.getServerName(), request.getServerPort(),
+				request.getContextPath())).thenReturn("http://localhost:8080");
 		controller = new HALLocationController(locationService, weatherLink, builder);
 		response = Mockito.mock(HttpServletResponse.class);
 

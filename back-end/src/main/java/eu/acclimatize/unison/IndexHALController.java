@@ -20,9 +20,9 @@ import org.springframework.web.servlet.ModelAndView;
 @RestController
 public class IndexHALController {
 
-	private RootURIBuilder builder;
+	private BaseURIBuilder builder;
 
-	public IndexHALController(RootURIBuilder builder) {
+	public IndexHALController(BaseURIBuilder builder) {
 		this.builder = builder;
 	}
 
@@ -40,7 +40,8 @@ public class IndexHALController {
 		response.setHeader(HttpHeaders.VARY, HttpHeaders.ACCEPT);
 		List<Link> list = new ArrayList<>();
 
-		String baseURI = builder.build(request);
+		String baseURI = builder.build(request.getScheme(), request.getServerName(), request.getServerPort(),
+				request.getContextPath());
 		list.add(Link.of(baseURI).withSelfRel());
 		list.add(Link.of(baseURI + MappingConstant.INDEX).withSelfRel());
 

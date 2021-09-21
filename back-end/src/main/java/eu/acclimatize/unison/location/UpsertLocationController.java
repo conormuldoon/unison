@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import eu.acclimatize.unison.Constant;
 import eu.acclimatize.unison.MappingConstant;
-import eu.acclimatize.unison.RootURIBuilder;
+import eu.acclimatize.unison.BaseURIBuilder;
 import eu.acclimatize.unison.location.harvester.HarvestController;
 
 /**
@@ -26,7 +26,7 @@ public class UpsertLocationController {
 
 	private LocationRepository locationRepository;
 	private LocationService locationService;
-	private RootURIBuilder builder;
+	private BaseURIBuilder builder;
 
 	/**
 	 * Creates an instance of UpsertLocationController.
@@ -35,7 +35,7 @@ public class UpsertLocationController {
 	 * @param locationService    The service used to replace locations.
 	 */
 	public UpsertLocationController(LocationRepository locationRepository, LocationService locationService,
-			RootURIBuilder builder) {
+			BaseURIBuilder builder) {
 		this.locationRepository = locationRepository;
 		this.locationService = locationService;
 		this.builder = builder;
@@ -53,7 +53,7 @@ public class UpsertLocationController {
 	// @RolesAllowed is used when the location is deserialized so is not required
 	// here.
 	@PutMapping(MappingConstant.LOCATION_COLLECTION)
-	public void upsert(@RequestBody Location location, HttpServletResponse response,HttpServletRequest request) {
+	public void upsert(@RequestBody Location location, HttpServletResponse response, HttpServletRequest request) {
 
 		Optional<Location> optCurrent = location.findCurrent(locationRepository);
 
@@ -68,7 +68,8 @@ public class UpsertLocationController {
 
 			locationRepository.save(location);
 			response.setStatus(Constant.CREATED);
-			location.addHeader(response, builder.build(request));
+			location.addHeader(response, builder.build(request.getScheme(), request.getServerName(),
+					request.getServerPort(), request.getContextPath()));
 		}
 
 	}

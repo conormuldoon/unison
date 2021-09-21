@@ -114,8 +114,8 @@ public class UnisonServerApplication {
 	}
 
 	@Bean
-	public RootURIBuilder builder() {
-		return new RootURIBuilder();
+	public BaseURIBuilder builder() {
+		return new BaseURIBuilder();
 	}
 
 }
