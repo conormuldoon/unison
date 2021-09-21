@@ -53,8 +53,9 @@ public class UpsertLocationController {
 	// @RolesAllowed is used when the location is deserialized so is not required
 	// here.
 	@PutMapping(MappingConstant.LOCATION_COLLECTION)
-	public void upsert(@RequestBody Location location, HttpServletResponse response, HttpServletRequest request) {
+	public void upsert(@RequestBody LocationDTO locationDTO, HttpServletResponse response, HttpServletRequest request) {
 
+		Location location = locationDTO.createEntity();
 		Optional<Location> optCurrent = location.findCurrent(locationRepository);
 
 		if (optCurrent.isPresent()) {

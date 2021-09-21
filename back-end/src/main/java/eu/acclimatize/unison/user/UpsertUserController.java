@@ -2,6 +2,7 @@ package eu.acclimatize.unison.user;
 
 import java.util.Optional;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.security.access.AccessDeniedException;
@@ -9,6 +10,7 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
+import eu.acclimatize.unison.BaseURIBuilder;
 import eu.acclimatize.unison.Constant;
 import eu.acclimatize.unison.MappingConstant;
 
@@ -21,16 +23,18 @@ public class UpsertUserController {
 
 	private UserRepository userRepository;
 	private UserService userService;
+	private BaseURIBuilder builder;
 
 	/**
 	 * Creates and instance of UpsertUserController.
 	 * 
 	 * @param userService The service used to update the user.
 	 */
-	public UpsertUserController(UserRepository userRepository, UserService userService) {
+	public UpsertUserController(UserRepository userRepository, UserService userService, BaseURIBuilder builder) {
 
 		this.userRepository = userRepository;
 		this.userService = userService;
+		this.builder = builder;
 
 	}
 
@@ -49,7 +53,10 @@ public class UpsertUserController {
 	// configured to require authorization in the UnisonSecurityConfig
 	// configuration.
 	@PutMapping(MappingConstant.USER)
-	public void upsertUser(@RequestBody UserInformation userInformation, HttpServletResponse response) {
+	public void upsertUser(@RequestBody UserInfoDTO userInfoDTO, HttpServletResponse response,
+			HttpServletRequest request) {
+
+		UserInformation userInformation = userInfoDTO.createEntity();
 
 		Optional<UserInformation> optCurrent = userInformation.findCurrent(userRepository);
 		if (optCurrent.isPresent()) {
@@ -65,7 +72,9 @@ public class UpsertUserController {
 		} else {
 			userRepository.save(userInformation);
 			response.setStatus(Constant.CREATED);
-			userInformation.addHeader(response);
+			String baseURI = builder.build(request.getScheme(), request.getServerName(), request.getServerPort(),
+					request.getContextPath());
+			userInformation.addHeader(response, baseURI);
 		}
 
 	}

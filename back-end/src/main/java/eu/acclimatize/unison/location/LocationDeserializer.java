@@ -27,7 +27,7 @@ import eu.acclimatize.unison.user.UserRepository;
  *
  */
 @JsonComponent
-public class LocationDeserializer extends JsonDeserializer<Location> {
+public class LocationDeserializer extends JsonDeserializer<LocationDTO> {
 
 	private UserRepository userRepository;
 
@@ -92,7 +92,7 @@ public class LocationDeserializer extends JsonDeserializer<Location> {
 
 	@RolesAllowed(Constant.ROLL_USER)
 	@Override
-	public Location deserialize(JsonParser parser, DeserializationContext ctxt)
+	public LocationDTO deserialize(JsonParser parser, DeserializationContext ctxt)
 			throws IOException, JsonProcessingException {
 
 		String locationName = null;
@@ -136,7 +136,7 @@ public class LocationDeserializer extends JsonDeserializer<Location> {
 		}
 
 		UserInformation userInformation = oUser.get();
-		return new Location(locationName, userInformation,
+		return new LocationDTO(locationName, userInformation,
 				geometryFactory.createPoint(new Coordinate(coordinates[0], coordinates[1])));
 
 	}

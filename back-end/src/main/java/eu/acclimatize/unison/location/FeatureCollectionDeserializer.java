@@ -45,7 +45,9 @@ public class FeatureCollectionDeserializer extends JsonDeserializer<FeatureColle
 					noFeatures = false;
 					while ((jsonToken = parser.nextToken()) != JsonToken.END_ARRAY) {
 						if (jsonToken == JsonToken.START_OBJECT) {
-							location.add(locationDeserializer.deserialize(parser, ctxt));
+							LocationDTO locationDTO = locationDeserializer.deserialize(parser, ctxt);
+
+							location.add(locationDTO.createEntity());
 						}
 					}
 				}

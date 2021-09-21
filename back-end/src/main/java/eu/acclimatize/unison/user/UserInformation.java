@@ -9,7 +9,6 @@ import javax.persistence.Id;
 import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.hateoas.UriTemplate;
-import org.springframework.hateoas.server.mvc.BasicLinkBuilder;
 import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
 
@@ -29,7 +28,7 @@ import eu.acclimatize.unison.OwnedItem;
 public class UserInformation implements OwnedItem, Serializable {
 
 	private static final long serialVersionUID = -6566767228133005900L;
-	private static final String MAPPING = MappingConstant.USER + "{" + Constant.USER_NAME + "}";
+	private static final String MAPPING = MappingConstant.USER + "/{" + Constant.USER_NAME + "}";
 	@Id
 	@JsonProperty
 	private String userName;
@@ -78,9 +77,9 @@ public class UserInformation implements OwnedItem, Serializable {
 	 * 
 	 * @param response The response the header is added to.
 	 */
-	public void addHeader(HttpServletResponse response) {
-		String baseUri = BasicLinkBuilder.linkToCurrentMapping().toString();
-		UriTemplate uriTemplate = UriTemplate.of(baseUri + MAPPING);
+	public void addHeader(HttpServletResponse response, String baseURI) {
+		
+		UriTemplate uriTemplate = UriTemplate.of(baseURI + MAPPING);
 		URI uri = uriTemplate.expand(userName);
 		response.setHeader(Constant.LOCATION_HEADER, uri.toString());
 	}
