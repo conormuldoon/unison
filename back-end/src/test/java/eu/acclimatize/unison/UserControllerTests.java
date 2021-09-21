@@ -1,17 +1,25 @@
 package eu.acclimatize.unison;
 
+import static org.springframework.security.test.web.servlet.request.SecurityMockMvcRequestPostProcessors.csrf;
+import static org.springframework.security.test.web.servlet.request.SecurityMockMvcRequestPostProcessors.httpBasic;
+import static org.springframework.security.test.web.servlet.request.SecurityMockMvcRequestPostProcessors.user;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.put;
+
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.context.SpringBootTest.WebEnvironment;
-import org.springframework.boot.test.web.client.TestRestTemplate;
+import org.springframework.http.MediaType;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
+import org.springframework.test.web.servlet.MockMvc;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.databind.ObjectMapper;
 
 import eu.acclimatize.unison.user.UserInformation;
 import eu.acclimatize.unison.user.UserRepository;
@@ -23,6 +31,7 @@ import eu.acclimatize.unison.user.UserRepository;
  */
 @ExtendWith(SpringExtension.class)
 @SpringBootTest(webEnvironment = WebEnvironment.RANDOM_PORT)
+@AutoConfigureMockMvc
 class UserControllerTests {
 
 	private static final String SECOND_PASSWORD = "pwd2";
@@ -31,7 +40,7 @@ class UserControllerTests {
 	private UserRepository userRepository;
 
 	@Autowired
-	private TestRestTemplate template;
+	private MockMvc mockMvc;
 
 	/**
 	 * Adds an initial user.
@@ -55,21 +64,26 @@ class UserControllerTests {
 
 	/**
 	 * Tests the controller for adding new users.
+	 * 
+	 * @throws Exception
 	 */
 	@Test
-	void addUser() {
+	void addUser() throws Exception {
 
-		TestRestTemplate templateWBA = template.withBasicAuth(TestConstant.USERNAME, TestConstant.PASSWORD);
-		templateWBA.put(MappingConstant.USER, TestUtility.createUserInformation(TestConstant.OTHER_USERNAME, TestConstant.OTHER_USER_PASSWORD));
+		UserInformation userInfo = TestUtility.createUserInformation(TestConstant.OTHER_USERNAME,
+				TestConstant.OTHER_USER_PASSWORD);
+
+		String json = new ObjectMapper().writeValueAsString(userInfo);
+		mockMvc.perform(put(MappingConstant.USER).contentType(MediaType.APPLICATION_JSON).content(json).with(csrf())
+				.with(user(TestConstant.USERNAME).password(TestConstant.PASSWORD)));
 
 		Assertions.assertEquals(2, userRepository.count());
 	}
 
 	/**
 	 * 
-	 * Using a stub for serializing the user information as the TestRestTemplate
-	 * performs serialization prior to performing a put and the encoded password in
-	 * the UserInformation has only write access.
+	 * Using a stub for serializing the user information as the encoded password in
+	 * the UserInfoDTO has only write access.
 	 *
 	 */
 	private class SerializationStub {
@@ -91,51 +105,47 @@ class UserControllerTests {
 
 	}
 
-	private void testUpdate(TestRestTemplate templateWBA, boolean expected, String userName, String password) {
+	private void testUpdate(boolean expected, String userName, String password) throws Exception {
 
 		String encodedPassword = TestUtility.encode(password);
 		SerializationStub serializationStub = new SerializationStub(userName, encodedPassword);
-		templateWBA.put(MappingConstant.USER, serializationStub);
+
+		String json = new ObjectMapper().writeValueAsString(serializationStub);
+
+		mockMvc.perform(put(MappingConstant.USER).contentType(MediaType.APPLICATION_JSON).content(json)
+				.with(httpBasic(TestConstant.USERNAME, TestConstant.PASSWORD)).with(csrf()));
+
 		UserInformation savedUserInformation = userRepository.findById(userName).get();
 
 		UserInformation userInformation = new UserInformation(userName, encodedPassword);
-		Assertions.assertEquals(expected, userInformation.equals(savedUserInformation));
-	}
 
-	private void testUpdate(TestRestTemplate templateWBA, boolean expected, String password) {
-		testUpdate(templateWBA, expected, TestConstant.USERNAME, password);
+		Assertions.assertEquals(expected, userInformation.equals(savedUserInformation));
 	}
 
 	/**
 	 * Tests the controller for updating passwords.
+	 * 
+	 * @throws Exception
 	 */
 	@Test
-	void updatePasswordUser() {
+	void updatePasswordUser() throws Exception {
 
-		// Tests that the current password works and updates the current password to be
-		// the second password.
-		TestRestTemplate templateWBA = template.withBasicAuth(TestConstant.USERNAME, TestConstant.PASSWORD);
-
-		testUpdate(templateWBA, true, SECOND_PASSWORD);
-
-		// Tests that original password does not work.
-		testUpdate(templateWBA, false, TestConstant.PASSWORD);
-
-		// Tests that the second password works and updates the current password to be
-		templateWBA = template.withBasicAuth(TestConstant.USERNAME, SECOND_PASSWORD);
-		testUpdate(templateWBA, true, TestConstant.PASSWORD);
+		testUpdate(true, TestConstant.USERNAME, SECOND_PASSWORD);
+		testUpdate(false, TestConstant.USERNAME, TestConstant.PASSWORD);
+		
 
 	}
 
 	/**
 	 * Tests that the authenticated user cannot update the passwords of other users.
+	 * 
+	 * @throws Exception
 	 */
 	@Test
-	void updatePasswordOther() {
+	void updatePasswordOther() throws Exception {
 
-		TestRestTemplate templateWBA = template.withBasicAuth(TestConstant.USERNAME, TestConstant.PASSWORD);
 		TestUtility.addUserInformation(TestConstant.OTHER_USERNAME, TestConstant.OTHER_USER_PASSWORD, userRepository);
-		testUpdate(templateWBA, false, TestConstant.OTHER_USERNAME, TestConstant.PASSWORD);
+		testUpdate(false, TestConstant.OTHER_USERNAME, TestConstant.PASSWORD);
 	}
 
 }

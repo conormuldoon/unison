@@ -33,6 +33,8 @@ public class UserService {
 	 */
 	@PreAuthorize(Constant.REPLACE_ITEM)
 	public void replace(UserInformation current, UserInformation updated) {
+
 		userRepository.save(updated);
+		
 	}
 }

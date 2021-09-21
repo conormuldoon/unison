@@ -71,6 +71,7 @@ public class UserInformation implements OwnedItem, Serializable {
 		return userName.equals(ownerName);
 	}
 
+
 	/**
 	 * Used to add a location header to the HTTP servlet response when new user
 	 * information has been stored.
@@ -78,7 +79,7 @@ public class UserInformation implements OwnedItem, Serializable {
 	 * @param response The response the header is added to.
 	 */
 	public void addHeader(HttpServletResponse response, String baseURI) {
-		
+
 		UriTemplate uriTemplate = UriTemplate.of(baseURI + MAPPING);
 		URI uri = uriTemplate.expand(userName);
 		response.setHeader(Constant.LOCATION_HEADER, uri.toString());

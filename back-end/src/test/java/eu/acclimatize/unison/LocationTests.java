@@ -1,5 +1,10 @@
 package eu.acclimatize.unison;
 
+import static org.springframework.security.test.web.servlet.request.SecurityMockMvcRequestPostProcessors.csrf;
+import static org.springframework.security.test.web.servlet.request.SecurityMockMvcRequestPostProcessors.httpBasic;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.delete;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.put;
+
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
@@ -21,12 +26,14 @@ import org.locationtech.jts.geom.Coordinate;
 import org.locationtech.jts.geom.GeometryFactory;
 import org.mockito.Mockito;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.context.SpringBootTest.WebEnvironment;
 import org.springframework.boot.test.web.client.TestRestTemplate;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.test.context.support.WithMockUser;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
+import org.springframework.test.web.servlet.MockMvc;
 
 import com.fasterxml.jackson.core.JsonFactory;
 import com.fasterxml.jackson.core.JsonGenerator;
@@ -46,6 +53,8 @@ import eu.acclimatize.unison.user.UserRepository;
  */
 @ExtendWith(SpringExtension.class)
 @SpringBootTest(webEnvironment = WebEnvironment.RANDOM_PORT)
+@AutoConfigureMockMvc
+
 class LocationTests {
 
 	@Autowired
@@ -60,6 +69,8 @@ class LocationTests {
 	@Autowired
 	private TestRestTemplate template;
 
+	@Autowired
+	private MockMvc mockMvc;
 
 	/**
 	 * Adds an initial user and location to the database.
@@ -87,25 +98,34 @@ class LocationTests {
 	 * Test that a location is added if the request is made by an authenticated user
 	 * and the location is not present.
 	 * 
+	 * @throws Exception
+	 * 
 	 */
 	@Test
-	void validUser() {
+	void validUser() throws Exception {
 
 		Location location = createLocation("New Location");
 
-		TestRestTemplate templateWBA = template.withBasicAuth(TestConstant.USERNAME, TestConstant.PASSWORD);
-		templateWBA.put(MappingConstant.LOCATION_COLLECTION, location);
+		String json = serializeLocation(location);
+		mockMvc.perform(put(MappingConstant.LOCATION_COLLECTION).contentType(LocationConstant.GEOJSON_MEDIA_TYPE)
+				.content(json).with(csrf()).with(httpBasic(TestConstant.USERNAME, TestConstant.PASSWORD)));
 
 		Assertions.assertEquals(2, locationRepository.count());
 
 	}
 
-	private void testUpdate(String userName, String password, boolean expected) {
+	private void testUpdate(String userName, String password, boolean expected) throws Exception {
 		TestUtility.addUserInformation(userName, password, userRepository);
-		TestRestTemplate templateWBA = template.withBasicAuth(userName, password);
+
 		Location modifiedLocation = createLocation(TestConstant.LOCATION);
-		templateWBA.put(MappingConstant.LOCATION_COLLECTION, modifiedLocation);
+		String json = serializeLocation(modifiedLocation);
+
+		mockMvc.perform(put(MappingConstant.LOCATION_COLLECTION).contentType(LocationConstant.GEOJSON_MEDIA_TYPE)
+				.content(json).with(csrf()).with(httpBasic(userName, password)));
+
 		Optional<Location> oLoc = locationRepository.findById(TestConstant.LOCATION);
+
+		Assertions.assertTrue(oLoc.isPresent());
 		Location savedLocation = oLoc.get();
 		Assertions.assertEquals(expected, modifiedLocation.equals(savedLocation));
 
@@ -114,9 +134,11 @@ class LocationTests {
 	/**
 	 * Tests that a user can update a location that they added.
 	 * 
+	 * @throws Exception
+	 * 
 	 */
 	@Test
-	void updateLocation() {
+	void updateLocation() throws Exception {
 		testUpdate(TestConstant.USERNAME, TestConstant.PASSWORD, true);
 
 	}
@@ -124,16 +146,19 @@ class LocationTests {
 	/**
 	 * Tests that a user cannot update a location that they didn't add.
 	 * 
+	 * @throws Exception
+	 * 
 	 */
 	@Test
-	void updateLocationOther() {
+	void updateLocationOther() throws Exception {
 		testUpdate(TestConstant.OTHER_USERNAME, TestConstant.OTHER_USER_PASSWORD, false);
 	}
 
-	private void testDelete(String userName, String password, int expectedCount, String locationName) {
-		TestRestTemplate templateWBA = template.withBasicAuth(userName, password);
+	private void testDelete(String userName, String password, int expectedCount, String locationName) throws Exception {
 
-		templateWBA.delete(MappingConstant.SPECIFIC_LOCATION, locationName);
+		mockMvc.perform(delete(MappingConstant.LOCATION_COLLECTION + "/" + locationName).with(csrf())
+				.with(httpBasic(userName, password)));
+
 		Assertions.assertEquals(expectedCount, locationRepository.count());
 
 	}
@@ -141,22 +166,26 @@ class LocationTests {
 	/**
 	 * Tests that a location is not deleted if the wrong location name is given, but
 	 * and request made by a valid user.
+	 * 
+	 * @throws Exception
 	 */
 	@Test
-	void locationNotPresentValidUser() {
+	void locationNotPresentValidUser() throws Exception {
 
 		testDelete(TestConstant.USERNAME, TestConstant.PASSWORD, 1, "Other Location");
 	}
 
-	private void testDelete(String userName, String password, int expectedCount) {
+	private void testDelete(String userName, String password, int expectedCount) throws Exception {
 		testDelete(userName, password, expectedCount, TestConstant.LOCATION);
 	}
 
 	/**
 	 * Tests an authenticated user that added a location can delete the location.
+	 * 
+	 * @throws Exception
 	 */
 	@Test
-	void deleteValidUser() {
+	void deleteValidUser() throws Exception {
 
 		testDelete(TestConstant.USERNAME, TestConstant.PASSWORD, 0);
 
@@ -165,9 +194,11 @@ class LocationTests {
 	/**
 	 * Tests an authenticated user that didn't add a location can't delete the
 	 * location.
+	 * 
+	 * @throws Exception
 	 */
 	@Test
-	void deleteOtherUser() {
+	void deleteOtherUser() throws Exception {
 
 		TestUtility.addUserInformation(TestConstant.OTHER_USERNAME, TestConstant.OTHER_USER_PASSWORD, userRepository);
 
@@ -222,6 +253,16 @@ class LocationTests {
 		Assertions.assertNotNull(response.getBody());
 	}
 
+	private String serializeLocation(Location location) throws IOException {
+		Writer jsonWriter = new StringWriter();
+		JsonGenerator jsonGenerator = new JsonFactory().createGenerator(jsonWriter);
+		location.geoJSONSerialize(jsonGenerator);
+
+		jsonGenerator.flush();
+		return jsonWriter.toString();
+
+	}
+
 	/**
 	 * Tests the coordinates are serialized in a GeoJSON format correctly.
 	 * 
@@ -230,22 +271,15 @@ class LocationTests {
 
 	@Test
 	void serialization() throws IOException {
-		Writer jsonWriter = new StringWriter();
-		JsonGenerator jsonGenerator = new JsonFactory().createGenerator(jsonWriter);
 
 		Location location = TestUtility.createLocation(TestConstant.LOCATION, null, TestConstant.LONGITUDE,
 				TestConstant.LATITUDE);
-
-		location.geoJSONSerialize(jsonGenerator);
-
-		jsonGenerator.flush();
+		String json = serializeLocation(location);
 
 		InputStream is = getClass().getResourceAsStream("/TestPoint.json");
 		BufferedReader br = new BufferedReader(new InputStreamReader(is));
 
-		String line = jsonWriter.toString();
-		System.out.println("\n\n\n" + line);
-		Assertions.assertEquals(br.readLine(), jsonWriter.toString());
+		Assertions.assertEquals(br.readLine(), json);
 		br.close();
 
 	}
@@ -310,7 +344,5 @@ class LocationTests {
 		br.close();
 
 	}
-
-
 
 }
