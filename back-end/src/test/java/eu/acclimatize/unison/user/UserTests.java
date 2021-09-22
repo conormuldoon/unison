@@ -135,7 +135,7 @@ class UserTests {
 	}
 
 	/**
-	 * Tests that different UserInformation equality and that equal instances have the
+	 * Tests for UserInformation equality and that equal instances have the
 	 * same hash codes.
 	 */
 	@Test

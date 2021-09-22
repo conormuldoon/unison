@@ -344,8 +344,8 @@ class LocationTests {
 	}
 
 	/**
-	 * Tests that different LocationModel equality and that equal instances have the
-	 * same hash codes.
+	 * Tests for LocationModel equality and that equal instances have the same hash
+	 * codes.
 	 */
 	@Test
 	void equalityAndHashLM() {
@@ -364,15 +364,50 @@ class LocationTests {
 	 * and have different hash codes.
 	 */
 	@Test
-	void differenceUserLM() {
+	void differenceLM() {
 		LocationModel lm0 = new LocationModel(new ArrayList<>(), TestConstant.LOCATION);
 		LocationModel lm1 = new LocationModel(new ArrayList<>(), "Other location");
 
 		Assertions.assertNotEquals(lm0, lm1);
+		Assertions.assertNotEquals(lm0.hashCode(), lm1.hashCode());
 
 		LocationModel lm2 = new LocationModel(new ArrayList<>(), null);
 		Assertions.assertNotEquals(lm0, lm2);
 		Assertions.assertNotEquals(lm2, lm0);
+
+	}
+
+	/**
+	 * Tests for Location equality and that equal instances have the same hash
+	 * codes.
+	 */
+	@Test
+	void equalityAndHashLocation() {
+
+		Location l0 = createLocation(TestConstant.LOCATION);
+		Location l1 = createLocation(TestConstant.LOCATION);
+
+		Assertions.assertEquals(l0, l0);
+		Assertions.assertEquals(l0, l1);
+		Assertions.assertEquals(l0.hashCode(), l1.hashCode());
+
+	}
+
+	/**
+	 * Tests that Location instances with different attributes are not equal and
+	 * have different hash codes.
+	 */
+	@Test
+	void differenceLocation() {
+		Location l0 = createLocation(TestConstant.LOCATION);
+		Location l1 = createLocation("Other location");
+
+		Assertions.assertNotEquals(l0, l1);
+		Assertions.assertNotEquals(l0.hashCode(), l1.hashCode());
+
+		Location l2 = new Location(TestConstant.LOCATION, null, null);
+		Assertions.assertNotEquals(l0, l2);
+		Assertions.assertNotEquals(l2, l0);
 
 	}
 

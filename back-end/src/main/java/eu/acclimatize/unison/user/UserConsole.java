@@ -32,9 +32,10 @@ public final class UserConsole {
 	 * a {@link UserHibernateStore} to save the received data using Hibernate.
 	 * 
 	 * @param args The arguments are not used.
+	 * @throws IOException 
 	 * 
 	 */
-	public static void main(String[] args) {
+	public static void main(String[] args) throws IOException {
 
 		PrintWriter pw = new PrintWriter(System.out, true);
 		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
@@ -49,11 +50,8 @@ public final class UserConsole {
 		uhs.execute(new Configuration());
 		pw.close();
 
-		try {
-			br.close();
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
+		br.close();
+		
 
 	}
 

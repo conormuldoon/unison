@@ -71,7 +71,6 @@ public class UserHibernateStore {
 	public void createIncompleteInit(File file) throws IOException {
 		if (!file.createNewFile()) {
 			logger.log(Level.SEVERE, "Failed to create incomplete initialisation file: " + INCOMPLETE_INIT);
-			return;
 		}
 	}
 
