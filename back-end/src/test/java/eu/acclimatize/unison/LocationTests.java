@@ -43,6 +43,7 @@ import eu.acclimatize.unison.location.FeatureCollectionSerializer;
 import eu.acclimatize.unison.location.GeoJSONLocationController;
 import eu.acclimatize.unison.location.Location;
 import eu.acclimatize.unison.location.LocationConstant;
+import eu.acclimatize.unison.location.LocationModel;
 import eu.acclimatize.unison.location.LocationRepository;
 import eu.acclimatize.unison.user.UserRepository;
 
@@ -342,6 +343,39 @@ class LocationTests {
 		System.out.println(line);
 		Assertions.assertEquals(br.readLine(), jsonWriter.toString());
 		br.close();
+
+	}
+
+	/**
+	 * Tests that different LocationModel equality and that equal instances have the
+	 * same hash codes.
+	 */
+	@Test
+	void equalityAndHashLM() {
+
+		LocationModel lm0 = new LocationModel(new ArrayList<>(), TestConstant.LOCATION);
+		LocationModel lm1 = new LocationModel(new ArrayList<>(), TestConstant.LOCATION);
+
+		Assertions.assertEquals(lm0, lm0);
+		Assertions.assertEquals(lm0, lm1);
+		Assertions.assertEquals(lm0.hashCode(), lm1.hashCode());
+
+	}
+
+	/**
+	 * Tests that LocationModel instances with different attributes are not equal
+	 * and have different hash codes.
+	 */
+	@Test
+	void differenceUserLM() {
+		LocationModel lm0 = new LocationModel(new ArrayList<>(), TestConstant.LOCATION);
+		LocationModel lm1 = new LocationModel(new ArrayList<>(), "Other location");
+
+		Assertions.assertNotEquals(lm0, lm1);
+
+		LocationModel lm2 = new LocationModel(new ArrayList<>(), null);
+		Assertions.assertNotEquals(lm0, lm2);
+		Assertions.assertNotEquals(lm2, lm0);
 
 	}
 

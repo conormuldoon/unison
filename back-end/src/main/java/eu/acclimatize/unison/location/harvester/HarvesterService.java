@@ -268,59 +268,66 @@ public class HarvesterService {
 			String nn = chNode.getNodeName();
 
 			NamedNodeMap nnm = chNode.getAttributes();
-			if (Constant.TEMPERATURE.equals(nn)) {
 
+			switch (nn) {
+			case Constant.TEMPERATURE:
 				String value = textContent(nnm, VALUE);
 				t = Double.parseDouble(value);
-
-			} else if (Constant.WIND_DIRECTION.equals(nn)) {
+				break;
+			case Constant.WIND_DIRECTION:
 				String deg = textContent(nnm, "deg");
 				String name = textContent(nnm, "name");
 				wd = new WindDirection(Double.parseDouble(deg), name);
-			} else if (Constant.WIND_SPEED.equals(nn)) {
+				break;
+			case Constant.WIND_SPEED:
 				String mps = textContent(nnm, "mps");
 				String beaufort = textContent(nnm, "beaufort");
-				String name = textContent(nnm, "name");
+				name = textContent(nnm, "name");
 				ws = new WindSpeed(Double.parseDouble(mps), Integer.parseInt(beaufort), name);
-
-			} else if (Constant.HUMIDITY.equals(nn)) {
-				String value = textContent(nnm, VALUE);
+				break;
+			case Constant.HUMIDITY:
+				value = textContent(nnm, VALUE);
 				h = Double.parseDouble(value);
-
-			} else if (Constant.PRESSURE.equals(nn)) {
-				String value = textContent(nnm, VALUE);
+				break;
+			case Constant.PRESSURE:
+				value = textContent(nnm, VALUE);
 				p = Double.parseDouble(value);
-			} else if (Constant.CLOUDINESS.equals(nn)) {
+				break;
+			case Constant.CLOUDINESS:
 				String percent = textContent(nnm, PERCENT);
 				c = Double.parseDouble(percent);
-			} else if ("lowClouds".equals(nn)) {
-				String percent = textContent(nnm, PERCENT);
+				break;
+			case "lowClouds":
+				percent = textContent(nnm, PERCENT);
 				lc = Double.parseDouble(percent);
-			} else if ("mediumClouds".equals(nn)) {
-				String percent = textContent(nnm, PERCENT);
+				break;
+			case "mediumClouds":
+				percent = textContent(nnm, PERCENT);
 				mc = Double.parseDouble(percent);
-			} else if ("highClouds".equals(nn)) {
-				String percent = textContent(nnm, PERCENT);
+				break;
+			case "highClouds":
+				percent = textContent(nnm, PERCENT);
 				hc = Double.parseDouble(percent);
-			} else if ("dewpointTemperature".equals(nn)) {
-				String value = textContent(nnm, VALUE);
+				break;
+			case "dewpointTemperature":
+				value = textContent(nnm, VALUE);
 				dp = Double.parseDouble(value);
-
-			} else if (Constant.FOG.equals(nn)) {
-				String percent = textContent(nnm, PERCENT);
+				break;
+			case Constant.FOG:
+				percent = textContent(nnm, PERCENT);
 				f = Double.parseDouble(percent);
-
-			} else if (Constant.GLOBAL_RADIATION.equals(nn)) {
-
+				break;
+			case Constant.GLOBAL_RADIATION:
 				String globalRadiation = textContent(nnm, VALUE);
-
 				gr = Double.parseDouble(globalRadiation);
+				break;
+			default:
+				if (!"#text".equals(nn)) {
 
-			} else if (!"#text".equals(nn)) {
-
-				if (!displayedUnknown.contains(nn)) {
-					displayedUnknown.add(nn);
-					logger.log(Level.WARNING, () -> "Unknown tag in data converter. Tag name: " + nn);
+					if (!displayedUnknown.contains(nn)) {
+						displayedUnknown.add(nn);
+						logger.log(Level.WARNING, () -> "Unknown tag in data converter. Tag name: " + nn);
+					}
 				}
 			}
 

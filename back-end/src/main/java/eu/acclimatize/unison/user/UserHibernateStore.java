@@ -90,15 +90,22 @@ public class UserHibernateStore {
 
 			boolean h2 = driverClass.equals("org.h2.Driver");
 			if (h2) {
-				File dbFile = new File("./harmonie.mv.db");
+				String dbFN = "./harmonie.mv.db";
+				File dbFile = new File(dbFN);
 				File incompleteInit = new File(INCOMPLETE_INIT);
 
 				if (incompleteInit.exists()) {
 					if (dbFile.exists()) {
-						dbFile.delete();
+						if (!dbFile.delete()) {
+							logger.log(Level.SEVERE, "Failed to delete partially initialised DB file: " + dbFN);
+							return;
+						}
 					}
 				} else {
-					incompleteInit.createNewFile();
+					if (!incompleteInit.createNewFile()) {
+						logger.log(Level.SEVERE, "Failed to create incomplete initialisation file: " + INCOMPLETE_INIT);
+						return;
+					}
 				}
 
 				if (dbFile.exists()) {
@@ -129,10 +136,12 @@ public class UserHibernateStore {
 	}
 
 	private void storeUserII(UserInformation user, Configuration configuration, Logger logger) {
-		
+
 		if (storeUser(user, configuration, logger)) {
 			File incompleteInit = new File(INCOMPLETE_INIT);
-			incompleteInit.delete();
+			if (!incompleteInit.delete()) {
+				logger.log(Level.SEVERE, "Failed to delete incomplete initialisation file: " + INCOMPLETE_INIT);
+			}
 		}
 	}
 

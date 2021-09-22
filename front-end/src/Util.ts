@@ -50,6 +50,8 @@ export const chartText = (curVar: string): string => {
 
 export function csrfToken(): string {
 
+  // Modified regular expression from an anwswer to https://stackoverflow.com/questions/51109559/get-cookie-with-react
+  // and removed unnecessary slash.
   return document.cookie.replace(/(?:(?:^|.*;\s*)XSRF-TOKEN\s*=\s*([^;]*).*$)|^.*$/, "$1");
 
 }

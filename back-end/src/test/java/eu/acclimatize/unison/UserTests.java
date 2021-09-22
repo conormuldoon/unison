@@ -138,6 +138,10 @@ class UserTests {
 		Assertions.assertNotEquals(r0, r1);
 	}
 
+	/**
+	 * Tests that different UserInformation equality and that equal instances have the
+	 * same hash codes.
+	 */
 	@Test
 	void equalityAndHashTest() {
 
@@ -150,23 +154,27 @@ class UserTests {
 
 	}
 
+	/**
+	 * Tests that UserInformation instances with different attributes are not equal
+	 * and have different hash codes.
+	 */
 	@Test
 	void differenceUserInfo() {
 		UserInformation ui0 = new UserInformation(TestConstant.USERNAME, "");
 		UserInformation ui1 = new UserInformation(TestConstant.OTHER_USERNAME, "");
-		
+
 		Assertions.assertNotEquals(ui0, ui1);
-		
+
 		UserInformation ui2 = new UserInformation(TestConstant.USERNAME, " ");
 		Assertions.assertNotEquals(ui0, ui2);
-		
+
 		UserInformation ui3 = new UserInformation(TestConstant.USERNAME, null);
-		
+
 		Assertions.assertNotEquals(ui0, ui3);
-		
+
 		UserInformation ui4 = new UserInformation(null, "");
 		Assertions.assertNotEquals(ui0, ui4);
-		
+
 	}
 
 }
