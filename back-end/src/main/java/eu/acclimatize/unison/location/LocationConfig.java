@@ -56,25 +56,25 @@ public class LocationConfig {
 		int n = values.length;
 
 		// The Met Éireann HARMONIE-AROME endpoint does not support fog.
-		if (!fogSupported) {
+		if (Boolean.FALSE.equals(fogSupported)) {
 			n--;
 		}
 
 		// The Norwegian Meteorological Institute HARMONIE-AROME endpoint does not
 		// support global radiation.
-		if (!grSupported) {
+		if (Boolean.FALSE.equals(grSupported)) {
 			n--;
 		}
-		
+
 		WeatherLink[] wl = new WeatherLink[n];
 		int curI = 0;
 		for (WeatherLink v : values) {
 			if (v == WeatherLink.FOG) {
-				if (fogSupported) {
+				if (Boolean.TRUE.equals(fogSupported)) {
 					wl[curI++] = v;
 				}
 			} else if (v == WeatherLink.GLOBAL_RADIATION) {
-				if (grSupported) {
+				if (Boolean.TRUE.equals(grSupported)) {
 					wl[curI++] = v;
 				}
 			} else {

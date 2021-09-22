@@ -1,5 +1,6 @@
 package eu.acclimatize.unison.user;
 
+import java.io.File;
 import java.io.IOException;
 import java.util.Properties;
 import java.util.logging.Level;
@@ -80,8 +81,16 @@ public class UserHibernateStore {
 					properties.getProperty("spring.datasource.username"));
 			configuration.setProperty("hibernate.connection.password",
 					properties.getProperty("spring.datasource.password"));
-			configuration.setProperty("hibernate.hbm2ddl.auto",
-					properties.getProperty("spring.jpa.hibernate.ddl-auto"));
+
+			File file = new File("./harmonie.mv.db");
+			if (driverClass.equals("org.h2.Driver") && file.exists()) {
+
+				configuration.setProperty("hibernate.hbm2ddl.auto", "none");
+
+			} else {
+				configuration.setProperty("hibernate.hbm2ddl.auto",
+						properties.getProperty("spring.jpa.hibernate.ddl-auto"));
+			}
 
 			UserInformation userInformation = credentialsRequester.requestUserInformation();
 			storeUser(userInformation, configuration, logger);

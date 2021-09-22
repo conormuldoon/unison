@@ -63,7 +63,8 @@ public class LocationDeserializer extends JsonDeserializer<LocationDTO> {
 
 	private double[] parseGeometry(JsonParser parser) throws IOException {
 
-		Double longitude = null, latitude = null;
+		Double longitude = null;
+		Double latitude = null;
 
 		JsonToken jsonToken;
 		while ((jsonToken = parser.nextToken()) != JsonToken.END_OBJECT) {

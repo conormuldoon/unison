@@ -2,7 +2,6 @@ package eu.acclimatize.unison;
 
 import java.util.concurrent.Executor;
 import java.util.concurrent.Executors;
-//import java.util.logging.Level;
 import java.util.logging.Logger;
 
 import org.springframework.beans.factory.InjectionPoint;
@@ -54,7 +53,6 @@ public class UnisonServerApplication {
 					"A null method parameter was received for the injection point for the logger.");
 		}
 		return Logger.getLogger(mp.getContainingClass().getName());
-		// logger.setLevel(Level.SEVERE);
 
 	}
 

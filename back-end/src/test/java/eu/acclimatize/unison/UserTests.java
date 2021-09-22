@@ -154,8 +154,7 @@ class UserTests {
 	void differenceUserInfo() {
 		UserInformation ui0 = new UserInformation(TestConstant.USERNAME, "");
 		UserInformation ui1 = new UserInformation(TestConstant.OTHER_USERNAME, "");
-		Assertions.assertNotEquals(ui0, null);
-		Assertions.assertNotEquals(null, ui1);
+		
 		Assertions.assertNotEquals(ui0, ui1);
 		
 		UserInformation ui2 = new UserInformation(TestConstant.USERNAME, " ");

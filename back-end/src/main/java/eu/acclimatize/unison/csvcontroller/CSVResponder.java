@@ -83,7 +83,7 @@ public class CSVResponder {
 			List<? extends HarmonieItem> list) throws IOException {
 		response.setContentType(CSV_CONTENT);
 
-		String uLoc = locationName.replaceAll(" ", "_");
+		String uLoc = locationName.replace(' ', '_');
 
 		response.setHeader(HttpHeaders.CONTENT_DISPOSITION, "attachment; filename=\"" + uLoc + "_" + uVariableName + "_"
 				+ dateFormat.format(fromDate) + "_" + dateFormat.format(toDate) + ".csv\"");
