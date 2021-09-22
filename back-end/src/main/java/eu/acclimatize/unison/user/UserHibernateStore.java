@@ -59,6 +59,12 @@ public class UserHibernateStore {
 		mchangeLogger.setLevel(ch.qos.logback.classic.Level.WARN);
 	}
 
+	private void configAuto(Configuration configuration, Properties properties) {
+		configuration.setProperty("hibernate.hbm2ddl.auto", properties.getProperty("spring.jpa.hibernate.ddl-auto"));
+	}
+
+	private static final String INCOMPLETE_INIT = "./harmonie.iinit";
+
 	/**
 	 * Loads the configuration properties and requests information from the user.
 	 * 
@@ -82,18 +88,37 @@ public class UserHibernateStore {
 			configuration.setProperty("hibernate.connection.password",
 					properties.getProperty("spring.datasource.password"));
 
-			File file = new File("./harmonie.mv.db");
-			if (driverClass.equals("org.h2.Driver") && file.exists()) {
+			boolean h2 = driverClass.equals("org.h2.Driver");
+			if (h2) {
+				File dbFile = new File("./harmonie.mv.db");
+				File incompleteInit = new File(INCOMPLETE_INIT);
 
-				configuration.setProperty("hibernate.hbm2ddl.auto", "none");
+				if (incompleteInit.exists()) {
+					if (dbFile.exists()) {
+						dbFile.delete();
+					}
+				} else {
+					incompleteInit.createNewFile();
+				}
 
+				if (dbFile.exists()) {
+
+					configuration.setProperty("hibernate.hbm2ddl.auto", "none");
+
+				} else {
+					configAuto(configuration, properties);
+				}
 			} else {
-				configuration.setProperty("hibernate.hbm2ddl.auto",
-						properties.getProperty("spring.jpa.hibernate.ddl-auto"));
+				configAuto(configuration, properties);
+
 			}
 
 			UserInformation userInformation = credentialsRequester.requestUserInformation();
-			storeUser(userInformation, configuration, logger);
+			if (h2) {
+				storeUserII(userInformation, configuration, logger);
+			} else {
+				storeUser(userInformation, configuration, logger);
+			}
 
 		} catch (IOException e) {
 
@@ -103,7 +128,15 @@ public class UserHibernateStore {
 
 	}
 
-	private void storeUser(UserInformation user, Configuration configuration, Logger logger) {
+	private void storeUserII(UserInformation user, Configuration configuration, Logger logger) {
+		
+		if (storeUser(user, configuration, logger)) {
+			File incompleteInit = new File(INCOMPLETE_INIT);
+			incompleteInit.delete();
+		}
+	}
+
+	private boolean storeUser(UserInformation user, Configuration configuration, Logger logger) {
 		SessionFactory factory = null;
 		Session session = null;
 		try {
@@ -115,6 +148,7 @@ public class UserHibernateStore {
 			try {
 
 				t.commit();
+				return true;
 			} catch (javax.persistence.PersistenceException pe) {
 				logger.log(Level.SEVERE, pe.getMessage());
 			}
@@ -126,6 +160,7 @@ public class UserHibernateStore {
 				factory.close();
 			}
 		}
+		return false;
 
 	}
 
