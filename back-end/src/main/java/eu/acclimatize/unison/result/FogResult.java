@@ -40,8 +40,8 @@ public class FogResult implements HarmonieItem {
 
 	@Override
 	public void printItem(PrintWriter pw) {
-		if (fog != null)
-			pw.println(date.toString() + ',' + fog + ',');
+
+		pw.println(date.toString() + ',' + fog + ',');
 
 	}
 }

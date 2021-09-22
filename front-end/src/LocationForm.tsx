@@ -2,7 +2,7 @@ import PropTypes from 'prop-types';
 import React, { useState } from 'react';
 import './App.css';
 
-import { problemConnecting } from './Util';
+import { problemConnecting, csrfToken } from './Util';
 import HttpStatus from 'http-status-codes';
 import { locationPutObject } from './Util';
 
@@ -73,7 +73,10 @@ function LocationForm({ display, hideDisplay, toggleDisplay, obtainData, selfRef
     if (response.ok) {
 
       const harvestResponse = await fetch(selfRef + '/' + location, {
-        method: 'POST'
+        method: 'POST',
+        headers: new Headers({
+          'X-XSRF-TOKEN': csrfToken()
+        }),
       });
 
       const message = (response.status === HttpStatus.OK) ? 'updated' : 'added';

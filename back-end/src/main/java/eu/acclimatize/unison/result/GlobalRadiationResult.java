@@ -40,8 +40,8 @@ public class GlobalRadiationResult implements HarmonieItem {
 
 	@Override
 	public void printItem(PrintWriter pw) {
-		if (globalRadiation != null)
-			pw.println(date.toString() + ',' + globalRadiation + ',');
+
+		pw.println(date.toString() + ',' + globalRadiation + ',');
 
 	}
 }
