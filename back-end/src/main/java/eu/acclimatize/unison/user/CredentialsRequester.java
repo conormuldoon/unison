@@ -52,10 +52,13 @@ public class CredentialsRequester {
 	 *                     data.
 	 */
 	public UserInformation requestUserInformation() throws IOException {
-		writer.printf("Enter user name: ");
+		writer.print("Enter user name: ");
+		writer.flush();
 
 		String userName = reader.readLine();
-		writer.printf("Generate password (y/N)? ");
+		
+		writer.print("Generate password (y/N)? ");
+		writer.flush();
 
 		String gp = reader.readLine().toLowerCase();
 		String encodedPassword = null;
@@ -80,10 +83,11 @@ public class CredentialsRequester {
 				}
 				Arrays.fill(passwd, ' ');
 				if (match) {
-					writer.printf("Password confirmed.\n");
+					writer.printf("Password confirmed.%n");
 				} else {
-					writer.printf("The passwords don't match.\n");
+					writer.printf("The passwords don't match.%n");
 				}
+				
 
 			} while (!match);
 		}

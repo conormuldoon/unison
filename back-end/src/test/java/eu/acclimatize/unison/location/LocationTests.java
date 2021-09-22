@@ -1,4 +1,4 @@
-package eu.acclimatize.unison;
+package eu.acclimatize.unison.location;
 
 import static org.springframework.security.test.web.servlet.request.SecurityMockMvcRequestPostProcessors.csrf;
 import static org.springframework.security.test.web.servlet.request.SecurityMockMvcRequestPostProcessors.httpBasic;
@@ -38,13 +38,10 @@ import org.springframework.test.web.servlet.MockMvc;
 import com.fasterxml.jackson.core.JsonFactory;
 import com.fasterxml.jackson.core.JsonGenerator;
 
-import eu.acclimatize.unison.location.FeatureCollection;
-import eu.acclimatize.unison.location.FeatureCollectionSerializer;
-import eu.acclimatize.unison.location.GeoJSONLocationController;
-import eu.acclimatize.unison.location.Location;
-import eu.acclimatize.unison.location.LocationConstant;
-import eu.acclimatize.unison.location.LocationModel;
-import eu.acclimatize.unison.location.LocationRepository;
+import eu.acclimatize.unison.Constant;
+import eu.acclimatize.unison.MappingConstant;
+import eu.acclimatize.unison.TestConstant;
+import eu.acclimatize.unison.TestUtility;
 import eu.acclimatize.unison.user.UserRepository;
 
 /**

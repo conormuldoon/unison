@@ -1,4 +1,4 @@
-package eu.acclimatize.unison;
+package eu.acclimatize.unison.location;
 
 import java.util.Optional;
 
@@ -19,12 +19,10 @@ import org.springframework.hateoas.RepresentationModel;
 import org.springframework.http.HttpHeaders;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 
-import eu.acclimatize.unison.location.HALLocationController;
-import eu.acclimatize.unison.location.LocationConfig;
-import eu.acclimatize.unison.location.LocationModel;
-import eu.acclimatize.unison.location.LocationRepository;
-import eu.acclimatize.unison.location.LocationService;
-import eu.acclimatize.unison.location.WeatherLink;
+import eu.acclimatize.unison.BaseURIBuilder;
+import eu.acclimatize.unison.TestConstant;
+import eu.acclimatize.unison.TestUtility;
+import eu.acclimatize.unison.UnisonServerApplication;
 import eu.acclimatize.unison.user.UserRepository;
 
 @ExtendWith(SpringExtension.class)

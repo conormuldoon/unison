@@ -1,4 +1,4 @@
-package eu.acclimatize.unison;
+package eu.acclimatize.unison.location.harvester;
 
 import static org.mockito.ArgumentMatchers.anyCollection;
 import static org.mockito.Mockito.mock;
@@ -23,13 +23,14 @@ import org.springframework.test.context.junit.jupiter.SpringExtension;
 import org.w3c.dom.Document;
 import org.xml.sax.SAXException;
 
+import eu.acclimatize.unison.Constant;
+import eu.acclimatize.unison.HourlyPrecipitationRepository;
+import eu.acclimatize.unison.HourlyWeatherRepository;
+import eu.acclimatize.unison.TestConstant;
+import eu.acclimatize.unison.TestUtility;
+import eu.acclimatize.unison.UnisonServerApplication;
 import eu.acclimatize.unison.location.Location;
 import eu.acclimatize.unison.location.LocationRepository;
-import eu.acclimatize.unison.location.harvester.DocumentNotFoundException;
-import eu.acclimatize.unison.location.harvester.DocumentRequestService;
-import eu.acclimatize.unison.location.harvester.HarvestParseException;
-import eu.acclimatize.unison.location.harvester.HarvestRequestException;
-import eu.acclimatize.unison.location.harvester.HarvesterService;
 
 /**
  * Tests for the Unison data harvester and document request service.

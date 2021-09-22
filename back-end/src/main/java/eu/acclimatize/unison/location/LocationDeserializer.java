@@ -12,7 +12,6 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 
 import com.fasterxml.jackson.core.JsonParser;
-import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.core.JsonToken;
 import com.fasterxml.jackson.databind.DeserializationContext;
 import com.fasterxml.jackson.databind.JsonDeserializer;
@@ -94,7 +93,7 @@ public class LocationDeserializer extends JsonDeserializer<LocationDTO> {
 	@RolesAllowed(Constant.ROLL_USER)
 	@Override
 	public LocationDTO deserialize(JsonParser parser, DeserializationContext ctxt)
-			throws IOException, JsonProcessingException {
+			throws IOException {
 
 		String locationName = null;
 		double[] coordinates = null;

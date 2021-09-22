@@ -1,4 +1,4 @@
-package eu.acclimatize.unison;
+package eu.acclimatize.unison.user;
 
 import java.io.BufferedReader;
 import java.io.ByteArrayInputStream;
@@ -17,11 +17,7 @@ import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
-import eu.acclimatize.unison.user.CredentialsRequester;
-import eu.acclimatize.unison.user.UserHibernateStore;
-import eu.acclimatize.unison.user.UserInformation;
-import eu.acclimatize.unison.user.UserReadyEventListener;
-import eu.acclimatize.unison.user.UserRepository;
+import eu.acclimatize.unison.TestConstant;
 
 /**
  * Non-controller unit tests for the user package.

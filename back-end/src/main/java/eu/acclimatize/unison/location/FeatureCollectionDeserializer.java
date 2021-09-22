@@ -7,7 +7,6 @@ import java.util.List;
 import org.springframework.boot.jackson.JsonComponent;
 
 import com.fasterxml.jackson.core.JsonParser;
-import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.core.JsonToken;
 import com.fasterxml.jackson.databind.DeserializationContext;
 import com.fasterxml.jackson.databind.JsonDeserializer;
@@ -31,9 +30,20 @@ public class FeatureCollectionDeserializer extends JsonDeserializer<FeatureColle
 		this.locationDeserializer = locationDeserializer;
 	}
 
+	private void addFeatures(JsonParser parser, DeserializationContext ctxt, List<Location> location)
+			throws IOException {
+		JsonToken jsonToken;
+		while ((jsonToken = parser.nextToken()) != JsonToken.END_ARRAY) {
+			if (jsonToken == JsonToken.START_OBJECT) {
+				LocationDTO locationDTO = locationDeserializer.deserialize(parser, ctxt);
+
+				location.add(locationDTO.createEntity());
+			}
+		}
+	}
+
 	@Override
-	public FeatureCollection deserialize(JsonParser parser, DeserializationContext ctxt)
-			throws IOException, JsonProcessingException {
+	public FeatureCollection deserialize(JsonParser parser, DeserializationContext ctxt) throws IOException {
 		JsonToken jsonToken;
 		List<Location> location = new ArrayList<>();
 		boolean noFeatures = true;
@@ -43,13 +53,7 @@ public class FeatureCollectionDeserializer extends JsonDeserializer<FeatureColle
 				String currentName = parser.getCurrentName();
 				if (currentName.equals(LocationConstant.FEATURES)) {
 					noFeatures = false;
-					while ((jsonToken = parser.nextToken()) != JsonToken.END_ARRAY) {
-						if (jsonToken == JsonToken.START_OBJECT) {
-							LocationDTO locationDTO = locationDeserializer.deserialize(parser, ctxt);
-
-							location.add(locationDTO.createEntity());
-						}
-					}
+					addFeatures(parser, ctxt, location);
 				}
 			}
 		}

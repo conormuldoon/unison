@@ -2,6 +2,9 @@ package eu.acclimatize.unison.user;
 
 import java.io.File;
 import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.Properties;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -26,6 +29,8 @@ import eu.acclimatize.unison.Constant;
 public class UserHibernateStore {
 
 	public static final String CONFIG = "userinformation.cfg.xml";
+	
+	private static final String INCOMPLETE_INIT = "./harmonie.iinit";
 
 	private CredentialsRequester credentialsRequester;
 
@@ -63,7 +68,13 @@ public class UserHibernateStore {
 		configuration.setProperty("hibernate.hbm2ddl.auto", properties.getProperty("spring.jpa.hibernate.ddl-auto"));
 	}
 
-	private static final String INCOMPLETE_INIT = "./harmonie.iinit";
+	public void createIncompleteInit(File file) throws IOException {
+		if (!file.createNewFile()) {
+			logger.log(Level.SEVERE, "Failed to create incomplete initialisation file: " + INCOMPLETE_INIT);
+			return;
+		}
+	}
+
 
 	/**
 	 * Loads the configuration properties and requests information from the user.
@@ -95,17 +106,12 @@ public class UserHibernateStore {
 				File incompleteInit = new File(INCOMPLETE_INIT);
 
 				if (incompleteInit.exists()) {
-					if (dbFile.exists()) {
-						if (!dbFile.delete()) {
-							logger.log(Level.SEVERE, "Failed to delete partially initialised DB file: " + dbFN);
-							return;
-						}
-					}
+					
+					Path p=Paths.get("./harmonie.mv.db");
+					Files.delete(p);
+
 				} else {
-					if (!incompleteInit.createNewFile()) {
-						logger.log(Level.SEVERE, "Failed to create incomplete initialisation file: " + INCOMPLETE_INIT);
-						return;
-					}
+					createIncompleteInit(incompleteInit);
 				}
 
 				if (dbFile.exists()) {
@@ -135,13 +141,13 @@ public class UserHibernateStore {
 
 	}
 
-	private void storeUserII(UserInformation user, Configuration configuration, Logger logger) {
+	private void storeUserII(UserInformation user, Configuration configuration, Logger logger) throws IOException {
 
 		if (storeUser(user, configuration, logger)) {
-			File incompleteInit = new File(INCOMPLETE_INIT);
-			if (!incompleteInit.delete()) {
-				logger.log(Level.SEVERE, "Failed to delete incomplete initialisation file: " + INCOMPLETE_INIT);
-			}
+			
+			Path p=Paths.get(INCOMPLETE_INIT);
+			Files.delete(p);
+			
 		}
 	}
 

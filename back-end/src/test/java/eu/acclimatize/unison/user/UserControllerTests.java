@@ -1,4 +1,4 @@
-package eu.acclimatize.unison;
+package eu.acclimatize.unison.user;
 
 import static org.springframework.security.test.web.servlet.request.SecurityMockMvcRequestPostProcessors.csrf;
 import static org.springframework.security.test.web.servlet.request.SecurityMockMvcRequestPostProcessors.httpBasic;
@@ -21,8 +21,9 @@ import org.springframework.test.web.servlet.MockMvc;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
-import eu.acclimatize.unison.user.UserInformation;
-import eu.acclimatize.unison.user.UserRepository;
+import eu.acclimatize.unison.MappingConstant;
+import eu.acclimatize.unison.TestConstant;
+import eu.acclimatize.unison.TestUtility;
 
 /**
  * 

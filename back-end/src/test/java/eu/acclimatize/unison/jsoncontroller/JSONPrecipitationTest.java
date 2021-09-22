@@ -1,4 +1,4 @@
-package eu.acclimatize.unison;
+package eu.acclimatize.unison.jsoncontroller;
 
 import javax.servlet.http.HttpServletResponse;
 
@@ -9,7 +9,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 
-import eu.acclimatize.unison.jsoncontroller.JSONPrecipitationController;
+import eu.acclimatize.unison.HourlyPrecipitationRepository;
+import eu.acclimatize.unison.TestConstant;
+import eu.acclimatize.unison.TestUtility;
 import eu.acclimatize.unison.location.LocationRepository;
 import eu.acclimatize.unison.result.PrecipitationResult;
 import eu.acclimatize.unison.user.UserRepository;

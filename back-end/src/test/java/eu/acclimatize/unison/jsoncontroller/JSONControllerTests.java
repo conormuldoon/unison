@@ -1,4 +1,4 @@
-package eu.acclimatize.unison;
+package eu.acclimatize.unison.jsoncontroller;
 
 import javax.servlet.http.HttpServletResponse;
 
@@ -11,16 +11,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 
+import eu.acclimatize.unison.FinderConfig;
+import eu.acclimatize.unison.HourlyWeatherRepository;
+import eu.acclimatize.unison.TestConstant;
+import eu.acclimatize.unison.TestUtility;
+import eu.acclimatize.unison.UnisonServerApplication;
 import eu.acclimatize.unison.csvcontroller.CSVResponderConfig;
-import eu.acclimatize.unison.jsoncontroller.JSONCloudLevelController;
-import eu.acclimatize.unison.jsoncontroller.JSONCloudinessController;
-import eu.acclimatize.unison.jsoncontroller.JSONDewPointController;
-import eu.acclimatize.unison.jsoncontroller.JSONFogController;
-import eu.acclimatize.unison.jsoncontroller.JSONHumidityController;
-import eu.acclimatize.unison.jsoncontroller.JSONPressureController;
-import eu.acclimatize.unison.jsoncontroller.JSONTemperatureController;
-import eu.acclimatize.unison.jsoncontroller.JSONWindDirectionController;
-import eu.acclimatize.unison.jsoncontroller.JSONWindSpeedController;
 import eu.acclimatize.unison.location.LocationRepository;
 import eu.acclimatize.unison.result.CloudLevelResult;
 import eu.acclimatize.unison.result.CloudinessResult;

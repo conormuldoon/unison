@@ -1,4 +1,4 @@
-package eu.acclimatize.unison;
+package eu.acclimatize.unison.csvcontroller;
 
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -15,16 +15,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 
-import eu.acclimatize.unison.csvcontroller.CSVCloudLevelController;
-import eu.acclimatize.unison.csvcontroller.CSVCloudinessController;
-import eu.acclimatize.unison.csvcontroller.CSVDewPointController;
-import eu.acclimatize.unison.csvcontroller.CSVFogController;
-import eu.acclimatize.unison.csvcontroller.CSVHumidityController;
-import eu.acclimatize.unison.csvcontroller.CSVPressureController;
-import eu.acclimatize.unison.csvcontroller.CSVResponderConfig;
-import eu.acclimatize.unison.csvcontroller.CSVTemperatureController;
-import eu.acclimatize.unison.csvcontroller.CSVWindDirectionController;
-import eu.acclimatize.unison.csvcontroller.CSVWindSpeedController;
+import eu.acclimatize.unison.FinderConfig;
+import eu.acclimatize.unison.HourlyWeatherRepository;
+import eu.acclimatize.unison.TestConstant;
+import eu.acclimatize.unison.TestUtility;
+import eu.acclimatize.unison.UnisonServerApplication;
 import eu.acclimatize.unison.location.LocationRepository;
 import eu.acclimatize.unison.user.UserRepository;
 

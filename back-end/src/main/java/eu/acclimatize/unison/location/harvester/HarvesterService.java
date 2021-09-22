@@ -322,12 +322,10 @@ public class HarvesterService {
 				gr = Double.parseDouble(globalRadiation);
 				break;
 			default:
-				if (!"#text".equals(nn)) {
+				if (!"#text".equals(nn) && !displayedUnknown.contains(nn)) {
+					displayedUnknown.add(nn);
+					logger.log(Level.WARNING, () -> "Unknown tag in data converter. Tag name: " + nn);
 
-					if (!displayedUnknown.contains(nn)) {
-						displayedUnknown.add(nn);
-						logger.log(Level.WARNING, () -> "Unknown tag in data converter. Tag name: " + nn);
-					}
 				}
 			}
 

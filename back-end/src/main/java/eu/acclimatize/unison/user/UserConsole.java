@@ -52,7 +52,7 @@ public final class UserConsole {
 		try {
 			br.close();
 		} catch (IOException e) {
-			System.out.println(e.getMessage());
+			e.printStackTrace();
 		}
 
 	}
