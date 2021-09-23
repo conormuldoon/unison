@@ -4,7 +4,7 @@ enableFetchMocks();
 import "@testing-library/jest-dom/extend-expect";
 import fetchMock from 'jest-fetch-mock';
 import React from 'react';
-import { render, waitFor } from "@testing-library/react";
+import { render, screen } from "@testing-library/react";
 import TabsComponent from './TabsComponent';
 import { createChartFactory } from './ChartComponent';
 
@@ -39,10 +39,10 @@ const addChart = async (weatherVariable, dataArray, zoomDomain) => {
 
     const chartFactory = createChartFactory(dataArray, zoomDomain, () => { }, weatherVariable, false);
 
-    const { getByTestId /*, debug */ } = render(<TabsComponent curVar={weatherVariable} minMax={false} chartFactory={chartFactory} />);
+    render(<TabsComponent curVar={weatherVariable} minMax={false} chartFactory={chartFactory} />);
 
 
-    await waitFor(() => getByTestId('chart'));
+    await screen.findByTestId('chart');
 
 
     fetchMock.resetMocks();

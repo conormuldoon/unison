@@ -4,7 +4,7 @@ enableFetchMocks();
 import "@testing-library/jest-dom/extend-expect";
 import fetchMock from 'jest-fetch-mock';
 import React from 'react';
-import { fireEvent, render, waitFor, screen } from "@testing-library/react";
+import { fireEvent, render, screen, waitFor } from "@testing-library/react";
 import Unison from './Unison';
 import { createMapFactory } from './LeafletMap';
 
@@ -268,12 +268,12 @@ it('displays popup when marker clicked', async () => {
         JSON.stringify({ value: false })
     );
 
-    await waitFor(() => screen.getAllByAltText('')[1]);
+    await screen.findAllByAltText('');
 
     fireEvent.click(screen.getAllByAltText('')[1]);
 
 
-    const text = await waitFor(() => screen.getByText('UCD'));
+    const text = await screen.findByText('UCD');
     expect(text).toBeDefined();
 
     global.Date.now = dn;

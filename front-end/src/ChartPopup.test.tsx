@@ -3,7 +3,7 @@ enableFetchMocks();
 
 import fetchMock from 'jest-fetch-mock';
 import React from 'react';
-import { render, waitFor, screen } from "@testing-library/react";
+import { render, screen } from "@testing-library/react";
 import ChartPopup from './ChartPopup';
 import { PRECIP, CL } from './Constant';
 import { chartText } from './Util';
@@ -83,8 +83,8 @@ it('mathes snapshot', async () => {
 
   fetchMock.mockResponse(JSON.stringify(data));
 
-  const { container, getByText } = render(chartPopup);
-  await waitFor(() => getByText('Precipitation data from ' + location.name));
+  const { container } = render(chartPopup);
+  await screen.findByText('Precipitation data from ' + location.name);
   expect(container).toMatchSnapshot();
 
   fetchMock.resetMocks();
@@ -94,7 +94,7 @@ it('mathes snapshot', async () => {
 
 it('displays text for the selected variable and location', async () => {
 
-  
+
   const VAR_OPT = [PRECIP, 'Humidity', 'Wind Direction', 'Wind Speed', 'Cloudiness', CL, 'Dew Point', 'Pressure', 'Temperature'];
   for (const vo of VAR_OPT) {
     let sOpt = chartText(vo);
@@ -189,9 +189,9 @@ it('displays text for the selected variable and location', async () => {
       fetchMock.mockOnce(JSON.stringify(loc));
 
       const uri = "http://localhost:8080/locationCollection/London/windSpeed?fromDate=" + fromDate + "&toDate=" + toDate;
-      const { getByText } = render(<ChartPopup curVar={vo} name={loc.name} uri={uri} closePopup={() => { }} />);
+      render(<ChartPopup curVar={vo} name={loc.name} uri={uri} closePopup={() => { }} />);
 
-      await waitFor(() => getByText(sOpt + ' data from ' + loc.name));
+      await screen.findByText(sOpt + ' data from ' + loc.name);
     }
   }
 
@@ -205,10 +205,10 @@ it('displays a lower case letter for second word', async () => {
   fetchMock.mockOnce("[]");
 
   const wdURI = "http://localhost:8080/locationCollection/London/windDirection?fromDate=" + fromDate + "&toDate=" + toDate;
-  const { getByText } = render(<ChartPopup curVar={'Wind Direction'} name={location.name} uri={wdURI}
+  render(<ChartPopup curVar={'Wind Direction'} name={location.name} uri={wdURI}
     closePopup={() => { }} />);
 
-  await waitFor(() => getByText('Wind direction data from ' + location.name));
+  await screen.findByText('Wind direction data from ' + location.name);
 
 
 
@@ -219,7 +219,7 @@ it('adds a chart', async () => {
   fetchMock.mockOnce(JSON.stringify(data));
 
   render(chartPopup);
-  await waitFor(() => screen.getByTestId('chart'));
+  await screen.findByTestId('chart');
 
 });
 

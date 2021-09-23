@@ -4,7 +4,7 @@ enableFetchMocks();
 import fetchMock from 'jest-fetch-mock';
 import React from 'react';
 
-import { fireEvent, render, waitFor } from "@testing-library/react";
+import { fireEvent, render, screen } from "@testing-library/react";
 import LocationForm from './LocationForm';
 import HttpStatus from 'http-status-codes';
 
@@ -12,7 +12,7 @@ import HttpStatus from 'http-status-codes';
 it('renders without crashing', async () => {
 
   render(<LocationForm obtainData={() => { }} hideDisplay={() => { }} toggleDisplay={() => { }} display={true} />);
-  
+
 });
 
 
@@ -25,9 +25,9 @@ it('mathes snapshot', () => {
 
 });
 
-async function changeValue(getByLabelText, labelText, value) {
+async function changeValue(labelText, value) {
 
-  fireEvent.change(await waitFor(() => getByLabelText(labelText)), { target: { value: value } });
+  fireEvent.change(await screen.findByLabelText(labelText), { target: { value: value } });
 }
 
 it('sends the data in the form when submit is clicked', async () => {
@@ -60,19 +60,19 @@ it('sends the data in the form when submit is clicked', async () => {
 
   const component = <LocationForm display={true} containsRef={"http://localhost:8080/locationCollection/contains{?name}"} selfRef={"http://localhost:8080/locationCollection"} obtainData={obtainData} hideDisplay={hideDisplay}
     toggleDisplay={() => { }} featureProperties={map} />;
-  const { getByText, getByLabelText } = render(component);
+  render(component);
 
-  await changeValue(getByLabelText, 'Location name:', location);
-  await changeValue(getByLabelText, 'Longitude:', lon);
-  await changeValue(getByLabelText, 'Latitude:', lat);
+  await changeValue('Location name:', location);
+  await changeValue('Longitude:', lon);
+  await changeValue('Latitude:', lat);
 
   jest.spyOn(window, 'alert').mockImplementation(() => { });
   fetchMock.mockResponses(
     ['', { status: HttpStatus.ACCEPTED }],
     ['', { status: HttpStatus.OK }]);
 
-  fireEvent.click(await waitFor(() => getByText('Submit')));
-  await changeValue(getByLabelText, 'Latitude:', '');
+  fireEvent.click(await screen.findByText('Submit'));
+  await changeValue('Latitude:', '');
 
   fetchMock.resetMocks();
 
@@ -107,12 +107,12 @@ it('handles add location', async () => {
   const component = <LocationForm display={true} containsRef={"http://localhost:8080/locationCollection/contains{?name}"} selfRef={"http://localhost:8080/locationCollection"}
     obtainData={obtainData} hideDisplay={hideDisplay}
     toggleDisplay={() => { }} featureProperties={map} />;
-  const { getByText, getByLabelText } = render(component);
+  render(component);
 
-  await changeValue(getByLabelText, 'Location name:', location);
-  const button = await waitFor(() => getByText('Submit'));
+  await changeValue('Location name:', location);
+  const button = await screen.findByText('Submit');
   fireEvent.click(button);
-  await changeValue(getByLabelText, 'Latitude:', '');
+  await changeValue('Latitude:', '');
   expect(hideDisplay).toHaveBeenCalledTimes(1);
 
   fetchMock.resetMocks();
