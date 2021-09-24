@@ -4,7 +4,7 @@ enableFetchMocks();
 import "@testing-library/jest-dom/extend-expect";
 import fetchMock from 'jest-fetch-mock';
 import React from 'react';
-import { fireEvent, render, screen, waitFor } from "@testing-library/react";
+import { fireEvent, render, screen } from "@testing-library/react";
 import Unison from './Unison';
 import { createMapFactory } from './LeafletMap';
 
@@ -124,7 +124,6 @@ it('renders without crashing', async () => {
 
     mockInitialResponses();
 
-    const div = document.createElement('div');
     render(<Unison createMap={mapFactory} />);
     await screen.findByRole('button', { name: 'CSV' });
 
@@ -141,10 +140,13 @@ it('mathes Unison snapshot', async () => {
     const dn = global.Date.now;
     global.Date.now = mockDateNow;
 
-    const { container } = render(<Unison createMap={mapFactory} />);
-    await screen.findByRole('button', { name: 'CSV' });
-    expect(container).toMatchSnapshot();
-    global.Date.now = dn;
+    try {
+        const { container } = render(<Unison createMap={mapFactory} />);
+        await screen.findByRole('button', { name: 'CSV' });
+        expect(container).toMatchSnapshot();
+    } finally {
+        global.Date.now = dn;
+    }
 
 
 });
@@ -260,24 +262,25 @@ it('displays popup when marker clicked', async () => {
 
     mockInitialResponses();
 
-    const unison = <Unison createMap={mapFactory} />;
-    render(unison);
+    try {
+        const unison = <Unison createMap={mapFactory} />;
+        render(unison);
 
-    fetchMock.mockResponses(
-        JSON.stringify(precipData),
-        JSON.stringify({ value: false })
-    );
+        fetchMock.mockResponses(
+            JSON.stringify(precipData),
+            JSON.stringify({ value: false })
+        );
 
-    await screen.findAllByAltText('');
+        await screen.findAllByAltText('');
 
-    fireEvent.click(screen.getAllByAltText('')[1]);
+        fireEvent.click(screen.getAllByAltText('')[1]);
 
 
-    const text = await screen.findByText('UCD');
-    expect(text).toBeDefined();
+        await screen.findByText('UCD');
 
-    global.Date.now = dn;
+    } finally {
+        global.Date.now = dn;
+    }
 
-    fetchMock.resetMocks();
 });
 

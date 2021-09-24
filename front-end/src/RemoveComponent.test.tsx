@@ -4,7 +4,7 @@ enableFetchMocks();
 import "@testing-library/jest-dom/extend-expect";
 import fetchMock from 'jest-fetch-mock';
 import React from 'react';
-import { fireEvent, render } from "@testing-library/react";
+import { fireEvent, render, screen } from "@testing-library/react";
 import RemoveComponent from './RemoveComponent';
 
 const location = { name: 'UCD', links: { self: '/location/UCD' } };
@@ -55,14 +55,16 @@ it('handles remove location', (done) => {
     done();
   };
 
-  const component = <RemoveComponent name={linksProperty.name} href={linksProperty._links['self'].href} obtainData={obtainData} hideAdd={hideDisplay} />;
-  const { getByText } = render(component);
+  try {
+    const component = <RemoveComponent name={linksProperty.name} href={linksProperty._links['self'].href} obtainData={obtainData} hideAdd={hideDisplay} />;
+    render(component);
 
-  fireEvent.click(getByText('Remove ' + location.name));
-
-  confirmSpy.mockClear();
-  alertSpy.mockClear();
-  fetchMock.resetMocks();
+    fireEvent.click(screen.getByText('Remove ' + location.name));
+    
+  } finally {
+    confirmSpy.mockClear();
+    alertSpy.mockClear();
+  }
 
 });
 

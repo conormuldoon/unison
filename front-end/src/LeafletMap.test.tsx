@@ -100,6 +100,5 @@ it('displays popup', async () => {
   await screen.findByRole('button', { name: 'email' });
   expect(markerCallback).toHaveBeenCalledWith(location.name);
 
-  fetchMock.resetMocks();
 
 });

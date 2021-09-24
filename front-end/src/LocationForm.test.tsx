@@ -74,8 +74,6 @@ it('sends the data in the form when submit is clicked', async () => {
   fireEvent.click(await screen.findByText('Submit'));
   await changeValue('Latitude:', '');
 
-  fetchMock.resetMocks();
-
 
 });
 
@@ -115,6 +113,5 @@ it('handles add location', async () => {
   await changeValue('Latitude:', '');
   expect(hideDisplay).toHaveBeenCalledTimes(1);
 
-  fetchMock.resetMocks();
 });
 

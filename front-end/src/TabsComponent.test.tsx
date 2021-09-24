@@ -2,7 +2,6 @@ import { enableFetchMocks } from 'jest-fetch-mock';
 enableFetchMocks();
 
 import "@testing-library/jest-dom/extend-expect";
-import fetchMock from 'jest-fetch-mock';
 import React from 'react';
 import { render, screen } from "@testing-library/react";
 import TabsComponent from './TabsComponent';
@@ -43,9 +42,6 @@ const addChart = async (weatherVariable, dataArray, zoomDomain) => {
 
 
     await screen.findByTestId('chart');
-
-
-    fetchMock.resetMocks();
 
 }
 
