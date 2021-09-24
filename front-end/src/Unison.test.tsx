@@ -4,7 +4,7 @@ enableFetchMocks();
 import "@testing-library/jest-dom/extend-expect";
 import fetchMock from 'jest-fetch-mock';
 import React from 'react';
-import { fireEvent, render, screen } from "@testing-library/react";
+import { fireEvent, render, screen, waitForElementToBeRemoved } from "@testing-library/react";
 import Unison from './Unison';
 import { createMapFactory } from './LeafletMap';
 
@@ -113,158 +113,208 @@ const locationCollection = {
 const mapCentre: [number, number] = [59.922326, 10.751560];
 const mapFactory = createMapFactory(mapCentre);
 
-function mockInitialResponses() {
-    fetchMock.mockResponses(
-        JSON.stringify(unisonModel),
-        JSON.stringify(locationModelHAL),
-        JSON.stringify(locationCollection));
-}
 
-it('renders without crashing', async () => {
+describe('Unison', () => {
 
-    mockInitialResponses();
+    beforeEach(() => {
+        fetchMock.mockResponses(
+            JSON.stringify(unisonModel),
+            JSON.stringify(locationModelHAL),
+            JSON.stringify(locationCollection));
+    });
 
-    render(<Unison createMap={mapFactory} />);
-    await screen.findByRole('button', { name: 'CSV' });
+    it('renders without crashing', async () => {
 
 
-
-});
-
-it('mathes Unison snapshot', async () => {
-
-
-    mockInitialResponses();
-
-    const mockDateNow = jest.fn(() => 1571875200000);
-    const dn = global.Date.now;
-    global.Date.now = mockDateNow;
-
-    try {
-        const { container } = render(<Unison createMap={mapFactory} />);
+        render(<Unison createMap={mapFactory} />);
         await screen.findByRole('button', { name: 'CSV' });
-        expect(container).toMatchSnapshot();
-    } finally {
-        global.Date.now = dn;
-    }
-
-
-});
-
-it('displays popup when marker clicked', async () => {
 
 
 
+    });
 
-    const precipData = [{
-        "date": "2019-04-01T23:00:00.000+0000",
-        "precipitation": {
-            "value": 0,
-            "minvalue": 0,
-            "maxvalue": 0.1
+    it('mathes snapshot', async () => {
+
+
+        const mockDateNow = jest.fn(() => 1571875200000);
+        const dn = global.Date.now;
+        global.Date.now = mockDateNow;
+
+        try {
+            const { container } = render(<Unison createMap={mapFactory} />);
+            await screen.findByRole('button', { name: 'CSV' });
+            expect(container).toMatchSnapshot();
+        } finally {
+            global.Date.now = dn;
         }
-    },
-    {
-        "date": "2019-04-02T00:00:00.000+0000",
-        "precipitation": {
-            "value": 0,
-            "minvalue": 0,
-            "maxvalue": 0
+
+
+    });
+
+    it('displays a button to remove the first location received', async () => {
+        render(<Unison createMap={mapFactory} />);
+        await screen.findByRole('button', {
+            name: 'Remove ' +
+                locationCollection.features[0].properties.name
+        });
+    });
+
+    it('does not dispplay a remove button when no loctioos', async () => {
+        render(<Unison createMap={mapFactory} />);
+        const removeButton = await screen.findByRole('button', {
+            name: 'Remove ' +
+                locationCollection.features[0].properties.name
+        });
+
+        const emptyFC = {
+            "type": "FeatureCollection",
+            "features": []
         }
-    },
-    {
-        "date": "2019-04-02T01:00:00.000+0000",
-        "precipitation": {
-            "value": 0,
-            "minvalue": 0,
-            "maxvalue": 0
+
+        const emptyHALC = {
+
+            "_links": {
+                "self": {
+                    "href": "http://localhost:8080/locationCollection"
+                },
+                "contains": {
+                    "href": "http://localhost:8080/locationCollection/contains{?name}",
+                    "templated": true
+                }
+            }
         }
-    },
-    {
-        "date": "2019-04-02T02:00:00.000+0000",
-        "precipitation": {
-            "value": 0,
-            "minvalue": 0,
-            "maxvalue": 0
+
+        fetchMock.mockResponses(
+            "",
+            JSON.stringify(unisonModel),
+            JSON.stringify(emptyHALC),
+            JSON.stringify(emptyFC)
+        );
+
+        const alertSpy = jest.spyOn(window, 'alert');
+        alertSpy.mockImplementation(() => { });
+
+        const confirmSpy = jest.spyOn(window, 'confirm');
+        confirmSpy.mockImplementation(() => true);
+
+        try {
+            fireEvent.click(removeButton);
+
+            
+
+            await waitForElementToBeRemoved(removeButton);
+
+        } finally {
+            confirmSpy.mockClear();
+            alertSpy.mockClear();
         }
-    },
-    {
-        "date": "2019-04-02T03:00:00.000+0000",
-        "precipitation": {
-            "value": 0,
-            "minvalue": 0,
-            "maxvalue": 0
-        }
-    },
-    {
-        "date": "2019-04-02T04:00:00.000+0000",
-        "precipitation": {
-            "value": 0,
-            "minvalue": 0,
-            "maxvalue": 0
-        }
-    },
-    {
-        "date": "2019-04-02T05:00:00.000+0000",
-        "precipitation": {
-            "value": 0,
-            "minvalue": 0,
-            "maxvalue": 0
-        }
-    },
-    {
-        "date": "2019-04-02T06:00:00.000+0000",
-        "precipitation": {
-            "value": 0,
-            "minvalue": 0,
-            "maxvalue": 0
-        }
-    },
-    {
-        "date": "2019-04-02T07:00:00.000+0000",
-        "precipitation": {
-            "value": 0,
-            "minvalue": 0,
-            "maxvalue": 0
-        }
-    },
-    {
-        "date": "2019-04-02T08:00:00.000+0000",
-        "precipitation": {
-            "value": 0,
-            "minvalue": 0,
-            "maxvalue": 0
-        }
-    },
-    {
-        "date": "2019-04-02T09:00:00.000+0000",
-        "precipitation": {
-            "value": 0,
-            "minvalue": 0,
-            "maxvalue": 0
-        }
-    },
-    {
-        "date": "2019-04-02T10:00:00.000+0000",
-        "precipitation": {
-            "value": 0,
-            "minvalue": 0,
-            "maxvalue": 0
-        }
-    }];
+
+    });
+
+    it('displays popup when marker clicked', async () => {
 
 
 
 
-    const mockDateNow = jest.fn(() => 1571875200000);
-    const dn = global.Date.now;
-    global.Date.now = mockDateNow;
+        const precipData = [{
+            "date": "2019-04-01T23:00:00.000+0000",
+            "precipitation": {
+                "value": 0,
+                "minvalue": 0,
+                "maxvalue": 0.1
+            }
+        },
+        {
+            "date": "2019-04-02T00:00:00.000+0000",
+            "precipitation": {
+                "value": 0,
+                "minvalue": 0,
+                "maxvalue": 0
+            }
+        },
+        {
+            "date": "2019-04-02T01:00:00.000+0000",
+            "precipitation": {
+                "value": 0,
+                "minvalue": 0,
+                "maxvalue": 0
+            }
+        },
+        {
+            "date": "2019-04-02T02:00:00.000+0000",
+            "precipitation": {
+                "value": 0,
+                "minvalue": 0,
+                "maxvalue": 0
+            }
+        },
+        {
+            "date": "2019-04-02T03:00:00.000+0000",
+            "precipitation": {
+                "value": 0,
+                "minvalue": 0,
+                "maxvalue": 0
+            }
+        },
+        {
+            "date": "2019-04-02T04:00:00.000+0000",
+            "precipitation": {
+                "value": 0,
+                "minvalue": 0,
+                "maxvalue": 0
+            }
+        },
+        {
+            "date": "2019-04-02T05:00:00.000+0000",
+            "precipitation": {
+                "value": 0,
+                "minvalue": 0,
+                "maxvalue": 0
+            }
+        },
+        {
+            "date": "2019-04-02T06:00:00.000+0000",
+            "precipitation": {
+                "value": 0,
+                "minvalue": 0,
+                "maxvalue": 0
+            }
+        },
+        {
+            "date": "2019-04-02T07:00:00.000+0000",
+            "precipitation": {
+                "value": 0,
+                "minvalue": 0,
+                "maxvalue": 0
+            }
+        },
+        {
+            "date": "2019-04-02T08:00:00.000+0000",
+            "precipitation": {
+                "value": 0,
+                "minvalue": 0,
+                "maxvalue": 0
+            }
+        },
+        {
+            "date": "2019-04-02T09:00:00.000+0000",
+            "precipitation": {
+                "value": 0,
+                "minvalue": 0,
+                "maxvalue": 0
+            }
+        },
+        {
+            "date": "2019-04-02T10:00:00.000+0000",
+            "precipitation": {
+                "value": 0,
+                "minvalue": 0,
+                "maxvalue": 0
+            }
+        }];
 
-    mockInitialResponses();
 
-    try {
-        const unison = <Unison createMap={mapFactory} />;
-        render(unison);
+        render(<Unison createMap={mapFactory} />);
 
         fetchMock.mockResponses(
             JSON.stringify(precipData),
@@ -278,9 +328,9 @@ it('displays popup when marker clicked', async () => {
 
         await screen.findByText('UCD');
 
-    } finally {
-        global.Date.now = dn;
-    }
 
+
+    });
 });
+
 
