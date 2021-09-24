@@ -5,6 +5,8 @@ import static org.springframework.security.test.web.servlet.request.SecurityMock
 import static org.springframework.security.test.web.servlet.request.SecurityMockMvcRequestPostProcessors.user;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.put;
 
+import java.util.Optional;
+
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
@@ -18,7 +20,7 @@ import org.springframework.http.MediaType;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 import org.springframework.test.web.servlet.MockMvc;
 
-import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 import eu.acclimatize.unison.MappingConstant;
@@ -63,6 +65,12 @@ class UserControllerTests {
 
 	}
 
+	private String jsonUInfo(String userName, String password) throws JsonProcessingException {
+
+		UserInfoDTO userInfoDTO = new UserInfoDTO(userName, TestUtility.encode(password));
+		return new ObjectMapper().writeValueAsString(userInfoDTO);
+	}
+
 	/**
 	 * Tests the controller for adding new users.
 	 * 
@@ -71,56 +79,24 @@ class UserControllerTests {
 	@Test
 	void addUser() throws Exception {
 
-		UserInformation userInfo = TestUtility.createUserInformation(TestConstant.OTHER_USERNAME,
-				TestConstant.OTHER_USER_PASSWORD);
-
-		String json = new ObjectMapper().writeValueAsString(userInfo);
+		String json = jsonUInfo(TestConstant.OTHER_USERNAME, TestConstant.OTHER_USER_PASSWORD);
 		mockMvc.perform(put(MappingConstant.USER).contentType(MediaType.APPLICATION_JSON).content(json).with(csrf())
 				.with(user(TestConstant.USERNAME).password(TestConstant.PASSWORD)));
 
 		Assertions.assertEquals(2, userRepository.count());
 	}
 
-	/**
-	 * 
-	 * Using a stub for serializing the user information as the encoded password in
-	 * the UserInfoDTO has only write access.
-	 *
-	 */
-	private class SerializationStub {
-		@JsonProperty
-		private String userName;
-
-		@JsonProperty /**
-						 * In the user UserInformation class, the JSON property for the encoded password
-						 * has write access, but not read access. It has read access only for
-						 * serialization purposes.
-						 * 
-						 **/
-		private String encodedPassword;
-
-		private SerializationStub(String userName, String encodedPassword) {
-			this.userName = userName;
-			this.encodedPassword = encodedPassword;
-		}
-
-	}
-
 	private void testUpdate(boolean expected, String userName, String password) throws Exception {
 
-		String encodedPassword = TestUtility.encode(password);
-		SerializationStub serializationStub = new SerializationStub(userName, encodedPassword);
-
-		String json = new ObjectMapper().writeValueAsString(serializationStub);
+		String json = jsonUInfo(userName, password);
 
 		mockMvc.perform(put(MappingConstant.USER).contentType(MediaType.APPLICATION_JSON).content(json)
 				.with(httpBasic(TestConstant.USERNAME, TestConstant.PASSWORD)).with(csrf()));
 
-		UserInformation savedUserInformation = userRepository.findById(userName).get();
+		Optional<UserInformation> savedUIOpt = userRepository.findById(userName);
 
-		UserInformation userInformation = new UserInformation(userName, encodedPassword);
-
-		Assertions.assertEquals(expected, userInformation.equals(savedUserInformation));
+		Assertions.assertTrue(savedUIOpt.isPresent());
+		
 	}
 
 	/**
@@ -133,7 +109,7 @@ class UserControllerTests {
 
 		testUpdate(true, TestConstant.USERNAME, SECOND_PASSWORD);
 		testUpdate(false, TestConstant.USERNAME, TestConstant.PASSWORD);
-		
+		testUpdate(true, TestConstant.USERNAME, SECOND_PASSWORD);
 
 	}
 

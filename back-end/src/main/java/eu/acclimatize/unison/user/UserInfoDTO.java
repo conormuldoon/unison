@@ -19,6 +19,18 @@ public class UserInfoDTO {
 	private String encodedPassword;
 
 	/**
+	 * Creates and instance of UserInfoDTO. Specifying a constructor is not required
+	 * by Jackson, but enables a POJO to be created for testing.
+	 * 
+	 * @param userName        The name of the user.
+	 * @param enocdedPassword The bcrypt encoded password.
+	 */
+	public UserInfoDTO(String userName, String encodedPassword) {
+		this.userName = userName;
+		this.encodedPassword = encodedPassword;
+	}
+
+	/**
 	 * Creates a JPA entity for the user information.
 	 * 
 	 * @return The created entity.
