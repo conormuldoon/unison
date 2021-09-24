@@ -86,8 +86,8 @@ it('toggles add location correctly', () => {
     fireEvent.click(getByText('Add Location'));
     fireEvent.click(getByText('Remove ' + location.name));
     expect(getByTestId('lf-button')).toHaveTextContent('Add Location');
-    
-  } catch {
+
+  } finally {
     confirmSpy.mockClear();
   }
 
