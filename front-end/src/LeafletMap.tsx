@@ -27,7 +27,7 @@ export function createMapFactory(mapCentre: [number, number]) {
 
   return function mapFactory(marker: MapMarker[] | null,
     markerClicked: (location: string) => void,
-    popupFactory?: (closePopup: () => void) => React.ReactNode): JSX.Element  {
+    popupFactory?: (closePopup: () => void) => React.ReactNode): JSX.Element {
 
     return <LeafletMap marker={marker}
       markerCallback={markerClicked}
@@ -37,9 +37,25 @@ export function createMapFactory(mapCentre: [number, number]) {
 }
 
 interface MapProps {
+
+  /**
+   * A callback invoked when a marker on the map is clicked.
+   */
   markerCallback: (location: string) => void;
+
+  /**
+   * A tuple of two numbers for the map's centre.
+   */
   mapCentre: [number, number];
+
+  /**
+   * An array of markers that are displayed on the map.
+   */
   marker: MapMarker[] | null;
+
+  /**
+   * An optional factory that creates chart popup components.
+   */
   popupFactory?: (closePopup: () => void) => React.ReactNode | undefined;
 
 }
@@ -51,7 +67,7 @@ interface MapProps {
  * 
  */
 
-function LeafletMap({ markerCallback, mapCentre, marker, popupFactory }: MapProps): JSX.Element  {
+function LeafletMap({ markerCallback, mapCentre, marker, popupFactory }: MapProps): JSX.Element {
 
   const [popupComponent, setPopupComponent] = useState<React.ReactNode | null>(null);
   const [dragging, setDragging] = useState(false);

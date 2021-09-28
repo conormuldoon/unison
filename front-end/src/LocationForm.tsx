@@ -19,11 +19,35 @@ export function createLocationFactory(obtainData: () => void, selfRef: string, c
 }
 
 interface LocationProps {
+
+  /**
+   * A flag that determines whether the add location popup is displayed.
+   */
   display: boolean;
+
+  /**
+   * A callback invoked to hide the add locatoin popup.
+   */
   hideDisplay: () => void;
+
+  /**
+   * Toggles whether the add location popup is displayed.
+   */
   toggleDisplay: () => void;
+
+  /**
+   * A callback for obtaining data from the server that is invoked once a location has been added.
+   */
   obtainData: () => void;
+
+  /**
+   * A URI for new location PUT requests.
+   */
   selfRef: string;
+
+  /**
+   * A URI for determining whether the location collection contains a location of a given name.
+   */
   containsRef: string;
 }
 

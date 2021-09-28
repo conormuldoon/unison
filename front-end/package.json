@@ -62,7 +62,8 @@
     "jest-fetch-mock": "^3.0.3",
     "jest-watch-typeahead": "^0.6.1",
     "jsdoc": "^3.6.6",
-    "node-fetch": "^3.0.0"
+    "node-fetch": "^3.0.0",
+    "typedoc": "^0.22.4"
   },
   "publishConfig": {
     "registry": "https://npm.pkg.github.com/"

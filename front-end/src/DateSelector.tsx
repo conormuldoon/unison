@@ -7,8 +7,20 @@ import { formatDate, parseDate } from 'react-day-picker/moment';
 import { FORMAT } from './Constant';
 
 interface SelectorProps {
+
+  /**
+   * Tha label dispalyed above the date selector.
+   */
   label: string;
+
+  /**
+   * The initial value of the date selector.
+   */
   dateValue: Date;
+
+  /**
+   * A callback invoked when the selected date is changed.
+   */
   handleDayChange: (day: Date) => void;
 }
 /**

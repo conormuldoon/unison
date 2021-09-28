@@ -31,11 +31,34 @@ export function createChartFactory(data: ChartData, zoomDomain: DomainPropType,
 
 interface ChartProps {
 
+  /**
+   * The current weather variable.
+   */
   curVar: string;
+
+  /**
+   * A flag that is true in cases where preciptation data is ternary.
+   */
   minMax: boolean;
+
+  /**
+   * Specifies the index of the chart in cases where there are multiple chart tabs.
+   */
   index: number | undefined;
+
+  /**
+   * The dat that is displayed on the chart.
+   */
   data: ChartData;
+
+  /**
+   * A two element tuple that specifies the chart's zoom domain.
+   */
   zoomDomain: DomainPropType;
+
+  /**
+   * A callback invoked when the zoom domain of the chart is changed.
+   */
   handleZoom: (domain: DomainPropType, props: VictoryZoomContainerProps) => void;
 }
 

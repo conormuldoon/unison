@@ -5,8 +5,20 @@ import "react-tabs/style/react-tabs.css";
 import { CL, HIGH, HPER, LOW, LPER, MEDIAN, MEDIUM } from './Constant';
 
 interface TabsProps {
+
+  /**
+   * A flag that is true in the case of ternary precipitation data.
+   */
   minMax: boolean;
+
+  /**
+   * The name of the current weather variable.
+   */
   curVar: string;
+
+  /**
+   * A factory that creates chart components.
+   */
   chartFactory: (index?: number) => React.ReactNode;
 }
 /**
