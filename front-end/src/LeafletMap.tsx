@@ -26,7 +26,7 @@ export const DEFAULT_ZOOM = 12;
 
 export type PopupFactory = ((closePopup: () => void) => React.ReactNode);
 
-export type MapFactory = (marker: MapMarker[] | null,
+export type MapFactory = (marker: MapMarker[],
   markerClicked: (location: string) => void,
   popupFactory?: PopupFactory) => JSX.Element;
 
@@ -63,7 +63,7 @@ export interface MapProps {
   /**
    * An array of markers that are displayed on the map.
    */
-  marker: MapMarker[] | null;
+  marker: MapMarker[];
 
   /**
    * An optional factory that creates chart popup components.
@@ -98,7 +98,7 @@ function LeafletMap({ markerCallback, mapCentre, marker, popupFactory }: MapProp
     if (display && popupFactory) {
 
       const popupComponent = popupFactory(closePopup);
-      //const popupComponent=<ChartPopup uri={"http://localhost:3000/locationCollection/Test/cloudiness?fromDate=23-4-2021&toDate=24-4-2021"} curVar={"Cloudiness"} name={"Testing"} closePopup={closePopup} />
+
       setPopupComponent(popupComponent);
       setDragging(false);
     }

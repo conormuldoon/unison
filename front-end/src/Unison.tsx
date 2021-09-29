@@ -135,6 +135,9 @@ function variableOptions(vo: string[], link: Link) {
 
 type LinkMap = Map<string, string>;
 
+const locationMap = new Map<string, LinkMap>();
+const varOpt: string[] = [];
+const option: string[] = [];
 
 /**
  * Application component for Unison. Once mounted, it connects to the back-end to receive a list of the locations being tracked.
@@ -147,12 +150,9 @@ function Unison({ createMap, logoLeft, logoRight }: UnisonProps): JSX.Element {
 
   const [fromDate, setFromDate] = useState(today());
   const [toDate, setToDate] = useState(tomorrow());
-  const [option, setOption] = useState<string[] | null>(null);
-  const [marker, setMarker] = useState<MapMarker[] | null>(null);
+  const [marker, setMarker] = useState<MapMarker[]>([]);
   const [curLoc, setCurLoc] = useState<string | null>(null);
   const [curVar, setCurVar] = useState<string | null>(null);
-  const [varOpt, setVarOpt] = useState<string[] | null>(null);
-  const [locationMap, setLocationMap] = useState<Map<string, LinkMap> | null>(null);
   const [modelLink, setModelLink] = useState<ModelLink | null>(null);
 
   /**
@@ -172,11 +172,11 @@ function Unison({ createMap, logoLeft, logoRight }: UnisonProps): JSX.Element {
     const locationArray = fc.features;
     const n = locationArray.length;
 
-    const newOption = [];
+
     const newMarker: MapMarker[] = [];
 
     for (let i = 0; i < n; i++) {
-      newOption.push(locationArray[i].properties.name);
+      option.push(locationArray[i].properties.name);
       const pos: [number, number] = [locationArray[i].geometry.coordinates[1], locationArray[i].geometry.coordinates[0]];
 
       const properties = locationArray[i].properties;
@@ -186,13 +186,12 @@ function Unison({ createMap, logoLeft, logoRight }: UnisonProps): JSX.Element {
 
     if (n > 0) {
 
-      setOption(newOption);
       setMarker(newMarker);
 
 
     } else {
-      setOption(null);
-      setMarker(null);
+      option.length = 0;
+      setMarker([]);
     }
 
 
@@ -202,35 +201,31 @@ function Unison({ createMap, logoLeft, logoRight }: UnisonProps): JSX.Element {
 
     setCurLoc(null);
     setCurVar(null);
-    setVarOpt(null);
-    setLocationMap(null);
+    varOpt.length = 0;
+    locationMap.clear();
 
   }
 
   function processModelList(list: [{ name: string, _links: Link }]) {
 
     const n = list.length;
-    const map = new Map();
+
 
     for (let i = 0; i < n; i++) {
 
-      map.set(list[i].name, createLinkMap(list[i]._links));
+      locationMap.set(list[i].name, createLinkMap(list[i]._links));
     }
 
-    setLocationMap(map);
-
-    const vo: string[] = [];
+    varOpt.length = 0;
 
     if (n > 0) {
-      variableOptions(vo, list[0]._links);
+      variableOptions(varOpt, list[0]._links);
 
     }
 
-    if (vo.length > 0) {
+    if (varOpt.length > 0) {
       setCurLoc(list[0].name);
-      setCurVar(vo[0]);
-      setVarOpt(vo);
-
+      setCurVar(varOpt[0]);
     } else {
 
       clearCurrent();
@@ -297,8 +292,6 @@ function Unison({ createMap, logoLeft, logoRight }: UnisonProps): JSX.Element {
     requestModel();
 
 
-
-
   };
 
   useEffect(obtainData, []);
@@ -336,7 +329,7 @@ function Unison({ createMap, logoLeft, logoRight }: UnisonProps): JSX.Element {
 
   function expandLink() {
 
-    if (locationMap && curLoc && curVar) {
+    if (curLoc && curVar) {
       const linkMap = locationMap.get(curLoc);
       if (linkMap) {
         const href = linkMap.get(varMapping(curVar));
@@ -386,7 +379,7 @@ function Unison({ createMap, logoLeft, logoRight }: UnisonProps): JSX.Element {
     let createRemove = null;
 
 
-    if (curLoc && locationMap) {
+    if (curLoc) {
 
       const linkMap = locationMap.get(curLoc);
       if (linkMap) {
@@ -415,19 +408,19 @@ function Unison({ createMap, logoLeft, logoRight }: UnisonProps): JSX.Element {
         <div>
           {curLoc && <div id='variDD' >
 
-            {varOpt && <select onChange={_onVarSelect}>
+            <select onChange={_onVarSelect}>
 
               {varOpt.map((opt) => <option key={opt} value={opt}>{opt}</option>)}
 
-            </select>}
+            </select>
 
           </div>}
 
           {curLoc && <div className='marginItem' >
 
             <select onChange={_onLocationSelect} value={curLoc}>
-              {!option && <option key="Location" value="Location" >Location</option>}
-              {option && option.map((opt) => <option key={opt} value={opt}>{opt}</option>)}
+
+              {option.map((opt) => <option key={opt} value={opt}>{opt}</option>)}
 
             </select>
 
