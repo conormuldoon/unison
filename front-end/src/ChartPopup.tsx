@@ -26,7 +26,7 @@ export function createPopupFactory(uri: string, curVar: string, name: string) {
 
 export type ChartData = Record<string, unknown>[];
 
-interface PopupProps {
+export interface PopupProps {
 
   /** The URI where data for the chart it obtained from. */
   uri: string;

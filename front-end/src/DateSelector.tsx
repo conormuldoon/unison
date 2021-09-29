@@ -6,7 +6,7 @@ import { formatDate, parseDate } from 'react-day-picker/moment';
 
 import { FORMAT } from './Constant';
 
-interface SelectorProps {
+export interface SelectorProps {
 
   /**
    * Tha label dispalyed above the date selector.

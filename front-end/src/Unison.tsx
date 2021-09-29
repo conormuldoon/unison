@@ -9,7 +9,7 @@ import DateSelector from './DateSelector';
 import { today, tomorrow, problemConnecting, varMapping } from './Util';
 import HttpStatus from 'http-status-codes';
 import PropTypes from 'prop-types';
-import { MapMarker } from './LeafletMap';
+import { MapMarker, PopupFactory } from './LeafletMap';
 
 import { createLocationFactory } from './LocationForm';
 
@@ -18,14 +18,14 @@ import { createPopupFactory } from './ChartPopup';
 import parser from 'uri-template';
 
 
-interface UnisonProps {
+export interface UnisonProps {
 
   /**
    * A function for creating the map. 
    */
   createMap: (marker: MapMarker[] | null,
     markerCallback: (locationName: string) => void,
-    popupFactory?: (closePopup: () => void) => React.ReactNode) => JSX.Element | undefined;
+    popupFactory: PopupFactory) => JSX.Element;
 
   /** A logo displayed at the bottom of the screen. It will be displayed to the left
    * if the logoRight prop is defined.
@@ -374,7 +374,7 @@ function Unison({ createMap, logoLeft, logoRight }: UnisonProps): JSX.Element {
     return <DateSelector label={label} dateValue={dateValue} handleDayChange={handleDayChange} />;
   }
 
-  let popupFactory;
+  let popupFactory = null;
   if (curLoc && curVar) {
     const uri = expandLink();
     popupFactory = createPopupFactory(uri, curVar, curLoc);

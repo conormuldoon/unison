@@ -173,12 +173,12 @@ exports[`mathes snapshot 1`] = `
                 width="350"
               >
                 <g
-                  clip-path="url(#victory-clip-2)"
+                  clip-path="url(#victory-clip-4)"
                   style="border: 1px solid #ccc; width: 100%; height: 100%;"
                 >
                   <defs>
                     <clippath
-                      id="victory-clip-2"
+                      id="victory-clip-4"
                     >
                       <rect
                         height="290"

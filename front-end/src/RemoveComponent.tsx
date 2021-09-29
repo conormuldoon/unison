@@ -19,7 +19,7 @@ export function createRemoveFactory(obtainData: () => void, name: string, href?:
   }
 }
 
-interface RemoveProps {
+export interface RemoveProps {
 
   /** Called when a location has been successfully removed to obtain the updated location list from the server. */
   obtainData: () => void;

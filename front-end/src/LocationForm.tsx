@@ -18,7 +18,7 @@ export function createLocationFactory(obtainData: () => void, selfRef: string, c
   }
 }
 
-interface LocationProps {
+export interface LocationProps {
 
   /**
    * A flag that determines whether the add location popup is displayed.

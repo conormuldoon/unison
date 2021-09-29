@@ -23,11 +23,14 @@ export type MapMarker = {
   position: [number, number];
 }
 
+export type PopupFactory = ((closePopup: () => void) => React.ReactNode) | null;
+
+
 export function createMapFactory(mapCentre: [number, number]) {
 
   return function mapFactory(marker: MapMarker[] | null,
     markerClicked: (location: string) => void,
-    popupFactory?: (closePopup: () => void) => React.ReactNode): JSX.Element {
+    popupFactory: PopupFactory): JSX.Element {
 
     return <LeafletMap marker={marker}
       markerCallback={markerClicked}
@@ -36,7 +39,7 @@ export function createMapFactory(mapCentre: [number, number]) {
 
 }
 
-interface MapProps {
+export interface MapProps {
 
   /**
    * A callback invoked when a marker on the map is clicked.
@@ -56,7 +59,7 @@ interface MapProps {
   /**
    * An optional factory that creates chart popup components.
    */
-  popupFactory?: (closePopup: () => void) => React.ReactNode | undefined;
+  popupFactory: PopupFactory;
 
 }
 

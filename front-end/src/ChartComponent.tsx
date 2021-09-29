@@ -29,7 +29,7 @@ export function createChartFactory(data: ChartData, zoomDomain: DomainPropType,
   }
 }
 
-interface ChartProps {
+export interface ChartProps {
 
   /**
    * The current weather variable.
@@ -68,7 +68,7 @@ interface ChartProps {
  * @component
  * 
  */
-function ChartComponent({ curVar, minMax, index, data, zoomDomain, handleZoom }: ChartProps): JSX.Element | null {
+function ChartComponent({ curVar, minMax, index, data, zoomDomain, handleZoom }: ChartProps): JSX.Element {
 
   let yVal;
   let yLabel;
@@ -128,45 +128,42 @@ function ChartComponent({ curVar, minMax, index, data, zoomDomain, handleZoom }:
     yLabel = CELSIUS;
   }
 
- 
-  
-  if (yVal && data.length > 1 && has(data[0], yVal)) {
 
-    return (
 
-      <VictoryChart style={{ parent: { maxWidth: "55%", maxHeight: "55%" } }} padding={{ left: 70, bottom: 50, top: 10 }}
-        domainPadding={{ x: [0, 1], y: 0 }}
-        theme={VictoryTheme.material}
-        scale={{ x: "time" }}
-        containerComponent={
-          <VictoryZoomContainer
-            zoomDimension="x"
-            zoomDomain={zoomDomain}
-            onZoomDomainChange={handleZoom}
-          />
-        }
-      >
-        <VictoryLine
-          style={{
-            data: { stroke: "#c43a31" },
-            parent: { border: "1px solid #ccc" }
-          }}
-          data={data}
-          x="date"
-          y={yVal}
+
+
+  return (
+
+    <VictoryChart style={{ parent: { maxWidth: "55%", maxHeight: "55%" } }} padding={{ left: 70, bottom: 50, top: 10 }}
+      domainPadding={{ x: [0, 1], y: 0 }}
+      theme={VictoryTheme.material}
+      scale={{ x: "time" }}
+      containerComponent={
+        <VictoryZoomContainer
+          zoomDimension="x"
+          zoomDomain={zoomDomain}
+          onZoomDomainChange={handleZoom}
         />
+      }
+    >
+      {yVal && has(data[0], yVal) && <VictoryLine
+        style={{
+          data: { stroke: "#c43a31" },
+          parent: { border: "1px solid #ccc" }
+        }}
+        data={data}
+        x="date"
+        y={yVal}
+      />}
 
-        <VictoryAxis fixLabelOverlap={true} />
-        <VictoryAxis dependentAxis label={yLabel} style={{ axisLabel: { padding: 45 } }} tickFormat={
-          (x) => { if (Math.abs(x) < .001) { return parseFloat(x.toFixed(3)); } if (Math.abs(x) > 999) { return Math.round(x); } return x; }} />
+      <VictoryAxis fixLabelOverlap={true} />
+      <VictoryAxis dependentAxis label={yLabel} style={{ axisLabel: { padding: 45 } }} tickFormat={
+        (x) => { if (Math.abs(x) < .001) { return parseFloat(x.toFixed(3)); } if (Math.abs(x) > 999) { return Math.round(x); } return x; }} />
 
-      </VictoryChart>
+    </VictoryChart>
 
-    );
-  } else {
+  );
 
-    return null;
-  }
 
 }
 

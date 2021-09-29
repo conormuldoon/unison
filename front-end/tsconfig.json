@@ -18,12 +18,22 @@
     "resolveJsonModule": true,
     "isolatedModules": true,
     "noEmit": true,
-    "jsx": "react",
+    "jsx": "react-jsx",
     "noImplicitThis": false,
-    "typeRoots": [  "node_modules/@types", "src/typings"]
+    "typeRoots": [
+      "node_modules/@types",
+      "src/typings"
+    ]
   },
   "include": [
-    "src"
+    "src/*.tsx",
+    "src/*.ts"
   ],
-  "exclude": ["node_modules","src/typings"]
+  "typedocOptions": {
+    "out": "docs"
+  },
+  "exclude": [
+    "src/*.test.ts",
+    "src/*.test.tsx"
+  ]
 }

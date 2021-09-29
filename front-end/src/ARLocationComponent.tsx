@@ -4,11 +4,11 @@ import './App.css';
 
 import PropTypes from 'prop-types';
 
-interface ARLocationProps {
+export interface ARLocationProps {
 
   /** A factory that creates a add location form. */
   createLocation: (toggleDisplayAdd: () => void, displayAdd: boolean, hideAdd: () => void) => React.ReactNode;
-  
+
   /** A factory that creates a component from removing locations. */
   createRemove: ((hideAdd: () => void) => React.ReactNode | undefined) | null;
 }
