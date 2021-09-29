@@ -31,11 +31,6 @@ export type MapFactory = (marker: MapMarker[],
   popupFactory?: PopupFactory) => JSX.Element;
 
 
-const tileLayer = <TileLayer
-  attribution='&copy; <a href="https://osm.org/copyright">OpenStreetMap</a> contributors'
-  url='https://{s}.tile.osm.org/{z}/{x}/{y}.png'
-/>;
-
 export function createMapFactory(mapCentre: [number, number]): MapFactory {
 
   return function mapFactory(marker, markerClicked, popupFactory) {
@@ -82,7 +77,7 @@ export interface MapProps {
 
 function LeafletMap({ markerCallback, mapCentre, marker, popupFactory }: MapProps): JSX.Element {
 
-  const [popupComponent, setPopupComponent] = useState<React.ReactNode | null>(null);
+  const [popupComponent, setPopupComponent] = useState<React.ReactNode>();
   const [dragging, setDragging] = useState(false);
   const [display, setDisplay] = useState(false);
 
@@ -115,9 +110,12 @@ function LeafletMap({ markerCallback, mapCentre, marker, popupFactory }: MapProp
   return (
     <Map center={mapCentre} zoom={DEFAULT_ZOOM} dragging={dragging} >
 
-      {tileLayer}
+      <TileLayer
+        attribution='&copy; <a href="https://osm.org/copyright">OpenStreetMap</a> contributors'
+        url='https://{s}.tile.osm.org/{z}/{x}/{y}.png'
+      />
 
-      {marker && marker.map((mkr) =>
+      {marker.map((mkr) =>
         <Marker key={mkr.name} position={mkr.position} onClick={mCallback.bind(this, mkr.name)} icon={image} />
 
       )}

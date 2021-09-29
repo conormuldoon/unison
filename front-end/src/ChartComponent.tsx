@@ -20,7 +20,7 @@ export function createChartFactory(data: ChartData, zoomDomain: DomainPropType,
   handleZoom: (domain: DomainPropType, props: VictoryZoomContainerProps) => void,
   curVar: string, minMax: boolean) {
 
-  return function chartFactory(index: number | undefined): JSX.Element {
+  return function chartFactory(index?: number): JSX.Element {
 
     return <ChartComponent data={data} zoomDomain={zoomDomain} index={index}
       handleZoom={handleZoom}

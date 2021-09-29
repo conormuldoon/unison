@@ -2,7 +2,7 @@ import { enableFetchMocks } from 'jest-fetch-mock';
 enableFetchMocks();
 
 import fetchMock from 'jest-fetch-mock';
-import React from 'react';
+
 import { render, screen } from "@testing-library/react";
 import ChartPopup from './ChartPopup';
 import { PRECIP, CL } from './Constant';
