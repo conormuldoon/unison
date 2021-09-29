@@ -56,13 +56,13 @@ const location = {
 
 it('renders without crashing', async () => {
 
-  render(<LeafletMap mapCentre={[59.922326, 10.751560]} marker={null} markerCallback={() => null} />);
+  render(<LeafletMap mapCentre={[59.922326, 10.751560]} marker={[]} markerCallback={() => null} />);
 });
 
 it('mathes snapshot', () => {
 
 
-  const { container } = render(<LeafletMap marker={null} mapCentre={[59.922326, 10.751560]} markerCallback={() => null} />);
+  const { container } = render(<LeafletMap marker={[]} mapCentre={[59.922326, 10.751560]} markerCallback={() => null} />);
 
   expect(container).toMatchSnapshot();
 
