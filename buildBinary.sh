@@ -11,7 +11,7 @@ sed -i "s/version\": \"[0-9]*\.[0-9]*\.[0-9]*.*\"/version\": \"$1\"/" package.js
 yarn install
 yarn build
 rm -f ../back-end/src/main/resources/public/*.js
-rm -rf ./back-end/src/main/resources/public/static
+rm -rf ../back-end/src/main/resources/public/static
 cp -r build/* ../back-end/src/main/resources/public
 cd ../back-end
 sed -i "s/[0-9]*\.[0-9]*\.[0-9]*-SNAPSHOT/$1/" pom.xml

@@ -41,7 +41,6 @@ public class CSVResponderConfig {
 		dateFormat = new SimpleDateFormat(Constant.FORMAT);
 	}
 
-
 	// Recursively appends the double, Double, int, Date, and String CSVHeaderItem
 	// values of the attributes of the result classes to create a CSV header string.
 	private void appendFieldNames(Class<?> c, StringBuilder sb) {
@@ -51,11 +50,11 @@ public class CSVResponderConfig {
 			CSVHeaderItem csvProperty = f.getAnnotation(CSVHeaderItem.class);
 			if (csvProperty != null) {
 				Class<?> ft = f.getType();
-				recurseAppend(ft,csvProperty,f,sb);
+				recurseAppend(ft, csvProperty, f, sb);
 			}
 		}
 	}
-	
+
 	private void recurseAppend(Class<?> ft, CSVHeaderItem csvProperty, Field f, StringBuilder sb) {
 		if (ft.equals(Date.class) || ft.equals(Double.TYPE) || ft.equals(Integer.TYPE) || ft.equals(Double.class)
 				|| ft.equals(String.class)) {
@@ -132,8 +131,6 @@ public class CSVResponderConfig {
 	 * Creates a {@link CSVResponder} bean for humidity data.
 	 * 
 	 * @param humidityFinder An {@link ItemListFinder} for humidity data.
-	 * @param cacheSupport   Used for adding conditional the Vary header and a
-	 *                       conditional cache control header.
 	 * @return A new instance of {@link CSVResponder} that uses the humidity finder.
 	 */
 	@Bean

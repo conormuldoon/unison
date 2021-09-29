@@ -72,7 +72,7 @@ public class HarvesterService {
 	 * @param lrs                     The service that is used to obtain XML weather
 	 *                                data documents for locations.
 	 * @param logger                  Logs warning messages and exceptions.
-	 * @param simpleDateFormat        Used to parse date data using a given time
+	 * @param harmonieDateFormat      Used to parse date data using a given time
 	 *                                zone.
 	 * @param executor                Used to execute the data harvesting process on
 	 *                                a thread.

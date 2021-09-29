@@ -46,9 +46,11 @@ public class UpsertLocationController {
 	 * Add a location if the location does not exist in the location repository or
 	 * updates a location if the authenticated user added the location.
 	 * 
-	 * @param location The location to add.
-	 * @param response The HTTP servlet response that a location header is added to
-	 *                 if the location was not already stored in the repository.
+	 * @param locationDTO The transfer object for the location to add.
+	 * @param response    The HTTP servlet response that a location header is added
+	 *                    to if the location was not already stored in the
+	 *                    repository.
+	 * @param request     Used to create a base URI for HAL.
 	 */
 	// @RolesAllowed is used when the location is deserialized so is not required
 	// here.

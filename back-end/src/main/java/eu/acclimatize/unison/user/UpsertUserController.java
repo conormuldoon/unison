@@ -44,10 +44,10 @@ public class UpsertUserController {
 	 * information.
 	 * 
 	 * 
-	 * @param userInformation The new user information.
-	 * @param response        The response that a location header is added to if a
-	 *                        new user was stored rather than an existing user
-	 *                        updated.
+	 * @param userInfoDTO The transfer object for new user information.
+	 * @param response    The response that a location header is added to if a new
+	 *                    user was stored rather than an existing user updated.
+	 * @param request     Used to create a base URI for HAL.
 	 */
 	// The roles allowed annotation is not required here as MappingConstant.USER is
 	// configured to require authorization in the UnisonSecurityConfig

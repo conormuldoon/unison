@@ -32,7 +32,7 @@ public class CSVResponder {
 	 * @param itemListFinder Used to obtain a list of data based on query
 	 *                       parameters.
 	 * @param header         The CSV header printed by the responder.
-	 * @param variableName   The name of the weather variable with spaces
+	 * @param uVariableName  The name of the weather variable with spaces
 	 *                       underscored.
 	 * @param dateFormat     the date format used when specifying the file name in
 	 *                       the content disposition header.
@@ -71,11 +71,11 @@ public class CSVResponder {
 	 * Writes the list to the HTTP servlet response object in a CSV format and
 	 * alters caching headers subject to the last date for the query range.
 	 * 
-	 * @param fromDate    The start date for the data (inclusive).
-	 * @param toDate      The end date for the data (inclusive).
-	 * @param locatinName The name of the location for the data.
-	 * @param response    Data is written to the writer of the response object and
-	 *                    the content type is set to text/csv.
+	 * @param fromDate     The start date for the data (inclusive).
+	 * @param toDate       The end date for the data (inclusive).
+	 * @param locationName The name of the location for the data.
+	 * @param response     Data is written to the writer of the response object and
+	 *                     the content type is set to text/csv.
 	 * @throws IOException Thrown if there is a problem obtaining the writer of the
 	 *                     response object.
 	 */

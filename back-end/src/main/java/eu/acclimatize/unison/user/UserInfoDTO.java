@@ -23,7 +23,7 @@ public class UserInfoDTO {
 	 * by Jackson, but enables a POJO to be created for testing.
 	 * 
 	 * @param userName        The name of the user.
-	 * @param enocdedPassword The bcrypt encoded password.
+	 * @param encodedPassword The bcrypt encoded password.
 	 */
 	public UserInfoDTO(String userName, String encodedPassword) {
 		this.userName = userName;
