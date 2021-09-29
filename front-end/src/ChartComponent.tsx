@@ -1,6 +1,5 @@
 import { has } from 'lodash';
 import PropTypes from 'prop-types';
-import React from 'react';
 import {
   VictoryAxis, VictoryChart, VictoryLine, VictoryTheme, VictoryZoomContainer,
   DomainPropType, VictoryZoomContainerProps

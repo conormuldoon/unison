@@ -1,6 +1,5 @@
 
 
-import React from 'react';
 import { problemConnecting, csrfToken } from './Util';
 import HttpStatus from 'http-status-codes';
 import PropTypes from 'prop-types';

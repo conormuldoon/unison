@@ -1,5 +1,5 @@
 
-import React, { useEffect, useState, MouseEvent } from 'react';
+import { useEffect, useState, MouseEvent } from 'react';
 import { IoMdClose } from "react-icons/io";
 import './App.css';
 import { PRECIP } from './Constant';

@@ -1,4 +1,4 @@
-import React from 'react';
+
 import DayPickerInput from 'react-day-picker/DayPickerInput';
 import PropTypes from 'prop-types';
 import 'react-day-picker/lib/style.css';
