@@ -1,9 +1,7 @@
 import { enableFetchMocks } from 'jest-fetch-mock';
 enableFetchMocks();
 
-import React from 'react';
-
-import LeafletMap from './LeafletMap';
+import LeafletMap, { MapMarker } from './LeafletMap';
 
 import { render, fireEvent, screen } from "@testing-library/react";
 import fetchMock from 'jest-fetch-mock';
@@ -58,13 +56,13 @@ const location = {
 
 it('renders without crashing', async () => {
 
-  render(<LeafletMap location={location} mapCentre={[59.922326, 10.751560]} />);
+  render(<LeafletMap mapCentre={[59.922326, 10.751560]} marker={null} markerCallback={() => null} />);
 });
 
 it('mathes snapshot', () => {
 
 
-  const { container } = render(<LeafletMap linksProperty={location} mapCentre={[59.922326, 10.751560]} />);
+  const { container } = render(<LeafletMap marker={null} mapCentre={[59.922326, 10.751560]} markerCallback={() => null} />);
 
   expect(container).toMatchSnapshot();
 
@@ -74,11 +72,11 @@ it('displays popup', async () => {
 
 
   // position: [lat, lon]
-  const marker = [{ name: location.name, position: [53.308441, -6.223682] }];
+  const marker: MapMarker[] = [{ name: location.name, position: [53.308441, -6.223682] }];
 
   const fromDate = '1-2-2018';
   const toDate = '7-10-2019';
-  const mapCentre = [53.35014, -6.266155];
+  const mapCentre: [number, number] = [53.35014, -6.266155];
 
   fetchMock.mockResponse("[]");
 

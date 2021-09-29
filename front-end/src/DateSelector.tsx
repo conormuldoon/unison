@@ -16,7 +16,7 @@ export interface SelectorProps {
   /**
    * The initial value of the date selector.
    */
-  dateValue: Date;
+  dateValue: string;
 
   /**
    * A callback invoked when the selected date is changed.

@@ -43,7 +43,7 @@ export interface ChartProps {
   /**
    * Specifies the index of the chart in cases where there are multiple chart tabs.
    */
-  index: number | undefined;
+  index?: number;
 
   /**
    * The dat that is displayed on the chart.

@@ -2,7 +2,7 @@
 import { enableFetchMocks } from 'jest-fetch-mock';
 enableFetchMocks();
 import fetchMock from 'jest-fetch-mock';
-import React from 'react';
+
 
 import { fireEvent, render, screen } from "@testing-library/react";
 import LocationForm from './LocationForm';
@@ -11,7 +11,8 @@ import HttpStatus from 'http-status-codes';
 
 it('renders without crashing', async () => {
 
-  render(<LocationForm obtainData={() => { }} hideDisplay={() => { }} toggleDisplay={() => { }} display={true} />);
+  render(<LocationForm obtainData={() => { }} hideDisplay={() => { }} toggleDisplay={() => { }}
+    display={true} selfRef="" containsRef="" />);
 
 });
 
@@ -19,25 +20,21 @@ it('renders without crashing', async () => {
 it('mathes snapshot', () => {
 
 
-  const { container } = render(<LocationForm obtainData={() => { }} hideDisplay={() => { }} toggleDisplay={() => { }} display={true} />);
+  const { container } = render(<LocationForm obtainData={() => { }} hideDisplay={() => { }}
+    toggleDisplay={() => { }} display={true} selfRef="" containsRef="" />);
 
   expect(container).toMatchSnapshot();
 
 });
 
-async function changeValue(labelText, value) {
+async function changeValue(labelText: string, value: string) {
 
   fireEvent.change(await screen.findByLabelText(labelText), { target: { value: value } });
 }
 
 it('sends the data in the form when submit is clicked', async () => {
 
-  const fetch = jest.spyOn(window, 'fetch').mockImplementation(() => {
-    return {
-      headers: { get: () => { } }, ok: true,
-      json: () => { return { properties: { links: { harvest: '/harvest' } } } }
-    }
-  });
+
   fetchMock.mockOnce(JSON.stringify({ value: false }));
 
   const hideDisplay = jest.fn();
@@ -52,14 +49,11 @@ it('sends the data in the form when submit is clicked', async () => {
 
     expect(hideDisplay).toHaveBeenCalledTimes(1);
 
-
-
   };
 
-  const map = new Map();
 
   const component = <LocationForm display={true} containsRef={"http://localhost:8080/locationCollection/contains{?name}"} selfRef={"http://localhost:8080/locationCollection"} obtainData={obtainData} hideDisplay={hideDisplay}
-    toggleDisplay={() => { }} featureProperties={map} />;
+    toggleDisplay={() => { }} />;
   render(component);
 
   await changeValue('Location name:', location);
@@ -101,10 +95,10 @@ it('handles add location', async () => {
 
   };
 
-  const map = new Map();
+
   const component = <LocationForm display={true} containsRef={"http://localhost:8080/locationCollection/contains{?name}"} selfRef={"http://localhost:8080/locationCollection"}
     obtainData={obtainData} hideDisplay={hideDisplay}
-    toggleDisplay={() => { }} featureProperties={map} />;
+    toggleDisplay={() => { }} />;
   render(component);
 
   await changeValue('Location name:', location);

@@ -2,10 +2,11 @@ import { enableFetchMocks } from 'jest-fetch-mock';
 enableFetchMocks();
 
 import "@testing-library/jest-dom/extend-expect";
-import React from 'react';
 import { render, screen } from "@testing-library/react";
 import TabsComponent from './TabsComponent';
 import { createChartFactory } from './ChartComponent';
+import { ChartData } from './ChartPopup';
+import { DomainPropType } from 'victory';
 
 const DLEN = 16;
 
@@ -26,15 +27,8 @@ it('mathes snapshot', () => {
 
 
 
-const addChart = async (weatherVariable, dataArray, zoomDomain) => {
+const addChart = async (weatherVariable: string, dataArray: ChartData, zoomDomain: DomainPropType) => {
 
-    const n = dataArray.length;
-
-    for (let i = 0; i < n; i++) {
-        const dateS = dataArray[i].date;
-        dataArray[i].date = new Date(dateS.substring(0, DLEN));
-
-    }
 
     const chartFactory = createChartFactory(dataArray, zoomDomain, () => { }, weatherVariable, false);
 

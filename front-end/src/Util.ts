@@ -7,7 +7,7 @@ import {
 
 import GeoJSON from 'geojson';
 
-export const tomorrow = (): Date => {
+export const tomorrow = (): string => {
 
   const now = Date.now();
   const today = new Date(now);
@@ -17,7 +17,7 @@ export const tomorrow = (): Date => {
   return formatDate(tomorrow, FORMAT);
 }
 
-export const today = (): Date => {
+export const today = (): string => {
   return formatDate(new Date(Date.now()), FORMAT);
 };
 

@@ -207,8 +207,6 @@ LocationForm.propTypes = {
   /** Called when a location has been successfully added to obtain the updated location list from the server and add the location to the map. */
   obtainData: PropTypes.func.isRequired,
 
-  featureProperties: PropTypes.object,
-
   selfRef: PropTypes.string,
 
   containsRef: PropTypes.string,

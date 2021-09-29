@@ -9,7 +9,7 @@ import DateSelector from './DateSelector';
 import { today, tomorrow, problemConnecting, varMapping } from './Util';
 import HttpStatus from 'http-status-codes';
 import PropTypes from 'prop-types';
-import { MapMarker, PopupFactory } from './LeafletMap';
+import { MapFactory, MapMarker } from './LeafletMap';
 
 import { createLocationFactory } from './LocationForm';
 
@@ -23,9 +23,7 @@ export interface UnisonProps {
   /**
    * A function for creating the map. 
    */
-  createMap: (marker: MapMarker[] | null,
-    markerCallback: (locationName: string) => void,
-    popupFactory: PopupFactory) => JSX.Element;
+  createMap: MapFactory;
 
   /** A logo displayed at the bottom of the screen. It will be displayed to the left
    * if the logoRight prop is defined.
@@ -370,14 +368,17 @@ function Unison({ createMap, logoLeft, logoRight }: UnisonProps): JSX.Element {
   }
 
 
-  function createSelector(label: string, dateValue: Date, handleDayChange: (day: Date) => void) {
+  function createSelector(label: string, dateValue: string, handleDayChange: (day: Date) => void) {
     return <DateSelector label={label} dateValue={dateValue} handleDayChange={handleDayChange} />;
   }
 
-  let popupFactory = null;
+  let guiMap;
   if (curLoc && curVar) {
     const uri = expandLink();
-    popupFactory = createPopupFactory(uri, curVar, curLoc);
+    const popupFactory = createPopupFactory(uri, curVar, curLoc);
+    guiMap = createMap(marker, markerClicked, popupFactory)
+  } else {
+    guiMap = createMap(marker, markerClicked);
   }
 
   let arc = null;
@@ -407,7 +408,7 @@ function Unison({ createMap, logoLeft, logoRight }: UnisonProps): JSX.Element {
 
       </div>
 
-      {createMap(marker, markerClicked, popupFactory)}
+      {guiMap}
 
       <div id="selectdiv" style={{ textAlign: "center" }}>
 

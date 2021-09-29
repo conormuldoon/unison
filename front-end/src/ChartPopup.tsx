@@ -24,7 +24,11 @@ export function createPopupFactory(uri: string, curVar: string, name: string) {
   }
 }
 
-export type ChartData = Record<string, unknown>[];
+
+export type ChartData = {
+  date: string;
+  [key: string]: string|number|Record<string, unknown>;
+}[];
 
 export interface PopupProps {
 

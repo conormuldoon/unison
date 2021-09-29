@@ -4,7 +4,6 @@ import PropTypes from 'prop-types';
 import React, { useState, useEffect } from 'react';
 import { Map, Marker, TileLayer } from 'react-leaflet';
 
-//import ChartPopup from './ChartPopup';
 
 
 let uri = require('./2000px-Map_marker.png');
@@ -23,18 +22,28 @@ export type MapMarker = {
   position: [number, number];
 }
 
-export type PopupFactory = ((closePopup: () => void) => React.ReactNode) | null;
+export const DEFAULT_ZOOM = 12;
+
+export type PopupFactory = ((closePopup: () => void) => React.ReactNode);
+
+export type MapFactory = (marker: MapMarker[] | null,
+  markerClicked: (location: string) => void,
+  popupFactory?: PopupFactory) => JSX.Element;
 
 
-export function createMapFactory(mapCentre: [number, number]) {
+const tileLayer = <TileLayer
+  attribution='&copy; <a href="https://osm.org/copyright">OpenStreetMap</a> contributors'
+  url='https://{s}.tile.osm.org/{z}/{x}/{y}.png'
+/>;
 
-  return function mapFactory(marker: MapMarker[] | null,
-    markerClicked: (location: string) => void,
-    popupFactory: PopupFactory): JSX.Element {
+export function createMapFactory(mapCentre: [number, number]): MapFactory {
+
+  return function mapFactory(marker, markerClicked, popupFactory) {
 
     return <LeafletMap marker={marker}
       markerCallback={markerClicked}
       mapCentre={mapCentre} popupFactory={popupFactory} />;
+
   }
 
 }
@@ -59,7 +68,8 @@ export interface MapProps {
   /**
    * An optional factory that creates chart popup components.
    */
-  popupFactory: PopupFactory;
+  popupFactory?: PopupFactory;
+
 
 }
 
@@ -103,11 +113,9 @@ function LeafletMap({ markerCallback, mapCentre, marker, popupFactory }: MapProp
   }
 
   return (
-    <Map center={mapCentre} zoom={12} dragging={dragging} >
-      <TileLayer
-        attribution='&copy; <a href="https://osm.org/copyright">OpenStreetMap</a> contributors'
-        url='https://{s}.tile.osm.org/{z}/{x}/{y}.png'
-      />
+    <Map center={mapCentre} zoom={DEFAULT_ZOOM} dragging={dragging} >
+
+      {tileLayer}
 
       {marker && marker.map((mkr) =>
         <Marker key={mkr.name} position={mkr.position} onClick={mCallback.bind(this, mkr.name)} icon={image} />
