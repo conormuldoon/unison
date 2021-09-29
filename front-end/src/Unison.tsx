@@ -174,7 +174,7 @@ function Unison({ createMap, logoLeft, logoRight }: UnisonProps): JSX.Element {
 
 
     const newMarker: MapMarker[] = [];
-
+    option.length = 0;
     for (let i = 0; i < n; i++) {
       option.push(locationArray[i].properties.name);
       const pos: [number, number] = [locationArray[i].geometry.coordinates[1], locationArray[i].geometry.coordinates[0]];
@@ -190,7 +190,7 @@ function Unison({ createMap, logoLeft, logoRight }: UnisonProps): JSX.Element {
 
 
     } else {
-      option.length = 0;
+
       setMarker([]);
     }
 
