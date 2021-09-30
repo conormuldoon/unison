@@ -136,7 +136,7 @@ const option: string[] = [];
  * @component
  * 
  */
-const Unison: React.FC<UnisonProps> = ({ createMap, children })=> {
+const Unison: React.FC<UnisonProps> = ({ createMap, children }) => {
 
 
   const [fromDate, setFromDate] = useState(today());
@@ -193,6 +193,7 @@ const Unison: React.FC<UnisonProps> = ({ createMap, children })=> {
     setCurLoc(null);
     setCurVar(null);
     varOpt.length = 0;
+    option.length = 0;
     locationMap.clear();
 
   }
@@ -201,6 +202,7 @@ const Unison: React.FC<UnisonProps> = ({ createMap, children })=> {
 
     const n = list.length;
 
+    locationMap.clear();
 
     for (let i = 0; i < n; i++) {
 
