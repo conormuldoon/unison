@@ -98,4 +98,6 @@ To change the model, edit the (HARMONIE-AROME) endpoint URI `harmonie.uri` and t
 ## Acknowledgement
 Unison has been developed as part of the Acclimatize Project (https://www.acclimatize.eu/). The Acclimatize project is part funded by the European Regional Development Fund through the Ireland Wales Cooperation programme.
 
-![Acclimatize logo](https://raw.githubusercontent.com/conormuldoon/unison/master/front-end/src/Acclimatize-Logo.png) ![Partners logo](https://github.com/conormuldoon/unison/blob/master/front-end/src/partners-logos.jpg?raw=true)
+![Acclimatize logo](https://raw.githubusercontent.com/conormuldoon/unison/master/front-end/src/Acclimatize-Logo.png) 
+
+![Partners logo](https://github.com/conormuldoon/unison/blob/master/front-end/src/partners-logos.jpg?raw=true)
