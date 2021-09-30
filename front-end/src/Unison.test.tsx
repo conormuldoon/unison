@@ -8,8 +8,6 @@ import Unison from './Unison';
 import { createMapFactory } from './LeafletMap';
 
 
-
-
 const unisonModel = {
     "_links": {
         "self": [
@@ -125,7 +123,7 @@ describe('Unison', () => {
     it('renders without crashing', async () => {
 
 
-        render(<Unison createMap={mapFactory} logoLeft={null} logoRight={null} />);
+        render(<Unison createMap={mapFactory} />);
         await screen.findByRole('button', { name: 'CSV' });
 
 
@@ -140,7 +138,7 @@ describe('Unison', () => {
         global.Date.now = mockDateNow;
 
         try {
-            const { container } = render(<Unison createMap={mapFactory} logoLeft={null} logoRight={null} />);
+            const { container } = render(<Unison createMap={mapFactory} />);
             await screen.findByRole('button', { name: 'CSV' });
             expect(container).toMatchSnapshot();
         } finally {
@@ -151,7 +149,7 @@ describe('Unison', () => {
     });
 
     it('displays a button to remove the first location received', async () => {
-        render(<Unison createMap={mapFactory} logoLeft={null} logoRight={null} />);
+        render(<Unison createMap={mapFactory} />);
         await screen.findByRole('button', {
             name: 'Remove ' +
                 locationCollection.features[0].properties.name
@@ -159,7 +157,7 @@ describe('Unison', () => {
     });
 
     it('does not dispplay a remove button when no loctioos', async () => {
-        render(<Unison createMap={mapFactory} logoLeft={null} logoRight={null} />);
+        render(<Unison createMap={mapFactory} />);
         const removeButton = await screen.findByRole('button', {
             name: 'Remove ' +
                 locationCollection.features[0].properties.name
@@ -313,7 +311,7 @@ describe('Unison', () => {
         }];
 
 
-        render(<Unison createMap={mapFactory} logoLeft={null} logoRight={null} />);
+        render(<Unison createMap={mapFactory} />);
 
         fetchMock.mockResponses(
             JSON.stringify(precipData),
