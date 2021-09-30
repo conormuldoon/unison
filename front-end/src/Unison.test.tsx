@@ -156,7 +156,8 @@ describe('Unison', () => {
         });
     });
 
-    it('does not dispplay a remove button when no loctioos', async () => {
+    
+    it('does not dispplay a remove button when no loctions', async () => {
         render(<Unison createMap={mapFactory} />);
         const removeButton = await screen.findByRole('button', {
             name: 'Remove ' +
@@ -183,9 +184,11 @@ describe('Unison', () => {
 
         fetchMock.mockResponses(
             "",
+            "",
             JSON.stringify(unisonModel),
             JSON.stringify(emptyHALC),
-            JSON.stringify(emptyFC)
+            JSON.stringify(emptyFC),
+           
         );
 
         const alertSpy = jest.spyOn(window, 'alert');
