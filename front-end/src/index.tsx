@@ -32,5 +32,8 @@ const logoRight = createLogo(require('./partners-logos.jpg'));
 
 
 
-ReactDOM.render(<Unison createMap={createMapFactory(mapCentre)} logoLeft={logoLeft} logoRight={logoRight} />, document.getElementById('root'));
+ReactDOM.render(<Unison createMap={createMapFactory(mapCentre)}>
+    {logoLeft}
+    {logoRight}
+</Unison>, document.getElementById('root'));
 unregister();

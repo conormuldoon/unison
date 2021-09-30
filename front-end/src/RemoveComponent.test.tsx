@@ -3,7 +3,7 @@ enableFetchMocks();
 
 import "@testing-library/jest-dom/extend-expect";
 import fetchMock from 'jest-fetch-mock';
-import React from 'react';
+
 import { fireEvent, render, screen } from "@testing-library/react";
 import RemoveComponent from './RemoveComponent';
 

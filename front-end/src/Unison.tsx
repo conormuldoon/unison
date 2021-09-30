@@ -25,15 +25,6 @@ export interface UnisonProps {
    */
   createMap: MapFactory;
 
-  /** A logo displayed at the bottom of the screen. It will be displayed to the left
-   * if the logoRight prop is defined.
-   */
-  logoLeft?: React.ReactNode;
-
-  /** A logo displayed at the bottom of the screen. It will be displayed to the right
-   * if the logoLeft prop is defined.
-   */
-  logoRight?: React.ReactNode;
 }
 
 
@@ -145,7 +136,7 @@ const option: string[] = [];
  * @component
  * 
  */
-function Unison({ createMap, logoLeft, logoRight }: UnisonProps): JSX.Element {
+const Unison: React.FC<UnisonProps> = ({ createMap, children })=> {
 
 
   const [fromDate, setFromDate] = useState(today());
@@ -395,8 +386,7 @@ function Unison({ createMap, logoLeft, logoRight }: UnisonProps): JSX.Element {
 
       <div id="logos" style={{ textAlign: "center" }} >
 
-        {logoLeft}
-        {logoRight}
+        {children}
 
 
       </div>
@@ -456,8 +446,7 @@ Unison.propTypes = {
 
 
   createMap: PropTypes.func.isRequired,
-  logoLeft: PropTypes.any,
-  logoRight: PropTypes.any,
+
 
 }
 
