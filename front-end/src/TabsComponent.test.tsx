@@ -1,5 +1,3 @@
-import { enableFetchMocks } from 'jest-fetch-mock';
-enableFetchMocks();
 
 import "@testing-library/jest-dom/extend-expect";
 import { render, screen } from "@testing-library/react";

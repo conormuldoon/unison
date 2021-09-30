@@ -70,7 +70,7 @@ function RemoveComponent({ obtainData, hideAdd, href, name }:
       if (response.status === HttpStatus.FORBIDDEN) {
         csrfT = csrfToken();
       } else {
-        // CSRF disabled
+        // CSRF is disabled.
         handleResponse(response.ok, response.status);
         return;
       }

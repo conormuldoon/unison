@@ -6,6 +6,7 @@ import fetchMock from 'jest-fetch-mock';
 import { fireEvent, render, screen, waitForElementToBeRemoved } from "@testing-library/react";
 import Unison from './Unison';
 import { createMapFactory } from './LeafletMap';
+import HttpStatus from 'http-status-codes';
 
 
 const unisonModel = {
@@ -183,7 +184,7 @@ describe('Unison', () => {
         }
 
         fetchMock.mockResponses(
-            "",
+            ['', { status: HttpStatus.FORBIDDEN }],
             "",
             JSON.stringify(unisonModel),
             JSON.stringify(emptyHALC),
