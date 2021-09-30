@@ -29,7 +29,14 @@ export interface UnisonProps {
 
 
 type ModelLink = {
+  /**
+   * The self URI for the HAL location collection.
+   */
   "self": string,
+
+  /**
+   * The contains URI for the HAL location collection.
+   */
   "contains": string
 
 }
@@ -55,6 +62,13 @@ class ResponseError extends Error {
   }
 }
 
+/**
+ * Throws an error for the endpoint if the was response was not ok.
+ * 
+ * @param ok True if the response was ok and false otherwise.
+ * @param endpoint The endpoint the resquest was made to.
+ * @param status The HTTP status code.
+ */
 function checkResponse(ok: boolean, endpoint: string, status: number) {
   if (!ok)
     throw new ResponseError('Bad response for ' + endpoint, status);
@@ -62,6 +76,12 @@ function checkResponse(ok: boolean, endpoint: string, status: number) {
 
 const OMIT = 'omit';
 
+/**
+ * Creates request options for GeoJSON and HAL requests.
+ * 
+ * @param accept Used in creating the accept header.
+ * @returns Options for the credentials and headers.
+ */
 function jsonHeader(accept: 'geo' | 'hal'): RequestInit {
   return {
     credentials: OMIT,
@@ -94,10 +114,23 @@ function createLinkMap(listItem: Link) {
   return itemMap;
 }
 
+/**
+ * Replaces spaces with underscores.
+ * 
+ * @param s The source string.
+ * @returns The converted string.
+ */
 const spaceToUnderscore = (s: string) => {
   return s.replace(/ /g, '_')
 }
 
+/**
+ * Uses upper case letters to split strings can creating weather variable option names to display to the user
+ * in capital case. For example, the string 'WindDirection' would be converted to 'Wind Direction' 
+ * 
+ * @param s The source string.
+ * @returns The converted string.
+ */
 function optionName(s: string) {
   let optName = '';
   let sw = 0;
@@ -112,6 +145,12 @@ function optionName(s: string) {
   return optName;
 }
 
+/**
+ * Converts the HAL relation keys for links received to weather variable options to display to the user.
+ * 
+ * @param vo An array that the weather variable options are pushed to.
+ * @param link The HAL links.
+ */
 function variableOptions(vo: string[], link: Link) {
   for (const rel in link) {
     if (SELF === rel) {
