@@ -5,16 +5,16 @@ import HttpStatus from 'http-status-codes';
 import PropTypes from 'prop-types';
 
 
-export function createRemoveFactory(obtainData: () => void, name: string, href?: string) {
+export function createRemoveFactory(obtainData: () => void, name: string, href: string) {
 
-  return function removeFactory(hideAdd: () => void): JSX.Element | undefined {
-    if (href) {
-      return <RemoveComponent obtainData={obtainData}
-        hideAdd={hideAdd}
-        href={href}
-        name={name}
-      />;
-    }
+  return function removeFactory(hideAdd: () => void): JSX.Element {
+
+    return <RemoveComponent obtainData={obtainData}
+      hideAdd={hideAdd}
+      href={href}
+      name={name}
+    />;
+
   }
 }
 
@@ -37,6 +37,7 @@ export interface RemoveProps {
 
 const DELETE = 'DELETE';
 
+
 /**
  * A component to enable the user to remove a location from being tracked.
  * 
@@ -45,13 +46,34 @@ const DELETE = 'DELETE';
 function RemoveComponent({ obtainData, hideAdd, href, name }:
   RemoveProps): JSX.Element {
 
+  function handleResponse(ok: boolean, status: number) {
+    if (ok) {
+      alert(name + ' was removed.');
+      obtainData();
+    } else if (status === HttpStatus.UNAUTHORIZED) {
+      alert('Incorrect user name or password');
+    }
+    else {
+      console.log(status)
+      problemConnecting();
+    }
+  }
+
+
   async function removeRequest() {
 
     let csrfT = csrfToken();
 
     if (csrfT === '') {
-      await fetch(href, { method: DELETE });
-      csrfT = csrfToken();
+      const response = await fetch(href, { method: DELETE });
+
+      if (response.status === HttpStatus.FORBIDDEN) {
+        csrfT = csrfToken();
+      } else {
+        // CSRF disabled
+        handleResponse(response.ok, response.status);
+        return;
+      }
     }
 
     const response = await fetch(href, {
@@ -61,20 +83,12 @@ function RemoveComponent({ obtainData, hideAdd, href, name }:
       })
     });
 
-    if (response.ok) {
-
-      alert(name + ' was removed.');
-      obtainData();
-
-    } else if (response.status === HttpStatus.UNAUTHORIZED) {
-      alert('Incorrect user name or password');
-    } else if (response.status === HttpStatus.FORBIDDEN) {
+    if (response.status === HttpStatus.FORBIDDEN) {
 
       alert('You do not have permission to delete ' + name + '. You may need to enter your login details.');
 
     } else {
-      console.log(response.status)
-      problemConnecting();
+      handleResponse(response.ok, response.status);
     }
 
   }
