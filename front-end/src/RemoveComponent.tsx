@@ -34,6 +34,9 @@ export interface RemoveProps {
   name: string;
 
 }
+
+const CSRF_SUFFIX = "/csrfToken";
+
 /**
  * A component to enable the user to remove a location from being tracked.
  * 
@@ -44,10 +47,17 @@ function RemoveComponent({ obtainData, hideAdd, href, name }:
 
   async function removeRequest() {
 
+    let csrfT = csrfToken();
+
+    if (csrfT === '') {
+      await fetch(href + CSRF_SUFFIX);
+      csrfT = csrfToken();
+    }
+
     const response = await fetch(href, {
       method: 'DELETE',
       headers: new Headers({
-        'X-XSRF-TOKEN': csrfToken()
+        'X-XSRF-TOKEN': csrfT
       })
     });
 
@@ -59,7 +69,9 @@ function RemoveComponent({ obtainData, hideAdd, href, name }:
     } else if (response.status === HttpStatus.UNAUTHORIZED) {
       alert('Incorrect user name or password');
     } else if (response.status === HttpStatus.FORBIDDEN) {
-      alert('You do not have permission to delete ' + name + '. You may need to enter your login details. Please try again.');
+
+      alert('You do not have permission to delete ' + name + '. You may need to enter your login details.');
+
     } else {
       console.log(response.status)
       problemConnecting();
