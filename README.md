@@ -95,5 +95,7 @@ It is recommended that the `spring.datasource.password` property be changed to a
 
 To change the model, edit the (HARMONIE-AROME) endpoint URI `harmonie.uri` and the associated time zone `harmonie.timezone` properties in the `back-end/src/main/resources/application.properties` file and restart the server. Alternatively, if running a packaged version of the application, override the `harmonie.uri` and `harmonie.timezone` properties using Java system properties or the `--harmonie.uri` and `--harmonie.timezone` arguments for main.
 
-## Acknowlegement
+## Acknowledgement
 Unison has been developed as part of the Acclimatize Project (https://www.acclimatize.eu/). The Acclimatize project is part funded by the European Regional Development Fund through the Ireland Wales Cooperation programme.
+
+![Acclimatize logo](https://raw.githubusercontent.com/conormuldoon/unison/master/front-end/src/Acclimatize-Logo.png) ![Partners logo](https://github.com/conormuldoon/unison/blob/master/front-end/src/partners-logos.jpg?raw=true)
