@@ -35,7 +35,7 @@ export interface RemoveProps {
 
 }
 
-const CSRF_SUFFIX = "/csrfToken";
+const DELETE = 'DELETE';
 
 /**
  * A component to enable the user to remove a location from being tracked.
@@ -50,12 +50,12 @@ function RemoveComponent({ obtainData, hideAdd, href, name }:
     let csrfT = csrfToken();
 
     if (csrfT === '') {
-      await fetch(href + CSRF_SUFFIX);
+      await fetch(href, { method: DELETE });
       csrfT = csrfToken();
     }
 
     const response = await fetch(href, {
-      method: 'DELETE',
+      method: DELETE,
       headers: new Headers({
         'X-XSRF-TOKEN': csrfT
       })

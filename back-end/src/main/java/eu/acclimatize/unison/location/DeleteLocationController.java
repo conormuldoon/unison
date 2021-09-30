@@ -24,8 +24,6 @@ public class DeleteLocationController {
 	private LocationRepository locationRepository;
 	private LocationService locationService;
 
-	private static final String CSRF_MAPPING = MappingConstant.SPECIFIC_LOCATION + "/csrfToken";
-
 	/**
 	 * Creates an instance of DeleteLocationController.
 	 * 
@@ -35,16 +33,6 @@ public class DeleteLocationController {
 	public DeleteLocationController(LocationRepository locationRepository, LocationService locationService) {
 		this.locationRepository = locationRepository;
 		this.locationService = locationService;
-
-	}
-
-	/**
-	 * A protected endpoint used to obtain a CSRF token by the remove location
-	 * React component if a CSRF token is not already present on the client.
-	 */
-	@RolesAllowed(Constant.ROLL_USER)
-	@GetMapping(CSRF_MAPPING)
-	public void csrfToken() {
 
 	}
 
