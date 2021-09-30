@@ -59,7 +59,7 @@ function RemoveComponent({ obtainData, hideAdd, href, name }:
     } else if (response.status === HttpStatus.UNAUTHORIZED) {
       alert('Incorrect user name or password');
     } else if (response.status === HttpStatus.FORBIDDEN) {
-      alert('You do not have permission to delete ' + name + '.');
+      alert('You do not have permission to delete ' + name + '. You may need to enter your login details. Please try again.');
     } else {
       console.log(response.status)
       problemConnecting();
