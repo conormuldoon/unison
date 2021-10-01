@@ -406,20 +406,23 @@ const Unison: React.FC<UnisonProps> = ({ createMap, children }) => {
     guiMap = createMap(marker, markerClicked);
   }
 
-  let arc = null;
-  if (modelLink) {
-    let createRemove = null;
 
-
+  function buildRemoveFactory() {
     if (curLoc) {
 
       const linkMap = locationMap.get(curLoc);
       if (linkMap) {
         const href = linkMap.get(SELF);
         if (href)
-          createRemove = createRemoveFactory(obtainData, curLoc, href);
+          return createRemoveFactory(obtainData, curLoc, href);
       }
     }
+  }
+
+
+  let arc;
+  if (modelLink) {
+    const createRemove = buildRemoveFactory();
     arc = <ARLocationComponent createLocation={createLocationFactory(obtainData, modelLink.self, modelLink.contains)}
       createRemove={createRemove} />
   }
