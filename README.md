@@ -11,7 +11,7 @@ Unison requires Java 11 to operate. Download the jar file from the [latest relea
 
 ### From source
 
-#### Start the back-end
+#### Compile and start the back-end
 
 ```
 cd back-end
@@ -21,6 +21,7 @@ Wait until the application has started and if not using the `default.username` a
 
 #### Start the front-end
 
+The current version of Unison uses Yarn Zero-Installs, so there is no need to run `yarn install`.
 ```
 cd front-end
 yarn start
