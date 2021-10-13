@@ -23,9 +23,6 @@ Wait until the application has started and if not using the `default.username` a
 
 ```
 cd front-end
-```
-If not previously run: `yarn install`
-```
 yarn start
 ```
 
@@ -45,7 +42,7 @@ cd back-end
 ```
 If not previously packaged: `./mvnw clean compile package`
 ```
-java -cp target/unison-server-0.9.0.jar -Dloader.main=eu.acclimatize.unison.user.UserConsole org.springframework.boot.loader.PropertiesLauncher
+java -cp target/unison-server-0.9.1-SNAPSHOT.jar -Dloader.main=eu.acclimatize.unison.user.UserConsole org.springframework.boot.loader.PropertiesLauncher
 ```
 
 Enter the user credentials (if the user name already exists, the password will be updated).

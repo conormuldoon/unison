@@ -1,4 +1,4 @@
-@import "../node_modules/leaflet/dist/leaflet.css";
+@import "leaflet/dist/leaflet.css";
 
 .App {
   text-align: center;

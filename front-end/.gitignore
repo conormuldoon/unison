@@ -32,3 +32,12 @@ yarn-error.log*
 
 # stryker temp files
 .stryker-tmp
+
+# Using Zero-Installs with Yarn 3.0.2
+.yarn/*
+!.yarn/cache
+!.yarn/patches
+!.yarn/plugins
+!.yarn/releases
+!.yarn/sdks
+!.yarn/versions

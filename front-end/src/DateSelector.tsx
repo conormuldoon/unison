@@ -2,7 +2,6 @@
 import DayPickerInput from 'react-day-picker/DayPickerInput';
 import PropTypes from 'prop-types';
 import 'react-day-picker/lib/style.css';
-import { formatDate, parseDate } from 'react-day-picker/moment';
 
 import { FORMAT } from './Constant';
 
@@ -36,8 +35,6 @@ function DateSelector({ label, dateValue, handleDayChange }: SelectorProps): JSX
       <DayPickerInput
 
         format={FORMAT}
-        formatDate={formatDate}
-        parseDate={parseDate}
         value={dateValue}
         onDayChange={handleDayChange}
 

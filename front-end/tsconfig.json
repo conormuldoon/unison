@@ -19,15 +19,11 @@
     "isolatedModules": true,
     "noEmit": true,
     "jsx": "react-jsx",
-    "noImplicitThis": false,
-    "typeRoots": [
-      "node_modules/@types",
-      "src/typings"
-    ]
+    "noImplicitThis": false
   },
   "include": [
-    "src/*.tsx",
-    "src/*.ts"
+    "src/**/*.tsx",
+    "src/**/*.ts",
   ],
   "typedocOptions": {
     "out": "docs"
