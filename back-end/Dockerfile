@@ -22,8 +22,9 @@ COPY --from=build ${DEPENDENCY}/BOOT-INF/classes /app
 EXPOSE 8080
 
 RUN apt-get update
-RUN apt-get install -y gnupg wget
-RUN wget --quiet -O - https://www.postgresql.org/media/keys/ACCC4CF8.asc | apt-key add -
+RUN apt-get install -y gnupg curl
+RUN curl -O https://www.postgresql.org/media/keys/ACCC4CF8.asc
+RUN apt-key add ACCC4CF8.asc
 RUN apt-get update
 RUN apt-get install -y postgresql-client
 COPY entrypoint.sh .

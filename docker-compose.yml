@@ -14,9 +14,6 @@ services:
       - db
     environment:
       SPRING_DATASOURCE_URL: jdbc:postgresql://db:5432/harmonie
-    networks:
-      - back-end
-      - front-end
     
 
   react-app:
@@ -28,8 +25,6 @@ services:
     restart: always
     depends_on:
       - server
-    networks:
-      - front-end  
   
   db:
     image: postgis/postgis
@@ -42,13 +37,9 @@ services:
     volumes:
       - db-data:/var/lib/postgresql/unison-data
       - ./back-end/src/main/resources/pg_pgis_schema.sql:/docker-entrypoint-initdb.d/init.sql
-    networks:
-      - back-end
 
 volumes:
   db-data:
-networks:
-  back-end:
-  front-end:
+
  
 
