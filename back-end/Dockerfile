@@ -1,17 +1,14 @@
-FROM openkbs/jdk11-mvn-py3 as build
+FROM maven:3.8.3-jdk-11 as build
 
 WORKDIR /app
 
 COPY pom.xml .
 COPY src src
 
-RUN sudo chown -R $(whoami):$(whoami) .
-
 RUN mvn package -DskipTests
 RUN mkdir -p target/dependency && (cd target/dependency; jar -xf ../*.jar)
 
 FROM openjdk:11-jdk-slim
-
 ARG DEPENDENCY=/app/target/dependency
 
 COPY --from=build ${DEPENDENCY}/BOOT-INF/lib /app/lib	
