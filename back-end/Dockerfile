@@ -5,10 +5,9 @@ WORKDIR /app
 COPY pom.xml .
 COPY src src
 
-RUN (cd src/main/python; python switch_db_config.py)
+RUN sudo chown -R $(whoami):$(whoami) .
 
 RUN mvn package -DskipTests
-
 RUN mkdir -p target/dependency && (cd target/dependency; jar -xf ../*.jar)
 
 FROM openjdk:11-jdk-slim
