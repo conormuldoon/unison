@@ -4,6 +4,8 @@ dist: bionic
 matrix:
   include:
     - language: node_js
+      node_js:
+        - "stable"
       cache:
         npm: false 
         directories:
@@ -19,7 +21,6 @@ matrix:
       before_script: 
         - cd front-end
       script:
-        - yarn install
         - yarn test
         - yarn build
 
