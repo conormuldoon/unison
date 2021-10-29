@@ -19,7 +19,7 @@ import eu.acclimatize.unison.ItemListFinder;
  */
 public class CSVResponder {
 
-	private static final String CSV_CONTENT = "text/csv";
+	private static final String CSV_CONTENT = "text/csv; charset=ISO-8859-1";
 	private ItemListFinder<? extends HarmonieItem> itemListFinder;
 	private String header;
 
