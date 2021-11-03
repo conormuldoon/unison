@@ -14,8 +14,7 @@ export interface ARLocationProps {
 }
 
 /**
- * A component that enables locations for tracking to be either added or removed. 
- * The user name and password is posted to the server and the obtain data callback is executed if successful.
+ * A component that enables locations for tracking to be either added or removed.
  * 
  * @component
  * 
