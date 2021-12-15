@@ -170,6 +170,7 @@ const locationMap = new Map<string, LinkMap>();
 const varOpt: string[] = [];
 const option: string[] = [];
 
+
 /**
  * Application component for Unison. Once mounted, it connects to the back-end to receive a list of the locations being tracked.
  * 

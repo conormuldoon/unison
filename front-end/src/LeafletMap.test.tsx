@@ -1,7 +1,8 @@
 import { enableFetchMocks } from 'jest-fetch-mock';
 enableFetchMocks();
 
-import LeafletMap, { MapMarker } from './LeafletMap';
+import LeafletMap, { MapMarkerFactory } from './LeafletMap';
+import { Marker, Tooltip } from 'react-leaflet';
 
 import { render, fireEvent, screen } from "@testing-library/react";
 import fetchMock from 'jest-fetch-mock';
@@ -72,7 +73,12 @@ it('displays popup', async () => {
 
 
   // position: [lat, lon]
-  const marker: MapMarker[] = [{ name: location.name, position: [53.308441, -6.223682] }];
+  const marker: MapMarkerFactory[] = [{
+    createMarker: function (component, callback, image): JSX.Element {
+      return <Marker key={location.name} position={[53.308441, -6.223682]} onClick={callback.bind(component, location.name)} icon={image} >
+        <Tooltip>{location.name}</Tooltip>
+      </Marker>
+    }}];
 
   const fromDate = '1-2-2018';
   const toDate = '7-10-2019';
