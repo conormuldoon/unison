@@ -2,7 +2,7 @@
 import Leaflet from 'leaflet';
 import PropTypes from 'prop-types';
 import React, { useState, useEffect } from 'react';
-import { Map, Marker, TileLayer } from 'react-leaflet';
+import { Map, Marker, TileLayer, Tooltip } from 'react-leaflet';
 
 
 
@@ -116,7 +116,9 @@ function LeafletMap({ markerCallback, mapCentre, marker, popupFactory }: MapProp
       />
 
       {marker.map((mkr) =>
-        <Marker key={mkr.name} position={mkr.position} onClick={mCallback.bind(this, mkr.name)} icon={image} />
+        <Marker key={mkr.name} position={mkr.position} onClick={mCallback.bind(this, mkr.name)} icon={image} >
+          <Tooltip>{mkr.name}</Tooltip>
+        </Marker>
 
       )}
       <div id="marginclickdiv" >
