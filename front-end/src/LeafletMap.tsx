@@ -2,7 +2,7 @@
 import Leaflet from 'leaflet';
 import PropTypes from 'prop-types';
 import React, { useState, useEffect } from 'react';
-import { Map, Marker, TileLayer, Tooltip } from 'react-leaflet';
+import { Map, TileLayer } from 'react-leaflet';
 
 
 
@@ -17,16 +17,18 @@ const image = new Leaflet.Icon({
 })
 
 
-export type MapMarker = {
-  name: string;
-  position: [number, number];
+export type MapMarkerFactory = {
+  createMarker: (component: JSX.Element,
+    callback: (name: string) => void,
+    image: Leaflet.Icon)
+    => JSX.Element;
 }
 
 export const DEFAULT_ZOOM = 12;
 
 export type PopupFactory = ((closePopup: () => void) => React.ReactNode);
 
-export type MapFactory = (marker: MapMarker[],
+export type MapFactory = (marker: MapMarkerFactory[],
   markerClicked: (location: string) => void,
   popupFactory?: PopupFactory) => JSX.Element;
 
@@ -58,7 +60,7 @@ export interface MapProps {
   /**
    * An array of markers that are displayed on the map.
    */
-  marker: MapMarker[];
+  marker: MapMarkerFactory[];
 
   /**
    * An optional factory that creates chart popup components.
@@ -115,12 +117,8 @@ function LeafletMap({ markerCallback, mapCentre, marker, popupFactory }: MapProp
         url='https://{s}.tile.osm.org/{z}/{x}/{y}.png'
       />
 
-      {marker.map((mkr) =>
-        <Marker key={mkr.name} position={mkr.position} onClick={mCallback.bind(this, mkr.name)} icon={image} >
-          <Tooltip>{mkr.name}</Tooltip>
-        </Marker>
+      {marker.map((mkrf) => mkrf.createMarker(this, mCallback, image))}
 
-      )}
       <div id="marginclickdiv" >
         {popupComponent}
       </div>

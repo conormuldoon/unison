@@ -9,7 +9,8 @@ import DateSelector from './DateSelector';
 import { today, tomorrow, problemConnecting, varMapping } from './Util';
 import HttpStatus from 'http-status-codes';
 import PropTypes from 'prop-types';
-import { MapFactory, MapMarker } from './LeafletMap';
+import { MapFactory, MapMarkerFactory } from './LeafletMap';
+import { Marker, Tooltip } from 'react-leaflet';
 
 import { createLocationFactory } from './LocationForm';
 
@@ -180,7 +181,7 @@ const Unison: React.FC<UnisonProps> = ({ createMap, children }) => {
 
   const [fromDate, setFromDate] = useState(today());
   const [toDate, setToDate] = useState(tomorrow());
-  const [marker, setMarker] = useState<MapMarker[]>([]);
+  const [marker, setMarker] = useState<MapMarkerFactory[]>([]);
   const [curLoc, setCurLoc] = useState<string | null>(null);
   const [curVar, setCurVar] = useState<string | null>(null);
   const [modelLink, setModelLink] = useState<ModelLink | null>(null);
@@ -203,14 +204,22 @@ const Unison: React.FC<UnisonProps> = ({ createMap, children }) => {
     const n = locationArray.length;
 
 
-    const newMarker: MapMarker[] = [];
+    const newMarker: MapMarkerFactory[] = [];
     option.length = 0;
     for (let i = 0; i < n; i++) {
       option.push(locationArray[i].properties.name);
       const pos: [number, number] = [locationArray[i].geometry.coordinates[1], locationArray[i].geometry.coordinates[0]];
 
       const properties = locationArray[i].properties;
-      newMarker.push({ name: properties.name, position: pos });
+      newMarker.push({
+
+        createMarker: function (component, callback, image):JSX.Element {
+          return <Marker key={properties.name} position={pos} onClick={callback.bind(component, properties.name)} icon={image} >
+            <Tooltip>{properties.name}</Tooltip>
+          </Marker>
+
+        }
+      });
 
     }
 
