@@ -212,14 +212,10 @@ const Unison: React.FC<UnisonProps> = ({ createMap, children }) => {
       const pos: [number, number] = [locationArray[i].geometry.coordinates[1], locationArray[i].geometry.coordinates[0]];
 
       const properties = locationArray[i].properties;
-      newMarker.push({
-
-        createMarker: function (component, callback, image):JSX.Element {
-          return <Marker key={properties.name} position={pos} onClick={callback.bind(component, properties.name)} icon={image} >
-            <Tooltip>{properties.name}</Tooltip>
-          </Marker>
-
-        }
+      newMarker.push(function (component, callback, image): JSX.Element {
+        return <Marker key={properties.name} position={pos} onClick={callback.bind(component, properties.name)} icon={image} >
+          <Tooltip>{properties.name}</Tooltip>
+        </Marker>
       });
 
     }

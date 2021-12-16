@@ -17,12 +17,11 @@ const image = new Leaflet.Icon({
 })
 
 
-export type MapMarkerFactory = {
-  createMarker: (component: JSX.Element,
-    callback: (name: string) => void,
-    image: Leaflet.Icon)
-    => JSX.Element;
-}
+export type MapMarkerFactory = (component: JSX.Element,
+  callback: (name: string) => void,
+  image: Leaflet.Icon)
+  => JSX.Element;
+
 
 export const DEFAULT_ZOOM = 12;
 
@@ -117,7 +116,7 @@ function LeafletMap({ markerCallback, mapCentre, marker, popupFactory }: MapProp
         url='https://{s}.tile.osm.org/{z}/{x}/{y}.png'
       />
 
-      {marker.map((mkrf) => mkrf.createMarker(this, mCallback, image))}
+      {marker.map((createMarker) => createMarker(this, mCallback, image))}
 
       <div id="marginclickdiv" >
         {popupComponent}
