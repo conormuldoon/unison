@@ -371,8 +371,10 @@ const Unison: React.FC<UnisonProps> = ({ createMap, children }) => {
       const linkMap = locationMap.get(curLoc);
       if (linkMap) {
         const href = linkMap.get(varMapping(curVar));
-        const template = parser.parse(href);
-        return template.expand({ name: curLoc, fromDate: fromDate, toDate: toDate });
+        if (href) {
+          const template = parser.parse(href);
+          return template.expand({ name: curLoc, fromDate: fromDate, toDate: toDate });
+        }
       }
     }
 
@@ -381,20 +383,22 @@ const Unison: React.FC<UnisonProps> = ({ createMap, children }) => {
 
   const handleCSV = async () => {
 
+    const uri = expandLink();
+    if (uri) {
+      const response = await fetch(uri, {
+        credentials: OMIT
+      });
 
-    const response = await fetch(expandLink(), {
-      credentials: OMIT
-    });
-
-    if (response.ok && curVar && curLoc) {
-      const blob = await response.blob();
-      const a = document.createElement('a');
-      a.href = window.URL.createObjectURL(blob);
-      a.download = spaceToUnderscore(curLoc) + '_' + spaceToUnderscore(curVar) + '_'
-        + fromDate + "_" + toDate + '.csv';
-      a.click();
-    } else if (response.status === HttpStatus.GATEWAY_TIMEOUT) {
-      problemConnecting();
+      if (response.ok && curVar && curLoc) {
+        const blob = await response.blob();
+        const a = document.createElement('a');
+        a.href = window.URL.createObjectURL(blob);
+        a.download = spaceToUnderscore(curLoc) + '_' + spaceToUnderscore(curVar) + '_'
+          + fromDate + "_" + toDate + '.csv';
+        a.click();
+      } else if (response.status === HttpStatus.GATEWAY_TIMEOUT) {
+        problemConnecting();
+      }
     }
   }
 
@@ -406,8 +410,10 @@ const Unison: React.FC<UnisonProps> = ({ createMap, children }) => {
   let guiMap;
   if (curLoc && curVar) {
     const uri = expandLink();
-    const popupFactory = createPopupFactory(uri, curVar, curLoc);
-    guiMap = createMap(marker, markerClicked, popupFactory)
+    if (uri) {
+      const popupFactory = createPopupFactory(uri, curVar, curLoc);
+      guiMap = createMap(marker, markerClicked, popupFactory)
+    }
   } else {
     guiMap = createMap(marker, markerClicked);
   }
