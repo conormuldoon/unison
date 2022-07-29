@@ -72,3 +72,13 @@
        add constraint FK20kfrl1yb9dujp553x6uiutdh 
        foreign key (user_userName) 
        references UserInformation;
+
+    alter table UnknownWV 
+       add constraint FKnrr32vxiy8rql3hxsqmqqpvfs 
+       foreign key (location_name) 
+       references Location;
+
+    alter table UnknownWV_item 
+       add constraint FKc1oe7sqpmcwq3n91j5xetpwib 
+       foreign key (UnknownWV_fromHour, UnknownWV_location_name, UnknownWV_weatherItem) 
+       references UnknownWV;

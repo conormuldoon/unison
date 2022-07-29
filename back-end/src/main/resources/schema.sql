@@ -80,13 +80,13 @@
        
        
     alter table UnknownWV 
-       add constraint FKnrr32vxiy8rql3hxsqmqqpvfs 
+       add constraint if not exists FKnrr32vxiy8rql3hxsqmqqpvfs 
        foreign key (location_name) 
        references Location;
        
     
     alter table UnknownWV_item 
-       add constraint FKc1oe7sqpmcwq3n91j5xetpwib 
+       add constraint if not exists FKc1oe7sqpmcwq3n91j5xetpwib 
        foreign key (UnknownWV_fromHour, UnknownWV_location_name, UnknownWV_weatherItem) 
        references UnknownWV;
     

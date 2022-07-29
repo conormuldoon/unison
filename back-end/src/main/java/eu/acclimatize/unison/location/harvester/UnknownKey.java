@@ -20,6 +20,10 @@ public class UnknownKey implements Serializable {
 	@ManyToOne
 	private Location location;
 
+	public UnknownKey() {
+		
+	}
+	
 	public UnknownKey(Date fromHour, Location location, String weatherItem) {
 		this.fromHour = fromHour;
 		this.location = location;

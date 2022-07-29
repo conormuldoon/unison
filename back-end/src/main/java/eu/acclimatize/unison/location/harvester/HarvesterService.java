@@ -117,10 +117,12 @@ public class HarvesterService {
 			}
 
 			storageService.store(precipitation, weather);
+			System.out.println("Uknown s: "+unknown.size());
 			storageService.storeUnknown(unknown);
 			precipitation.clear();
 			weather.clear();
 			unknown.clear();
+			System.out.println("Uknown s: "+unknown.size());
 
 		});
 
