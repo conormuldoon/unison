@@ -38,6 +38,21 @@
     );
 
 
+    create table if not exists UnknownWV (
+       fromHour timestamp not null,
+        weatherItem varchar(255) not null,
+        location_name varchar(255) not null,
+        primary key (fromHour, location_name, weatherItem)
+    );
+
+    
+    create table if not exists UnknownWV_item (
+       UnknownWV_fromHour timestamp not null,
+        UnknownWV_location_name varchar(255) not null,
+        UnknownWV_weatherItem varchar(255) not null,
+        item varchar(255)
+    );
+
     
     create table if not exists UserInformation (
        userName varchar(255) not null,
@@ -62,3 +77,16 @@
        add constraint if not exists FK20kfrl1yb9dujp553x6uiutdh 
        foreign key (user_userName) 
        references UserInformation;
+       
+       
+    alter table UnknownWV 
+       add constraint FKnrr32vxiy8rql3hxsqmqqpvfs 
+       foreign key (location_name) 
+       references Location;
+       
+    
+    alter table UnknownWV_item 
+       add constraint FKc1oe7sqpmcwq3n91j5xetpwib 
+       foreign key (UnknownWV_fromHour, UnknownWV_location_name, UnknownWV_weatherItem) 
+       references UnknownWV;
+    

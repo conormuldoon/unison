@@ -45,6 +45,8 @@ class HarvesterTests {
 		HourlyPrecipitationRepository pr = mock(HourlyPrecipitationRepository.class);
 		HourlyWeatherRepository wr = mock(HourlyWeatherRepository.class);
 
+		StorageService storageService = new StorageService(pr, wr, null);
+
 		Logger logger = mock(Logger.class);
 
 		SimpleDateFormat dateFormat = new SimpleDateFormat(Constant.HARMONIE_DATE_FORMAT);
@@ -62,8 +64,8 @@ class HarvesterTests {
 		LocationRepository lr = Mockito.mock(LocationRepository.class);
 		Location location = TestUtility.createLocation("New Location", null, 0, 0);
 		Mockito.when(lr.findById(Mockito.anyString())).thenReturn(Optional.of(location));
-		HarvesterService hs = new HarvesterService(lr, pr, wr, lrs, logger, dateFormat,
-				new UnisonServerApplication().executor());
+		HarvesterService hs = new HarvesterService(lr, lrs, logger, dateFormat,
+				new UnisonServerApplication().executor(), storageService);
 
 		hs.fetchAndStore(location);
 
@@ -88,8 +90,8 @@ class HarvesterTests {
 	 * @throws DocumentNotFoundException
 	 */
 	@Test
-	void testConvertorIrl() throws ParserConfigurationException, SAXException, IOException,
-			HarvestParseException, HarvestRequestException, DocumentNotFoundException {
+	void testConvertorIrl() throws ParserConfigurationException, SAXException, IOException, HarvestParseException,
+			HarvestRequestException, DocumentNotFoundException {
 		testParse("/TestIreland.xml", "Europe/Dublin");
 	}
 
@@ -130,8 +132,8 @@ class HarvesterTests {
 	 * @throws DocumentNotFoundException
 	 */
 	@Test
-	void testConvertorNor() throws ParserConfigurationException, SAXException, IOException,
-			HarvestParseException, HarvestRequestException, DocumentNotFoundException {
+	void testConvertorNor() throws ParserConfigurationException, SAXException, IOException, HarvestParseException,
+			HarvestRequestException, DocumentNotFoundException {
 		testParse("/TestNorway.xml", "Europe/Oslo");
 	}
 

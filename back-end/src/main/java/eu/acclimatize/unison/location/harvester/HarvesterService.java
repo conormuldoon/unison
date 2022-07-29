@@ -22,9 +22,7 @@ import org.w3c.dom.NodeList;
 import eu.acclimatize.unison.Cloud;
 import eu.acclimatize.unison.Constant;
 import eu.acclimatize.unison.HourlyPrecipitation;
-import eu.acclimatize.unison.HourlyPrecipitationRepository;
 import eu.acclimatize.unison.HourlyWeather;
-import eu.acclimatize.unison.HourlyWeatherRepository;
 import eu.acclimatize.unison.ItemKey;
 import eu.acclimatize.unison.PrecipitationValue;
 import eu.acclimatize.unison.WeatherValue;
@@ -45,8 +43,6 @@ public class HarvesterService {
 
 	private LocationRepository locationRepository;
 
-	private HourlyPrecipitationRepository precipitationRepository;
-	private HourlyWeatherRepository weatherRepository;
 	private DocumentRequestService lrs;
 
 	private List<HourlyPrecipitation> precipitation;
@@ -59,6 +55,10 @@ public class HarvesterService {
 	private Executor executor;
 
 	private Set<String> displayedUnknown;
+
+	private List<UnknownWV> unknown;
+
+	private StorageService storageService;
 
 	/**
 	 * Creates an instance of HarvesterService.
@@ -77,13 +77,11 @@ public class HarvesterService {
 	 * @param executor                Used to execute the data harvesting process on
 	 *                                a thread.
 	 */
-	public HarvesterService(LocationRepository locationRepository,
-			HourlyPrecipitationRepository precipitationRepository, HourlyWeatherRepository weatherRepository,
-			DocumentRequestService lrs, Logger logger, DateFormat harmonieDateFormat, Executor executor) {
+	public HarvesterService(LocationRepository locationRepository, DocumentRequestService lrs, Logger logger,
+			DateFormat harmonieDateFormat, Executor executor, StorageService storageService) {
 
 		this.locationRepository = locationRepository;
-		this.weatherRepository = weatherRepository;
-		this.precipitationRepository = precipitationRepository;
+
 		this.lrs = lrs;
 
 		precipitation = new ArrayList<>();
@@ -94,6 +92,10 @@ public class HarvesterService {
 		this.executor = executor;
 
 		displayedUnknown = new HashSet<>();
+
+		unknown = new ArrayList<>();
+
+		this.storageService = storageService;
 
 	}
 
@@ -114,9 +116,11 @@ public class HarvesterService {
 				Thread.currentThread().interrupt();
 			}
 
-			store(precipitation, weather);
+			storageService.store(precipitation, weather);
+			storageService.storeUnknown(unknown);
 			precipitation.clear();
 			weather.clear();
+			unknown.clear();
 
 		});
 
@@ -169,7 +173,7 @@ public class HarvesterService {
 		List<HourlyPrecipitation> hourlyPrecipitation = new ArrayList<>();
 		List<HourlyWeather> hourlyWeather = new ArrayList<>();
 		processDocument(document, hourlyPrecipitation, hourlyWeather, ownedItem);
-		store(hourlyPrecipitation, hourlyWeather);
+		storageService.store(hourlyPrecipitation, hourlyWeather);
 
 	}
 
@@ -198,20 +202,18 @@ public class HarvesterService {
 			try {
 				ft = dateFormat.parse(from);
 
-				ItemKey ik = new ItemKey(ft, location);
-
 				Element loc = (Element) element.getElementsByTagName("location").item(0);
 				NodeList cn = loc.getElementsByTagName("precipitation");
 
 				int m = cn.getLength();
 
 				if (m == 1) {
-
+					ItemKey ik = new ItemKey(ft, location);
 					addPrecipitation(cn, ik, hPrecipitation);
 
 				} else {
 
-					addWeather(loc.getChildNodes(), ik, hWeather);
+					addWeather(loc.getChildNodes(), ft, location, hWeather);
 
 				}
 
@@ -247,7 +249,9 @@ public class HarvesterService {
 		hPrecipitation.add(new HourlyPrecipitation(ik, new PrecipitationValue(Double.parseDouble(value), mnV, mxV)));
 	}
 
-	private void addWeather(NodeList locChild, ItemKey ik, List<HourlyWeather> hWeather) {
+	private void addWeather(NodeList locChild, Date ft, Location location, List<HourlyWeather> hWeather) {
+		ItemKey ik = new ItemKey(ft, location);
+
 		int m = locChild.getLength();
 
 		Double t = null;
@@ -322,9 +326,21 @@ public class HarvesterService {
 				gr = Double.parseDouble(globalRadiation);
 				break;
 			default:
-				if (!"#text".equals(nn) && !displayedUnknown.contains(nn)) {
-					displayedUnknown.add(nn);
-					logger.log(Level.WARNING, () -> "Unknown tag in data converter. Tag name: " + nn);
+				if (!"#text".equals(nn)) {
+					if (!displayedUnknown.contains(nn)) {
+						displayedUnknown.add(nn);
+						logger.log(Level.WARNING,
+								() -> "Unknown weather variable type in data converter. Tag name: " + nn);
+					}
+
+					int n = nnm.getLength();
+					Set<String> item = new HashSet<>();
+					for (int i = 0; i < n; i++) {
+						item.add(nnm.item(i).toString());
+
+					}
+					UnknownKey uKey = new UnknownKey(ft, location, nn);
+					unknown.add(new UnknownWV(uKey, item));
 
 				}
 			}
@@ -340,12 +356,6 @@ public class HarvesterService {
 
 	private String textContent(NamedNodeMap nnm, String attName) {
 		return nnm.getNamedItem(attName).getTextContent();
-	}
-
-	private void store(List<HourlyPrecipitation> hPrecipitation, List<HourlyWeather> hWeather) {
-
-		precipitationRepository.saveAll(hPrecipitation);
-		weatherRepository.saveAll(hWeather);
 	}
 
 }

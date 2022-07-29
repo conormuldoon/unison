@@ -33,7 +33,24 @@
         geom GEOMETRY,
         user_userName varchar(255),
         primary key (name)
-    ); 
+    );
+    
+    
+    create table UnknownWV (
+       fromHour timestamp not null,
+        weatherItem varchar(255) not null,
+        location_name varchar(255) not null,
+        primary key (fromHour, location_name, weatherItem)
+    );
+ 
+    
+    create table UnknownWV_item (
+       UnknownWV_fromHour timestamp not null,
+        UnknownWV_location_name varchar(255) not null,
+        UnknownWV_weatherItem varchar(255) not null,
+        item varchar(255)
+    );
+
     
     create table UserInformation (
        userName varchar(255) not null,

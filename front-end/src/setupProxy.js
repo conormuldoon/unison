@@ -5,6 +5,7 @@ const filter = function (pathName, req) {
   const headers = req.headers;
   const accept = headers.accept;
 
+
   if (accept === 'application/hal+json' || accept === 'application/geo+jason' ||
     accept === 'application/json' || pathName.startsWith("/locationCollection")) {
     return true;

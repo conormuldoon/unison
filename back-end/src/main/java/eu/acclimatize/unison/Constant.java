@@ -36,7 +36,7 @@ public final class Constant {
 	 * The link name and mapping suffix for global radiation.
 	 */
 	public static final String GLOBAL_RADIATION = "globalRadiation";
-	
+
 	/**
 	 * The link name and mapping suffix for fog.
 	 */
@@ -198,5 +198,7 @@ public final class Constant {
 	 * The index file name for the root and explorer directories.
 	 */
 	public static final String INDEX_FILE = MappingConstant.INDEX + ".html";
+
+	public static final String NAME = "name";
 
 }
