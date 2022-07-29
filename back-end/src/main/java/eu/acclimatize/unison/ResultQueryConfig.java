@@ -33,8 +33,8 @@ public class ResultQueryConfig {
 	private String createQuery(String entityName, Class<? extends HarmonieItem> resultClass, String item) {
 		return "select new " + resultClass.getName() + "(a.key.fromHour,a." + item + ") from " + entityName
 				+ " a where a.key.location.name = :" + Constant.LOCATION_NAME + " and a.key.fromHour >= :"
-				+ Constant.FROM_DATE + " and cast(a.key.fromHour as date) <= :" + Constant.TO_DATE
-				+ " order by a.key.fromHour";
+				+ Constant.FROM_DATE + " and cast(a.key.fromHour as date) <= :" + Constant.TO_DATE + " and " + item
+				+ " is not null order by a.key.fromHour";
 
 	}
 
@@ -114,7 +114,7 @@ public class ResultQueryConfig {
 	public String cloudinessQuery() {
 		return createQuery(WEA_TABLE, CloudinessResult.class, VALUE + ".cloudiness");
 	}
-	
+
 	/**
 	 * Creates a JPQL query for global radiation.
 	 * 
