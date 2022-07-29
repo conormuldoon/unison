@@ -79,7 +79,7 @@ export interface MapProps {
 function LeafletMap({ markerCallback, mapCentre, marker, popupFactory }: MapProps): JSX.Element {
 
   const [popupComponent, setPopupComponent] = useState<React.ReactNode>();
-  const [dragging, setDragging] = useState(false);
+  const [dragging, setDragging] = useState(true);
   const [display, setDisplay] = useState(false);
 
   function closePopup() {
