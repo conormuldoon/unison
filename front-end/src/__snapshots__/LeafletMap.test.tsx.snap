@@ -3,7 +3,7 @@
 exports[`mathes snapshot 1`] = `
 <div>
   <div
-    class="leaflet-container"
+    class="leaflet-container leaflet-grab leaflet-touch-drag"
     style="position: relative;"
     tabindex="0"
   >

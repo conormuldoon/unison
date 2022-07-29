@@ -10,7 +10,7 @@ exports[`Unison mathes snapshot 1`] = `
       style="text-align: center;"
     />
     <div
-      class="leaflet-container"
+      class="leaflet-container leaflet-grab leaflet-touch-drag"
       style="position: relative;"
       tabindex="0"
     >
