@@ -1,5 +1,5 @@
 
-import ReactDOM from 'react-dom';
+import { createRoot } from 'react-dom/client';
 import './index.css';
 import { unregister } from './registerServiceWorker';
 import Unison from './Unison';
@@ -30,10 +30,13 @@ function createLogo(file: { default: string } | string) {
 const logoLeft = createLogo(require('./Acclimatize-Logo.png'));
 const logoRight = createLogo(require('./partners-logos.jpg'));
 
+const container = document.getElementById('root');
 
+// eslint-disable-next-line  @typescript-eslint/no-non-null-assertion
+const root = createRoot(container!);
 
-ReactDOM.render(<Unison createMap={createMapFactory(mapCentre)}>
+root.render(<Unison createMap={createMapFactory(mapCentre)}>
     {logoLeft}
     {logoRight}
-</Unison>, document.getElementById('root'));
+</Unison>);
 unregister();
