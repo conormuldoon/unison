@@ -15,6 +15,7 @@
         cloudiness float8,
         dewPoint float8,
         globalRadiation float8,
+        gust float8,
         fog float8,
         humidity float8,
         pressure float8,

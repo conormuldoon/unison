@@ -34,22 +34,25 @@ public class WeatherValue {
 
 	private Double globalRadiation;
 
+	private Double gust;
+
 	/**
 	 * Creates an instance of WeatherValue.
 	 * 
-	 * @param t  The temperature.
-	 * @param wd The wind direction.
-	 * @param ws The wind speed.
-	 * @param h  The humidity.
-	 * @param p  The pressure.
-	 * @param c  The cloudiness percentage.
-	 * @param cd The low, medium, and high cloud percentages.
-	 * @param dp The dew point level.
-	 * @param fg The level of fog.
-	 * @param gr The global radiation.
+	 * @param t    The temperature.
+	 * @param wd   The wind direction.
+	 * @param ws   The wind speed.
+	 * @param h    The humidity.
+	 * @param p    The pressure.
+	 * @param c    The cloudiness percentage.
+	 * @param cd   The low, medium, and high cloud percentages.
+	 * @param dp   The dew point level.
+	 * @param fg   The level of fog.
+	 * @param gr   The global radiation.
+	 * @param gust The wind gust.
 	 */
 	public WeatherValue(Double t, WindDirection wd, WindSpeed ws, Double h, Double p, Double c, Cloud cd, Double dp,
-			Double fg, Double gr) {
+			Double fg, Double gr, Double gust) {
 		temperature = t;
 		windDirection = wd;
 		windSpeed = ws;
@@ -60,6 +63,7 @@ public class WeatherValue {
 		dewPoint = dp;
 		fog = fg;
 		globalRadiation = gr;
+		this.gust = gust;
 
 	}
 

@@ -40,6 +40,7 @@ public class HarvesterService {
 	private static final int SLEEP_TIME = 60000;
 	private static final String VALUE = "value";
 	private static final String PERCENT = "percent";
+	private static final String MPS = "mps";
 
 	private LocationRepository locationRepository;
 
@@ -117,7 +118,7 @@ public class HarvesterService {
 			}
 
 			storageService.store(precipitation, weather);
-			
+
 			storageService.storeUnknown(unknown);
 			precipitation.clear();
 			weather.clear();
@@ -250,6 +251,15 @@ public class HarvesterService {
 		hPrecipitation.add(new HourlyPrecipitation(ik, new PrecipitationValue(Double.parseDouble(value), mnV, mxV)));
 	}
 
+	private String textContent(NamedNodeMap nnm, String attName) {
+		return nnm.getNamedItem(attName).getTextContent();
+	}
+
+	private Double doubleContent(NamedNodeMap nnm, String attName) {
+		String value = textContent(nnm, attName);
+		return Double.parseDouble(value);
+	}
+
 	private void addWeather(NodeList locChild, Date ft, Location location, List<HourlyWeather> hWeather) {
 		ItemKey ik = new ItemKey(ft, location);
 
@@ -267,6 +277,7 @@ public class HarvesterService {
 		Double dp = null;
 		Double f = null;
 		Double gr = null;
+		Double gust = null;
 
 		for (int j = 0; j < m; j++) {
 			Node chNode = locChild.item(j);
@@ -276,62 +287,56 @@ public class HarvesterService {
 
 			switch (nn) {
 			case Constant.TEMPERATURE:
-				String value = textContent(nnm, VALUE);
-				t = Double.parseDouble(value);
+
+				t = doubleContent(nnm, VALUE);
 				break;
 			case Constant.WIND_DIRECTION:
-				String deg = textContent(nnm, "deg");
+				double deg = doubleContent(nnm, "deg");
 				String name = textContent(nnm, "name");
-				wd = new WindDirection(Double.parseDouble(deg), name);
+				wd = new WindDirection(deg, name);
 				break;
 			case Constant.WIND_SPEED:
-				String mps = textContent(nnm, "mps");
+				Double mps = doubleContent(nnm, MPS);
 				String beaufort = textContent(nnm, "beaufort");
 				name = textContent(nnm, "name");
-				ws = new WindSpeed(Double.parseDouble(mps), Integer.parseInt(beaufort), name);
+				ws = new WindSpeed(mps, Integer.parseInt(beaufort), name);
 				break;
 			case Constant.HUMIDITY:
-				value = textContent(nnm, VALUE);
-				h = Double.parseDouble(value);
+				h = doubleContent(nnm, VALUE);
 				break;
 			case Constant.PRESSURE:
-				value = textContent(nnm, VALUE);
-				p = Double.parseDouble(value);
+				p = doubleContent(nnm, VALUE);
 				break;
 			case Constant.CLOUDINESS:
-				String percent = textContent(nnm, PERCENT);
-				c = Double.parseDouble(percent);
+				c = doubleContent(nnm, PERCENT);
 				break;
 			case "lowClouds":
-				percent = textContent(nnm, PERCENT);
-				lc = Double.parseDouble(percent);
+				lc = doubleContent(nnm, PERCENT);
 				break;
 			case "mediumClouds":
-				percent = textContent(nnm, PERCENT);
-				mc = Double.parseDouble(percent);
+				mc = doubleContent(nnm, PERCENT);
 				break;
 			case "highClouds":
-				percent = textContent(nnm, PERCENT);
-				hc = Double.parseDouble(percent);
+				hc = doubleContent(nnm, PERCENT);
 				break;
 			case "dewpointTemperature":
-				value = textContent(nnm, VALUE);
-				dp = Double.parseDouble(value);
+				dp = doubleContent(nnm, VALUE);
 				break;
 			case Constant.FOG:
-				percent = textContent(nnm, PERCENT);
-				f = Double.parseDouble(percent);
+				f = doubleContent(nnm, PERCENT);
 				break;
 			case Constant.GLOBAL_RADIATION:
-				String globalRadiation = textContent(nnm, VALUE);
-				gr = Double.parseDouble(globalRadiation);
+				gr = doubleContent(nnm, VALUE);
+				break;
+			case "windGust":
+				gust = doubleContent(nnm, MPS);
 				break;
 			default:
 				if (!"#text".equals(nn)) {
 					if (!displayedUnknown.contains(nn)) {
 						displayedUnknown.add(nn);
 						logger.log(Level.WARNING,
-								() -> "Unknown weather variable type in data converter. Tag name: " + nn);
+								() -> "Unknown weather variable in the data converter. Variable name: " + nn);
 					}
 
 					int n = nnm.getLength();
@@ -350,13 +355,9 @@ public class HarvesterService {
 
 		Cloud cloud = new Cloud(lc, mc, hc);
 
-		WeatherValue weatherValue = new WeatherValue(t, wd, ws, h, p, c, cloud, dp, f, gr);
+		WeatherValue weatherValue = new WeatherValue(t, wd, ws, h, p, c, cloud, dp, f, gr, gust);
 		hWeather.add(new HourlyWeather(ik, weatherValue));
 
-	}
-
-	private String textContent(NamedNodeMap nnm, String attName) {
-		return nnm.getNamedItem(attName).getTextContent();
 	}
 
 }

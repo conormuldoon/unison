@@ -24,6 +24,7 @@
         cloudiness double,
         dewPoint double,
         globalRadiation double,
+        gust double,
         fog double,
         humidity double,
         pressure double,
