@@ -45,7 +45,7 @@ class HarvesterTests {
 		HourlyPrecipitationRepository pr = mock(HourlyPrecipitationRepository.class);
 		HourlyWeatherRepository wr = mock(HourlyWeatherRepository.class);
 
-		StorageService storageService = new StorageService(pr, wr, null);
+		HarvestRepository harvestRepository = new HarvestRepository(pr, wr, null);
 
 		Logger logger = mock(Logger.class);
 
@@ -65,7 +65,7 @@ class HarvesterTests {
 		Location location = TestUtility.createLocation("New Location", null, 0, 0);
 		Mockito.when(lr.findById(Mockito.anyString())).thenReturn(Optional.of(location));
 		HarvesterService hs = new HarvesterService(lr, lrs, logger, dateFormat,
-				new UnisonServerApplication().executor(), storageService);
+				new UnisonServerApplication().executor(), harvestRepository);
 
 		hs.fetchAndStore(location);
 

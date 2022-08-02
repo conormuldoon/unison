@@ -32,7 +32,7 @@ import eu.acclimatize.unison.location.Location;
 import eu.acclimatize.unison.location.LocationRepository;
 
 /**
- * A service that harvest data from a HARMONIE-AROME endpoint.
+ * A service that harvest data from a HARMONIE-AROME end-point.
  */
 @Service
 public class HarvesterService {
@@ -59,27 +59,23 @@ public class HarvesterService {
 
 	private List<UnknownWV> unknown;
 
-	private StorageService storageService;
+	private HarvestRepository harvestRepository;
 
 	/**
 	 * Creates an instance of HarvesterService.
 	 * 
-	 * @param locationRepository      The repository that stores the locations that
-	 *                                data will be harvested for.
-	 * @param precipitationRepository The repository where precipitation data is
-	 *                                stored.
-	 * @param weatherRepository       The repository where non-precipitation weather
-	 *                                data is stored.
-	 * @param lrs                     The service that is used to obtain XML weather
-	 *                                data documents for locations.
-	 * @param logger                  Logs warning messages and exceptions.
-	 * @param harmonieDateFormat      Used to parse date data using a given time
-	 *                                zone.
-	 * @param executor                Used to execute the data harvesting process on
-	 *                                a thread.
+	 * @param locationRepository The repository that stores the locations that data
+	 *                           will be harvested for.
+	 * @param lrs                The service that is used to obtain XML weather data
+	 *                           documents for locations.
+	 * @param logger             Logs warning messages and exceptions.
+	 * @param harmonieDateFormat Used to parse date data using a given time zone.
+	 * @param executor           Used to execute the data harvesting process on a
+	 *                           thread.
+	 * @param harvestRepository  The repository used for storing harvested data.
 	 */
 	public HarvesterService(LocationRepository locationRepository, DocumentRequestService lrs, Logger logger,
-			DateFormat harmonieDateFormat, Executor executor, StorageService storageService) {
+			DateFormat harmonieDateFormat, Executor executor, HarvestRepository harvestRepository) {
 
 		this.locationRepository = locationRepository;
 
@@ -96,7 +92,7 @@ public class HarvesterService {
 
 		unknown = new ArrayList<>();
 
-		this.storageService = storageService;
+		this.harvestRepository = harvestRepository;
 
 	}
 
@@ -117,9 +113,8 @@ public class HarvesterService {
 				Thread.currentThread().interrupt();
 			}
 
-			storageService.store(precipitation, weather);
+			harvestRepository.store(precipitation, weather, unknown);
 
-			storageService.storeUnknown(unknown);
 			precipitation.clear();
 			weather.clear();
 			unknown.clear();
@@ -174,8 +169,9 @@ public class HarvesterService {
 
 		List<HourlyPrecipitation> hourlyPrecipitation = new ArrayList<>();
 		List<HourlyWeather> hourlyWeather = new ArrayList<>();
-		processDocument(document, hourlyPrecipitation, hourlyWeather, ownedItem);
-		storageService.store(hourlyPrecipitation, hourlyWeather);
+		List<UnknownWV> unknownWV = new ArrayList<>();
+		processDocument(document, hourlyPrecipitation, hourlyWeather, unknownWV, ownedItem);
+		harvestRepository.store(hourlyPrecipitation, hourlyWeather, unknownWV);
 
 	}
 
@@ -183,12 +179,12 @@ public class HarvesterService {
 			throws HarvestParseException, HarvestRequestException, DocumentNotFoundException {
 		Document document = lrs.documentForLocation(location);
 
-		processDocument(document, precipitation, weather, location);
+		processDocument(document, precipitation, weather, unknown, location);
 
 	}
 
 	private void processDocument(Document doc, List<HourlyPrecipitation> hPrecipitation, List<HourlyWeather> hWeather,
-			Location location) {
+			List<UnknownWV> unknownWV, Location location) {
 
 		doc.getDocumentElement().normalize();
 
@@ -215,7 +211,7 @@ public class HarvesterService {
 
 				} else {
 
-					addWeather(loc.getChildNodes(), ft, location, hWeather);
+					addWeather(loc.getChildNodes(), ft, location, hWeather, unknownWV);
 
 				}
 
@@ -260,7 +256,8 @@ public class HarvesterService {
 		return Double.parseDouble(value);
 	}
 
-	private void addWeather(NodeList locChild, Date ft, Location location, List<HourlyWeather> hWeather) {
+	private void addWeather(NodeList locChild, Date ft, Location location, List<HourlyWeather> hWeather,
+			List<UnknownWV> unknownWV) {
 		ItemKey ik = new ItemKey(ft, location);
 
 		int m = locChild.getLength();
@@ -346,7 +343,7 @@ public class HarvesterService {
 
 					}
 					UnknownKey uKey = new UnknownKey(ft, location, nn);
-					unknown.add(new UnknownWV(uKey, item));
+					unknownWV.add(new UnknownWV(uKey, item));
 
 				}
 			}
