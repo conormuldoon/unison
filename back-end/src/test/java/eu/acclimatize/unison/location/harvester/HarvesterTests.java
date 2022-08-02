@@ -44,8 +44,9 @@ class HarvesterTests {
 
 		HourlyPrecipitationRepository pr = mock(HourlyPrecipitationRepository.class);
 		HourlyWeatherRepository wr = mock(HourlyWeatherRepository.class);
+		UnknownWVRepository uWVRep = mock(UnknownWVRepository.class);
 
-		HarvestRepository harvestRepository = new HarvestRepository(pr, wr, null);
+		HarvestRepository harvestRepository = new HarvestRepository(pr, wr, uWVRep);
 
 		Logger logger = mock(Logger.class);
 

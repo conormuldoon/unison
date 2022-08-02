@@ -9,6 +9,11 @@ import javax.persistence.MapsId;
 import eu.acclimatize.unison.Constant;
 import eu.acclimatize.unison.location.Location;
 
+/**
+ * 
+ * A composite key used for storing data for unknown weather variables.
+ *
+ */
 public class UnknownKey implements Serializable {
 
 	private static final long serialVersionUID = 205021704051775170L;
@@ -20,10 +25,20 @@ public class UnknownKey implements Serializable {
 	@ManyToOne
 	private Location location;
 
+	/**
+	 * A zero argument constructor required by JPA.
+	 */
 	public UnknownKey() {
 		
 	}
 	
+	/**
+	 * Creates an instance of UnknownKey.
+	 * 
+	 * @param fromHour The hour that the data relates to.
+	 * @param location The location the data was obtained for.
+	 * @param weatherItem The name of the weather varialbe.	
+	 */
 	public UnknownKey(Date fromHour, Location location, String weatherItem) {
 		this.fromHour = fromHour;
 		this.location = location;
