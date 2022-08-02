@@ -2,3 +2,5 @@
 // this will ensure they're removed after each test.
 //import 'react-testing-library/cleanup-after-each';
 import '@testing-library/jest-dom';
+
+globalThis.IS_REACT_ACT_ENVIRONMENT = true;

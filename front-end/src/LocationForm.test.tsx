@@ -4,7 +4,7 @@ enableFetchMocks();
 import fetchMock from 'jest-fetch-mock';
 
 
-import { fireEvent, render, screen } from "@testing-library/react";
+import { fireEvent, render, screen, act } from "@testing-library/react";
 import LocationForm from './LocationForm';
 import HttpStatus from 'http-status-codes';
 
@@ -29,7 +29,8 @@ it('mathes snapshot', () => {
 
 async function changeValue(labelText: string, value: string) {
 
-  fireEvent.change(await screen.findByLabelText(labelText), { target: { value: value } });
+  const item = await screen.findByLabelText(labelText);
+  await act(() => fireEvent.change(item, { target: { value: value } }));
 }
 
 it('sends the data in the form when submit is clicked', async () => {
@@ -65,7 +66,8 @@ it('sends the data in the form when submit is clicked', async () => {
     ['', { status: HttpStatus.ACCEPTED }],
     ['', { status: HttpStatus.OK }]);
 
-  fireEvent.click(await screen.findByText('Submit'));
+  const button = await screen.findByText('Submit')
+  fireEvent.click(button);
   await changeValue('Latitude:', '');
 
 

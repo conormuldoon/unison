@@ -3,10 +3,11 @@ enableFetchMocks();
 
 import fetchMock from 'jest-fetch-mock';
 
-import { render, screen } from "@testing-library/react";
+import { render, screen, act } from "@testing-library/react";
 import ChartPopup from './ChartPopup';
 import { PRECIP, CL } from './Constant';
 import { chartText } from './Util';
+
 
 const fromDate = '1-2-2018';
 const toDate = '7-10-2019';
@@ -71,7 +72,7 @@ it('renders without crashing', async () => {
 
   fetchMock.mockOnce("[]");
 
-  render(chartPopup);
+  await act(() => render(chartPopup));
   await screen.findByRole('button', { name: 'email' });
 
 });
@@ -82,7 +83,7 @@ it('mathes snapshot', async () => {
 
   fetchMock.mockResponse(JSON.stringify(data));
 
-  const { container } = render(chartPopup);
+  const { container } = await act(() => render(chartPopup));
   await screen.findByText('Precipitation data from ' + location.name);
   expect(container).toMatchSnapshot();
 
@@ -186,7 +187,7 @@ it('displays text for the selected variable and location', async () => {
       fetchMock.mockOnce(JSON.stringify(loc));
 
       const uri = "http://localhost:8080/locationCollection/London/windSpeed?fromDate=" + fromDate + "&toDate=" + toDate;
-      render(<ChartPopup curVar={vo} name={loc.name} uri={uri} closePopup={() => { }} />);
+      await act(() => render(<ChartPopup curVar={vo} name={loc.name} uri={uri} closePopup={() => { }} />));
 
       await screen.findByText(sOpt + ' data from ' + loc.name);
     }
@@ -200,8 +201,7 @@ it('displays a lower case letter for second word', async () => {
   fetchMock.mockOnce("[]");
 
   const wdURI = "http://localhost:8080/locationCollection/London/windDirection?fromDate=" + fromDate + "&toDate=" + toDate;
-  render(<ChartPopup curVar={'Wind Direction'} name={location.name} uri={wdURI}
-    closePopup={() => { }} />);
+  await act(() => render(<ChartPopup curVar={'Wind Direction'} name={location.name} uri={wdURI} closePopup={() => { }} />));
 
   await screen.findByText('Wind direction data from ' + location.name);
 
@@ -213,7 +213,7 @@ it('adds a chart', async () => {
 
   fetchMock.mockOnce(JSON.stringify(data));
 
-  render(chartPopup);
+  await act(() => render(chartPopup));
   await screen.findByTestId('chart');
 
 });

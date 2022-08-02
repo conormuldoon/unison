@@ -4,7 +4,7 @@ enableFetchMocks();
 import LeafletMap, { MapMarkerFactory } from './LeafletMap';
 import { Marker } from 'react-leaflet';
 
-import { render, fireEvent, screen } from "@testing-library/react";
+import { render, fireEvent, screen, act } from "@testing-library/react";
 import fetchMock from 'jest-fetch-mock';
 import { createPopupFactory } from './ChartPopup';
 
@@ -96,7 +96,7 @@ it('displays popup', async () => {
   // Firing click event for marker icon image
   const arr = await screen.findAllByAltText('');
 
-  fireEvent.click(arr[1]);
+  await act(() => fireEvent.click(arr[1]));
 
   await screen.findByRole('button', { name: 'email' });
   expect(markerCallback).toHaveBeenCalledWith(location.name);

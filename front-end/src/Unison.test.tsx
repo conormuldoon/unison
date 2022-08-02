@@ -3,7 +3,7 @@ import { enableFetchMocks } from 'jest-fetch-mock';
 enableFetchMocks();
 import "@testing-library/jest-dom/extend-expect";
 import fetchMock from 'jest-fetch-mock';
-import { fireEvent, render, screen, waitForElementToBeRemoved } from "@testing-library/react";
+import { fireEvent, render, screen, waitForElementToBeRemoved, act } from "@testing-library/react";
 import Unison from './Unison';
 import { createMapFactory } from './LeafletMap';
 import HttpStatus from 'http-status-codes';
@@ -131,7 +131,7 @@ describe('Unison', () => {
 
     });
 
-    it('mathes snapshot', async () => {
+    it('matches snapshot', async () => {
 
 
         const mockDateNow = jest.fn(() => 1571875200000);
@@ -158,7 +158,7 @@ describe('Unison', () => {
     });
 
 
-    it('does not dispplay a remove button when no loctions', async () => {
+    it('does not display a remove button when no loctions', async () => {
         render(<Unison createMap={mapFactory} />);
         const removeButton = await screen.findByRole('button', {
             name: 'Remove ' +
@@ -315,7 +315,7 @@ describe('Unison', () => {
         }];
 
 
-        render(<Unison createMap={mapFactory} />);
+        await act(() => render(<Unison createMap={mapFactory} />));
 
         fetchMock.mockResponses(
             JSON.stringify(precipData),
@@ -324,11 +324,9 @@ describe('Unison', () => {
 
         await screen.findAllByAltText('');
 
-        fireEvent.click(screen.getAllByAltText('')[1]);
-
+        await act(() => fireEvent.click(screen.getAllByAltText('')[1]));
 
         await screen.findByText('UCD');
-
 
 
     });
