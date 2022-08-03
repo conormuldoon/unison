@@ -97,8 +97,8 @@ public class HarvesterService {
 	}
 
 	/**
-	 * Requests and data stores from a HARMONIE-AROME API for locations in the
-	 * database.
+	 * Requests, parses, and stores data from a HARMONIE-AROME end-point for
+	 * locations in the database.
 	 * 
 	 */
 	public void harvestData() {
@@ -148,7 +148,7 @@ public class HarvesterService {
 	}
 
 	/**
-	 * Requests and stores weather data from a HARMONIE-AROME API for a given
+	 * Requests and stores weather data from a HARMONIE-AROME end-point for a given
 	 * location.
 	 * 
 	 * @param ownedItem The location to obtain data for.
@@ -333,7 +333,7 @@ public class HarvesterService {
 					if (!displayedUnknown.contains(nn)) {
 						displayedUnknown.add(nn);
 						logger.log(Level.WARNING,
-								() -> "Unknown weather variable in the data converter. Variable name: " + nn);
+								() -> "Unknown weather variable obtained from the end-point. Variable name: " + nn);
 					}
 
 					int n = nnm.getLength();
