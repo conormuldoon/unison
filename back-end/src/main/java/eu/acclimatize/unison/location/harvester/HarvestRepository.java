@@ -31,7 +31,7 @@ public class HarvestRepository {
 	 * @param precipitationRepository The repository for storing precipitation data.
 	 * @param weatherRepository       The repository for storing general weather
 	 *                                data (other than precipitation data).
-	 * @param unknownWPRepository     The repository for storing unknown weather
+	 * @param unknownWVRepository     The repository for storing unknown weather
 	 *                                variable data.
 	 */
 	public HarvestRepository(HourlyPrecipitationRepository precipitationRepository,
