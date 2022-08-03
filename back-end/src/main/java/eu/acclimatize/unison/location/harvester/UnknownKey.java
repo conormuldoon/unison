@@ -3,6 +3,7 @@ package eu.acclimatize.unison.location.harvester;
 import java.io.Serializable;
 import java.util.Date;
 
+import javax.persistence.Embeddable;
 import javax.persistence.ManyToOne;
 import javax.persistence.MapsId;
 
@@ -15,6 +16,7 @@ import eu.acclimatize.unison.location.Location;
  * A composite key used for storing data for unknown weather variables.
  *
  */
+@Embeddable
 public class UnknownKey implements Serializable {
 
 	private static final long serialVersionUID = 205021704051775170L;
