@@ -1,4 +1,4 @@
-package eu.acclimatize.unison.location.harvester;
+package eu.acclimatize.unison;
 
 import java.lang.annotation.Documented;
 import java.lang.annotation.Retention;

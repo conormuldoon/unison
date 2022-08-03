@@ -7,6 +7,7 @@ import javax.persistence.ManyToOne;
 import javax.persistence.MapsId;
 
 import eu.acclimatize.unison.Constant;
+import eu.acclimatize.unison.GeneratedMethod;
 import eu.acclimatize.unison.location.Location;
 
 /**

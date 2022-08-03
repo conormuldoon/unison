@@ -8,7 +8,6 @@ import javax.persistence.ManyToOne;
 import javax.persistence.MapsId;
 
 import eu.acclimatize.unison.location.Location;
-import eu.acclimatize.unison.location.harvester.GeneratedMethod;
 
 /**
  * 
