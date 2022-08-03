@@ -68,3 +68,10 @@ jobs:
           git add yarn.lock
           git commit -m '[dependabot skip] Fix yarn.lock'
           git push
+
+      - name: Dump GitHub context
+        env:
+          GITHUB_CONTEXT: ${{ toJSON(github) }}
+        run: |
+          echo "GitHub Context"
+          echo "$GITHUB_CONTEXT"
