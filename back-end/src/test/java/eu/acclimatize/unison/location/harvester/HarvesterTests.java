@@ -57,15 +57,15 @@ class HarvesterTests {
 		DocumentBuilder dBuilder = dbFactory.newDocumentBuilder();
 		Document doc = dBuilder.parse(getClass().getResourceAsStream(fileName));
 
-		DocumentBuilder mockBuilder = Mockito.mock(DocumentBuilder.class);
-		Mockito.when(mockBuilder.parse(Mockito.anyString())).thenReturn(doc);
+		Location location = TestUtility.createLocation("New Location", null, 0, 0);
 
-		DocumentRequestService lrs = new DocumentRequestService(mockBuilder, "classpath:" + fileName);
+		DocumentRequestService mockDRS = Mockito.mock(DocumentRequestService.class);
+		Mockito.when(mockDRS.documentForLocation(location)).thenReturn(doc);
 
 		LocationRepository lr = Mockito.mock(LocationRepository.class);
-		Location location = TestUtility.createLocation("New Location", null, 0, 0);
+
 		Mockito.when(lr.findById(Mockito.anyString())).thenReturn(Optional.of(location));
-		HarvesterService hs = new HarvesterService(lr, lrs, logger, dateFormat,
+		HarvesterService hs = new HarvesterService(lr, mockDRS, logger, dateFormat,
 				new UnisonServerApplication().executor(), harvestRepository);
 
 		hs.fetchAndStore(location);
@@ -138,30 +138,5 @@ class HarvesterTests {
 		testParse("/TestNorway.xml", "Europe/Oslo");
 	}
 
-	/**
-	 * Tests that the document is present.
-	 * 
-	 * @throws SAXException              Thrown if there is a an error in parsing
-	 *                                   the XML, parsing is mocked in this test and
-	 *                                   the exception should not be thrown.
-	 * @throws IOException               Thrown if there is an I/O error when
-	 *                                   parsing the document.
-	 * @throws HarvestParseException     Thrown if the XML was not obtained.
-	 * @throws HarvestRequestException
-	 * @throws DocumentNotFoundException
-	 */
-	@Test
-	void testHaveDocument() throws SAXException, IOException, HarvestParseException, HarvestRequestException,
-			DocumentNotFoundException {
-		DocumentBuilder documentBuilder = Mockito.mock(DocumentBuilder.class);
-
-		Document d = Mockito.mock(Document.class);
-		Mockito.when(documentBuilder.parse(Mockito.anyString())).thenReturn(d);
-
-		DocumentRequestService drc = new DocumentRequestService(documentBuilder, "");
-
-		Document document = drc.documentForLocation(
-				TestUtility.createLocation(TestConstant.LOCATION, null, TestConstant.LONGITUDE, TestConstant.LATITUDE));
-		Assertions.assertNotNull(document);
-	}
+	
 }

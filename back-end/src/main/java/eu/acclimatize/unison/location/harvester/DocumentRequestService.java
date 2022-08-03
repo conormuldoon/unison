@@ -23,7 +23,7 @@ import eu.acclimatize.unison.location.Location;
 @Service
 public class DocumentRequestService {
 
-	private static final String UAS = "java/" + System.getProperty("java.version");
+	private static final String UA = "java/" + System.getProperty("java.version");
 
 	private DocumentBuilder documentBuilder;
 	private String template;
@@ -61,10 +61,12 @@ public class DocumentRequestService {
 		String locationURI = location.replaceVariables(template);
 
 		try {
+			
 			URL url = new URL(locationURI);
 			URLConnection connection = url.openConnection();
-			connection.setRequestProperty("User-Agent", UAS);
+			connection.setRequestProperty("User-Agent", UA);
 			return documentBuilder.parse(connection.getInputStream());
+			
 		} catch (FileNotFoundException e) {
 			throw new DocumentNotFoundException("No XML doucment was found at " + locationURI + ".");
 		} catch (SAXException e) {

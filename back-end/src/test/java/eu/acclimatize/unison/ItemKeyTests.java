@@ -14,7 +14,7 @@ import eu.acclimatize.unison.location.Location;
  * Tests that item key equality and hash function.
  *
  */
-class ItemKeyTest {
+class ItemKeyTests {
 
 	/**
 	 * Tests that item keys with the same from hour and location are equal and have
@@ -33,7 +33,6 @@ class ItemKeyTest {
 		Assertions.assertEquals(itemKey0, itemKey1);
 		Assertions.assertEquals(itemKey0.hashCode(), itemKey1.hashCode());
 		
-
 	}
 
 	/**
