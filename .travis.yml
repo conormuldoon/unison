@@ -11,11 +11,12 @@ matrix:
         directories:
           - ./.yarn/cache
           
-    
+
+      before_install: 
+        - cd front-end
+
       install: yarn
 
-      before_script: 
-        - cd front-end
       script:
         - yarn test
         - yarn build
