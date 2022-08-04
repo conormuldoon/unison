@@ -1,11 +1,11 @@
 
-dist: bionic
+dist: focal
 
 matrix:
   include:
     - language: node_js
       node_js:
-        - 16
+        - 18
       cache:
         npm: false 
         directories:

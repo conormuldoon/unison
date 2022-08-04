@@ -25,6 +25,7 @@ export interface UnisonProps {
    * A function for creating the map. 
    */
   createMap: MapFactory;
+  children?: React.ReactNode;
 
 }
 

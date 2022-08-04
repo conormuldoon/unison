@@ -14,7 +14,7 @@ it('renders without crashing', () => {
 
 
 
-it('mathes snapshot', () => {
+it('matches snapshot', () => {
 
 
   const { container } = render(dateSelector);

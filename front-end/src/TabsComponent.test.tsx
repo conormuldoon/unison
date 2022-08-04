@@ -4,7 +4,6 @@ import { render, screen } from "@testing-library/react";
 import TabsComponent from './TabsComponent';
 import { createChartFactory } from './ChartComponent';
 import { ChartData } from './ChartPopup';
-import { DomainPropType } from 'victory';
 
 const DLEN = 16;
 
@@ -14,7 +13,7 @@ it('renders without crashing', async () => {
     render(<TabsComponent minMax={false} curVar='Cloudiness' chartFactory={(index) => null} />);
 });
 
-it('mathes snapshot', () => {
+it('matches snapshot', () => {
 
 
     const { container } = render(<TabsComponent minMax={false} curVar='Cloudiness' chartFactory={(index) => null} />);
@@ -25,7 +24,7 @@ it('mathes snapshot', () => {
 
 
 
-const addChart = async (weatherVariable: string, dataArray: ChartData, zoomDomain: DomainPropType) => {
+const addChart = async (weatherVariable: string, dataArray: ChartData, zoomDomain: { x: [Date, Date] }) => {
 
 
     const chartFactory = createChartFactory(dataArray, zoomDomain, () => { }, weatherVariable, false);

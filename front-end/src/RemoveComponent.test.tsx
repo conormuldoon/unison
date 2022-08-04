@@ -28,7 +28,7 @@ it('renders without crashing', async () => {
 
 });
 
-it('mathes snapshot', () => {
+it('matches snapshot', () => {
 
 
   const { container } = render(<RemoveComponent name={linksProperty.name} href={linksProperty._links['self'].href} obtainData={() => { }} hideAdd={() => { }} />);

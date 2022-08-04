@@ -8,7 +8,7 @@ import { createChartFactory } from './ChartComponent';
 import { chartText } from './Util';
 import PropTypes from 'prop-types';
 import { EmailShareButton, EmailIcon, WhatsappShareButton, WhatsappIcon, TelegramShareButton, TelegramIcon } from 'react-share';
-import { DomainPropType } from 'victory'
+
 
 const DLEN = 16;
 
@@ -27,7 +27,7 @@ export function createPopupFactory(uri: string, curVar: string, name: string) {
 
 export type ChartData = {
   date: string;
-  [key: string]: string|number|Record<string, unknown>;
+  [key: string]: string | number | Record<string, unknown>;
 }[];
 
 export interface PopupProps {
@@ -53,7 +53,9 @@ export interface PopupProps {
 function ChartPopup({ uri, curVar, name, closePopup }: PopupProps): JSX.Element {
 
   const [data, setData] = useState<ChartData>([]);
-  const [zoomDomain, setZoomDomain] = useState<DomainPropType>({ x: [0, 1] });
+
+  
+  const [zoomDomain, setZoomDomain] = useState({});
   const [minMax, setMinMax] = useState(false);
 
 
@@ -84,8 +86,8 @@ function ChartPopup({ uri, curVar, name, closePopup }: PopupProps): JSX.Element 
 
         if (n > 0) {
 
-          const fd = dataArray[0].date;
-          const td = dataArray[dataArray.length - 1].date;
+          const fd: Date = dataArray[0].date;
+          const td: Date = dataArray[dataArray.length - 1].date;
 
           if (curVar === PRECIP && dataArray[0].precipitation.minvalue !== undefined) {
 
@@ -100,7 +102,7 @@ function ChartPopup({ uri, curVar, name, closePopup }: PopupProps): JSX.Element 
         } else {
 
           setData([]);
-          setZoomDomain({ x: [0, 1] });
+          setZoomDomain({});
           setMinMax(false);
         }
       }
@@ -122,6 +124,7 @@ function ChartPopup({ uri, curVar, name, closePopup }: PopupProps): JSX.Element 
   const subject = vc + ' data from ' + name.trim();
 
   const chartFactory = createChartFactory(data, zoomDomain, setZoomDomain, curVar, minMax);
+
 
   return (
     <div id="popupdiv" data-testid='chart-div' onClick={handleClick} style={{ textAlign: 'center' }}>

@@ -15,7 +15,6 @@ import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.ParserConfigurationException;
 
-import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.Mockito;
@@ -26,7 +25,6 @@ import org.xml.sax.SAXException;
 import eu.acclimatize.unison.Constant;
 import eu.acclimatize.unison.HourlyPrecipitationRepository;
 import eu.acclimatize.unison.HourlyWeatherRepository;
-import eu.acclimatize.unison.TestConstant;
 import eu.acclimatize.unison.TestUtility;
 import eu.acclimatize.unison.UnisonServerApplication;
 import eu.acclimatize.unison.location.Location;

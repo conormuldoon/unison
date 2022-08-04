@@ -72,18 +72,24 @@ it('renders without crashing', async () => {
 
   fetchMock.mockOnce("[]");
 
-  await act(() => render(chartPopup));
+  await act(() => { render(chartPopup); });
   await screen.findByRole('button', { name: 'email' });
 
 });
 
 
 
-it('mathes snapshot', async () => {
+it('matches snapshot', async () => {
 
   fetchMock.mockResponse(JSON.stringify(data));
 
-  const { container } = await act(() => render(chartPopup));
+  let container;
+
+  await act(() => {
+    const cp = render(chartPopup);
+    container = cp.container;
+  });
+
   await screen.findByText('Precipitation data from ' + location.name);
   expect(container).toMatchSnapshot();
 
@@ -187,7 +193,7 @@ it('displays text for the selected variable and location', async () => {
       fetchMock.mockOnce(JSON.stringify(loc));
 
       const uri = "http://localhost:8080/locationCollection/London/windSpeed?fromDate=" + fromDate + "&toDate=" + toDate;
-      await act(() => render(<ChartPopup curVar={vo} name={loc.name} uri={uri} closePopup={() => { }} />));
+      await act(() => { render(<ChartPopup curVar={vo} name={loc.name} uri={uri} closePopup={() => { }} />); });
 
       await screen.findByText(sOpt + ' data from ' + loc.name);
     }
@@ -201,11 +207,9 @@ it('displays a lower case letter for second word', async () => {
   fetchMock.mockOnce("[]");
 
   const wdURI = "http://localhost:8080/locationCollection/London/windDirection?fromDate=" + fromDate + "&toDate=" + toDate;
-  await act(() => render(<ChartPopup curVar={'Wind Direction'} name={location.name} uri={wdURI} closePopup={() => { }} />));
+  await act(() => { render(<ChartPopup curVar={'Wind Direction'} name={location.name} uri={wdURI} closePopup={() => { }} />); });
 
   await screen.findByText('Wind direction data from ' + location.name);
-
-
 
 });
 
@@ -213,7 +217,7 @@ it('adds a chart', async () => {
 
   fetchMock.mockOnce(JSON.stringify(data));
 
-  await act(() => render(chartPopup));
+  await act(() => { render(chartPopup); });
   await screen.findByTestId('chart');
 
 });

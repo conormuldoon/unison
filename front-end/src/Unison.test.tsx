@@ -7,6 +7,7 @@ import { fireEvent, render, screen, waitForElementToBeRemoved, act } from "@test
 import Unison from './Unison';
 import { createMapFactory } from './LeafletMap';
 import HttpStatus from 'http-status-codes';
+import { PinterestIcon } from 'react-share';
 
 
 const unisonModel = {
@@ -215,118 +216,39 @@ describe('Unison', () => {
     it('displays popup when marker clicked', async () => {
 
 
-
-
-        const precipData = [{
-            "date": "2019-04-01T23:00:00.000+0000",
-            "precipitation": {
-                "value": 0,
-                "minvalue": 0,
-                "maxvalue": 0.1
-            }
+        const cloudinessData = [{
+            "date": "2022-08-03T23:00:00.000+00:00",
+            "cloudiness": 83.1
         },
         {
-            "date": "2019-04-02T00:00:00.000+0000",
-            "precipitation": {
-                "value": 0,
-                "minvalue": 0,
-                "maxvalue": 0
-            }
+            "date": "2022-08-04T00:00:00.000+00:00",
+            "cloudiness": 26.3
         },
         {
-            "date": "2019-04-02T01:00:00.000+0000",
-            "precipitation": {
-                "value": 0,
-                "minvalue": 0,
-                "maxvalue": 0
-            }
+            "date": "2022-08-04T01:00:00.000+00:00",
+            "cloudiness": 20.5
         },
         {
-            "date": "2019-04-02T02:00:00.000+0000",
-            "precipitation": {
-                "value": 0,
-                "minvalue": 0,
-                "maxvalue": 0
-            }
-        },
-        {
-            "date": "2019-04-02T03:00:00.000+0000",
-            "precipitation": {
-                "value": 0,
-                "minvalue": 0,
-                "maxvalue": 0
-            }
-        },
-        {
-            "date": "2019-04-02T04:00:00.000+0000",
-            "precipitation": {
-                "value": 0,
-                "minvalue": 0,
-                "maxvalue": 0
-            }
-        },
-        {
-            "date": "2019-04-02T05:00:00.000+0000",
-            "precipitation": {
-                "value": 0,
-                "minvalue": 0,
-                "maxvalue": 0
-            }
-        },
-        {
-            "date": "2019-04-02T06:00:00.000+0000",
-            "precipitation": {
-                "value": 0,
-                "minvalue": 0,
-                "maxvalue": 0
-            }
-        },
-        {
-            "date": "2019-04-02T07:00:00.000+0000",
-            "precipitation": {
-                "value": 0,
-                "minvalue": 0,
-                "maxvalue": 0
-            }
-        },
-        {
-            "date": "2019-04-02T08:00:00.000+0000",
-            "precipitation": {
-                "value": 0,
-                "minvalue": 0,
-                "maxvalue": 0
-            }
-        },
-        {
-            "date": "2019-04-02T09:00:00.000+0000",
-            "precipitation": {
-                "value": 0,
-                "minvalue": 0,
-                "maxvalue": 0
-            }
-        },
-        {
-            "date": "2019-04-02T10:00:00.000+0000",
-            "precipitation": {
-                "value": 0,
-                "minvalue": 0,
-                "maxvalue": 0
-            }
+            "date": "2022-08-04T02:00:00.000+00:00",
+            "cloudiness": 2.3
         }];
 
 
-        await act(() => render(<Unison createMap={mapFactory} />));
+        await act(() => { render(<Unison createMap={mapFactory} />); });
 
         fetchMock.mockResponses(
-            JSON.stringify(precipData),
+            JSON.stringify(cloudinessData),
             JSON.stringify({ value: false })
         );
 
         await screen.findAllByAltText('');
 
-        await act(() => fireEvent.click(screen.getAllByAltText('')[1]));
+        const marker = screen.getAllByAltText('Marker');
 
-        await screen.findByText('UCD');
+
+        await act(() => { fireEvent.click(marker[0]); });
+
+        await screen.findByText('Cloudiness data from UCD');
 
 
     });

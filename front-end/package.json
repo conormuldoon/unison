@@ -16,7 +16,7 @@
     "react-fast-compare": "^3.2.0",
     "react-icons": "^3.7.0",
     "react-leaflet": "2.8.0",
-    "react-scripts": "^4.0.3",
+    "react-scripts": "^5.0.1",
     "react-share": "^4.3.1",
     "react-tabs": "^3.0.0",
     "styled-components": "^4.3.1",
@@ -50,18 +50,17 @@
     "@types/lodash": "^4.14.172",
     "@types/node": "^16.10.6",
     "@types/prop-types": "^15.7.4",
-    "@types/react": "^17.0.20",
-    "@types/react-dom": "^17.0.9",
+    "@types/react": "^18.0.15",
+    "@types/react-dom": "^18.0.6",
     "@types/react-leaflet": "^2.8.2",
     "@types/react-tabs": "^2.3.3",
-    "@types/victory": "^33.1.5",
     "@typescript-eslint/eslint-plugin": "^4.31.1",
     "@typescript-eslint/parser": "^4.31.1",
     "eslint": "^7.13.0",
     "eslint-plugin-react": "^7.21.5",
     "jest": "^27.2.5",
     "jest-fetch-mock": "^3.0.3",
-    "jest-watch-typeahead": "^0.6.1",
+    "jest-watch-typeahead": "^2.0.0",
     "jsdoc": "^3.6.6",
     "node-fetch": "^3.0.0",
     "typedoc": "^0.22.4",
@@ -97,5 +96,6 @@
       "babel-plugin-typescript-to-proptypes"
     ]
   },
-  "proxy": "http://localhost:8080"
+  "proxy": "http://localhost:8080",
+  "packageManager": "yarn@3.2.2"
 }

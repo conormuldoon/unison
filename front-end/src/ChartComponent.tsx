@@ -1,8 +1,8 @@
+
 import { has } from 'lodash';
 import PropTypes from 'prop-types';
 import {
-  VictoryAxis, VictoryChart, VictoryLine, VictoryTheme, VictoryZoomContainer,
-  DomainPropType, VictoryZoomContainerProps
+  VictoryAxis, VictoryChart, VictoryLine, VictoryTheme, VictoryZoomContainer
 } from 'victory';
 import './App.css';
 import { varMapping } from './Util';
@@ -15,9 +15,10 @@ const CELSIUS = "Celsius";
 
 const PREVAL = "precipitation.value";
 
+type ZoomDomain = { x?: [Date, Date] };
 
-export function createChartFactory(data: ChartData, zoomDomain: DomainPropType,
-  handleZoom: (domain: DomainPropType, props: VictoryZoomContainerProps) => void,
+export function createChartFactory(data: ChartData, zoomDomain: ZoomDomain,
+  handleZoom: (domain: ZoomDomain) => void,
   curVar: string, minMax: boolean) {
 
   return function chartFactory(index?: number): JSX.Element {
@@ -53,12 +54,12 @@ export interface ChartProps {
   /**
    * A two element tuple that specifies the chart's zoom domain.
    */
-  zoomDomain: DomainPropType;
+  zoomDomain: ZoomDomain;
 
   /**
    * A callback invoked when the zoom domain of the chart is changed.
    */
-  handleZoom: (domain: DomainPropType, props: VictoryZoomContainerProps) => void;
+  handleZoom: (domain: ZoomDomain) => void;
 }
 
 /**
@@ -131,6 +132,7 @@ function ChartComponent({ curVar, minMax, index, data, zoomDomain, handleZoom }:
 
 
 
+
   return (
 
     <VictoryChart style={{ parent: { maxWidth: "55%", maxHeight: "55%" } }} padding={{ left: 70, bottom: 50, top: 10 }}
@@ -145,6 +147,7 @@ function ChartComponent({ curVar, minMax, index, data, zoomDomain, handleZoom }:
         />
       }
     >
+
       {yVal && has(data[0], yVal) && <VictoryLine
         style={{
           data: { stroke: "#c43a31" },
@@ -157,11 +160,9 @@ function ChartComponent({ curVar, minMax, index, data, zoomDomain, handleZoom }:
 
       <VictoryAxis fixLabelOverlap={true} />
       <VictoryAxis dependentAxis label={yLabel} style={{ axisLabel: { padding: 45 } }} tickFormat={
-        (x) => { if (Math.abs(x) < .001) { return parseFloat(x.toFixed(3)); } if (Math.abs(x) > 999) { return Math.round(x); } return x; }} />
+        (x: number) => { if (Math.abs(x) < .001) { return parseFloat(x.toFixed(3)); } if (Math.abs(x) > 999) { return Math.round(x); } return x; }} />
 
-    </VictoryChart>
-
-  );
+    </VictoryChart>);
 
 
 }

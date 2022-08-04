@@ -12,7 +12,7 @@ it('renders without crashing', async () => {
 });
 
 
-it('mathes snapshot', () => {
+it('matches snapshot', () => {
 
 
   const { container } = render(<ARLocationComponent createLocation={createLocationFactory(() => { })} />);

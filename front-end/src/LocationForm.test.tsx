@@ -17,7 +17,7 @@ it('renders without crashing', async () => {
 });
 
 
-it('mathes snapshot', () => {
+it('matches snapshot', () => {
 
 
   const { container } = render(<LocationForm obtainData={() => { }} hideDisplay={() => { }}
@@ -30,7 +30,7 @@ it('mathes snapshot', () => {
 async function changeValue(labelText: string, value: string) {
 
   const item = await screen.findByLabelText(labelText);
-  await act(() => fireEvent.change(item, { target: { value: value } }));
+  await act(() => { fireEvent.change(item, { target: { value: value } }); });
 }
 
 it('sends the data in the form when submit is clicked', async () => {
