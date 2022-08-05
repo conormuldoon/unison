@@ -24,6 +24,7 @@ Wait until the application has started and if not using the `default.username` a
 The current version of Unison uses Yarn Zero-Installs, so there is no need to run `yarn install`.
 ```
 cd front-end
+yarn
 yarn start
 ```
 
