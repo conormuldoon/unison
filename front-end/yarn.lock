@@ -1550,7 +1550,7 @@ __metadata:
     jest-fetch-mock: ^3.0.3
     jest-watch-typeahead: ^2.0.0
     jsdoc: ^3.6.6
-    leaflet: ^1.7.1
+    leaflet: ^1.8.0
     lodash: ^4.17.21
     moment: ^2.22.2
     node-fetch: ^3.0.0
@@ -8779,7 +8779,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"leaflet@npm:^1.7.1":
+"leaflet@npm:^1.8.0":
   version: 1.8.0
   resolution: "leaflet@npm:1.8.0"
   checksum: 4a27895d4253844f2f13f94cbc52a2030b10833cdf553085d931b834745236a8d2a38844a01eb968cc109eb43268bfadb97aad85b51deffb17b6ccd106542e00
