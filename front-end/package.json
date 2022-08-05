@@ -22,8 +22,6 @@
     "styled-components": "^4.3.1",
     "uri-template": "^1.0.1",
     "victory": "^33.1.0",
-    "victory-shared-events": "^36.0.0",
-    "web-vitals": "^0.2.4",
     "xmlhttprequest": "^1.8.0"
   },
   "scripts": {
