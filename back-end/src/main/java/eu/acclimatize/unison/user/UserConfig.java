@@ -16,7 +16,7 @@ public class UserConfig {
 	 * @return True if the console is present and false otherwise.
 	 */
 	@Bean
-	public Boolean consolePresent() {
+	Boolean consolePresent() {
 
 		/*
 		 * Removing the static System.console() call from the injected component is

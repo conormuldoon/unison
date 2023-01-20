@@ -9,7 +9,6 @@ import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.Mockito;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -17,7 +16,6 @@ import org.springframework.hateoas.CollectionModel;
 import org.springframework.hateoas.Link;
 import org.springframework.hateoas.RepresentationModel;
 import org.springframework.http.HttpHeaders;
-import org.springframework.test.context.junit.jupiter.SpringExtension;
 
 import eu.acclimatize.unison.BaseURIBuilder;
 import eu.acclimatize.unison.TestConstant;
@@ -25,7 +23,6 @@ import eu.acclimatize.unison.TestUtility;
 import eu.acclimatize.unison.UnisonServerApplication;
 import eu.acclimatize.unison.user.UserRepository;
 
-@ExtendWith(SpringExtension.class)
 @SpringBootTest(classes = { UnisonServerApplication.class, LocationConfig.class })
 class HALLocationTests {
 	@Autowired

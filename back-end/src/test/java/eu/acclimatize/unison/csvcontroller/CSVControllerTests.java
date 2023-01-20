@@ -9,11 +9,9 @@ import javax.servlet.http.HttpServletResponse;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.Mockito;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.test.context.junit.jupiter.SpringExtension;
 
 import eu.acclimatize.unison.FinderConfig;
 import eu.acclimatize.unison.HourlyWeatherRepository;
@@ -28,7 +26,6 @@ import eu.acclimatize.unison.user.UserRepository;
  * Tests the CSV controllers for querying weather data.
  *
  */
-@ExtendWith(SpringExtension.class)
 @SpringBootTest(classes = { UnisonServerApplication.class, FinderConfig.class, CSVResponderConfig.class })
 class CSVControllerTests {
 
