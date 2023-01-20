@@ -20,6 +20,7 @@ import eu.acclimatize.unison.result.CloudLevelResult;
 import eu.acclimatize.unison.result.CloudinessResult;
 import eu.acclimatize.unison.result.DewPointResult;
 import eu.acclimatize.unison.result.FogResult;
+import eu.acclimatize.unison.result.GlobalRadiationResult;
 import eu.acclimatize.unison.result.HumidityResult;
 import eu.acclimatize.unison.result.PressureResult;
 import eu.acclimatize.unison.result.TemperatureResult;
@@ -68,6 +69,9 @@ class JSONControllerTests {
 
 	@Autowired
 	private JSONWindSpeedController windSpeedController;
+	
+	@Autowired
+	private JSONGlobalRadiationController globalRadiationController;
 
 	@Autowired
 	private UserRepository userRepository;
@@ -190,6 +194,16 @@ class JSONControllerTests {
 
 		TestUtility.assertType(windSpeedController.windSpeed(TestConstant.LOCATION, TestConstant.FROM_DATE,
 				TestConstant.TO_DATE, response), WindSpeedResult.class);
+	}
+	
+	/**
+	 * Test that the results returned are of type GlobalRadiationResult.
+	 */
+	@Test
+	void testGlobalRadiation() {
+
+		TestUtility.assertType(globalRadiationController.globlalRadiation(TestConstant.LOCATION, TestConstant.FROM_DATE,
+				TestConstant.TO_DATE, response), GlobalRadiationResult.class);
 	}
 
 }

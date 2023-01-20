@@ -15,6 +15,7 @@ import eu.acclimatize.unison.result.CloudLevelResult;
 import eu.acclimatize.unison.result.CloudinessResult;
 import eu.acclimatize.unison.result.DewPointResult;
 import eu.acclimatize.unison.result.FogResult;
+import eu.acclimatize.unison.result.GlobalRadiationResult;
 import eu.acclimatize.unison.result.HumidityResult;
 import eu.acclimatize.unison.result.PrecipitationResult;
 import eu.acclimatize.unison.result.PressureResult;
@@ -85,7 +86,7 @@ public class CSVResponderConfig {
 	 *         finder.
 	 */
 	@Bean
-	public CSVResponder precipitationResponder(ItemListFinder<PrecipitationResult> precipitationFinder) {
+	CSVResponder precipitationResponder(ItemListFinder<PrecipitationResult> precipitationFinder) {
 		return new CSVResponder(precipitationFinder, createHeader(PrecipitationResult.class), "Precipitation",
 				dateFormat);
 	}
@@ -98,7 +99,7 @@ public class CSVResponderConfig {
 	 *         finder.
 	 */
 	@Bean
-	public CSVResponder cloudLevelResponder(ItemListFinder<HarmonieItem> cloudLevelFinder) {
+	CSVResponder cloudLevelResponder(ItemListFinder<HarmonieItem> cloudLevelFinder) {
 		return new CSVResponder(cloudLevelFinder, createHeader(CloudLevelResult.class), "Cloud_Level", dateFormat);
 	}
 
@@ -110,7 +111,7 @@ public class CSVResponderConfig {
 	 *         finder.
 	 */
 	@Bean
-	public CSVResponder windSpeedResponder(ItemListFinder<HarmonieItem> windSpeedFinder) {
+	CSVResponder windSpeedResponder(ItemListFinder<HarmonieItem> windSpeedFinder) {
 		return new CSVResponder(windSpeedFinder, createHeader(WindSpeedResult.class), "Wind_Speed", dateFormat);
 	}
 
@@ -122,7 +123,7 @@ public class CSVResponderConfig {
 	 *         finder.
 	 */
 	@Bean
-	public CSVResponder windDirectionResponder(ItemListFinder<HarmonieItem> windDirectionFinder) {
+	CSVResponder windDirectionResponder(ItemListFinder<HarmonieItem> windDirectionFinder) {
 		return new CSVResponder(windDirectionFinder, createHeader(WindDirectionResult.class), "Wind_Direction",
 				dateFormat);
 	}
@@ -134,7 +135,7 @@ public class CSVResponderConfig {
 	 * @return A new instance of {@link CSVResponder} that uses the humidity finder.
 	 */
 	@Bean
-	public CSVResponder humidityResponder(ItemListFinder<HarmonieItem> humidityFinder) {
+	CSVResponder humidityResponder(ItemListFinder<HarmonieItem> humidityFinder) {
 		return new CSVResponder(humidityFinder, createHeader(HumidityResult.class), "Humdity", dateFormat);
 	}
 
@@ -147,8 +148,8 @@ public class CSVResponderConfig {
 	 *         finder.
 	 */
 	@Bean
-	public CSVResponder globalRadiationResponder(ItemListFinder<HarmonieItem> globalRadiationFinder) {
-		return new CSVResponder(globalRadiationFinder, createHeader(HumidityResult.class), "Global_Radiation",
+	CSVResponder globalRadiationResponder(ItemListFinder<HarmonieItem> globalRadiationFinder) {
+		return new CSVResponder(globalRadiationFinder, createHeader(GlobalRadiationResult.class), "Global_Radiation",
 				dateFormat);
 	}
 
@@ -162,7 +163,7 @@ public class CSVResponderConfig {
 	 * @return A new instance of {@link CSVResponder} that uses the fog finder.
 	 */
 	@Bean
-	public CSVResponder fogResponder(ItemListFinder<HarmonieItem> fogFinder) {
+	CSVResponder fogResponder(ItemListFinder<HarmonieItem> fogFinder) {
 		return new CSVResponder(fogFinder, createHeader(FogResult.class), "Fog", dateFormat);
 	}
 
@@ -175,7 +176,7 @@ public class CSVResponderConfig {
 	 *         finder.
 	 */
 	@Bean
-	public CSVResponder cloudinessResponder(ItemListFinder<HarmonieItem> cloudinessFinder) {
+	CSVResponder cloudinessResponder(ItemListFinder<HarmonieItem> cloudinessFinder) {
 		return new CSVResponder(cloudinessFinder, createHeader(CloudinessResult.class), "Cloudiness", dateFormat);
 	}
 
@@ -187,7 +188,7 @@ public class CSVResponderConfig {
 	 * @return A new instance of {@link CSVResponder} that uses the pressure finder.
 	 */
 	@Bean
-	public CSVResponder pressureResponder(ItemListFinder<HarmonieItem> pressureFinder) {
+	CSVResponder pressureResponder(ItemListFinder<HarmonieItem> pressureFinder) {
 		return new CSVResponder(pressureFinder, createHeader(PressureResult.class), "Pressure", dateFormat);
 	}
 
@@ -199,7 +200,7 @@ public class CSVResponderConfig {
 	 *         finder.
 	 */
 	@Bean
-	public CSVResponder dewPointResponder(ItemListFinder<HarmonieItem> dewPointFinder) {
+	CSVResponder dewPointResponder(ItemListFinder<HarmonieItem> dewPointFinder) {
 		return new CSVResponder(dewPointFinder, createHeader(DewPointResult.class), "Dew Point", dateFormat);
 	}
 
@@ -211,7 +212,7 @@ public class CSVResponderConfig {
 	 *         finder.
 	 */
 	@Bean
-	public CSVResponder temperatureResponder(ItemListFinder<HarmonieItem> temperatureFinder) {
+	CSVResponder temperatureResponder(ItemListFinder<HarmonieItem> temperatureFinder) {
 		return new CSVResponder(temperatureFinder, createHeader(TemperatureResult.class), "Temperature", dateFormat);
 	}
 
