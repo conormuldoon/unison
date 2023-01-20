@@ -27,7 +27,7 @@ matrix:
         directories:
         - $HOME/.m2
       
-      jdk: openjdk11
+      jdk: openjdk17
       before_script: cd back-end
       script:
         - ./mvnw clean compile package
