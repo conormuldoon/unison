@@ -4,7 +4,7 @@
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>eu.acclimatize</groupId>
 	<artifactId>unison-server</artifactId>
-	<version>9.2</version>
+	<version>0.9.2</version>
 	<packaging>jar</packaging>
 	<name>unison-server</name>
 	<description>Back-end server and data harvester for Unison.</description>
