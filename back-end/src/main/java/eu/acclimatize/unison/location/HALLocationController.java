@@ -37,6 +37,7 @@ public class HALLocationController {
 	 * @param locationService The service used to obtain the list of locations.
 	 * @param weatherLink     The HAL weather links that are used in the
 	 *                        representational model.
+	 * @param builder         Used in creating base URIs for HATEOAS links.
 	 */
 	public HALLocationController(LocationService locationService, WeatherLink[] weatherLink, BaseURIBuilder builder) {
 		this.locationService = locationService;
@@ -48,6 +49,8 @@ public class HALLocationController {
 	 * Obtains a representational model of a sorted list of all locations in the
 	 * spatial database.
 	 * 
+	 * @param response The HTTP servlet response used to add the vary header.
+	 * @param request  The HTTP servlet request used to create a base URI.
 	 * @return A representational model of stored locations.
 	 */
 	@GetMapping(value = MappingConstant.LOCATION_COLLECTION, produces = MediaTypes.HAL_JSON_VALUE)
@@ -75,6 +78,8 @@ public class HALLocationController {
 	/**
 	 * Obtains the location model for the specified location name.
 	 * 
+	 * @param response     The HTTP servlet response used to add the vary header.
+	 * @param request      The HTTP servlet request used to create a base URI.
 	 * @param locationName The name of the location.
 	 * @return The HAL representational model.
 	 */

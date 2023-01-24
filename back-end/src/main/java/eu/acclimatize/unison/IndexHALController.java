@@ -22,6 +22,11 @@ public class IndexHALController {
 
 	private BaseURIBuilder builder;
 
+	/**
+	 * Creates an instance of IndexHALController.
+	 * 
+	 * @param builder Used in creating links.
+	 */
 	public IndexHALController(BaseURIBuilder builder) {
 		this.builder = builder;
 	}
@@ -33,6 +38,8 @@ public class IndexHALController {
 	/**
 	 * Creates a HAL representation for the root.
 	 * 
+	 * @param response The HTTP servlet response used to add the HTTP vary header.
+	 * @param request  The HTTP servlet request used in creating base URIs.
 	 * @return A representational model for Unison.
 	 */
 	@GetMapping(value = "/", produces = MediaTypes.HAL_JSON_VALUE)
@@ -55,6 +62,8 @@ public class IndexHALController {
 	/**
 	 * Creates a HAL representation for the index.
 	 * 
+	 * @param response The HTTP servlet response used to add the HTTP vary header.
+	 * @param request  The HTTP servlet request used in creating base URIs.
 	 * @return A representational model for Unison.
 	 */
 	@GetMapping(value = MappingConstant.INDEX, produces = MediaTypes.HAL_JSON_VALUE)
@@ -65,6 +74,7 @@ public class IndexHALController {
 	/**
 	 * Maps root to the index HTML file.
 	 * 
+	 * @param response The HTTP servlet response used to add the HTTP vary header.
 	 * @return A model and view of the index file.
 	 */
 	@GetMapping("/")
@@ -75,8 +85,9 @@ public class IndexHALController {
 	}
 
 	/**
-	 * Maps the /index endpoint to the root index HTML file.
+	 * Maps the /index end-point to the root index HTML file.
 	 * 
+	 * @param response The HTTP servlet response used to add the HTTP vary header.
 	 * @return A model and view of the index file.
 	 */
 	@GetMapping(MappingConstant.INDEX)

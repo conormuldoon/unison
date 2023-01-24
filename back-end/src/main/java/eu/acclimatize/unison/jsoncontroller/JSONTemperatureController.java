@@ -41,6 +41,8 @@ public class JSONTemperatureController {
 	 * @param location The location of interest.
 	 * @param fromDate The start date for the data (inclusive).
 	 * @param toDate   The end date for the data (inclusive).
+	 * @param response The HTTP servlet response used to add the vary and cache
+	 *                 control headers.
 	 * @return A list of {@link eu.acclimatize.unison.result.TemperatureResult}
 	 *         items.
 	 */

@@ -6,6 +6,7 @@ SWITCHED = "../resources/application.tmppy"
 DS_PASSWORD = "spring.datasource.password"
 
 
+# Changes the database password in the application properties file.
 def changepassord(password):
 
     f0 = open(CURRENT, "r")

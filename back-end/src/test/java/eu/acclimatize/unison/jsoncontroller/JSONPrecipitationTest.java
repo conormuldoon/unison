@@ -3,11 +3,9 @@ package eu.acclimatize.unison.jsoncontroller;
 import javax.servlet.http.HttpServletResponse;
 
 import org.junit.jupiter.api.Test;
-import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.Mockito;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.test.context.junit.jupiter.SpringExtension;
 
 import eu.acclimatize.unison.HourlyPrecipitationRepository;
 import eu.acclimatize.unison.TestConstant;
@@ -21,9 +19,7 @@ import eu.acclimatize.unison.user.UserRepository;
  * Tests the JSON controller for querying precipitation data.
  *
  */
-@ExtendWith(SpringExtension.class)
 @SpringBootTest
-
 class JSONPrecipitationTest {
 
 	@Autowired

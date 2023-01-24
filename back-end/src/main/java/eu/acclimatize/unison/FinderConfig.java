@@ -24,7 +24,7 @@ public class FinderConfig {
 	 * @return The {@link ItemListFinder} created.
 	 */
 	@Bean
-	public ItemListFinder<PrecipitationResult> precipitationFinder(EntityManager entityManager,
+	ItemListFinder<PrecipitationResult> precipitationFinder(EntityManager entityManager,
 			String precipitationQuery, CacheSupport cacheSupport) {
 		return new ItemListFinder<>(entityManager, precipitationQuery, cacheSupport, PrecipitationResult.class);
 	}
@@ -37,7 +37,7 @@ public class FinderConfig {
 	 * @return The {@link ItemListFinder} created.
 	 */
 	@Bean
-	public ItemListFinder<HarmonieItem> cloudLevelFinder(EntityManager entityManager, String cloudLevelQuery,
+	ItemListFinder<HarmonieItem> cloudLevelFinder(EntityManager entityManager, String cloudLevelQuery,
 			CacheSupport cacheSupport) {
 		return new ItemListFinder<>(entityManager, cloudLevelQuery, cacheSupport, HarmonieItem.class);
 	}
@@ -51,7 +51,7 @@ public class FinderConfig {
 	 * @return The {@link ItemListFinder} created.
 	 */
 	@Bean
-	public ItemListFinder<HarmonieItem> windSpeedFinder(EntityManager entityManager, String windSpeedQuery,
+	ItemListFinder<HarmonieItem> windSpeedFinder(EntityManager entityManager, String windSpeedQuery,
 			CacheSupport cacheSupport) {
 		return new ItemListFinder<>(entityManager, windSpeedQuery, cacheSupport, HarmonieItem.class);
 	}
@@ -64,7 +64,7 @@ public class FinderConfig {
 	 * @return The {@link ItemListFinder} created.
 	 */
 	@Bean
-	public ItemListFinder<HarmonieItem> windDirectionFinder(EntityManager entityManager, String windDirectionQuery,
+	ItemListFinder<HarmonieItem> windDirectionFinder(EntityManager entityManager, String windDirectionQuery,
 			CacheSupport cacheSupport) {
 		return new ItemListFinder<>(entityManager, windDirectionQuery, cacheSupport, HarmonieItem.class);
 	}
@@ -77,7 +77,7 @@ public class FinderConfig {
 	 * @return The {@link ItemListFinder} created.
 	 */
 	@Bean
-	public ItemListFinder<HarmonieItem> humidityFinder(EntityManager entityManager, String humidityQuery,
+	ItemListFinder<HarmonieItem> humidityFinder(EntityManager entityManager, String humidityQuery,
 			CacheSupport cacheSupport) {
 		return new ItemListFinder<>(entityManager, humidityQuery, cacheSupport, HarmonieItem.class);
 	}
@@ -90,7 +90,7 @@ public class FinderConfig {
 	 * @return The {@link ItemListFinder} created.
 	 */
 	@Bean
-	public ItemListFinder<HarmonieItem> fogFinder(EntityManager entityManager, String fogQuery,
+	ItemListFinder<HarmonieItem> fogFinder(EntityManager entityManager, String fogQuery,
 			CacheSupport cacheSupport) {
 		return new ItemListFinder<>(entityManager, fogQuery, cacheSupport, HarmonieItem.class);
 	}
@@ -130,7 +130,7 @@ public class FinderConfig {
 	 * @return The {@link ItemListFinder} created.
 	 */
 	@Bean
-	public ItemListFinder<HarmonieItem> pressureFinder(EntityManager entityManager, String pressureQuery,
+	ItemListFinder<HarmonieItem> pressureFinder(EntityManager entityManager, String pressureQuery,
 			CacheSupport cacheSupport) {
 		return new ItemListFinder<>(entityManager, pressureQuery, cacheSupport, HarmonieItem.class);
 	}
@@ -143,7 +143,7 @@ public class FinderConfig {
 	 * @return The {@link ItemListFinder} created.
 	 */
 	@Bean
-	public ItemListFinder<HarmonieItem> dewPointFinder(EntityManager entityManager, String dewPointQuery,
+	ItemListFinder<HarmonieItem> dewPointFinder(EntityManager entityManager, String dewPointQuery,
 			CacheSupport cacheSupport) {
 		return new ItemListFinder<>(entityManager, dewPointQuery, cacheSupport, HarmonieItem.class);
 	}
@@ -156,7 +156,7 @@ public class FinderConfig {
 	 * @return The {@link ItemListFinder} created.
 	 */
 	@Bean
-	public ItemListFinder<HarmonieItem> temperatureFinder(EntityManager entityManager, String temperatureQuery, CacheSupport cacheSupport) {
+	ItemListFinder<HarmonieItem> temperatureFinder(EntityManager entityManager, String temperatureQuery, CacheSupport cacheSupport) {
 		return new ItemListFinder<>(entityManager, temperatureQuery, cacheSupport, HarmonieItem.class);
 	}
 

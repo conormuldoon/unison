@@ -15,6 +15,9 @@ import org.springframework.context.annotation.Configuration;
 
 import eu.acclimatize.unison.Constant;
 
+/**
+ * A configuration class for the Unison harvester.
+ */
 @Configuration
 public class HarvesterConfig {
 
@@ -27,7 +30,7 @@ public class HarvesterConfig {
 	 *                                      creating the document builder.
 	 */
 	@Bean
-	public DocumentBuilder documentBuilder() throws ParserConfigurationException {
+	DocumentBuilder documentBuilder() throws ParserConfigurationException {
 		DocumentBuilderFactory dbFactory = DocumentBuilderFactory.newInstance();
 		dbFactory.setFeature("http://apache.org/xml/features/disallow-doctype-decl", true);
 		dbFactory.setFeature(XMLConstants.FEATURE_SECURE_PROCESSING, true);
@@ -43,12 +46,10 @@ public class HarvesterConfig {
 	 * @return A singleton scope date format.
 	 */
 	@Bean
-	public DateFormat harmonieDateFormat(@Value("${harmonie.timezone}") String timeZone) {
+	DateFormat harmonieDateFormat(@Value("${harmonie.timezone}") String timeZone) {
 		SimpleDateFormat dateFormat = new SimpleDateFormat(Constant.HARMONIE_DATE_FORMAT);
 		dateFormat.setTimeZone(TimeZone.getTimeZone(timeZone));
 		return dateFormat;
 	}
-
-
 
 }

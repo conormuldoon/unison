@@ -3,7 +3,7 @@ import shutil
 CURRENT = "../resources/application.properties"
 SWITCHED = "../resources/application.tmppy"
 
-
+# Toggles (comments/uncomments) the properties specified in the application properties file.
 def switchitems(matchlist):
 
     f0 = open(CURRENT, "r")

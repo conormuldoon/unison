@@ -19,8 +19,14 @@ public class ItemKey implements Serializable {
 
 	private static final long serialVersionUID = -2386171964847399660L;
 
+	/**
+	 * The from hour for the data item. The to hour is not explicitly stored and can be taken as hour increment of the from hour.
+	 */
 	private Date fromHour;
 
+	/**
+	 * The location that the data item relates to.
+	 */
 	@MapsId(Constant.NAME)
 	@ManyToOne
 	private Location location;

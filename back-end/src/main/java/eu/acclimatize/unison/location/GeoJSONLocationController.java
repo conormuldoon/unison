@@ -37,6 +37,7 @@ public class GeoJSONLocationController {
 	 * Obtains a feature collection where the features represent a sorted list of
 	 * all coordinates in the spatial database.
 	 * 
+	 * @param response The HTTP servlet response used to add the vary header.
 	 * @return A GeoJSON feature collection of point features for the added
 	 *         locations.
 	 */
@@ -51,6 +52,7 @@ public class GeoJSONLocationController {
 	/**
 	 * Obtains the location for the specified location name.
 	 * 
+	 * @param response     The HTTP servlet response used to add the vary header.
 	 * @param locationName The name of the location.
 	 * @return The location obtained from the repository.
 	 */

@@ -29,10 +29,17 @@ public class UserInformation implements OwnedItem, Serializable {
 
 	private static final long serialVersionUID = -6566767228133005900L;
 	private static final String MAPPING = MappingConstant.USER + "/{" + Constant.USER_NAME + "}";
+	
+	/**
+	 * The user name.
+	 */
 	@Id
 	@JsonProperty
 	private String userName;
 
+	/**
+	 * The user's password in a hashed form.
+	 */
 	@JsonProperty(access = Access.WRITE_ONLY)
 	private String encodedPassword;
 
@@ -71,12 +78,13 @@ public class UserInformation implements OwnedItem, Serializable {
 		return userName.equals(ownerName);
 	}
 
-
 	/**
 	 * Used to add a location header to the HTTP servlet response when new user
 	 * information has been stored.
 	 * 
-	 * @param response The response the header is added to.
+	 * @param response The response the header is added to. 
+	 * @param baseURI  The base URI used in creating a template for a user name link.
+	 *
 	 */
 	public void addHeader(HttpServletResponse response, String baseURI) {
 

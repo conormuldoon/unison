@@ -45,7 +45,7 @@ public class ResultQueryConfig {
 	 *         date, and to date.
 	 */
 	@Bean
-	public String precipitationQuery() {
+	String precipitationQuery() {
 		return createQuery(PRE_TABLE, PrecipitationResult.class, VALUE);
 	}
 
@@ -56,7 +56,7 @@ public class ResultQueryConfig {
 	 *         date, and to date.
 	 */
 	@Bean
-	public String cloudLevelQuery() {
+	String cloudLevelQuery() {
 		return createQuery(WEA_TABLE, CloudLevelResult.class, VALUE + ".cloud");
 	}
 
@@ -67,7 +67,7 @@ public class ResultQueryConfig {
 	 *         date, and to date.
 	 */
 	@Bean
-	public String windSpeedQuery() {
+	String windSpeedQuery() {
 		return createQuery(WEA_TABLE, WindSpeedResult.class, VALUE + ".windSpeed");
 	}
 
@@ -78,7 +78,7 @@ public class ResultQueryConfig {
 	 *         date, and to date.
 	 */
 	@Bean
-	public String windDirectionQuery() {
+	String windDirectionQuery() {
 		return createQuery(WEA_TABLE, WindDirectionResult.class, VALUE + ".windDirection");
 	}
 
@@ -89,7 +89,7 @@ public class ResultQueryConfig {
 	 *         date, and to date.
 	 */
 	@Bean
-	public String humidityQuery() {
+	String humidityQuery() {
 		return createQuery(WEA_TABLE, HumidityResult.class, VALUE + ".humidity");
 	}
 
@@ -100,7 +100,7 @@ public class ResultQueryConfig {
 	 *         date, and to date.
 	 */
 	@Bean
-	public String fogQuery() {
+	String fogQuery() {
 		return createQuery(WEA_TABLE, FogResult.class, VALUE + ".fog");
 	}
 
@@ -111,7 +111,7 @@ public class ResultQueryConfig {
 	 *         date, and to date.
 	 */
 	@Bean
-	public String cloudinessQuery() {
+	String cloudinessQuery() {
 		return createQuery(WEA_TABLE, CloudinessResult.class, VALUE + ".cloudiness");
 	}
 
@@ -122,7 +122,7 @@ public class ResultQueryConfig {
 	 *         date, and to date.
 	 */
 	@Bean
-	public String globalRadiationQuery() {
+	String globalRadiationQuery() {
 		return createQuery(WEA_TABLE, GlobalRadiationResult.class, VALUE + ".globalRadiation");
 	}
 
@@ -133,7 +133,7 @@ public class ResultQueryConfig {
 	 *         date, and to date.
 	 */
 	@Bean
-	public String pressureQuery() {
+	String pressureQuery() {
 		return createQuery(WEA_TABLE, PressureResult.class, VALUE + ".pressure");
 	}
 
@@ -144,7 +144,7 @@ public class ResultQueryConfig {
 	 *         date, and to date.
 	 */
 	@Bean
-	public String dewPointQuery() {
+	String dewPointQuery() {
 		return createQuery(WEA_TABLE, DewPointResult.class, VALUE + ".dewPoint");
 	}
 

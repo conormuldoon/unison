@@ -20,7 +20,7 @@ public class LocationConfig {
 	 * @return The geometry factory created.
 	 */
 	@Bean
-	public GeometryFactory geometryFactory() {
+	GeometryFactory geometryFactory() {
 
 		return new GeometryFactory();
 	}
@@ -32,7 +32,7 @@ public class LocationConfig {
 	 *         location name column.
 	 */
 	@Bean
-	public Sort sort() {
+	Sort sort() {
 
 		return Sort.by(Sort.Direction.ASC, "name");
 
@@ -49,7 +49,7 @@ public class LocationConfig {
 	 * 
 	 */
 	@Bean
-	public WeatherLink[] weatherLink(@Value("${harmonie.fog}") Boolean fogSupported,
+	WeatherLink[] weatherLink(@Value("${harmonie.fog}") Boolean fogSupported,
 			@Value("${harmonie.globalRadiation}") Boolean grSupported) {
 
 		WeatherLink[] values = WeatherLink.values();

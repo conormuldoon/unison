@@ -48,6 +48,8 @@ public class HarvestController {
 	 * 
 	 *                     * @throws HarvestParseException Thrown if there was a SAX
 	 *                     exception when parsing.
+	 * @throws HarvestParseException     Thrown if there was a SAX exception when
+	 *                                   parsing.
 	 * @throws HarvestRequestException   Thrown if there was an I/O exception when
 	 *                                   connecting to the URI.
 	 * @throws DocumentNotFoundException Thrown if there was no XML document found

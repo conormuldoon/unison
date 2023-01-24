@@ -33,6 +33,14 @@ public class UnisonSecurityConfig {
 		this.userDetailsService = userDetailsService;
 	}
 
+	/**
+	 * Creates a security filter chain to protect for CSRF vulnerabilities and to
+	 * use HTTP Basic authentication for protected end-points.
+	 * 
+	 * @param http Used to build the filter chain.
+	 * @return The built filter chain.
+	 * @throws Exception Thrown if there is a CSRF or HTTP Basic issue.
+	 */
 	@Bean
 	SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
 
@@ -52,6 +60,12 @@ public class UnisonSecurityConfig {
 		return new BCryptPasswordEncoder();
 	}
 
+	/**
+	 * Creates an authentication provider that uses the user details service and
+	 * password encoder.
+	 * 
+	 * @return The authentication provider created.
+	 */
 	@Bean
 	DaoAuthenticationProvider authProvider() {
 		DaoAuthenticationProvider authProvider = new DaoAuthenticationProvider();

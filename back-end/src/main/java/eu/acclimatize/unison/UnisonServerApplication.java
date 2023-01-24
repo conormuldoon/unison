@@ -45,7 +45,7 @@ public class UnisonServerApplication {
 	 */
 	@Bean
 	@Scope("prototype")
-	public Logger logger(InjectionPoint injectionPoint) throws NoMethodParameterException {
+	Logger logger(InjectionPoint injectionPoint) throws NoMethodParameterException {
 
 		MethodParameter mp = injectionPoint.getMethodParameter();
 		if (mp == null) {
@@ -62,7 +62,7 @@ public class UnisonServerApplication {
 	 * @return The executor created.
 	 */
 	@Bean
-	public Executor executor() {
+	Executor executor() {
 		return Executors.newSingleThreadExecutor();
 	}
 
@@ -74,7 +74,7 @@ public class UnisonServerApplication {
 	 *         container.
 	 */
 	@Bean
-	public FilterRegistrationBean<ForwardedHeaderFilter> forwardedHeaderFilter() {
+	FilterRegistrationBean<ForwardedHeaderFilter> forwardedHeaderFilter() {
 		return new FilterRegistrationBean<>(new ForwardedHeaderFilter());
 
 	}
@@ -85,7 +85,7 @@ public class UnisonServerApplication {
 	 * @return A bean for altering caching headers.
 	 */
 	@Bean
-	public CacheSupport cacheSupport() {
+	CacheSupport cacheSupport() {
 		return new CacheSupport();
 	}
 
@@ -95,7 +95,7 @@ public class UnisonServerApplication {
 	 * @return A bean that computes ETag values for responses.
 	 */
 	@Bean
-	public ShallowEtagHeaderFilter shallowEtagHeaderFilter() {
+	ShallowEtagHeaderFilter shallowEtagHeaderFilter() {
 		return new ShallowEtagHeaderFilter();
 	}
 
@@ -107,12 +107,17 @@ public class UnisonServerApplication {
 	 * @return A bean for filtering precipitation results.
 	 */
 	@Bean
-	public PrecipitationResultFilter resultFilter(ItemListFinder<PrecipitationResult> precipitationFinder) {
+	PrecipitationResultFilter resultFilter(ItemListFinder<PrecipitationResult> precipitationFinder) {
 		return new PrecipitationResultFilter(precipitationFinder);
 	}
 
+	/**
+	 * A bean for creating builders used in creating links.
+	 *
+	 * @return The builder created.
+	 */
 	@Bean
-	public BaseURIBuilder builder() {
+	BaseURIBuilder builder() {
 		return new BaseURIBuilder();
 	}
 

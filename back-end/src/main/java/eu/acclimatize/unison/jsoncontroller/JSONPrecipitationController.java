@@ -30,8 +30,8 @@ public class JSONPrecipitationController {
 	 * Creates an instance of JSONPrecipitationController.
 	 * 
 	 * @param resultFilter Used to find an ordered list of precipitation data
-	 *                      containing either ternary or single value precipitation
-	 *                      values.
+	 *                     containing either ternary or single value precipitation
+	 *                     values.
 	 */
 	public JSONPrecipitationController(PrecipitationResultFilter resultFilter) {
 		this.resultFilter = resultFilter;
@@ -43,6 +43,8 @@ public class JSONPrecipitationController {
 	 * @param location The location of interest.
 	 * @param fromDate The start date for the data (inclusive).
 	 * @param toDate   The end date for the data (inclusive).
+	 * @param response The HTTP servlet response used to add the vary and cache
+	 *                 control headers.
 	 * @return A list of {@link eu.acclimatize.unison.result.PrecipitationResult}
 	 *         items.
 	 */
@@ -51,9 +53,9 @@ public class JSONPrecipitationController {
 			@RequestParam(Constant.FROM_DATE) @DateTimeFormat(pattern = Constant.FORMAT) Date fromDate,
 			@RequestParam(Constant.TO_DATE) @DateTimeFormat(pattern = Constant.FORMAT) Date toDate,
 			HttpServletResponse response) {
-		
+
 		return resultFilter.filterResults(response, location, fromDate, toDate);
-	
+
 	}
 
 }

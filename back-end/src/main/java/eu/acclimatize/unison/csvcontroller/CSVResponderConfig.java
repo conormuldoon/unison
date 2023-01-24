@@ -140,7 +140,7 @@ public class CSVResponderConfig {
 	}
 
 	/**
-	 * Creates a {@link CSVResponder} bean for globalRadiation data.
+	 * Creates a {@link CSVResponder} bean for global radiation data.
 	 * 
 	 * @param globalRadiationFinder An {@link ItemListFinder} for global radiation
 	 *                              data.

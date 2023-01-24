@@ -28,9 +28,11 @@ public class ItemListFinder<T extends HarmonieItem> {
 	 * 
 	 * @param entityManager The JPA entity manager.
 	 * @param query         The query to be executed.
+	 * @param cacheSupport  Adds vary and cache control headers to responses.
+	 * @param queryClass    Used to create typed queries.
 	 */
 	public ItemListFinder(EntityManager entityManager, String query, CacheSupport cacheSupport, Class<T> queryClass) {
-		this.entityManager = entityManager;
+		this.entityManager = entityManager	;
 		this.query = query;
 		this.cacheSupport = cacheSupport;
 		this.queryClass = queryClass;
@@ -40,6 +42,8 @@ public class ItemListFinder<T extends HarmonieItem> {
 	/**
 	 * Returns a list of items based on the query parameters.
 	 * 
+	 * @param response The HTTP servlet response used to add HTTP vary and cache
+	 *                 control headers.
 	 * @param location The location of the weather or precipitation value.
 	 * @param fromDate The start date (inclusive) for the query.
 	 * @param toDate   The end date (inclusive) for the query.

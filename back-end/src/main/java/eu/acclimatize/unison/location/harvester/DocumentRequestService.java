@@ -17,7 +17,7 @@ import eu.acclimatize.unison.location.Location;
 /**
  * 
  * A service that obtains XML weather data documents from a HARMONIE-AROME
- * endpoint for the coordinates of locations.
+ * end-point for the coordinates of locations.
  *
  */
 @Service
@@ -31,9 +31,11 @@ public class DocumentRequestService {
 	/**
 	 * Creates an instance of DocumentRequestService.
 	 * 
-	 * @param documentBuilder
-	 * @param template        The template for a HARMONIE-AROME endpoint specified
-	 *                        by app.uri in the application properties file.
+	 * @param documentBuilder Used for parsing the data from the HARMONIE-AROME
+	 *                        end-point.
+	 * @param template        The template for the HARMONIE-AROME end-point
+	 *                        specified by app.uri in the application properties
+	 *                        file.
 	 */
 	public DocumentRequestService(DocumentBuilder documentBuilder, @Value("${harmonie.uri}") String template) {
 
@@ -61,12 +63,12 @@ public class DocumentRequestService {
 		String locationURI = location.replaceVariables(template);
 
 		try {
-			
+
 			URL url = new URL(locationURI);
 			URLConnection connection = url.openConnection();
 			connection.setRequestProperty("User-Agent", UA);
 			return documentBuilder.parse(connection.getInputStream());
-			
+
 		} catch (FileNotFoundException e) {
 			throw new DocumentNotFoundException("No XML doucment was found at " + locationURI + ".");
 		} catch (SAXException e) {

@@ -9,6 +9,7 @@ import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.Optional;
 import java.util.TimeZone;
+import java.util.concurrent.Executors;
 import java.util.logging.Logger;
 
 import javax.xml.parsers.DocumentBuilder;
@@ -26,7 +27,6 @@ import eu.acclimatize.unison.Constant;
 import eu.acclimatize.unison.HourlyPrecipitationRepository;
 import eu.acclimatize.unison.HourlyWeatherRepository;
 import eu.acclimatize.unison.TestUtility;
-import eu.acclimatize.unison.UnisonServerApplication;
 import eu.acclimatize.unison.location.Location;
 import eu.acclimatize.unison.location.LocationRepository;
 
@@ -64,7 +64,7 @@ class HarvesterTests {
 
 		Mockito.when(lr.findById(Mockito.anyString())).thenReturn(Optional.of(location));
 		HarvesterService hs = new HarvesterService(lr, mockDRS, logger, dateFormat,
-				new UnisonServerApplication().executor(), harvestRepository);
+				Executors.newSingleThreadExecutor(), harvestRepository);
 
 		hs.fetchAndStore(location);
 

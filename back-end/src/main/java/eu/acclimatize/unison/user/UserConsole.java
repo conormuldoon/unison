@@ -31,7 +31,7 @@ public final class UserConsole {
 	 * a {@link UserHibernateStore} to save the received data using Hibernate.
 	 * 
 	 * @param args The arguments are not used.
-	 * @throws IOException 
+	 * @throws IOException Thrown if an I/O error occurs.
 	 * 
 	 */
 	public static void main(String[] args) throws IOException {

@@ -1,6 +1,6 @@
 {
   "name": "@conormuldoon/unison",
-  "version": "0.9.2-alpha",
+  "version": "9.2",
   "license": "MIT",
   "dependencies": {
     "autoprefixer": "10.4.5",

@@ -199,6 +199,9 @@ public final class Constant {
 	 */
 	public static final String INDEX_FILE = MappingConstant.INDEX + ".html";
 
+	/**
+	 * JPQL query parameter name for the item key name.
+	 */
 	public static final String NAME = "name";
 
 }

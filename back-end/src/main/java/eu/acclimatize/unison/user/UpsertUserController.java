@@ -28,7 +28,10 @@ public class UpsertUserController {
 	/**
 	 * Creates and instance of UpsertUserController.
 	 * 
-	 * @param userService The service used to update the user.
+	 * @param userRepository The repository that stores user data.
+	 * @param userService    The service used to update the user.
+	 * @param builder        Used to create a base URI for the user name link.
+	 * 
 	 */
 	public UpsertUserController(UserRepository userRepository, UserService userService, BaseURIBuilder builder) {
 

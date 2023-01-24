@@ -11,7 +11,8 @@ import eu.acclimatize.unison.PrecipitationValue;
 import eu.acclimatize.unison.csvcontroller.CSVHeaderItem;
 
 /**
- * A Jackson and CSV annotated class that is used to store a result row from a precipitation data query.
+ * A Jackson and CSV annotated class that is used to store a result row from a
+ * precipitation data query.
  *
  */
 public class PrecipitationResult implements HarmonieItem {
@@ -27,9 +28,10 @@ public class PrecipitationResult implements HarmonieItem {
 	/**
 	 * Creates and instance of PrecipitationResult.
 	 * 
-	 * @param date The hour from which the results relates.
-	 * @param precipitation Stores the value, minimum value, and maximum value for precipitation. The 
-	 * minimum and maximum values may not be presents for some locations or in the Norwegian model.
+	 * @param date          The hour from which the results relates.
+	 * @param precipitation Stores the value, minimum value, and maximum value for
+	 *                      precipitation. The minimum and maximum values may not be
+	 *                      presents for some locations or in the Norwegian model.
 	 */
 	public PrecipitationResult(Date date, PrecipitationValue precipitation) {
 		this.date = date;
@@ -44,7 +46,12 @@ public class PrecipitationResult implements HarmonieItem {
 		precipitation.printItem(pw);
 
 	}
-	
+
+	/**
+	 * Checks whether the result is ternary.
+	 * 
+	 * @return True if the results has min and max values and false otherwise.
+	 */
 	public boolean ternary() {
 		return precipitation.ternary();
 	}

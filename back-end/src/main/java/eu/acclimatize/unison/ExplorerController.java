@@ -13,8 +13,9 @@ import org.springframework.web.servlet.ModelAndView;
 public class ExplorerController {
 
 	/**
-	 * Maps the /explorer endpoint to the explorer HTML file.
+	 * Maps the /explorer end-point to the explorer HTML file.
 	 * 
+	 * @param response The HTTP servlet response used to add the vary header.
 	 * @return A model and view for the explorer file.
 	 */
 	@GetMapping(MappingConstant.EXPLORER)

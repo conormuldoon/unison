@@ -35,12 +35,21 @@ public class Location implements OwnedItem, Serializable {
 
 	private static final long serialVersionUID = 1771422791257298902L;
 
+	/**
+	 * The name of the location.
+	 */
 	@Id
 	private String name;
 
+	/**
+	 * Information related to the user that owns or added the location.
+	 */
 	@ManyToOne
 	private UserInformation user;
 
+	/**
+	 * The spatial point for the location.
+	 */
 	private Point geom;
 
 	/**
@@ -102,7 +111,7 @@ public class Location implements OwnedItem, Serializable {
 
 		UriTemplate uriTemplate = UriTemplate.of(baseURI + MappingConstant.SPECIFIC_LOCATION);
 		URI uri = uriTemplate.expand(name);
-		
+
 		return uri.toString();
 	}
 
@@ -110,6 +119,8 @@ public class Location implements OwnedItem, Serializable {
 	 * Creates a representational model using the given links.
 	 * 
 	 * @param weatherLink The links used in creating the model.
+	 * @param baseURI     Used in creating links for the weather data.
+	 * 
 	 * @return A HAL model for the location.
 	 */
 	public LocationModel createModel(WeatherLink[] weatherLink, String baseURI) {
@@ -127,6 +138,7 @@ public class Location implements OwnedItem, Serializable {
 	 * Adds the location header to the HTTP servlet response.
 	 * 
 	 * @param response The response the header is added to.
+	 * @param baseURI  Used in creating a URI for a specific location.
 	 */
 	public void addHeader(HttpServletResponse response, String baseURI) {
 

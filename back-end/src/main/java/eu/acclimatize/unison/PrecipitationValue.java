@@ -50,6 +50,12 @@ public class PrecipitationValue implements HarmonieItem {
 
 	}
 
+	/**
+	 * Checks whether the min and max values.
+	 * 
+	 * @return Returns true if the min and max values are present and false
+	 *         otherwise.
+	 */
 	public boolean ternary() {
 		return minvalue != null && maxvalue != null;
 	}

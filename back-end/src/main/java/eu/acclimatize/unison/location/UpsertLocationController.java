@@ -33,6 +33,8 @@ public class UpsertLocationController {
 	 * 
 	 * @param locationRepository The repository where the locations are stored.
 	 * @param locationService    The service used to replace locations.
+	 * @param builder            Used in creating a URI for the HTTP location
+	 *                           header.
 	 */
 	public UpsertLocationController(LocationRepository locationRepository, LocationService locationService,
 			BaseURIBuilder builder) {

@@ -28,7 +28,7 @@ import eu.acclimatize.unison.Constant;
  */
 public class UserHibernateStore {
 
-	public static final String CONFIG = "userinformation.cfg.xml";
+	private static final String CONFIG = "userinformation.cfg.xml";
 	
 	private static final String INCOMPLETE_INIT = "./harmonie.iinit";
 
@@ -68,6 +68,13 @@ public class UserHibernateStore {
 		configuration.setProperty("hibernate.hbm2ddl.auto", properties.getProperty("spring.jpa.hibernate.ddl-auto"));
 	}
 
+	/**
+	 * 
+	 * Logs a message that if the incomplete initialisation file could not be created.
+	 * 
+	 * @param file The initialisation file.
+	 * @throws IOException Thrown if an I/O error occurs.
+	 */
 	public void createIncompleteInit(File file) throws IOException {
 		if (!file.createNewFile()) {
 			logger.log(Level.SEVERE, "Failed to create incomplete initialisation file: " + INCOMPLETE_INIT);

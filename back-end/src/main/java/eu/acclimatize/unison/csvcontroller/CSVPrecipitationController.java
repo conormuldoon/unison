@@ -33,6 +33,9 @@ public class CSVPrecipitationController {
 	 * 
 	 * @param precipitationResponder A responder that prints precipitation data in a
 	 *                               CSV format.
+	 * @param resultFilter           Filters results such that only ternary or
+	 *                               single values are contained in the returned
+	 *                               list, not a combination of both.
 	 */
 	public CSVPrecipitationController(CSVResponder precipitationResponder, PrecipitationResultFilter resultFilter) {
 		this.precipitationResponder = precipitationResponder;

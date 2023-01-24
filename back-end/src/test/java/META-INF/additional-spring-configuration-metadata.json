@@ -13,5 +13,25 @@
     "name": "api.fog",
     "type": "java.lang.Boolean",
     "description": "Specifies whether the HARMONIE-AROME API supports fog."
+  },
+  {
+    "name": "harmonie.globalRadiation",
+    "type": "java.lang.String",
+    "description": "A description for 'harmonie.globalRadiation'"
+  },
+  {
+    "name": "harmonie.timezone",
+    "type": "java.lang.String",
+    "description": "A description for 'harmonie.timezone'"
+  },
+  {
+    "name": "harmonie.uri",
+    "type": "java.lang.String",
+    "description": "A description for 'harmonie.uri'"
+  },
+  {
+    "name": "harmonie.fog",
+    "type": "java.lang.String",
+    "description": "A description for 'harmonie.fog'"
   }
 ]}

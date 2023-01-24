@@ -15,7 +15,16 @@ const CELSIUS = "Celsius";
 
 const PREVAL = "precipitation.value";
 
-type ZoomDomain = { x?: [Date, Date] };
+/**
+ * The zoom domain for the chart data.
+ */
+export type ZoomDomain = {
+
+  /**
+   * The start and end dates for the zoom level.
+   */
+  x?: [Date, Date] 
+};
 
 export function createChartFactory(data: ChartData, zoomDomain: ZoomDomain,
   handleZoom: (domain: ZoomDomain) => void,
