@@ -155,7 +155,7 @@ public class ResultQueryConfig {
 	 *         date, and to date.
 	 */
 	@Bean
-	public String temperatureQuery() {
+	String temperatureQuery() {
 		return createQuery(WEA_TABLE, TemperatureResult.class, VALUE + ".temperature");
 	}
 
