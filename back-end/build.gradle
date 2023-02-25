@@ -5,7 +5,7 @@
 plugins {
     id 'java'
     id 'maven-publish'
-    id 'org.springframework.boot' version '2.7.6'
+    id 'org.springframework.boot' version '2.7.9'
     id 'io.spring.dependency-management' version '1.0.10.RELEASE'
     id 'jacoco'
 }
@@ -26,9 +26,9 @@ repositories {
 }
 
 dependencies {
-    implementation 'org.springframework.boot:spring-boot-starter-data-jpa:2.7.6'
-    implementation 'org.springframework.boot:spring-boot-starter-web:2.7.6'
-    implementation 'org.springframework.boot:spring-boot-starter-hateoas:2.7.6'
+    implementation 'org.springframework.boot:spring-boot-starter-data-jpa:2.7.9'
+    implementation 'org.springframework.boot:spring-boot-starter-web:2.7.9'
+    implementation 'org.springframework.boot:spring-boot-starter-hateoas:2.7.9'
     implementation 'com.h2database:h2:1.4.200'
     implementation 'org.orbisgis:h2gis:2.1.0'
     implementation 'org.hibernate:hibernate-core:5.4.23.Final'
