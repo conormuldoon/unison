@@ -5,7 +5,7 @@
   "dependencies": {
     "autoprefixer": "10.4.5",
     "geojson": "^0.5.0",
-    "http-proxy-middleware": "^2.0.7",
+    "http-proxy-middleware": "^2.0.9",
     "http-status-codes": "^1.4.0",
     "leaflet": "^1.8.0",
     "lodash": "^4.17.21",
